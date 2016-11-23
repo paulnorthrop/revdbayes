@@ -14,7 +14,6 @@ Description: Provides functions for the Bayesian analysis of extreme value
 Imports: stats,
     graphics,
     methods,
-    spatstat,
     rust (>= 1.1.0)
 License: GPL (>= 2)
 LazyData: TRUE
