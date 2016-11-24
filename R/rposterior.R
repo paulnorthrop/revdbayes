@@ -131,7 +131,7 @@
 #' osv <- rpost(n = 1000, model = "os", prior = pv, data = venice)
 #' plot(osv)
 #' @export
-rpost <- function(n, model = c("gp", "gev", "pp", "os"), data, prior,
+rpost <- function(n, model = c("gev", "gp", "pp", "os"), data, prior,
                   thresh = NULL, noy = NULL, use_noy = TRUE, ros= NULL,
                   init_ests = NULL, mult = 2, use_phi_map = FALSE, ...) {
   #
@@ -149,7 +149,11 @@ rpost <- function(n, model = c("gp", "gev", "pp", "os"), data, prior,
   if (prior_model %in% c("pp", "os")) {
     prior_model <- "gev"
   }
-  if (prior_model != model) {
+  check_model <- model
+  if (model %in% c("gev", "pp", "os")) {
+    check_model <- "gev"
+  }
+  if (prior_model != check_model) {
     warning("Are you sure that the prior is compatible with the model?",
             immediate. = TRUE)
   }

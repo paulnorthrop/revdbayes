@@ -25,7 +25,9 @@
 #'   then \code{model} gives the extreme value model to be used.  Using
 #'   either \code{model = "gev"}, \code{model = "pp"} or
 #'   \code{model = "os"} will result in the same (GEV) parameterisation.
-#'   \code{model} has no effect if \code{prior} is a function.
+#'   If \code{prior} is a function then the value of \code{model} is stored
+#'   so that in the subsequent call to \code{rpost}, consistency of the
+#'   prior and extreme value model parameterisations can be checked.
 #' @param ... Further arguments to be passed to the user-supplied or
 #'   in-built prior function.  For details of the latter see \strong{Details}.
 #' @details Of the in-built named priors available in revdbayes only
@@ -199,8 +201,13 @@
 #' @export
 set_prior <- function(prior = c("norm", "loglognorm", "mdi", "flat",
                                 "flatflat", "jeffreys", "beta"),
-                      model = c("gp", "gev", "pp", "os"),
+                      model = c("gev", "gp", "pp", "os"),
                       ...) {
+  if (length(model) > 1) {
+    warning("model not supplied: model == \"gev\" has been used.",
+            immediate. = TRUE)
+  }
+  model <- match.arg(model)
   # If prior is a function then just return it in the required format,
   # together with any additional arguments from ....
   if (is.function(prior)) {
@@ -217,7 +224,6 @@ set_prior <- function(prior = c("norm", "loglognorm", "mdi", "flat",
     return(structure(temp, class = "evprior", model = model))
   }
   # Otherwise, call the appropriate function to set the prior with name prior.
-  model <- match.arg(model)
   prior <- match.arg(prior)
   temp <- switch(model, gp = gp_prior(prior, ...), gev = gev_prior(prior, ...),
           pp = gev_prior(prior, ...), os = gev_prior(prior, ...))

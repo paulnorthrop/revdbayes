@@ -273,7 +273,7 @@ u_prior_fn <- function(x, ab) {
   return(-log(x[1]) + (ab[1] - 1) * log(1 + x[2]) +
            (ab[2] - 1) * log(1 - x[2]))
 }
-up <- set_prior(prior = u_prior_fn, ab = c(2, 2))
+up <- set_prior(prior = u_prior_fn, ab = c(2, 2), model = "gp")
 gp_u <- rpost(n = n, model = "gp", prior = up, thresh = thresh, data = gom)
 ```
 
@@ -370,7 +370,7 @@ u_gev_prior_fn <- function(x, ab) {
   return(-log(x[2]) + (ab[1] - 1) * log(1 + x[3]) +
            (ab[2] - 1) * log(1 - x[3]))
 }
-up <- set_prior(prior = u_gev_prior_fn, ab = c(2, 2))
+up <- set_prior(prior = u_gev_prior_fn, ab = c(2, 2), model = "gev")
 # Using revdbayes function rpost()
 p1 <- rpost(n = n, model = "gev", prior = up, thresh = thresh, data = gom)
 # Using evdbayes function posterior()
