@@ -16,7 +16,7 @@
 #'   overview of the package.
 #'
 #' @references Northrop, P. J. (2016). rust: Ratio-of-Uniforms Simulation with
-#'   Transformation. R package version 1.0.0.
+#'   Transformation. R package version 1.1.0.
 #'   \url{https://cran.r-project.org/package=rust}.
 #'
 #' @seealso \code{\link{rpost}} to perform ratio-of-uniforms sampling.
