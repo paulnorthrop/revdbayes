@@ -15,7 +15,7 @@
 #' @param ... Additional arguments passed on to \code{hist}, \code{lines},
 #'   \code{contour} or \code{points}.
 #' @param n A numeric scalar.  Only relevant if \code{x$d = 1} or
-#' \code{x$d = 2}. The meaning depends on the value of x$d.
+#'   \code{x$d = 2}. The meaning depends on the value of x$d.
 #' \itemize{
 #'   \item {For d = 1 : n + 1 is the number of abscissae in the trapezium
 #'      method used to normalize the density.}
