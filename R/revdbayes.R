@@ -19,11 +19,15 @@
 #'   Transformation. R package version 1.1.0.
 #'   \url{https://cran.r-project.org/package=rust}.
 #'
-#' @seealso \code{\link{rpost}} to perform ratio-of-uniforms sampling.
-#' @seealso \code{\link{set_prior}} to set a prior density.
+#' @seealso \code{\link{set_prior}} to set a prior density for extreme value
+#'   parameters.
+#' @seealso \code{\link{rpost}} to perform ratio-of-uniforms sampling from
+#'   an extreme value posterior distribution.
 #' @seealso The \code{\link[rust]{ru}} function in the \code{\link{rust}}
-#'   package for details of the arguments that can be passed to \code{ru} and
-#'   the form of the object of class "ru" returned by \code{rpost}.
+#'   package for details of the arguments that can be passed to \code{ru}
+#'   via \code{rpost} and for the form of the object (of class "evprior")
+#'   returned from \code{rpost}, which has the same structure as an object
+#'   (of class "ru") returned by \code{ru}.
 #' @docType package
 #' @name revdbayes
 #' @import methods
