@@ -1,6 +1,6 @@
 ---
 title: "Introducing revdbayes: Ratio-of-Uniforms Sampling for Bayesian Extreme Value Analysis"
-author: "Paul Northrop"
+author: "Paul J. Northrop"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
