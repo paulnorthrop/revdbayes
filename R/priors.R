@@ -28,10 +28,24 @@
 #'   If \code{prior} is a function then the value of \code{model} is stored
 #'   so that in the subsequent call to \code{rpost}, consistency of the
 #'   prior and extreme value model parameterisations can be checked.
+#' @param bin_prior Only relevant when \code{model = "bingp"}.  Either
+#' \itemize{
+#'   \item {A function that returns the value of the prior for the probability
+#'     \eqn{p} that a randomly-chosen observation exceeds the threshold
+#'     \code{thresh} supplied to \code{\link{rpost}}, or}
+#'   \item {A character string giving the name of the prior for \eqn{p}.
+#'     See \strong{Details} for a list of priors available for \eqn{p},
+#'     that is, for the binomial part of the binomial-gp model.}
+#' }
+#' The prior for \eqn{p} set using \code{bin_prior} is multiplied by the
+#' prior for the Generalised Pareto (GP) parameters set using \code{prior},
+#' that is, \eqn{p} is taken to be independent of the GP parameters
+#' \emph{a priori}.
 #' @param ... Further arguments to be passed to the user-supplied or
 #'   in-built prior function.  For details of the latter see \strong{Details}.
 #' @details Of the in-built named priors available in revdbayes only
-#'   those specified using \code{prior = "norm"} are proper.  Other proper
+#'   those specified using \code{prior = "norm"} or
+#'   \code{prior = "loglognorm"} are proper.  Other proper
 #'   priors are available from the package evdbayes, via the
 #'   functions \code{\link[evdbayes]{prior.prob}},
 #'   \code{\link[evdbayes]{prior.quant}},
@@ -47,8 +61,8 @@
 #'   extreme value analyses.  In most of improper priors below the prior for
 #'   the scale parameter \eqn{\sigma} is taken to be \eqn{1/\sigma},
 #'   i.e. a flat prior for \eqn{log \sigma}.  Here we denote the scale
-#'   parameter of the Generalised Pareto (GP) distribution by \eqn{\sigma},
-#'   whereas we use \eqn{\sigma_u} in the revdbayes vignette.
+#'   parameter of the GP distribution by \eqn{\sigma}, whereas we use
+#'   \eqn{\sigma_u} in the revdbayes vignette.
 #'
 #'   For all in-bulit priors the arguments \code{min_xi} and \code{max_xi} may
 #'   be supplied by the user.  The prior density is set to zero for any value
@@ -56,11 +70,12 @@
 #'   (\code{min_xi}, \code{max_xi}).  This will override the default values
 #'   of \code{min_xi} and \code{max_xi} in the named priors detailed above.
 #'
-#'   The names of the priors available and details of hyperparameters are:
+#'   \strong{Extreme value priors.} The names of the extreme value priors
+#'   set using \code{prior} and details of hyperparameters are:
 #' \itemize{
 #'   \item {\code{"norm"}.
 #'
-#'   For \code{model = "gp"}:
+#'   For \code{model = "gp"} or \code{model = "bingp"}:
 #'     (\eqn{log \sigma, \xi}), is bivariate normal with mean \code{mean}
 #'     (a numeric vector of length 2) and covariance matrix \code{cov}
 #'     (a symmetric positive definite 2 by 2 matrix).
@@ -77,18 +92,20 @@
 #'   }
 #'   \item {\code{"mdi"}.
 #'
-#'   For \code{model = "gp"}: (an extended version
+#'   For \code{model = "gp"} or \code{model = "bingp"}: (an extended version
 #'     of) the maximal data information (MDI) prior, that is,
 #'     \deqn{\pi(\sigma, \xi) = (1/ \sigma) exp[- a (\xi + 1)], for
 #'     \sigma > 0, \xi >= -1, a > 0.}
-#'     The MDI prior has \eqn{a = 1}.
+#'     The value of \eqn{a} is set using the argument \code{a}.  The default
+#'     value is \eqn{a = 1}, which gives the MDI prior.
 #'
 #'     For \code{model = "gev"}: (an extended version
 #'     of) the maximal data information (MDI) prior, that is,
 #'     \deqn{\pi(\mu, \sigma, \xi) = (1/ \sigma) exp[- a (\xi + 1)], for
 #'     \sigma > 0, \xi >= -1, a > 0.}
-#'     The MDI prior has \eqn{a = \gamma}, where \eqn{\gamma = 0.57721}
-#'     is Euler's constant
+#'     The value of \eqn{a} is set using the argument \code{a}.  The default
+#'     value is \eqn{a = \gamma}, where \eqn{\gamma = 0.57721} is Euler's
+#'     constant, which gives the MDI prior.
 #'
 #'     For each of these cases \eqn{\xi} must be is bounded below
 #'     \emph{a priori} for the posterior to be proper
@@ -102,18 +119,18 @@
 #'   }
 #'   \item{\code{"flat"}.
 #'
-#'     For \code{model = "gp"}: a flat prior for
+#'     For \code{model = "gp"} or \code{model = "bingp"}: a flat prior for
 #'     \eqn{\xi} (and for \eqn{log \sigma}):
 #'     \deqn{\pi(\sigma, \xi) = (1/ \sigma), for \sigma > 0.}
 #'
-#'     For \code{model = "ev"}: a flat prior for
+#'     For \code{model = "gev"}: a flat prior for
 #'     \eqn{\xi} (and for \eqn{\mu} and \eqn{log \sigma}):
 #'     \deqn{\pi(\mu, \sigma, \xi) = (1/ \sigma), for \sigma > 0.}
 #'   }
 #'   \item{\code{"flatflat"}.
 #'
-#'     For \code{model = "gp"}: flat priors for \eqn{\sigma}
-#'     and \eqn{\xi}:
+#'     For \code{model = "gp"} or \code{model = "bingp"}: flat priors for
+#'     \eqn{\sigma} and \eqn{\xi}:
 #'     \deqn{\pi(\sigma, \xi) = 1, for \sigma > 0.}
 #'
 #'     For \code{model = "gev"}: flat priors for \eqn{\mu}, \eqn{\sigma}
@@ -122,8 +139,8 @@
 #'
 #'     Therefore, the posterior is proportional to the likelihood.
 #'   }
-#'   \item{\code{"jeffreys"}.  For \code{model = "gp"} only: the
-#'     Jeffreys prior (Castellanos and Cabras, 2007):
+#'   \item{\code{"jeffreys"}.  For \code{model = "gp"}or \code{model = "bingp"}
+#'     only: the Jeffreys prior (Castellanos and Cabras, 2007):
 #'     \deqn{\pi(\sigma, \xi) = 1/ [\sigma (1+\xi) \sqrt(1+2\xi)],
 #'       for \sigma > 0, \xi > -1 / 2.}
 #'
@@ -131,8 +148,8 @@
 #'     for any sample size.  See Northrop and Attalides (2016) for details.
 #'   }
 #'   \item{\code{"beta"}.
-#'     For \code{model = "gp"}: a beta-type(p, q) prior is used for xi
-#'     on the interval (\code{min_xi}, \code{max_xi}):
+#'     For \code{model = "gp"} or \code{model = "bingp"}: a beta-type(p, q)
+#'     prior is used for xi on the interval (\code{min_xi}, \code{max_xi}):
 #'     \deqn{\pi(\sigma, \xi) = (1/\sigma) (\xi - min_xi) ^ (p-1)
 #'           (max_xi - \xi) ^ (q-1), for min_xi < \xi < max_xi.}
 #'
@@ -144,6 +161,18 @@
 #'     The default settings for this prior are \code{p=6,q=9} and
 #'     \code{min_xi = -1/2, max_xi = 1/2}, which corresponds to the
 #'     prior for \eqn{\xi} proposed in Martins and Stedinger (2000, 2001).
+#'   }
+#' }
+#'   \strong{Binomial priors.} The names of the binomial priors set using
+#'   \code{bin_prior} and details of hyperparameters are:
+#' \itemize{
+#'   \item {\code{"jeffreys"}: the \emph{Jeffreys} beta(1/2, 1/2) prior.}
+#'   \item {\code{"laplace"}: the \emph{Bayes-Laplace} beta(1, 1) prior.}
+#'   \item{\code{"haldane"}: the \emph{Haldane} beta(0, 0) prior.}
+#'   \item{\code{"beta"}: a beta(\eqn{\alpha, \beta}) prior.  The argument
+#'     \code{ab} is a vector containing \code{c}(\eqn{\alpha, \beta}).}
+#'   \item{\code{"mdi"}: the prior
+#'     \eqn{\pi(p) = 1.6186 p^p (1-p)^(1-p),     0 < p < 1.}
 #'   }
 #' }
 #' @return A list.  The first component is the input prior, i.e. either the
@@ -201,8 +230,9 @@
 #' @export
 set_prior <- function(prior = c("norm", "loglognorm", "mdi", "flat",
                                 "flatflat", "jeffreys", "beta"),
-                      model = c("gev", "gp", "pp", "os"),
-                      ...) {
+                      model = c("gev", "gp", "bingp", "pp", "os"),
+                      bin_prior = c("jeffreys", "laplace", "haldane",
+                                    "beta", "mdi"), ...) {
   if (length(model) > 1) {
     warning("model not supplied: model == \"gev\" has been used.",
             immediate. = TRUE)
