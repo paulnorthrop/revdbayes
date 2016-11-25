@@ -5,7 +5,7 @@
 \title{Construction of prior distributions}
 \usage{
 set_prior(prior = c("norm", "loglognorm", "mdi", "flat", "flatflat",
-  "jeffreys", "beta"), model = c("gp", "gev", "pp", "os"), ...)
+  "jeffreys", "beta"), model = c("gev", "gp", "pp", "os"), ...)
 }
 \arguments{
 \item{prior}{Either
@@ -19,7 +19,9 @@ set_prior(prior = c("norm", "loglognorm", "mdi", "flat", "flatflat",
 then \code{model} gives the extreme value model to be used.  Using
 either \code{model = "gev"}, \code{model = "pp"} or
 \code{model = "os"} will result in the same (GEV) parameterisation.
-\code{model} has no effect if \code{prior} is a function.}
+If \code{prior} is a function then the value of \code{model} is stored
+so that in the subsequent call to \code{rpost}, consistency of the
+prior and extreme value model parameterisations can be checked.}
 
 \item{...}{Further arguments to be passed to the user-supplied or
 in-built prior function.  For details of the latter see \strong{Details}.}

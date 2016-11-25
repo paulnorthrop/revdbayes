@@ -4,7 +4,7 @@
 \alias{rpost}
 \title{Random sampling from extreme value posterior distributions}
 \usage{
-rpost(n, model = c("gp", "gev", "pp", "os"), data, prior, thresh = NULL,
+rpost(n, model = c("gev", "gp", "pp", "os"), data, prior, thresh = NULL,
   noy = NULL, use_noy = TRUE, ros = NULL, init_ests = NULL, mult = 2,
   use_phi_map = FALSE, ...)
 }

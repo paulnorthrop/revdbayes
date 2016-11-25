@@ -17,7 +17,8 @@
 \item{...}{Additional arguments passed on to \code{hist}, \code{lines},
 \code{contour} or \code{points}.}
 
-\item{n}{A number.  The meaning depends on the value of x$d.
+\item{n}{A numeric scalar.  Only relevant if \code{x$d = 1} or
+  \code{x$d = 2}. The meaning depends on the value of x$d.
 \itemize{
   \item {For d = 1 : n + 1 is the number of abscissae in the trapezium
      method used to normalize the density.}
@@ -46,7 +47,7 @@ the column names of the simulated data matrix to be plotted are used.}
   The density is normalized crudely using the trapezium rule.  For
   \code{d = 2} a scatter plot of the simulated values is produced with
   density contours superimposed.  For \code{d > 2} pairwise plots of the
-  simulated values are produced using \code{pairs()}.
+  simulated values are produced.
 }
 \details{
 Note that \code{suppressWarnings} is used to avoid potential benign warnings
