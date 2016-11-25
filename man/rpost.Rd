@@ -4,9 +4,10 @@
 \alias{rpost}
 \title{Random sampling from extreme value posterior distributions}
 \usage{
-rpost(n, model = c("gev", "gp", "pp", "os"), data, prior, thresh = NULL,
-  noy = NULL, use_noy = TRUE, ros = NULL, init_ests = NULL, mult = 2,
-  use_phi_map = FALSE, ...)
+rpost(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
+  thresh = NULL, noy = NULL, use_noy = TRUE, ros = NULL,
+  bin_prior = NULL, init_ests = NULL, mult = 2, use_phi_map = FALSE,
+  ...)
 }
 \arguments{
 \item{n}{A numeric scalar. The size of posterior sample required.}
@@ -73,8 +74,8 @@ May also be used to pass the arguments \code{n_grid} and/or \code{ep_bc}
 to \code{\link[rust]{find_lambda}}.}
 }
 \value{
-An object of class "evpost", which has the same structure as
-  an object of class "ru" returned from \code{\link[rust]{ru}}.
+An object of class \code{"evpost"}, which has the same structure
+  as an object of class "ru" returned from \code{\link[rust]{ru}}.
 }
 \description{
 Uses the \code{\link[rust]{ru}} function in the \code{\link[rust]{rust}}

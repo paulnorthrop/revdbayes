@@ -2,11 +2,10 @@
 % Please edit documentation in R/priors.R
 \name{set_prior}
 \alias{set_prior}
-\title{Construction of prior distributions}
+\title{Construction of prior distributions for extreme value model parameters}
 \usage{
 set_prior(prior = c("norm", "loglognorm", "mdi", "flat", "flatflat",
-  "jeffreys", "beta"), model = c("gev", "gp", "bingp", "pp", "os"),
-  bin_prior = c("jeffreys", "laplace", "haldane", "beta", "mdi"), ...)
+  "jeffreys", "beta"), model = c("gev", "gp", "pp", "os"), ...)
 }
 \arguments{
 \item{prior}{Either
@@ -24,27 +23,14 @@ If \code{prior} is a function then the value of \code{model} is stored
 so that in the subsequent call to \code{rpost}, consistency of the
 prior and extreme value model parameterisations can be checked.}
 
-\item{bin_prior}{Only relevant when \code{model = "bingp"}.  Either
-\itemize{
-  \item {A function that returns the value of the prior for the probability
-    \eqn{p} that a randomly-chosen observation exceeds the threshold
-    \code{thresh} supplied to \code{\link{rpost}}, or}
-  \item {A character string giving the name of the prior for \eqn{p}.
-    See \strong{Details} for a list of priors available for \eqn{p},
-    that is, for the binomial part of the binomial-gp model.}
-}
-The prior for \eqn{p} set using \code{bin_prior} is multiplied by the
-prior for the Generalised Pareto (GP) parameters set using \code{prior},
-that is, \eqn{p} is taken to be independent of the GP parameters
-\emph{a priori}.}
-
 \item{...}{Further arguments to be passed to the user-supplied or
 in-built prior function.  For details of the latter see \strong{Details}.}
 }
 \value{
-A list.  The first component is the input prior, i.e. either the
-  name of the prior or a user-supplied function.  The remaining components
-  contain the numeric values of any hyperparameters in the prior.
+A list with class \code{"evprior"}.  The first component is the
+  input prior, i.e. either the name of the prior or a user-supplied
+  function.  The remaining components contain the numeric values of any
+  hyperparameters in the prior.
 }
 \description{
 Constructs a prior distribution for use as the argument \code{prior} in
@@ -70,7 +56,7 @@ Of the in-built named priors available in revdbayes only
   using \code{model = "gev"} and \code{prior = "norm"} in
   \code{set_prior}.
 
-  The other in-built prior are improper, that is, the integral of the
+  The other in-built priors are improper, that is, the integral of the
   prior function over its support is not finite.  Such priors do not
   necessarily result in a proper posterior distribution. Northrop and
   Attalides (2016) consider the issue of posterior propriety in Bayesian
@@ -91,7 +77,7 @@ Of the in-built named priors available in revdbayes only
 \itemize{
   \item {\code{"norm"}.
 
-  For \code{model = "gp"} or \code{model = "bingp"}:
+  For \code{model = "gp"}:
     (\eqn{log \sigma, \xi}), is bivariate normal with mean \code{mean}
     (a numeric vector of length 2) and covariance matrix \code{cov}
     (a symmetric positive definite 2 by 2 matrix).
@@ -108,7 +94,7 @@ Of the in-built named priors available in revdbayes only
   }
   \item {\code{"mdi"}.
 
-  For \code{model = "gp"} or \code{model = "bingp"}: (an extended version
+  For \code{model = "gp"}: (an extended version
     of) the maximal data information (MDI) prior, that is,
     \deqn{\pi(\sigma, \xi) = (1/ \sigma) exp[- a (\xi + 1)], for
     \sigma > 0, \xi >= -1, a > 0.}
@@ -135,7 +121,7 @@ Of the in-built named priors available in revdbayes only
   }
   \item{\code{"flat"}.
 
-    For \code{model = "gp"} or \code{model = "bingp"}: a flat prior for
+    For \code{model = "gp"}: a flat prior for
     \eqn{\xi} (and for \eqn{log \sigma}):
     \deqn{\pi(\sigma, \xi) = (1/ \sigma), for \sigma > 0.}
 
@@ -145,7 +131,7 @@ Of the in-built named priors available in revdbayes only
   }
   \item{\code{"flatflat"}.
 
-    For \code{model = "gp"} or \code{model = "bingp"}: flat priors for
+    For \code{model = "gp"}: flat priors for
     \eqn{\sigma} and \eqn{\xi}:
     \deqn{\pi(\sigma, \xi) = 1, for \sigma > 0.}
 
@@ -155,8 +141,8 @@ Of the in-built named priors available in revdbayes only
 
     Therefore, the posterior is proportional to the likelihood.
   }
-  \item{\code{"jeffreys"}.  For \code{model = "gp"}or \code{model = "bingp"}
-    only: the Jeffreys prior (Castellanos and Cabras, 2007):
+  \item{\code{"jeffreys"}.  For \code{model = "gp"} only: the Jeffreys
+    prior (Castellanos and Cabras, 2007):
     \deqn{\pi(\sigma, \xi) = 1/ [\sigma (1+\xi) \sqrt(1+2\xi)],
       for \sigma > 0, \xi > -1 / 2.}
 
@@ -164,7 +150,7 @@ Of the in-built named priors available in revdbayes only
     for any sample size.  See Northrop and Attalides (2016) for details.
   }
   \item{\code{"beta"}.
-    For \code{model = "gp"} or \code{model = "bingp"}: a beta-type(p, q)
+    For \code{model = "gp"}: a beta-type(p, q)
     prior is used for xi on the interval (\code{min_xi}, \code{max_xi}):
     \deqn{\pi(\sigma, \xi) = (1/\sigma) (\xi - min_xi) ^ (p-1)
           (max_xi - \xi) ^ (q-1), for min_xi < \xi < max_xi.}
@@ -177,18 +163,6 @@ Of the in-built named priors available in revdbayes only
     The default settings for this prior are \code{p=6,q=9} and
     \code{min_xi = -1/2, max_xi = 1/2}, which corresponds to the
     prior for \eqn{\xi} proposed in Martins and Stedinger (2000, 2001).
-  }
-}
-  \strong{Binomial priors.} The names of the binomial priors set using
-  \code{bin_prior} and details of hyperparameters are:
-\itemize{
-  \item {\code{"jeffreys"}: the \emph{Jeffreys} beta(1/2, 1/2) prior.}
-  \item {\code{"laplace"}: the \emph{Bayes-Laplace} beta(1, 1) prior.}
-  \item{\code{"haldane"}: the \emph{Haldane} beta(0, 0) prior.}
-  \item{\code{"beta"}: a beta(\eqn{\alpha, \beta}) prior.  The argument
-    \code{ab} is a vector containing \code{c}(\eqn{\alpha, \beta}).}
-  \item{\code{"mdi"}: the prior
-    \eqn{\pi(p) = 1.6186 p^p (1-p)^(1-p),     0 < p < 1.}
   }
 }
 }

@@ -1,3 +1,11 @@
+# bin_prior : if non-null and model = "bingp" independent prior for p and GP pars
+# The prior for \eqn{p} set using \code{bin_prior} is multiplied by the
+# prior for the Generalised Pareto (GP) parameters set using \code{prior},
+# that is, \eqn{p} is taken to be independent of the GP parameters
+# \emph{a priori}.
+#
+# bingp_prior : if non-null and model = "bingp" joint prior for p and GP pars
+
 # =========================== rpost ===========================
 #
 #' Random sampling from extreme value posterior distributions
@@ -89,8 +97,8 @@
 #'
 #' See the revdbayes vignette for further details and examples.
 #'
-#' @return An object of class "evpost", which has the same structure as
-#'   an object of class "ru" returned from \code{\link[rust]{ru}}.
+#' @return An object of class \code{"evpost"}, which has the same structure
+#'   as an object of class "ru" returned from \code{\link[rust]{ru}}.
 #' @seealso \code{\link{set_prior}} for setting a prior distribution.
 #' @seealso \code{\link[rust]{ru}} in the \code{\link[rust]{rust}}
 #'   package for details of the arguments that can be passed to \code{ru} and
@@ -131,9 +139,10 @@
 #' osv <- rpost(n = 1000, model = "os", prior = pv, data = venice)
 #' plot(osv)
 #' @export
-rpost <- function(n, model = c("gev", "gp", "pp", "os"), data, prior,
+rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
                   thresh = NULL, noy = NULL, use_noy = TRUE, ros= NULL,
-                  init_ests = NULL, mult = 2, use_phi_map = FALSE, ...) {
+                  bin_prior = NULL, init_ests = NULL, mult = 2,
+                  use_phi_map = FALSE, ...) {
   #
   model <- match.arg(model)
   # Check that the prior is compatible with the model.
@@ -444,4 +453,22 @@ rpost <- function(n, model = c("gev", "gp", "pp", "os"), data, prior,
   }
   class(temp) <- "evpost"
   return(temp)
+}
+
+# =========================== binpost ===========================
+#
+#' Random sampling from a binomial posterior distribution
+#'
+#' Samples from the posterior distribution of the probability \eqn{p}
+#' of a binomial distribution.
+#'
+#' @param n A numeric scalar. The size of posterior sample required.
+#' @param prior A function to evaluate the prior, created by
+#'   \code{\link{set_bin_prior}}.
+#' @details Some details.
+#' @return An object of class \code{"binpost"}.
+#' @seealso \code{\link{set_bin_prior}} for setting a prior distribution
+#'   for the binomial probability \eqn{p}.
+binpost <- function(n, prior) {
+  prior <- match.arg(prior)
 }

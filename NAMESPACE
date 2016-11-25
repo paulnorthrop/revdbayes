@@ -3,5 +3,6 @@
 S3method(plot,evpost)
 S3method(summary,evpost)
 export(rpost)
+export(set_bin_prior)
 export(set_prior)
 import(methods)
