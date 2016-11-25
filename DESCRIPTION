@@ -9,7 +9,7 @@ Description: Provides functions for the Bayesian analysis of extreme value
     used to simulate a random sample from the required posterior distribution.
     The functionality of 'revdbayes' is similar to the 'evdbayes' package
     <https://cran.r-project.org/package=evdbayes>, which uses Markov Chain
-    Monte Carlo (MCMC) methods for posterior simulation.  See the 'revdbayes' 
+    Monte Carlo ('MCMC') methods for posterior simulation.  See the 'revdbayes' 
     website for more information, documentation and examples.
 Imports: stats,
     graphics,
