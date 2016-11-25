@@ -31,7 +31,6 @@
 #' @docType package
 #' @name revdbayes
 #' @import methods
-#' @importFrom stats runif
 NULL
 
 #' Annual Maximum Sea Levels at Port Pirie, South Australia
