@@ -6,8 +6,8 @@
 \usage{
 rpost(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
   thresh = NULL, noy = NULL, use_noy = TRUE, ros = NULL,
-  bin_prior = NULL, init_ests = NULL, mult = 2, use_phi_map = FALSE,
-  ...)
+  bin_prior = structure(list(prior = "bin_beta", ab = c(1/2, 1/2), class =
+  "binprior")), init_ests = NULL, mult = 2, use_phi_map = FALSE, ...)
 }
 \arguments{
 \item{n}{A numeric scalar. The size of posterior sample required.}
@@ -17,6 +17,7 @@ rpost(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
 \item{data}{Sample data, of a format appropriate for the model.
 \itemize{
   \item {"gp"} {A numeric vector of threshold excesses or raw data.}
+  \item {"bingp"} {A numeric vector of raw data.}
   \item {"gev"} {A numeric vector of block maxima.}
   \item {"pp"} {A numeric vector of raw data.}
   \item {"os"} {A numeric matrix or data frame. Each row should contain
@@ -28,8 +29,8 @@ rpost(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
     each row are used.}
 }}
 
-\item{prior}{A function to evaluate the prior, created by
-\code{\link{set_prior}}.}
+\item{prior}{A list specifying the prior for the parameters of the extreme
+value model, created by \code{\link{set_prior}}.}
 
 \item{thresh}{A numeric scalar.  Extreme value threshold applied to data.
 Only relevant when \code{model = "gp"} or \code{model = "pp"}.  Must
@@ -52,6 +53,11 @@ user's value of \code{noy} is used in the likelihood.}
 \item{ros}{A numeric scalar.  Only relevant when \code{model = "os"}. The
 largest \code{ros} values in each row of the matrix \code{data} are used
 in the analysis.}
+
+\item{bin_prior}{A list specifying the prior for a binomial probability
+\eqn{p}, created by \code{\link{set_bin_prior}}.  Only relevant if
+\code{model = "bingp"}.  If this is not supplied then the Jeffreys
+beta(1/2, 1/2) prior is used.}
 
 \item{init_ests}{A numeric vector.  Initial parameter estimates for search
 for the mode of the posterior distribution.}

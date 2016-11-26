@@ -2,14 +2,13 @@
 
 process_data <- function(model, data, thresh, noy, use_noy, ros) {
   #
-  # Removes missings, extracts sample summaries, calculates constants with
-  # which to shift and scale the data to have approximate location 0 and
-  # scale 1.
+  # Removes missings, extracts sample summaries.
   #
   # Args:
   #   model      : character string specifying the extreme value model.
   #   data       : sample data, of a format appropriate for the model.
   #     "gp"     : vector of raw data (or, if thresh = 0, threshold excesses).
+  #     "bingp"  : vector of raw data.
   #     "gev"    : vector of block maxima.
   #     "pp"     : vector of raw data.
   #     "os"     : matrix of order statistics.
@@ -23,9 +22,12 @@ process_data <- function(model, data, thresh, noy, use_noy, ros) {
   #   lik_args   : basic sample summaries to add to lik_args in rpost().
   #
   lik_args <- list()
-  if (model == "gp") {
+  if (model == "gp" | model == "bingp") {
     nas <- is.na(data)
     data <- data[!nas]
+    if (model == "bingp") {
+      lik_args$n_raw <- length(data)              # number of raw observations
+    }
     lik_args$data <- data[data > thresh] - thresh # sample threshold excesses
     if (length(lik_args$data) == 0) {
       stop("There are no data above the threshold.")

@@ -4,13 +4,20 @@
 \alias{binpost}
 \title{Random sampling from a binomial posterior distribution}
 \usage{
-binpost(n, prior)
+binpost(n, prior, ds_bin)
 }
 \arguments{
 \item{n}{A numeric scalar. The size of posterior sample required.}
 
 \item{prior}{A function to evaluate the prior, created by
 \code{\link{set_bin_prior}}.}
+
+\item{ds_bin}{A numeric list.  Sufficient statistics for inference
+  about a binomial probability \eqn{p}.  Contains
+\itemize{
+  \item {\code{n_raw} : number of raw observations}
+  \item {\code{m} : number of threshold exceedances.}
+}}
 }
 \value{
 An object of class \code{"binpost"}.

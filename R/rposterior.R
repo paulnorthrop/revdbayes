@@ -19,6 +19,7 @@
 #' @param data  Sample data, of a format appropriate for the model.
 #'   \itemize{
 #'     \item {"gp"} {A numeric vector of threshold excesses or raw data.}
+#'     \item {"bingp"} {A numeric vector of raw data.}
 #'     \item {"gev"} {A numeric vector of block maxima.}
 #'     \item {"pp"} {A numeric vector of raw data.}
 #'     \item {"os"} {A numeric matrix or data frame. Each row should contain
@@ -29,8 +30,8 @@
 #'       \code{ros} is supplied then only the largest \code{ros} values in
 #'       each row are used.}
 #'   }
-#' @param prior A function to evaluate the prior, created by
-#'   \code{\link{set_prior}}.
+#' @param prior A list specifying the prior for the parameters of the extreme
+#'   value model, created by \code{\link{set_prior}}.
 #' @param thresh A numeric scalar.  Extreme value threshold applied to data.
 #'   Only relevant when \code{model = "gp"} or \code{model = "pp"}.  Must
 #'   be supplied when \code{model = "pp"}.  If \code{model = "gp"} and
@@ -49,6 +50,10 @@
 #' @param ros A numeric scalar.  Only relevant when \code{model = "os"}. The
 #'   largest \code{ros} values in each row of the matrix \code{data} are used
 #'   in the analysis.
+#' @param bin_prior A list specifying the prior for a binomial probability
+#'   \eqn{p}, created by \code{\link{set_bin_prior}}.  Only relevant if
+#'   \code{model = "bingp"}.  If this is not supplied then the Jeffreys
+#'   beta(1/2, 1/2) prior is used.
 #' @param init_ests A numeric vector.  Initial parameter estimates for search
 #'   for the mode of the posterior distribution.
 #' @param mult A numeric scalar.  The grid of values used to choose the Box-Cox
@@ -141,8 +146,10 @@
 #' @export
 rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
                   thresh = NULL, noy = NULL, use_noy = TRUE, ros= NULL,
-                  bin_prior = NULL, init_ests = NULL, mult = 2,
-                  use_phi_map = FALSE, ...) {
+                  bin_prior = structure(list(prior = "bin_beta",
+                                             ab = c(1 / 2, 1 / 2),
+                                             class = "binprior")),
+                  init_ests = NULL, mult = 2, use_phi_map = FALSE, ...) {
   #
   model <- match.arg(model)
   # Check that the prior is compatible with the model.
@@ -161,6 +168,9 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
   check_model <- model
   if (model %in% c("gev", "pp", "os")) {
     check_model <- "gev"
+  }
+  if (model %in% c("gp", "bingp")) {
+    check_model <- "gp"
   }
   if (prior_model != check_model) {
     warning("Are you sure that the prior is compatible with the model?",
@@ -186,6 +196,24 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
   #
   ds <- process_data(model = model, data = data, thresh = thresh, noy = noy,
                      use_noy = use_noy, ros = ros)
+  #
+  # If model = "bingp" then extract sufficient statistics for the binomial
+  # model, and remove n_raw from ds because it isn't used in the GP
+  # log-likelihood.  Sample from the posterior distribution for the binomial
+  # probability p.  The set model = "gp" because we have dealt with the "bin"
+  # bit of "bingp".
+  #
+  add_binomial <- FALSE
+  if (model == "bingp") {
+    ds_bin <- list()
+    ds_bin$m <- ds$m
+    ds_bin$n_raw <- ds$n_raw
+    ds$n_raw <- NULL
+    bin_sim <- binpost(n = n, prior = bin_prior, ds_bin = ds_bin)
+    add_binomial <- TRUE
+    model <- "gp"
+  }
+  #
   n_check <- ds$n_check
   if (n_check < 10) {
     warning(paste(
@@ -357,6 +385,10 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
                                   in_noy = ds$noy, out_noy = noy))
       }
     }
+    # If model was "bingp" then add the binomial posterior simulated values.
+    if (add_binomial) {
+      temp$bin_sim_vals <- bin_sim
+    }
     class(temp) <- "evpost"
     return(temp)
   }
@@ -451,6 +483,10 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
                                in_noy = ds$noy, out_noy = noy))
     }
   }
+  # If model was "bingp" then add the binomial posterior simulated values.
+  if (add_binomial) {
+    temp$bin_sim_vals <- bin_sim
+  }
   class(temp) <- "evpost"
   return(temp)
 }
@@ -465,10 +501,21 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
 #' @param n A numeric scalar. The size of posterior sample required.
 #' @param prior A function to evaluate the prior, created by
 #'   \code{\link{set_bin_prior}}.
+#' @param ds_bin A numeric list.  Sufficient statistics for inference
+#'   about a binomial probability \eqn{p}.  Contains
+#' \itemize{
+#'   \item {\code{n_raw} : number of raw observations}
+#'   \item {\code{m} : number of threshold exceedances.}
+#' }
 #' @details Some details.
 #' @return An object of class \code{"binpost"}.
 #' @seealso \code{\link{set_bin_prior}} for setting a prior distribution
 #'   for the binomial probability \eqn{p}.
-binpost <- function(n, prior) {
-  prior <- match.arg(prior)
+binpost <- function(n, prior, ds_bin) {
+  if (prior$prior == "bin_beta") {
+    shape1 <- ds_bin$m + prior$ab[1]
+    shape2 <- ds_bin$n_raw - ds_bin$m + prior$ab[2]
+    sim_bin_post <- stats::rbeta(n = n, shape1 = shape1, shape2 = shape2)
+  }
+  return(sim_bin_post)
 }
