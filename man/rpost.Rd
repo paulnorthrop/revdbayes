@@ -88,8 +88,7 @@ An object (list) of class \code{"evpost"}, which has the same
       simulated from the posterior for the binomial
       probability \eqn{p}}
     \item{\code{bin_logf}:} {A function returning the log-posterior for
-      \eqn{p}.  This is exact if \code{bin_prior$prior == "bin_beta"},
-      but up to an additive constant otherwise.}
+      \eqn{p}.}
     \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
   }
 }

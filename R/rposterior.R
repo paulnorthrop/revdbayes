@@ -112,8 +112,7 @@
 #'       simulated from the posterior for the binomial
 #'       probability \eqn{p}}
 #'     \item{\code{bin_logf}:} {A function returning the log-posterior for
-#'       \eqn{p}.  This is exact if \code{bin_prior$prior == "bin_beta"},
-#'       but up to an additive constant otherwise.}
+#'       \eqn{p}.}
 #'     \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
 #'   }
 #' @seealso \code{\link{set_prior}} for setting a prior distribution.
@@ -411,9 +410,7 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
     if (add_binomial) {
       temp$bin_sim_vals <- matrix(temp_bin$bin_sim_vals, ncol = 1)
       colnames(temp$bin_sim_vals) <- "p[u]"
-      temp$bin_logf <- function(x, shape1 , shape2) {
-        dbeta(x, shape1 = shape1, shape2 = shape2, log = TRUE, ...)
-      }
+      temp$bin_logf <- temp_bin$bin_logf
       temp$bin_logf_args <- temp_bin$bin_logf_args
     }
     class(temp) <- "evpost"
@@ -514,9 +511,7 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
   if (add_binomial) {
     temp$bin_sim_vals <- matrix(temp_bin$bin_sim_vals, ncol = 1)
     colnames(temp$bin_sim_vals) <- "p[u]"
-    temp$bin_logf <- function(x) {
-      dbeta(x, log = TRUE, ...)
-    }
+    temp$bin_logf <- temp_bin$bin_logf
     temp$bin_logf_args <- temp_bin$bin_logf_args
   }
   class(temp) <- "evpost"
@@ -539,18 +534,91 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
 #'   \item {\code{n_raw} : number of raw observations}
 #'   \item {\code{m} : number of threshold exceedances.}
 #' }
-#' @details Some details.
-#' @return An object of class \code{"binpost"}.
+#' @details If \code{prior$prior == "bin_beta"} then the posterior for \eqn{p}
+#'   is a beta distribution so \code{\link[stats]{rbeta}} is used to sample
+#'   from the posterior.  If \code{prior$prior == "bin_mdi"} then rejection
+#'   sampling is used to sample from the posterior with an envelope function
+#'   equal to the density of a
+#'   beta(\code{ds$m} + 1, \code{ds$n_raw - ds$m} + 1) density.
+#' @return An object (list) of class \code{"binpost"} with components
+#'   \itemize{
+#'     \item{\code{bin_sim_vals}:} {An \code{n} by 1 numeric matrix of values
+#'       simulated from the posterior for the binomial
+#'       probability \eqn{p}}
+#'     \item{\code{bin_logf}:} {A function returning the log-posterior for
+#'       \eqn{p}.}
+#'     \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
+#'   }
 #' @seealso \code{\link{set_bin_prior}} for setting a prior distribution
 #'   for the binomial probability \eqn{p}.
+#' @examples
+#' data(gom)
+#' u <- quantile(gom, probs = 0.65)
+#' ds_bin <- list()
+#' ds_bin$n_raw <- length(gom)
+#' ds_bin$m <- sum(gom > u)
+#' bp <- set_bin_prior(prior = "jeffreys")
+#' temp <- binpost(n = 1000, prior = bp, ds_bin = ds_bin)
+#' graphics::hist(temp$bin_sim_vals, prob = TRUE)
 binpost <- function(n, prior, ds_bin) {
+  n_success <- ds_bin$m
+  n_failure <- ds_bin$n_raw - ds_bin$m
   if (prior$prior == "bin_beta") {
-    shape1 <- ds_bin$m + prior$ab[1]
-    shape2 <- ds_bin$n_raw - ds_bin$m + prior$ab[2]
+    shape1 <- n_success + prior$ab[1]
+    shape2 <- n_failure + prior$ab[2]
     bin_sim_vals <- stats::rbeta(n = n, shape1 = shape1, shape2 = shape2)
     bin_logf_args <- list(shape1 = shape1, shape2 = shape2)
+    bin_logf <- function(x, shape1 , shape2) {
+      dbeta(x, shape1 = shape1, shape2 = shape2, log = TRUE)
+    }
   }
-  temp <- list(bin_sim_vals = bin_sim_vals, bin_logf_args = bin_logf_args)
+  if (prior$prior == "bin_mdi") {
+    bin_sim_vals <- r_pu_MDI(n = n, n_success = n_success,
+                             n_failure = n_failure)
+    beta_const <- beta(n_success + 1, n_failure + 1)
+    log_beta_const <- log(beta_const)
+    MDI_post <- function(pu) {
+      pu ^ (pu + n_success) * (1 - pu) ^ (1 - pu + n_failure) / beta_const
+    }
+    log_MDI_const <- log(integrate(MDI_post, 0, 1)$value)
+    bin_logf_args <- list(n_success = n_success, n_failure = n_failure,
+                          log_MDI_const = log_MDI_const,
+                          log_beta_const = log_beta_const)
+    bin_logf <- function(pu, n_success, n_failure, log_MDI_const,
+                         log_beta_const) {
+      (pu + n_success) * log(pu) + (1 - pu + n_failure) * log(1 - pu) -
+        log_MDI_const - log_beta_const
+    }
+  }
+  temp <- list(bin_sim_vals = bin_sim_vals, bin_logf = bin_logf,
+               bin_logf_args = bin_logf_args)
   class(temp) <- "binpost"
   return(temp)
+}
+
+# =========================== r_pu_MDI ===========================
+
+r_pu_MDI <- function(n, n_success, n_failure) {
+  #
+  # Uses rejection sampling to sample from the posterior distribution of
+  # a binomial probability p, based on the MDI prior for p.
+  #
+  # Args:
+  #   n         : A numeric scalar.  The sample size required.
+  #   n_success : A numeric scalar.  The number of successes.
+  #   n_failure : A numeric scalar.  The number of failures.
+  # Returns:
+  #   A numeric vector containing the n sampled values.
+  #
+  n_acc <- 0
+  p_sim <- NULL
+  while (n_acc < n) {
+    p <- rbeta(1, n_success + 1, n_failure + 1)
+    u <- runif(1)
+    if (u <= p ^ p * (1 - p) ^ (1 - p)) {
+      n_acc <- n_acc+1
+      p_sim[n_acc] <- p
+    }
+  }
+  p_sim
 }

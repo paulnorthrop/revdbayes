@@ -20,14 +20,37 @@ binpost(n, prior, ds_bin)
 }}
 }
 \value{
-An object of class \code{"binpost"}.
+An object (list) of class \code{"binpost"} with components
+  \itemize{
+    \item{\code{bin_sim_vals}:} {An \code{n} by 1 numeric matrix of values
+      simulated from the posterior for the binomial
+      probability \eqn{p}}
+    \item{\code{bin_logf}:} {A function returning the log-posterior for
+      \eqn{p}.}
+    \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
+  }
 }
 \description{
 Samples from the posterior distribution of the probability \eqn{p}
 of a binomial distribution.
 }
 \details{
-Some details.
+If \code{prior$prior == "bin_beta"} then the posterior for \eqn{p}
+  is a beta distribution so \code{\link[stats]{rbeta}} is used to sample
+  from the posterior.  If \code{prior$prior == "bin_mdi"} then rejection
+  sampling is used to sample from the posterior with an envelope function
+  equal to the density of a
+  beta(\code{ds$m} + 1, \code{ds$n_raw - ds$m} + 1) density.
+}
+\examples{
+data(gom)
+u <- quantile(gom, probs = 0.65)
+ds_bin <- list()
+ds_bin$n_raw <- length(gom)
+ds_bin$m <- sum(gom > u)
+bp <- set_bin_prior(prior = "jeffreys")
+temp <- binpost(n = 1000, prior = bp, ds_bin = ds_bin)
+graphics::hist(temp$bin_sim_vals, prob = TRUE)
 }
 \seealso{
 \code{\link{set_bin_prior}} for setting a prior distribution

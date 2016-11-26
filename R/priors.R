@@ -496,17 +496,13 @@ hpar_drop <- function(x_list, hpar_vec) {
 #' specify their own prior function and arguments for hyperparameters or choose
 #' from a list of in-built priors.
 #'
-#' @param prior Either
-#' \itemize{
-#'   \item {A function that returns the value of the prior for \eqn{p}, or}
-#'   \item {A character string giving the name of the prior for \eqn{p}.
-#'     See \strong{Details} for a list of priors available for \eqn{p}.}
-#' }
+#' @param prior A character string giving the name of the prior for \eqn{p}.
+#'   See \strong{Details} for a list of the priors available.
 #' @param ... Further arguments to be passed to the user-supplied or
 #'   in-built prior function.  For details of the latter see \strong{Details}.
 #' @details
 #'   \strong{Binomial priors.} The names of the binomial priors set using
-#'   \code{bin_prior} and details of hyperparameters are:
+#'   \code{bin_prior} are:
 #' \itemize{
 #'   \item {\code{"jeffreys"}: the \emph{Jeffreys} beta(1/2, 1/2) prior.}
 #'   \item {\code{"laplace"}: the \emph{Bayes-Laplace} beta(1, 1) prior.}
@@ -514,14 +510,15 @@ hpar_drop <- function(x_list, hpar_vec) {
 #'   \item{\code{"beta"}: a beta(\eqn{\alpha, \beta}) prior.  The argument
 #'     \code{ab} is a vector containing \code{c}(\eqn{\alpha, \beta}).}
 #'     The default is \code{ab = c(1, 1)}.
-#'   \item{\code{"mdi"}: the prior
+#'   \item{\code{"mdi"}: the MDI prior
 #'     \eqn{\pi(p) = 1.6186 p^p (1-p)^(1-p),     0 < p < 1.}
 #'   }
 #' }
+#' Apart from the MDI prior these are all beta distributions.
 #' @return A list of class \code{"binprior"}.  The first component is the
-#'   input prior, i.e. either the name of the prior or a user-supplied
-#'   function.  The remaining components contain the numeric values of any
-#'   hyperparameters in the prior.
+#'   name of the input prior.  Apart from the MDI prior this will be "beta",
+#'   in which case the other component of the list is a vector of length two
+#'   giving the corresponding values of the beta parameters.
 #' @seealso \code{\link{binpost}} for sampling from a binomial posterior
 #'   distribution.
 #' @examples
@@ -529,13 +526,6 @@ hpar_drop <- function(x_list, hpar_vec) {
 #' @export
 set_bin_prior <- function(prior = c("jeffreys", "laplace", "haldane", "beta",
                                     "mdi"), ...) {
-  # If prior is a function then just return it in the required format,
-  # together with any additional arguments from ....
-  if (is.function(prior)) {
-    temp <- list(prior = prior, ...)
-    return(structure(temp, class = "binprior"))
-  }
-  # Otherwise, call the appropriate function to set the prior with name prior.
   prior <- match.arg(prior)
   temp <- list(prior = paste("bin_", prior, sep=""), ...)
   # Check for unused hyperparameter names and drop them

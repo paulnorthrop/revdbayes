@@ -111,7 +111,11 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     xx <- xx[cond]
     n <- length(yy) - 1
     #
-    area <- h * (yy[1] / 2 + sum(yy[2:n]) + yy[n + 1] / 2)
+    if (pu_only) {
+      area <- 1
+    } else {
+      area <- h * (yy[1] / 2 + sum(yy[2:n]) + yy[n + 1] / 2)
+    }
     yy <- yy / area
     max_y <- max(temp$density, yy)
     temp <- list(...)
