@@ -1,3 +1,5 @@
+# To do:
+#
 # bin_prior : if non-null and model = "bingp" independent prior for p and GP pars
 # The prior for \eqn{p} set using \code{bin_prior} is multiplied by the
 # prior for the Generalised Pareto (GP) parameters set using \code{prior},
@@ -102,8 +104,18 @@
 #'
 #' See the revdbayes vignette for further details and examples.
 #'
-#' @return An object of class \code{"evpost"}, which has the same structure
-#'   as an object of class "ru" returned from \code{\link[rust]{ru}}.
+#' @return An object (list) of class \code{"evpost"}, which has the same
+#'   structure as an object of class "ru" returned from \code{\link[rust]{ru}}.
+#'   If \code{model == "bingp"} then this list contains in addition
+#'   \itemize{
+#'     \item{\code{bin_sim_vals}:} {An \code{n} by 1 numeric matrix of values
+#'       simulated from the posterior for the binomial
+#'       probability \eqn{p}}
+#'     \item{\code{bin_logf}:} {A function returning the log-posterior for
+#'       \eqn{p}.  This is exact if \code{bin_prior$prior == "bin_beta"},
+#'       but up to an additive constant otherwise.}
+#'     \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
+#'   }
 #' @seealso \code{\link{set_prior}} for setting a prior distribution.
 #' @seealso \code{\link[rust]{ru}} in the \code{\link[rust]{rust}}
 #'   package for details of the arguments that can be passed to \code{ru} and
@@ -121,6 +133,16 @@
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 #' gpg <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = gom)
 #' plot(gpg)
+#'
+#' # Binomial-GP model
+#' data(gom)
+#' u <- quantile(gom, probs = 0.65)
+#' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
+#' bp <- set_bin_prior(prior = "jeffreys")
+#' gpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
+#'   bin_prior = bp)
+#' plot(gpg, pu_only = TRUE)
+#' plot(gpg, add_pu = TRUE)
 #'
 #' # GEV model
 #' data(portpirie)
@@ -209,7 +231,7 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
     ds_bin$m <- ds$m
     ds_bin$n_raw <- ds$n_raw
     ds$n_raw <- NULL
-    bin_sim <- binpost(n = n, prior = bin_prior, ds_bin = ds_bin)
+    temp_bin <- binpost(n = n, prior = bin_prior, ds_bin = ds_bin)
     add_binomial <- TRUE
     model <- "gp"
   }
@@ -387,7 +409,12 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
     }
     # If model was "bingp" then add the binomial posterior simulated values.
     if (add_binomial) {
-      temp$bin_sim_vals <- bin_sim
+      temp$bin_sim_vals <- matrix(temp_bin$bin_sim_vals, ncol = 1)
+      colnames(temp$bin_sim_vals) <- "p[u]"
+      temp$bin_logf <- function(x, shape1 , shape2) {
+        dbeta(x, shape1 = shape1, shape2 = shape2, log = TRUE, ...)
+      }
+      temp$bin_logf_args <- temp_bin$bin_logf_args
     }
     class(temp) <- "evpost"
     return(temp)
@@ -485,7 +512,12 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
   }
   # If model was "bingp" then add the binomial posterior simulated values.
   if (add_binomial) {
-    temp$bin_sim_vals <- bin_sim
+    temp$bin_sim_vals <- matrix(temp_bin$bin_sim_vals, ncol = 1)
+    colnames(temp$bin_sim_vals) <- "p[u]"
+    temp$bin_logf <- function(x) {
+      dbeta(x, log = TRUE, ...)
+    }
+    temp$bin_logf_args <- temp_bin$bin_logf_args
   }
   class(temp) <- "evpost"
   return(temp)
@@ -515,7 +547,10 @@ binpost <- function(n, prior, ds_bin) {
   if (prior$prior == "bin_beta") {
     shape1 <- ds_bin$m + prior$ab[1]
     shape2 <- ds_bin$n_raw - ds_bin$m + prior$ab[2]
-    sim_bin_post <- stats::rbeta(n = n, shape1 = shape1, shape2 = shape2)
+    bin_sim_vals <- stats::rbeta(n = n, shape1 = shape1, shape2 = shape2)
+    bin_logf_args <- list(shape1 = shape1, shape2 = shape2)
   }
-  return(sim_bin_post)
+  temp <- list(bin_sim_vals = bin_sim_vals, bin_logf_args = bin_logf_args)
+  class(temp) <- "binpost"
+  return(temp)
 }

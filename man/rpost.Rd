@@ -80,8 +80,18 @@ May also be used to pass the arguments \code{n_grid} and/or \code{ep_bc}
 to \code{\link[rust]{find_lambda}}.}
 }
 \value{
-An object of class \code{"evpost"}, which has the same structure
-  as an object of class "ru" returned from \code{\link[rust]{ru}}.
+An object (list) of class \code{"evpost"}, which has the same
+  structure as an object of class "ru" returned from \code{\link[rust]{ru}}.
+  If \code{model == "bingp"} then this list contains in addition
+  \itemize{
+    \item{\code{bin_sim_vals}:} {An \code{n} by 1 numeric matrix of values
+      simulated from the posterior for the binomial
+      probability \eqn{p}}
+    \item{\code{bin_logf}:} {A function returning the log-posterior for
+      \eqn{p}.  This is exact if \code{bin_prior$prior == "bin_beta"},
+      but up to an additive constant otherwise.}
+    \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
+  }
 }
 \description{
 Uses the \code{\link[rust]{ru}} function in the \code{\link[rust]{rust}}
@@ -127,6 +137,16 @@ u <- quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 gpg <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = gom)
 plot(gpg)
+
+# Binomial-GP model
+data(gom)
+u <- quantile(gom, probs = 0.65)
+fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
+bp <- set_bin_prior(prior = "jeffreys")
+gpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
+  bin_prior = bp)
+plot(gpg, pu_only = TRUE)
+plot(gpg, add_pu = TRUE)
 
 # GEV model
 data(portpirie)

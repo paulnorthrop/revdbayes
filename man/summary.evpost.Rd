@@ -4,23 +4,27 @@
 \alias{summary.evpost}
 \title{Summarizing an evpost object}
 \usage{
-\method{summary}{evpost}(object, ...)
+\method{summary}{evpost}(object, add_pu = FALSE, ...)
 }
 \arguments{
 \item{object}{an object of class "evpost", a result of a call to
 \code{\link{rpost}}.}
+
+\item{add_pu}{Includes in the summary of the simulated values the threshold
+exceedance probability \eqn{p}. Only relevant when \code{model == "bingp"}
+was used in the call to \code{rpost}.}
 
 \item{...}{Additional arguments passed on to \code{print} or \code{summary}.}
 }
 \value{
 Prints
 \itemize{
-  \item {a summary of the simulated values, via
-    \code{summary(object$sim_vals)}}
-  \item {an estimate of the probability of acceptance, i.e.
-    \code{object$pa}}
   \item {information about the ratio-of-uniforms bounding box, i.e.
     \code{object$box}}
+  \item {an estimate of the probability of acceptance, i.e.
+    \code{object$pa}}
+  \item {a summary of the simulated values, via
+    \code{summary(object$sim_vals)}}
 }
 }
 \description{

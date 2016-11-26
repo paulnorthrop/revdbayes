@@ -6,7 +6,8 @@
 \usage{
 \method{plot}{evpost}(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
   prob = c(0.1, 0.25, 0.5, 0.75, 0.95, 0.99), ru_scale = FALSE,
-  rows = NULL, xlabs = NULL, ylabs = NULL)
+  rows = NULL, xlabs = NULL, ylabs = NULL, pu_only = FALSE,
+  add_pu = FALSE)
 }
 \arguments{
 \item{x}{an object of class "evpost", a result of a call to
@@ -40,6 +41,15 @@ internally.}
 \item{xlabs, ylabs}{Numeric vectors.  When \code{d} > 2 these set the labels
 on the x and y axes respectively.  if the use doesn't provide these then
 the column names of the simulated data matrix to be plotted are used.}
+
+\item{pu_only}{Only produce a plot relating to the posterior distribution
+for the threshold exceedance probability \eqn{p}. Only relevant when
+\code{model == "bingp"} was used in the call to \code{rpost}.}
+
+\item{add_pu}{Before producing the plots add the threshold exceedance
+probability \eqn{p} to the parameters of the extreme value model. Only
+relevant when \code{model == "bingp"} was used in the call to
+\code{rpost}.}
 }
 \description{
 \code{plot} method for class "evpost".  For \code{d = 1} a histogram of the

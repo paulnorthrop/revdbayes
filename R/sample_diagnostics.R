@@ -33,6 +33,13 @@
 #' @param xlabs,ylabs Numeric vectors.  When \code{d} > 2 these set the labels
 #'   on the x and y axes respectively.  if the use doesn't provide these then
 #'   the column names of the simulated data matrix to be plotted are used.
+#' @param pu_only Only produce a plot relating to the posterior distribution
+#'   for the threshold exceedance probability \eqn{p}. Only relevant when
+#'   \code{model == "bingp"} was used in the call to \code{rpost}.
+#' @param add_pu Before producing the plots add the threshold exceedance
+#'   probability \eqn{p} to the parameters of the extreme value model. Only
+#'   relevant when \code{model == "bingp"} was used in the call to
+#'   \code{rpost}.
 #' @details
 #' Note that \code{suppressWarnings} is used to avoid potential benign warnings
 #'   caused by passing unused graphical parameters to \code{hist} and
@@ -51,7 +58,7 @@
 plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
                     prob = c(0.1, 0.25, 0.5, 0.75, 0.95, 0.99),
                     ru_scale = FALSE, rows = NULL, xlabs = NULL,
-                    ylabs = NULL) {
+                    ylabs = NULL, pu_only = FALSE, add_pu = FALSE) {
   if (!inherits(x, "evpost")) {
     stop("use only with \"evpost\" objects")
   }
@@ -64,6 +71,27 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
   } else {
     plot_data <- x$sim_vals
     plot_density <- x$logf
+  }
+  #
+  if (pu_only & is.null(x$bin_sim_vals)) {
+    warning("pu_only = TRUE is not relevant and has been ignored",
+            immediate. = TRUE)
+    pu_only <- FALSE
+  }
+  if (add_pu & is.null(x$bin_sim_vals)) {
+    warning("add_pu = TRUE is not relevant and has been ignored",
+            immediate. = TRUE)
+    add_pu <- FALSE
+  }
+  if (pu_only) {
+    plot_data <- x$bin_sim_vals
+    plot_density <- x$bin_logf
+    x$logf_args <- x$bin_logf_args
+    x$d <- 1
+  }
+  if (add_pu) {
+    plot_data <- cbind(x$bin_sim_vals, plot_data)
+    x$d <- x$d + 1
   }
   if (x$d == 1) {
     temp <- suppressWarnings(graphics::hist(plot_data, prob = TRUE,
@@ -169,15 +197,18 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #'
 #' @param object an object of class "evpost", a result of a call to
 #'   \code{\link{rpost}}.
+#' @param add_pu Includes in the summary of the simulated values the threshold
+#'   exceedance probability \eqn{p}. Only relevant when \code{model == "bingp"}
+#'   was used in the call to \code{rpost}.
 #' @param ... Additional arguments passed on to \code{print} or \code{summary}.
 #' @return Prints
 #' \itemize{
-#'   \item {a summary of the simulated values, via
-#'     \code{summary(object$sim_vals)}}
-#'   \item {an estimate of the probability of acceptance, i.e.
-#'     \code{object$pa}}
 #'   \item {information about the ratio-of-uniforms bounding box, i.e.
 #'     \code{object$box}}
+#'   \item {an estimate of the probability of acceptance, i.e.
+#'     \code{object$pa}}
+#'   \item {a summary of the simulated values, via
+#'     \code{summary(object$sim_vals)}}
 #' }
 #' @examples
 #' # GP posterior
@@ -190,7 +221,7 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #'   \code{object$box}.
 #' @seealso \code{\link{plot.ru}} for a diagnostic plot.
 #' @export
-summary.evpost <- function(object, ...) {
+summary.evpost <- function(object, add_pu = FALSE, ...) {
   if (!inherits(object, "evpost")) {
     stop("use only with \"evpost\" objects")
   }
@@ -201,6 +232,15 @@ summary.evpost <- function(object, ...) {
   print(object$pa, ...)
   cat("\n")
   cat("sample summary", "\n")
-  print(summary(object$sim_vals, ...), ...)
+  if (add_pu & is.null(object$bin_sim_vals)) {
+    warning("add_pu = TRUE is not relevant and has been ignored",
+            immediate. = FALSE)
+    add_pu <- FALSE
+  }
+  if (!add_pu) {
+    print(summary(object$sim_vals, ...), ...)
+  } else {
+    print(summary(cbind(object$bin_sim_vals, object$sim_vals), ...), ...)
+  }
 }
 
