@@ -480,8 +480,8 @@ hpar_drop <- function(x_list, hpar_vec) {
     warning("The following user-supplied arguments are unused and have been
             dropped:", immediate. = TRUE)
   }
-  cat(names(x_list[to_drop]), "\n")
   if (length(to_drop) > 0) {
+    cat(names(x_list[to_drop]), "\n")
     x_list <- x_list[-to_drop]
   }
   return(x_list)
