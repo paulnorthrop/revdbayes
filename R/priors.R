@@ -239,7 +239,7 @@ gp_prior <- function(prior = c("norm", "mdi", "flat", "flatflat", "jeffreys",
   prior <- match.arg(prior)
   temp <- list(prior = paste("gp_", prior, sep=""), ...)
   # Check for unused hyperparameter names and drop them
-  hpar_vec <- switch(prior, norm = c("mean", "cov"), mdi = "a_mdi",
+  hpar_vec <- switch(prior, norm = c("mean", "cov"), mdi = "a",
                      flat = NULL, jeffreys = NULL, beta = "ab")
   hpar_vec <- c(hpar_vec, "min_xi", "max_xi")
   temp <- hpar_drop(temp, hpar_vec)
@@ -277,10 +277,10 @@ gp_prior <- function(prior = c("norm", "mdi", "flat", "flatflat", "jeffreys",
     temp$cov <- NULL
     temp <- c(temp, list(icov=icov))
   }
-  if (prior == "mdi" & !is.null(temp$a_mdi)) {
-    a_mdi <- temp$a_mdi
-    if (length(a_mdi) != 1 | !is.numeric(a_mdi) | a_mdi <= 0)
-        stop("a_mdi must be a positive numeric vector of length 1")
+  if (prior == "mdi" & !is.null(temp$a)) {
+    a <- temp$a
+    if (length(a) != 1 | !is.numeric(a) | a <= 0)
+        stop("a must be a positive numeric vector of length 1")
   }
   if (prior == "beta" & !is.null(temp$pq)) {
     pq <- temp$pq
@@ -351,7 +351,7 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
   prior <- match.arg(prior)
   temp <- list(prior = paste("gev_", prior, sep=""), ...)
   # Check for unused hyperparameter names and drop them
-  hpar_vec <- switch(prior, norm = c("mean", "cov"), mdi = "a_mdi",
+  hpar_vec <- switch(prior, norm = c("mean", "cov"), mdi = "a",
                       flat = NULL, beta = "ab")
   hpar_vec <- c(hpar_vec, "min_xi", "max_xi")
   temp <- hpar_drop(temp, hpar_vec)
@@ -384,10 +384,10 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
     temp$cov <- NULL
     temp <- c(temp, list(icov=icov))
   }
-  if (prior == "mdi" & !is.null(temp$a_mdi)) {
-    a_mdi <- temp$a_mdi
-    if (length(a_mdi) != 1 | !is.numeric(a_mdi) | a_mdi <= 0)
-        stop("a_mdi must be a positive numeric vector of length 1")
+  if (prior == "mdi" & !is.null(temp$a)) {
+    a <- temp$a
+    if (length(a) != 1 | !is.numeric(a) | a <= 0)
+        stop("a must be a positive numeric vector of length 1")
   }
   if (prior == "beta" & !is.null(temp$pq)) {
     pq <- temp$pq
@@ -429,12 +429,12 @@ gev_loglognorm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
   return(-ld / 2 - pars[2] - pars[3])
 }
 
-gev_mdi <- function(pars, a_mdi=0.5772156649015323, min_xi=-1, max_xi=Inf,
+gev_mdi <- function(pars, a=0.5772156649015323, min_xi=-1, max_xi=Inf,
                     trendsd = 0) {
   if (pars[2] <= 0 | pars[3] < min_xi | pars[3] > max_xi) {
     return(-Inf)
   }
-  return(-log(pars[1]) - a_mdi * pars[3])
+  return(-log(pars[1]) - a * pars[3])
 }
 
 gev_flat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
