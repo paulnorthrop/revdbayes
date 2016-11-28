@@ -31,7 +31,7 @@
 #'   rows of plots.  If the user doesn't provide this then it is set
 #'   internally.
 #' @param xlabs,ylabs Numeric vectors.  When \code{d} > 2 these set the labels
-#'   on the x and y axes respectively.  if the use doesn't provide these then
+#'   on the x and y axes respectively.  If the user doesn't provide these then
 #'   the column names of the simulated data matrix to be plotted are used.
 #' @param pu_only Only produce a plot relating to the posterior distribution
 #'   for the threshold exceedance probability \eqn{p}. Only relevant when
