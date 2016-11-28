@@ -12,3 +12,6 @@
 * The spurious warning messages relating to checking that the model argument
   to `rpost()` is consistent with the prior set using `set-prior()` have been 
   corrected.  These occurred when `model = "pp"` or `model = "os"`.
+  
+* The hyperparameter in the MDI prior was `a` in the documentation and `a_mdi`
+  in the code.  Now it is `a` everywhere.
