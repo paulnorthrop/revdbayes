@@ -2,10 +2,15 @@
 
 ## New features
 
-* `model = bingp` can mow be supplied to `rpost()` to add inferences about the
+* `model = bingp` can now be supplied to `rpost()` to add inferences about the
   probabiliy of threshold exceedance to inferences about threshold excesses 
-  based on the Generalised Pareto (GP) model.  `set_bin_prior` can be used to 
+  based on the Generalised Pareto (GP) model.  `set_bin_prior()` can be used to 
   set a prior for this probability.
+  
+* `rprior_quant()`: to simulate from the prior distribution for GEV parameters 
+   proposed in Coles and Tawn (1996) [A Bayesian analysis of extreme rainfall 
+   data. Appl. Statist., 45, 463-478], based on independent gamma priors for 
+   differences between quantiles.   
 
 ## Bug fixes and minor improvements
 
