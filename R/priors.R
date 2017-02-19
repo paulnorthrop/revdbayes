@@ -240,7 +240,7 @@ gp_prior <- function(prior = c("norm", "mdi", "flat", "flatflat", "jeffreys",
   temp <- list(prior = paste("gp_", prior, sep=""), ...)
   # Check for unused hyperparameter names and drop them
   hpar_vec <- switch(prior, norm = c("mean", "cov"), mdi = "a",
-                     flat = NULL, jeffreys = NULL, beta = "ab")
+                     flat = NULL, jeffreys = NULL, beta = "pq")
   hpar_vec <- c(hpar_vec, "min_xi", "max_xi")
   temp <- hpar_drop(temp, hpar_vec)
   # Check for problems with min_xi and/or max_xi
