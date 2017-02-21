@@ -8,9 +8,14 @@
   set a prior for this probability.
   
 * `rprior_quant()`: to simulate from the prior distribution for GEV parameters 
-   proposed in Coles and Tawn (1996) [A Bayesian analysis of extreme rainfall 
-   data. Appl. Statist., 45, 463-478], based on independent gamma priors for 
-   differences between quantiles.   
+  proposed in Coles and Tawn (1996) [A Bayesian analysis of extreme rainfall 
+  data. Appl. Statist., 45, 463-478], based on independent gamma priors for 
+  differences between quantiles.  
+   
+* `prior_prob()`: to simulate from the prior distribution for GEV parameters
+  based on Crowder (1992), in which independent beta priors are specified for 
+  ratios of probabilities (which is equivalent to a Dirichlet prior on 
+  differences between these probabilities).
 
 ## Bug fixes and minor improvements
 
