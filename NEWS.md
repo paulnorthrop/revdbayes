@@ -16,6 +16,8 @@
   based on Crowder (1992), in which independent beta priors are specified for 
   ratios of probabilities (which is equivalent to a Dirichlet prior on 
   differences between these probabilities).
+  
+* Predictive stuff ...  
 
 ## Bug fixes and minor improvements
 
@@ -25,3 +27,7 @@
   
 * The hyperparameter in the MDI prior was `a` in the documentation and `a_mdi`
   in the code.  Now it is `a` everywhere.
+  
+* In the documentation of `rpost()` the description of the argument `noy` 
+  has been corrected.
+

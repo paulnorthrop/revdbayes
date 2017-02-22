@@ -3,8 +3,7 @@
 #' The Generalized Extreme Value Distribution
 #'
 #' Density function, distribution function, quantile function and
-#' random generation for the generalized extreme value (GEV)
-#' distribution with location, scale and shape parameters.
+#' random generation for the generalized extreme value (GEV).
 #'
 #' @param x,q Numeric vectors of quantiles.
 #' @param p A numeric vector of probabilities in (0,1).
@@ -18,6 +17,9 @@
 #' @param log A logical scalar.  If TRUE the log-density is returned.
 #' @param lower_tail A logical scalar.  If TRUE (default), probabilities
 #'   are P[X <= x], otherwise, P[X > x].
+#' @details See
+#'  \url{https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution}
+#'   for information about the GEV distribution.
 #' @return \code{dgev} gives the density function, \code{pgev} gives the
 #'   distribution function, \code{qgev} gives the quantile function,
 #'   and \code{rgev} generates random deviates.
@@ -51,8 +53,6 @@ NULL
 ## NULL
 
 # ----------------------------- dgev ---------------------------------
-
-# ----------------------------- qgev ---------------------------------
 
 #' @rdname gev
 #' @export
@@ -190,7 +190,7 @@ qgev <- function (p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE) {
   return(loc + scale * mult)
 }
 
-# ----------------------------- qgev ---------------------------------
+# ----------------------------- rgev ---------------------------------
 
 #' @rdname gev
 #' @export
@@ -198,6 +198,11 @@ rgev <- function (n, loc = 0, scale = 1, shape = 0) {
   if (length(loc) != 1 || length(scale) != 1 || length(shape) != 1) {
     stop("loc, scale and shape must have length one.")
   }
-  return(qgev(runif(n), loc = loc, scale = scale, shape = shape))
+  return(qgev(stats::runif(n), loc = loc, scale = scale, shape = shape))
 }
 
+# --------------------------- rgev_vec -------------------------------
+
+# Vectorized version of rgev.
+
+rgev_vec <- Vectorize(rgev, vectorize.args = c("n", "loc", "scale", "shape"))

@@ -23,7 +23,7 @@ rpost(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
   \item {"os"} {A numeric matrix or data frame. Each row should contain
     the largest order statistics for a block of data.  These needs not
     be ordered because they are sorted inside \code{rpost}. If a block
-    contains fewer than \code{dim(as.matrix(data)[2]} order statistics
+    contains fewer than \code{dim(as.matrix(data))[2]} order statistics
     then the corresponding row should be padded by \code{NA}s. If
     \code{ros} is supplied then only the largest \code{ros} values in
     each row are used.}
@@ -38,9 +38,9 @@ be supplied when \code{model = "pp"}.  If \code{model = "gp"} and
 \code{thresh} is not supplied then \code{thresh = 0} is used and
 \code{data} should contain threshold excesses.}
 
-\item{noy}{A numeric scalar  The number of observations per block, where a
-block is often a year.  Only relevant, and must be supplied, if
-\code{model = "pp"}.}
+\item{noy}{A numeric scalar. The number of blocks of observations,
+excluding any missing values.  A block is often a year.
+Only relevant, and must be supplied, \code{model = "pp"}.}
 
 \item{use_noy}{A logical scalar.  Only relevant if model is "pp".  By
 default (\code{use_noy = FALSE}) sampling is based on a likelihood in
@@ -82,7 +82,17 @@ to \code{\link[rust]{find_lambda}}.}
 \value{
 An object (list) of class \code{"evpost"}, which has the same
   structure as an object of class "ru" returned from \code{\link[rust]{ru}}.
-  If \code{model == "bingp"} then this list contains in addition
+  In addition this list contains
+  \itemize{
+    \item{\code{model}:} The argument \code{model} to \code{rpost}
+      detailed above.
+    \item{\code{data}:} The argument \code{data} to \code{rpost}
+      detailed above.
+  }
+  If \code{model == "pp"} then this list also contains the argument
+    \code{noy} to \code{rpost} detailed above.
+
+  If \code{model == "bingp"} then this list also contains
   \itemize{
     \item{\code{bin_sim_vals}:} {An \code{n} by 1 numeric matrix of values
       simulated from the posterior for the binomial

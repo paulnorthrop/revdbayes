@@ -42,8 +42,12 @@ are P[X <= x], otherwise, P[X > x].}
 }
 \description{
 Density function, distribution function, quantile function and
-random generation for the generalized extreme value (GEV)
-distribution with location, scale and shape parameters.
+random generation for the generalized extreme value (GEV).
+}
+\details{
+See
+ \url{https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution}
+  for information about the GEV distribution.
 }
 \examples{
 dgev(-1:4, 1, 0.5, 0.8)

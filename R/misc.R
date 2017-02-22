@@ -204,8 +204,8 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6) {
   # Args:
   #   x          : A numeric vector. (Positive) values to be Box-Cox
   #                transformed.
-  #   lambda     : A numeric vector.  Transformation parameter.
-  #   gm         : A numeric vector.  Optional scaling parameter.
+  #   lambda     : A numeric scalar.  Transformation parameter.
+  #   gm         : A numeric scalar.  Optional scaling parameter.
   #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda.tol use
   #                a Taylor series expansion.
   #
@@ -223,6 +223,12 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6) {
   return(retval)
 }
 
+# =========================== box_cox_vec ===========================
+
+# Version of box_cox vectorized for lambda and gm.
+
+box_cox_vec <- Vectorize(box_cox, vectorize.args = c("lambda", "gm"))
+
 # ====================== box_cox_deriv ==========================
 
 box_cox_deriv <- function (x, lambda = 1, lambda_tol = 1e-6) {
@@ -233,7 +239,7 @@ box_cox_deriv <- function (x, lambda = 1, lambda_tol = 1e-6) {
   # Args:
   #   x          : A numeric vector. (Positive) values to be Box-Cox
   #                transformed.
-  #   lambda     : A numeric vector.  Transformation parameter.
+  #   lambda     : A numeric scalar.  Transformation parameter.
   #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda.tol use
   #                a Taylor series expansion.
   #
