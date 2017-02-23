@@ -197,7 +197,8 @@ set_range_phi <- function(model, phi_mid, se_phi, mult) {
 
 # =========================== box_cox ===========================
 
-box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6) {
+box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6,
+                     poly_order = 3) {
   #
   # Computes the Box-Cox transformation of a vector.
   #
@@ -208,6 +209,8 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6) {
   #   gm         : A numeric scalar.  Optional scaling parameter.
   #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda.tol use
   #                a Taylor series expansion.
+  #   poly_order : order of Taylor series polynomial in lambda used as
+  #                an approximation if abs(lambda) < lambda.tol
   #
   # Returns:
   #   A numeric vector.  The transformed value
@@ -216,7 +219,7 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6) {
   if (abs(lambda) > lambda_tol) {
     retval <- (x ^ lambda - 1) / lambda / gm ^ (lambda - 1)
   } else {
-    i <- 0:3
+    i <- 0:poly_order
     retval <- sum(log(x) ^ (i+1) * lambda ^ i / factorial(i + 1))
     retval <- retval / gm ^ (lambda - 1)
   }
@@ -227,11 +230,12 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6) {
 
 # Version of box_cox vectorized for lambda and gm.
 
-box_cox_vec <- Vectorize(box_cox, vectorize.args = c("lambda", "gm"))
+box_cox_vec <- Vectorize(box_cox, vectorize.args = c("x", "lambda", "gm"))
 
 # ====================== box_cox_deriv ==========================
 
-box_cox_deriv <- function (x, lambda = 1, lambda_tol = 1e-6) {
+box_cox_deriv <- function (x, lambda = 1, lambda_tol = 1e-6,
+                           poly_order = 3) {
   #
   # Computes the derivative with respect to lambda the Box-Cox
   # transformation.
@@ -242,6 +246,8 @@ box_cox_deriv <- function (x, lambda = 1, lambda_tol = 1e-6) {
   #   lambda     : A numeric scalar.  Transformation parameter.
   #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda.tol use
   #                a Taylor series expansion.
+  #   poly_order : order of Taylor series polynomial in lambda used as
+  #                an approximation if abs(lambda) < lambda.tol
   #
   # Returns:
   #   A numeric vector.  The transformed value
@@ -250,7 +256,7 @@ box_cox_deriv <- function (x, lambda = 1, lambda_tol = 1e-6) {
   if (abs(lambda) > lambda_tol) {
     retval <- (lambda * x ^ lambda * log(x) - x ^ lambda + 1) / lambda ^ 2
   } else {
-    i <- 0:3
+    i <- 0:poly_order
     retval <- sum(log(x) ^ (i + 2) * lambda ^ i / ((i + 2) * factorial(i)))
   }
   return(retval)

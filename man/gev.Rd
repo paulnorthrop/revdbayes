@@ -6,7 +6,7 @@
 \alias{pgev}
 \alias{qgev}
 \alias{rgev}
-\title{The Generalized Extreme Value Distribution}
+\title{The Generalised Extreme Value Distribution}
 \usage{
 dgev(x, loc = 0, scale = 1, shape = 0, log = FALSE)
 
@@ -21,6 +21,7 @@ rgev(n, loc = 0, scale = 1, shape = 0)
 
 \item{loc, scale, shape}{Numeric vectors, of the same length.
 Location, scale and shape parameters.
+All elements of \code{scale} must be positive.
 In \code{dgev}, \code{pgev} and \code{qgev} these vectors can have
 length > 1, but only if \code{length(x)[dgev]}, \code{length(q)[pgev]},
 or \code{length(p)[qgev]} has length one.
@@ -42,12 +43,26 @@ are P[X <= x], otherwise, P[X > x].}
 }
 \description{
 Density function, distribution function, quantile function and
-random generation for the generalized extreme value (GEV).
+random generation for the generalised extreme value (GEV)
+distribution.
 }
 \details{
-See
+The distribution function of a GEV distribution with parameters
+ \code{loc} = \eqn{\mu}, \code{scale} = \eqn{\sigma} (>0) and
+ \code{shape} = \eqn{\xi} is
+ \deqn{F(x) = exp { - [1 + \xi (x - \mu) / \sigma] ^ (-1/\xi)} }
+ for \eqn{1 + \xi (x - \mu) / \sigma > 0}.  If \eqn{\xi = 0} the
+ distribution function is defined as the limit as \eqn{\xi} tends to zero.
+ The support of the distribution depends on \eqn{\xi}: it is
+ \eqn{x <= \mu - \sigma / \xi} for \eqn{\xi < 0};
+ \eqn{x >= \mu - \sigma / \xi} for \eqn{\xi > 0};
+ and \eqn{x} is unbounded for \eqn{\xi = 0}.
+ Note that if \eqn{\xi < -1} the GEV density function becomes infinite
+ as \eqn{x} approaches \eqn{\mu -\sigma/\xi}.
+
+ See
  \url{https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution}
-  for information about the GEV distribution.
+ for further information.
 }
 \examples{
 dgev(-1:4, 1, 0.5, 0.8)
