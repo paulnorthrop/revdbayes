@@ -8,24 +8,26 @@
 \alias{rgp}
 \title{The Generalised Pareto Distribution}
 \usage{
-dgp(x, scale = 1, shape = 0, log = FALSE)
+dgp(x, loc = 0, scale = 1, shape = 0, log = FALSE)
 
-pgp(q, scale = 1, shape = 0, lower_tail = TRUE)
+pgp(q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE)
 
-qgp(p, scale = 1, shape = 0, lower_tail = TRUE)
+qgp(p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE)
 
-rgp(n, scale = 1, shape = 0)
+rgp(n, loc = 0, scale = 1, shape = 0)
 }
 \arguments{
 \item{x, q}{Numeric vectors of quantiles.  All elements of \code{x}
 and \code{q} must be non-negative.}
 
-\item{scale, shape}{Numeric vectors, of the same length.
-Scale and shape parameters.
+\item{loc, scale, shape}{Numeric vectors.
+Location, scale and shape parameters.
 All elements of \code{scale} must be positive.
 In \code{dgp}, \code{pgp} and \code{qgp} these vectors can have
 length > 1, but only if \code{length(x)[dgp]}, \code{length(q)[pgp]},
 or \code{length(p)[qgp]} has length one.
+Then they must either have a common length or a subset of
+them must have a common length with the others having length one.
 Otherwise, they must have length one.}
 
 \item{log}{A logical scalar.  If TRUE the log-density is returned.}
@@ -48,38 +50,38 @@ random generation for the generalised Pareto (GP) distribution.
 }
 \details{
 The distribution function of a GP distribution with parameters
- \code{scale} = \eqn{\sigma} (>0) and \code{shape} = \eqn{\xi} is
- \deqn{F(x) = 1 - [1 + \xi x / \sigma] ^ (-1/\xi) }
- for \eqn{1 + \xi x / \sigma > 0}.  If \eqn{\xi = 0} the
+ \code{location} = \eqn{\mu}, \code{scale} = \eqn{\sigma} (>0) and
+ \code{shape} = \eqn{\xi} is
+ \deqn{F(x) = 1 - [1 + \xi (x - \mu) / \sigma] ^ (-1/\xi) }
+ for \eqn{1 + \xi (x - \mu) / \sigma > 0}.  If \eqn{\xi = 0} the
  distribution function is defined as the limit as \eqn{\xi} tends to zero.
  The support of the distribution depends on \eqn{\xi}: it is
- \eqn{x >= 0} for \eqn{\xi >= 0};
- and \eqn{0 <= x <= - \sigma / \xi} for \eqn{\xi < 0}.  Note that
+ \eqn{x >= \mu} for \eqn{\xi >= 0};
+ and \eqn{0 <= x <= \mu - \sigma / \xi} for \eqn{\xi < 0}.  Note that
  if \eqn{\xi < -1} the GP density function becomes infinite as \eqn{x}
- approaches \eqn{-\sigma/\xi}.
+ approaches \eqn{\mu - \sigma/\xi}.
 
  See
  \url{https://en.wikipedia.org/wiki/Generalized_Pareto_distribution}
   for information.
 }
 \examples{
-dgp(0:4, 0.5, 0.8)
-dgp(1:6, 0.5, -0.2, log = TRUE)
-dgp(1, c(1, 2), c(-0.2, 0.4))
+dgp(0:4, scale = 0.5, shape = 0.8)
+dgp(1:6, scale = 0.5, shape = -0.2, log = TRUE)
+dgp(1, scale = 1, shape = c(-0.2, 0.4))
 
-pgp(0:4, 0.5, 0.8)
-pgp(1:6, 0.5, -0.2)
-pgp(1, c(1, 2), c(-0.2, 0.4))
-pgp(7, c(1, 2), c(-0.2, 0.4))
-pgp(-3, c(1, 2), c(-0.2, 0.4))
+pgp(0:4, scale = 0.5, shape = 0.8)
+pgp(1:6, scale = 0.5, shape = -0.2)
+pgp(1, scale = c(1, 2), shape = c(-0.2, 0.4))
+pgp(7, scale = 1, shape = c(-0.2, 0.4))
 
-qgp((1:9)/10, 0.5, 0.8)
-qgp(0.5, c(0.5, 1), c(-0.5, 0.5))
+qgp((1:9)/10, scale = 0.5, shape = 0.8)
+qgp(0.5, scale = c(0.5, 1), shape = c(-0.5, 0.5))
 
 p <- (1:9)/10
-pgp(qgp(p, 1, 2, 0.8), 2, 0.8)
+pgp(qgp(p, scale = 2, shape = 0.8), scale = 2, shape = 0.8)
 
-rgp(6, 0.5, 0.8)
+rgp(6, scale = 0.5, shape = 0.8)
 }
 \references{
 Pickands, J. (1975) Statistical inference using extreme

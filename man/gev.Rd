@@ -25,6 +25,8 @@ All elements of \code{scale} must be positive.
 In \code{dgev}, \code{pgev} and \code{qgev} these vectors can have
 length > 1, but only if \code{length(x)[dgev]}, \code{length(q)[pgev]},
 or \code{length(p)[qgev]} has length one.
+Then they must either have a common length or a subset of
+them must have a common length with the others having length one.
 Otherwise, they must have length one.}
 
 \item{log}{A logical scalar.  If TRUE the log-density is returned.}
@@ -67,13 +69,13 @@ The distribution function of a GEV distribution with parameters
 \examples{
 dgev(-1:4, 1, 0.5, 0.8)
 dgev(1:6, 1, 0.5, -0.2, log = TRUE)
-dgev(1, c(1, 2), c(1, 2), c(-0.2, 0.4))
+dgev(1, shape = c(-0.2, 0.4))
 
 pgev(-1:4, 1, 0.5, 0.8)
 pgev(1:6, 1, 0.5, -0.2)
 pgev(1, c(1, 2), c(1, 2), c(-0.2, 0.4))
-pgev(7, c(1, 2), c(1, 2), c(-0.2, 0.4))
 pgev(-3, c(1, 2), c(1, 2), c(-0.2, 0.4))
+pgev(7, 1, 1, c(-0.2, 0.4))
 
 qgev((1:9)/10, 2, 0.5, 0.8)
 qgev(0.5, c(1,2), c(0.5, 1), c(-0.5, 0.5))
