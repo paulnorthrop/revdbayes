@@ -17,7 +17,8 @@
   ratios of probabilities (which is equivalent to a Dirichlet prior on 
   differences between these probabilities).
   
-* Predictive stuff ...  
+* Functions `dpred()`, `ppred()`, `qpred()` and `rpred()` to perform predictive
+  inference about the largest observation observed in N years.
 
 ## Bug fixes and minor improvements
 
