@@ -8,7 +8,7 @@
 \source{
 Coles, S. G. (2001) \emph{An Introduction to Statistical Modelling
   of Extreme Values}. London: Springer.
-  doi:\href{https://doi.org/10.1007/978-1-4471-3675-0}{10.1007/978-1-4471-3675-0}.
+  \url{https://doi.org/10.1007/978-1-4471-3675-0}
 }
 \usage{
 portpirie

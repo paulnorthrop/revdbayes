@@ -25,7 +25,10 @@
 #'   in the specification of \code{lb}.  Must be in (0,1).  If \code{lb=NULL}
 #'   then \code{lb_prob} is not used.
 #' @details The simulation is based on the way that the prior is constructed.
-#'   See Coles and Tawn (1996), Stephenson (1996) or the evdbayes user guide
+#'   See
+#'   \href{http://dx.doi.org/10.2307/2986068}{Coles and Tawn (1996)},
+#'   \href{http://dx.doi.org/10.1201/b19721-14}{Stephenson (1996)}
+#'   or the evdbayes user guide
 #'   for details of the construction of the prior. First, the quantile
 #'   differences are simulated from the specified gamma distributions.
 #'   Then the simulated quantiles are calculated. Then the GEV location,
@@ -143,7 +146,10 @@ rprior_quant <- function(n, prob, shape, scale, lb = NULL, lb_prob = 0.001){
 #'   in the specification of \code{lb}.  Must be in (0,1).  If \code{lb=NULL}
 #'   then \code{lb_prob} is not used.
 #' @details The simulation is based on the way that the prior is constructed.
-#'   See Stephenson (1996), the evdbayes user guide or Northrop et al. (2017)
+#'   See
+#'   \href{http://dx.doi.org/10.1201/b19721-14}{Stephenson (1996)}
+#'   the evdbayes user guide or Northrop et al. (2017)
+#'   \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
 #'   for details of the construction of the prior.  First, differences between
 #'   probabilities are simulated from a Dirichlet distribution. Then the GEV
 #'   location, scale and shape parameters that correspond to these quantile
@@ -168,11 +174,12 @@ rprior_quant <- function(n, prob, shape, scale, lb = NULL, lb_prob = 0.001){
 #'   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
 #'   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
 #'   Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721-14}
-#' @references Northrop, P. J., Attalides, N. and Jonathan, P. (2016)
-#'   Cross-validatory extreme value threshold selection and uncertainty with
-#'   application to ocean storm severity.  \emph{Journal of the Royal
-#'   Statistical Society Series C: Applied Statistics}, \strong{66}(1),
-#'   93--120.  \url{http://dx.doi.org/10.1111/rssc.12159}.
+#' @references Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
+#'   Cross-validatory extreme value threshold selection and uncertainty
+#'   with application to ocean storm severity.
+#'   \emph{Journal of the Royal Statistical Society Series C: Applied
+#'   Statistics}, \emph{66}(1), 93-120.
+#'   \url{http://dx.doi.org/10.1111/rssc.12159}
 #' @examples
 #' quant <- c(85, 88, 95)
 #' alpha <- c(4, 2.5, 2.25, 0.25)
@@ -319,7 +326,9 @@ quantile_to_gev <- function(quant, prob){
 #'   \eqn{Y_1}, ..., \eqn{Y_K} are independent, \eqn{Y_i} has a
 #'   gamma(\eqn{\alpha_i}, 1) distribution and \eqn{S = Y_1 + ... + Y_k}
 #'   then \eqn{(Y_1, ..., Y_K) / S} has a
-#'   Dirichlet(\eqn{\alpha_1}, ..., \eqn{\alpha_K}) distribution.  See
+#'   Dirichlet(\eqn{\alpha_1}, ..., \eqn{\alpha_K}) distribution.
+#'
+#'   See
 #' \url{https://en.wikipedia.org/wiki/Dirichlet_distribution#Gamma_distribution}
 #' @return An \code{n} by \code{length(alpha)} numeric matrix.
 #' @seealso \code{\link{rprior_prob}} for prior simulation of

@@ -5,7 +5,7 @@
 \title{Random sampling from extreme value posterior distributions}
 \usage{
 rpost(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
-  thresh = NULL, noy = NULL, use_noy = TRUE, ros = NULL,
+  thresh = NULL, noy = NULL, use_noy = TRUE, npy = NULL, ros = NULL,
   bin_prior = structure(list(prior = "bin_beta", ab = c(1/2, 1/2), class =
   "binprior")), init_ests = NULL, mult = 2, use_phi_map = FALSE, ...)
 }
@@ -50,6 +50,20 @@ sampled values are transformed back to the required parameterisation
 before returning them to the user.  If \code{use_noy = TRUE} then the
 user's value of \code{noy} is used in the likelihood.}
 
+\item{npy}{A numeric scalar. The mean number of observations per year
+  of data, after excluding any missing values, i.e. the number of
+  non-missing observations divided by total number of years of non-missing
+  data.
+
+  The value of \code{npy} does not affect any calculation in
+  \code{rpost}, it only affects subsequent extreme value inferences using
+  \code{\link{dpred}}, \code{\link{ppred}}, \code{\link{qpred}} or
+  \code{\link{rpred}}.  However, setting \code{npy} in the call to
+  \code{rpost} avoids the need to supply \code{npy} when calling these
+  latter functions.  This is likely to be useful only when
+  \code{model = bingp}. See the documentation of \code{\link{ev_pred}}
+  for further details.}
+
 \item{ros}{A numeric scalar.  Only relevant when \code{model = "os"}. The
 largest \code{ros} values in each row of the matrix \code{data} are used
 in the analysis.}
@@ -92,6 +106,9 @@ An object (list) of class \code{"evpost"}, which has the same
   If \code{model == "pp"} then this list also contains the argument
     \code{noy} to \code{rpost} detailed above.
 
+  If \code{model == "gp"} or \code{model == "bingp"} then this list also
+    contains the argument \code{thresh} to \code{rpost} detailed above.
+
   If \code{model == "bingp"} then this list also contains
   \itemize{
     \item{\code{bin_sim_vals}:} {An \code{n} by 1 numeric matrix of values
@@ -115,10 +132,17 @@ model.
   amounts by which those values exceed \code{thresh}.
   If \code{thresh} is not supplied then the GP distribution is fitted to
   all values in \code{data}, in effect \code{thresh = 0}.
+  See also \code{\link{gp}}.
+
+\emph{Binomial-GP}: \code{model = "bingp"}.  The GP model for threshold
+  excesses supplemented by a binomial(\code{length(data)}, \eqn{p})
+  model for the number of threshold excesses.  See
+  \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
+  for details.
 
 \emph{Generalised extreme value (GEV) model}: \code{model = "gev"}.  A
   model for block maxima.  Required arguments: \code{n}, \code{data},
-  \code{prior}.
+  \code{prior}.  See also \code{\link{gev}}.
 
 \emph{Point process (PP) model}: \code{model = "pp"}. A model for
   occurrences of threshold exceedances and threshold excesses.  Required
@@ -178,6 +202,25 @@ mat <- diag(c(10000, 10000, 100))
 pv <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
 osv <- rpost(n = 1000, model = "os", prior = pv, data = venice)
 plot(osv)
+}
+\references{
+Coles, S. G. and Powell, E. A. (1996) Bayesian methods in
+  extreme value modelling: a review and new developments.
+  \emph{Int. Statist. Rev.}, \strong{64}, 119-136.
+  \url{http://dx.doi.org/10.2307/1403426}
+
+Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
+  Cross-validatory extreme value threshold selection and uncertainty
+  with application to ocean storm severity.
+  \emph{Journal of the Royal Statistical Society Series C: Applied
+  Statistics}, \emph{66}(1), 93-120.
+  \url{http://dx.doi.org/10.1111/rssc.12159}
+
+Stephenson, A. (2016). Bayesian Inference for Extreme Value
+  Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
+  Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
+  Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721-14}
+  value posterior using the evdbayes package.
 }
 \seealso{
 \code{\link{set_prior}} for setting a prior distribution.

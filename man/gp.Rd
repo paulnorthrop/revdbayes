@@ -35,7 +35,9 @@ Otherwise, they must have length one.}
 \item{lower_tail}{A logical scalar.  If TRUE (default), probabilities
 are P[X <= x], otherwise, P[X > x].}
 
-\item{p}{A numeric vector of probabilities in (0,1).}
+\item{p}{A numeric vector of probabilities.
+If \code{lower_tail = TRUE} then \code{p} must be in [0, 1).
+If \code{lower_tail = FALSE} then \code{p} must be in (0, 1].}
 
 \item{n}{Numeric scalar.  The number of observations to be simulated.}
 }
@@ -63,7 +65,7 @@ The distribution function of a GP distribution with parameters
 
  See
  \url{https://en.wikipedia.org/wiki/Generalized_Pareto_distribution}
-  for information.
+  for further information.
 }
 \examples{
 dgp(0:4, scale = 0.5, shape = 0.8)
@@ -75,7 +77,7 @@ pgp(1:6, scale = 0.5, shape = -0.2)
 pgp(1, scale = c(1, 2), shape = c(-0.2, 0.4))
 pgp(7, scale = 1, shape = c(-0.2, 0.4))
 
-qgp((1:9)/10, scale = 0.5, shape = 0.8)
+qgp((0:9)/10, scale = 0.5, shape = 0.8)
 qgp(0.5, scale = c(0.5, 1), shape = c(-0.5, 0.5))
 
 p <- (1:9)/10
@@ -90,6 +92,6 @@ Pickands, J. (1975) Statistical inference using extreme
 
 Coles, S. G. (2001) \emph{An Introduction to Statistical
   Modeling of Extreme Values}, Springer-Verlag, London.
-  \url{http://dx.doi.org/10.1007/978-1-4471-3675-0}
+  Chapter 4: \url{http://dx.doi.org/10.1007/978-1-4471-3675-0_4}
 }
 

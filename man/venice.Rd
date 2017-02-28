@@ -8,7 +8,7 @@
 \source{
 Smith, R. L. (1986) Extreme value theory based on the \emph{r}
   largest annual events. \emph{Journal of Hydrology}, \strong{86}, 27-43.
-  doi:\href{https://doi.org/10.1016/0022-1694(86)90004-1}{10.1016/0022-1694(86)90004-1}.
+  \url{https://doi.org/10.1016/0022-1694(86)90004-1}
 }
 \usage{
 venice
@@ -23,7 +23,7 @@ measurements are given as row names.
 \references{
 Coles, S. G. (2001) \emph{An Introduction to Statistical
   Modelling of Extreme Values}. London: Springer.
-  doi:\href{https://doi.org/10.1007/978-1-4471-3675-0}{10.1007/978-1-4471-3675-0}.
+  \url{https://doi.org/10.1007/978-1-4471-3675-0}
 }
 \keyword{datasets}
 

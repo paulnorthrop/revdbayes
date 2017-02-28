@@ -41,7 +41,7 @@ NULL
 #' @format A numeric vector containing 65 observations.
 #' @source Coles, S. G. (2001) \emph{An Introduction to Statistical Modelling
 #'   of Extreme Values}. London: Springer.
-#'   doi:\href{https://doi.org/10.1007/978-1-4471-3675-0}{10.1007/978-1-4471-3675-0}.
+#'   \url{https://doi.org/10.1007/978-1-4471-3675-0}
 "portpirie"
 
 #' Annual Maximum Temperatures at Oxford
@@ -73,11 +73,12 @@ NULL
 #'
 #'@format A vector containing 315 observations.
 #'@source Oceanweather Inc. (2005) GOMOS -- Gulf of Mexico hindcast study.
-#'@references Northrop, P. J., N. Attalides, and P. Jonathan. (2016).
-#'  Cross-Validatory Extreme Value Threshold Selection and Uncertainty with
-#'  Application to Ocean Storm Severity. \emph{Journal of the Royal
-#'  Statistical Society: Series C (Applied Statistics)}.
-#'  doi:\href{https://doi.org/10.1111/rssc.12159}{10.1111/rssc.12159}.
+#' @references Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
+#'   Cross-validatory extreme value threshold selection and uncertainty
+#'   with application to ocean storm severity.
+#'   \emph{Journal of the Royal Statistical Society Series C: Applied
+#'   Statistics}, \emph{66}(1), 93-120.
+#'   \url{http://dx.doi.org/10.1111/rssc.12159}
 "gom"
 
 #' Largest Sea Levels in Venice
@@ -91,9 +92,8 @@ NULL
 #' @format A data frame with 51 rows and 10 columns.
 #' @source Smith, R. L. (1986) Extreme value theory based on the \emph{r}
 #'   largest annual events. \emph{Journal of Hydrology}, \strong{86}, 27-43.
-#'   doi:\href{https://doi.org/10.1016/0022-1694(86)90004-1}{10.1016/0022-1694(86)90004-1}.
-#'
+#'   \url{https://doi.org/10.1016/0022-1694(86)90004-1}
 #' @references Coles, S. G. (2001) \emph{An Introduction to Statistical
 #'   Modelling of Extreme Values}. London: Springer.
-#'   doi:\href{https://doi.org/10.1007/978-1-4471-3675-0}{10.1007/978-1-4471-3675-0}.
+#'   \url{https://doi.org/10.1007/978-1-4471-3675-0}
 "venice"
