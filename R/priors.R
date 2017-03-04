@@ -530,7 +530,7 @@ set_bin_prior <- function(prior = c("jeffreys", "laplace", "haldane", "beta",
   temp <- list(prior = paste("bin_", prior, sep=""), ...)
   # Check for unused hyperparameter names and drop them
   if (prior == "beta") {
-    hpar_vec <- "pq"
+    hpar_vec <- "ab"
   } else {
     hpar_vec <- NULL
   }
