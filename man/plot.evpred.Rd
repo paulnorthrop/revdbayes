@@ -4,7 +4,7 @@
 \alias{plot.evpred}
 \title{Plot diagnostics for an evpred object}
 \usage{
-\method{plot}{evpred}(object, ..., leg_pos = "topright", leg_text = NULL,
+\method{plot}{evpred}(object, ..., leg_pos = NULL, leg_text = NULL,
   which_int = c("long", "short", "both"))
 }
 \arguments{

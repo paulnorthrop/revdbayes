@@ -56,8 +56,7 @@
 #' plot(r_gevp, xlim = c(4, 10))
 #'
 #' @export
-plot.evpred <- function(object, ...,
-                        leg_pos = "topright", leg_text = NULL,
+plot.evpred <- function(object, ..., leg_pos = NULL, leg_text = NULL,
                         which_int = c("long", "short", "both")) {
   if (!inherits(object, "evpred")) {
     stop("use only with \"evpred\" objects, produced by predict.evpost")
@@ -75,6 +74,13 @@ plot.evpred <- function(object, ...,
                         font.main, font.sub, lab, las, lend, tck, xaxp, xaxs,
                         xaxt, xlog, xpd, yaxp, yaxs, yaxt, xlim, ylim) {
     graphics::legend(x = x, legend = legend, ...)
+  }
+  if (is.null(leg_pos)) {
+    if (object$type %in% c("d", "r")) {
+      leg_pos <- "topright"
+    } else {
+      leg_pos <- "bottomright"
+    }
   }
   temp <- list(...)
   type <- object$type
@@ -114,6 +120,7 @@ plot.evpred <- function(object, ...,
       y_all <- y
       x_all <- x
     }
+    y_lab <- y + epy2 / 2
     graphics::matplot(range(x_all), range(y_all), type = "n", axes = FALSE,
                       ann = FALSE, ...)
     graphics::segments(x[, 1], y, x[, 2], y, ...)
@@ -123,13 +130,18 @@ plot.evpred <- function(object, ...,
     u <- par("usr")
     epx <- (u[2] - u[1]) / 50
     if (is.null(temp$cex)) {
-      graphics::text(x[, 2] + epx, y, labels = as.character(level), cex = 0.7,
-                     ...)
+      graphics::text(x[, 2] + epx, y_lab, labels = as.character(level),
+                     cex = 0.7, ...)
     } else {
-      graphics::text(x[, 2] + epx, y, labels = as.character(level), ...)
+      graphics::text(x[, 2] + epx, y_lab, labels = as.character(level), ...)
     }
     axis(1, ...)
-    axis(2, at = 1:n_y, labels = n_years, ...)
+    if (which_int == "both") {
+      my_at <- 1:n_y + epy * (n_l - 1) / 2 + epy2 / 2
+    } else {
+      my_at <- 1:n_y + epy * (n_l - 1) / 2
+    }
+    axis(2, at = my_at, labels = n_years, ...)
     box(bty ="l", ...)
     if (is.null(temp$xlab)) {
       title(xlab = "quantile")
