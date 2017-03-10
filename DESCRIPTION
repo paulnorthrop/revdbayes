@@ -14,11 +14,12 @@ Description: Provides functions for the Bayesian analysis of extreme value
 Imports: stats,
     graphics,
     methods,
-    rust (>= 1.1.0)
+    rust (>= 1.1.0),
+    bayesplot (>= 1.1.0)
 License: GPL (>= 2)
 LazyData: TRUE
 Depends:
-    R (>= 3.3.1)
+    R (>= 3.3.2),
 RoxygenNote: 5.0.1
 Suggests: knitr,
     rmarkdown,

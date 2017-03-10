@@ -231,7 +231,6 @@ rgev <- function (n, loc = 0, scale = 1, shape = 0) {
 
 rgev_vec <- Vectorize(rgev, vectorize.args = c("n", "loc", "scale", "shape"))
 
-
 # ================================ GP functions ===============================
 
 #' The Generalised Pareto Distribution

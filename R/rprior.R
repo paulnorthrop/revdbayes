@@ -184,7 +184,7 @@ rprior_quant <- function(n, prob, shape, scale, lb = NULL, lb_prob = 0.001){
 #' quant <- c(85, 88, 95)
 #' alpha <- c(4, 2.5, 2.25, 0.25)
 #' x <- rprior_prob(n = 1000, quant = quant, alpha = alpha, exc = TRUE)
-#' x <- rprior_prob(n = 1000, quant = quant, alpha = alpha, exc = TRUE, lb= 0)
+#' x <- rprior_prob(n = 1000, quant = quant, alpha = alpha, exc = TRUE, lb = 0)
 #' @export
 rprior_prob <- function(n, quant, alpha, exc = FALSE, lb = NULL,
                         lb_prob = 0.001){

@@ -5,9 +5,10 @@
 \title{Random sampling from extreme value posterior distributions}
 \usage{
 rpost(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
-  thresh = NULL, noy = NULL, use_noy = TRUE, npy = NULL, ros = NULL,
-  bin_prior = structure(list(prior = "bin_beta", ab = c(1/2, 1/2), class =
-  "binprior")), init_ests = NULL, mult = 2, use_phi_map = FALSE, ...)
+  nrep = NULL, thresh = NULL, noy = NULL, use_noy = TRUE, npy = NULL,
+  ros = NULL, bin_prior = structure(list(prior = "bin_beta", ab = c(1/2,
+  1/2), class = "binprior")), init_ests = NULL, mult = 2,
+  use_phi_map = FALSE, ...)
 }
 \arguments{
 \item{n}{A numeric scalar. The size of posterior sample required.}
@@ -32,6 +33,15 @@ rpost(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
 \item{prior}{A list specifying the prior for the parameters of the extreme
 value model, created by \code{\link{set_prior}}.}
 
+\item{nrep}{A numeric scalar.  If \code{nrep} is not \code{NULL} then
+\code{nrep} gives the number of replications of the original dataset
+simulated from the posterior predictive distribution.
+Each replication is based on one of the samples from the posterior
+distribution.  Therefore, \code{nrep} must not be greater than \code{n}.
+In that event \code{nrep} is set equal to \code{n}.
+Currently only implemented if \code{model = "gev"} or
+\code{model = "bingp"}.}
+
 \item{thresh}{A numeric scalar.  Extreme value threshold applied to data.
 Only relevant when \code{model = "gp"} or \code{model = "pp"}.  Must
 be supplied when \code{model = "pp"}.  If \code{model = "gp"} and
@@ -40,7 +50,7 @@ be supplied when \code{model = "pp"}.  If \code{model = "gp"} and
 
 \item{noy}{A numeric scalar. The number of blocks of observations,
 excluding any missing values.  A block is often a year.
-Only relevant, and must be supplied, \code{model = "pp"}.}
+Only relevant, and must be supplied, if \code{model = "pp"}.}
 
 \item{use_noy}{A logical scalar.  Only relevant if model is "pp".  By
 default (\code{use_noy = FALSE}) sampling is based on a likelihood in
@@ -61,8 +71,8 @@ user's value of \code{noy} is used in the likelihood.}
   \code{\link{rpred}}.  However, setting \code{npy} in the call to
   \code{rpost} avoids the need to supply \code{npy} when calling these
   latter functions.  This is likely to be useful only when
-  \code{model = bingp}. See the documentation of \code{\link{ev_pred}}
-  for further details.}
+  \code{model = bingp}. See the documentation of
+  \code{\link{predict.evpost}} for further details.}
 
 \item{ros}{A numeric scalar.  Only relevant when \code{model = "os"}. The
 largest \code{ros} values in each row of the matrix \code{data} are used
@@ -101,10 +111,22 @@ An object (list) of class \code{"evpost"}, which has the same
     \item{\code{model}:} The argument \code{model} to \code{rpost}
       detailed above.
     \item{\code{data}:} The argument \code{data} to \code{rpost}
+      detailed above, with any missing values removed, except that
+      if \code{model = "gp"} then only the values that lie above the
+      threshold are included and if \code{model = "bingp"} or
+      \code{model = "pp"} then the input data are returned
+      but any value lying below the threshold is set to \code{thresh}.
+    \item{\code{prior}:} The argument \code{prior} to \code{rpost}
       detailed above.
   }
+  If \code{nrep} is not \code{NULL} then this list also contains
+    \code{data_rep}, a numerical matrix with \code{nrep} rows.  Each
+    row contains a replication of the original data \code{data}
+    simulated from the posterior predictive distribution.
   If \code{model == "pp"} then this list also contains the argument
     \code{noy} to \code{rpost} detailed above.
+  If the argument \code{npy} was supplied then this list also contains
+  \code{npy}.
 
   If \code{model == "gp"} or \code{model == "bingp"} then this list also
     contains the argument \code{thresh} to \code{rpost} detailed above.
@@ -138,7 +160,8 @@ model.
   excesses supplemented by a binomial(\code{length(data)}, \eqn{p})
   model for the number of threshold excesses.  See
   \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
-  for details.
+  for details.  Currently, the GP and binomial parameters are assumed to
+  be independent \emph{a priori}.
 
 \emph{Generalised extreme value (GEV) model}: \code{model = "gev"}.  A
   model for block maxima.  Required arguments: \code{n}, \code{data},
@@ -176,10 +199,10 @@ data(gom)
 u <- quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 bp <- set_bin_prior(prior = "jeffreys")
-gpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
-  bin_prior = bp)
-plot(gpg, pu_only = TRUE)
-plot(gpg, add_pu = TRUE)
+bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
+   bin_prior = bp)
+plot(bgpg, pu_only = TRUE)
+plot(bgpg, add_pu = TRUE)
 
 # GEV model
 data(portpirie)
@@ -224,6 +247,10 @@ Stephenson, A. (2016). Bayesian Inference for Extreme Value
 }
 \seealso{
 \code{\link{set_prior}} for setting a prior distribution.
+
+\code{\link{plot.evpost}}, \code{\link{summary.evpost}} and
+  \code{\link{predict.evpost}} for the S3 \code{plot}, \code{summary}
+  and \code{predict} methods for objects of class \code{evpost}.
 
 \code{\link[rust]{ru}} in the \code{\link[rust]{rust}}
   package for details of the arguments that can be passed to \code{ru} and

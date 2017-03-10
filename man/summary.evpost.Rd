@@ -7,7 +7,7 @@
 \method{summary}{evpost}(object, add_pu = FALSE, ...)
 }
 \arguments{
-\item{object}{an object of class "evpost", a result of a call to
+\item{object}{An object of class "evpost", a result of a call to
 \code{\link{rpost}}.}
 
 \item{add_pu}{Includes in the summary of the simulated values the threshold

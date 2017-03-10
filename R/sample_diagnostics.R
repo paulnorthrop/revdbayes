@@ -8,8 +8,12 @@
 #'   \code{d = 2} a scatter plot of the simulated values is produced with
 #'   density contours superimposed.  For \code{d > 2} pairwise plots of the
 #'   simulated values are produced.
+#'   An interface is also provided to the functions in the \strong{bayesplot}
+#'   package that produce plots of Markov chain Monte Carlo (MCMC)
+#'   simulations.  See \link[bayesplot]{MCMC-overview} for details of these
+#'   functions.
 #'
-#' @param x an object of class "evpost", a result of a call to
+#' @param x An object of class "evpost", a result of a call to
 #'   \code{\link{rpost}}.
 #' @param y Not used.
 #' @param ... Additional arguments passed on to \code{hist}, \code{lines},
@@ -40,31 +44,84 @@
 #'   probability \eqn{p} to the parameters of the extreme value model. Only
 #'   relevant when \code{model == "bingp"} was used in the call to
 #'   \code{rpost}.
+#' @param use_bayesplot A logical scalar. If \code{TRUE} the bayesplot
+#'   function indicated by \code{fun_name} is called.  In principle \emph{any}
+#'   bayesplot function (that starts with \code{mcmc_}) can be called but
+#'   this may not always be successful because, for example, some of the
+#'   bayesplot functions work only with multiple MCMC simulations.
+#' @param fun_name A character scalar.  The name of the bayesplot function,
+#'   with the initial \code{mcmc_} part removed.  See
+#'   \link[bayesplot]{MCMC-overview} and links therein for the names of these
+#'   functions. Some examples are given below.
 #' @details
 #' Note that \code{suppressWarnings} is used to avoid potential benign warnings
 #'   caused by passing unused graphical parameters to \code{hist} and
 #'   \code{lines} via \code{...}.
+#' @return Nothing is returned unless \code{use_bayesplot = TRUE} when a
+#'   ggplot object, which can be further customized using the
+#'   \strong{ggplot2} package, is returned.
+#' @seealso \code{\link{summary.evpost}} for summaries of the simulated values
+#'   and properties of the ratio-of-uniforms algorithm.
+#' @seealso \code{\link[bayesplot]{MCMC-overview}},
+#'   \code{\link[bayesplot]{MCMC-intervals}},
+#'   \code{\link[bayesplot]{MCMC-distributions}}.
+#' @references Jonah Gabry (2016). bayesplot: Plotting for Bayesian
+#' Models. R package version 1.1.0.
+#' \url{https://CRAN.R-project.org/package=bayesplot}
 #' @examples
-#' # GP posterior
+#' ## GP posterior
 #' data(gom)
 #' u <- stats::quantile(gom, probs = 0.65)
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 #' gpg <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = gom)
 #' plot(gpg)
 #'
-#' @seealso \code{\link{summary.evpost}} for summaries of the simulated values
-#'   and properties of the ratio-of-uniforms algorithm.
+#' # Using the bayesplot package
+#' plot(gpg, use_bayesplot = TRUE)
+#' plot(gpg, use_bayesplot = TRUE, pars = "xi")
+#' plot(gpg, use_bayesplot = TRUE, fun_name = "intervals", pars = "xi")
+#' plot(gpg, use_bayesplot = TRUE, fun_name = "hist")
+#' plot(gpg, use_bayesplot = TRUE, fun_name = "dens")
+#' plot(gpg, use_bayesplot = TRUE, fun_name = "scatter")
+#'
+#' ## bin-GP posterior
+#' data(gom)
+#' u <- quantile(gom, probs = 0.65)
+#' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
+#' bp <- set_bin_prior(prior = "jeffreys")
+#' npy_gom <- length(gom)/105
+#' bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
+#'              bin_prior = bp, npy = npy_gom)
+#' plot(bgpg)
+#' plot(bgpg, pu_only = TRUE)
+#' plot(bgpg, add_pu = TRUE)
+#'
+#' # Using the bayesplot package
+#' dimnames(bgpg$bin_sim_vals)
+#' plot(bgpg, use_bayesplot = TRUE)
+#' plot(bgpg, use_bayesplot = TRUE, fun_name = "hist")
+#' plot(bgpg, use_bayesplot = TRUE, pars = "p[u]")
 #' @export
 plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
-                    prob = c(0.1, 0.25, 0.5, 0.75, 0.95, 0.99),
-                    ru_scale = FALSE, rows = NULL, xlabs = NULL,
-                    ylabs = NULL, pu_only = FALSE, add_pu = FALSE) {
+                        prob = c(0.1, 0.25, 0.5, 0.75, 0.95, 0.99),
+                        ru_scale = FALSE, rows = NULL, xlabs = NULL,
+                        ylabs = NULL, pu_only = FALSE, add_pu = FALSE,
+                        use_bayesplot = FALSE,
+                        fun_name = c("areas", "intervals", "dens", "hist")) {
   if (!inherits(x, "evpost")) {
     stop("use only with \"evpost\" objects")
   }
   if (n < 1) {
     stop("n must be no smaller than 1")
   }
+  #
+  if (use_bayesplot) {
+    fun_name <- paste("mcmc_", fun_name, sep = "")
+    bfun <- getFromNamespace(fun_name, "bayesplot")
+    x <- create_sim_vals(x)
+    return(bfun(x, ...))
+  }
+  #
   if (ru_scale) {
     plot_data <- x$sim_vals_rho
     plot_density <- x$logf_rho
@@ -148,10 +205,10 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     c1 <- cumsum(sz) * dx * dy; c1 <- c1/max(c1)
     con.levs <- sapply(prob, function(x) stats::approx(c1, sz, xout = 1 - x)$y)
     #
-    graphics::contour(xx, yy, zz, levels = con.levs, add = F, ann = F,
+    graphics::contour(xx, yy, zz, levels = con.levs, add = FALSE, ann = FALSE,
       labels = prob * 100, ...)
     graphics::points(plot_data, col = 8, ...)
-    graphics::contour(xx, yy, zz, levels = con.levs, add = T, ann = T,
+    graphics::contour(xx, yy, zz, levels = con.levs, add = TRUE, ann = TRUE,
       labels = prob * 100, ...)
     temp <- list(...)
     if (is.null(temp$xlab)) {
@@ -199,7 +256,7 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #'
 #' \code{summary} method for class "evpost"
 #'
-#' @param object an object of class "evpost", a result of a call to
+#' @param object An object of class "evpost", a result of a call to
 #'   \code{\link{rpost}}.
 #' @param add_pu Includes in the summary of the simulated values the threshold
 #'   exceedance probability \eqn{p}. Only relevant when \code{model == "bingp"}
@@ -248,3 +305,12 @@ summary.evpost <- function(object, add_pu = FALSE, ...) {
   }
 }
 
+# ========================= create_sim_vals ===========================
+
+create_sim_vals <- function(object) {
+  x <- object$sim_vals
+  if (object$model == "bingp") {
+    x <- cbind(x, object$bin_sim_vals)
+  }
+  return(x)
+}

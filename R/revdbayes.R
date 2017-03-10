@@ -31,6 +31,20 @@
 #' @docType package
 #' @name revdbayes
 #' @import methods
+#' @importFrom bayesplot ppc_stat
+#' @importFrom bayesplot ppc_stat_2d
+#' @importFrom bayesplot ppc_dens_overlay
+#' @importFrom bayesplot ppc_ecdf_overlay
+#' @importFrom bayesplot ppc_dens
+#' @importFrom bayesplot ppc_hist
+#' @importFrom bayesplot ppc_boxplot
+#' @importFrom bayesplot ppc_intervals
+#' @importFrom bayesplot ppc_ribbon
+#' @importFrom bayesplot pp_check
+#' @importFrom bayesplot mcmc_areas
+#' @importFrom bayesplot mcmc_intervals
+#' @importFrom bayesplot mcmc_dens
+#' @importFrom bayesplot mcmc_hist
 NULL
 
 #' Annual Maximum Sea Levels at Port Pirie, South Australia

@@ -1,13 +1,3 @@
-# To do:
-#
-# bin_prior : if non-null and model = "bingp" independent prior for p and GP pars
-# The prior for \eqn{p} set using \code{bin_prior} is multiplied by the
-# prior for the Generalised Pareto (GP) parameters set using \code{prior},
-# that is, \eqn{p} is taken to be independent of the GP parameters
-# \emph{a priori}.
-#
-# bingp_prior : if non-null and model = "bingp" joint prior for p and GP pars
-
 # =========================== rpost ===========================
 #
 #' Random sampling from extreme value posterior distributions
@@ -34,6 +24,14 @@
 #'   }
 #' @param prior A list specifying the prior for the parameters of the extreme
 #'   value model, created by \code{\link{set_prior}}.
+#' @param nrep A numeric scalar.  If \code{nrep} is not \code{NULL} then
+#'   \code{nrep} gives the number of replications of the original dataset
+#'   simulated from the posterior predictive distribution.
+#'   Each replication is based on one of the samples from the posterior
+#'   distribution.  Therefore, \code{nrep} must not be greater than \code{n}.
+#'   In that event \code{nrep} is set equal to \code{n}.
+#'   Currently only implemented if \code{model = "gev"} or
+#'   \code{model = "bingp"}.
 #' @param thresh A numeric scalar.  Extreme value threshold applied to data.
 #'   Only relevant when \code{model = "gp"} or \code{model = "pp"}.  Must
 #'   be supplied when \code{model = "pp"}.  If \code{model = "gp"} and
@@ -41,7 +39,7 @@
 #'   \code{data} should contain threshold excesses.
 #' @param noy A numeric scalar. The number of blocks of observations,
 #'   excluding any missing values.  A block is often a year.
-#'   Only relevant, and must be supplied, \code{model = "pp"}.
+#'   Only relevant, and must be supplied, if \code{model = "pp"}.
 #' @param use_noy A logical scalar.  Only relevant if model is "pp".  By
 #'   default (\code{use_noy = FALSE}) sampling is based on a likelihood in
 #'   which the number of blocks (years) is set equal to the number of threshold
@@ -60,8 +58,8 @@
 #'   \code{\link{rpred}}.  However, setting \code{npy} in the call to
 #'   \code{rpost} avoids the need to supply \code{npy} when calling these
 #'   latter functions.  This is likely to be useful only when
-#'   \code{model = bingp}. See the documentation of \code{\link{ev_pred}}
-#'   for further details.
+#'   \code{model = bingp}. See the documentation of
+#'   \code{\link{predict.evpost}} for further details.
 #' @param ros A numeric scalar.  Only relevant when \code{model = "os"}. The
 #'   largest \code{ros} values in each row of the matrix \code{data} are used
 #'   in the analysis.
@@ -99,7 +97,8 @@
 #'   excesses supplemented by a binomial(\code{length(data)}, \eqn{p})
 #'   model for the number of threshold excesses.  See
 #'   \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
-#'   for details.
+#'   for details.  Currently, the GP and binomial parameters are assumed to
+#'   be independent \emph{a priori}.
 #'
 #' \emph{Generalised extreme value (GEV) model}: \code{model = "gev"}.  A
 #'   model for block maxima.  Required arguments: \code{n}, \code{data},
@@ -131,10 +130,22 @@
 #'     \item{\code{model}:} The argument \code{model} to \code{rpost}
 #'       detailed above.
 #'     \item{\code{data}:} The argument \code{data} to \code{rpost}
+#'       detailed above, with any missing values removed, except that
+#'       if \code{model = "gp"} then only the values that lie above the
+#'       threshold are included and if \code{model = "bingp"} or
+#'       \code{model = "pp"} then the input data are returned
+#'       but any value lying below the threshold is set to \code{thresh}.
+#'     \item{\code{prior}:} The argument \code{prior} to \code{rpost}
 #'       detailed above.
 #'   }
+#'   If \code{nrep} is not \code{NULL} then this list also contains
+#'     \code{data_rep}, a numerical matrix with \code{nrep} rows.  Each
+#'     row contains a replication of the original data \code{data}
+#'     simulated from the posterior predictive distribution.
 #'   If \code{model == "pp"} then this list also contains the argument
 #'     \code{noy} to \code{rpost} detailed above.
+#'   If the argument \code{npy} was supplied then this list also contains
+#'   \code{npy}.
 #'
 #'   If \code{model == "gp"} or \code{model == "bingp"} then this list also
 #'     contains the argument \code{thresh} to \code{rpost} detailed above.
@@ -149,6 +160,9 @@
 #'     \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
 #'   }
 #' @seealso \code{\link{set_prior}} for setting a prior distribution.
+#' @seealso \code{\link{plot.evpost}}, \code{\link{summary.evpost}} and
+#'   \code{\link{predict.evpost}} for the S3 \code{plot}, \code{summary}
+#'   and \code{predict} methods for objects of class \code{evpost}.
 #' @seealso \code{\link[rust]{ru}} in the \code{\link[rust]{rust}}
 #'   package for details of the arguments that can be passed to \code{ru} and
 #'   the form of the object returned by \code{rpost}.
@@ -186,10 +200,10 @@
 #' u <- quantile(gom, probs = 0.65)
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 #' bp <- set_bin_prior(prior = "jeffreys")
-#' gpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
-#'   bin_prior = bp)
-#' plot(gpg, pu_only = TRUE)
-#' plot(gpg, add_pu = TRUE)
+#' bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
+#'    bin_prior = bp)
+#' plot(bgpg, pu_only = TRUE)
+#' plot(bgpg, add_pu = TRUE)
 #'
 #' # GEV model
 #' data(portpirie)
@@ -214,8 +228,8 @@
 #' plot(osv)
 #' @export
 rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
-                  thresh = NULL, noy = NULL, use_noy = TRUE, npy = NULL,
-                  ros= NULL,
+                  nrep = NULL, thresh = NULL, noy = NULL, use_noy = TRUE,
+                  npy = NULL, ros= NULL,
                   bin_prior = structure(list(prior = "bin_beta",
                                              ab = c(1 / 2, 1 / 2),
                                              class = "binprior")),
@@ -465,7 +479,17 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
     }
     class(temp) <- "evpost"
     temp$model <- save_model
-    temp$data <- data
+    if (save_model == "gp") {
+      temp$data <- ds$data + thresh
+    } else if (save_model == "bingp") {
+      temp$data <- ds$data + thresh
+      temp$data <- c(temp$data, rep(thresh, ds_bin$n_raw - length(temp$data)))
+    } else if (save_model == "pp") {
+      temp$data <- ds$data
+      temp$data <- c(temp$data, rep(thresh, ds$m - length(temp$data)))
+    } else {
+      temp$data <- ds$data
+    }
     if (save_model == "pp") {
       temp$noy <- noy
     }
@@ -473,6 +497,55 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
       temp$thresh <- thresh
     }
     temp$npy <- npy
+    temp$prior <- prior
+    if (!is.null(nrep)) {
+      if (nrep > n) {
+        nrep <- n
+        warning("nrep has been set equal to n.")
+      }
+      if (save_model == "gev") {
+        wr <- 1:nrep
+        temp$data_rep <- t(rgev_vec(n = ds$m, loc = temp$sim_vals[wr, 1],
+                                    scale = temp$sim_vals[wr, 2],
+                                    shape = temp$sim_vals[wr, 3]))
+      }
+      if (save_model == "gp") {
+        wr <- 1:nrep
+        temp$data_rep <- t(rgp_vec(n = ds$m, loc = thresh,
+                                   scale = temp$sim_vals[wr, 1],
+                                   shape = temp$sim_vals[wr, 2]))
+      }
+      if (save_model == "bingp") {
+        wr <- 1:nrep
+        temp$data_rep <- matrix(thresh, nrow = nrep, ncol = ds_bin$n_raw)
+        for (i in wr) {
+          n_above <- rbinom(1, ds_bin$n_raw, temp$bin_sim_vals[i])
+          if (n_above > 0) {
+            temp$data_rep[i, 1:n_above] <- rgp(n = n_above, loc = thresh,
+                                               scale = temp$sim_vals[i, 1],
+                                               shape = temp$sim_vals[i, 2])
+          }
+        }
+      }
+      if (save_model == "pp") {
+        wr <- 1:nrep
+        temp$data_rep <- matrix(thresh, nrow = nrep, ncol = length(temp$data))
+        loc <- temp$sim_vals[wr, 1]
+        scale <- temp$sim_vals[wr, 2]
+        shape <- temp$sim_vals[wr, 3]
+        mod_scale <- scale + shape * (thresh - loc)
+        p_u <- noy * pu_pp(q = thresh, loc = loc, scale = scale,
+                           shape = shape, lower_tail = FALSE) / ds$m
+        for (i in wr) {
+          n_above <- rbinom(1, ds$m, p_u)
+          if (n_above > 0) {
+            temp$data_rep[i, 1:n_above] <- rgp(n = n_above, loc = thresh,
+                                               scale = mod_scale[i],
+                                               shape = shape[i])
+          }
+        }
+      }
+    }
     return(temp)
   }
   #
@@ -575,7 +648,17 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
   }
   class(temp) <- "evpost"
   temp$model <- save_model
-  temp$data <- data
+  if (save_model == "gp") {
+    temp$data <- ds$data + thresh
+  } else if (save_model == "bingp") {
+    temp$data <- ds$data + thresh
+    temp$data <- c(temp$data, rep(thresh, ds_bin$n_raw - length(temp$data)))
+  } else if (save_model == "pp") {
+    temp$data <- ds$data
+    temp$data <- c(temp$data, rep(thresh, ds$m - length(temp$data)))
+  } else {
+    temp$data <- ds$data
+  }
   if (save_model == "pp") {
     temp$noy <- noy
   }
@@ -583,7 +666,101 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
     temp$thresh <- thresh
   }
   temp$npy <- npy
+  temp$prior <- prior
+  if (!is.null(nrep)) {
+    if (nrep > n) {
+      nrep <- n
+      warning("nrep has been set equal to n.")
+    }
+    if (save_model == "gev") {
+      wr <- 1:nrep
+      temp$data_rep <- t(rgev_vec(n = ds$m, loc = temp$sim_vals[wr, 1],
+                                  scale = temp$sim_vals[wr, 2],
+                                  shape = temp$sim_vals[wr, 3]))
+    }
+    if (save_model == "gp") {
+      wr <- 1:nrep
+      temp$data_rep <- t(rgp_vec(n = ds$m, loc = thresh,
+                                 scale = temp$sim_vals[wr, 1],
+                                 shape = temp$sim_vals[wr, 2]))
+    }
+    if (save_model == "bingp") {
+      wr <- 1:nrep
+      temp$data_rep <- matrix(thresh, nrow = nrep, ncol = ds_bin$n_raw)
+      for (i in wr) {
+        n_above <- rbinom(1, ds_bin$n_raw, temp$bin_sim_vals[i])
+        temp$data_rep[i, 1:n_above] <- rgp(n = n_above, loc = thresh,
+                                           scale = temp$sim_vals[i, 1],
+                                           shape = temp$sim_vals[i, 2])
+      }
+    }
+    if (save_model == "pp") {
+      wr <- 1:nrep
+      temp$data_rep <- matrix(thresh, nrow = nrep, ncol = length(temp$data))
+      loc <- temp$sim_vals[, 1]
+      scale <- temp$sim_vals[, 2]
+      shape <- temp$sim_vals[, 3]
+      mod_scale <- scale + shape * (thresh - loc)
+      p_u <- noy * (mod_scale / scale) ^ (-1 / shape) / ds$m
+      for (i in wr) {
+        n_above <- rbinom(1, ds$m, p_u[i])
+        temp$data_rep[i, 1:n_above] <- rgp(n = n_above, loc = thresh,
+                                           scale = mod_scale[i],
+                                           shape = shape[i])
+      }
+    }
+  }
   return(temp)
+}
+
+# =========================== pu_pp ===========================
+
+pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
+  if (any(scale < 0)) {
+    stop("invalid scale: scale must be positive.")
+  }
+  len_loc <- length(loc)
+  len_scale <- length(scale)
+  len_shape <- length(shape)
+  check_len <- c(len_loc, len_scale, len_shape)
+  if (length(unique(check_len[check_len > 1])) > 1) {
+    stop("loc, scale and shape have incompatible lengths.")
+  }
+  max_len <- max(check_len)
+  loc <- rep(loc, length.out = max_len)
+  scale <- rep(scale, length.out = max_len)
+  shape <- rep(shape, length.out = max_len)
+  len_q <- length(q)
+  if (max_len != 1 & len_q != 1) {
+    stop("If length(q) > 1 then scale and shape must have length 1.")
+  }
+  q <- (q - loc) / scale
+  nn <- length(q)
+  qq <- 1 + shape * q
+  # co is a condition to ensure that calculations are only performed in
+  # instances where the density is positive.
+  co <- qq > 0 | is.na(qq)
+  q <- q[co]
+  qq <- qq[co]
+  p <- numeric(nn)
+  p[!co] <- 1
+  # If shape is close to zero then base calculation on an approximation that
+  # is linear in shape.
+  if (len_q == 1) {
+    shape <- shape[co]
+    p[co] <- ifelse(abs(shape) < 1e-6, 1 - exp(-q + shape * q ^ 2 / 2),
+                    1 - pmax(1 + shape * q, 0) ^ (-1 / shape))
+  } else {
+    if(abs(shape) < 1e-6) {
+      p[co] <- 1 - exp(-q + shape * q ^ 2 / 2)
+    } else {
+      p[co] <- 1 - pmax(1 + shape * q, 0) ^ (-1 / shape)
+    }
+  }
+  if (!lower_tail) {
+    p <- 1 - p
+  }
+  return(p)
 }
 
 # =========================== binpost ===========================

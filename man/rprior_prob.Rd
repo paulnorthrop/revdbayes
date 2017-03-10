@@ -68,7 +68,7 @@ The simulation is based on the way that the prior is constructed.
 quant <- c(85, 88, 95)
 alpha <- c(4, 2.5, 2.25, 0.25)
 x <- rprior_prob(n = 1000, quant = quant, alpha = alpha, exc = TRUE)
-x <- rprior_prob(n = 1000, quant = quant, alpha = alpha, exc = TRUE, lb= 0)
+x <- rprior_prob(n = 1000, quant = quant, alpha = alpha, exc = TRUE, lb = 0)
 }
 \references{
 Crowder, M. (1992) Bayesian priors based on parameter
