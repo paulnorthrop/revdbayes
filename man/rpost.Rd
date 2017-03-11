@@ -39,8 +39,9 @@ simulated from the posterior predictive distribution.
 Each replication is based on one of the samples from the posterior
 distribution.  Therefore, \code{nrep} must not be greater than \code{n}.
 In that event \code{nrep} is set equal to \code{n}.
-Currently only implemented if \code{model = "gev"} or
-\code{model = "bingp"}.}
+Currently only implemented if \code{model = "gev"} or \code{"gp"} or
+\code{"bingp"} or \code{"pp"}, i.e. \emph{not} implemented if
+\code{model = "os"}.}
 
 \item{thresh}{A numeric scalar.  Extreme value threshold applied to data.
 Only relevant when \code{model = "gp"} or \code{model = "pp"}.  Must
@@ -120,9 +121,16 @@ An object (list) of class \code{"evpost"}, which has the same
       detailed above.
   }
   If \code{nrep} is not \code{NULL} then this list also contains
-    \code{data_rep}, a numerical matrix with \code{nrep} rows.  Each
-    row contains a replication of the original data \code{data}
-    simulated from the posterior predictive distribution.
+  \code{data_rep}, a numerical matrix with \code{nrep} rows.  Each
+  row contains a replication of the original data \code{data}
+  simulated from the posterior predictive distribution.
+  If \code{model = "bingp"} or \code{"pp"} then the rate of threshold
+  exceedance is part of the inference.  Therefore, the number of values in
+  \code{data_rep} that lie above the threshold varies between
+  predictive replications (different rows of \code{data_rep}).
+  Values below the threshold are left-censored at the threshold, i.e. they
+  are set at the threshold.
+
   If \code{model == "pp"} then this list also contains the argument
     \code{noy} to \code{rpost} detailed above.
   If the argument \code{npy} was supplied then this list also contains
@@ -184,7 +192,8 @@ model.
   axes is used to reduce posterior parameter dependence.  The default
   is \code{trans = "none"} and \code{rotate = TRUE}.
 
-See the revdbayes vignette for further details and examples.
+  See the \href{https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-vignette.html}{Introducing revdbayes vignette}
+  for further details and examples.
 }
 \examples{
 # GP model

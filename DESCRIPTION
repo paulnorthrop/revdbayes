@@ -24,7 +24,8 @@ RoxygenNote: 5.0.1
 Suggests: knitr,
     rmarkdown,
     devtools,
-    evdbayes
+    evdbayes,
+    ggplot2
 VignetteBuilder: knitr
 URL: http://github.com/paulnorthrop/revdbayes
 BugReports: http://github.com/paulnorthrop/revdbayes/issues

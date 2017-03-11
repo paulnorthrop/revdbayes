@@ -59,14 +59,14 @@
 #'   }
 #'   In all cases any missing values have been removed from the data.
 #'
-#'   If \code{model = "bingp"} or \code{"pp"} the rate of thrshold exceedance
-#'   is part of the inferences.  Therefore, the number of values in
+#'   If \code{model = "bingp"} or \code{"pp"} the rate of threshold exceedance
+#'   is part of the inference.  Therefore, the number of values in
 #'   \code{object$data_rep} that lie above the threshold varies between
-#'   predictive replications, with values below the threshold left-censored
-#'   at the threshold.  This limits a little the posterior predictive checks
-#'   that it is useful to perform.  In the examples below we have compared
-#'   \code{object$data} and \code{object$data_rep} using only their sample
-#'   maxima.
+#'   predictive replications, with values below the threshold being
+#'   left-censored at the threshold.  This limits a little the posterior
+#'   predictive checks that it is useful to perform.  In the examples below
+#'   we have compared \code{object$data} and \code{object$data_rep} using
+#'   only their sample maxima.
 #' @return A ggplot object that can be further customized using the
 #'   \strong{ggplot2} package.
 #' @seealso \code{\link{rpost}} for sampling from an extreme value posterior
@@ -83,10 +83,6 @@
 #' Vehtari, A., and Rubin, D. B. (2013). \emph{Bayesian Data Analysis}.
 #' Chapman & Hall/CRC Press, London, third edition. (Chapter 6)
 #' \url{www.stat.columbia.edu/~gelman/book}
-#' @references Alec Stephenson and Mathieu Ribatet. (2014).
-#' evdbayes: Bayesian Analysis in Extreme Value Theory.
-#' R package version 1.1-1.
-#' \url{https://CRAN.R-project.org/package=evdbayes}.
 #' @examples
 #' # GEV model
 #' data(portpirie)
@@ -130,9 +126,9 @@
 #'
 #' # bin-GP model
 #' bp <- set_bin_prior(prior = "jeffreys")
-#' gpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
-#'             bin_prior = bp, nrep = 50)
-#' pp_check(gpg, stat = "max")
+#' bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
+#'              bin_prior = bp, nrep = 50)
+#' pp_check(bgpg, stat = "max")
 #'
 #' # PP model
 #' data(rainfall)

@@ -17,7 +17,8 @@
 #'   \code{\link{rpost}}.
 #' @param y Not used.
 #' @param ... Additional arguments passed on to \code{hist}, \code{lines},
-#'   \code{contour} or \code{points}.
+#'   \code{contour}, \code{points} or functions from the \strong{bayesplot}
+#'   package.
 #' @param n A numeric scalar.  Only relevant if \code{x$d = 1} or
 #'   \code{x$d = 2}. The meaning depends on the value of x$d.
 #' \itemize{
@@ -57,6 +58,11 @@
 #' Note that \code{suppressWarnings} is used to avoid potential benign warnings
 #'   caused by passing unused graphical parameters to \code{hist} and
 #'   \code{lines} via \code{...}.
+#'
+#' @details For details of these functions see \link[bayesplot]{MCMC-overview}.
+#'   See also the \strong{bayesplot} vignette \href{
+#'   https://cran.r-project.org/web/packages/bayesplot/vignettes/MCMC.html}{
+#'   Plotting MCMC draws}.
 #' @return Nothing is returned unless \code{use_bayesplot = TRUE} when a
 #'   ggplot object, which can be further customized using the
 #'   \strong{ggplot2} package, is returned.
@@ -78,7 +84,7 @@
 #'
 #' # Using the bayesplot package
 #' plot(gpg, use_bayesplot = TRUE)
-#' plot(gpg, use_bayesplot = TRUE, pars = "xi")
+#' plot(gpg, use_bayesplot = TRUE, pars = "xi", prob = 0.95)
 #' plot(gpg, use_bayesplot = TRUE, fun_name = "intervals", pars = "xi")
 #' plot(gpg, use_bayesplot = TRUE, fun_name = "hist")
 #' plot(gpg, use_bayesplot = TRUE, fun_name = "dens")
@@ -103,7 +109,7 @@
 #' plot(bgpg, use_bayesplot = TRUE, pars = "p[u]")
 #' @export
 plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
-                        prob = c(0.1, 0.25, 0.5, 0.75, 0.95, 0.99),
+                        prob = c(0.5, 0.1, 0.25, 0.75, 0.95, 0.99),
                         ru_scale = FALSE, rows = NULL, xlabs = NULL,
                         ylabs = NULL, pu_only = FALSE, add_pu = FALSE,
                         use_bayesplot = FALSE,
@@ -116,12 +122,18 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
   }
   #
   if (use_bayesplot) {
+    fun_name <- match.arg(fun_name)
     fun_name <- paste("mcmc_", fun_name, sep = "")
     bfun <- getFromNamespace(fun_name, "bayesplot")
     x <- create_sim_vals(x)
-    return(bfun(x, ...))
+    if (fun_name %in% c("mcmc_areas", "mcmc_intervals")) {
+      return(bfun(x, prob = prob[1], ...))
+    } else {
+      return(bfun(x, ...))
+    }
   }
   #
+  prob <- sort(prob)
   if (ru_scale) {
     plot_data <- x$sim_vals_rho
     plot_density <- x$logf_rho

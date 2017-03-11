@@ -5,7 +5,7 @@
 \title{Plot diagnostics for an evpost object}
 \usage{
 \method{plot}{evpost}(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
-  prob = c(0.1, 0.25, 0.5, 0.75, 0.95, 0.99), ru_scale = FALSE,
+  prob = c(0.5, 0.1, 0.25, 0.75, 0.95, 0.99), ru_scale = FALSE,
   rows = NULL, xlabs = NULL, ylabs = NULL, pu_only = FALSE,
   add_pu = FALSE, use_bayesplot = FALSE, fun_name = c("areas",
   "intervals", "dens", "hist"))
@@ -17,7 +17,8 @@
 \item{y}{Not used.}
 
 \item{...}{Additional arguments passed on to \code{hist}, \code{lines},
-\code{contour} or \code{points}.}
+\code{contour}, \code{points} or function from the \strong{bayesplot}
+package.}
 
 \item{n}{A numeric scalar.  Only relevant if \code{x$d = 1} or
   \code{x$d = 2}. The meaning depends on the value of x$d.
@@ -84,6 +85,11 @@ Nothing is returned unless \code{use_bayesplot = TRUE} when a
 Note that \code{suppressWarnings} is used to avoid potential benign warnings
   caused by passing unused graphical parameters to \code{hist} and
   \code{lines} via \code{...}.
+
+For details of these functions see \link[bayesplot]{MCMC-overview}.
+  See also the \strong{bayesplot} vignette \href{
+  https://cran.r-project.org/web/packages/bayesplot/vignettes/MCMC.html}{
+  Plotting MCMC draws}.
 }
 \examples{
 ## GP posterior
@@ -95,7 +101,7 @@ plot(gpg)
 
 # Using the bayesplot package
 plot(gpg, use_bayesplot = TRUE)
-plot(gpg, use_bayesplot = TRUE, pars = "xi")
+plot(gpg, use_bayesplot = TRUE, pars = "xi", prob = 0.95)
 plot(gpg, use_bayesplot = TRUE, fun_name = "intervals", pars = "xi")
 plot(gpg, use_bayesplot = TRUE, fun_name = "hist")
 plot(gpg, use_bayesplot = TRUE, fun_name = "dens")

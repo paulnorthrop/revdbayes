@@ -110,9 +110,13 @@
 #'
 #'   \strong{GEV / OS / PP}.
 #'   If \code{model = "gev"}, \code{model = "os"} or \code{model = "pp"}
-#'   in the call to \code{\link{rpost}} then we calculate the number
-#'   of blocks in \code{n_years} years, and then convert the posterior
-#'   simulated GEV parameters to the \code{n_years} level of aggregation.
+#'   in the call to \code{\link{rpost}} we first calculate the number
+#'   of blocks \eqn{b} in \code{n_years} years.  Then we convert the
+#'   posterior simulated GEV parameters \eqn{(\mu, \sigma, \xi)} to
+#'   the \code{n_years} level of aggregation, that is,
+#'   \eqn{(\mu + \sigma log b, \sigma, \xi)} if \eqn{\xi = 0} and
+#'   \eqn{(\mu + \sigma (b ^ \xi - 1) / \xi, \sigma b ^ \xi, \xi)}
+#'   otherwise.
 #'
 #'   \itemize{
 #'     \item{\code{type = "p"}.} We calculate using \code{\link{pgev}}
@@ -130,12 +134,13 @@
 #'     numerically for \code{q} for each element \code{p[i]} of \code{p}.
 #'
 #'     \item{\code{type = "i"}.}
-#'     If \code{hpd = TRUE} then we perform a
+#'     If \code{hpd = FALSE} then we calculate equi-tailed intervals using
+#'     \code{predict.evpost(object, type ="q", x = p)}, where
+#'     \code{p = c((1-level/100)/2, (1+level/100)/2)}.
+#'     If \code{hpd = TRUE} then, in addition, we perform a
 #'     numerical minimisation of the length of level\% intervals, after
 #'     approximating the predictive quantile function using monotonic
-#'     cubic splines, to reduce computing time.  Otherwise,
-#'     the interval is equal to \code{predict.evpost(object, type ="q", x = p)},
-#'     where \code{p = c((1-level/100)/2, (1+level/100)/2)}.
+#'     cubic splines, to reduce computing time.
 #'
 #'     \item{\code{type = "r"}.} For each simulated value of the GEV parameters
 #'     at the \code{n_years} level of aggregation we simulate one value from
@@ -148,6 +153,7 @@
 #'   \code{\link{rpost}} then we calculate the mean number of observations
 #'   in \code{n_years} years, i.e. \code{npy * n_years}.
 #'
+#'   Following \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
 #'   Let \eqn{M_N} be the largest value observed in \eqn{N} years,
 #'   \eqn{m} = \code{npy * n_years} and \eqn{u} the threshold
 #'   \code{object$thresh} used in the call to \code{rpost}.
@@ -259,28 +265,27 @@
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 #' bp <- set_bin_prior(prior = "jeffreys")
 #' npy_gom <- length(gom)/105
-#' gpg1 <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
-#'              bin_prior = bp)
+#' bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
+#'               bin_prior = bp)
 #'
-#' q <- seq(10, 30, 0.1)
-#' # Setting npy in call to ppred(), for example.
-#' predict(gpg1, npy = npy_gom)$y
+#' # Setting npy in call to predict.evpost()
+#' predict(bgpg, npy = npy_gom)$long
 #'
 #' # Setting npy in call to rpost()
-#' gpg2 <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
-#'              bin_prior = bp, npy = npy_gom)
+#' bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
+#'               bin_prior = bp, npy = npy_gom)
 #'
 #' # Interval estimation
-#' predict(gpg2)$long
-#' predict(gpg2, hpd = TRUE)$short
+#' predict(bgpg)$long
+#' predict(bgpg, hpd = TRUE)$short
 #' # Density function
-#' plot(predict(gpg2, type = "d", n_years = c(100, 1000)))
+#' plot(predict(bgpg, type = "d", n_years = c(100, 1000)))
 #' # Distribution function
-#' plot(predict(gpg2, type = "p", n_years = c(100, 1000)))
+#' plot(predict(bgpg, type = "p", n_years = c(100, 1000)))
 #' # Quantiles
-#' predict(gpg2, type = "q", n_years = c(100, 1000))$y
+#' predict(bgpg, type = "q", n_years = c(100, 1000))$y
 #' # Random generation
-#' plot(predict(gpg2, type = "r"))
+#' plot(predict(bgpg, type = "r"))
 #' @export
 predict.evpost <- function(object, type = c("i", "p", "d", "q", "r"), x = NULL,
                            x_num = 100, n_years = 100, npy = NULL, level = 95,
