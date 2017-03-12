@@ -29,4 +29,4 @@ install.packages("revdbayes")
 
 ### Vignette
 
-See `vignette("revdbayes-vignette", package = "revdbayes")` for an overview of the package.
+See `vignette("revdbayes-vignette", package = "revdbayes")` for an overview of the package and `vignette("revdbayes-predictive-vignette", package = "revdbayes")` for an outline of how to use revdbayes to perform posterior predictive extreme value inference.

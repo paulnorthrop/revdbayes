@@ -41,6 +41,12 @@
 * The hyperparameter in the MDI prior was `a` in the documentation and `a_mdi`
   in the code.  Now it is `a` everywhere.
   
+* In `set_prior` with `prior = "beta"` parameter vector `ab` has been 
+  corrected to `pq`.
+  
 * In the documentation of `rpost()` the description of the argument `noy` 
   has been corrected.
+  
+* Package spatstat removed from the Imports field in description to avoid
+  NOTE in CRAN checks.  
 
