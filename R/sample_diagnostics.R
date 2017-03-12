@@ -60,8 +60,8 @@
 #'   \code{lines} via \code{...}.
 #'
 #' @details For details of these functions see \link[bayesplot]{MCMC-overview}.
-#'   See also the \strong{bayesplot} vignette \href{
-#'   https://cran.r-project.org/web/packages/bayesplot/vignettes/MCMC.html}{
+#'   See also the \strong{bayesplot} vignette
+#'   \href{https://cran.r-project.org/web/packages/bayesplot/vignettes/MCMC.html}{
 #'   Plotting MCMC draws}.
 #' @return Nothing is returned unless \code{use_bayesplot = TRUE} when a
 #'   ggplot object, which can be further customized using the
@@ -122,9 +122,8 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
   }
   #
   if (use_bayesplot) {
-    fun_name <- match.arg(fun_name)
     fun_name <- paste("mcmc_", fun_name, sep = "")
-    bfun <- getFromNamespace(fun_name, "bayesplot")
+    bfun <- utils::getFromNamespace(fun_name, "bayesplot")
     x <- create_sim_vals(x)
     if (fun_name %in% c("mcmc_areas", "mcmc_intervals")) {
       return(bfun(x, prob = prob[1], ...))

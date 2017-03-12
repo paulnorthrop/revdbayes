@@ -16,12 +16,12 @@
 #'   the gamma priors for the quantile differences.
 #' @param scale A numeric vector of length 3. Respective scale parameters of
 #'   the gamma priors for the quantile differences.
-#' @param lb. A numeric scalar.  If this is not \code{NULL} then the simulation
+#' @param lb A numeric scalar.  If this is not \code{NULL} then the simulation
 #'   is constrained so that \code{lb} is an approximate lower bound on the
 #'   GEV variable.  Specifically, only simulated GEV parameter values for
 #'   which the 100\code{lb_prob}\% quantile is greater than \code{lb} are
 #'   retained.
-#' @param lb_prob.  A numeric scalar.  The non-exceedance probability involved
+#' @param lb_prob A numeric scalar.  The non-exceedance probability involved
 #'   in the specification of \code{lb}.  Must be in (0,1).  If \code{lb=NULL}
 #'   then \code{lb_prob} is not used.
 #' @details The simulation is based on the way that the prior is constructed.
@@ -72,9 +72,9 @@ rprior_quant <- function(n, prob, shape, scale, lb = NULL, lb_prob = 0.001){
     #
     # Simulate qp_tildes (differences between quantiles)
     #
-    qp1_tilde <- rgamma(n, shape = shape[1], scale = scale[1])
-    qp2_tilde <- rgamma(n, shape = shape[2], scale = scale[2])
-    qp3_tilde <- rgamma(n, shape = shape[3], scale = scale[3])
+    qp1_tilde <- stats::rgamma(n, shape = shape[1], scale = scale[1])
+    qp2_tilde <- stats::rgamma(n, shape = shape[2], scale = scale[2])
+    qp3_tilde <- stats::rgamma(n, shape = shape[3], scale = scale[3])
     #
     # Transform to qps
     #
@@ -137,12 +137,12 @@ rprior_quant <- function(n, prob, shape, scale, lb = NULL, lb_prob = 0.001){
 #'   If \code{exc=TRUE} then a Dirichlet(\code{alpha}) distribution is placed on
 #'   (\eqn{1 - p_q1, p_q1 - p_q2, p_q2 - p_q3, p_q3}), where
 #'   \eqn{p_q = P(M > q)}, as in Stephenson (2016).
-#' @param lb. A numeric scalar.  If this is not \code{NULL} then the simulation
+#' @param lb A numeric scalar.  If this is not \code{NULL} then the simulation
 #'   is constrained so that \code{lb} is an approximate lower bound on the
 #'   GEV variable.  Specifically, only simulated GEV parameter values for
 #'   which the 100\code{lb_prob}\% quantile is greater than \code{lb} are
 #'   retained.
-#' @param lb_prob.  A numeric scalar.  The non-exceedance probability involved
+#' @param lb_prob A numeric scalar.  The non-exceedance probability involved
 #'   in the specification of \code{lb}.  Must be in (0,1).  If \code{lb=NULL}
 #'   then \code{lb_prob} is not used.
 #' @details The simulation is based on the way that the prior is constructed.
@@ -343,7 +343,7 @@ quantile_to_gev <- function(quant, prob){
 rDir <- function(n = 1, alpha = c(1,1)){
   y <- matrix(NA, nrow = n, ncol = length(alpha))
   for (j in 1:ncol(y)){
-    y[, j] <- rgamma(n, shape = alpha[j])
+    y[, j] <- stats::rgamma(n, shape = alpha[j])
   }
   y / rowSums(y)
 }

@@ -55,8 +55,7 @@
 #'
 #'   The value of \code{npy} does not affect any calculation in
 #'   \code{rpost}, it only affects subsequent extreme value inferences using
-#'   \code{\link{dpred}}, \code{\link{ppred}}, \code{\link{qpred}} or
-#'   \code{\link{rpred}}.  However, setting \code{npy} in the call to
+#'   \code{predict.evpost}.  However, setting \code{npy} in the call to
 #'   \code{rpost} avoids the need to supply \code{npy} when calling these
 #'   latter functions.  This is likely to be useful only when
 #'   \code{model = bingp}. See the documentation of
@@ -531,7 +530,7 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
         wr <- 1:nrep
         temp$data_rep <- matrix(thresh, nrow = nrep, ncol = ds_bin$n_raw)
         for (i in wr) {
-          n_above <- rbinom(1, ds_bin$n_raw, temp$bin_sim_vals[i])
+          n_above <- stats::rbinom(1, ds_bin$n_raw, temp$bin_sim_vals[i])
           if (n_above > 0) {
             temp$data_rep[i, 1:n_above] <- rgp(n = n_above, loc = thresh,
                                                scale = temp$sim_vals[i, 1],
@@ -549,7 +548,7 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
         p_u <- noy * pu_pp(q = thresh, loc = loc, scale = scale,
                            shape = shape, lower_tail = FALSE) / ds$m
         for (i in wr) {
-          n_above <- rbinom(1, ds$m, p_u)
+          n_above <- stats::rbinom(1, ds$m, p_u)
           if (n_above > 0) {
             temp$data_rep[i, 1:n_above] <- rgp(n = n_above, loc = thresh,
                                                scale = mod_scale[i],
@@ -700,7 +699,7 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
       wr <- 1:nrep
       temp$data_rep <- matrix(thresh, nrow = nrep, ncol = ds_bin$n_raw)
       for (i in wr) {
-        n_above <- rbinom(1, ds_bin$n_raw, temp$bin_sim_vals[i])
+        n_above <- stats::rbinom(1, ds_bin$n_raw, temp$bin_sim_vals[i])
         temp$data_rep[i, 1:n_above] <- rgp(n = n_above, loc = thresh,
                                            scale = temp$sim_vals[i, 1],
                                            shape = temp$sim_vals[i, 2])
@@ -715,7 +714,7 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
       mod_scale <- scale + shape * (thresh - loc)
       p_u <- noy * (mod_scale / scale) ^ (-1 / shape) / ds$m
       for (i in wr) {
-        n_above <- rbinom(1, ds$m, p_u[i])
+        n_above <- stats::rbinom(1, ds$m, p_u[i])
         temp$data_rep[i, 1:n_above] <- rgp(n = n_above, loc = thresh,
                                            scale = mod_scale[i],
                                            shape = shape[i])
@@ -776,7 +775,7 @@ pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 }
 
 # =========================== binpost ===========================
-#
+
 #' Random sampling from a binomial posterior distribution
 #'
 #' Samples from the posterior distribution of the probability \eqn{p}
@@ -817,6 +816,7 @@ pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 #' bp <- set_bin_prior(prior = "jeffreys")
 #' temp <- binpost(n = 1000, prior = bp, ds_bin = ds_bin)
 #' graphics::hist(temp$bin_sim_vals, prob = TRUE)
+#' @export
 binpost <- function(n, prior, ds_bin) {
   n_success <- ds_bin$m
   n_failure <- ds_bin$n_raw - ds_bin$m
@@ -825,9 +825,11 @@ binpost <- function(n, prior, ds_bin) {
     shape2 <- n_failure + prior$ab[2]
     bin_sim_vals <- stats::rbeta(n = n, shape1 = shape1, shape2 = shape2)
     bin_logf_args <- list(shape1 = shape1, shape2 = shape2)
-    bin_logf <- function(x, shape1 , shape2) {
-      dbeta(x, shape1 = shape1, shape2 = shape2, log = TRUE)
+    bin_logf_beta <- function(x, shape1 , shape2) {
+      stats::dbeta(x, shape1 = shape1, shape2 = shape2, log = TRUE)
     }
+    temp <- list(bin_sim_vals = bin_sim_vals, bin_logf = bin_logf_beta,
+                 bin_logf_args = bin_logf_args)
   }
   if (prior$prior == "bin_mdi") {
     bin_sim_vals <- r_pu_MDI(n = n, n_success = n_success,
@@ -837,18 +839,18 @@ binpost <- function(n, prior, ds_bin) {
     MDI_post <- function(pu) {
       pu ^ (pu + n_success) * (1 - pu) ^ (1 - pu + n_failure) / beta_const
     }
-    log_MDI_const <- log(integrate(MDI_post, 0, 1)$value)
+    log_MDI_const <- log(stats::integrate(MDI_post, 0, 1)$value)
     bin_logf_args <- list(n_success = n_success, n_failure = n_failure,
                           log_MDI_const = log_MDI_const,
                           log_beta_const = log_beta_const)
-    bin_logf <- function(pu, n_success, n_failure, log_MDI_const,
-                         log_beta_const) {
+    bin_logf_mdi <- function(pu, n_success, n_failure, log_MDI_const,
+                             log_beta_const) {
       (pu + n_success) * log(pu) + (1 - pu + n_failure) * log(1 - pu) -
         log_MDI_const - log_beta_const
     }
+    temp <- list(bin_sim_vals = bin_sim_vals, bin_logf = bin_logf_mdi,
+                 bin_logf_args = bin_logf_args)
   }
-  temp <- list(bin_sim_vals = bin_sim_vals, bin_logf = bin_logf,
-               bin_logf_args = bin_logf_args)
   class(temp) <- "binpost"
   return(temp)
 }
@@ -870,8 +872,8 @@ r_pu_MDI <- function(n, n_success, n_failure) {
   n_acc <- 0
   p_sim <- NULL
   while (n_acc < n) {
-    p <- rbeta(1, n_success + 1, n_failure + 1)
-    u <- runif(1)
+    p <- stats::rbeta(1, n_success + 1, n_failure + 1)
+    u <- stats::runif(1)
     if (u <= p ^ p * (1 - p) ^ (1 - p)) {
       n_acc <- n_acc+1
       p_sim[n_acc] <- p

@@ -4,11 +4,11 @@
 \alias{plot.evpred}
 \title{Plot diagnostics for an evpred object}
 \usage{
-\method{plot}{evpred}(object, ..., leg_pos = NULL, leg_text = NULL,
+\method{plot}{evpred}(x, ..., leg_pos = NULL, leg_text = NULL,
   which_int = c("long", "short", "both"))
 }
 \arguments{
-\item{object}{An object of class "evpost", a result of a call to
+\item{x}{An object of class "evpost", a result of a call to
 \code{\link{rpost}}.}
 
 \item{...}{Additional arguments passed on to \code{\link{matplot}}.}
@@ -19,7 +19,7 @@ See \code{\link{legend}}.}
 \item{leg_text}{A character or expression vector.  Text for legend.
 See \code{\link{legend}}.}
 
-\item{which_int.}{A character scalar.  If \code{object$type = "i"} which
+\item{which_int}{A character scalar.  If \code{x$type = "i"} which
 intervals should be plotted?  \code{"long"} for equi-tailed intervals,
 \code{"short"} for the shortest possible intervals, \code{"both"} for
 both.}
@@ -27,14 +27,14 @@ both.}
 \description{
 \code{plot} method for class "evpred".  Plots summarising the predictive
 distribution of the largest value to be observed in N years are produced.
-The plot produced depends on \code{object$type}.
-If \code{object$type = "d", "p"} or \code{"q"} then
+The plot produced depends on \code{x$type}.
+If \code{x$type = "d", "p"} or \code{"q"} then
 \code{\link[graphics]{matplot}} is used to produce a line plot of the
 predictive density, distribution or quantile function, respectively,
-with a line for each value of N in \code{object$n_years}.
-If \code{object$type = "r"} then estimates of the predictive density
+with a line for each value of N in \code{x$n_years}.
+If \code{x$type = "r"} then estimates of the predictive density
 (from \code{\link[stats]{density}}) are plotted with a line for each N.
-If \code{object$type = "i"} then lines representing estimated predictive
+If \code{x$type = "i"} then lines representing estimated predictive
 intervals are plotted, with the level of the interval indicated next to
 the line.
 }

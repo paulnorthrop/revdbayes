@@ -15,6 +15,12 @@ bibliography: revdbayes.bib
 ```{r, include = FALSE}
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 ```
+This vignette focuses on random sampling from extreme value posterior 
+distributions.  Performing posterior predictive inference using these samples
+is covered in a separate vignette
+[Posterior Predictive Extreme Value Inference using the revdbayes Package](https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-predictive-vignette.html)
+
+### The *revdbayes* package
 
 The *revdbayes* package tackles the same problem as the *evdbayes* package
 [@evdbayes], that is, sampling from posterior distributions that occur in 
@@ -26,7 +32,7 @@ the generalised ratio-of-uniforms method [@WGS1991], implemented using the
 functionality and their functions have a similar syntax.  For example, a prior
 distribution specified using one package may be used in posterior sampling
 implemented by the other.  For details of setting prior distributions
-see \code{set_prior}.
+see the `set_prior` function.
 
 For details of Bayesian extreme value analyses see the review of 
 @Stephenson2016 and the evdbayes user guide (available in the 
@@ -293,7 +299,7 @@ function `rpost`.
 
 ### Port Pirie Sea Level Data
 
-The numeric vector \code{portpirie} contains 65 annual maximum sea levels 
+The numeric vector `portpirie` contains 65 annual maximum sea levels 
 (in metres) recorded at Port Pirie, South Australia, from 1923 to 1987.
 
 ```{r}
@@ -381,7 +387,7 @@ p2 <- posterior(n + 200, t0, prior = up, lh = "gev", data = portpirie, psd = s)
 
 ### Oxford Temperature Data
 
-The numeric vector \code{oxford} contains 80 annual maximum temperatures, 
+The numeric vector `oxford` contains 80 annual maximum temperatures, 
 in degrees Fahrenheit, from 1901 to 1980 at Oxford, England.  
 
 ```{r}

@@ -6,7 +6,7 @@
 \usage{
 \method{pp_check}{evpost}(object, ..., type = c("stat", "overlaid",
   "multiple", "intervals", "user"), subtype = NULL, stat = "median",
-  nrep = 8)
+  nrep = 8, fun = NULL)
 }
 \arguments{
 \item{object}{An object of class "evpost", a result of a call to
@@ -36,7 +36,7 @@
 
 \item{subtype}{A character scalar.}
 
-\item{stat}{See \link{bayesplot::PPC-test-statistics}.}
+\item{stat}{See \link[bayesplot]{PPC-test-statistics}.}
 
 \item{nrep}{If \code{type = "multiple"} the maximum number of
 summary plots of the predictive simulated datasets to include.}
@@ -58,8 +58,8 @@ details of these functions.
 }
 \details{
 For details of these functions see \link[bayesplot]{PPC-overview}.
-  See also the \strong{bayesplot} vignette \href{
-  https://cran.r-project.org/web/packages/bayesplot/vignettes/PPC.html}{
+  See also the \strong{bayesplot} vignette
+  \href{https://cran.r-project.org/web/packages/bayesplot/vignettes/PPC.html}{
   Graphical posterior predictive checks}.
 
   The general idea is to compare the observed data \code{object$data}

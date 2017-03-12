@@ -21,13 +21,13 @@ the gamma priors for the quantile differences.}
 \item{scale}{A numeric vector of length 3. Respective scale parameters of
 the gamma priors for the quantile differences.}
 
-\item{lb.}{A numeric scalar.  If this is not \code{NULL} then the simulation
+\item{lb}{A numeric scalar.  If this is not \code{NULL} then the simulation
 is constrained so that \code{lb} is an approximate lower bound on the
 GEV variable.  Specifically, only simulated GEV parameter values for
 which the 100\code{lb_prob}\% quantile is greater than \code{lb} are
 retained.}
 
-\item{lb_prob.}{A numeric scalar.  The non-exceedance probability involved
+\item{lb_prob}{A numeric scalar.  The non-exceedance probability involved
 in the specification of \code{lb}.  Must be in (0,1).  If \code{lb=NULL}
 then \code{lb_prob} is not used.}
 }

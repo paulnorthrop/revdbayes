@@ -17,7 +17,7 @@
 \item{y}{Not used.}
 
 \item{...}{Additional arguments passed on to \code{hist}, \code{lines},
-\code{contour}, \code{points} or function from the \strong{bayesplot}
+\code{contour}, \code{points} or functions from the \strong{bayesplot}
 package.}
 
 \item{n}{A numeric scalar.  Only relevant if \code{x$d = 1} or
@@ -87,8 +87,8 @@ Note that \code{suppressWarnings} is used to avoid potential benign warnings
   \code{lines} via \code{...}.
 
 For details of these functions see \link[bayesplot]{MCMC-overview}.
-  See also the \strong{bayesplot} vignette \href{
-  https://cran.r-project.org/web/packages/bayesplot/vignettes/MCMC.html}{
+  See also the \strong{bayesplot} vignette
+  \href{https://cran.r-project.org/web/packages/bayesplot/vignettes/MCMC.html}{
   Plotting MCMC draws}.
 }
 \examples{

@@ -30,13 +30,13 @@ If \code{exc=TRUE} then a Dirichlet(\code{alpha}) distribution is placed on
 (\eqn{1 - p_q1, p_q1 - p_q2, p_q2 - p_q3, p_q3}), where
 \eqn{p_q = P(M > q)}, as in Stephenson (2016).}
 
-\item{lb.}{A numeric scalar.  If this is not \code{NULL} then the simulation
+\item{lb}{A numeric scalar.  If this is not \code{NULL} then the simulation
 is constrained so that \code{lb} is an approximate lower bound on the
 GEV variable.  Specifically, only simulated GEV parameter values for
 which the 100\code{lb_prob}\% quantile is greater than \code{lb} are
 retained.}
 
-\item{lb_prob.}{A numeric scalar.  The non-exceedance probability involved
+\item{lb_prob}{A numeric scalar.  The non-exceedance probability involved
 in the specification of \code{lb}.  Must be in (0,1).  If \code{lb=NULL}
 then \code{lb_prob} is not used.}
 }

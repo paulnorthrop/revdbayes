@@ -1,12 +1,11 @@
-# revdbayes 1.0.0.9000
+# revdbayes 1.1.0
 
 ## New features
 
-* `model = bingp` can now be supplied to `rpost()` to add inferences about the
-  probability of threshold exceedance to inferences about threshold excesses 
-  based on the Generalised Pareto (GP) model.  `set_bin_prior()` can be used to 
-  set a prior for this probability.
-  
+* A new vignette (Posterior Predictive Extreme Value Inference using the revdbayes   
+  Package) provides an overview of most of the new features. Run 
+  browseVignettes("revdbayes") to access.
+
 * S3 `predict()` method for class 'evpost' performs predictive inference 
   about the largest observation observed in N years, returning an object
   of class `evpred`.
@@ -17,6 +16,11 @@
   checks using the bayesplot package.
 
 * Interface to the bayesplot package added in the S3 `plot.evpost` method.
+
+* `model = bingp` can now be supplied to `rpost()` to add inferences about the
+  probability of threshold exceedance to inferences about threshold excesses 
+  based on the Generalised Pareto (GP) model.  `set_bin_prior()` can be used to 
+  set a prior for this probability.
 
 * `rprior_quant()`: to simulate from the prior distribution for GEV parameters 
   proposed in Coles and Tawn (1996) [A Bayesian analysis of extreme rainfall 

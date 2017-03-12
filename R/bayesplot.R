@@ -30,7 +30,7 @@
 #'     (see \link[bayesplot]{pp_check}).
 #' }
 #' @param subtype A character scalar.
-#' @param stat See \link{bayesplot::PPC-test-statistics}.
+#' @param stat See \link[bayesplot]{PPC-test-statistics}.
 #' @param nrep If \code{type = "multiple"} the maximum number of
 #'   summary plots of the predictive simulated datasets to include.
 #' @param fun The plotting function to call.
@@ -38,8 +38,8 @@
 #'   The "ppc_" prefix can optionally be dropped if fun is specified
 #'   as a string.
 #' @details For details of these functions see \link[bayesplot]{PPC-overview}.
-#'   See also the \strong{bayesplot} vignette \href{
-#'   https://cran.r-project.org/web/packages/bayesplot/vignettes/PPC.html}{
+#'   See also the \strong{bayesplot} vignette
+#'   \href{https://cran.r-project.org/web/packages/bayesplot/vignettes/PPC.html}{
 #'   Graphical posterior predictive checks}.
 #'
 #'   The general idea is to compare the observed data \code{object$data}
@@ -141,7 +141,8 @@
 pp_check.evpost <- function(object, ...,
                             type = c("stat", "overlaid", "multiple",
                                      "intervals", "user"),
-                            subtype = NULL, stat = "median", nrep = 8) {
+                            subtype = NULL, stat = "median", nrep = 8,
+                            fun = NULL) {
   if (!inherits(object, "evpost")) {
     stop("use only with \"evpost\" objects")
   }
@@ -186,6 +187,6 @@ pp_check.evpost <- function(object, ...,
     ))
   }
   if (type == "user") {
-    return(bayesplot::pp_check(y, yrep, ...))
+    return(bayesplot::pp_check(y, yrep, fun = fun, ...))
   }
 }

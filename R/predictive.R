@@ -5,7 +5,8 @@
 #' \code{predict} method for class "evpost".  Performs predictive inference
 #' about this largest value to be observed over a future time period of
 #' N years.  Predictive inferences accounts for uncertainty in model
-#' parameters and uncertainty owing to the variability of future observations.
+#' parameters and for uncertainty owing to the variability of future
+#' observations.
 #'
 #' @param object An object of class "evpost", a result of a call to
 #'   \code{\link{rpost}} with \code{model = "gev"}, \code{model = "os"},
@@ -611,8 +612,9 @@ ipred_hpd <- function(q_lower, q_upper, ev_obj, n_years, level, npy, pfun,
     limits <- c(lower_limit, upper_limit)
     return(structure(diff(limits), limits = limits))
   }
-  temp <- nlminb(p_init, ob_fun, ev_obj = ev_obj, n_years = n_years, npy = npy,
-                 level = level, lower = p_range[1], upper = p_range[2])
+  temp <- stats::nlminb(p_init, ob_fun, ev_obj = ev_obj, n_years = n_years,
+                        npy = npy, level = level, lower = p_range[1],
+                        upper = p_range[2])
   temp <- ob_fun(p1 = temp$par, ev_obj = ev_obj, n_years = n_years, npy = npy,
                  level = level)
   return(matrix(attr(temp, "limits"), ncol = 1, nrow = 2))
