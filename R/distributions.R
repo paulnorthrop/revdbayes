@@ -8,7 +8,7 @@
 #'
 #' @param x,q Numeric vectors of quantiles.
 #' @param p A numeric vector of probabilities in (0,1).
-#' @param loc,scale,shape Numeric vectors, of the same length.
+#' @param loc,scale,shape Numeric vectors.
 #'   Location, scale and shape parameters.
 #'   All elements of \code{scale} must be positive.
 #'   In \code{dgev}, \code{pgev} and \code{qgev} these vectors can have

@@ -19,7 +19,7 @@ rgev(n, loc = 0, scale = 1, shape = 0)
 \arguments{
 \item{x, q}{Numeric vectors of quantiles.}
 
-\item{loc, scale, shape}{Numeric vectors, of the same length.
+\item{loc, scale, shape}{Numeric vectors.
 Location, scale and shape parameters.
 All elements of \code{scale} must be positive.
 In \code{dgev}, \code{pgev} and \code{qgev} these vectors can have
