@@ -34,7 +34,7 @@ Otherwise, they must have length one.}
 \item{lower_tail}{A logical scalar.  If TRUE (default), probabilities
 are P[X <= x], otherwise, P[X > x].}
 
-\item{p}{A numeric vector of probabilities in (0,1).}
+\item{p}{A numeric vector of probabilities in [0,1].}
 
 \item{n}{Numeric scalar.  The number of observations to be simulated.}
 }
@@ -60,7 +60,12 @@ The distribution function of a GEV distribution with parameters
  \eqn{x >= \mu - \sigma / \xi} for \eqn{\xi > 0};
  and \eqn{x} is unbounded for \eqn{\xi = 0}.
  Note that if \eqn{\xi < -1} the GEV density function becomes infinite
- as \eqn{x} approaches \eqn{\mu -\sigma/\xi}.
+ as \eqn{x} approaches \eqn{\mu -\sigma/\xi} from below.
+
+ If \code{lower_tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
+ the lower (upper) limit of the distribution is returned, which is
+ \code{-Inf} or \code{Inf} in some cases.  Similarly, but reversed,
+ if \code{lower_tail = FALSE}.
 
  See
  \url{https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution}

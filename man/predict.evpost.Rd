@@ -98,7 +98,7 @@ N years, i.e. level\% predictive intervals are returned.}
   If \code{hpd = TRUE} then, in addition to the equi-tailed interval,
   the shortest possible level\% interval is calculated.
   If the predictive distribution is unimodal then this
-  is a highest predictive density interval.}
+  is a highest predictive density (HPD) interval.}
 
 \item{lower_tail}{A logical scalar.
 Only relevant when \code{type = "p"} or \code{type = "q"}.
@@ -132,11 +132,12 @@ An object of class "evpred", a list containing a subset of the
       \item{\code{type = "i"}:} \code{y} is not present.
       }}
       \item{long}{A \code{length(n_years)*length(level)} by 4 numeric
-        matrix with columns: lower limit, upper limit, n_years, level.
+        matrix containing the equi-tailed limits with columns:
+        lower limit, upper limit, n_years, level.
         Only present if \code{type = "i"}.  If an interval extends below
         the threshold then \code{NA} is returned.}
-      \item{short}{A matrix with the same structure as \code{long}.
-        Only present if \code{type = "i"}.
+      \item{short}{A matrix with the same structure as \code{long}
+        containing the HPD limits.  Only present if \code{type = "i"}.
         Columns 1 and 2 contain \code{NA}s if \code{hpd = FALSE}
         or if the corresponding equi-tailed interval extends below
         the threshold.}

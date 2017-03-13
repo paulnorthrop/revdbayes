@@ -218,6 +218,12 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6,
   #
   if (abs(lambda) > lambda_tol) {
     retval <- (x ^ lambda - 1) / lambda / gm ^ (lambda - 1)
+  } else if (lambda == 0) {
+    retval <- log(x)
+  } else if (is.infinite(x)) {
+    retval <- ifelse(lambda < 0, -1 / lambda, Inf)
+  } else if (x == 0) {
+    retval <- ifelse(lambda > 0, -1 / lambda, -Inf)
   } else {
     i <- 0:poly_order
     retval <- sum(log(x) ^ (i+1) * lambda ^ i / factorial(i + 1))

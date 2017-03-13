@@ -7,7 +7,7 @@
 #' distribution.
 #'
 #' @param x,q Numeric vectors of quantiles.
-#' @param p A numeric vector of probabilities in (0,1).
+#' @param p A numeric vector of probabilities in [0,1].
 #' @param loc,scale,shape Numeric vectors.
 #'   Location, scale and shape parameters.
 #'   All elements of \code{scale} must be positive.
@@ -32,7 +32,12 @@
 #'  \eqn{x >= \mu - \sigma / \xi} for \eqn{\xi > 0};
 #'  and \eqn{x} is unbounded for \eqn{\xi = 0}.
 #'  Note that if \eqn{\xi < -1} the GEV density function becomes infinite
-#'  as \eqn{x} approaches \eqn{\mu -\sigma/\xi}.
+#'  as \eqn{x} approaches \eqn{\mu -\sigma/\xi} from below.
+#'
+#'  If \code{lower_tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
+#'  the lower (upper) limit of the distribution is returned, which is
+#'  \code{-Inf} or \code{Inf} in some cases.  Similarly, but reversed,
+#'  if \code{lower_tail = FALSE}.
 #'
 #'  See
 #'  \url{https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution}
@@ -183,9 +188,6 @@ pgev <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 #' @rdname gev
 #' @export
 qgev <- function (p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE) {
-  if (any(p <= 0) || any(p >= 1)) {
-    stop("The elements of p must all be in (0,1)")
-  }
   if (min(scale) < 0) {
     stop("invalid scale: scale must be positive.")
   }
@@ -240,9 +242,7 @@ rgev_vec <- Vectorize(rgev, vectorize.args = c("n", "loc", "scale", "shape"))
 #'
 #' @param x,q Numeric vectors of quantiles.  All elements of \code{x}
 #'   and \code{q} must be non-negative.
-#' @param p A numeric vector of probabilities.
-#'   If \code{lower_tail = TRUE} then \code{p} must be in [0, 1).
-#'   If \code{lower_tail = FALSE} then \code{p} must be in (0, 1].
+#' @param p A numeric vector of probabilities in [0,1].
 #' @param loc,scale,shape Numeric vectors.
 #'   Location, scale and shape parameters.
 #'   All elements of \code{scale} must be positive.
@@ -264,9 +264,14 @@ rgev_vec <- Vectorize(rgev, vectorize.args = c("n", "loc", "scale", "shape"))
 #'  distribution function is defined as the limit as \eqn{\xi} tends to zero.
 #'  The support of the distribution depends on \eqn{\xi}: it is
 #'  \eqn{x >= \mu} for \eqn{\xi >= 0};
-#'  and \eqn{0 <= x <= \mu - \sigma / \xi} for \eqn{\xi < 0}.  Note that
+#'  and \eqn{\mu <= x <= \mu - \sigma / \xi} for \eqn{\xi < 0}.  Note that
 #'  if \eqn{\xi < -1} the GP density function becomes infinite as \eqn{x}
 #'  approaches \eqn{\mu - \sigma/\xi}.
+#'
+#'  If \code{lower_tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
+#'  the lower (upper) limit of the distribution is returned.
+#'  The upper limit is \code{Inf} if \code{shape} is non-negative.
+#'  Similarly, but reversed, if \code{lower_tail = FALSE}.
 #'
 #'  See
 #'  \url{https://en.wikipedia.org/wiki/Generalized_Pareto_distribution}
@@ -413,16 +418,6 @@ pgp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 #' @rdname gp
 #' @export
 qgp <- function (p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE) {
-  if (lower_tail) {
-    if (any(p < 0) || any(p >= 1)) {
-      stop("The elements of p must all be in [0,1)")
-    }
-  }
-  if (!lower_tail) {
-    if (any(p <= 0) || any(p > 1)) {
-      stop("The elements of p must all be in (0,1]")
-    }
-  }
   if (any(scale < 0)) {
     stop("invalid scale: scale must be positive.")
   }
@@ -593,11 +588,11 @@ qbingp <- function(p, p_u = 0.5, loc = 0, scale = 1, shape = 0,
   # Binomial-GP quantiles.
   #`
   # Args:
-  #   p          : Numeric vector of probabilities in (0,1).
+  #   p          : Numeric vector of probabilities in [0,1].
   #   p_u        : Numeric vector of threshold exceedance probabilities in
-  #                (0,1).
+  #                (0,1].
   #   loc        : Numeric vector of GP location parameters: usually the
-  #               threshold.
+  #                threshold.
   #   scale      : Numeric vector of GP scale parameters.
   #   shape      : Numeric vector of GP shape parameters.
   #   lower_tail : A logical scalar.  If TRUE (default), probabilities
@@ -608,9 +603,6 @@ qbingp <- function(p, p_u = 0.5, loc = 0, scale = 1, shape = 0,
   #   a common length or a subset of them must have a common length with the
   #   others having length one. Otherwise, they must have length one.
   #
-  if (any(p <= 0) || any(p >= 1)) {
-    stop("invalid p: p must be in (0,1).")
-  }
   if (!lower_tail) {
     p <- 1 - p
   }
@@ -625,8 +617,8 @@ qbingp <- function(p, p_u = 0.5, loc = 0, scale = 1, shape = 0,
   if (min(scale) < 0) {
     stop("invalid scale: scale must be positive.")
   }
-  if (any(p_u <= 0) || any(p_u >= 1)) {
-    stop("invalid p_u: p_u must be in (0,1).")
+  if (any(p_u <= 0) || any(p_u > 1)) {
+    stop("invalid p_u: p_u must be in (0,1].")
   }
   len_p_u <- length(p_u)
   len_loc <- length(loc)

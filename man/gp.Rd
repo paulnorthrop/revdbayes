@@ -35,9 +35,7 @@ Otherwise, they must have length one.}
 \item{lower_tail}{A logical scalar.  If TRUE (default), probabilities
 are P[X <= x], otherwise, P[X > x].}
 
-\item{p}{A numeric vector of probabilities.
-If \code{lower_tail = TRUE} then \code{p} must be in [0, 1).
-If \code{lower_tail = FALSE} then \code{p} must be in (0, 1].}
+\item{p}{A numeric vector of probabilities in [0,1].}
 
 \item{n}{Numeric scalar.  The number of observations to be simulated.}
 }
@@ -59,9 +57,14 @@ The distribution function of a GP distribution with parameters
  distribution function is defined as the limit as \eqn{\xi} tends to zero.
  The support of the distribution depends on \eqn{\xi}: it is
  \eqn{x >= \mu} for \eqn{\xi >= 0};
- and \eqn{0 <= x <= \mu - \sigma / \xi} for \eqn{\xi < 0}.  Note that
+ and \eqn{\mu <= x <= \mu - \sigma / \xi} for \eqn{\xi < 0}.  Note that
  if \eqn{\xi < -1} the GP density function becomes infinite as \eqn{x}
  approaches \eqn{\mu - \sigma/\xi}.
+
+ If \code{lower_tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
+ the lower (upper) limit of the distribution is returned.
+ The upper limit is \code{Inf} if \code{shape} is non-negative.
+ Similarly, but reversed, if \code{lower_tail = FALSE}.
 
  See
  \url{https://en.wikipedia.org/wiki/Generalized_Pareto_distribution}
