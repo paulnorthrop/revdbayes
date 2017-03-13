@@ -235,7 +235,7 @@ for each value in `n_years` and each level in `level`.  The argument
 The dashed lines give the HPD intervals and the solid lines the equi-tailed
 intervals.  Each line is labelled by the level of the interval.
 
-```{r, fig.show='hold'}
+```{r,  fig.width = 7}
 i_gevp <- predict(gevp, n_years = c(100, 1000), level = c(50, 95, 99), hpd = TRUE)
 plot(i_gevp, which_int = "both")
 i_bgpp <- predict(bgpg, n_years = c(100, 1000), level = c(50, 95, 99), hpd = TRUE)
