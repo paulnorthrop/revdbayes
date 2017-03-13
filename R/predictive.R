@@ -82,12 +82,15 @@
 #'   N years, i.e. level\% predictive intervals are returned.
 #' @param hpd A logical scalar.
 #'   Only relevant when \code{type = "i"}.
-#'   If \code{hpd = TRUE} then the shortest possible level\% interval
-#'   is calculated.  If the predictive distribution is unimodal then this
-#'   is a highest predictive density interval.
+#'
 #'   If \code{hpd = FALSE} then the predictive interval is
 #'   equi-tailed, equal to \code{predict.evpost(object, type ="q", x = p)},
 #'   where \code{p = c((1-level/100)/2, (1+level/100)/2)}.
+#'
+#'   If \code{hpd = TRUE} then, in addition to the equi-tailed interval,
+#'   the shortest possible level\% interval is calculated.
+#'   If the predictive distribution is unimodal then this
+#'   is a highest predictive density interval.
 #' @param lower_tail A logical scalar.
 #'   Only relevant when \code{type = "p"} or \code{type = "q"}.
 #'   If TRUE (default), (output or input) probabilities are P[X <= x],
@@ -480,8 +483,8 @@ ipred <- function(ev_obj, n_years = 100, npy = NULL, level = 95,
     # to the threshold used in the call to rpost().  This enables us to check
     # whether or not that it is possible to calculate a given level% predictive
     # interval without extending below the threshold.
-    p_min <- pred_pbingp(ev_obj = ev_obj, q = ev_obj$thresh, n_years = n_years,
-                         npy = npy, lower_tail = TRUE)$y
+    p_min <- pfun(ev_obj = ev_obj, q = ev_obj$thresh, n_years = n_years,
+                  npy = npy, lower_tail = TRUE)$y
   }
   # Find the equi-tailed level% interval (for hpd = FALSE)
   p1 <- (1 - level / 100) / 2.

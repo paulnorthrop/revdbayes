@@ -86,8 +86,9 @@ Note that \code{suppressWarnings} is used to avoid potential benign warnings
   caused by passing unused graphical parameters to \code{hist} and
   \code{lines} via \code{...}.
 
-For details of these functions see \link[bayesplot]{MCMC-overview}.
-  See also the \strong{bayesplot} vignette
+For details of the \strong{bayesplot} functions available when
+  \code{use_bayesplot = TRUE} see \link[bayesplot]{MCMC-overview} and
+  the \strong{bayesplot} vignette
   \href{https://cran.r-project.org/web/packages/bayesplot/vignettes/MCMC.html}{
   Plotting MCMC draws}.
 }

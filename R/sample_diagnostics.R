@@ -59,8 +59,9 @@
 #'   caused by passing unused graphical parameters to \code{hist} and
 #'   \code{lines} via \code{...}.
 #'
-#' @details For details of these functions see \link[bayesplot]{MCMC-overview}.
-#'   See also the \strong{bayesplot} vignette
+#' @details For details of the \strong{bayesplot} functions available when
+#'   \code{use_bayesplot = TRUE} see \link[bayesplot]{MCMC-overview} and
+#'   the \strong{bayesplot} vignette
 #'   \href{https://cran.r-project.org/web/packages/bayesplot/vignettes/MCMC.html}{
 #'   Plotting MCMC draws}.
 #' @return Nothing is returned unless \code{use_bayesplot = TRUE} when a
@@ -188,6 +189,8 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     max_y <- max(temp$density, yy)
     temp <- list(...)
     if (is.null(temp$xlab)) {
+      graphics::hist(plot_data, prob = TRUE, main="", ylim = c(0, max_y),
+                     xlab = "", ...)
       suppressWarnings(graphics::hist(plot_data, prob = TRUE, main="",
                                       ylim = c(0, max_y), xlab = "", ...))
       if (!is.null(colnames(plot_data))) {
