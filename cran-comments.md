@@ -4,5 +4,5 @@
 
 ## Downstream dependencies
 
-I have also run R CMD on downstream dependencies of rust.
+I have also run R CMD on downstream dependencies of revdbayes.
 All packages passed.
