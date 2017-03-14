@@ -163,4 +163,3 @@ Chapman & Hall/CRC Press, London, third edition. (Chapter 6)
   \link[bayesplot]{PPC-intervals},
   \link[bayesplot]{pp_check}.
 }
-

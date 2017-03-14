@@ -56,4 +56,3 @@ graphics::hist(temp$bin_sim_vals, prob = TRUE)
 \code{\link{set_bin_prior}} for setting a prior distribution
   for the binomial probability \eqn{p}.
 }
-

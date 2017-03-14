@@ -41,4 +41,3 @@ Kotz, S., Balakrishnan, N. and Johnson, N. L. (2000)
 \code{\link{rprior_prob}} for prior simulation of
   GEV parameters - prior on probability scale.
 }
-

@@ -227,4 +227,3 @@ Northrop, P.J. and Attalides, N. (2016) Posterior propriety in
 \code{\link[evdbayes]{posterior}} for sampling from an extreme
   value posterior using the evdbayes package.
 }
-

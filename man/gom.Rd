@@ -25,4 +25,3 @@ Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
   \url{http://dx.doi.org/10.1111/rssc.12159}
 }
 \keyword{datasets}
-

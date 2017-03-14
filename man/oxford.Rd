@@ -17,4 +17,3 @@ A numeric vector containing annual maximum temperatures, in degrees
 Fahrenheit, from 1901 to 1980 at Oxford, England.
 }
 \keyword{datasets}
-

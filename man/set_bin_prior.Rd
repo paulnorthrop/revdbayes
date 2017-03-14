@@ -48,4 +48,3 @@ bp <- set_bin_prior(prior = "jeffreys")
 \code{\link{binpost}} for sampling from a binomial posterior
   distribution.
 }
-

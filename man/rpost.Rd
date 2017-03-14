@@ -272,4 +272,3 @@ Stephenson, A. (2016). Bayesian Inference for Extreme Value
 \code{\link[evdbayes]{posterior}} for sampling from an extreme
   value posterior using the evdbayes package.
 }
-

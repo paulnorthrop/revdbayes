@@ -99,4 +99,3 @@ Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
 \code{\link{rpost}} for sampling from an extreme value posterior
   distribution.
 }
-

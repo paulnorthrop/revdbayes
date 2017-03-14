@@ -82,4 +82,3 @@ Stephenson, A. 2016. Bayesian Inference for Extreme Value
 \code{\link{rpost}} for sampling from an extreme value posterior
   distribution.
 }
-

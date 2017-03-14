@@ -26,4 +26,3 @@ Coles, S. G. (2001) \emph{An Introduction to Statistical
   \url{https://doi.org/10.1007/978-1-4471-3675-0}
 }
 \keyword{datasets}
-

@@ -18,4 +18,3 @@ over a 57 year period, beginning on a leap year. Three of these years
 contain only missing values.
 }
 \keyword{datasets}
-

@@ -139,4 +139,3 @@ Models. R package version 1.1.0.
   \code{\link[bayesplot]{MCMC-intervals}},
   \code{\link[bayesplot]{MCMC-distributions}}.
 }
-

@@ -49,4 +49,3 @@ qgev(p = 1 - my_p, loc = x[1], scale = x[2], shape = x[3])
 \code{\link{rprior_quant}} for simulation of GEV parameters from
   a prior constructed on the quantile scale.
 }
-

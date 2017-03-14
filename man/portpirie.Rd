@@ -18,4 +18,3 @@ A numeric vector of length 65 containing annual maximum sea levels,
 in metres, from 1923 to 1987 at Port Pirie, South Australia.
 }
 \keyword{datasets}
-

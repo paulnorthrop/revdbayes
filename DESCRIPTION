@@ -20,13 +20,13 @@ Imports: stats,
 License: GPL (>= 2)
 LazyData: TRUE
 Depends:
-    R (>= 3.3.2),
-RoxygenNote: 5.0.1
+    R (>= 3.3.3),
+RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
     devtools,
     evdbayes,
-    ggplot2
+    ggplot2 (>= 2.2.1)
 VignetteBuilder: knitr
 URL: http://github.com/paulnorthrop/revdbayes
 BugReports: http://github.com/paulnorthrop/revdbayes/issues

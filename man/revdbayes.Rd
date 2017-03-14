@@ -40,4 +40,3 @@ The \code{\link[rust]{ru}} function in the \code{\link{rust}}
   returned from \code{rpost}, which has the same structure as an object
   (of class "ru") returned by \code{ru}.
 }
-

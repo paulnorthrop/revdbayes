@@ -70,4 +70,3 @@ plot(r_gevp, xlim = c(4, 10))
 \code{\link{predict.evpost}} for the S3 \code{predict} method
  for objects of class \code{evpost}.
 }
-
