@@ -62,8 +62,7 @@
 #' @details For details of the \strong{bayesplot} functions available when
 #'   \code{use_bayesplot = TRUE} see \link[bayesplot]{MCMC-overview} and
 #'   the \strong{bayesplot} vignette
-#'   \href{https://cran.r-project.org/web/packages/bayesplot/vignettes/MCMC.html}{
-#'   Plotting MCMC draws}.
+#'   \href{https://CRAN.R-project.org/package=bayesplot}{Plotting MCMC draws}.
 #' @return Nothing is returned unless \code{use_bayesplot = TRUE} when a
 #'   ggplot object, which can be further customized using the
 #'   \strong{ggplot2} package, is returned.

@@ -191,7 +191,7 @@ model.
   axes is used to reduce posterior parameter dependence.  The default
   is \code{trans = "none"} and \code{rotate = TRUE}.
 
-  See the \href{https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-vignette.html}{Introducing revdbayes vignette}
+  See the \href{https://CRAN.R-project.org/package=revdbayes}{Introducing revdbayes vignette}
   for further details and examples.
 }
 \examples{

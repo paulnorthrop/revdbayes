@@ -38,7 +38,7 @@ the observed data. This accounts for uncertainty in model parameters and
 for uncertainty owing to the variability of future observations.
 
 We illustrate the code used to perform these two tasks using the 
-`portpirie` and `gom` datasets that feature in the vignette [Introducing revdbayes](https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-vignette.html).
+`portpirie` and `gom` datasets that feature in the vignette [Introducing revdbayes](revdbayes-vignette.html).
 
 ```{r setup, include=FALSE}
 devtools::load_all() 
@@ -74,7 +74,7 @@ gpg <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = gom, nrep = 
 The `pp_check` method `pp_check.evpost` provides an interface to the
 posterior predictive checking graphics available in the *bayesplot* package
 [@bayesplot].  For details see the bayesplot vignette 
-[Graphical posterior predictive checks](https://cran.r-project.org/web/packages/bayesplot/vignettes/PPC.html).  *bayesplot* functions return a `ggplot` object 
+[Graphical posterior predictive checks](https://CRAN.R-project.org/package=bayesplot).  *bayesplot* functions return a `ggplot` object 
 that can be customised using the *gglot2* package [@ggplot2].
 
 ```{r}

@@ -112,6 +112,8 @@
 #'   or
 #'   \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
 #'   for details.
+#'   See also the vignette
+#'   \href{https://CRAN.R-project.org/package=revdbayes}{Posterior Predictive Extreme Value Inference}
 #'
 #'   \strong{GEV / OS / PP}.
 #'   If \code{model = "gev"}, \code{model = "os"} or \code{model = "pp"}

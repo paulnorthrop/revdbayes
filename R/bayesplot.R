@@ -38,9 +38,10 @@
 #'   The "ppc_" prefix can optionally be dropped if fun is specified
 #'   as a string.
 #' @details For details of these functions see \link[bayesplot]{PPC-overview}.
-#'   See also the \strong{bayesplot} vignette
-#'   \href{https://cran.r-project.org/web/packages/bayesplot/vignettes/PPC.html}{
-#'   Graphical posterior predictive checks}.
+#'   See also the vignette
+#'   \href{https://CRAN.R-project.org/package=revdbayes}{Posterior Predictive Extreme Value Inference}
+#'   and the \strong{bayesplot} vignette
+#'   \href{https://CRAN.R-project.org/package=bayesplot}{Graphical posterior predictive checks}.
 #'
 #'   The general idea is to compare the observed data \code{object$data}
 #'   with a matrix \code{object$data_rep}) in which each row is a
