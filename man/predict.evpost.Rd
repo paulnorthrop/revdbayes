@@ -41,7 +41,8 @@ The model is stored in \code{object$model}.}
       99\% quantile, subject all values being greater than the threshold.
 
     \item{\code{type = "q"}:} \code{x} contains probabilities in (0,1)
-      at which to evaluate the quantile function.
+      at which to evaluate the quantile function.  Any values outside
+      (0, 1) will be removed without warning.
 
       If \code{object$model == "bingp"} then no element of \code{p} can
       correspond to a predictive quantile that is below the threshold,

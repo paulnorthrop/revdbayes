@@ -38,7 +38,8 @@
 #'       99\% quantile, subject all values being greater than the threshold.
 #'
 #'     \item{\code{type = "q"}:} \code{x} contains probabilities in (0,1)
-#'       at which to evaluate the quantile function.
+#'       at which to evaluate the quantile function.  Any values outside
+#'       (0, 1) will be removed without warning.
 #'
 #'       If \code{object$model == "bingp"} then no element of \code{p} can
 #'       correspond to a predictive quantile that is below the threshold,
@@ -335,8 +336,15 @@ predict.evpost <- function(object, type = c("i", "p", "d", "q", "r"), x = NULL,
       }
     }
   }
-  if (type == "q" & is.null(x)) {
-    x <- c(0.025, 0.25, 0.5, 0.75, 0.975)
+  if (type == "q") {
+    if (is.null(x)) {
+      x <- c(0.025, 0.25, 0.5, 0.75, 0.975)
+    } else {
+      x <- x[x > 0 & x < 1]
+      if (length(x) == 0) {
+        stop("For type = ``q'' values in x must be in (0,1)")
+      }
+    }
   }
   if (type %in% c("p", "d") & is.null(x)) {
     if (is.null(x_num)) {
