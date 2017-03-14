@@ -18,7 +18,7 @@ knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 This vignette focuses on random sampling from extreme value posterior 
 distributions.  Performing posterior predictive inference using these samples
 is covered in a separate vignette
-[Posterior Predictive Extreme Value Inference using the revdbayes Package](https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-predictive-vignette.html)
+[Posterior Predictive Extreme Value Inference using the revdbayes Package](revdbayes-predictive-vignette.html)
 
 ### The *revdbayes* package
 
