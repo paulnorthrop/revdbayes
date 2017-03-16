@@ -47,8 +47,8 @@ The model is stored in \code{object$model}.}
       If \code{object$model == "bingp"} then no element of \code{p} can
       correspond to a predictive quantile that is below the threshold,
       \code{object$thresh}.  That is, no element of \code{p} can be less
-      than the value of
-      \code{predict.evpost(object, type = "q", x = object$thresh)}.
+      than the value of \code{predict.evpost(object,}
+      \code{type = "q", x = object$thresh)}.
 
       If \code{x} is not supplied then a default value of
       \code{c(0.025, 0.25, 0.5, 0.75, 0.975)} is used.
@@ -92,9 +92,9 @@ N years, i.e. level\% predictive intervals are returned.}
 \item{hpd}{A logical scalar.
   Only relevant when \code{type = "i"}.
 
-  If \code{hpd = FALSE} then the predictive interval is
-  equi-tailed, equal to \code{predict.evpost(object, type ="q", x = p)},
-  where \code{p = c((1-level/100)/2, (1+level/100)/2)}.
+  If \code{hpd = FALSE} then the interval is
+  equi-tailed, equal to \code{predict.evpost()} \code{object, type ="q", x = p)},
+  where \code{p = c((1-level/100)/2,} \code{(1+level/100)/2)}.
 
   If \code{hpd = TRUE} then, in addition to the equi-tailed interval,
   the shortest possible level\% interval is calculated.
@@ -196,10 +196,9 @@ Inferences about future extreme observations are integrated over
     \code{predict.evpost(object, type = "p", x = q)} = \code{p[i]}
     numerically for \code{q} for each element \code{p[i]} of \code{p}.
 
-    \item{\code{type = "i"}.}
-    If \code{hpd = FALSE} then we calculate equi-tailed intervals using
-    \code{predict.evpost(object, type ="q", x = p)}, where
-    \code{p = c((1-level/100)/2, (1+level/100)/2)}.
+    \item{\code{type = "i"}.} If \code{hpd = FALSE} then the interval is
+    equi-tailed, equal to \code{predict.evpost()} \code{object, type ="q", x = p)},
+    where \code{p = c((1-level/100)/2,} \code{(1+level/100)/2)}.
     If \code{hpd = TRUE} then, in addition, we perform a
     numerical minimisation of the length of level\% intervals, after
     approximating the predictive quantile function using monotonic

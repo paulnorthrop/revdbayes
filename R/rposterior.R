@@ -15,8 +15,8 @@
 #'     \item {"gev"} {A numeric vector of block maxima.}
 #'     \item {"pp"} {A numeric vector of raw data.}
 #'     \item {"os"} {A numeric matrix or data frame. Each row should contain
-#'       the largest order statistics for a block of data.  These needs not
-#'       be ordered because they are sorted inside \code{rpost}. If a block
+#'       the largest order statistics for a block of data.  These need not
+#'       be ordered: they are sorted inside \code{rpost}. If a block
 #'       contains fewer than \code{dim(as.matrix(data))[2]} order statistics
 #'       then the corresponding row should be padded by \code{NA}s. If
 #'       \code{ros} is supplied then only the largest \code{ros} values in
