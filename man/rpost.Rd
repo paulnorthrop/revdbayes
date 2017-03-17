@@ -53,11 +53,12 @@ be supplied when \code{model = "pp"}.  If \code{model = "gp"} and
 excluding any missing values.  A block is often a year.
 Only relevant, and must be supplied, if \code{model = "pp"}.}
 
-\item{use_noy}{A logical scalar.  Only relevant if model is "pp".  By
-default (\code{use_noy = FALSE}) sampling is based on a likelihood in
+\item{use_noy}{A logical scalar.  Only relevant if model is "pp".
+If \code{use_noy = FALSE} then sampling is based on a likelihood in
 which the number of blocks (years) is set equal to the number of threshold
-excesses, to reduce posterior dependence between the parameters.  The
-sampled values are transformed back to the required parameterisation
+excesses, to reduce posterior dependence between the parameters
+(\href{http://dx.doi.org/10.1214/10-AOAS333}{Wadsworth \emph{et al}. (2010)}).
+The sampled values are transformed back to the required parameterisation
 before returning them to the user.  If \code{use_noy = TRUE} then the
 user's value of \code{noy} is used in the likelihood.}
 
@@ -244,14 +245,19 @@ Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
   Cross-validatory extreme value threshold selection and uncertainty
   with application to ocean storm severity.
   \emph{Journal of the Royal Statistical Society Series C: Applied
-  Statistics}, \emph{66}(1), 93-120.
+  Statistics}, \strong{66}(1), 93-120.
   \url{http://dx.doi.org/10.1111/rssc.12159}
 
-Stephenson, A. (2016). Bayesian Inference for Extreme Value
+Stephenson, A. (2016) Bayesian Inference for Extreme Value
   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
   Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721-14}
   value posterior using the evdbayes package.
+
+Wadsworth, J. L., Tawn, J. A. and Jonathan, P. (2010)
+  Accounting for choice of measurement scale in extreme value modeling.
+ \emph{The Annals of Applied Statistics}, \strong{4}(3), 1558-1578.
+  \url{http://dx.doi.org/10.1214/10-AOAS333}
 }
 \seealso{
 \code{\link{set_prior}} for setting a prior distribution.

@@ -1,5 +1,9 @@
 # revdbayes 1.1.0.9000
 
+## Bug fixes and minor improvements
+
+* The documentation for `rpost` has been corrected: previously it stated that the default for `use_noy` is `use_noy = FALSE`, which is not true.
+
 # revdbayes 1.1.0
 
 ## New features
