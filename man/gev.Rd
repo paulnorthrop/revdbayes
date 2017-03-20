@@ -8,40 +8,47 @@
 \alias{rgev}
 \title{The Generalised Extreme Value Distribution}
 \usage{
-dgev(x, loc = 0, scale = 1, shape = 0, log = FALSE)
+dgev(x, loc = 0, scale = 1, shape = 0, log = FALSE, m = 1)
 
-pgev(q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE)
+pgev(q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE, m = 1)
 
-qgev(p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE)
+qgev(p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE, m = 1)
 
-rgev(n, loc = 0, scale = 1, shape = 0)
+rgev(n, loc = 0, scale = 1, shape = 0, m = 1)
 }
 \arguments{
 \item{x, q}{Numeric vectors of quantiles.}
 
 \item{loc, scale, shape}{Numeric vectors.
 Location, scale and shape parameters.
-All elements of \code{scale} must be positive.
-In \code{dgev}, \code{pgev} and \code{qgev} these vectors can have
-length > 1, but only if \code{length(x)[dgev]}, \code{length(q)[pgev]},
-or \code{length(p)[qgev]} has length one.
-Then they must either have a common length or a subset of
-them must have a common length with the others having length one.
-Otherwise, they must have length one.}
+All elements of \code{scale} must be positive.}
 
 \item{log}{A logical scalar.  If TRUE the log-density is returned.}
+
+\item{m}{A numeric scalar.  The distribution is reparameterised by working
+with the GEV(\code{loc, scale, shape}) distribution function raised to the
+power \code{m}.  See \strong{Details}.}
 
 \item{lower_tail}{A logical scalar.  If TRUE (default), probabilities
 are P[X <= x], otherwise, P[X > x].}
 
 \item{p}{A numeric vector of probabilities in [0,1].}
 
-\item{n}{Numeric scalar.  The number of observations to be simulated.}
+\item{n}{Numeric scalar.  The number of observations to be simulated.
+If \code{length(n) > 1} then \code{length(n)} is taken to be the number
+required.}
 }
 \value{
 \code{dgev} gives the density function, \code{pgev} gives the
   distribution function, \code{qgev} gives the quantile function,
   and \code{rgev} generates random deviates.
+
+  The length of the result is determined by \code{n} for \code{rgev},
+  and is the maximum of the lengths of the numerical arguments for the
+  other functions.
+
+  The numerical arguments other than \code{n} are recycled to the length
+  of the result.
 }
 \description{
 Density function, distribution function, quantile function and
@@ -60,7 +67,7 @@ The distribution function of a GEV distribution with parameters
  \eqn{x >= \mu - \sigma / \xi} for \eqn{\xi > 0};
  and \eqn{x} is unbounded for \eqn{\xi = 0}.
  Note that if \eqn{\xi < -1} the GEV density function becomes infinite
- as \eqn{x} approaches \eqn{\mu -\sigma/\xi} from below.
+ as \eqn{x} approaches \eqn{\mu -\sigma / \xi} from below.
 
  If \code{lower_tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
  the lower (upper) limit of the distribution is returned, which is
@@ -70,6 +77,14 @@ The distribution function of a GEV distribution with parameters
  See
  \url{https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution}
  for further information.
+
+ The effect of \code{m} is to change the location, scale and shape
+ parameters to
+ \eqn{(\mu + \sigma log m, \sigma, \xi)} if \eqn{\xi = 0} and
+ \eqn{(\mu + \sigma (m ^ \xi - 1) / \xi, \sigma m ^ \xi, \xi)}.
+ For integer \code{m} we can think of this as working with the
+ maximum of \code{m} independent copies of the original
+ GEV(\code{loc, scale, shape}) variable.
 }
 \examples{
 dgev(-1:4, 1, 0.5, 0.8)

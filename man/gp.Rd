@@ -22,13 +22,7 @@ and \code{q} must be non-negative.}
 
 \item{loc, scale, shape}{Numeric vectors.
 Location, scale and shape parameters.
-All elements of \code{scale} must be positive.
-In \code{dgp}, \code{pgp} and \code{qgp} these vectors can have
-length > 1, but only if \code{length(x)[dgp]}, \code{length(q)[pgp]},
-or \code{length(p)[qgp]} has length one.
-Then they must either have a common length or a subset of
-them must have a common length with the others having length one.
-Otherwise, they must have length one.}
+All elements of \code{scale} must be positive.}
 
 \item{log}{A logical scalar.  If TRUE the log-density is returned.}
 
@@ -37,7 +31,9 @@ are P[X <= x], otherwise, P[X > x].}
 
 \item{p}{A numeric vector of probabilities in [0,1].}
 
-\item{n}{Numeric scalar.  The number of observations to be simulated.}
+\item{n}{Numeric scalar.  The number of observations to be simulated.
+If \code{length(n) > 1} then \code{length(n)} is taken to be the number
+required.}
 }
 \value{
 \code{dgp} gives the density function, \code{pgp} gives the

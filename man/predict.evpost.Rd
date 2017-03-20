@@ -93,7 +93,7 @@ N years, i.e. level\% predictive intervals are returned.}
   Only relevant when \code{type = "i"}.
 
   If \code{hpd = FALSE} then the interval is
-  equi-tailed, equal to \code{predict.evpost()} \code{object, type ="q", x = p)},
+  equi-tailed, equal to \code{predict.evpost(}\code{object, type ="q", x = p)},
   where \code{p = c((1-level/100)/2,} \code{(1+level/100)/2)}.
 
   If \code{hpd = TRUE} then, in addition to the equi-tailed interval,
@@ -174,12 +174,10 @@ Inferences about future extreme observations are integrated over
   \strong{GEV / OS / PP}.
   If \code{model = "gev"}, \code{model = "os"} or \code{model = "pp"}
   in the call to \code{\link{rpost}} we first calculate the number
-  of blocks \eqn{b} in \code{n_years} years.  Then we convert the
-  posterior simulated GEV parameters \eqn{(\mu, \sigma, \xi)} to
-  the \code{n_years} level of aggregation, that is,
-  \eqn{(\mu + \sigma log b, \sigma, \xi)} if \eqn{\xi = 0} and
-  \eqn{(\mu + \sigma (b ^ \xi - 1) / \xi, \sigma b ^ \xi, \xi)}
-  otherwise.
+  of blocks \eqn{b} in \code{n_years} years.  To calculate the density
+  function or distribution function of the maximum over \code{n_years}
+  we call \code{\link{dgev}} or \code{\link{pgev}} with \code{m} =
+  \eqn{b}.
 
   \itemize{
     \item{\code{type = "p"}.} We calculate using \code{\link{pgev}}

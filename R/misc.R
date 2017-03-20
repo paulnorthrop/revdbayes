@@ -203,7 +203,7 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6,
   # Computes the Box-Cox transformation of a vector.
   #
   # Args:
-  #   x          : A numeric vector. (Positive) values to be Box-Cox
+  #   x          : A numeric vector. (Non-negative) values to be Box-Cox
   #                transformed.
   #   lambda     : A numeric scalar.  Transformation parameter.
   #   gm         : A numeric scalar.  Optional scaling parameter.
@@ -234,9 +234,35 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6,
 
 # =========================== box_cox_vec ===========================
 
-# Version of box_cox vectorized for lambda and gm.
-
-box_cox_vec <- Vectorize(box_cox, vectorize.args = c("x", "lambda", "gm"))
+box_cox_vec <- function(x, lambda = 1, lambda_tol = 1e-6) {
+  #
+  # Computes the Box-Cox transformation of a vector.  If lambda is very close
+  # to zero then a first order Taylor series approximation is used.
+  #
+  # Args:
+  #   x          : A numeric vector. (Non-negative) values to be Box-Cox
+  #                transformed.
+  #   lambda     : A numeric scalar.  Transformation parameter.
+  #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda.tol use
+  #                a Taylor series expansion.
+  # Returns:
+  #   A numeric vector.  The transformed value
+  #     (x^lambda - 1) / lambda
+  #
+  if (any(x < 0)) {
+    stop("Invalid x: x must be non-negative")
+  }
+  max_len <- max(length(x), length(lambda))
+  x <- rep_len(x, max_len)
+  lambda <- rep_len(lambda, max_len)
+  retval <- ifelse(abs(lambda) > lambda_tol, (x ^ lambda - 1) / lambda,
+                   ifelse(lambda == 0, log(x),
+                          ifelse(is.infinite(x),
+                                 ifelse(lambda < 0, -1 / lambda, Inf),
+                          ifelse(x == 0, ifelse(lambda > 0, -1 / lambda, -Inf),
+                                 log(x) * (1 + lambda / 2)))))
+  return(retval)
+}
 
 # ====================== box_cox_deriv ==========================
 

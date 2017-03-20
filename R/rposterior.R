@@ -521,15 +521,15 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
       }
       if (save_model == "gev") {
         wr <- 1:nrep
-        temp$data_rep <- t(rgev_vec(n = ds$m, loc = temp$sim_vals[wr, 1],
-                                    scale = temp$sim_vals[wr, 2],
-                                    shape = temp$sim_vals[wr, 3]))
+        temp$data_rep <- replicate(ds$m, rgev(nrep, loc = temp$sim_vals[wr, 1],
+                                              scale = temp$sim_vals[wr, 2],
+                                              shape = temp$sim_vals[wr, 3]))
       }
       if (save_model == "gp") {
         wr <- 1:nrep
-        temp$data_rep <- t(rgp_vec(n = ds$m, loc = thresh,
-                                   scale = temp$sim_vals[wr, 1],
-                                   shape = temp$sim_vals[wr, 2]))
+        temp$data_rep <- replicate(ds$m, rgp(nrep, loc = thresh,
+                                            scale = temp$sim_vals[wr, 1],
+                                            shape = temp$sim_vals[wr, 2]))
       }
       if (save_model == "bingp") {
         wr <- 1:nrep
@@ -690,15 +690,15 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
     }
     if (save_model == "gev") {
       wr <- 1:nrep
-      temp$data_rep <- t(rgev_vec(n = ds$m, loc = temp$sim_vals[wr, 1],
-                                  scale = temp$sim_vals[wr, 2],
-                                  shape = temp$sim_vals[wr, 3]))
+      temp$data_rep <- replicate(ds$m, rgev(nrep, loc = temp$sim_vals[wr, 1],
+                                            scale = temp$sim_vals[wr, 2],
+                                            shape = temp$sim_vals[wr, 3]))
     }
     if (save_model == "gp") {
       wr <- 1:nrep
-      temp$data_rep <- t(rgp_vec(n = ds$m, loc = thresh,
-                                 scale = temp$sim_vals[wr, 1],
-                                 shape = temp$sim_vals[wr, 2]))
+      temp$data_rep <- replicate(ds$m, rgp(nrep, loc = thresh,
+                                           scale = temp$sim_vals[wr, 1],
+                                           shape = temp$sim_vals[wr, 2]))
     }
     if (save_model == "bingp") {
       wr <- 1:nrep

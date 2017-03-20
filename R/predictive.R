@@ -85,7 +85,7 @@
 #'   Only relevant when \code{type = "i"}.
 #'
 #'   If \code{hpd = FALSE} then the interval is
-#'   equi-tailed, equal to \code{predict.evpost()} \code{object, type ="q", x = p)},
+#'   equi-tailed, equal to \code{predict.evpost(}\code{object, type ="q", x = p)},
 #'   where \code{p = c((1-level/100)/2,} \code{(1+level/100)/2)}.
 #'
 #'   If \code{hpd = TRUE} then, in addition to the equi-tailed interval,
@@ -118,12 +118,10 @@
 #'   \strong{GEV / OS / PP}.
 #'   If \code{model = "gev"}, \code{model = "os"} or \code{model = "pp"}
 #'   in the call to \code{\link{rpost}} we first calculate the number
-#'   of blocks \eqn{b} in \code{n_years} years.  Then we convert the
-#'   posterior simulated GEV parameters \eqn{(\mu, \sigma, \xi)} to
-#'   the \code{n_years} level of aggregation, that is,
-#'   \eqn{(\mu + \sigma log b, \sigma, \xi)} if \eqn{\xi = 0} and
-#'   \eqn{(\mu + \sigma (b ^ \xi - 1) / \xi, \sigma b ^ \xi, \xi)}
-#'   otherwise.
+#'   of blocks \eqn{b} in \code{n_years} years.  To calculate the density
+#'   function or distribution function of the maximum over \code{n_years}
+#'   we call \code{\link{dgev}} or \code{\link{pgev}} with \code{m} =
+#'   \eqn{b}.
 #'
 #'   \itemize{
 #'     \item{\code{type = "p"}.} We calculate using \code{\link{pgev}}
@@ -653,18 +651,14 @@ pred_dgev <- function(ev_obj, x, n_years = 100, npy = NULL, log = FALSE) {
     stop("quantiles must be a vector or a matrix with length(n_years) columns")
   }
   d <- x
-  temp <- function(x, loc_n, scale_n, shape) {
-    return(mean(dgev(x, loc = loc_n, scale = scale_n, shape = shape)))
+  temp <- function(x, loc, scale, shape, m) {
+    return(mean(dgev(x = x, loc = loc, scale = scale, shape = shape, m = m)))
   }
   for (i in 1:n_y) {
-    # Convert the GEV location and scale parameters from the input time period
-    # (block size) to a period of n_years.
-    loc_n <- loc + scale * box_cox_vec(x = mult[i], lambda = shape)
-    scale_n <- scale * mult[i] ^ shape
     # Calculate the GEV pdf at x for each combination of (loc, scale, shape)
     # in the posterior sample, and take the mean.
-    d[, i] <- sapply(x[, i], temp, loc_n = loc_n, scale_n = scale_n,
-                     shape = shape)
+    d[, i] <- sapply(x[, i], temp, loc = loc, scale = scale, shape = shape,
+                     m = mult[i])
   }
   if (log) {
     d <- log(d)
@@ -691,18 +685,14 @@ pred_pgev <- function(ev_obj, q, n_years = 100, npy = NULL,
     stop("quantiles must be a vector or a matrix with length(n_years) columns")
   }
   p <- q
-  temp <- function(q, loc_n, scale_n, shape) {
-    return(mean(pgev(q, loc = loc_n, scale = scale_n, shape = shape)))
+  temp <- function(q, loc, scale, shape, m) {
+    return(mean(pgev(q = q, loc = loc, scale = scale, shape = shape, m = m)))
   }
   for (i in 1:n_y) {
-    # Convert the GEV location and scale parameters from the input time period
-    # (block size) to a period of n_years.
-    loc_n <- loc + scale * box_cox_vec(x = mult[i], lambda = shape)
-    scale_n <- scale * mult[i] ^ shape
     # Calculate the GEV cdf at q for each combination of (loc, scale, shape)
     # in the posterior sample, and take the mean.
-    p[, i] <- sapply(q[, i], temp, loc_n = loc_n, scale_n = scale_n,
-                     shape = shape)
+    p[, i] <- sapply(q[, i], temp, loc = loc, scale = scale, shape = shape,
+                     m = mult[i])
   }
   if (!lower_tail) {
     p <- 1 - p
@@ -740,22 +730,18 @@ pred_qgev <- function(ev_obj, p, n_years = 100, npy = NULL,
   }
   if (!ok_init_q) {
     init_q <- matrix(NA, nrow = n_p, ncol = n_y)
-    temp <- function(p, loc_n, scale_n, shape) {
-      return(mean(qgev(p, loc = loc_n, scale = scale_n, shape = shape)))
+    temp <- function(p, loc, scale, shape, m) {
+      return(mean(qgev(p = p, loc = loc, scale = scale, shape = shape, m = m)))
     }
   }
   for (i in 1:n_y) {
-    # Convert the GEV location and scale parameters from the input time period
-    # (block size) to a period of n_years.
-    loc_n <- loc + scale * box_cox_vec(x = mult[i], lambda = shape)
-    scale_n <- scale * mult[i] ^ shape
     # Calculate the GEV quantile at p for each combination of (loc, scale, shape)
     # in the posterior sample, and take the mean.
     #
     # This gives reasonable initial estimates for the predictive quantiles.
     if (!ok_init_q) {
-      init_q[, i] <- sapply(p[, i], temp, loc_n = loc_n, scale_n = scale_n,
-                            shape = shape)
+      init_q[, i] <- sapply(p[, i], temp, loc = loc, scale = scale,
+                            shape = shape, m = mult[i])
     }
     #
     logit <- function(p) log(p / (1 - p))
@@ -814,13 +800,10 @@ pred_rgev <- function(ev_obj, n_years = 100, npy = NULL) {
   n_y <- length(n_years)
   r_mat <- matrix(NA, nrow = n_sim, ncol = n_y)
   for (i in 1:n_y) {
-    # Convert the GEV location and scale parameters from the input time period
-    # (block size) to a period of n_years.
-    loc_n <- loc + scale * box_cox_vec(x = mult[i], lambda = shape)
-    scale_n <- scale * mult[i] ^ shape
     # Simulate a single observation from a GEV distribution corresponding
     # to each parameter combination in the posterior sample.
-    r_mat[, i] <- rgev_vec(n = 1, loc = loc_n, scale = scale_n, shape = shape)
+    r_mat[, i] <- rgev(n = n_sim, loc = loc, scale = scale, shape = shape,
+                       m = mult[i])
   }
   return(list(y = r_mat))
 }
@@ -1058,7 +1041,7 @@ pred_rbingp <- function(ev_obj = ev_obj, n_years = n_years, npy = npy) {
   u <- stats::runif(n_sim)
   for (i in 1:n_y) {
     x_val <- (1 - u ^ (1 / mult[i])) / p_u
-    new_mult <- box_cox_vec(x = x_val, lambda = -shape, poly_order = 1)
+    new_mult <- box_cox_vec(x = x_val, lambda = -shape)
     r_mat[, i] <- ifelse(u < p_min, NA, thresh - scale * new_mult)
   }
   return(list(y = r_mat))

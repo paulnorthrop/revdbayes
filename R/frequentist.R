@@ -756,16 +756,6 @@ gev_fish <- function(theta) {
   return(matrix(c(col1, col2, col3), 3, 3))
 }
 
-rrgev <- function (n, mu = 0, sigma = 1, xi = 0){
-  if (min(sigma) < 0) {
-    stop("sigma must be positive")
-  }
-  if (length(xi) != 1) {
-    stop("xi must be scalar")
-  }
-  return(mu - sigma * sapply(X = stats::rexp(n), FUN = box_cox, lambda = -xi))
-}
-
 #---------------------------------#
 #    PWM		      	    #
 #---------------------------------#
@@ -833,7 +823,7 @@ gev_pwm <- function(x){
     n_sim <- 100
     my_pars <- matrix(NA, ncol = 3, nrow = n_sim)
     for (i in 1:n_sim){
-      x <- rrgev(n, mu = pwm[1], sigma = pwm[2], xi = pwm[3])
+      x <- rgev(n = n, loc = pwm[1], scale = pwm[2], shape = pwm[3])
       my_pars[i, ] <- pwm_ests(x)
     }
     pwm_varcov <- stats::var(my_pars)

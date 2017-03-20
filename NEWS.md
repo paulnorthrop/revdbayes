@@ -2,7 +2,9 @@
 
 ## Bug fixes and minor improvements
 
-* The documentation for `rpost` has been corrected: previously it stated that the default for `use_noy` is `use_noy = FALSE`, which is not true.
+* The GEV functions `dgev`, `pgev`, `qgev`, `rgev` and the GP functions `dgp`, `pgp`, `qgp`, `rgp` have been rewritten to conform with the vectorised style of the standard functions for distributions, e.g. those found at `?Normal`.  This makes these functions more flexible, but also means that the user take care when calling them with vectors arguments or different lengths.
+
+* The documentation for `rpost` has been corrected: previously it stated that the default for `use_noy` is `use_noy = FALSE`, when in fact it is `use_noy = TRUE`.
 
 # revdbayes 1.1.0
 

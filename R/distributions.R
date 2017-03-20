@@ -11,16 +11,15 @@
 #' @param loc,scale,shape Numeric vectors.
 #'   Location, scale and shape parameters.
 #'   All elements of \code{scale} must be positive.
-#'   In \code{dgev}, \code{pgev} and \code{qgev} these vectors can have
-#'   length > 1, but only if \code{length(x)[dgev]}, \code{length(q)[pgev]},
-#'   or \code{length(p)[qgev]} has length one.
-#'   Then they must either have a common length or a subset of
-#'   them must have a common length with the others having length one.
-#'   Otherwise, they must have length one.
 #' @param n Numeric scalar.  The number of observations to be simulated.
+#'   If \code{length(n) > 1} then \code{length(n)} is taken to be the number
+#'   required.
 #' @param log A logical scalar.  If TRUE the log-density is returned.
 #' @param lower_tail A logical scalar.  If TRUE (default), probabilities
 #'   are P[X <= x], otherwise, P[X > x].
+#' @param m A numeric scalar.  The distribution is reparameterised by working
+#'  with the GEV(\code{loc, scale, shape}) distribution function raised to the
+#'  power \code{m}.  See \strong{Details}.
 #' @details The distribution function of a GEV distribution with parameters
 #'  \code{loc} = \eqn{\mu}, \code{scale} = \eqn{\sigma} (>0) and
 #'  \code{shape} = \eqn{\xi} is
@@ -32,7 +31,7 @@
 #'  \eqn{x >= \mu - \sigma / \xi} for \eqn{\xi > 0};
 #'  and \eqn{x} is unbounded for \eqn{\xi = 0}.
 #'  Note that if \eqn{\xi < -1} the GEV density function becomes infinite
-#'  as \eqn{x} approaches \eqn{\mu -\sigma/\xi} from below.
+#'  as \eqn{x} approaches \eqn{\mu -\sigma / \xi} from below.
 #'
 #'  If \code{lower_tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
 #'  the lower (upper) limit of the distribution is returned, which is
@@ -42,9 +41,24 @@
 #'  See
 #'  \url{https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution}
 #'  for further information.
+#'
+#'  The effect of \code{m} is to change the location, scale and shape
+#'  parameters to
+#'  \eqn{(\mu + \sigma log m, \sigma, \xi)} if \eqn{\xi = 0} and
+#'  \eqn{(\mu + \sigma (m ^ \xi - 1) / \xi, \sigma m ^ \xi, \xi)}.
+#'  For integer \code{m} we can think of this as working with the
+#'  maximum of \code{m} independent copies of the original
+#'  GEV(\code{loc, scale, shape}) variable.
 #' @return \code{dgev} gives the density function, \code{pgev} gives the
 #'   distribution function, \code{qgev} gives the quantile function,
 #'   and \code{rgev} generates random deviates.
+#'
+#'   The length of the result is determined by \code{n} for \code{rgev},
+#'   and is the maximum of the lengths of the numerical arguments for the
+#'   other functions.
+#'
+#'   The numerical arguments other than \code{n} are recycled to the length
+#'   of the result.
 #' @references Jenkinson, A. F. (1955) The frequency distribution of the
 #'   annual maximum (or minimum) of meteorological elements.
 #'   \emph{Quart. J. R. Met. Soc.}, \strong{81}, 158-171.
@@ -78,54 +92,28 @@ NULL
 
 #' @rdname gev
 #' @export
-dgev <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE) {
-  if (any(scale < 0)) {
+dgev <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE, m = 1) {
+  if (any(scale <= 0)) {
     stop("invalid scale: scale must be positive.")
   }
-  len_loc <- length(loc)
-  len_scale <- length(scale)
-  len_shape <- length(shape)
-  check_len <- c(len_loc, len_scale, len_shape)
-  if (length(unique(check_len[check_len > 1])) > 1) {
-    stop("loc, scale and shape have incompatible lengths.")
-  }
-  max_len <- max(check_len)
-  loc <- rep(loc, length.out = max_len)
-  scale <- rep(scale, length.out = max_len)
-  shape <- rep(shape, length.out = max_len)
-  len_x <- length(x)
-  if (max_len != 1 & len_x != 1) {
-    stop("If length(x) > 1 then loc, scale and shape must have length 1.")
-  }
+  max_len <- max(length(x), length(loc), length(scale), length(shape),
+                 length(m))
+  x <- rep_len(x, max_len)
+  loc <- rep_len(loc, max_len)
+  scale <- rep_len(scale, max_len)
+  shape <- rep_len(shape, max_len)
+  m <- rep_len(m, max_len)
   x <- (x - loc) / scale
-  nn <- length(x)
   xx <- 1 + shape * x
-  # co is a condition to ensure that calculations are only performed in
-  # instances where the density is positive.
-  co <- xx > 0 | is.na(xx)
-  d <- numeric(nn)
-  d[!co] <- -Inf
-  d[xx == 0 & shape < -1] <- Inf
-  d[xx == 0 & shape == -1] <- log(1 / scale)
-  x <- x[co]
-  xx <- xx[co]
-  # If shape is close to zero then base calculation on approximations that
-  # are linear in shape.
-  if (len_x == 1) {
-    shape <- shape[co]
-    d[co] <- ifelse(abs(shape) < 1e-6,
-                    -x + shape * x * (x - 2) / 2 - exp(-x + shape * x ^ 2 / 2),
-                    -(1 + 1 / shape) * log(xx) - xx ^ (-1 / shape))
-  } else {
-    if(abs(shape) < 1e-6) {
-      d[co] <- -x + shape * x * (x - 2) / 2 - exp(-x + shape * x ^ 2 / 2)
-    } else {
-      d[co] <- -(1 + 1 / shape) * log(xx) - xx ^ (-1 / shape)
-    }
-  }
-  d <- d - log(scale)
-  if (!log) {
-    d <- exp(d)
+  d <- ifelse(xx < 0, 0,
+           ifelse(xx == 0 & shape == -1, 1,
+                ifelse(xx == 0 & shape < -1, Inf,
+                     ifelse(abs(shape) > 1e-6,
+                          xx ^ (-(1 + 1 / shape)) * exp(-m * xx ^ (-1/ shape)),
+        exp(-x + shape * x * (x - 2) / 2 - m * exp(-x + shape * x ^ 2 / 2))))))
+  d <- d * m / scale
+  if (log) {
+    d <- log(d)
   }
   return(d)
 }
@@ -134,49 +122,22 @@ dgev <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE) {
 
 #' @rdname gev
 #' @export
-pgev <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
-  if (any(scale < 0)) {
+pgev <- function(q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE, m = 1) {
+  if (any(scale <= 0)) {
     stop("invalid scale: scale must be positive.")
   }
-  len_loc <- length(loc)
-  len_scale <- length(scale)
-  len_shape <- length(shape)
-  check_len <- c(len_loc, len_scale, len_shape)
-  if (length(unique(check_len[check_len > 1])) > 1) {
-    stop("loc, scale and shape have incompatible lengths.")
-  }
-  max_len <- max(check_len)
-  loc <- rep(loc, length.out = max_len)
-  scale <- rep(scale, length.out = max_len)
-  shape <- rep(shape, length.out = max_len)
-  len_q <- length(q)
-  if (max_len != 1 & len_q != 1) {
-    stop("If length(q) > 1 then loc, scale and shape must have length 1.")
-  }
+  max_len <- max(length(q), length(loc), length(scale), length(shape),
+                 length(m))
+  q <- rep_len(q, max_len)
+  loc <- rep_len(loc, max_len)
+  scale <- rep_len(scale, max_len)
+  shape <- rep_len(shape, max_len)
+  m <- rep_len(m, max_len)
   q <- (q - loc) / scale
-  nn <- length(q)
-  qq <- 1 + shape * q
-  # co is a condition to ensure that calculations are only performed in
-  # instances where the density is positive.
-  co <- qq > 0 | is.na(qq)
-  q <- q[co]
-  qq <- qq[co]
-  p <- numeric(nn)
-  # If shape is close to zero then base calculation on an approximation that
-  # is linear in shape.
-  if (len_q == 1) {
-    p[!co] <- ifelse(shape[!co] > 0, 0, 1)
-    shape <- shape[co]
-    p[co] <- ifelse(abs(shape) < 1e-6, exp(-exp(-q + shape * q ^ 2 / 2)),
-                exp(-pmax(1 + shape * q, 0) ^ (-1 / shape)))
-  } else {
-    p[!co] <- ifelse(shape > 0, 0, 1)
-    if(abs(shape) < 1e-6) {
-      p[co] <- exp(-exp(-q + shape * q ^ 2 / 2))
-    } else {
-      p[co] <- exp(-pmax(1 + shape * q, 0) ^ (-1 / shape))
-    }
-  }
+  p <- 1 + shape * q
+  p <- ifelse(abs(shape) > 1e-6 | p < 0,
+              exp(-m * pmax(p, 0) ^ (-1 / shape)),
+              exp(-m * exp(-q + shape * q ^ 2 / 2)))
   if (!lower_tail) {
     p <- 1 - p
   }
@@ -187,32 +148,25 @@ pgev <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 
 #' @rdname gev
 #' @export
-qgev <- function (p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE) {
-  if (min(scale) < 0) {
+qgev <- function (p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE, m = 1) {
+  if (any(scale <= 0)) {
     stop("invalid scale: scale must be positive.")
   }
-  len_loc <- length(loc)
-  len_scale <- length(scale)
-  len_shape <- length(shape)
-  check_len <- c(len_loc, len_scale, len_shape)
-  if (length(unique(check_len[check_len > 1])) > 1) {
-    stop("loc, scale and shape have incompatible lengths.")
+  if (any(p < 0 | p > 1)) {
+    stop("invalid p: p must be in [0,1].")
   }
-  max_len <- max(check_len)
-  loc <- rep(loc, length.out = max_len)
-  scale <- rep(scale, length.out = max_len)
-  shape <- rep(shape, length.out = max_len)
-  len_p <- length(p)
-  if (max_len != 1 & len_p != 1) {
-    stop("If length(p) > 1 then loc, scale and shape must have length 1.")
-  }
+  max_len <- max(length(p), length(loc), length(scale), length(shape),
+                 length(m))
+  p <- rep_len(p, max_len)
+  loc <- rep_len(loc, max_len)
+  scale <- rep_len(scale, max_len)
+  shape <- rep_len(shape, max_len)
+  m <- rep_len(m, max_len)
   if (!lower_tail) {
     p <- 1 - p
   }
-  xp <- -log(p)
-  # If shape is close to zero then base calculation on an approximation that
-  # is linear in shape.
-  mult <- box_cox_vec(x = xp, lambda = -shape, poly_order = 1)
+  xp <- -log(p) / m
+  mult <- box_cox_vec(x = xp, lambda = -shape)
   return(loc - scale * mult)
 }
 
@@ -220,18 +174,14 @@ qgev <- function (p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE) {
 
 #' @rdname gev
 #' @export
-rgev <- function (n, loc = 0, scale = 1, shape = 0) {
-  if (length(loc) != 1 || length(scale) != 1 || length(shape) != 1) {
-    stop("loc, scale and shape must have length one.")
-  }
-  return(qgev(stats::runif(n), loc = loc, scale = scale, shape = shape))
+rgev <- function (n, loc = 0, scale = 1, shape = 0, m = 1) {
+  max_len <- ifelse(length(n) > 1, length(n), n)
+  loc <- rep_len(loc, max_len)
+  scale <- rep_len(scale, max_len)
+  shape <- rep_len(shape, max_len)
+  m <- rep_len(m, max_len)
+  return(qgev(stats::runif(n), loc = loc, scale = scale, shape = shape, m = m))
 }
-
-# --------------------------- rgev_vec -------------------------------
-
-# Vectorized version of rgev.
-
-rgev_vec <- Vectorize(rgev, vectorize.args = c("n", "loc", "scale", "shape"))
 
 # ================================ GP functions ===============================
 
@@ -246,13 +196,9 @@ rgev_vec <- Vectorize(rgev, vectorize.args = c("n", "loc", "scale", "shape"))
 #' @param loc,scale,shape Numeric vectors.
 #'   Location, scale and shape parameters.
 #'   All elements of \code{scale} must be positive.
-#'   In \code{dgp}, \code{pgp} and \code{qgp} these vectors can have
-#'   length > 1, but only if \code{length(x)[dgp]}, \code{length(q)[pgp]},
-#'   or \code{length(p)[qgp]} has length one.
-#'   Then they must either have a common length or a subset of
-#'   them must have a common length with the others having length one.
-#'   Otherwise, they must have length one.
 #' @param n Numeric scalar.  The number of observations to be simulated.
+#'   If \code{length(n) > 1} then \code{length(n)} is taken to be the number
+#'   required.
 #' @param log A logical scalar.  If TRUE the log-density is returned.
 #' @param lower_tail A logical scalar.  If TRUE (default), probabilities
 #'   are P[X <= x], otherwise, P[X > x].
@@ -314,51 +260,24 @@ dgp <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE) {
   if (any(scale < 0)) {
     stop("invalid scale: scale must be positive.")
   }
-  len_loc <- length(loc)
-  len_scale <- length(scale)
-  len_shape <- length(shape)
-  check_len <- c(len_loc, len_scale, len_shape)
-  if (length(unique(check_len[check_len > 1])) > 1) {
-    stop("loc, scale and shape have incompatible lengths.")
-  }
-  max_len <- max(check_len)
-  loc <- rep(loc, length.out = max_len)
-  scale <- rep(scale, length.out = max_len)
-  shape <- rep(shape, length.out = max_len)
-  len_x <- length(x)
-  if (max_len != 1 & len_x != 1) {
-    stop("If length(x) > 1 then scale and shape must have length 1.")
-  }
+  max_len <- max(length(x), length(loc), length(scale), length(shape))
+  x <- rep_len(x, max_len)
+  loc <- rep_len(loc, max_len)
+  scale <- rep_len(scale, max_len)
+  shape <- rep_len(shape, max_len)
   x <- (x - loc) / scale
-  nn <- length(x)
   xx <- 1 + shape * x
-  # co is a condition to ensure that calculations are only performed in
-  # instances where the density is positive.
-  co <- (x >= 0 & xx > 0) | is.na(xx)
-  d <- numeric(nn)
-  d[!co] <- -Inf
-  d[xx == 0 & shape < -1] <- Inf
-  d[xx == 0 & shape == -1] <- log(1 / scale)
-  x <- x[co]
-  xx <- xx[co]
-  # If shape is close to zero then base calculation on approximations that
-  # are linear in shape.
-  if (len_x == 1) {
-    shape <- shape[co]
-    d[co] <- ifelse(abs(shape) < 1e-6, -x + shape * x * (x - 2) / 2,
-                    -(1 + 1 / shape) * log(xx))
-  } else {
-    if(abs(shape) < 1e-6) {
-      d[co] <- -x + shape * x * (x - 2) / 2
-    } else {
-      d[co] <- -(1 + 1 / shape) * log(xx)
-    }
+  x <- ifelse(x < 0 | xx < 0, 0,
+              ifelse(xx == 0 & shape == -1, 1,
+                     ifelse(xx == 0 & shape < -1, Inf,
+                            ifelse(abs(shape) > 1e-6,
+                                   xx ^ (-(1 + 1 / shape)),
+                                   exp(-x + shape * x * (x - 2) / 2)))))
+  x <- x / scale
+  if (log) {
+    x <- log(x)
   }
-  d <- d - log(scale)
-  if (!log) {
-    d <- exp(d)
-  }
-  return(d)
+  return(x)
 }
 
 # ----------------------------- pgp ---------------------------------
@@ -369,44 +288,17 @@ pgp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
   if (any(scale < 0)) {
     stop("invalid scale: scale must be positive.")
   }
-  len_loc <- length(loc)
-  len_scale <- length(scale)
-  len_shape <- length(shape)
-  check_len <- c(len_loc, len_scale, len_shape)
-  if (length(unique(check_len[check_len > 1])) > 1) {
-    stop("loc, scale and shape have incompatible lengths.")
-  }
-  max_len <- max(check_len)
-  loc <- rep(loc, length.out = max_len)
-  scale <- rep(scale, length.out = max_len)
-  shape <- rep(shape, length.out = max_len)
-  len_q <- length(q)
-  if (max_len != 1 & len_q != 1) {
-    stop("If length(q) > 1 then scale and shape must have length 1.")
-  }
+
+  max_len <- max(length(q), length(loc), length(scale), length(shape))
+  q <- rep_len(q, max_len)
+  loc <- rep_len(loc, max_len)
+  scale <- rep_len(scale, max_len)
+  shape <- rep_len(shape, max_len)
   q <- pmax(q - loc, 0) / scale
-  nn <- length(q)
-  qq <- 1 + shape * q
-  # co is a condition to ensure that calculations are only performed in
-  # instances where the density is positive.
-  co <- qq > 0 | is.na(qq)
-  q <- q[co]
-  qq <- qq[co]
-  p <- numeric(nn)
-  p[!co] <- 1
-  # If shape is close to zero then base calculation on an approximation that
-  # is linear in shape.
-  if (len_q == 1) {
-    shape <- shape[co]
-    p[co] <- ifelse(abs(shape) < 1e-6, 1 - exp(-q + shape * q ^ 2 / 2),
-                    1 - pmax(1 + shape * q, 0) ^ (-1 / shape))
-  } else {
-    if(abs(shape) < 1e-6) {
-      p[co] <- 1 - exp(-q + shape * q ^ 2 / 2)
-    } else {
-      p[co] <- 1 - pmax(1 + shape * q, 0) ^ (-1 / shape)
-    }
-  }
+  p <- 1 + shape * q
+  p <- ifelse(abs(shape) > 1e-6 | p < 0,
+              1 - pmax(p, 0) ^ (-1 / shape),
+              1 - exp(-q + shape * q ^ 2 / 2))
   if (!lower_tail) {
     p <- 1 - p
   }
@@ -421,52 +313,32 @@ qgp <- function (p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE) {
   if (any(scale < 0)) {
     stop("invalid scale: scale must be positive.")
   }
-  len_loc <- length(loc)
-  len_scale <- length(scale)
-  len_shape <- length(shape)
-  check_len <- c(len_loc, len_scale, len_shape)
-  if (length(unique(check_len[check_len > 1])) > 1) {
-    stop("loc, scale and shape have incompatible lengths.")
+  if (any(p < 0 | p > 1)) {
+    stop("invalid p: p must be in [0,1].")
   }
-  max_len <- max(check_len)
-  loc <- rep(loc, length.out = max_len)
-  scale <- rep(scale, length.out = max_len)
-  shape <- rep(shape, length.out = max_len)
-  len_p <- length(p)
-  if (max_len != 1 & len_p != 1) {
-    stop("If length(p) > 1 then scale and shape must have length 1.")
-  }
+  max_len <- max(length(p), length(loc), length(scale), length(shape))
+  p <- rep_len(p, max_len)
+  loc <- rep_len(loc, max_len)
+  scale <- rep_len(scale, max_len)
+  shape <- rep_len(shape, max_len)
   if (!lower_tail) {
     p <- 1 - p
   }
-  # If shape is close to zero then base calculation on an approximation that
-  # is linear in shape.
-  mult <- box_cox_vec(x = 1 - p, lambda = -shape, poly_order = 1)
+  mult <- box_cox_vec(x = 1 - p, lambda = -shape)
   return(loc - scale * mult)
 }
-
-# --------------------------- qgp_vec -------------------------------
-
-# Vectorized version of qgp.
-
-  qgp_vec <- Vectorize(qgp, vectorize.args = c("p", "loc", "scale", "shape"))
 
 # ----------------------------- rgp ---------------------------------
 
 #' @rdname gp
 #' @export
 rgp <- function (n, loc = 0, scale = 1, shape = 0) {
-  if (length(loc) != 1 || length(scale) != 1 || length(shape) != 1) {
-    stop("loc, scale and shape must have length one.")
-  }
+  max_len <- ifelse(length(n) > 1, length(n), n)
+  loc <- rep_len(loc, max_len)
+  scale <- rep_len(scale, max_len)
+  shape <- rep_len(shape, max_len)
   return(qgp(stats::runif(n), loc = loc, scale = scale, shape = shape))
 }
-
-# --------------------------- rgp_vec -------------------------------
-
-# Vectorized version of rgp.
-
-rgp_vec <- Vectorize(rgp, vectorize.args = c("n", "scale", "shape"))
 
 # =========================== binomial-GP functions ============================
 
@@ -484,11 +356,6 @@ dbingp <- function(x, p_u = 0.5 , loc = 0, scale = 1, shape = 0, log = FALSE) {
   #   shape : Numeric vector of GP shape parameters.
   #   log   : A logical scalar.  If TRUE the log-density is returned.
   #
-  #   All elements of scale must be positive. These vectors can have
-  #   length > 1, but only if x has length one.  Then they must either have
-  #   a common length or a subset of them must have a common length with the
-  #   others having length one. Otherwise, they must have length one.
-  #
   if (any(x < loc)) {
     stop("Invalid x: no element of  can be less than loc.")
   }
@@ -497,23 +364,6 @@ dbingp <- function(x, p_u = 0.5 , loc = 0, scale = 1, shape = 0, log = FALSE) {
   }
   if (any(p_u <= 0) || any(p_u >= 1)) {
     stop("invalid p_u: p_u must be in (0,1).")
-  }
-  len_p_u <- length(p_u)
-  len_loc <- length(loc)
-  len_scale <- length(scale)
-  len_shape <- length(shape)
-  check_len <- c(len_p_u, len_loc, len_scale, len_shape)
-  if (length(unique(check_len[check_len > 1])) > 1) {
-    stop("p_u, loc, scale and shape have incompatible lengths.")
-  }
-  max_len <- max(check_len)
-  p_u <- rep(p_u, length.out = max_len)
-  loc <- rep(loc, length.out = max_len)
-  scale <- rep(scale, length.out = max_len)
-  shape <- rep(shape, length.out = max_len)
-  len_x <- length(x)
-  if (max_len != 1 & len_x != 1) {
-    stop("If length(x) > 1 then scale and shape must have length 1.")
   }
   d <- dgp(x = x, loc = loc, scale = scale, shape = shape, log = TRUE) +
     log(p_u)
@@ -541,11 +391,6 @@ pbingp <- function(q, p_u = 0.5 , loc = 0, scale = 1, shape = 0,
   #   lower_tail : A logical scalar.  If TRUE (default), probabilities
   #                are P[X <= x], otherwise, P[X > x].
   #
-  #   All elements of scale must be positive. These vectors can have
-  #   length > 1, but only if q has length one.  Then they must either have
-  #   a common length or a subset of them must have a common length with the
-  #   others having length one. Otherwise, they must have length one.
-  #
   if (any(q < loc)) {
     stop("Invalid q: no element of q can be less than loc.")
   }
@@ -554,23 +399,6 @@ pbingp <- function(q, p_u = 0.5 , loc = 0, scale = 1, shape = 0,
   }
   if (any(p_u <= 0) || any(p_u >= 1)) {
     stop("invalid p_u: p_u must be in (0,1).")
-  }
-  len_p_u <- length(p_u)
-  len_loc <- length(loc)
-  len_scale <- length(scale)
-  len_shape <- length(shape)
-  check_len <- c(len_p_u, len_loc, len_scale, len_shape)
-  if (length(unique(check_len[check_len > 1])) > 1) {
-    stop("p_u, loc, scale and shape have incompatible lengths.")
-  }
-  max_len <- max(check_len)
-  p_u <- rep(p_u, length.out = max_len)
-  loc <- rep(loc, length.out = max_len)
-  scale <- rep(scale, length.out = max_len)
-  shape <- rep(shape, length.out = max_len)
-  len_q <- length(q)
-  if (max_len != 1 & len_q != 1) {
-    stop("If length(q) > 1 then scale and shape must have length 1.")
   }
   p <- 1 - p_u * pgp(q = q, loc = loc, scale = scale, shape = shape,
                      lower_tail = FALSE)
@@ -598,11 +426,6 @@ qbingp <- function(p, p_u = 0.5, loc = 0, scale = 1, shape = 0,
   #   lower_tail : A logical scalar.  If TRUE (default), probabilities
   #                are P[X <= x], otherwise, P[X > x].
   #
-  #   All elements of scale must be positive. These vectors can have
-  #   length > 1, but only if p has length one.  Then they must either have
-  #   a common length or a subset of them must have a common length with the
-  #   others having length one. Otherwise, they must have length one.
-  #
   if (!lower_tail) {
     p <- 1 - p
   }
@@ -620,24 +443,7 @@ qbingp <- function(p, p_u = 0.5, loc = 0, scale = 1, shape = 0,
   if (any(p_u <= 0) || any(p_u > 1)) {
     stop("invalid p_u: p_u must be in (0,1].")
   }
-  len_p_u <- length(p_u)
-  len_loc <- length(loc)
-  len_scale <- length(scale)
-  len_shape <- length(shape)
-  check_len <- c(len_p_u, len_loc, len_scale, len_shape)
-  if (length(unique(check_len[check_len > 1])) > 1) {
-    stop("p_u, loc, scale and shape have incompatible lengths.")
-  }
-  max_len <- max(check_len)
-  p_u <- rep(p_u, length.out = max_len)
-  loc <- rep(loc, length.out = max_len)
-  scale <- rep(scale, length.out = max_len)
-  shape <- rep(shape, length.out = max_len)
-  len_p <- length(p)
-  if (max_len != 1 & len_p != 1) {
-    stop("If length(p) > 1 then p_u, loc, scale and shape must have length 1.")
-  }
   pnew <- 1 - (1 - p) / p_u
-  q <- qgp_vec(p = pnew, loc = loc, scale = scale, shape = shape)
+  q <- qgp(p = pnew, loc = loc, scale = scale, shape = shape)
   return(q)
 }
