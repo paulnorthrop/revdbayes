@@ -6,6 +6,8 @@
 
 * The documentation for `rpost` has been corrected: previously it stated that the default for `use_noy` is `use_noy = FALSE`, when in fact it is `use_noy = TRUE`.
 
+* Bug fixed in `plot.evpost` : previously, in the `d = 2` case, providing the graphical parameter `col` produced an error because `col = 8` was hard-coded in a call to `points`. Now the extra argument `points_par` enables the user to provide a list of arguments to `points`.
+
 # revdbayes 1.1.0
 
 ## New features

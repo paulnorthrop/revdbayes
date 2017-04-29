@@ -111,8 +111,8 @@
 plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
                         prob = c(0.5, 0.1, 0.25, 0.75, 0.95, 0.99),
                         ru_scale = FALSE, rows = NULL, xlabs = NULL,
-                        ylabs = NULL, pu_only = FALSE, add_pu = FALSE,
-                        use_bayesplot = FALSE,
+                        ylabs = NULL, points_par = list(col = 8),
+                        pu_only = FALSE, add_pu = FALSE, use_bayesplot = FALSE,
                         fun_name = c("areas", "intervals", "dens", "hist")) {
   if (!inherits(x, "evpost")) {
     stop("use only with \"evpost\" objects")
@@ -220,7 +220,8 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     #
     graphics::contour(xx, yy, zz, levels = con.levs, add = FALSE, ann = FALSE,
       labels = prob * 100, ...)
-    graphics::points(plot_data, col = 8, ...)
+#    graphics::points(plot_data, col = 8, ...)
+    do.call(graphics::points, c(list(x = plot_data), points_par))
     graphics::contour(xx, yy, zz, levels = con.levs, add = TRUE, ann = TRUE,
       labels = prob * 100, ...)
     temp <- list(...)
@@ -240,12 +241,19 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
       rows <- x$d -2
     }
     cols <- ceiling(choose(x$d, 2) / rows)
-    temp <- list(...)
     if (is.null(xlabs)) {
-      xlabs <- colnames(plot_data)
+      if (!is.null(colnames(plot_data))) {
+        xlabs <- colnames(plot_data)
+      } else {
+        xlabs <- rep(NA, x$d)
+      }
     }
     if (is.null(ylabs)) {
-      ylabs <- colnames(plot_data)
+      if (!is.null(colnames(plot_data))) {
+        ylabs <- colnames(plot_data)
+      } else {
+        ylabs <- rep(NA, x$d)
+      }
     }
     def.par <- graphics::par(no.readonly = TRUE)
     graphics::par(mfrow = c(rows, cols))
