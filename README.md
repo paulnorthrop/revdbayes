@@ -1,7 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-revdbayes: Ratio-of-uniforms Sampling for Bayesian Extreme Value Analysis
--------------------------------------------------------------------------
+revdbayes <img src="revdbayes_logo.png" height = "200" align="right" />
+=======================================================================
+
+Ratio-of-uniforms Sampling for Bayesian Extreme Value Analysis
+--------------------------------------------------------------
 
 ### What does revdbayes do?
 
