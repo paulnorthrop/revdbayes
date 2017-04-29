@@ -3,7 +3,8 @@
 revdbayes <img src="revdbayes_logo.png" height = "150" align="right" />
 =======================================================================
 
-### Ratio-of-uniforms Sampling for Bayesian Extreme Value Analysis
+Ratio-of-uniforms Sampling for Bayesian Extreme Value Analysis
+--------------------------------------------------------------
 
 ### What does revdbayes do?
 
