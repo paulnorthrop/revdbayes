@@ -402,6 +402,20 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
 
 # ------------------------------ specific GEV priors ------------------------- #
 
+#' Trivariate normal prior for GEV parameters
+#'
+#' For information about this and other priors see \code{\link{set_prior}}.
+#'
+#' @param pars A numeric vector of length 3.
+#'   GEV parameters (\eqn{log \mu, log \sigma, \xi}).
+#' @param mean A numeric vector of length 3.  Prior mean.
+#' @param icov A 3x3 numeric matrix.
+#'   The inverse of the prior covariance matrix.
+#' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
+#' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
+#' @param trendsd  Has no function other other to achieve compatability with
+#'   function in the evdbayes package.
+#' @export
 gev_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
                      trendsd = 0) {
   if (pars[2] <= 0 | pars[3] < min_xi | pars[3] > max_xi) {
