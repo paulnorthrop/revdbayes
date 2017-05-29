@@ -295,6 +295,20 @@ gp_prior <- function(prior = c("norm", "mdi", "flat", "flatflat", "jeffreys",
 
 # ------------------------------ specific GP priors -------------------------- #
 
+#' Bivariate normal prior for GP parameters (\eqn{log \sigma, \xi})
+#'
+#' For information about this and other priors see \code{\link{set_prior}}.
+#'
+#' @param pars A numeric vector of length 2.
+#'   GP parameters (\eqn{\sigma, \xi}).
+#' @param mean A numeric vector of length 2.  Prior mean.
+#' @param icov A 2x2 numeric matrix.
+#'   The inverse of the prior covariance matrix.
+#' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
+#' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
+#' @param trendsd  Has no function other other to achieve compatability with
+#'   function in the evdbayes package.
+#' @export
 gp_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
                     trendsd = 0) {
   if (pars[1] <= 0 | pars[2] < min_xi | pars[2] > max_xi) {
@@ -307,6 +321,21 @@ gp_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
   return(-ld / 2 - pars[1])
 }
 
+#' Maximal data information (MDI) prior for GP parameters
+#' (\eqn{\sigma, \xi})
+#'
+#' For information about this and other priors see \code{\link{set_prior}}.
+#'
+#' @param pars A numeric vector of length 3.
+#'   GP parameters (\eqn{\sigma, \xi}).
+#' @param a A numeric scalar.  The default value, Euler's constant, gives the
+#'   MDI prior.
+#' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
+#'   Must not be \code{-Inf} because this results in an improper posterior.
+#' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
+#' @param trendsd  Has no function other other to achieve compatability with
+#'   function in the evdbayes package.
+#' @export
 gp_mdi <- function(pars, a = 1, min_xi = -1, max_xi = Inf, trendsd = 0) {
   if (pars[1] <= 0 | pars[2] < min_xi | pars[2] > max_xi) {
     return(-Inf)
@@ -314,6 +343,18 @@ gp_mdi <- function(pars, a = 1, min_xi = -1, max_xi = Inf, trendsd = 0) {
   return(-log(pars[1]) - a * pars[2])
 }
 
+#' Flat prior for GP parameters (\eqn{log \sigma, \xi})
+#'
+#' For information about this and other priors see \code{\link{set_prior}}.
+#'
+#' @param pars A numeric vector of length 2.
+#'   GP parameters (\eqn{\sigma, \xi}).
+#' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
+#'   Must not be \code{-Inf} because this results in an improper posterior.
+#' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
+#' @param trendsd  Has no function other other to achieve compatability with
+#'   function in the evdbayes package.
+#' @export
 gp_flat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
   if (pars[1] <= 0 | pars[2] < min_xi | pars[2] > max_xi) {
     return(-Inf)
@@ -321,6 +362,18 @@ gp_flat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
   return(-log(pars[1]))
 }
 
+#' Flat prior for GP parameters (\eqn{\sigma, \xi})
+#'
+#' For information about this and other priors see \code{\link{set_prior}}.
+#'
+#' @param pars A numeric vector of length 2.
+#'   GP parameters (\eqn{\sigma, \xi}).
+#' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
+#'   Must not be \code{-Inf} because this results in an improper posterior.
+#' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
+#' @param trendsd  Has no function other other to achieve compatability with
+#'   function in the evdbayes package.
+#' @export
 gp_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
   if (pars[1] <= 0 | pars[2] < min_xi | pars[2] > max_xi) {
     return(-Inf)
@@ -328,6 +381,18 @@ gp_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
   return(1)
 }
 
+#' Jeffreys prior for GP parameters (\eqn{\sigma, \xi})
+#'
+#' For information about this and other priors see \code{\link{set_prior}}.
+#'
+#' @param pars A numeric vector of length 2.
+#'   GP parameters (\eqn{\sigma, \xi}).
+#' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
+#'   Must not be \code{-Inf} because this results in an improper posterior.
+#' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
+#' @param trendsd  Has no function other other to achieve compatability with
+#'   function in the evdbayes package.
+#' @export
 gp_jeffreys <- function(pars, min_xi = -1/2, max_xi = Inf, trendsd = 0) {
   if (pars[1] <= 0 | pars[2] < min_xi | pars[2] > max_xi) {
     return(-Inf)
@@ -335,6 +400,19 @@ gp_jeffreys <- function(pars, min_xi = -1/2, max_xi = Inf, trendsd = 0) {
   return(-log(pars[1]) - log(1 + pars[2]) - log(1 + 2 * pars[2]) / 2)
 }
 
+#' Beta-type prior for GP shape parameter \eqn{\xi}
+#'
+#' For information about this and other priors see \code{\link{set_prior}}.
+#'
+#' @param pars A numeric vector of length 2.
+#'   GP parameters (\eqn{\sigma, \xi}).
+#' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
+#' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
+#' @param pg A numeric vector of length 2.
+#'   See \code{\link{set_prior}} for details.
+#' @param trendsd  Has no function other other to achieve compatability with
+#'   function in the evdbayes package.
+#' @export
 gp_beta <- function(pars, min_xi = -1 / 2, max_xi = 1 / 2, pq = c(6, 9),
                     trendsd = 0) {
   if (pars[1] <= 0 | pars[2] < min_xi | pars[2] > max_xi) {
@@ -407,7 +485,7 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
 #' For information about this and other priors see \code{\link{set_prior}}.
 #'
 #' @param pars A numeric vector of length 3.
-#'   (Transformed) GEV parameters (\eqn{\mu, log \sigma, \xi}).
+#'   GEV parameters (\eqn{\mu, \sigma, \xi}).
 #' @param mean A numeric vector of length 3.  Prior mean.
 #' @param icov A 3x3 numeric matrix.
 #'   The inverse of the prior covariance matrix.
@@ -434,7 +512,7 @@ gev_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
 #' For information about this and other priors see \code{\link{set_prior}}.
 #'
 #' @param pars A numeric vector of length 3.
-#'   (Transformed) GEV parameters (\eqn{log \mu, log \sigma, \xi}).
+#'   GEV parameters (\eqn{\mu, \sigma, \xi}).
 #' @param mean A numeric vector of length 3.  Prior mean.
 #' @param icov A 3x3 numeric matrix.
 #'   The inverse of the prior covariance matrix.
@@ -518,7 +596,7 @@ gev_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
   return(1)
 }
 
-#' Beta-type prior for GEV parameter \eqn{\xi}
+#' Beta-type prior for GEV shape parameter \eqn{\xi}
 #'
 #' For information about this and other priors see \code{\link{set_prior}}.
 #'
