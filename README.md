@@ -1,7 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-revdbayes <img src="revdbayes_logo.png" height = "150" align="right" />
-=======================================================================
+revdbayes <img src="tools/revdbayes_logo.png" height = "150" align="right" />
+=============================================================================
+
+[![Travis-CI Build Status](https://travis-ci.org/paulnorthrop/revdbayes.svg?branch=master)](https://travis-ci.org/paulnorthrop/revdbayes) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/revdbayes)](https://cran.r-project.org/package=revdbayes)
 
 ### Ratio-of-uniforms Sampling for Bayesian Extreme Value Analysis
 
