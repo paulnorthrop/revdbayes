@@ -8,7 +8,7 @@ gev_norm(pars, mean, icov, min_xi = -Inf, max_xi = Inf, trendsd = 0)
 }
 \arguments{
 \item{pars}{A numeric vector of length 3.
-(Transformed) GEV parameters (\eqn{\mu, log \sigma, \xi}).}
+GEV parameters (\eqn{\mu, \sigma, \xi}).}
 
 \item{mean}{A numeric vector of length 3.  Prior mean.}
 

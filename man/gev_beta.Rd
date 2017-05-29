@@ -2,7 +2,7 @@
 % Please edit documentation in R/priors.R
 \name{gev_beta}
 \alias{gev_beta}
-\title{Beta-type prior for GEV parameter \eqn{\xi}}
+\title{Beta-type prior for GEV shape parameter \eqn{\xi}}
 \usage{
 gev_beta(pars, min_xi = -1/2, max_xi = 1/2, pq = c(6, 9), trendsd = 0)
 }
