@@ -8,6 +8,10 @@
 
 * Bug fixed in `plot.evpost` : previously, in the `d = 2` case, providing the graphical parameter `col` produced an error because `col = 8` was hard-coded in a call to `points`. Now the extra argument `points_par` enables the user to provide a list of arguments to `points`.
 
+* All the prior functions described in the documentation of `set_prior` are now exported.  This means that they can now be used in the function `posterior` in the `evdbayes` package.
+
+* Unnecessary dependence on package `devtools` via Suggests is removed.
+
 # revdbayes 1.1.0
 
 ## New features
