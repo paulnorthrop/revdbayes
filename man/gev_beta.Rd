@@ -14,11 +14,11 @@ GEV parameters (\eqn{\mu, \sigma, \xi}).}
 
 \item{max_xi}{A numeric scalar.  Prior upper bound on \eqn{\xi}.}
 
+\item{pq}{A numeric vector of length 2.
+See \code{\link{set_prior}} for details.}
+
 \item{trendsd}{Has no function other other to achieve compatability with
 function in the evdbayes package.}
-
-\item{pg}{A numeric vector of length 2.
-See \code{\link{set_prior}} for details.}
 }
 \description{
 For information about this and other priors see \code{\link{set_prior}}.

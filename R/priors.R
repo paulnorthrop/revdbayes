@@ -408,7 +408,7 @@ gp_jeffreys <- function(pars, min_xi = -1/2, max_xi = Inf, trendsd = 0) {
 #'   GP parameters (\eqn{\sigma, \xi}).
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param pg A numeric vector of length 2.
+#' @param pq A numeric vector of length 2.
 #'   See \code{\link{set_prior}} for details.
 #' @param trendsd  Has no function other other to achieve compatability with
 #'   function in the evdbayes package.
@@ -604,7 +604,7 @@ gev_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
 #'   GEV parameters (\eqn{\mu, \sigma, \xi}).
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param pg A numeric vector of length 2.
+#' @param pq A numeric vector of length 2.
 #'   See \code{\link{set_prior}} for details.
 #' @param trendsd  Has no function other other to achieve compatability with
 #'   function in the evdbayes package.
