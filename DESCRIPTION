@@ -24,7 +24,6 @@ Depends:
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
-    devtools,
     evdbayes,
     ggplot2 (>= 2.2.1)
 VignetteBuilder: knitr

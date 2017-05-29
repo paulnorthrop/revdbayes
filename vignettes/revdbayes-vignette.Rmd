@@ -95,10 +95,6 @@ problems.
 The computations in the following sections were performed using a notebook 
 containing a 3.0GHz Intel processor and 8GB RAM.
 
-```{r setup, include=FALSE}
-devtools::load_all() 
-```
-
 ```{r}
 library(revdbayes)
 library(evdbayes)
