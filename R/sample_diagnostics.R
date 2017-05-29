@@ -38,6 +38,9 @@
 #' @param xlabs,ylabs Numeric vectors.  When \code{d} > 2 these set the labels
 #'   on the x and y axes respectively.  If the user doesn't provide these then
 #'   the column names of the simulated data matrix to be plotted are used.
+#' @param points_par A list of arguments to pass to
+#'   \code{\link[graphics]{points}} to control the appearance of points
+#'   depicting the simulated values. Only relevant when \code{d = 2}.
 #' @param pu_only Only produce a plot relating to the posterior distribution
 #'   for the threshold exceedance probability \eqn{p}. Only relevant when
 #'   \code{model == "bingp"} was used in the call to \code{rpost}.
