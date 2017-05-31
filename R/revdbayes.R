@@ -45,6 +45,8 @@
 #' @importFrom bayesplot mcmc_intervals
 #' @importFrom bayesplot mcmc_dens
 #' @importFrom bayesplot mcmc_hist
+#' @useDynLib revdbayes
+#' @importFrom Rcpp sourceCpp
 NULL
 
 #' Annual Maximum Sea Levels at Port Pirie, South Australia

@@ -16,7 +16,8 @@ Imports: stats,
     methods,
     utils,
     rust (>= 1.1.0),
-    bayesplot (>= 1.1.0)
+    bayesplot (>= 1.1.0),
+    Rcpp
 License: GPL (>= 2)
 LazyData: TRUE
 Depends:
@@ -29,3 +30,4 @@ Suggests: knitr,
 VignetteBuilder: knitr
 URL: http://github.com/paulnorthrop/revdbayes
 BugReports: http://github.com/paulnorthrop/revdbayes/issues
+LinkingTo: Rcpp (>= 0.12.10), RcppArmadillo 

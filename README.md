@@ -3,7 +3,7 @@
 revdbayes <img src="tools/revdbayes_logo.png" height = "150" align="right" />
 =============================================================================
 
-[![Travis-CI Build Status](https://travis-ci.org/paulnorthrop/revdbayes.svg?branch=master)](https://travis-ci.org/paulnorthrop/revdbayes) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/revdbayes)](https://cran.r-project.org/package=revdbayes)
+[![Travis-CI Build Status](https://travis-ci.org/paulnorthrop/revdbayes.svg?branch=master)](https://travis-ci.org/paulnorthrop/revdbayes) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/revdbayes?branch=master&svg=true)](https://ci.appveyor.com/project/paulnorthrop/revdbayes) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/revdbayes)](https://cran.r-project.org/package=revdbayes)
 
 ### Ratio-of-uniforms Sampling for Bayesian Extreme Value Analysis
 

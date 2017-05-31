@@ -1,11 +1,12 @@
-## Resubmission
-This is a resubmission.  In this version I have corrected the invalid URLs.
-
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
 
+## Test environments
+
+- ubuntu 12.04 (on travis-ci), R 3.3.3
+- win-builder (devel and release)
+
 ## Downstream dependencies
 
-I have also run R CMD on downstream dependencies of revdbayes.
-All packages passed.
+Currently revdbayes has no downstream dependencies.
