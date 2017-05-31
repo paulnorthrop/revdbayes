@@ -40,10 +40,6 @@ for uncertainty owing to the variability of future observations.
 We illustrate the code used to perform these two tasks using the 
 `portpirie` and `gom` datasets that feature in the vignette [Introducing revdbayes](revdbayes-vignette.html).
 
-```{r setup, include=FALSE}
-devtools::load_all() 
-```
-
 ```{r}
 # Set the number of posterior samples required.
 n <- 1000

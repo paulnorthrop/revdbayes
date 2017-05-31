@@ -1,9 +1,6 @@
 ## ---- include = FALSE----------------------------------------------------
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 
-## ----setup, include=FALSE------------------------------------------------
-devtools::load_all() 
-
 ## ------------------------------------------------------------------------
 # Set the number of posterior samples required.
 n <- 1000
