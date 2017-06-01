@@ -1,6 +1,16 @@
 # revdbayes 1.1.0.9000
 
+## New features
+
+* Faster computation, owing to the use of packages Rcpp and RcppArmadillo in package rust (https://CRAN.R-project.org/package=rust).
+
+* New function: `rpost_rcpp`.  
+
+* New vignette. "`rpost` vs. `rpost_rcpp`".
+
 ## Bug fixes and minor improvements
+
+* The list returned from `set_prior` now contains default values for all the required arguments of a given in-built prior, if these haven't been specified by the user.  This simplifies the evaluation of prior densities using C++.
 
 * The GEV functions `dgev`, `pgev`, `qgev`, `rgev` and the GP functions `dgp`, `pgp`, `qgp`, `rgp` have been rewritten to conform with the vectorised style of the standard functions for distributions, e.g. those found at `?Normal`.  This makes these functions more flexible, but also means that the user take care when calling them with vectors arguments or different lengths.
 

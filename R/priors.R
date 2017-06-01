@@ -49,7 +49,7 @@
 #'   parameter of the GP distribution by \eqn{\sigma}, whereas we use
 #'   \eqn{\sigma_u} in the revdbayes vignette.
 #'
-#'   For all in-bulit priors the arguments \code{min_xi} and \code{max_xi} may
+#'   For all in-built priors the arguments \code{min_xi} and \code{max_xi} may
 #'   be supplied by the user.  The prior density is set to zero for any value
 #'   of the shape parameter \eqn{\xi} that is outside
 #'   (\code{min_xi}, \code{max_xi}).  This will override the default values
@@ -238,6 +238,18 @@ gp_prior <- function(prior = c("norm", "mdi", "flat", "flatflat", "jeffreys",
                                "beta"), ...) {
   prior <- match.arg(prior)
   temp <- list(prior = paste("gp_", prior, sep=""), ...)
+  # For v1.2.0 ...
+  # ... force min_xi and max_xi to be present in the list temp.
+  temp$min_xi <- max(temp$min_xi, -Inf)
+  temp$max_xi <- min(temp$max_xi, Inf)
+  # ... add default value for a in MDI prior if it isn't present.
+  if (prior == "mdi" & is.null(temp$a)) {
+    temp$a <- 1
+  }
+  # ... add default value for pq in beta-type prior if it isn't present.
+  if (prior == "beta" & is.null(temp$pq)) {
+    temp$pq = c(6, 9)
+  }
   # Check for unused hyperparameter names and drop them
   hpar_vec <- switch(prior, norm = c("mean", "cov"), mdi = "a",
                      flat = NULL, jeffreys = NULL, beta = "pq")
@@ -428,6 +440,18 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
                               "beta"), ...) {
   prior <- match.arg(prior)
   temp <- list(prior = paste("gev_", prior, sep=""), ...)
+  # For v1.2.0 ...
+  # ... force min_xi and max_xi to be present in the list temp.
+  temp$min_xi <- max(temp$min_xi, -Inf)
+  temp$max_xi <- min(temp$max_xi, Inf)
+  # ... add default value for a in MDI prior if it isn't present.
+  if (prior == "mdi" & is.null(temp$a)) {
+    temp$a <- 0.5772156649015323
+  }
+  # ... add default value for pq in beta-type prior if it isn't present.
+  if (prior == "beta" & is.null(temp$pq)) {
+    temp$pq = c(6, 9)
+  }
   # Check for unused hyperparameter names and drop them
   hpar_vec <- switch(prior, norm = c("mean", "cov"), mdi = "a",
                       flat = NULL, beta = "pq")

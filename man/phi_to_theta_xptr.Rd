@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{phi_to_theta_xptr}
 \alias{phi_to_theta_xptr}
-\title{Create external pointer to a C++ function for phi_to_theta}
+\title{Create external pointer to a C++ phi_to_theta function}
 \usage{
 phi_to_theta_xptr(fstr)
 }
@@ -10,5 +10,5 @@ phi_to_theta_xptr(fstr)
 \item{fstr}{A string indicating the C++ function required.}
 }
 \description{
-Create external pointer to a C++ function for phi_to_theta
+Create external pointer to a C++ phi_to_theta function
 }

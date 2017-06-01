@@ -66,7 +66,7 @@ Of the in-built named priors available in revdbayes only
   parameter of the GP distribution by \eqn{\sigma}, whereas we use
   \eqn{\sigma_u} in the revdbayes vignette.
 
-  For all in-bulit priors the arguments \code{min_xi} and \code{max_xi} may
+  For all in-built priors the arguments \code{min_xi} and \code{max_xi} may
   be supplied by the user.  The prior density is set to zero for any value
   of the shape parameter \eqn{\xi} that is outside
   (\code{min_xi}, \code{max_xi}).  This will override the default values
