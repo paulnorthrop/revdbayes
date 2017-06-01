@@ -333,6 +333,21 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   #
   # -------------------------- Set up log-posterior ------------------------- #
   #
+  # v1.2.1
+  #
+  # Create a pointers to the C++ log-likelihood, log-prior and
+  # log-posterior functions.
+  #
+  lik_ptr <- loglik_xptr(model)
+  prior_ptr <- logprior_xptr(prior$prior)
+  post_ptr <- logpost_xptr(model)
+  #
+  # Combine lists ds (data) and prior (details of prior) into one list and
+  # add the log-likelihood and log-prior pointers to the list for_posterior.
+  #
+  for_post <- c(ds, prior)
+  for_post <- c(for_post, lik_ptr = lik_ptr, prior_ptr = prior_ptr)
+  #
   if (model == "gp") {
     logpost <- function(pars, ds) {
       loglik <- do.call(gp_loglik, c(list(pars = pars), ds))
@@ -389,7 +404,7 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   #
   # If init is not admissible set xi = 0 and try again
   #
-  init_check <- logpost(pars = init, ds = ds)
+  init_check <- cpp_logpost(x = init, pars = for_post)
   if (is.infinite(init_check)) {
     temp <- switch(model,
                    gp = do.call(gp_init, c(ds, xi_eq_zero = TRUE)),
@@ -471,9 +486,9 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
     #
     ru_args$n_grid <- NULL
     ru_args$ep_bc <- NULL
-    for_ru <- c(list(logf = logpost, ds = ds), fr, list(init = init, n = n),
-                ru_args)
-    temp <- do.call(rust::ru, for_ru)
+    for_ru_rcpp <- c(list(logf = post_ptr, pars = for_post), fr,
+                     list(init = init, n = n), ru_args)
+    temp <- do.call(rust::ru_rcpp, for_ru_rcpp)
     #
     # If model == "pp" and the sampling parameterisation is not equal to that
     # required by the user then transform to the required parameterisation.

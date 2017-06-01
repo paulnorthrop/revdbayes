@@ -11,7 +11,7 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 double cpp_gp_loglik(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
-  Rcpp::NumericVector gpd_data = ss["gpd_data"] ;
+  Rcpp::NumericVector gpd_data = ss["data"] ;
   int m = ss["m"] ;
   double xm = ss["xm"] ;
   double sum_gp = ss["sum_gp"] ;
@@ -38,14 +38,6 @@ double cpp_gp_loglik(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
   return loglik ;
 }
 
-// A function to create external pointers to the functions to evaluate logf.
-// See http://gallery.rcpp.org/articles/passing-cpp-function-pointers/
-// If you write a new function above called new_name then add something
-// like the following.
-//
-// else if (fstr == "new_name")
-//   return(Rcpp::XPtr<funcPtr>(new funcPtr(&new_name))) ;
-
 //' Create external pointer to a C++ log-likelihood function
 //'
 //' @param fstr A string indicating the C++ function required.
@@ -53,30 +45,30 @@ double cpp_gp_loglik(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
 //' @export
 // [[Rcpp::export]]
 SEXP loglik_xptr(std::string fstr) {
-  typedef double (*funcPtr)(const Rcpp::NumericVector& x,
-                  const Rcpp::List& pars) ;
+  typedef double (*loglikPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& ss) ;
   if (fstr == "gp")
-    return(Rcpp::XPtr<funcPtr>(new funcPtr(&cpp_gp_loglik))) ;
+    return(Rcpp::XPtr<loglikPtr>(new loglikPtr(&cpp_gp_loglik))) ;
   else
-    return(Rcpp::XPtr<funcPtr>(R_NilValue)) ;
+    return(Rcpp::XPtr<loglikPtr>(R_NilValue)) ;
 }
 
 // Generalized Pareto log-prior
 
 // [[Rcpp::export]]
-double cpp_gp_mdi(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+double cpp_gp_mdi(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
   if (x[1] < -1)
     return R_NegInf ;
-  double a = pars["a"] ;
+  double a = ppars["a"] ;
   return -log(x[0]) - a * x[1] ;
 }
 
 // [[Rcpp::export]]
-double cpp_gp_flat(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+double cpp_gp_flat(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
   if (x[0] <= 0)
     return R_NegInf ;
-  double min_xi = pars["min_xi"] ;
-  double max_xi = pars["max_xi"] ;
+  double min_xi = ppars["min_xi"] ;
+  double max_xi = ppars["max_xi"] ;
   if (x[1] < min_xi)
     return R_NegInf ;
   if (x[1] > max_xi)
@@ -90,25 +82,49 @@ double cpp_gp_flat(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
 //'
 //' @export
 // [[Rcpp::export]]
-SEXP prior_xptr(std::string fstr) {
-  typedef double (*funcPtr)(const Rcpp::NumericVector& x,
-                  const Rcpp::List& pars) ;
+SEXP logprior_xptr(std::string fstr) {
+  typedef double (*priorPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& ppars) ;
   if (fstr == "gp_mdi")
-    return(Rcpp::XPtr<funcPtr>(new funcPtr(&cpp_gp_mdi))) ;
+    return(Rcpp::XPtr<priorPtr>(new priorPtr(&cpp_gp_mdi))) ;
   else if (fstr == "gp_flat")
-    return(Rcpp::XPtr<funcPtr>(new funcPtr(&cpp_gp_flat))) ;
+    return(Rcpp::XPtr<priorPtr>(new priorPtr(&cpp_gp_flat))) ;
   else
-    return(Rcpp::XPtr<funcPtr>(R_NilValue)) ;
+    return(Rcpp::XPtr<priorPtr>(R_NilValue)) ;
 }
 
 // Generalized Pareto log-posterior
 
 // [[Rcpp::export]]
-double cpp_gp_posterior(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
-  double loglik = cpp_gp_loglik(x, ss) ;
-  double logprior = cpp_gp_mdi(x, ss) ;
+double cpp_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  // Unwrap pointer to the log-likelihood function.
+  SEXP lik_ptr = pars["lik_ptr"] ;
+  SEXP prior_ptr = pars["prior_ptr"] ;
+  typedef double (*loglikPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& ss) ;
+  Rcpp::XPtr<loglikPtr> xlfun(lik_ptr) ;
+  loglikPtr loglikfun = *xlfun ;
+  // Unwrap pointer to the log-prior function.
+  typedef double (*priorPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& ppars) ;
+  Rcpp::XPtr<priorPtr> xpfun(prior_ptr) ;
+  loglikPtr priorfun = *xpfun ;
+  double loglik = loglikfun(x, pars) ;
+  double logprior = priorfun(x, pars) ;
   double logpost = loglik + logprior ;
   return logpost ;
+}
+
+//' Create external pointer to a C++ log-posterior function
+//'
+//' @param fstr A string indicating the C++ function required.
+//'
+//' @export
+// [[Rcpp::export]]
+SEXP logpost_xptr(std::string fstr) {
+  typedef double (*logpostPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& pars) ;
+  return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&cpp_logpost))) ;
 }
 
 // Generalized Pareto phi_to_theta

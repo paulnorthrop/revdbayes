@@ -14,12 +14,12 @@ loglik_xptr <- function(fstr) {
     .Call('revdbayes_loglik_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
-cpp_gp_mdi <- function(x, pars) {
-    .Call('revdbayes_cpp_gp_mdi', PACKAGE = 'revdbayes', x, pars)
+cpp_gp_mdi <- function(x, ppars) {
+    .Call('revdbayes_cpp_gp_mdi', PACKAGE = 'revdbayes', x, ppars)
 }
 
-cpp_gp_flat <- function(x, pars) {
-    .Call('revdbayes_cpp_gp_flat', PACKAGE = 'revdbayes', x, pars)
+cpp_gp_flat <- function(x, ppars) {
+    .Call('revdbayes_cpp_gp_flat', PACKAGE = 'revdbayes', x, ppars)
 }
 
 #' Create external pointer to a C++ prior function
@@ -27,12 +27,21 @@ cpp_gp_flat <- function(x, pars) {
 #' @param fstr A string indicating the C++ function required.
 #'
 #' @export
-prior_xptr <- function(fstr) {
-    .Call('revdbayes_prior_xptr', PACKAGE = 'revdbayes', fstr)
+logprior_xptr <- function(fstr) {
+    .Call('revdbayes_logprior_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
-cpp_gp_posterior <- function(x, ss) {
-    .Call('revdbayes_cpp_gp_posterior', PACKAGE = 'revdbayes', x, ss)
+cpp_logpost <- function(x, pars) {
+    .Call('revdbayes_cpp_logpost', PACKAGE = 'revdbayes', x, pars)
+}
+
+#' Create external pointer to a C++ log-posterior function
+#'
+#' @param fstr A string indicating the C++ function required.
+#'
+#' @export
+logpost_xptr <- function(fstr) {
+    .Call('revdbayes_logpost_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
 gp_phi_to_theta <- function(phi, user_args) {
