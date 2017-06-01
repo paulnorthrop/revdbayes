@@ -35,6 +35,10 @@ cpp_logpost <- function(x, pars) {
     .Call('revdbayes_cpp_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
+cpp_logpost_phi <- function(phi, pars, phi_to_theta_ptr) {
+    .Call('revdbayes_cpp_logpost_phi', PACKAGE = 'revdbayes', phi, pars, phi_to_theta_ptr)
+}
+
 #' Create external pointer to a C++ log-posterior function
 #'
 #' @param fstr A string indicating the C++ function required.

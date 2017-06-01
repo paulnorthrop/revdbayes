@@ -30,7 +30,7 @@ double cpp_gp_loglik(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
       for(int i = 1; i < 5; ++i) {
         t1 = pow(sdatj, i) ;
         t2 = (i * sdatj - i - 1) ;
-        total += pow(-1, i) * t1 * t2 * pow(x[1], i) / i / (i + 1) ;
+        total += pow(-1.0, i) * t1 * t2 * pow(x[1], i) / i / (i + 1) ;
       }
     }
     loglik = -m * log(x[0]) - sum_gp / x[0] - total ;
@@ -93,13 +93,13 @@ SEXP logprior_xptr(std::string fstr) {
     return(Rcpp::XPtr<priorPtr>(R_NilValue)) ;
 }
 
-// Generalized Pareto log-posterior
+// General log-posterior
 
 // [[Rcpp::export]]
 double cpp_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
-  // Unwrap pointer to the log-likelihood function.
   SEXP lik_ptr = pars["lik_ptr"] ;
   SEXP prior_ptr = pars["prior_ptr"] ;
+  // Unwrap pointer to the log-likelihood function.
   typedef double (*loglikPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& ss) ;
   Rcpp::XPtr<loglikPtr> xlfun(lik_ptr) ;
@@ -111,6 +111,36 @@ double cpp_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   loglikPtr priorfun = *xpfun ;
   double loglik = loglikfun(x, pars) ;
   double logprior = priorfun(x, pars) ;
+  double logpost = loglik + logprior ;
+  return logpost ;
+}
+
+// General log-posterior, after transformation from theta to phi.
+
+// [[Rcpp::export]]
+double cpp_logpost_phi(const Rcpp::NumericVector& phi,
+                       const Rcpp::List& pars, const SEXP& phi_to_theta_ptr) {
+  SEXP lik_ptr = pars["lik_ptr"] ;
+  SEXP prior_ptr = pars["prior_ptr"] ;
+//  SEXP phi_to_theta_ptr = phi_to_theta ;
+  // Unwrap pointer to the log-likelihood function.
+  typedef double (*loglikPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& ss) ;
+  Rcpp::XPtr<loglikPtr> xlfun(lik_ptr) ;
+  loglikPtr loglikfun = *xlfun ;
+  // Unwrap pointer to the log-prior function.
+  typedef double (*priorPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& ppars) ;
+  Rcpp::XPtr<priorPtr> xpfun(prior_ptr) ;
+  loglikPtr priorfun = *xpfun ;
+  // Unwrap pointer to the phi_to_theta function.
+  typedef Rcpp::NumericVector (*p2tPtr)(const Rcpp::NumericVector& phi,
+                  const Rcpp::List& user_args) ;
+  Rcpp::XPtr<p2tPtr> p2tfun(phi_to_theta_ptr) ;
+  p2tPtr phi_to_theta_fun = *p2tfun ;
+  Rcpp::NumericVector theta = phi_to_theta_fun(phi, pars) ;
+  double loglik = loglikfun(theta, pars) ;
+  double logprior = priorfun(theta, pars) ;
   double logpost = loglik + logprior ;
   return logpost ;
 }

@@ -139,6 +139,25 @@ namespace revdbayes {
         return Rcpp::as<double >(rcpp_result_gen);
     }
 
+    inline double cpp_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars, const SEXP& phi_to_theta_ptr) {
+        typedef SEXP(*Ptr_cpp_logpost_phi)(SEXP,SEXP,SEXP);
+        static Ptr_cpp_logpost_phi p_cpp_logpost_phi = NULL;
+        if (p_cpp_logpost_phi == NULL) {
+            validateSignature("double(*cpp_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&,const SEXP&)");
+            p_cpp_logpost_phi = (Ptr_cpp_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_cpp_logpost_phi");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_cpp_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars), Rcpp::wrap(phi_to_theta_ptr));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
     inline SEXP logpost_xptr(std::string fstr) {
         typedef SEXP(*Ptr_logpost_xptr)(SEXP);
         static Ptr_logpost_xptr p_logpost_xptr = NULL;

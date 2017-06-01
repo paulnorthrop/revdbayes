@@ -343,54 +343,11 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   post_ptr <- logpost_xptr(model)
   #
   # Combine lists ds (data) and prior (details of prior) into one list and
-  # add the log-likelihood and log-prior pointers to the list for_posterior.
+  # add the log-likelihood and log-prior pointers to the list for_post.
   #
   for_post <- c(ds, prior)
   for_post <- c(for_post, lik_ptr = lik_ptr, prior_ptr = prior_ptr)
   #
-  if (model == "gp") {
-    logpost <- function(pars, ds) {
-      loglik <- do.call(gp_loglik, c(list(pars = pars), ds))
-      if (is.infinite(loglik)) return(loglik)
-      logprior <- do.call(prior$prior, c(list(pars), prior[-1]))
-      return(loglik + logprior)
-    }
-  }
-  if (model == "gev") {
-    logpost <- function(pars, ds) {
-      loglik <- do.call(gev_loglik, c(list(pars = pars), ds))
-      if (is.infinite(loglik)) return(loglik)
-      logprior <- do.call(prior$prior, c(list(pars), prior[-1]))
-      return(loglik + logprior)
-    }
-  }
-  if (model == "os") {
-    logpost <- function(pars, ds) {
-      loglik <- do.call(os_loglik, c(list(pars = pars), ds))
-      if (is.infinite(loglik)) return(loglik)
-      logprior <- do.call(prior$prior, c(list(pars), prior[-1]))
-      return(loglik + logprior)
-    }
-  }
-  if (model == "pp") {
-    if (ds$noy == noy) {
-      logpost <- function(pars, ds) {
-        loglik <- do.call(pp_loglik, c(list(pars = pars), ds))
-        if (is.infinite(loglik)) return(loglik)
-        logprior <- do.call(prior$prior, c(list(pars), prior[-1]))
-        return(loglik + logprior)
-      }
-    } else {
-      log_rat <- log(ds$noy / noy)
-      logpost <- function(pars, ds) {
-        loglik <- do.call(pp_loglik, c(list(pars = pars), ds))
-        if (is.infinite(loglik)) return(loglik)
-        noy_pars <- change_pp_pars(pars, in_noy = ds$noy, out_noy = noy)
-        logprior <- do.call(prior$prior, c(list(noy_pars), prior[-1]))
-        return(loglik + logprior + pars[3] * log_rat)
-      }
-    }
-  }
   #
   # ---------------- set some admissible initial estimates ------------------ #
   #
@@ -429,7 +386,7 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
     if (model == "pp" & use_noy == FALSE) {
       init_ests <- change_pp_pars(init_ests, in_noy = noy, out_noy = ds$n_exc)
     }
-    init_check <- logpost(par = init_ests, ds = ds)
+    init_check <- cpp_logpost(x = init, pars = for_post)
     if (!is.infinite(init_check)) {
       init <- init_ests
       init_phi <- switch(model,
@@ -585,43 +542,21 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   #
   # -------------------------- Define phi_to_theta -------------------------- #
   #
-  if (model == "gp") {
-    phi_to_theta <- function(phi) {
-      c(phi[1], phi[2] - phi[1] / ds$xm)
-    }
-    log_j <- function(x) 0
-  }
-  if (model == "gev" | model == "os") {
-    sr <- sqrt(ds$xm - ds$x1)
-    phi_to_theta <- function(phi) {
-      mu <- phi[1]
-      xi <- (phi[3] - phi[2]) / sr
-      sigma <- ((ds$xm - phi[1]) * phi[2] + (phi[1] - ds$x1) * phi[3]) / sr
-      c(mu, sigma, xi)
-    }
-    log_j <- function(x) 0
-  }
-  if (model == "pp") {
-    sr <- sqrt(ds$xm - ds$thresh)
-    phi_to_theta <- function(phi) {
-      mu <- phi[1]
-      xi <- (phi[3] - phi[2]) / sr
-      sigma <- ((ds$xm - phi[1]) * phi[2] + (phi[1] - ds$thresh) * phi[3]) / sr
-      c(mu, sigma, xi)
-    }
-    log_j <- function(x) 0
-  }
+  # v1.2.0
+  # Create a pointer to the C++ phi_to_theta function and add it to the
+  # list for_post.
+  #
+  phi_to_theta_ptr <- phi_to_theta_xptr(model)
+#  for_post <- c(for_post, phi_to_theta = phi_to_theta_ptr)
   #
   # Set which_lam: indices of the parameter vector that are Box-Cox transformed.
   #
   which_lam <- set_which_lam(model = model)
   #
   if (use_phi_map) {
-    logpost_phi <- function(phi, ...) {
-      logpost(par = phi_to_theta(phi), ...)
-    }
-    temp <- stats::optim(init_phi, logpost_phi,
-                  control = list(parscale = se_phi, fnscale = -1), ds = ds)
+    temp <- stats::optim(init_phi, cpp_logpost_phi,
+                  control = list(parscale = se_phi, fnscale = -1),
+                  pars = for_post, phi_to_theta_ptr = phi_to_theta_ptr)
     phi_mid <- temp$par
   } else {
     phi_mid <- init_phi
@@ -637,12 +572,12 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   if (!is.null(temp_args$n_grid)) find_lambda_args$n_grid <- temp_args$n_grid
   if (!is.null(temp_args$ep_bc)) find_lambda_args$n_grid <- temp_args$ep_bc
   # Find Box-Cox parameter lambda and initial estimate for psi.
-  for_find_lambda <- c(list(logf = logpost, ds = ds), min_max_phi,
+  for_find_lambda <- c(list(logf = post_ptr, pars = for_post), min_max_phi,
                        list(d = fr$d, which_lam = which_lam),
-                       find_lambda_args,
-                       list(phi_to_theta = phi_to_theta, log_j = log_j))
+                       find_lambda_args, list(phi_to_theta = phi_to_theta_ptr,
+                       user_args = list(xm = ds$xm)))
   min_max_phi$min_phi[3] <- 0.1
-  lambda <- do.call(rust::find_lambda, for_find_lambda)
+  lambda <- do.call(rust::find_lambda_rcpp, for_find_lambda)
   #
   # Only set a_control$parscale if it hasn't been supplied and if a_algor
   # will be "optim" in ru()
@@ -657,10 +592,9 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
       }
     }
   }
-  for_ru <- c(list(logf = logpost, ds = ds, lambda = lambda), fr,
-              list(n = n, phi_to_theta = phi_to_theta, log_j = log_j),
-              ru_args)
-  temp <- do.call(rust::ru, for_ru)
+  for_ru_rcpp <- c(list(logf = post_ptr, pars = for_post, lambda = lambda),
+                   fr, list(n = n), ru_args)
+  temp <- do.call(rust::ru_rcpp, for_ru_rcpp)
   #
   # If model == "pp" and the sampling parameterisation is not equal to that
   # required by the user then transform to the required parameterisation.
