@@ -22,6 +22,8 @@
 
 * Unnecessary dependence on package `devtools` via Suggests is removed.
 
+* Bugs fixed in the (R) prior functions `gp_norm`, `gev_norm` and `gev_loglognorm`.  The effect of the bug was negligible unless the prior variances are not chosen to be large.
+
 # revdbayes 1.1.0
 
 ## New features
