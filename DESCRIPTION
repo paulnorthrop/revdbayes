@@ -15,7 +15,7 @@ Imports: stats,
     graphics,
     methods,
     utils,
-    rust (>= 1.1.0),
+    rust (>= 1.2.2),
     bayesplot (>= 1.1.0),
     Rcpp
 License: GPL (>= 2)
@@ -26,8 +26,9 @@ RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
     evdbayes,
+    microbenchmark,
     ggplot2 (>= 2.2.1)
 VignetteBuilder: knitr
 URL: http://github.com/paulnorthrop/revdbayes
 BugReports: http://github.com/paulnorthrop/revdbayes/issues
-LinkingTo: Rcpp (>= 0.12.10), RcppArmadillo 
+LinkingTo: Rcpp (>= 0.12.10), RcppArmadillo
