@@ -34,6 +34,8 @@ set.seed(46)
 
 ### rpost vs. rpost_rcpp
 
+Generalized Pareto
+
 ```{r}
 data(gom)
 u <- quantile(gom, probs = 0.65)
@@ -41,6 +43,18 @@ fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 microbenchmark(
   old = rpost(n = n, model = "gp", prior = fp, thresh = u, data = gom),
   new = rpost_rcpp(n = n, model = "gp", prior = fp, thresh = u, data = gom)
+)
+```
+
+Generalized Extreme Value
+
+```{r}
+data(portpirie)
+mat <- diag(c(10000, 10000, 100))
+pn <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
+microbenchmark(
+  old = rpost(n = n, model = "gev", prior = pn, data = portpirie),
+  new = rpost_rcpp(n = n, model = "gev", prior = pn, data = portpirie)
 )
 ```
 

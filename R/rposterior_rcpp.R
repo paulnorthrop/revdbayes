@@ -224,7 +224,7 @@
 #' data(portpirie)
 #' mat <- diag(c(10000, 10000, 100))
 #' pn <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
-#' gevp  <- rpost(n = 1000, model = "gev", prior = pn, data = portpirie)
+#' gevp  <- rpost_rcpp(n = 1000, model = "gev", prior = pn, data = portpirie)
 #' plot(gevp)
 #'
 #' # PP model
