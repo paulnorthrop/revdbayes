@@ -388,7 +388,6 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
       init_ests <- change_pp_pars(init_ests, in_noy = noy, out_noy = ds$n_exc)
     }
     init_check <- cpp_logpost(x = init_ests, pars = for_post)
-    print(init_check)
     if (!is.infinite(init_check)) {
       init <- init_ests
       init_phi <- switch(model,

@@ -414,7 +414,6 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
       init_ests <- change_pp_pars(init_ests, in_noy = noy, out_noy = ds$n_exc)
     }
     init_check <- logpost(par = init_ests, ds = ds)
-    print(init_check)
     if (!is.infinite(init_check)) {
       init <- init_ests
       init_phi <- switch(model,

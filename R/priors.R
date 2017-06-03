@@ -343,8 +343,8 @@ gp_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
   }
   pars[1] <- log(pars[1])
   cpar <- pars - mean
-  ld <- icov[1] * cpar[1] ^ 2 + 2 * icov[2] * cpar[1] * cpar[2]
-            + icov[3] * cpar[2] ^ 2
+  ld <- icov[1] * cpar[1] ^ 2 + 2 * icov[2] * cpar[1] * cpar[2] +
+    icov[3] * cpar[2] ^ 2
   return(-ld / 2 - pars[1])
 }
 
@@ -553,9 +553,9 @@ gev_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
   }
   pars[2] <- log(pars[2])
   cpar <- pars - mean
-  ld <- icov[1] * cpar[1] ^ 2 + 2 * icov[2] * cpar[1] * cpar[2]
-            + 2 * icov[3] * cpar[1] * cpar[3] + icov[4] * cpar[2] ^ 2
-            + 2 * icov[5] * cpar[2] * cpar[3] + icov[6] * cpar[3] ^ 2
+  ld <- icov[1] * cpar[1] ^ 2 + 2 * icov[2] * cpar[1] * cpar[2] +
+    2 * icov[3] * cpar[1] * cpar[3] + icov[4] * cpar[2] ^ 2 +
+    2 * icov[5] * cpar[2] * cpar[3] + icov[6] * cpar[3] ^ 2
   return(-ld / 2 - pars[2])
 }
 
@@ -581,9 +581,9 @@ gev_loglognorm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
   pars[1] <- log(pars[1])
   pars[2] <- log(pars[2])
   cpar <- pars - mean
-  ld <- icov[1] * cpar[1] ^ 2 + 2 * icov[2] * cpar[1] * cpar[2]
-            + 2 * icov[3] * cpar[1] * cpar[3] + icov[4] * cpar[2] ^ 2
-            + 2 * icov[5] * cpar[2] * cpar[3] + icov[6] * cpar[3] ^ 2
+  ld <- icov[1] * cpar[1] ^ 2 + 2 * icov[2] * cpar[1] * cpar[2] +
+    2 * icov[3] * cpar[1] * cpar[3] + icov[4] * cpar[2] ^ 2 +
+    2 * icov[5] * cpar[2] * cpar[3] + icov[6] * cpar[3] ^ 2
   return(-ld / 2 - pars[2] - pars[1])
 }
 
