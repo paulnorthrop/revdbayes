@@ -239,7 +239,22 @@ gp_prior <- function(prior = c("norm", "mdi", "flat", "flatflat", "jeffreys",
   prior <- match.arg(prior)
   temp <- list(prior = paste("gp_", prior, sep=""), ...)
   # For v1.2.0 ...
-  # ... force min_xi and max_xi to be present in the list temp.
+  # Add default value for min_xi in Jeffreys prior if it isn't present.
+  if (prior == "jeffreys" & is.null(temp$min_xi)) {
+    temp$min_xi = -1/2
+  }
+  # Add default value for min_xi in the MDI prior if it isn't present.
+  if (prior == "mdi" & is.null(temp$min_xi)) {
+    temp$min_xi = -1
+  }
+  # ... and similarly for beta prior.
+  if (prior == "beta" & is.null(temp$min_xi)) {
+    temp$min_xi = -1/2
+  }
+  if (prior == "beta" & is.null(temp$max_xi)) {
+    temp$max_xi = 1/2
+  }
+  # Force min_xi and max_xi to be present in the list temp.
   temp$min_xi <- max(temp$min_xi, -Inf)
   temp$max_xi <- min(temp$max_xi, Inf)
   # ... add default value for a in MDI prior if it isn't present.
@@ -441,7 +456,19 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
   prior <- match.arg(prior)
   temp <- list(prior = paste("gev_", prior, sep=""), ...)
   # For v1.2.0 ...
-  # ... force min_xi and max_xi to be present in the list temp.
+  # Add default value for min_xi in the MDI prior if it isn't present.
+  if (prior == "mdi" & is.null(temp$min_xi)) {
+    temp$min_xi = -1
+  }
+  # Add default values for min_xi and max_xi in the beta prior if they
+  # aren't present.
+  if (prior == "beta" & is.null(temp$min_xi)) {
+    temp$min_xi = -1/2
+  }
+  if (prior == "beta" & is.null(temp$max_xi)) {
+    temp$max_xi = 1/2
+  }
+  # Force min_xi and max_xi to be present in the list temp.
   temp$min_xi <- max(temp$min_xi, -Inf)
   temp$max_xi <- min(temp$max_xi, Inf)
   # ... add default value for a in MDI prior if it isn't present.
@@ -453,8 +480,9 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
     temp$pq = c(6, 9)
   }
   # Check for unused hyperparameter names and drop them
-  hpar_vec <- switch(prior, norm = c("mean", "cov"), mdi = "a",
-                      flat = NULL, beta = "pq")
+  hpar_vec <- switch(prior, norm = c("mean", "cov"),
+                     loglognorm = c("mean", "cov"), mdi = "a", flat = NULL,
+                     beta = "pq")
   hpar_vec <- c(hpar_vec, "min_xi", "max_xi")
   temp <- hpar_drop(temp, hpar_vec)
   # Check for problems with min_xi and/or max_xi
@@ -469,7 +497,7 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
     }
   }
   # Check admissibility of hyperparameters
-  if (prior == "norm") {
+  if (prior == "norm" | prior == "loglognorm") {
     mean <- temp$mean
     cov <- temp$cov
     if (length(mean) != 3 | mode(mean) != "numeric")
@@ -547,16 +575,16 @@ gev_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
 #' @export
 gev_loglognorm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
                            trendsd = 0) {
-  if (pars[2] <= 0 | pars[3] < min_xi | pars[3] > max_xi) {
+  if (pars[1] <= 0 | pars[2] <= 0 | pars[3] < min_xi | pars[3] > max_xi) {
     return(-Inf)
   }
+  pars[1] <- log(pars[1])
   pars[2] <- log(pars[2])
-  pars[3] <- log(pars[3])
   cpar <- pars - mean
   ld <- icov[1] * cpar[1] ^ 2 + 2 * icov[2] * cpar[1] * cpar[2]
             + 2 * icov[3] * cpar[1] * cpar[3] + icov[4] * cpar[2] ^ 2
             + 2 * icov[5] * cpar[2] * cpar[3] + icov[6] * cpar[3] ^ 2
-  return(-ld / 2 - pars[2] - pars[3])
+  return(-ld / 2 - pars[2] - pars[1])
 }
 
 #' Maximal data information (MDI) prior for GEV parameters
@@ -579,7 +607,7 @@ gev_mdi <- function(pars, a=0.5772156649015323, min_xi=-1, max_xi=Inf,
   if (pars[2] <= 0 | pars[3] < min_xi | pars[3] > max_xi) {
     return(-Inf)
   }
-  return(-log(pars[1]) - a * pars[3])
+  return(-log(pars[2]) - a * pars[3])
 }
 
 #' Flat prior for GEV parameters (\eqn{\mu, log \sigma, \xi})
@@ -638,8 +666,8 @@ gev_beta <- function(pars, min_xi = -1 / 2, max_xi = 1 / 2, pq = c(6, 9),
   if (pars[2] <= 0 | pars[3] < min_xi | pars[3] > max_xi) {
     return(-Inf)
   }
-  return(-log(pars[2]) + (pq[1] - 1) * log(1 / 2 + pars[3]) +
-           (pq[2] - 1) * log(1 / 2 - pars[3]))
+  return(-log(pars[2]) + (pq[1] - 1) * log(pars[3] - min_xi) +
+           (pq[2] - 1) * log(max_xi - pars[3]))
 }
 
 # ================================ hpar_drop ===============================

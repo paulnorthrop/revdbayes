@@ -205,8 +205,8 @@
 #' data(gom)
 #' u <- quantile(gom, probs = 0.65)
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
-#' gpg <- rpost(n = 1000, model = "gp", prior = fp, thresh = u,
-#'   data = gom)
+#' gpg <- rpost_rcpp(n = 1000, model = "gp", prior = fp, thresh = u,
+#'                   data = gom)
 #' plot(gpg)
 #'
 #' # Binomial-GP model
@@ -386,7 +386,8 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
     if (model == "pp" & use_noy == FALSE) {
       init_ests <- change_pp_pars(init_ests, in_noy = noy, out_noy = ds$n_exc)
     }
-    init_check <- cpp_logpost(x = init, pars = for_post)
+    init_check <- cpp_logpost(x = init_ests, pars = for_post)
+    print(init_check)
     if (!is.infinite(init_check)) {
       init <- init_ests
       init_phi <- switch(model,

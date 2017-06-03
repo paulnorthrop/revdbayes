@@ -1,0 +1,52 @@
+---
+title: "Faster simulation using revdbayes and Rcpp"
+author: "Paul J. Northrop"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Faster simulation using revdbayes and Rcpp}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: revdbayes.bib
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
+```
+
+This vignette introduces a new feature of *revdbayes*: reducing posterior simulation time by performing the most time-consuming tasks using C++ functions.  This achieved using a new facility in the *rust* package [@rust], which in turn uses the **Rcpp** package [@Rcpp, @RcppDEbook]. The result is a new function `rpost_rcpp`, which has the same structure as the existing function `rpost`.  From a user's perspective the only difference between these two functions occurs if the user wishes to supply their own prior distribution: `rpost_rcpp` requires an external pointer to a C++ function (see [Providing a user-defined prior](#cpp_fun)), whereas `rpost` requires input R functions (see the vignette
+[Introducing revdbayes](revdbayes-vignette.html)).
+
+Before we deal with user-supplied priors we compare posterior simulation times under different approaches using examples based on in-built prior distributions.
+
+## Performance comparisons
+
+```{r}
+library(revdbayes)
+library(evdbayes)
+library(microbenchmark)
+# Set the number of posterior samples required.
+n <- 1000
+set.seed(46)
+```
+
+### rpost vs. rpost_rcpp
+
+```{r}
+data(gom)
+u <- quantile(gom, probs = 0.65)
+fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
+microbenchmark(
+  old = rpost(n = n, model = "gp", prior = fp, thresh = u, data = gom),
+  new = rpost_rcpp(n = n, model = "gp", prior = fp, thresh = u, data = gom)
+)
+```
+
+### revdbayes vs. evdbayes
+
+## Providing a user-defined prior {#cpp_fun}
+
+## References
+
