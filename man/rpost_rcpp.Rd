@@ -226,7 +226,7 @@ plot(gevp)
 data(rainfall)
 rthresh <- 40
 pf <- set_prior(prior = "flat", model = "gev", min_xi = -1)
-ppr <- rpost(n = 1000, model = "pp", prior = pf, data = rainfall,
+ppr <- rpost_rcpp(n = 1000, model = "pp", prior = pf, data = rainfall,
   thresh = rthresh, noy = 54)
 plot(ppr)
 
