@@ -21,7 +21,7 @@ Imports: stats,
 License: GPL (>= 2)
 LazyData: TRUE
 Depends:
-    R (>= 3.3.3),
+    R (>= 3.3.1),
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,

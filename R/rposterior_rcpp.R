@@ -341,7 +341,10 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   #
   lik_ptr <- loglik_xptr(model)
   prior_ptr <- logprior_xptr(prior$prior)
-  post_ptr <- logpost_xptr(model)
+  post_ptr <- switch(model,
+                     gp = gp_logpost_xptr(prior$prior),
+                     gev = gev_logpost_xptr(prior$prior)
+  )
   #
   # Combine lists ds (data) and prior (details of prior) into one list and
   # add the log-likelihood and log-prior pointers to the list for_post.
@@ -362,7 +365,10 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   #
   # If init is not admissible set xi = 0 and try again
   #
-  init_check <- cpp_logpost(x = init, pars = for_post)
+  #  init_check <- cpp_logpost(x = init, pars = for_post)
+  init_check <- calc_init_logpost(model = model, prior = prior$prior,
+                                  init = init, for_post = for_post)
+  #
   if (is.infinite(init_check)) {
     temp <- switch(model,
                    gp = do.call(gp_init, c(ds, xi_eq_zero = TRUE)),
@@ -387,7 +393,9 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
     if (model == "pp" & use_noy == FALSE) {
       init_ests <- change_pp_pars(init_ests, in_noy = noy, out_noy = ds$n_exc)
     }
-    init_check <- cpp_logpost(x = init_ests, pars = for_post)
+#    init_check <- cpp_logpost(x = init_ests, pars = for_post)
+    init_check <- calc_init_logpost(model = model, prior = prior$prior,
+                                    init = init, for_post = for_post)
     if (!is.infinite(init_check)) {
       init <- init_ests
       init_phi <- switch(model,
@@ -680,3 +688,26 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   return(temp)
 }
 
+calc_init_logpost <- function(model, prior, init, for_post) {
+  if (model == "gp") {
+    init_check <- switch(
+      prior,
+      gp_mdi = gp_mdi_logpost(x = init, pars = for_post),
+      gp_norm = gp_norm_logpost(x = init, pars = for_post),
+      gp_flat = gp_flat_logpost(x = init, pars = for_post),
+      gp_flatflat = gp_flatflat_logpost(x = init, pars = for_post),
+      gp_jeffreys = gp_jeffreys_logpost(x = init, pars = for_post),
+      gp_beta = gp_beta_logpost(x = init, pars = for_post))
+  }
+  if (model == "gev") {
+    init_check <- switch(
+      prior,
+      gev_mdi = gev_mdi_logpost(x = init, pars = for_post),
+      gev_norm = gev_norm_logpost(x = init, pars = for_post),
+      gev_loglognorm = gev_loglognorm_logpost(x = init, pars = for_post),
+      gev_flat = gev_flat_logpost(x = init, pars = for_post),
+      gev_flatflat = gev_flatflat_logpost(x = init, pars = for_post),
+      gev_beta = gev_beta_logpost(x = init, pars = for_post))
+  }
+  return(init_check)
+}

@@ -17,17 +17,17 @@ bool any_nonpos(const Rcpp::NumericVector& x) {
 
 // [[Rcpp::export]]
 double cpp_gp_loglik(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
-  Rcpp::NumericVector gpd_data = ss["data"] ;
-  int m = ss["m"] ;
   double xm = ss["xm"] ;
-  double sum_gp = ss["sum_gp"] ;
   if (x[0] <= 0 || x[1] <= -x[0] / xm)
     return R_NegInf ;
   double loglik ;
+  Rcpp::NumericVector gpd_data = ss["data"] ;
+  int m = ss["m"] ;
+  double sum_gp = ss["sum_gp"] ;
   Rcpp::NumericVector sdat = gpd_data / x[0] ;
-  Rcpp::NumericVector zz = 1.0 + x[1] * sdat ;
+  Rcpp::NumericVector zz = 1 + x[1] * sdat ;
   if (std::abs(x[1]) > 1e-6) {
-    loglik = -m * log(x[0]) - (1.0 + 1.0 / x[1]) * sum(log(zz)) ;
+    loglik = -m * log(x[0]) - (1 + 1 / x[1]) * sum(log(zz)) ;
   } else {
     double t1, t2, sdatj ;
     double total = 0.0;
@@ -49,17 +49,22 @@ double cpp_gp_loglik(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
 // [[Rcpp::export]]
 double cpp_gev_loglik(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
   Rcpp::NumericVector data = ss["data"] ;
+//  double x1 = ss["x1"] ;
+//  double xm = ss["xm"] ;
   int m = ss["m"] ;
   double sum_gev = ss["sum_gev"] ;
+//  if (x[1] <= 0 || 1 + x[2] * (x1 - x[0]) / x[1] <= 0 ||
+//      1 + x[2] * (xm - x[0]) / x[1] <= 0)
+//    return R_NegInf ;
   if (x[1] <= 0)
     return R_NegInf ;
   Rcpp::NumericVector sdat = (data - x[0]) / x[1] ;
-  Rcpp::NumericVector zz = 1.0 + x[2] * sdat ;
+  Rcpp::NumericVector zz = 1 + x[2] * sdat ;
   if (any_nonpos(zz))
     return R_NegInf ;
   double val = -m * log(x[1]) ;
   if (std::abs(x[2]) > 1e-6) {
-    val = val - (1.0 + 1.0 / x[2]) * sum(log(zz)) - sum(pow(zz, (-1.0/x[2]))) ;
+    val = val - (1 + 1 / x[2]) * sum(log(zz)) - sum(pow(zz, (-1 / x[2]))) ;
   } else {
     double t1, t2, sdatj, temp ;
     double t0 = (sum_gev - m * x[0]) / x[1] ;
@@ -294,11 +299,79 @@ double cpp_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   typedef double (*priorPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& ppars) ;
   Rcpp::XPtr<priorPtr> xpfun(prior_ptr) ;
-  loglikPtr priorfun = *xpfun ;
-  double loglik = loglikfun(x, pars) ;
-  double logprior = priorfun(x, pars) ;
-  double logpost = loglik + logprior ;
-  return logpost ;
+  priorPtr priorfun = *xpfun ;
+  return loglikfun(x, pars) + priorfun(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double cpp_gp_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  SEXP prior_ptr = pars["prior_ptr"] ;
+  // Unwrap pointer to the log-prior function.
+  typedef double (*priorPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& ppars) ;
+  Rcpp::XPtr<priorPtr> xpfun(prior_ptr) ;
+  priorPtr priorfun = *xpfun ;
+  return cpp_gp_loglik(x, pars) + priorfun(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double gp_mdi_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_gp_loglik(x, pars) + cpp_gp_mdi(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double gp_norm_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_gp_loglik(x, pars) + cpp_gp_norm(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double gp_flat_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_gp_loglik(x, pars) + cpp_gp_flat(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double gp_flatflat_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_gp_loglik(x, pars) + cpp_gp_flatflat(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double gp_jeffreys_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_gp_loglik(x, pars) + cpp_gp_jeffreys(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double gp_beta_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_gp_loglik(x, pars) + cpp_gp_beta(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double gev_mdi_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_gev_loglik(x, pars) + cpp_gev_mdi(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double gev_norm_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_gev_loglik(x, pars) + cpp_gev_norm(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double gev_loglognorm_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_gev_loglik(x, pars) + cpp_gev_loglognorm(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double gev_flat_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_gev_loglik(x, pars) + cpp_gev_flat(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double gev_flatflat_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_gev_loglik(x, pars) + cpp_gev_flatflat(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double gev_beta_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_gev_loglik(x, pars) + cpp_gev_beta(x, pars) ;
 }
 
 // General log-posterior, after transformation from theta to phi.
@@ -308,7 +381,7 @@ double cpp_logpost_phi(const Rcpp::NumericVector& phi,
                        const Rcpp::List& pars, const SEXP& phi_to_theta_ptr) {
   SEXP lik_ptr = pars["lik_ptr"] ;
   SEXP prior_ptr = pars["prior_ptr"] ;
-//  SEXP phi_to_theta_ptr = phi_to_theta ;
+  //  SEXP phi_to_theta_ptr = phi_to_theta ;
   // Unwrap pointer to the log-likelihood function.
   typedef double (*loglikPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& ss) ;
@@ -318,29 +391,64 @@ double cpp_logpost_phi(const Rcpp::NumericVector& phi,
   typedef double (*priorPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& ppars) ;
   Rcpp::XPtr<priorPtr> xpfun(prior_ptr) ;
-  loglikPtr priorfun = *xpfun ;
+  priorPtr priorfun = *xpfun ;
   // Unwrap pointer to the phi_to_theta function.
   typedef Rcpp::NumericVector (*p2tPtr)(const Rcpp::NumericVector& phi,
-                  const Rcpp::List& user_args) ;
+                               const Rcpp::List& user_args) ;
   Rcpp::XPtr<p2tPtr> p2tfun(phi_to_theta_ptr) ;
   p2tPtr phi_to_theta_fun = *p2tfun ;
   Rcpp::NumericVector theta = phi_to_theta_fun(phi, pars) ;
-  double loglik = loglikfun(theta, pars) ;
-  double logprior = priorfun(theta, pars) ;
-  double logpost = loglik + logprior ;
-  return logpost ;
+  return loglikfun(theta, pars) + priorfun(theta, pars) ;
 }
 
-//' Create external pointer to a C++ log-posterior function
+//' Create external pointer to a C++ GP log-posterior function
 //'
 //' @param fstr A string indicating the C++ function required.
 //'
 //' @export
 // [[Rcpp::export]]
-SEXP logpost_xptr(std::string fstr) {
+SEXP gp_logpost_xptr(std::string fstr) {
   typedef double (*logpostPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& pars) ;
-  return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&cpp_logpost))) ;
+  if (fstr == "gp_mdi")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gp_mdi_logpost))) ;
+  else if (fstr == "gp_norm")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gp_norm_logpost))) ;
+  else if (fstr == "gp_flat")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gp_flat_logpost))) ;
+  else if (fstr == "gp_flatflat")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gp_flatflat_logpost))) ;
+  else if (fstr == "gp_jeffreys")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gp_jeffreys_logpost))) ;
+  else if (fstr == "gp_beta")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gp_beta_logpost))) ;
+  else
+    return(Rcpp::XPtr<logpostPtr>(R_NilValue)) ;
+}
+
+//' Create external pointer to a C++ GEV log-posterior function
+//'
+//' @param fstr A string indicating the C++ function required.
+//'
+//' @export
+// [[Rcpp::export]]
+SEXP gev_logpost_xptr(std::string fstr) {
+  typedef double (*logpostPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& pars) ;
+  if (fstr == "gev_mdi")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_mdi_logpost))) ;
+  else if (fstr == "gev_norm")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_norm_logpost))) ;
+  else if (fstr == "gev_loglognorm")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_loglognorm_logpost))) ;
+  else if (fstr == "gev_flat")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_flat_logpost))) ;
+  else if (fstr == "gev_flatflat")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_flatflat_logpost))) ;
+  else if (fstr == "gev_beta")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_beta_logpost))) ;
+  else
+    return(Rcpp::XPtr<logpostPtr>(R_NilValue)) ;
 }
 
 // Generalized Pareto phi_to_theta

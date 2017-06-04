@@ -16,7 +16,7 @@ bibliography: revdbayes.bib
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 ```
 
-This vignette introduces a new feature of *revdbayes*: reducing posterior simulation time by performing the most time-consuming tasks using C++ functions.  This achieved using a new facility in the *rust* package [@rust], which in turn uses the **Rcpp** package [@Rcpp, @RcppDEbook]. The result is a new function `rpost_rcpp`, which has the same structure as the existing function `rpost`.  From a user's perspective the only difference between these two functions occurs if the user wishes to supply their own prior distribution: `rpost_rcpp` requires an external pointer to a C++ function (see [Providing a user-defined prior](#cpp_fun)), whereas `rpost` requires input R functions (see the vignette
+This vignette introduces a new feature of *revdbayes*: reducing posterior simulation time by performing the most time-consuming tasks using C++ functions.  This achieved using a new facility in the *rust* package [@rust], which in turn uses the **Rcpp** package [@Rcpp, @RcppDEbook]. The result is a new function `rpost_rcpp`, which has the same structure as the existing function `rpost`.  From a user's perspective the only difference between these two functions occurs if they wish to supply their own prior distribution: `rpost_rcpp` requires an external pointer to a C++ function (see [Providing a user-defined prior](#cpp_fun)), whereas `rpost` requires input R functions (see the vignette
 [Introducing revdbayes](revdbayes-vignette.html)).
 
 Before we deal with user-supplied priors we compare posterior simulation times under different approaches using examples based on in-built prior distributions.
@@ -49,12 +49,18 @@ microbenchmark(
 Generalized Extreme Value
 
 ```{r}
+# evdbayes
+t0 <- c(3.87, 0.2, -0.05) 
+s <- c(.06, .25, .25)
+b <- 200
 data(portpirie)
 mat <- diag(c(10000, 10000, 100))
 pn <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
 microbenchmark(
   old = rpost(n = n, model = "gev", prior = pn, data = portpirie),
-  new = rpost_rcpp(n = n, model = "gev", prior = pn, data = portpirie)
+  new = rpost_rcpp(n = n, model = "gev", prior = pn, data = portpirie),
+  evdbayes = posterior(n + b - 1, t0, prior = pn, lh = "gev", data = portpirie,
+                       psd = s, burn = b)
 )
 ```
 
