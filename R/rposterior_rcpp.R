@@ -202,11 +202,19 @@
 #'   \url{http://dx.doi.org/10.1214/10-AOAS333}
 #' @examples
 #' library(rust)
+#'
 #' # GP model
 #' data(gom)
 #' u <- quantile(gom, probs = 0.65)
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 #' gpg <- rpost_rcpp(n = 1000, model = "gp", prior = fp, thresh = u,
+#'                   data = gom)
+#' plot(gpg)
+#'
+#' # GP model, user-defined prior
+#' ptr_gp_flat <- create_prior_xptr("gp_flat")
+#' p_user <- set_prior(prior = ptr_gp_flat, model = "gp", min_xi = -1)
+#' gpg <- rpost_rcpp(n = 1000, model = "gp", prior = p_user, thresh = u,
 #'                   data = gom)
 #' plot(gpg)
 #'
@@ -239,7 +247,7 @@
 #' data(venice)
 #' mat <- diag(c(10000, 10000, 100))
 #' pv <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
-#' osv <- rpost(n = 1000, model = "os", prior = pv, data = venice)
+#' osv <- rpost_rcpp(n = 1000, model = "os", prior = pv, data = venice)
 #' plot(osv)
 #' @export
 rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
@@ -334,26 +342,37 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   #
   # -------------------------- Set up log-posterior ------------------------- #
   #
-  # v1.2.1
+  # v1.2.0
   #
-  # Create a pointers to the C++ log-likelihood, log-prior and
-  # log-posterior functions.
+  # Create a pointer to the log-posterior function.
   #
-  print(model)
-#  lik_ptr <- loglik_xptr(model)
-#  prior_ptr <- logprior_xptr(prior$prior)
-  post_ptr <- switch(model,
-                     gp = gp_logpost_xptr(prior$prior),
-                     gev = gev_logpost_xptr(prior$prior),
-                     pp = pp_logpost_xptr(prior$prior)
-  )
+  if (class(prior$prior) == "externalptr") {
+    prior_type = "user"
+    post_ptr <- switch(model,
+                       gp = gp_logpost_xptr("gp_user"),
+                       gev = gev_logpost_xptr("gev_user"),
+                       pp = pp_logpost_xptr("gev_user"),
+                       os = os_logpost_xptr("gev_user")
+    )
+  } else {
+    prior_type = prior$prior
+    post_ptr <- switch(model,
+                       gp = gp_logpost_xptr(prior$prior),
+                       gev = gev_logpost_xptr(prior$prior),
+                       pp = pp_logpost_xptr(prior$prior),
+                       os = os_logpost_xptr(prior$prior)
+    )
+  }
   #
   # Combine lists ds (data) and prior (details of prior) into one list and
   # add the log-likelihood and log-prior pointers to the list for_post.
   #
   for_post <- c(ds, prior)
-#  for_post <- c(for_post, lik_ptr = lik_ptr, prior_ptr = prior_ptr)
-  #
+  # For the OS model add the largest sample size over all order statistics.
+  # (only used by the C++ function cpp_os_loglik)
+  if (model == "os") {
+    for_post <- c(for_post, list(nmax = n_check))
+  }
   #
   # ---------------- set some admissible initial estimates ------------------ #
   #
@@ -368,7 +387,7 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   # If init is not admissible set xi = 0 and try again
   #
   #  init_check <- cpp_logpost(x = init, pars = for_post)
-  init_check <- calc_init_logpost(model = model, prior = prior$prior,
+  init_check <- calc_init_logpost(model = model, prior_type = prior_type,
                                   init = init, for_post = for_post)
   #
   if (is.infinite(init_check)) {
@@ -396,7 +415,7 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
       init_ests <- change_pp_pars(init_ests, in_noy = noy, out_noy = ds$n_exc)
     }
 #    init_check <- cpp_logpost(x = init_ests, pars = for_post)
-    init_check <- calc_init_logpost(model = model, prior = prior$prior,
+    init_check <- calc_init_logpost(model = model, prior_type = prior_type,
                                     init = init_ests, for_post = for_post)
     print(init_check)
     if (!is.infinite(init_check)) {
@@ -691,10 +710,20 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   return(temp)
 }
 
-calc_init_logpost <- function(model, prior, init, for_post) {
+calc_init_logpost <- function(model, prior_type, init, for_post) {
+  if (prior_type == "user") {
+    init_check <- switch(
+      model,
+      gp = gp_user_logpost(x = init, pars = for_post),
+      gev = gev_user_logpost(x = init, pars = for_post),
+      os = os_user_logpost(x = init, pars = for_post),
+      pp = pp_user_logpost(x = init, pars = for_post)
+    )
+    return(init_check)
+  }
   if (model == "gp") {
     init_check <- switch(
-      prior,
+      prior_type,
       gp_mdi = gp_mdi_logpost(x = init, pars = for_post),
       gp_norm = gp_norm_logpost(x = init, pars = for_post),
       gp_flat = gp_flat_logpost(x = init, pars = for_post),
@@ -704,7 +733,7 @@ calc_init_logpost <- function(model, prior, init, for_post) {
   }
   if (model == "gev") {
     init_check <- switch(
-      prior,
+      prior_type,
       gev_mdi = gev_mdi_logpost(x = init, pars = for_post),
       gev_norm = gev_norm_logpost(x = init, pars = for_post),
       gev_loglognorm = gev_loglognorm_logpost(x = init, pars = for_post),
@@ -712,7 +741,17 @@ calc_init_logpost <- function(model, prior, init, for_post) {
       gev_flatflat = gev_flatflat_logpost(x = init, pars = for_post),
       gev_beta = gev_beta_logpost(x = init, pars = for_post))
   }
-  if (model == "gev" | model == "pp") {
+  if (model == "os") {
+    init_check <- switch(
+      prior,
+      gev_mdi = os_mdi_logpost(x = init, pars = for_post),
+      gev_norm = os_norm_logpost(x = init, pars = for_post),
+      gev_loglognorm = os_loglognorm_logpost(x = init, pars = for_post),
+      gev_flat = os_flat_logpost(x = init, pars = for_post),
+      gev_flatflat = os_flatflat_logpost(x = init, pars = for_post),
+      gev_beta = os_beta_logpost(x = init, pars = for_post))
+  }
+  if (model == "pp") {
     init_check <- switch(
       prior,
       gev_mdi = pp_mdi_logpost(x = init, pars = for_post),

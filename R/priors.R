@@ -201,6 +201,10 @@
 #'          (ab[2] - 1) * log(1 - x[2]))
 #' }
 #' up <- set_prior(prior = u_prior_fn, ab = c(2, 2))
+#'
+#' # A user-defined prior using a pointer to a C++ function
+#' ptr_gp_flat <- create_prior_xptr("gp_flat")
+#' u_prior_ptr <- set_prior(prior = ptr_gp_flat, model = "gp")
 #' @export
 set_prior <- function(prior = c("norm", "loglognorm", "mdi", "flat",
                                 "flatflat", "jeffreys", "beta"),
@@ -223,6 +227,13 @@ set_prior <- function(prior = c("norm", "loglognorm", "mdi", "flat",
       return(prior(pars, ...))
     }
     temp$prior <- new_prior
+    return(structure(temp, class = "evprior", model = model))
+  }
+  # If prior is a pointer to an external C++ function then just return it in
+  # the required format.  We don't need to worry about adding the argument
+  # trendsd because we don't need the prior to work with the evdbayes package.
+  if (class(prior) == "externalptr") {
+    temp <- list(prior = prior, ...)
     return(structure(temp, class = "evprior", model = model))
   }
   # Otherwise, call the appropriate function to set the prior with name prior.

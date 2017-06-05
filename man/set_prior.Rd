@@ -185,6 +185,10 @@ u_prior_fn <- function(x, ab) {
          (ab[2] - 1) * log(1 - x[2]))
 }
 up <- set_prior(prior = u_prior_fn, ab = c(2, 2))
+
+# A user-defined prior using a pointer to a C++ function
+ptr_gp_flat <- create_prior_xptr("gp_flat")
+u_prior_ptr <- set_prior(prior = ptr_gp_flat, model = "gp")
 }
 \references{
 Castellanos, E. M. and Cabras, S. (2007) A default Bayesian

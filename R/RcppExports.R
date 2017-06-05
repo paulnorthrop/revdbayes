@@ -13,17 +13,12 @@ cpp_gev_loglik <- function(x, ss) {
     .Call('revdbayes_cpp_gev_loglik', PACKAGE = 'revdbayes', x, ss)
 }
 
-cpp_pp_loglik <- function(x, ss) {
-    .Call('revdbayes_cpp_pp_loglik', PACKAGE = 'revdbayes', x, ss)
+cpp_os_loglik <- function(x, ss) {
+    .Call('revdbayes_cpp_os_loglik', PACKAGE = 'revdbayes', x, ss)
 }
 
-#' Create external pointer to a C++ log-likelihood function
-#'
-#' @param fstr A string indicating the C++ function required.
-#'
-#' @export
-loglik_xptr <- function(fstr) {
-    .Call('revdbayes_loglik_xptr', PACKAGE = 'revdbayes', fstr)
+cpp_pp_loglik <- function(x, ss) {
+    .Call('revdbayes_cpp_pp_loglik', PACKAGE = 'revdbayes', x, ss)
 }
 
 cpp_gp_norm <- function(x, ppars) {
@@ -74,21 +69,24 @@ cpp_gev_beta <- function(x, ppars) {
     .Call('revdbayes_cpp_gev_beta', PACKAGE = 'revdbayes', x, ppars)
 }
 
-#' Create external pointer to a C++ prior function
-#'
-#' @param fstr A string indicating the C++ function required.
-#'
-#' @export
-logprior_xptr <- function(fstr) {
-    .Call('revdbayes_logprior_xptr', PACKAGE = 'revdbayes', fstr)
-}
-
 cpp_logpost <- function(x, pars) {
     .Call('revdbayes_cpp_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
-cpp_gp_logpost <- function(x, pars) {
-    .Call('revdbayes_cpp_gp_logpost', PACKAGE = 'revdbayes', x, pars)
+gp_user_logpost <- function(x, pars) {
+    .Call('revdbayes_gp_user_logpost', PACKAGE = 'revdbayes', x, pars)
+}
+
+gev_user_logpost <- function(x, pars) {
+    .Call('revdbayes_gev_user_logpost', PACKAGE = 'revdbayes', x, pars)
+}
+
+os_user_logpost <- function(x, pars) {
+    .Call('revdbayes_os_user_logpost', PACKAGE = 'revdbayes', x, pars)
+}
+
+pp_user_logpost <- function(x, pars) {
+    .Call('revdbayes_pp_user_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gp_mdi_logpost <- function(x, pars) {
@@ -163,6 +161,30 @@ pp_beta_logpost <- function(x, pars) {
     .Call('revdbayes_pp_beta_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
+os_mdi_logpost <- function(x, pars) {
+    .Call('revdbayes_os_mdi_logpost', PACKAGE = 'revdbayes', x, pars)
+}
+
+os_norm_logpost <- function(x, pars) {
+    .Call('revdbayes_os_norm_logpost', PACKAGE = 'revdbayes', x, pars)
+}
+
+os_loglognorm_logpost <- function(x, pars) {
+    .Call('revdbayes_os_loglognorm_logpost', PACKAGE = 'revdbayes', x, pars)
+}
+
+os_flat_logpost <- function(x, pars) {
+    .Call('revdbayes_os_flat_logpost', PACKAGE = 'revdbayes', x, pars)
+}
+
+os_flatflat_logpost <- function(x, pars) {
+    .Call('revdbayes_os_flatflat_logpost', PACKAGE = 'revdbayes', x, pars)
+}
+
+os_beta_logpost <- function(x, pars) {
+    .Call('revdbayes_os_beta_logpost', PACKAGE = 'revdbayes', x, pars)
+}
+
 cpp_logpost_phi <- function(phi, pars, phi_to_theta_ptr) {
     .Call('revdbayes_cpp_logpost_phi', PACKAGE = 'revdbayes', phi, pars, phi_to_theta_ptr)
 }
@@ -185,7 +207,16 @@ gev_logpost_xptr <- function(fstr) {
     .Call('revdbayes_gev_logpost_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
-#' Create external pointer to a C++ GEV log-posterior function
+#' Create external pointer to a C++ OS log-posterior function
+#'
+#' @param fstr A string indicating the C++ function required.
+#'
+#' @export
+os_logpost_xptr <- function(fstr) {
+    .Call('revdbayes_os_logpost_xptr', PACKAGE = 'revdbayes', fstr)
+}
+
+#' Create external pointer to a C++ PP log-posterior function
 #'
 #' @param fstr A string indicating the C++ function required.
 #'
@@ -205,6 +236,27 @@ gp_phi_to_theta <- function(phi, user_args) {
 #' @export
 phi_to_theta_xptr <- function(fstr) {
     .Call('revdbayes_phi_to_theta_xptr', PACKAGE = 'revdbayes', fstr)
+}
+
+user_gp_flat <- function(x, ppars) {
+    .Call('revdbayes_user_gp_flat', PACKAGE = 'revdbayes', x, ppars)
+}
+
+user_gev_norm <- function(x, ppars) {
+    .Call('revdbayes_user_gev_norm', PACKAGE = 'revdbayes', x, ppars)
+}
+
+user_gev_flat <- function(x, ppars) {
+    .Call('revdbayes_user_gev_flat', PACKAGE = 'revdbayes', x, ppars)
+}
+
+#' Create external pointer to a C++ function for a log-prior
+#'
+#' @param fstr A string indicating the C++ function required.
+#'
+#' @export
+create_prior_xptr <- function(fstr) {
+    .Call('revdbayes_create_prior_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
 # Register entry points for exported C++ functions

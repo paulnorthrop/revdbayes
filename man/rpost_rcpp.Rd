@@ -197,11 +197,19 @@ model.
 }
 \examples{
 library(rust)
+
 # GP model
 data(gom)
 u <- quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 gpg <- rpost_rcpp(n = 1000, model = "gp", prior = fp, thresh = u,
+                  data = gom)
+plot(gpg)
+
+# GP model, user-defined prior
+ptr_gp_flat <- create_prior_xptr("gp_flat")
+p_user <- set_prior(prior = ptr_gp_flat, model = "gp", min_xi = -1)
+gpg <- rpost_rcpp(n = 1000, model = "gp", prior = p_user, thresh = u,
                   data = gom)
 plot(gpg)
 
@@ -234,7 +242,7 @@ plot(ppr)
 data(venice)
 mat <- diag(c(10000, 10000, 100))
 pv <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
-osv <- rpost(n = 1000, model = "os", prior = pv, data = venice)
+osv <- rpost_rcpp(n = 1000, model = "os", prior = pv, data = venice)
 plot(osv)
 }
 \references{

@@ -196,6 +196,8 @@ model.
   for further details and examples.
 }
 \examples{
+library(rust)
+
 # GP model
 data(gom)
 u <- quantile(gom, probs = 0.65)

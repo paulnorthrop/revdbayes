@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{pp_logpost_xptr}
 \alias{pp_logpost_xptr}
-\title{Create external pointer to a C++ GEV log-posterior function}
+\title{Create external pointer to a C++ PP log-posterior function}
 \usage{
 pp_logpost_xptr(fstr)
 }
@@ -10,5 +10,5 @@ pp_logpost_xptr(fstr)
 \item{fstr}{A string indicating the C++ function required.}
 }
 \description{
-Create external pointer to a C++ GEV log-posterior function
+Create external pointer to a C++ PP log-posterior function
 }
