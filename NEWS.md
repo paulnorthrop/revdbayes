@@ -6,7 +6,7 @@
 
 * New function: `rpost_rcpp`.  
 
-* New vignette. "`rpost` vs. `rpost_rcpp`".
+* New vignette. "Faster simulation using revdbayes and Rcpp".
 
 ## Bug fixes and minor improvements
 
