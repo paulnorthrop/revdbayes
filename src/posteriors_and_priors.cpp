@@ -51,11 +51,6 @@ double cpp_gev_loglik(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
   if (x[1] <= 0)
     return R_NegInf ;
   Rcpp::NumericVector data = ss["data"] ;
-//  double x1 = ss["x1"] ;
-//  double xm = ss["xm"] ;
-//  if (x[1] <= 0 || 1 + x[2] * (x1 - x[0]) / x[1] <= 0 ||
-//      1 + x[2] * (xm - x[0]) / x[1] <= 0)
-//    return R_NegInf ;
   Rcpp::NumericVector sdat = (data - x[0]) / x[1] ;
   Rcpp::NumericVector zz = 1 + x[2] * sdat ;
   if (any_nonpos(zz))
@@ -315,25 +310,6 @@ double cpp_gev_beta(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
   Rcpp::NumericVector pq = ppars["pq"] ;
   return -log(x[1]) + (pq[0] - 1.0) * log(x[2] - min_xi) +
     (pq[1] - 1.0) * log(max_xi - x[2]) ;
-}
-
-// General log-posterior
-
-// [[Rcpp::export]]
-double cpp_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
-  SEXP lik_ptr = pars["lik_ptr"] ;
-  SEXP prior_ptr = pars["prior_ptr"] ;
-  // Unwrap pointer to the log-likelihood function.
-  typedef double (*loglikPtr)(const Rcpp::NumericVector& x,
-                  const Rcpp::List& ss) ;
-  Rcpp::XPtr<loglikPtr> xlfun(lik_ptr) ;
-  loglikPtr loglikfun = *xlfun ;
-  // Unwrap pointer to the log-prior function.
-  typedef double (*priorPtr)(const Rcpp::NumericVector& x,
-                  const Rcpp::List& ppars) ;
-  Rcpp::XPtr<priorPtr> xpfun(prior_ptr) ;
-  priorPtr priorfun = *xpfun ;
-  return loglikfun(x, pars) + priorfun(x, pars) ;
 }
 
 // Model-specific log-posteriors for a user-defined prior
