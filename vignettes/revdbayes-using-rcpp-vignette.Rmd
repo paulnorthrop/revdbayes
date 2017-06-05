@@ -32,39 +32,50 @@ n <- 1000
 set.seed(46)
 ```
 
-### rpost vs. rpost_rcpp
+### Generalised Pareto (GP) model
 
-Generalized Pareto
+Use repeat the analysis of the Gulf of Mexico Wave Height Data from the [Introducing revdbayes](revdbayes-vignette.html)) vignette, using the **microbenchmark** package [@microbenchmark] to check that using Rcpp does indeed reduced computation time.
 
 ```{r}
 data(gom)
 u <- quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
-microbenchmark(
-  old = rpost(n = n, model = "gp", prior = fp, thresh = u, data = gom),
-  new = rpost_rcpp(n = n, model = "gp", prior = fp, thresh = u, data = gom)
+res <- microbenchmark(
+  rpost = rpost(n = n, model = "gp", prior = fp, thresh = u, data = gom),
+  rpost_rcpp = rpost_rcpp(n = n, model = "gp", prior = fp, thresh = u, data = gom)
 )
+print(res, signif = 4)
+options(microbenchmark.unit = "relative")
+print(res, signif = 2)
 ```
 
-Generalized Extreme Value
+In this example `rpost_rcpp` is, on average, a factor of approximately 7-8 times faster than `rpost`.
+
+### The Generalised Extreme Value (GEV) model
+
+Use repeat the analysis of the Port Pirie annual maximum sea level data from the [Introducing revdbayes](revdbayes-vignette.html)).  We add to the comparison of performances the example calculations that feature in the **evdbayes** user guide based on the `posterior` function.  
 
 ```{r}
-# evdbayes
-t0 <- c(3.87, 0.2, -0.05) 
-s <- c(.06, .25, .25)
-b <- 200
 data(portpirie)
 mat <- diag(c(10000, 10000, 100))
 pn <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
-microbenchmark(
-  old = rpost(n = n, model = "gev", prior = pn, data = portpirie),
-  new = rpost_rcpp(n = n, model = "gev", prior = pn, data = portpirie),
+# Tuning parameters from the evdbayes user guide.
+t0 <- c(3.87, 0.2, -0.05) 
+s <- c(.06, .25, .25)
+b <- 0
+res <- microbenchmark(
+  rpost = rpost(n = n, model = "gev", prior = pn, data = portpirie),
+  rpost_rcpp = rpost_rcpp(n = n, model = "gev", prior = pn, data = portpirie),
   evdbayes = posterior(n + b - 1, t0, prior = pn, lh = "gev", data = portpirie,
                        psd = s, burn = b)
 )
+options(microbenchmark.unit = NULL)
+print(res, signif = 4)
+options(microbenchmark.unit = "relative")
+print(res, signif = 2)
 ```
 
-### revdbayes vs. evdbayes
+The comparison above is generous to `posterior` because the burn-in has been set to zero and `posterior` produces a dependent sample rather than a random sample.  The *effective sample size* of an MCMC sample from `posterior` varies between simulations and across parameters.  Repeated use of the `effectiveSize` function in the **coda** package [@coda] suggests that the effective sample size in this example is of the order of 100 to 200, whereas the **revdbayes** functions `rpost` and `rpost_rcpp` produce random samples of size 1000. `rpost` is less than 50\% slower than `posterior` while `rpost_rcpp` is a factor of approximately 4 faster than `posterior`.
 
 ## Providing a user-defined prior {#cpp_fun}
 
