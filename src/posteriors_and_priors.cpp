@@ -22,9 +22,9 @@ double cpp_gp_loglik(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
     return R_NegInf ;
   double loglik ;
   Rcpp::NumericVector gpd_data = ss["data"] ;
-  int m = ss["m"] ;
   Rcpp::NumericVector sdat = gpd_data / x[0] ;
   Rcpp::NumericVector zz = 1 + x[1] * sdat ;
+  int m = ss["m"] ;
   if (std::abs(x[1]) > 1e-6) {
     loglik = -m * log(x[0]) - (1 + 1 / x[1]) * sum(log(zz)) ;
   } else {
