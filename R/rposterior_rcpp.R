@@ -743,7 +743,7 @@ calc_init_logpost <- function(model, prior_type, init, for_post) {
   }
   if (model == "os") {
     init_check <- switch(
-      prior,
+      prior_type,
       gev_mdi = os_mdi_logpost(x = init, pars = for_post),
       gev_norm = os_norm_logpost(x = init, pars = for_post),
       gev_loglognorm = os_loglognorm_logpost(x = init, pars = for_post),
@@ -753,7 +753,7 @@ calc_init_logpost <- function(model, prior_type, init, for_post) {
   }
   if (model == "pp") {
     init_check <- switch(
-      prior,
+      prior_type,
       gev_mdi = pp_mdi_logpost(x = init, pars = for_post),
       gev_norm = pp_norm_logpost(x = init, pars = for_post),
       gev_loglognorm = pp_loglognorm_logpost(x = init, pars = for_post),
