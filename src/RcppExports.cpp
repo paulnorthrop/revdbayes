@@ -535,37 +535,6 @@ RcppExport SEXP revdbayes_cpp_gev_beta(SEXP xSEXP, SEXP pparsSEXP) {
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// cpp_logpost
-double cpp_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars);
-static SEXP revdbayes_cpp_logpost_try(SEXP xSEXP, SEXP parsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_logpost(x, pars));
-    return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP revdbayes_cpp_logpost(SEXP xSEXP, SEXP parsSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(revdbayes_cpp_logpost_try(xSEXP, parsSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
-}
 // gp_user_logpost
 double gp_user_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars);
 static SEXP revdbayes_gp_user_logpost_try(SEXP xSEXP, SEXP parsSEXP) {
@@ -1434,38 +1403,6 @@ RcppExport SEXP revdbayes_os_beta_logpost(SEXP xSEXP, SEXP parsSEXP) {
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// cpp_logpost_phi
-double cpp_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars, const SEXP& phi_to_theta_ptr);
-static SEXP revdbayes_cpp_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP, SEXP phi_to_theta_ptrSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
-    Rcpp::traits::input_parameter< const SEXP& >::type phi_to_theta_ptr(phi_to_theta_ptrSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_logpost_phi(phi, pars, phi_to_theta_ptr));
-    return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP revdbayes_cpp_logpost_phi(SEXP phiSEXP, SEXP parsSEXP, SEXP phi_to_theta_ptrSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(revdbayes_cpp_logpost_phi_try(phiSEXP, parsSEXP, phi_to_theta_ptrSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
-}
 // gp_logpost_xptr
 SEXP gp_logpost_xptr(std::string fstr);
 static SEXP revdbayes_gp_logpost_xptr_try(SEXP fstrSEXP) {
@@ -1617,6 +1554,68 @@ RcppExport SEXP revdbayes_gp_phi_to_theta(SEXP phiSEXP, SEXP user_argsSEXP) {
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// gev_phi_to_theta
+Rcpp::NumericVector gev_phi_to_theta(const Rcpp::NumericVector& phi, const Rcpp::List& user_args);
+static SEXP revdbayes_gev_phi_to_theta_try(SEXP phiSEXP, SEXP user_argsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type user_args(user_argsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gev_phi_to_theta(phi, user_args));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gev_phi_to_theta(SEXP phiSEXP, SEXP user_argsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gev_phi_to_theta_try(phiSEXP, user_argsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// pp_phi_to_theta
+Rcpp::NumericVector pp_phi_to_theta(const Rcpp::NumericVector& phi, const Rcpp::List& user_args);
+static SEXP revdbayes_pp_phi_to_theta_try(SEXP phiSEXP, SEXP user_argsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type user_args(user_argsSEXP);
+    rcpp_result_gen = Rcpp::wrap(pp_phi_to_theta(phi, user_args));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_pp_phi_to_theta(SEXP phiSEXP, SEXP user_argsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_pp_phi_to_theta_try(phiSEXP, user_argsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // phi_to_theta_xptr
 SEXP phi_to_theta_xptr(std::string fstr);
 static SEXP revdbayes_phi_to_theta_xptr_try(SEXP fstrSEXP) {
@@ -1632,6 +1631,994 @@ RcppExport SEXP revdbayes_phi_to_theta_xptr(SEXP fstrSEXP) {
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
         rcpp_result_gen = PROTECT(revdbayes_phi_to_theta_xptr_try(fstrSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gp_mdi_logpost_phi
+double gp_mdi_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gp_mdi_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gp_mdi_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gp_mdi_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gp_mdi_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gp_norm_logpost_phi
+double gp_norm_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gp_norm_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gp_norm_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gp_norm_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gp_norm_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gp_flat_logpost_phi
+double gp_flat_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gp_flat_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gp_flat_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gp_flat_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gp_flat_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gp_flatflat_logpost_phi
+double gp_flatflat_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gp_flatflat_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gp_flatflat_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gp_flatflat_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gp_flatflat_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gp_jeffreys_logpost_phi
+double gp_jeffreys_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gp_jeffreys_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gp_jeffreys_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gp_jeffreys_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gp_jeffreys_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gp_beta_logpost_phi
+double gp_beta_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gp_beta_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gp_beta_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gp_beta_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gp_beta_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gp_user_logpost_phi
+double gp_user_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gp_user_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gp_user_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gp_user_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gp_user_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gev_mdi_logpost_phi
+double gev_mdi_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gev_mdi_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gev_mdi_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gev_mdi_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gev_mdi_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gev_norm_logpost_phi
+double gev_norm_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gev_norm_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gev_norm_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gev_norm_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gev_norm_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gev_loglognorm_logpost_phi
+double gev_loglognorm_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gev_loglognorm_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gev_loglognorm_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gev_loglognorm_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gev_loglognorm_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gev_flat_logpost_phi
+double gev_flat_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gev_flat_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gev_flat_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gev_flat_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gev_flat_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gev_flatflat_logpost_phi
+double gev_flatflat_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gev_flatflat_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gev_flatflat_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gev_flatflat_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gev_flatflat_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gev_beta_logpost_phi
+double gev_beta_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gev_beta_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gev_beta_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gev_beta_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gev_beta_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gev_user_logpost_phi
+double gev_user_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_gev_user_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gev_user_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gev_user_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gev_user_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// os_mdi_logpost_phi
+double os_mdi_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_os_mdi_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(os_mdi_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_os_mdi_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_os_mdi_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// os_norm_logpost_phi
+double os_norm_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_os_norm_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(os_norm_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_os_norm_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_os_norm_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// os_loglognorm_logpost_phi
+double os_loglognorm_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_os_loglognorm_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(os_loglognorm_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_os_loglognorm_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_os_loglognorm_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// os_flat_logpost_phi
+double os_flat_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_os_flat_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(os_flat_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_os_flat_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_os_flat_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// os_flatflat_logpost_phi
+double os_flatflat_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_os_flatflat_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(os_flatflat_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_os_flatflat_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_os_flatflat_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// os_beta_logpost_phi
+double os_beta_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_os_beta_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(os_beta_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_os_beta_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_os_beta_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// os_user_logpost_phi
+double os_user_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_os_user_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(os_user_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_os_user_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_os_user_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// pp_mdi_logpost_phi
+double pp_mdi_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_pp_mdi_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(pp_mdi_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_pp_mdi_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_pp_mdi_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// pp_norm_logpost_phi
+double pp_norm_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_pp_norm_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(pp_norm_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_pp_norm_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_pp_norm_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// pp_loglognorm_logpost_phi
+double pp_loglognorm_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_pp_loglognorm_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(pp_loglognorm_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_pp_loglognorm_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_pp_loglognorm_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// pp_flat_logpost_phi
+double pp_flat_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_pp_flat_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(pp_flat_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_pp_flat_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_pp_flat_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// pp_flatflat_logpost_phi
+double pp_flatflat_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_pp_flatflat_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(pp_flatflat_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_pp_flatflat_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_pp_flatflat_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// pp_beta_logpost_phi
+double pp_beta_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_pp_beta_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(pp_beta_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_pp_beta_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_pp_beta_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// pp_user_logpost_phi
+double pp_user_logpost_phi(const Rcpp::NumericVector& phi, const Rcpp::List& pars);
+static SEXP revdbayes_pp_user_logpost_phi_try(SEXP phiSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(pp_user_logpost_phi(phi, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_pp_user_logpost_phi(SEXP phiSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_pp_user_logpost_phi_try(phiSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gp_logpost_phi_xptr
+SEXP gp_logpost_phi_xptr(std::string fstr);
+static SEXP revdbayes_gp_logpost_phi_xptr_try(SEXP fstrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< std::string >::type fstr(fstrSEXP);
+    rcpp_result_gen = Rcpp::wrap(gp_logpost_phi_xptr(fstr));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gp_logpost_phi_xptr(SEXP fstrSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gp_logpost_phi_xptr_try(fstrSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// gev_logpost_phi_xptr
+SEXP gev_logpost_phi_xptr(std::string fstr);
+static SEXP revdbayes_gev_logpost_phi_xptr_try(SEXP fstrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< std::string >::type fstr(fstrSEXP);
+    rcpp_result_gen = Rcpp::wrap(gev_logpost_phi_xptr(fstr));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_gev_logpost_phi_xptr(SEXP fstrSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_gev_logpost_phi_xptr_try(fstrSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// pp_logpost_phi_xptr
+SEXP pp_logpost_phi_xptr(std::string fstr);
+static SEXP revdbayes_pp_logpost_phi_xptr_try(SEXP fstrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< std::string >::type fstr(fstrSEXP);
+    rcpp_result_gen = Rcpp::wrap(pp_logpost_phi_xptr(fstr));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_pp_logpost_phi_xptr(SEXP fstrSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_pp_logpost_phi_xptr_try(fstrSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// os_logpost_phi_xptr
+SEXP os_logpost_phi_xptr(std::string fstr);
+static SEXP revdbayes_os_logpost_phi_xptr_try(SEXP fstrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< std::string >::type fstr(fstrSEXP);
+    rcpp_result_gen = Rcpp::wrap(os_logpost_phi_xptr(fstr));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_os_logpost_phi_xptr(SEXP fstrSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_os_logpost_phi_xptr_try(fstrSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1792,7 +2779,6 @@ static int revdbayes_RcppExport_validate(const char* sig) {
         signatures.insert("double(*cpp_gev_flat)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*cpp_gev_flatflat)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*cpp_gev_beta)(const Rcpp::NumericVector&,const Rcpp::List&)");
-        signatures.insert("double(*cpp_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*gp_user_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*gev_user_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*os_user_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
@@ -1821,13 +2807,46 @@ static int revdbayes_RcppExport_validate(const char* sig) {
         signatures.insert("double(*os_flat_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*os_flatflat_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*os_beta_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-        signatures.insert("double(*cpp_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&,const SEXP&)");
         signatures.insert("SEXP(*gp_logpost_xptr)(std::string)");
         signatures.insert("SEXP(*gev_logpost_xptr)(std::string)");
         signatures.insert("SEXP(*os_logpost_xptr)(std::string)");
         signatures.insert("SEXP(*pp_logpost_xptr)(std::string)");
         signatures.insert("Rcpp::NumericVector(*gp_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("Rcpp::NumericVector(*gev_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("Rcpp::NumericVector(*pp_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("SEXP(*phi_to_theta_xptr)(std::string)");
+        signatures.insert("double(*gp_mdi_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*gp_norm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*gp_flat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*gp_flatflat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*gp_jeffreys_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*gp_beta_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*gp_user_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*gev_mdi_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*gev_norm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*gev_loglognorm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*gev_flat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*gev_flatflat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*gev_beta_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*gev_user_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*os_mdi_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*os_norm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*os_loglognorm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*os_flat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*os_flatflat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*os_beta_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*os_user_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*pp_mdi_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*pp_norm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*pp_loglognorm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*pp_flat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*pp_flatflat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*pp_beta_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*pp_user_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("SEXP(*gp_logpost_phi_xptr)(std::string)");
+        signatures.insert("SEXP(*gev_logpost_phi_xptr)(std::string)");
+        signatures.insert("SEXP(*pp_logpost_phi_xptr)(std::string)");
+        signatures.insert("SEXP(*os_logpost_phi_xptr)(std::string)");
         signatures.insert("double(*user_gp_flat)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*user_gev_norm)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*user_gev_flat)(const Rcpp::NumericVector&,const Rcpp::List&)");
@@ -1855,7 +2874,6 @@ RcppExport SEXP revdbayes_RcppExport_registerCCallable() {
     R_RegisterCCallable("revdbayes", "revdbayes_cpp_gev_flat", (DL_FUNC)revdbayes_cpp_gev_flat_try);
     R_RegisterCCallable("revdbayes", "revdbayes_cpp_gev_flatflat", (DL_FUNC)revdbayes_cpp_gev_flatflat_try);
     R_RegisterCCallable("revdbayes", "revdbayes_cpp_gev_beta", (DL_FUNC)revdbayes_cpp_gev_beta_try);
-    R_RegisterCCallable("revdbayes", "revdbayes_cpp_logpost", (DL_FUNC)revdbayes_cpp_logpost_try);
     R_RegisterCCallable("revdbayes", "revdbayes_gp_user_logpost", (DL_FUNC)revdbayes_gp_user_logpost_try);
     R_RegisterCCallable("revdbayes", "revdbayes_gev_user_logpost", (DL_FUNC)revdbayes_gev_user_logpost_try);
     R_RegisterCCallable("revdbayes", "revdbayes_os_user_logpost", (DL_FUNC)revdbayes_os_user_logpost_try);
@@ -1884,13 +2902,46 @@ RcppExport SEXP revdbayes_RcppExport_registerCCallable() {
     R_RegisterCCallable("revdbayes", "revdbayes_os_flat_logpost", (DL_FUNC)revdbayes_os_flat_logpost_try);
     R_RegisterCCallable("revdbayes", "revdbayes_os_flatflat_logpost", (DL_FUNC)revdbayes_os_flatflat_logpost_try);
     R_RegisterCCallable("revdbayes", "revdbayes_os_beta_logpost", (DL_FUNC)revdbayes_os_beta_logpost_try);
-    R_RegisterCCallable("revdbayes", "revdbayes_cpp_logpost_phi", (DL_FUNC)revdbayes_cpp_logpost_phi_try);
     R_RegisterCCallable("revdbayes", "revdbayes_gp_logpost_xptr", (DL_FUNC)revdbayes_gp_logpost_xptr_try);
     R_RegisterCCallable("revdbayes", "revdbayes_gev_logpost_xptr", (DL_FUNC)revdbayes_gev_logpost_xptr_try);
     R_RegisterCCallable("revdbayes", "revdbayes_os_logpost_xptr", (DL_FUNC)revdbayes_os_logpost_xptr_try);
     R_RegisterCCallable("revdbayes", "revdbayes_pp_logpost_xptr", (DL_FUNC)revdbayes_pp_logpost_xptr_try);
     R_RegisterCCallable("revdbayes", "revdbayes_gp_phi_to_theta", (DL_FUNC)revdbayes_gp_phi_to_theta_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gev_phi_to_theta", (DL_FUNC)revdbayes_gev_phi_to_theta_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_pp_phi_to_theta", (DL_FUNC)revdbayes_pp_phi_to_theta_try);
     R_RegisterCCallable("revdbayes", "revdbayes_phi_to_theta_xptr", (DL_FUNC)revdbayes_phi_to_theta_xptr_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gp_mdi_logpost_phi", (DL_FUNC)revdbayes_gp_mdi_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gp_norm_logpost_phi", (DL_FUNC)revdbayes_gp_norm_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gp_flat_logpost_phi", (DL_FUNC)revdbayes_gp_flat_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gp_flatflat_logpost_phi", (DL_FUNC)revdbayes_gp_flatflat_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gp_jeffreys_logpost_phi", (DL_FUNC)revdbayes_gp_jeffreys_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gp_beta_logpost_phi", (DL_FUNC)revdbayes_gp_beta_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gp_user_logpost_phi", (DL_FUNC)revdbayes_gp_user_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gev_mdi_logpost_phi", (DL_FUNC)revdbayes_gev_mdi_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gev_norm_logpost_phi", (DL_FUNC)revdbayes_gev_norm_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gev_loglognorm_logpost_phi", (DL_FUNC)revdbayes_gev_loglognorm_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gev_flat_logpost_phi", (DL_FUNC)revdbayes_gev_flat_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gev_flatflat_logpost_phi", (DL_FUNC)revdbayes_gev_flatflat_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gev_beta_logpost_phi", (DL_FUNC)revdbayes_gev_beta_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gev_user_logpost_phi", (DL_FUNC)revdbayes_gev_user_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_os_mdi_logpost_phi", (DL_FUNC)revdbayes_os_mdi_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_os_norm_logpost_phi", (DL_FUNC)revdbayes_os_norm_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_os_loglognorm_logpost_phi", (DL_FUNC)revdbayes_os_loglognorm_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_os_flat_logpost_phi", (DL_FUNC)revdbayes_os_flat_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_os_flatflat_logpost_phi", (DL_FUNC)revdbayes_os_flatflat_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_os_beta_logpost_phi", (DL_FUNC)revdbayes_os_beta_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_os_user_logpost_phi", (DL_FUNC)revdbayes_os_user_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_pp_mdi_logpost_phi", (DL_FUNC)revdbayes_pp_mdi_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_pp_norm_logpost_phi", (DL_FUNC)revdbayes_pp_norm_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_pp_loglognorm_logpost_phi", (DL_FUNC)revdbayes_pp_loglognorm_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_pp_flat_logpost_phi", (DL_FUNC)revdbayes_pp_flat_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_pp_flatflat_logpost_phi", (DL_FUNC)revdbayes_pp_flatflat_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_pp_beta_logpost_phi", (DL_FUNC)revdbayes_pp_beta_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_pp_user_logpost_phi", (DL_FUNC)revdbayes_pp_user_logpost_phi_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gp_logpost_phi_xptr", (DL_FUNC)revdbayes_gp_logpost_phi_xptr_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_gev_logpost_phi_xptr", (DL_FUNC)revdbayes_gev_logpost_phi_xptr_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_pp_logpost_phi_xptr", (DL_FUNC)revdbayes_pp_logpost_phi_xptr_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_os_logpost_phi_xptr", (DL_FUNC)revdbayes_os_logpost_phi_xptr_try);
     R_RegisterCCallable("revdbayes", "revdbayes_user_gp_flat", (DL_FUNC)revdbayes_user_gp_flat_try);
     R_RegisterCCallable("revdbayes", "revdbayes_user_gev_norm", (DL_FUNC)revdbayes_user_gev_norm_try);
     R_RegisterCCallable("revdbayes", "revdbayes_user_gev_flat", (DL_FUNC)revdbayes_user_gev_flat_try);
@@ -1917,7 +2968,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"revdbayes_cpp_gev_flat", (DL_FUNC) &revdbayes_cpp_gev_flat, 2},
     {"revdbayes_cpp_gev_flatflat", (DL_FUNC) &revdbayes_cpp_gev_flatflat, 2},
     {"revdbayes_cpp_gev_beta", (DL_FUNC) &revdbayes_cpp_gev_beta, 2},
-    {"revdbayes_cpp_logpost", (DL_FUNC) &revdbayes_cpp_logpost, 2},
     {"revdbayes_gp_user_logpost", (DL_FUNC) &revdbayes_gp_user_logpost, 2},
     {"revdbayes_gev_user_logpost", (DL_FUNC) &revdbayes_gev_user_logpost, 2},
     {"revdbayes_os_user_logpost", (DL_FUNC) &revdbayes_os_user_logpost, 2},
@@ -1946,13 +2996,46 @@ static const R_CallMethodDef CallEntries[] = {
     {"revdbayes_os_flat_logpost", (DL_FUNC) &revdbayes_os_flat_logpost, 2},
     {"revdbayes_os_flatflat_logpost", (DL_FUNC) &revdbayes_os_flatflat_logpost, 2},
     {"revdbayes_os_beta_logpost", (DL_FUNC) &revdbayes_os_beta_logpost, 2},
-    {"revdbayes_cpp_logpost_phi", (DL_FUNC) &revdbayes_cpp_logpost_phi, 3},
     {"revdbayes_gp_logpost_xptr", (DL_FUNC) &revdbayes_gp_logpost_xptr, 1},
     {"revdbayes_gev_logpost_xptr", (DL_FUNC) &revdbayes_gev_logpost_xptr, 1},
     {"revdbayes_os_logpost_xptr", (DL_FUNC) &revdbayes_os_logpost_xptr, 1},
     {"revdbayes_pp_logpost_xptr", (DL_FUNC) &revdbayes_pp_logpost_xptr, 1},
     {"revdbayes_gp_phi_to_theta", (DL_FUNC) &revdbayes_gp_phi_to_theta, 2},
+    {"revdbayes_gev_phi_to_theta", (DL_FUNC) &revdbayes_gev_phi_to_theta, 2},
+    {"revdbayes_pp_phi_to_theta", (DL_FUNC) &revdbayes_pp_phi_to_theta, 2},
     {"revdbayes_phi_to_theta_xptr", (DL_FUNC) &revdbayes_phi_to_theta_xptr, 1},
+    {"revdbayes_gp_mdi_logpost_phi", (DL_FUNC) &revdbayes_gp_mdi_logpost_phi, 2},
+    {"revdbayes_gp_norm_logpost_phi", (DL_FUNC) &revdbayes_gp_norm_logpost_phi, 2},
+    {"revdbayes_gp_flat_logpost_phi", (DL_FUNC) &revdbayes_gp_flat_logpost_phi, 2},
+    {"revdbayes_gp_flatflat_logpost_phi", (DL_FUNC) &revdbayes_gp_flatflat_logpost_phi, 2},
+    {"revdbayes_gp_jeffreys_logpost_phi", (DL_FUNC) &revdbayes_gp_jeffreys_logpost_phi, 2},
+    {"revdbayes_gp_beta_logpost_phi", (DL_FUNC) &revdbayes_gp_beta_logpost_phi, 2},
+    {"revdbayes_gp_user_logpost_phi", (DL_FUNC) &revdbayes_gp_user_logpost_phi, 2},
+    {"revdbayes_gev_mdi_logpost_phi", (DL_FUNC) &revdbayes_gev_mdi_logpost_phi, 2},
+    {"revdbayes_gev_norm_logpost_phi", (DL_FUNC) &revdbayes_gev_norm_logpost_phi, 2},
+    {"revdbayes_gev_loglognorm_logpost_phi", (DL_FUNC) &revdbayes_gev_loglognorm_logpost_phi, 2},
+    {"revdbayes_gev_flat_logpost_phi", (DL_FUNC) &revdbayes_gev_flat_logpost_phi, 2},
+    {"revdbayes_gev_flatflat_logpost_phi", (DL_FUNC) &revdbayes_gev_flatflat_logpost_phi, 2},
+    {"revdbayes_gev_beta_logpost_phi", (DL_FUNC) &revdbayes_gev_beta_logpost_phi, 2},
+    {"revdbayes_gev_user_logpost_phi", (DL_FUNC) &revdbayes_gev_user_logpost_phi, 2},
+    {"revdbayes_os_mdi_logpost_phi", (DL_FUNC) &revdbayes_os_mdi_logpost_phi, 2},
+    {"revdbayes_os_norm_logpost_phi", (DL_FUNC) &revdbayes_os_norm_logpost_phi, 2},
+    {"revdbayes_os_loglognorm_logpost_phi", (DL_FUNC) &revdbayes_os_loglognorm_logpost_phi, 2},
+    {"revdbayes_os_flat_logpost_phi", (DL_FUNC) &revdbayes_os_flat_logpost_phi, 2},
+    {"revdbayes_os_flatflat_logpost_phi", (DL_FUNC) &revdbayes_os_flatflat_logpost_phi, 2},
+    {"revdbayes_os_beta_logpost_phi", (DL_FUNC) &revdbayes_os_beta_logpost_phi, 2},
+    {"revdbayes_os_user_logpost_phi", (DL_FUNC) &revdbayes_os_user_logpost_phi, 2},
+    {"revdbayes_pp_mdi_logpost_phi", (DL_FUNC) &revdbayes_pp_mdi_logpost_phi, 2},
+    {"revdbayes_pp_norm_logpost_phi", (DL_FUNC) &revdbayes_pp_norm_logpost_phi, 2},
+    {"revdbayes_pp_loglognorm_logpost_phi", (DL_FUNC) &revdbayes_pp_loglognorm_logpost_phi, 2},
+    {"revdbayes_pp_flat_logpost_phi", (DL_FUNC) &revdbayes_pp_flat_logpost_phi, 2},
+    {"revdbayes_pp_flatflat_logpost_phi", (DL_FUNC) &revdbayes_pp_flatflat_logpost_phi, 2},
+    {"revdbayes_pp_beta_logpost_phi", (DL_FUNC) &revdbayes_pp_beta_logpost_phi, 2},
+    {"revdbayes_pp_user_logpost_phi", (DL_FUNC) &revdbayes_pp_user_logpost_phi, 2},
+    {"revdbayes_gp_logpost_phi_xptr", (DL_FUNC) &revdbayes_gp_logpost_phi_xptr, 1},
+    {"revdbayes_gev_logpost_phi_xptr", (DL_FUNC) &revdbayes_gev_logpost_phi_xptr, 1},
+    {"revdbayes_pp_logpost_phi_xptr", (DL_FUNC) &revdbayes_pp_logpost_phi_xptr, 1},
+    {"revdbayes_os_logpost_phi_xptr", (DL_FUNC) &revdbayes_os_logpost_phi_xptr, 1},
     {"revdbayes_user_gp_flat", (DL_FUNC) &revdbayes_user_gp_flat, 2},
     {"revdbayes_user_gev_norm", (DL_FUNC) &revdbayes_user_gev_norm, 2},
     {"revdbayes_user_gev_flat", (DL_FUNC) &revdbayes_user_gev_flat, 2},

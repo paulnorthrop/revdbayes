@@ -574,11 +574,21 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   # -------------------------- Define phi_to_theta -------------------------- #
   #
   # v1.2.0
-  # Create a pointer to the C++ phi_to_theta function and add it to the
-  # list for_post.
+  # Create a pointers to the C++ phi_to_theta function and the C++ function
+  # to evaluate the log-posterior after transformation from theta to phi.
   #
   phi_to_theta_ptr <- phi_to_theta_xptr(model)
-#  for_post <- c(for_post, phi_to_theta = phi_to_theta_ptr)
+  cpp_logpost_phi <- switch(model,
+    gp = gp_logpost_phi_xptr(prior_type),
+    gev = gev_logpost_phi_xptr(prior_type),
+    os = os_logpost_phi_xptr(prior_type),
+    pp = pp_logpost_phi_xptr(prior_type)
+  )
+  print(cpp_logpost_phi)
+  cpp_logpost_phi <- as.name(paste(prior_type,"_logpost_phi", sep = ""))
+  print(cpp_logpost_phi)
+  cpp_logpost_phi <- gp_beta_logpost_phi
+  #
   #
   # Set which_lam: indices of the parameter vector that are Box-Cox transformed.
   #
@@ -587,7 +597,7 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   if (use_phi_map) {
     temp <- stats::optim(init_phi, cpp_logpost_phi,
                   control = list(parscale = se_phi, fnscale = -1),
-                  pars = for_post, phi_to_theta_ptr = phi_to_theta_ptr)
+                  pars = for_post)
     phi_mid <- temp$par
   } else {
     phi_mid <- init_phi
@@ -603,10 +613,16 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   if (!is.null(temp_args$n_grid)) find_lambda_args$n_grid <- temp_args$n_grid
   if (!is.null(temp_args$ep_bc)) find_lambda_args$n_grid <- temp_args$ep_bc
   # Find Box-Cox parameter lambda and initial estimate for psi.
+  user_args <- switch(model,
+    gp = list(xm = ds$xm),
+    gev = list(x1 = ds$x1, xm = ds$xm),
+    os = list(x1 = ds$x1, xm = ds$xm),
+    pp = list(thresh = ds$thresh, xm = ds$xm)
+  )
   for_find_lambda <- c(list(logf = post_ptr, pars = for_post), min_max_phi,
                        list(d = fr$d, which_lam = which_lam),
                        find_lambda_args, list(phi_to_theta = phi_to_theta_ptr,
-                       user_args = list(xm = ds$xm)))
+                       user_args = user_args))
   min_max_phi$min_phi[3] <- 0.1
   lambda <- do.call(rust::find_lambda_rcpp, for_find_lambda)
   #

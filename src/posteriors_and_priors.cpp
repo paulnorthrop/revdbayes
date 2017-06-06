@@ -327,35 +327,35 @@ double gp_user_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
 
 // [[Rcpp::export]]
 double gev_user_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
-  SEXP prior_ptr = pars["prior_ptr"] ;
+  SEXP prior_ptr = pars["prior"] ;
   // Unwrap pointer to the log-prior function.
   typedef double (*priorPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& ppars) ;
   Rcpp::XPtr<priorPtr> xpfun(prior_ptr) ;
   priorPtr priorfun = *xpfun ;
-  return cpp_gp_loglik(x, pars) + priorfun(x, pars) ;
+  return cpp_gev_loglik(x, pars) + priorfun(x, pars) ;
 }
 
 // [[Rcpp::export]]
 double os_user_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
-  SEXP prior_ptr = pars["prior_ptr"] ;
+  SEXP prior_ptr = pars["prior"] ;
   // Unwrap pointer to the log-prior function.
   typedef double (*priorPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& ppars) ;
   Rcpp::XPtr<priorPtr> xpfun(prior_ptr) ;
   priorPtr priorfun = *xpfun ;
-  return cpp_gp_loglik(x, pars) + priorfun(x, pars) ;
+  return cpp_os_loglik(x, pars) + priorfun(x, pars) ;
 }
 
 // [[Rcpp::export]]
 double pp_user_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
-  SEXP prior_ptr = pars["prior_ptr"] ;
+  SEXP prior_ptr = pars["prior"] ;
   // Unwrap pointer to the log-prior function.
   typedef double (*priorPtr)(const Rcpp::NumericVector& x,
                   const Rcpp::List& ppars) ;
   Rcpp::XPtr<priorPtr> xpfun(prior_ptr) ;
   priorPtr priorfun = *xpfun ;
-  return cpp_gp_loglik(x, pars) + priorfun(x, pars) ;
+  return cpp_pp_loglik(x, pars) + priorfun(x, pars) ;
 }
 
 // GP Posteriors for specific in-built priors
@@ -486,38 +486,6 @@ double os_beta_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   return cpp_os_loglik(x, pars) + cpp_gev_beta(x, pars) ;
 }
 
-// General log-posterior, after transformation from theta to phi.
-
-// [[Rcpp::export]]
-double cpp_logpost_phi(const Rcpp::NumericVector& phi,
-                       const Rcpp::List& pars, const SEXP& phi_to_theta_ptr) {
-  SEXP lik_ptr = pars["lik_ptr"] ;
-  SEXP prior_ptr = pars["prior_ptr"] ;
-  //  SEXP phi_to_theta_ptr = phi_to_theta ;
-  // Unwrap pointer to the log-likelihood function.
-  typedef double (*loglikPtr)(const Rcpp::NumericVector& x,
-                  const Rcpp::List& ss) ;
-  Rcpp::XPtr<loglikPtr> xlfun(lik_ptr) ;
-  loglikPtr loglikfun = *xlfun ;
-  // Unwrap pointer to the log-prior function.
-  typedef double (*priorPtr)(const Rcpp::NumericVector& x,
-                  const Rcpp::List& ppars) ;
-  Rcpp::XPtr<priorPtr> xpfun(prior_ptr) ;
-  priorPtr priorfun = *xpfun ;
-  // Unwrap pointer to the phi_to_theta function.
-  typedef Rcpp::NumericVector (*p2tPtr)(const Rcpp::NumericVector& phi,
-                               const Rcpp::List& user_args) ;
-  Rcpp::XPtr<p2tPtr> p2tfun(phi_to_theta_ptr) ;
-  p2tPtr phi_to_theta_fun = *p2tfun ;
-  Rcpp::NumericVector theta = phi_to_theta_fun(phi, pars) ;
-  return loglikfun(theta, pars) + priorfun(theta, pars) ;
-}
-
-//' Create external pointer to a C++ GP log-posterior function
-//'
-//' @param fstr A string indicating the C++ function required.
-//'
-//' @export
 // [[Rcpp::export]]
 SEXP gp_logpost_xptr(std::string fstr) {
   typedef double (*logpostPtr)(const Rcpp::NumericVector& x,
@@ -540,11 +508,6 @@ SEXP gp_logpost_xptr(std::string fstr) {
     return(Rcpp::XPtr<logpostPtr>(R_NilValue)) ;
 }
 
-//' Create external pointer to a C++ GEV log-posterior function
-//'
-//' @param fstr A string indicating the C++ function required.
-//'
-//' @export
 // [[Rcpp::export]]
 SEXP gev_logpost_xptr(std::string fstr) {
   typedef double (*logpostPtr)(const Rcpp::NumericVector& x,
@@ -567,11 +530,6 @@ SEXP gev_logpost_xptr(std::string fstr) {
     return(Rcpp::XPtr<logpostPtr>(R_NilValue)) ;
 }
 
-//' Create external pointer to a C++ OS log-posterior function
-//'
-//' @param fstr A string indicating the C++ function required.
-//'
-//' @export
 // [[Rcpp::export]]
 SEXP os_logpost_xptr(std::string fstr) {
   typedef double (*logpostPtr)(const Rcpp::NumericVector& x,
@@ -594,11 +552,6 @@ SEXP os_logpost_xptr(std::string fstr) {
     return(Rcpp::XPtr<logpostPtr>(R_NilValue)) ;
 }
 
-//' Create external pointer to a C++ PP log-posterior function
-//'
-//' @param fstr A string indicating the C++ function required.
-//'
-//' @export
 // [[Rcpp::export]]
 SEXP pp_logpost_xptr(std::string fstr) {
   typedef double (*logpostPtr)(const Rcpp::NumericVector& x,
@@ -633,20 +586,342 @@ Rcpp::NumericVector gp_phi_to_theta(const Rcpp::NumericVector& phi,
   return val ;
 }
 
-// A function to create external pointers to C++ phi_to_theta functions to evaluate
-// phi_to_theta.
+// Generalized Extreme Value and (Order Statistics model) phi_to_theta
 
-//' Create external pointer to a C++ phi_to_theta function
-//'
-//' @param fstr A string indicating the C++ function required.
-//'
-//' @export
+// [[Rcpp::export]]
+Rcpp::NumericVector gev_phi_to_theta(const Rcpp::NumericVector& phi,
+                                     const Rcpp::List& user_args) {
+  double x1 = user_args["x1"] ;
+  double xm = user_args["xm"] ;
+  double sr = sqrt(xm - x1) ;
+  Rcpp::NumericVector val(3);
+  val[0] = phi[0] ;
+  val[2] = (phi[2] - phi[1]) / sr ;
+  val[1] = ((xm - phi[0]) * phi[1] + (phi[0] - x1) * phi[2]) / sr ;
+  return val ;
+}
+
+// Point process model phi_to_theta
+
+// [[Rcpp::export]]
+Rcpp::NumericVector pp_phi_to_theta(const Rcpp::NumericVector& phi,
+                                     const Rcpp::List& user_args) {
+  double thresh = user_args["thresh"] ;
+  double xm = user_args["xm"] ;
+  double sr = sqrt(xm - thresh) ;
+  Rcpp::NumericVector val(3);
+  val[0] = phi[0] ;
+  val[2] = (phi[2] - phi[1]) / sr ;
+  val[1] = ((xm - phi[0]) * phi[1] + (phi[0] - thresh) * phi[2]) / sr ;
+  return val ;
+}
+
+// Create external pointers to phi_to_theta functions
+
 // [[Rcpp::export]]
 SEXP phi_to_theta_xptr(std::string fstr) {
   typedef Rcpp::NumericVector (*p2tPtr)(const Rcpp::NumericVector& phi,
                                const Rcpp::List& user_args) ;
   if (fstr == "gp")
     return(Rcpp::XPtr<p2tPtr>(new p2tPtr(&gp_phi_to_theta))) ;
+  else if (fstr == "gev")
+    return(Rcpp::XPtr<p2tPtr>(new p2tPtr(&gev_phi_to_theta))) ;
+  else if (fstr == "os")
+    return(Rcpp::XPtr<p2tPtr>(new p2tPtr(&gev_phi_to_theta))) ;
+  else if (fstr == "pp")
+    return(Rcpp::XPtr<p2tPtr>(new p2tPtr(&pp_phi_to_theta))) ;
   else
     return(Rcpp::XPtr<p2tPtr>(R_NilValue)) ;
+}
+
+// GP posteriors for in-built priors, after transformation from theta to phi.
+
+// [[Rcpp::export]]
+double gp_mdi_logpost_phi(const Rcpp::NumericVector& phi,
+                          const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gp_phi_to_theta(phi, pars) ;
+  return gp_mdi_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double gp_norm_logpost_phi(const Rcpp::NumericVector& phi,
+                          const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gp_phi_to_theta(phi, pars) ;
+  return gp_norm_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double gp_flat_logpost_phi(const Rcpp::NumericVector& phi,
+                          const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gp_phi_to_theta(phi, pars) ;
+  return gp_flat_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double gp_flatflat_logpost_phi(const Rcpp::NumericVector& phi,
+                           const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gp_phi_to_theta(phi, pars) ;
+  return gp_flatflat_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double gp_jeffreys_logpost_phi(const Rcpp::NumericVector& phi,
+                           const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gp_phi_to_theta(phi, pars) ;
+  return gp_jeffreys_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double gp_beta_logpost_phi(const Rcpp::NumericVector& phi,
+                           const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gp_phi_to_theta(phi, pars) ;
+  return gp_beta_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double gp_user_logpost_phi(const Rcpp::NumericVector& phi,
+                           const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gp_phi_to_theta(phi, pars) ;
+  return gp_user_logpost(theta, pars) ;
+}
+
+// GEV posteriors for in-built priors, after transformation from theta to phi.
+
+// [[Rcpp::export]]
+double gev_mdi_logpost_phi(const Rcpp::NumericVector& phi,
+                           const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return gev_mdi_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double gev_norm_logpost_phi(const Rcpp::NumericVector& phi,
+                            const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return gev_norm_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double gev_loglognorm_logpost_phi(const Rcpp::NumericVector& phi,
+                                  const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return gev_loglognorm_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double gev_flat_logpost_phi(const Rcpp::NumericVector& phi,
+                            const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return gev_flat_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double gev_flatflat_logpost_phi(const Rcpp::NumericVector& phi,
+                                const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return gev_flatflat_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double gev_beta_logpost_phi(const Rcpp::NumericVector& phi,
+                            const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return gev_beta_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double gev_user_logpost_phi(const Rcpp::NumericVector& phi,
+                            const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return gev_user_logpost(theta, pars) ;
+}
+
+// OS posteriors for in-built priors, after transformation from theta to phi.
+
+// [[Rcpp::export]]
+double os_mdi_logpost_phi(const Rcpp::NumericVector& phi,
+                          const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return os_mdi_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double os_norm_logpost_phi(const Rcpp::NumericVector& phi,
+                           const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return os_norm_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double os_loglognorm_logpost_phi(const Rcpp::NumericVector& phi,
+                                 const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return os_loglognorm_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double os_flat_logpost_phi(const Rcpp::NumericVector& phi,
+                           const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return os_flat_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double os_flatflat_logpost_phi(const Rcpp::NumericVector& phi,
+                               const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return os_flatflat_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double os_beta_logpost_phi(const Rcpp::NumericVector& phi,
+                           const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return os_beta_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double os_user_logpost_phi(const Rcpp::NumericVector& phi,
+                           const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return os_user_logpost(theta, pars) ;
+}
+
+// PP posteriors for in-built priors, after transformation from theta to phi.
+
+// [[Rcpp::export]]
+double pp_mdi_logpost_phi(const Rcpp::NumericVector& phi,
+                          const Rcpp::List& pars){
+  Rcpp::NumericVector theta = pp_phi_to_theta(phi, pars) ;
+  return pp_mdi_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double pp_norm_logpost_phi(const Rcpp::NumericVector& phi,
+                           const Rcpp::List& pars){
+  Rcpp::NumericVector theta = pp_phi_to_theta(phi, pars) ;
+  return pp_norm_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double pp_loglognorm_logpost_phi(const Rcpp::NumericVector& phi,
+                                 const Rcpp::List& pars){
+  Rcpp::NumericVector theta = pp_phi_to_theta(phi, pars) ;
+  return pp_loglognorm_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double pp_flat_logpost_phi(const Rcpp::NumericVector& phi,
+                           const Rcpp::List& pars){
+  Rcpp::NumericVector theta = pp_phi_to_theta(phi, pars) ;
+  return pp_flat_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double pp_flatflat_logpost_phi(const Rcpp::NumericVector& phi,
+                               const Rcpp::List& pars){
+  Rcpp::NumericVector theta = pp_phi_to_theta(phi, pars) ;
+  return pp_flatflat_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double pp_beta_logpost_phi(const Rcpp::NumericVector& phi,
+                           const Rcpp::List& pars){
+  Rcpp::NumericVector theta = pp_phi_to_theta(phi, pars) ;
+  return pp_beta_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double pp_user_logpost_phi(const Rcpp::NumericVector& phi,
+                           const Rcpp::List& pars){
+  Rcpp::NumericVector theta = pp_phi_to_theta(phi, pars) ;
+  return pp_user_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+SEXP gp_logpost_phi_xptr(std::string fstr) {
+  typedef double (*logpostPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& pars) ;
+  if (fstr == "gp_mdi")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gp_mdi_logpost_phi))) ;
+  else if (fstr == "gp_norm")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gp_norm_logpost_phi))) ;
+  else if (fstr == "gp_flat")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gp_flat_logpost_phi))) ;
+  else if (fstr == "gp_flatflat")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gp_flatflat_logpost_phi))) ;
+  else if (fstr == "gp_jeffreys")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gp_jeffreys_logpost_phi))) ;
+  else if (fstr == "gp_beta")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gp_beta_logpost_phi))) ;
+  else if (fstr == "user")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gp_user_logpost_phi))) ;
+  else
+    return(Rcpp::XPtr<logpostPtr>(R_NilValue)) ;
+}
+
+// [[Rcpp::export]]
+SEXP gev_logpost_phi_xptr(std::string fstr) {
+  typedef double (*logpostPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& pars) ;
+  if (fstr == "gev_mdi")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_mdi_logpost_phi))) ;
+  else if (fstr == "gev_norm")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_norm_logpost_phi))) ;
+  else if (fstr == "gev_loglognorm")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_loglognorm_logpost_phi))) ;
+  else if (fstr == "gev_flat")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_flat_logpost_phi))) ;
+  else if (fstr == "gev_flatflat")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_flatflat_logpost_phi))) ;
+  else if (fstr == "gev_beta")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_beta_logpost_phi))) ;
+  else if (fstr == "user")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_user_logpost_phi))) ;
+  else
+    return(Rcpp::XPtr<logpostPtr>(R_NilValue)) ;
+}
+
+// [[Rcpp::export]]
+SEXP pp_logpost_phi_xptr(std::string fstr) {
+  typedef double (*logpostPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& pars) ;
+  if (fstr == "gev_mdi")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&pp_mdi_logpost_phi))) ;
+  else if (fstr == "gev_norm")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&pp_norm_logpost_phi))) ;
+  else if (fstr == "gev_loglognorm")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&pp_loglognorm_logpost_phi))) ;
+  else if (fstr == "gev_flat")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&pp_flat_logpost_phi))) ;
+  else if (fstr == "gev_flatflat")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&pp_flatflat_logpost_phi))) ;
+  else if (fstr == "gev_beta")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&pp_beta_logpost_phi))) ;
+  else if (fstr == "user")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&pp_user_logpost_phi))) ;
+  else
+    return(Rcpp::XPtr<logpostPtr>(R_NilValue)) ;
+}
+
+// [[Rcpp::export]]
+SEXP os_logpost_phi_xptr(std::string fstr) {
+  typedef double (*logpostPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& pars) ;
+  if (fstr == "gev_mdi")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&os_mdi_logpost_phi))) ;
+  else if (fstr == "gev_norm")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&os_norm_logpost_phi))) ;
+  else if (fstr == "gev_loglognorm")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&os_loglognorm_logpost_phi))) ;
+  else if (fstr == "gev_flat")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&os_flat_logpost_phi))) ;
+  else if (fstr == "gev_flatflat")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&os_flatflat_logpost_phi))) ;
+  else if (fstr == "gev_beta")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&os_beta_logpost_phi))) ;
+  else if (fstr == "user")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&os_user_logpost_phi))) ;
+  else
+    return(Rcpp::XPtr<logpostPtr>(R_NilValue)) ;
 }
