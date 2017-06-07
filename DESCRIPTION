@@ -27,7 +27,8 @@ Suggests: knitr,
     rmarkdown,
     evdbayes,
     microbenchmark,
-    ggplot2 (>= 2.2.1)
+    ggplot2 (>= 2.2.1),
+    testthat
 VignetteBuilder: knitr
 URL: http://github.com/paulnorthrop/revdbayes
 BugReports: http://github.com/paulnorthrop/revdbayes/issues

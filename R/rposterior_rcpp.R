@@ -2,9 +2,9 @@
 #
 #' Random sampling from extreme value posterior distributions
 #'
-#' Uses the \code{\link[rust]{ru}} function in the \code{\link[rust]{rust}}
-#' package to simulate from the posterior distribution of an extreme value
-#' model.
+#' Uses the \code{\link[rust]{ru_rcpp}} function in the
+#' \code{\link[rust]{rust}} package to simulate from the posterior distribution
+#' of an extreme value model.
 #'
 #' @param n A numeric scalar. The size of posterior sample required.
 #' @param model A character string.  Specifies the extreme value model.
@@ -126,8 +126,8 @@
 #'   for further details and examples.
 #'
 #' @return An object (list) of class \code{"evpost"}, which has the same
-#'   structure as an object of class "ru" returned from \code{\link[rust]{ru}}.
-#'   In addition this list contains
+#'   structure as an object of class "ru" returned from
+#'   \code{\link[rust]{ru_rcpp}}.  In addition this list contains
 #'   \itemize{
 #'     \item{\code{model}:} The argument \code{model} to \code{rpost}
 #'       detailed above.
@@ -578,17 +578,7 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   # to evaluate the log-posterior after transformation from theta to phi.
   #
   phi_to_theta_ptr <- phi_to_theta_xptr(model)
-  cpp_logpost_phi <- switch(model,
-    gp = gp_logpost_phi_xptr(prior_type),
-    gev = gev_logpost_phi_xptr(prior_type),
-    os = os_logpost_phi_xptr(prior_type),
-    pp = pp_logpost_phi_xptr(prior_type)
-  )
-  print(cpp_logpost_phi)
-  cpp_logpost_phi <- as.name(paste(prior_type,"_logpost_phi", sep = ""))
-  print(cpp_logpost_phi)
-  cpp_logpost_phi <- gp_beta_logpost_phi
-  #
+  cpp_logpost_phi <- set_logpost_phi(model = model, prior_type = prior_type)
   #
   # Set which_lam: indices of the parameter vector that are Box-Cox transformed.
   #
@@ -778,4 +768,45 @@ calc_init_logpost <- function(model, prior_type, init, for_post) {
       gev_beta = pp_beta_logpost(x = init, pars = for_post))
   }
   return(init_check)
+}
+
+set_logpost_phi <- function(model, prior_type) {
+  if (model == "gp") {
+    cpp_logpost_phi <- switch(prior_type,
+                              gp_mdi = gp_mdi_logpost_phi,
+                              gp_norm = gp_norm_logpost_phi,
+                              gp_flat = gp_flat_logpost_phi,
+                              gp_flatflat = gp_flatflat_logpost_phi,
+                              gp_jeffreys = gp_jeffreys_logpost_phi,
+                              gp_beta = gp_beta_logpost_phi,
+                              user = gp_user_logpost_phi)
+  } else if (model == "gev") {
+    cpp_logpost_phi <- switch(prior_type,
+                              gev_mdi = gev_mdi_logpost_phi,
+                              gev_norm = gev_norm_logpost_phi,
+                              gev_loglognorm = gev_loglognorm_logpost_phi,
+                              gev_flat = gev_flat_logpost_phi,
+                              gev_flatflat = gev_flatflat_logpost_phi,
+                              gev_beta = gev_beta_logpost_phi,
+                              user = gev_user_logpost_phi)
+  } else if (model == "os") {
+    cpp_logpost_phi <- switch(prior_type,
+                              gev_mdi = os_mdi_logpost_phi,
+                              gev_norm = os_norm_logpost_phi,
+                              gev_loglognorm = os_loglognorm_logpost_phi,
+                              gev_flat = os_flat_logpost_phi,
+                              gev_flatflat = os_flatflat_logpost_phi,
+                              gev_beta = os_beta_logpost_phi,
+                              user = os_user_logpost_phi)
+  } else if (model == "pp") {
+    cpp_logpost_phi <- switch(prior_type,
+                              gev_mdi = pp_mdi_logpost_phi,
+                              gev_norm = pp_norm_logpost_phi,
+                              gev_loglognorm = pp_loglognorm_logpost_phi,
+                              gev_flat = pp_flat_logpost_phi,
+                              gev_flatflat = pp_flatflat_logpost_phi,
+                              gev_beta = pp_beta_logpost_phi,
+                              user = pp_user_logpost_phi)
+  }
+  return(cpp_logpost_phi)
 }
