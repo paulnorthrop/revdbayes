@@ -69,11 +69,18 @@ process_data <- function(model, data, thresh, noy, use_noy, ros) {
   if (model == "os") {
     # Each row contains order statistics for a given block.
     # Remove any row that has only missing values.
+    data <- as.matrix(data)
+    data_col <- dim(data)[2]
     nas <- !apply(is.na(data), 1, all)
     data <- data[nas, , drop = FALSE]
     # Sort each row of the data so that the first columns contains the
     # largest values, the second column the second largest, and so on.
     data <- t(apply(data, 1, sort, decreasing = TRUE, na.last = TRUE))
+    # If the original data had a single column then we need to transpose the
+    # vector returned from apply to create a one-column matrix.
+    if (data_col == 1) {
+      data <- t(data)
+    }
     if (is.null(ros)) {
       ros <- ncol(data)
     } else if (ncol(data) < ros) {

@@ -24,6 +24,8 @@
 
 * Bugs fixed in the (R) prior functions `gp_norm`, `gev_norm` and `gev_loglognorm`.  The effect of the bug was negligible unless the prior variances are not chosen to be large.
 
+* In a call to `rpost` or `rpost_rcpp` with `model = "os"` the user may provide `data` in the form of a vector of block maxima.  In this instance the output is equivalent to a call to these functions with `model = "gev"` with the same data. 
+
 # revdbayes 1.1.0
 
 ## New features

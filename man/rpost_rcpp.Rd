@@ -15,7 +15,8 @@ rpost_rcpp(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
 
 \item{model}{A character string.  Specifies the extreme value model.}
 
-\item{data}{Sample data, of a format appropriate for the model.
+\item{data}{Sample data, of a format appropriate to the value of
+\code{model}.
 \itemize{
   \item {"gp"} {A numeric vector of threshold excesses or raw data.}
   \item {"bingp"} {A numeric vector of raw data.}
@@ -27,7 +28,8 @@ rpost_rcpp(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
     contains fewer than \code{dim(as.matrix(data))[2]} order statistics
     then the corresponding row should be padded by \code{NA}s. If
     \code{ros} is supplied then only the largest \code{ros} values in
-    each row are used.}
+    each row are used.  If a vector is supplied then this is converted
+    to a matrix with one column.}
 }}
 
 \item{prior}{A list specifying the prior for the parameters of the extreme
@@ -106,8 +108,8 @@ to \code{\link[rust]{find_lambda}}.}
 }
 \value{
 An object (list) of class \code{"evpost"}, which has the same
-  structure as an object of class "ru" returned from \code{\link[rust]{ru}}.
-  In addition this list contains
+  structure as an object of class "ru" returned from
+  \code{\link[rust]{ru_rcpp}}.  In addition this list contains
   \itemize{
     \item{\code{model}:} The argument \code{model} to \code{rpost}
       detailed above.
@@ -150,9 +152,9 @@ An object (list) of class \code{"evpost"}, which has the same
   }
 }
 \description{
-Uses the \code{\link[rust]{ru}} function in the \code{\link[rust]{rust}}
-package to simulate from the posterior distribution of an extreme value
-model.
+Uses the \code{\link[rust]{ru_rcpp}} function in the
+\code{\link[rust]{rust}} package to simulate from the posterior distribution
+of an extreme value model.
 }
 \details{
 \emph{Generalised Pareto (GP)}: \code{model = "gp"}.  A model for threshold

@@ -15,7 +15,8 @@ rpost(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
 
 \item{model}{A character string.  Specifies the extreme value model.}
 
-\item{data}{Sample data, of a format appropriate for the model.
+\item{data}{Sample data, of a format appropriate to the value of
+\code{model}..
 \itemize{
   \item {"gp"} {A numeric vector of threshold excesses or raw data.}
   \item {"bingp"} {A numeric vector of raw data.}
@@ -27,7 +28,8 @@ rpost(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
     contains fewer than \code{dim(as.matrix(data))[2]} order statistics
     then the corresponding row should be padded by \code{NA}s. If
     \code{ros} is supplied then only the largest \code{ros} values in
-    each row are used.}
+    each row are used.  If a vector is supplied then this is converted
+    to a matrix with one column.}
 }}
 
 \item{prior}{A list specifying the prior for the parameters of the extreme

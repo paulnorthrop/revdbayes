@@ -8,7 +8,8 @@
 #'
 #' @param n A numeric scalar. The size of posterior sample required.
 #' @param model A character string.  Specifies the extreme value model.
-#' @param data  Sample data, of a format appropriate for the model.
+#' @param data  Sample data, of a format appropriate to the value of
+#'   \code{model}..
 #'   \itemize{
 #'     \item {"gp"} {A numeric vector of threshold excesses or raw data.}
 #'     \item {"bingp"} {A numeric vector of raw data.}
@@ -20,7 +21,8 @@
 #'       contains fewer than \code{dim(as.matrix(data))[2]} order statistics
 #'       then the corresponding row should be padded by \code{NA}s. If
 #'       \code{ros} is supplied then only the largest \code{ros} values in
-#'       each row are used.}
+#'       each row are used.  If a vector is supplied then this is converted
+#'       to a matrix with one column.}
 #'   }
 #' @param prior A list specifying the prior for the parameters of the extreme
 #'   value model, created by \code{\link{set_prior}}.
