@@ -7,31 +7,26 @@ context("GP: rpost_rcpp vs rpost")
 # Set a tolerance for the comparison of the simulated values
 my_tol <- 1e-5
 
-# Generalized Pareto distribution --------------------------
-
-#model, prior, rotate, trans, use_phi_map
-
-# Set up the data and the threshold.
-data(gom)
+# Set a threshold.
 u <- quantile(gom, probs = 0.65)
 
-gp_test <- function(seed = 47, prior, model = "gp", n = 10, rotate = TRUE,
-                    trans = "none", use_phi_map = FALSE, ...){
+gp_test <- function(seed = 47, prior, n = 5, rotate = TRUE,
+                    trans = "none", use_phi_map = FALSE, data = gom, ...){
   if (prior == "user") {
     prior_rfn <- set_prior(prior = "flat", model = "gp", min_xi = -1)
     ptr_gp_flat <- create_prior_xptr("gp_flat")
     prior_cfn <- set_prior(prior = ptr_gp_flat, model = "gp", min_xi = -1)
   } else {
-    prior_rfn <- set_prior(prior = prior, model = model, ...)
-    prior_cfn <- set_prior(prior = prior, model = model, ...)
+    prior_rfn <- set_prior(prior = prior, model = "gp", ...)
+    prior_cfn <- set_prior(prior = prior, model = "gp", ...)
   }
   set.seed(seed)
   res1 <- rpost(n = n, model = "gp", prior = prior_rfn, thresh = u,
-                     data = gom, rotate = rotate, trans = trans,
-                     use_phi_map = use_phi_map)
+                data = data, rotate = rotate, trans = trans,
+                use_phi_map = use_phi_map)
   set.seed(seed)
   res2 <- rpost_rcpp(n = n, model = "gp", prior = prior_cfn, thresh = u,
-                     data = gom, rotate = rotate, trans = trans,
+                     data = data, rotate = rotate, trans = trans,
                      use_phi_map = use_phi_map)
   return(list(sim1 = res1$sim_vals, sim2 = res2$sim_vals))
 }
@@ -43,9 +38,15 @@ test_function <- function(x, test_string) {
   })
 }
 
-rotate_vals <- c(FALSE, TRUE)
-trans_vals <- c("none", "BC")
-use_phi_map_vals <- c(FALSE, TRUE)
+# Slow, belt-and-braces
+#rotate_vals <- c(FALSE, TRUE)
+#trans_vals <- c("none", "BC")
+#use_phi_map_vals <- c(FALSE, TRUE)
+
+# Faster, sufficient
+rotate_vals <- TRUE
+trans_vals <- "BC"
+use_phi_map_vals <- TRUE
 
 for (rotate in rotate_vals) {
   for (trans in trans_vals) {
