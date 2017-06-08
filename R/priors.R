@@ -344,7 +344,7 @@ gp_prior <- function(prior = c("norm", "mdi", "flat", "flatflat", "jeffreys",
 #'   The inverse of the prior covariance matrix.
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param trendsd  Has no function other other to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
 #' @export
 gp_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
@@ -371,7 +371,7 @@ gp_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #'   Must not be \code{-Inf} because this results in an improper posterior.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param trendsd  Has no function other other to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
 #' @export
 gp_mdi <- function(pars, a = 1, min_xi = -1, max_xi = Inf, trendsd = 0) {
@@ -390,7 +390,7 @@ gp_mdi <- function(pars, a = 1, min_xi = -1, max_xi = Inf, trendsd = 0) {
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #'   Must not be \code{-Inf} because this results in an improper posterior.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param trendsd  Has no function other other to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
 #' @export
 gp_flat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
@@ -409,7 +409,7 @@ gp_flat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #'   Must not be \code{-Inf} because this results in an improper posterior.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param trendsd  Has no function other other to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
 #' @export
 gp_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
@@ -428,7 +428,7 @@ gp_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #'   Must not be \code{-Inf} because this results in an improper posterior.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param trendsd  Has no function other other to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
 #' @export
 gp_jeffreys <- function(pars, min_xi = -1/2, max_xi = Inf, trendsd = 0) {
@@ -448,7 +448,7 @@ gp_jeffreys <- function(pars, min_xi = -1/2, max_xi = Inf, trendsd = 0) {
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param pq A numeric vector of length 2.
 #'   See \code{\link{set_prior}} for details.
-#' @param trendsd  Has no function other other to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
 #' @export
 gp_beta <- function(pars, min_xi = -1 / 2, max_xi = 1 / 2, pq = c(6, 9),
@@ -554,7 +554,7 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
 #'   The inverse of the prior covariance matrix.
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param trendsd  Has no function other other to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
 #' @export
 gev_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
@@ -581,7 +581,7 @@ gev_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
 #'   The inverse of the prior covariance matrix.
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param trendsd  Has no function other other to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
 #' @export
 gev_loglognorm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
@@ -610,7 +610,7 @@ gev_loglognorm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #'   Must not be \code{-Inf} because this results in an improper posterior.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param trendsd  Has no function other other to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
 #' @export
 gev_mdi <- function(pars, a=0.5772156649015323, min_xi=-1, max_xi=Inf,
@@ -630,7 +630,7 @@ gev_mdi <- function(pars, a=0.5772156649015323, min_xi=-1, max_xi=Inf,
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #'   Must not be \code{-Inf} because this results in an improper posterior.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param trendsd  Has no function other other to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
 #' @export
 gev_flat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
@@ -649,7 +649,7 @@ gev_flat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #'   Must not be \code{-Inf} because this results in an improper posterior.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param trendsd  Has no function other other to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
 #' @export
 gev_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
@@ -669,7 +669,7 @@ gev_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param pq A numeric vector of length 2.
 #'   See \code{\link{set_prior}} for details.
-#' @param trendsd  Has no function other other to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
 #' @export
 gev_beta <- function(pars, min_xi = -1 / 2, max_xi = 1 / 2, pq = c(6, 9),
