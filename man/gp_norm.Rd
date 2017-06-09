@@ -22,6 +22,9 @@ The inverse of the prior covariance matrix.}
 \item{trendsd}{Has no function other than to achieve compatability with
 function in the evdbayes package.}
 }
+\value{
+The log of the prior density.
+}
 \description{
 For information about this and other priors see \code{\link{set_prior}}.
 }
