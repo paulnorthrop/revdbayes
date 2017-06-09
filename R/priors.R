@@ -147,6 +147,14 @@
 #'     \code{min_xi = -1/2, max_xi = 1/2}, which corresponds to the
 #'     prior for \eqn{\xi} proposed in Martins and Stedinger (2000, 2001).
 #'   }
+#'   \item{\code{"prob"}.  A prior for GEV parameters \eqn{(\mu, \sigma, \xi)},
+#'     based on Crowder (1992), constructed by placing a Dirichlet distribution
+#'     on differences between non-exceedance probabilities of specified quantile
+#'     values.  Sets the same prior as the function
+#'     \code{\link[evdbayes]{prior.prob}} in the evdbayes package.
+#'     For details see Northrop et al. (2017) and Stephension (2016).
+#'     This construction is typically used to set an informative prior.
+#'   }
 #' }
 #' @return A list with class \code{"evprior"}.  The first component is the
 #'   input prior, i.e. either the name of the prior or a user-supplied
@@ -164,6 +172,10 @@
 #'   procedure for the generalized Pareto distribution.
 #'   \emph{Journal of Statistical Planning and Inference} \strong{137(2)},
 #'   473-483. \url{http://dx.doi.org/10.1016/j.jspi.2006.01.006}.
+#' @references Crowder, M. (1992) Bayesian priors based on parameter
+#'   transformation using the distribution function
+#'   \emph{Ann. Inst. Statist. Math.}, \strong{44}, 405-416.
+#'   \url{http://dx.doi.org/10.1007/BF00050695}.
 #' @references Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
 #'   for the Generalized Pareto Distribution.  \emph{Technometrics},
 #'   \strong{35(2)}, 185-191. \url{http://dx.doi.org/10.2307/1269663}.
@@ -182,6 +194,10 @@
 #'   Bayesian extreme value analyses using reference priors
 #'   \emph{Statistica Sinica}, \strong{26(2)}, 721--743
 #'   \url{http://dx.doi.org/10.5705/ss.2014.034}.
+#' @references Stephenson, A. (2016) Bayesian inference for extreme value
+#'   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
+#'   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
+#'   London. \url{http://dx.doi.org/10.1201/b19721-14}.
 #' @examples
 #' # Normal prior for GEV parameters (mu, log(sigma), xi).
 #' mat <- diag(c(10000, 10000, 100))
@@ -207,7 +223,7 @@
 #' u_prior_ptr <- set_prior(prior = ptr_gp_flat, model = "gp")
 #' @export
 set_prior <- function(prior = c("norm", "loglognorm", "mdi", "flat",
-                                "flatflat", "jeffreys", "beta"),
+                                "flatflat", "jeffreys", "beta", "prob"),
                       model = c("gev", "gp", "pp", "os"), ...) {
   if (length(model) > 1) {
     warning("model not supplied: model == \"gev\" has been used.",
@@ -346,6 +362,7 @@ gp_prior <- function(prior = c("norm", "mdi", "flat", "flatflat", "jeffreys",
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
+#' @return The log of the prior density.
 #' @export
 gp_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
                     trendsd = 0) {
@@ -373,6 +390,7 @@ gp_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
+#' @return The log of the prior density.
 #' @export
 gp_mdi <- function(pars, a = 1, min_xi = -1, max_xi = Inf, trendsd = 0) {
   if (pars[1] <= 0 | pars[2] < min_xi | pars[2] > max_xi) {
@@ -392,6 +410,7 @@ gp_mdi <- function(pars, a = 1, min_xi = -1, max_xi = Inf, trendsd = 0) {
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
+#' @return The log of the prior density.
 #' @export
 gp_flat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
   if (pars[1] <= 0 | pars[2] < min_xi | pars[2] > max_xi) {
@@ -411,6 +430,7 @@ gp_flat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
+#' @return The log of the prior density.
 #' @export
 gp_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
   if (pars[1] <= 0 | pars[2] < min_xi | pars[2] > max_xi) {
@@ -430,6 +450,7 @@ gp_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
+#' @return The log of the prior density.
 #' @export
 gp_jeffreys <- function(pars, min_xi = -1/2, max_xi = Inf, trendsd = 0) {
   if (pars[1] <= 0 | pars[2] < min_xi | pars[2] > max_xi) {
@@ -450,6 +471,7 @@ gp_jeffreys <- function(pars, min_xi = -1/2, max_xi = Inf, trendsd = 0) {
 #'   See \code{\link{set_prior}} for details.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
+#' @return The log of the prior density.
 #' @export
 gp_beta <- function(pars, min_xi = -1 / 2, max_xi = 1 / 2, pq = c(6, 9),
                     trendsd = 0) {
@@ -463,7 +485,7 @@ gp_beta <- function(pars, min_xi = -1 / 2, max_xi = 1 / 2, pq = c(6, 9),
 # ================================= GEV priors =================================
 
 gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
-                              "beta"), ...) {
+                              "beta", "prob"), ...) {
   prior <- match.arg(prior)
   temp <- list(prior = paste("gev_", prior, sep=""), ...)
   # For v1.2.0 ...
@@ -493,7 +515,7 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
   # Check for unused hyperparameter names and drop them
   hpar_vec <- switch(prior, norm = c("mean", "cov"),
                      loglognorm = c("mean", "cov"), mdi = "a", flat = NULL,
-                     beta = "pq")
+                     beta = "pq", prob = c("quant", "alpha"))
   hpar_vec <- c(hpar_vec, "min_xi", "max_xi")
   temp <- hpar_drop(temp, hpar_vec)
   # Check for problems with min_xi and/or max_xi
@@ -535,6 +557,20 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
     if (length(pq) != 2 | !is.numeric(pq) | any(pq <= 0) )
         stop("pq must be a non-negative numeric vector of length 2")
   }
+  if (prior == "prob") {
+    if (is.null(temp$quant)) {
+      stop("quant must be supplied when prior = prob")
+    }
+    if (is.null(temp$alpha)) {
+      stop("alpha must be supplied when prior = prob")
+    }
+    if (length(temp$quant) != 3 | mode(temp$quant) != "numeric") {
+      stop("quant must be a numeric vector of length three")
+    }
+    if (length(temp$alpha) != 4 | mode(temp$alpha) != "numeric") {
+      stop("alpha must be a numeric vector of length four")
+    }
+  }
   # Add trendsd to the prior list so that the prior will work with the
   # evdbayes function posterior().
   temp$trendsd <- 0
@@ -556,6 +592,7 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
+#' @return The log of the prior density.
 #' @export
 gev_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
                      trendsd = 0) {
@@ -583,6 +620,7 @@ gev_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
+#' @return The log of the prior density.
 #' @export
 gev_loglognorm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
                            trendsd = 0) {
@@ -612,6 +650,7 @@ gev_loglognorm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
+#' @return The log of the prior density.
 #' @export
 gev_mdi <- function(pars, a=0.5772156649015323, min_xi=-1, max_xi=Inf,
                     trendsd = 0) {
@@ -632,6 +671,7 @@ gev_mdi <- function(pars, a=0.5772156649015323, min_xi=-1, max_xi=Inf,
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
+#' @return The log of the prior density.
 #' @export
 gev_flat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
   if (pars[2] <= 0 | pars[3] < min_xi | pars[3] > max_xi) {
@@ -651,6 +691,7 @@ gev_flat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
+#' @return The log of the prior density.
 #' @export
 gev_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
   if (pars[2] <= 0 | pars[3] < min_xi | pars[3] > max_xi) {
@@ -671,6 +712,7 @@ gev_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
 #'   See \code{\link{set_prior}} for details.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
+#' @return The log of the prior density.
 #' @export
 gev_beta <- function(pars, min_xi = -1 / 2, max_xi = 1 / 2, pq = c(6, 9),
                      trendsd = 0) {

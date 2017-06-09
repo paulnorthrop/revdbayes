@@ -5,7 +5,7 @@
 \title{Construction of prior distributions for extreme value model parameters}
 \usage{
 set_prior(prior = c("norm", "loglognorm", "mdi", "flat", "flatflat",
-  "jeffreys", "beta"), model = c("gev", "gp", "pp", "os"), ...)
+  "jeffreys", "beta", "prob"), model = c("gev", "gp", "pp", "os"), ...)
 }
 \arguments{
 \item{prior}{Either
@@ -164,6 +164,14 @@ Of the in-built named priors available in revdbayes only
     \code{min_xi = -1/2, max_xi = 1/2}, which corresponds to the
     prior for \eqn{\xi} proposed in Martins and Stedinger (2000, 2001).
   }
+  \item{\code{"prob"}.  A prior for GEV parameters \eqn{(\mu, \sigma, \xi)},
+    based on Crowder (1992), constructed by placing a Dirichlet distribution
+    on differences between non-exceedance probabilities of specified quantile
+    values.  Sets the same prior as the function
+    \code{\link[evdbayes]{prior.prob}} in the evdbayes package.
+    For details see Northrop et al. (2017) and Stephension (2016).
+    This construction is typically used to set an informative prior.
+  }
 }
 }
 \examples{
@@ -196,6 +204,11 @@ Castellanos, E. M. and Cabras, S. (2007) A default Bayesian
   \emph{Journal of Statistical Planning and Inference} \strong{137(2)},
   473-483. \url{http://dx.doi.org/10.1016/j.jspi.2006.01.006}.
 
+Crowder, M. (1992) Bayesian priors based on parameter
+  transformation using the distribution function
+  \emph{Ann. Inst. Statist. Math.}, \strong{44}, 405-416.
+  \url{http://dx.doi.org/10.1007/BF00050695}.
+
 Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
   for the Generalized Pareto Distribution.  \emph{Technometrics},
   \strong{35(2)}, 185-191. \url{http://dx.doi.org/10.2307/1269663}.
@@ -218,6 +231,11 @@ Northrop, P.J. and Attalides, N. (2016) Posterior propriety in
   Bayesian extreme value analyses using reference priors
   \emph{Statistica Sinica}, \strong{26(2)}, 721--743
   \url{http://dx.doi.org/10.5705/ss.2014.034}.
+
+Stephenson, A. (2016) Bayesian inference for extreme value
+  modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
+  and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
+  London. \url{http://dx.doi.org/10.1201/b19721-14}.
 }
 \seealso{
 \code{\link{rpost}} for sampling from an extreme value posterior
