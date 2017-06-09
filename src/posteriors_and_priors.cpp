@@ -10,7 +10,7 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 bool any_nonpos(const Rcpp::NumericVector& x) {
-  return Rcpp::is_true(Rcpp::any(x <= 0));
+  return Rcpp::is_true(Rcpp::any(x <= 0)) ;
 }
 
 // Generalized Pareto log-likelihood

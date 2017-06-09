@@ -25,6 +25,44 @@ namespace revdbayes {
         }
     }
 
+    inline Rcpp::NumericVector dgev_cpp(const Rcpp::NumericVector& x, const double& loc, const double& scale, const double& shape) {
+        typedef SEXP(*Ptr_dgev_cpp)(SEXP,SEXP,SEXP,SEXP);
+        static Ptr_dgev_cpp p_dgev_cpp = NULL;
+        if (p_dgev_cpp == NULL) {
+            validateSignature("Rcpp::NumericVector(*dgev_cpp)(const Rcpp::NumericVector&,const double&,const double&,const double&)");
+            p_dgev_cpp = (Ptr_dgev_cpp)R_GetCCallable("revdbayes", "revdbayes_dgev_cpp");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_dgev_cpp(Rcpp::wrap(x), Rcpp::wrap(loc), Rcpp::wrap(scale), Rcpp::wrap(shape));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<Rcpp::NumericVector >(rcpp_result_gen);
+    }
+
+    inline Rcpp::NumericVector pgev_cpp(const Rcpp::NumericVector& q, const double& loc, const double& scale, const double& shape) {
+        typedef SEXP(*Ptr_pgev_cpp)(SEXP,SEXP,SEXP,SEXP);
+        static Ptr_pgev_cpp p_pgev_cpp = NULL;
+        if (p_pgev_cpp == NULL) {
+            validateSignature("Rcpp::NumericVector(*pgev_cpp)(const Rcpp::NumericVector&,const double&,const double&,const double&)");
+            p_pgev_cpp = (Ptr_pgev_cpp)R_GetCCallable("revdbayes", "revdbayes_pgev_cpp");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_pgev_cpp(Rcpp::wrap(q), Rcpp::wrap(loc), Rcpp::wrap(scale), Rcpp::wrap(shape));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<Rcpp::NumericVector >(rcpp_result_gen);
+    }
+
     inline bool any_nonpos(const Rcpp::NumericVector& x) {
         typedef SEXP(*Ptr_any_nonpos)(SEXP);
         static Ptr_any_nonpos p_any_nonpos = NULL;

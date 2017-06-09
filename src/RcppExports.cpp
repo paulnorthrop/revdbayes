@@ -9,6 +9,72 @@
 
 using namespace Rcpp;
 
+// dgev_cpp
+Rcpp::NumericVector dgev_cpp(const Rcpp::NumericVector& x, const double& loc, const double& scale, const double& shape);
+static SEXP revdbayes_dgev_cpp_try(SEXP xSEXP, SEXP locSEXP, SEXP scaleSEXP, SEXP shapeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const double& >::type loc(locSEXP);
+    Rcpp::traits::input_parameter< const double& >::type scale(scaleSEXP);
+    Rcpp::traits::input_parameter< const double& >::type shape(shapeSEXP);
+    rcpp_result_gen = Rcpp::wrap(dgev_cpp(x, loc, scale, shape));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_dgev_cpp(SEXP xSEXP, SEXP locSEXP, SEXP scaleSEXP, SEXP shapeSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_dgev_cpp_try(xSEXP, locSEXP, scaleSEXP, shapeSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// pgev_cpp
+Rcpp::NumericVector pgev_cpp(const Rcpp::NumericVector& q, const double& loc, const double& scale, const double& shape);
+static SEXP revdbayes_pgev_cpp_try(SEXP qSEXP, SEXP locSEXP, SEXP scaleSEXP, SEXP shapeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type q(qSEXP);
+    Rcpp::traits::input_parameter< const double& >::type loc(locSEXP);
+    Rcpp::traits::input_parameter< const double& >::type scale(scaleSEXP);
+    Rcpp::traits::input_parameter< const double& >::type shape(shapeSEXP);
+    rcpp_result_gen = Rcpp::wrap(pgev_cpp(q, loc, scale, shape));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP revdbayes_pgev_cpp(SEXP qSEXP, SEXP locSEXP, SEXP scaleSEXP, SEXP shapeSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(revdbayes_pgev_cpp_try(qSEXP, locSEXP, scaleSEXP, shapeSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // any_nonpos
 bool any_nonpos(const Rcpp::NumericVector& x);
 static SEXP revdbayes_any_nonpos_try(SEXP xSEXP) {
@@ -2762,6 +2828,8 @@ RcppExport SEXP revdbayes_create_prior_xptr(SEXP fstrSEXP) {
 static int revdbayes_RcppExport_validate(const char* sig) { 
     static std::set<std::string> signatures;
     if (signatures.empty()) {
+        signatures.insert("Rcpp::NumericVector(*dgev_cpp)(const Rcpp::NumericVector&,const double&,const double&,const double&)");
+        signatures.insert("Rcpp::NumericVector(*pgev_cpp)(const Rcpp::NumericVector&,const double&,const double&,const double&)");
         signatures.insert("bool(*any_nonpos)(const Rcpp::NumericVector&)");
         signatures.insert("double(*cpp_gp_loglik)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*cpp_gev_loglik)(const Rcpp::NumericVector&,const Rcpp::List&)");
@@ -2857,6 +2925,8 @@ static int revdbayes_RcppExport_validate(const char* sig) {
 
 // registerCCallable (register entry points for exported C++ functions)
 RcppExport SEXP revdbayes_RcppExport_registerCCallable() { 
+    R_RegisterCCallable("revdbayes", "revdbayes_dgev_cpp", (DL_FUNC)revdbayes_dgev_cpp_try);
+    R_RegisterCCallable("revdbayes", "revdbayes_pgev_cpp", (DL_FUNC)revdbayes_pgev_cpp_try);
     R_RegisterCCallable("revdbayes", "revdbayes_any_nonpos", (DL_FUNC)revdbayes_any_nonpos_try);
     R_RegisterCCallable("revdbayes", "revdbayes_cpp_gp_loglik", (DL_FUNC)revdbayes_cpp_gp_loglik_try);
     R_RegisterCCallable("revdbayes", "revdbayes_cpp_gev_loglik", (DL_FUNC)revdbayes_cpp_gev_loglik_try);
@@ -2951,6 +3021,8 @@ RcppExport SEXP revdbayes_RcppExport_registerCCallable() {
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"revdbayes_dgev_cpp", (DL_FUNC) &revdbayes_dgev_cpp, 4},
+    {"revdbayes_pgev_cpp", (DL_FUNC) &revdbayes_pgev_cpp, 4},
     {"revdbayes_any_nonpos", (DL_FUNC) &revdbayes_any_nonpos, 1},
     {"revdbayes_cpp_gp_loglik", (DL_FUNC) &revdbayes_cpp_gp_loglik, 2},
     {"revdbayes_cpp_gev_loglik", (DL_FUNC) &revdbayes_cpp_gev_loglik, 2},
