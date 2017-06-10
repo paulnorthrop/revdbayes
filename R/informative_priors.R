@@ -18,9 +18,8 @@
 #' @export
 gev_prob <- function(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
                      trendsd = 0){
-  # If abs(xi) < x_tol then xi is treated as being close to zero.
+  # If abs(xi) < xi_tol then xi is treated as being close to zero.
   xi_tol <- 1.e-6
-  dd <- 2 * xi_tol
   j_max <- 4
   # Extract GEV parameter values.
   mu <- pars[1]

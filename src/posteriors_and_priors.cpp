@@ -1,8 +1,9 @@
-// [[Rcpp::depends(Rcpp)]]
+// [[Rcpp::depends(RcppArmadillo)]]
 
-#include <Rcpp.h>
+#include <RcppArmadillo.h>
 
 using namespace Rcpp;
+using namespace arma;
 
 // [[Rcpp::interfaces(r, cpp)]]
 
@@ -312,6 +313,119 @@ double cpp_gev_beta(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
     (pq[1] - 1.0) * log(max_xi - x[2]) ;
 }
 
+// GEV functions
+
+//' GEV density function
+//' @export
+// [[Rcpp::export]]
+Rcpp::NumericVector lgdgev_cpp(const Rcpp::NumericVector& x, const double& loc,
+                             const double& scale, const double& shape) {
+  if (scale <= 0.0) {
+    stop("invalid scale: scale must be positive.") ;
+  }
+  Rcpp::NumericVector xs = (x - loc) / scale ;
+  Rcpp::NumericVector d = 1 + shape * xs ;
+  for(int i = 0; i < x.size(); ++i) {
+    if (d[i] < 0.0) {
+      d[i] = R_NegInf ;
+    } else {
+      if (std::abs(shape) > 1e-6) {
+        d[i] = -(1 + 1 / shape) * log(d[i]) - pow(d[i], -1 / shape) ;
+      } else {
+        d[i] = -xs[i] + shape * xs[i] * (xs[i] - 2) / 2 -
+          exp(-xs[i] + shape * pow(xs[i], 2.0) / 2) ;
+      }
+    }
+  }
+  return d - log(scale) ;
+}
+
+//' GEV distribution function
+//' @export
+// [[Rcpp::export]]
+Rcpp::NumericVector pgev_cpp(const Rcpp::NumericVector& q, const double& loc,
+                             const double& scale, const double& shape) {
+  if (scale <= 0.0) {
+    stop("invalid scale: scale must be positive.") ;
+  }
+  Rcpp::NumericVector qs = (q - loc) / scale ;
+  Rcpp::NumericVector p = 1 + shape * qs ;
+  for(int i = 0; i < q.size(); ++i) {
+    if ((std::abs(shape) > 1e-6) || (p[i] < 0.0)) {
+      p[i] = exp(-pow(std::max(p[i], 0.0), -1.0 / shape)) ;
+    } else {
+      p[i] = exp(-exp(-qs[i] + shape * pow(qs[i], 2.0) / 2)) ;
+    }
+  }
+  return p ;
+}
+
+// [[Rcpp::export]]
+double Dir_log_prior(const Rcpp::NumericVector& pq,
+                     const Rcpp::NumericVector& alpha) {
+  //
+  // pq    : 3-vector of reference non-exceedance probabilities (i.e cdf)
+  // alpha : (length(pq)+1)-vector of Dirichlet parameters
+  //
+  Rcpp::NumericVector diff_pq =
+    Rcpp::NumericVector::create(pq[0], pq[1] - pq[0], pq[2] - pq[1],
+                                1.0 - pq[2]) ;
+  if (Rcpp::is_true(Rcpp::any(diff_pq <= 0)))
+    return R_NegInf ;
+  // log-prior, up to an additive constant
+  return sum((alpha - 1) * log(diff_pq)) ;
+}
+
+//' Informative prior for GEV parameters constructed on the probability scale.
+//' @export
+// [[Rcpp::export]]
+double cpp_gev_prob(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
+  // Extract GEV parameter values.
+  double mu = x[0] ;
+  double sigma = x[1] ;
+  double xi = x[2] ;
+  // prior is zero if scale parameter is non-positive
+  if (sigma <= 0.0)
+    return R_NegInf ;
+  Rcpp::NumericVector quant = ppars["quant"] ;
+  Rcpp::NumericVector y = (quant - mu) / sigma ;
+  Rcpp::NumericVector lin = 1 + xi * y ;
+  // prior is zero if any component of lin is not positive.
+  if (Rcpp::is_true(Rcpp::any(lin <= 0)))
+    return R_NegInf ;
+  // If abs(xi) < xi_tol then xi is treated as being close to zero.
+  double xi_tol = 1.e-6 ;
+  int j_max = 5 ;
+  Rcpp::NumericVector h(3) ;
+  if (std::abs(xi) > xi_tol) {
+    h = y / xi - lin * log(lin) / pow(xi, 2.0) ;
+  } else {
+    for(int i = 0; i < 3; ++i) {
+      double tot = 0.0 ;
+      for(int j = 0; j < j_max; ++j) {
+        tot += pow(-1.0, j + 1.0) * pow(y[i], j + 2.0) * pow(xi, j) /
+          ((j + 1) * (j + 2)) ;
+      }
+      h[i] = tot ;
+    }
+  }
+  // make y and h arma::vec, or put y and h in via a loop?
+  arma::mat mat = ones(3,3) ;
+  mat.col(1) = as<arma::vec>(y) ;
+  mat.col(2) = as<arma::vec>(h) ;
+  double det_mat = std::abs(arma::det(mat)) ;
+  double log_det_mat = log(det_mat) ;
+  // log-density of GEV at q
+  Rcpp::NumericVector log_g = lgdgev_cpp(quant, mu, sigma, xi) ;
+  Rcpp::NumericVector pq = pgev_cpp(quant, mu, sigma, xi) ;
+  // log-Jacobian
+  double log_J = log(sigma) + sum(log_g) + log_det_mat ;
+  // Combine the Jacobian with the Dirichlet prior
+  Rcpp::NumericVector alpha = ppars["alpha"] ;
+  double val = log_J + Dir_log_prior(pq, alpha) ;
+  return val ;
+}
+
 // Model-specific log-posteriors for a user-defined prior
 
 // [[Rcpp::export]]
@@ -422,6 +536,11 @@ double gev_beta_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   return cpp_gev_loglik(x, pars) + cpp_gev_beta(x, pars) ;
 }
 
+// [[Rcpp::export]]
+double gev_prob_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_gev_loglik(x, pars) + cpp_gev_prob(x, pars) ;
+}
+
 // PP Posteriors for specific in-built priors
 
 // [[Rcpp::export]]
@@ -454,6 +573,11 @@ double pp_beta_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   return cpp_pp_loglik(x, pars) + cpp_gev_beta(x, pars) ;
 }
 
+// [[Rcpp::export]]
+double pp_prob_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_pp_loglik(x, pars) + cpp_gev_prob(x, pars) ;
+}
+
 // OS Posteriors for specific in-built priors
 
 // [[Rcpp::export]]
@@ -484,6 +608,11 @@ double os_flatflat_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars)
 // [[Rcpp::export]]
 double os_beta_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
   return cpp_os_loglik(x, pars) + cpp_gev_beta(x, pars) ;
+}
+
+// [[Rcpp::export]]
+double os_prob_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  return cpp_os_loglik(x, pars) + cpp_gev_prob(x, pars) ;
 }
 
 // [[Rcpp::export]]
@@ -524,6 +653,8 @@ SEXP gev_logpost_xptr(std::string fstr) {
     return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_flatflat_logpost))) ;
   else if (fstr == "gev_beta")
     return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_beta_logpost))) ;
+  else if (fstr == "gev_prob")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_prob_logpost))) ;
   else if (fstr == "gev_user")
     return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&gev_user_logpost))) ;
   else
@@ -546,6 +677,8 @@ SEXP os_logpost_xptr(std::string fstr) {
     return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&os_flatflat_logpost))) ;
   else if (fstr == "gev_beta")
     return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&os_beta_logpost))) ;
+  else if (fstr == "gev_prob")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&os_prob_logpost))) ;
   else if (fstr == "gev_user")
     return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&os_user_logpost))) ;
   else
@@ -568,6 +701,8 @@ SEXP pp_logpost_xptr(std::string fstr) {
     return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&pp_flatflat_logpost))) ;
   else if (fstr == "gev_beta")
     return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&pp_beta_logpost))) ;
+  else if (fstr == "gev_prob")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&pp_prob_logpost))) ;
   else if (fstr == "gev_user")
     return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&pp_user_logpost))) ;
   else
@@ -727,6 +862,13 @@ double gev_beta_logpost_phi(const Rcpp::NumericVector& phi,
                             const Rcpp::List& pars){
   Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
   return gev_beta_logpost(theta, pars) ;
+}
+
+// [[Rcpp::export]]
+double gev_prob_logpost_phi(const Rcpp::NumericVector& phi,
+                            const Rcpp::List& pars){
+  Rcpp::NumericVector theta = gev_phi_to_theta(phi, pars) ;
+  return gev_prob_logpost(theta, pars) ;
 }
 
 // [[Rcpp::export]]
