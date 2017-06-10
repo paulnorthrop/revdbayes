@@ -71,6 +71,10 @@ for (rotate in rotate_vals) {
       x <- gev_test(prior = "user",
                     rotate = rotate, trans = trans, use_phi_map = use_phi_map)
       test_function(x, test_string)
+      x <- gev_test(prior = "prob", quant = c(85, 88, 95),
+                    alpha = c(4, 2.5, 2.25, 0.25), data = oxford,
+                    rotate = rotate, trans = trans, use_phi_map = use_phi_map)
+      test_function(x, test_string)
     }
   }
 }
