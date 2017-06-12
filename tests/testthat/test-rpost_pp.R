@@ -64,6 +64,10 @@ for (rotate in rotate_vals) {
       x <- pp_test(prior = "user",
                    rotate = rotate, trans = trans, use_phi_map = use_phi_map)
       test_function(x, test_string)
+      x <- pp_test(prior = "quant", prob = 10^-(1:3), shape = c(38.9,7.1,47),
+                   scale = c(1.5,6.3,2.6),
+                   rotate = rotate, trans = trans, use_phi_map = use_phi_map)
+      test_function(x, test_string)
     }
   }
 }

@@ -748,7 +748,8 @@ calc_init_logpost <- function(model, prior_type, init, for_post) {
       gev_flat = gev_flat_logpost(x = init, pars = for_post),
       gev_flatflat = gev_flatflat_logpost(x = init, pars = for_post),
       gev_beta = gev_beta_logpost(x = init, pars = for_post),
-      gev_prob = gev_prob_logpost(x = init, pars = for_post))
+      gev_prob = gev_prob_logpost(x = init, pars = for_post),
+      gev_quant = gev_quant_logpost(x = init, pars = for_post))
   }
   if (model == "os") {
     init_check <- switch(
@@ -759,7 +760,8 @@ calc_init_logpost <- function(model, prior_type, init, for_post) {
       gev_flat = os_flat_logpost(x = init, pars = for_post),
       gev_flatflat = os_flatflat_logpost(x = init, pars = for_post),
       gev_beta = os_beta_logpost(x = init, pars = for_post),
-      gev_prob = os_prob_logpost(x = init, pars = for_post))
+      gev_prob = os_prob_logpost(x = init, pars = for_post),
+      gev_quant = os_quant_logpost(x = init, pars = for_post))
   }
   if (model == "pp") {
     init_check <- switch(
@@ -770,7 +772,8 @@ calc_init_logpost <- function(model, prior_type, init, for_post) {
       gev_flat = pp_flat_logpost(x = init, pars = for_post),
       gev_flatflat = pp_flatflat_logpost(x = init, pars = for_post),
       gev_beta = pp_beta_logpost(x = init, pars = for_post),
-      gev_prob = pp_prob_logpost(x = init, pars = for_post))
+      gev_prob = pp_prob_logpost(x = init, pars = for_post),
+      gev_quant = pp_quant_logpost(x = init, pars = for_post))
   }
   return(init_check)
 }
@@ -794,6 +797,7 @@ set_logpost_phi <- function(model, prior_type) {
                               gev_flatflat = gev_flatflat_logpost_phi,
                               gev_beta = gev_beta_logpost_phi,
                               gev_prob = gev_prob_logpost_phi,
+                              gev_quant = gev_quant_logpost_phi,
                               user = gev_user_logpost_phi)
   } else if (model == "os") {
     cpp_logpost_phi <- switch(prior_type,
@@ -804,6 +808,7 @@ set_logpost_phi <- function(model, prior_type) {
                               gev_flatflat = os_flatflat_logpost_phi,
                               gev_beta = os_beta_logpost_phi,
                               gev_prob = os_prob_logpost_phi,
+                              gev_quant = os_quant_logpost_phi,
                               user = os_user_logpost_phi)
   } else if (model == "pp") {
     cpp_logpost_phi <- switch(prior_type,
@@ -814,6 +819,7 @@ set_logpost_phi <- function(model, prior_type) {
                               gev_flatflat = pp_flatflat_logpost_phi,
                               gev_beta = pp_beta_logpost_phi,
                               gev_prob = pp_prob_logpost_phi,
+                              gev_quant = pp_quant_logpost_phi,
                               user = pp_user_logpost_phi)
   }
   return(cpp_logpost_phi)

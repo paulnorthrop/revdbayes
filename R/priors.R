@@ -223,7 +223,8 @@
 #' u_prior_ptr <- set_prior(prior = ptr_gp_flat, model = "gp")
 #' @export
 set_prior <- function(prior = c("norm", "loglognorm", "mdi", "flat",
-                                "flatflat", "jeffreys", "beta", "prob"),
+                                "flatflat", "jeffreys", "beta", "prob",
+                                "quant"),
                       model = c("gev", "gp", "pp", "os"), ...) {
   if (length(model) > 1) {
     warning("model not supplied: model == \"gev\" has been used.",
@@ -485,7 +486,7 @@ gp_beta <- function(pars, min_xi = -1 / 2, max_xi = 1 / 2, pq = c(6, 9),
 # ================================= GEV priors =================================
 
 gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
-                              "beta", "prob"), ...) {
+                              "beta", "prob", "quant"), ...) {
   prior <- match.arg(prior)
   temp <- list(prior = paste("gev_", prior, sep=""), ...)
   # For v1.2.0 ...
@@ -515,7 +516,8 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
   # Check for unused hyperparameter names and drop them
   hpar_vec <- switch(prior, norm = c("mean", "cov"),
                      loglognorm = c("mean", "cov"), mdi = "a", flat = NULL,
-                     beta = "pq", prob = c("quant", "alpha"))
+                     beta = "pq", prob = c("quant", "alpha"),
+                     quant = c("prob", "shape", "scale"))
   hpar_vec <- c(hpar_vec, "min_xi", "max_xi")
   temp <- hpar_drop(temp, hpar_vec)
   # Check for problems with min_xi and/or max_xi
@@ -570,6 +572,28 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
     if (length(temp$alpha) != 4 | mode(temp$alpha) != "numeric") {
       stop("alpha must be a numeric vector of length four")
     }
+  }
+  if (prior == "quant") {
+    if (is.null(temp$prob)) {
+      stop("prob must be supplied when prior = quant")
+    }
+    if (is.null(temp$shape)) {
+      stop("shape must be supplied when prior = quant")
+    }
+    if (is.null(temp$scale)) {
+      stop("scale must be supplied when prior = quant")
+    }
+    if (length(temp$prob) != 3 | mode(temp$prob) != "numeric") {
+      stop("prob must be a numeric vector of length three")
+    }
+    if (length(temp$shape) != 3 | mode(temp$shape) != "numeric") {
+      stop("shape must be a numeric vector of length three")
+    }
+    if (length(temp$scale) != 3 | mode(temp$scale) != "numeric") {
+      stop("scale must be a numeric vector of length three")
+    }
+    # Sort prob to ensure that the corresponding quantiles are increasing.
+    temp$prob <- sort(temp$prob, decreasing = TRUE)
   }
   # Add trendsd to the prior list so that the prior will work with the
   # evdbayes function posterior().
