@@ -39,7 +39,7 @@ A prior for GEV parameters \eqn{(\mu, \sigma, \xi)},
   based on Crowder (1992).  This construction is typically used to set
   an informative prior, based on specified quantiles \eqn{q1, q2, q3}.
   There are two interpretations of the parameter vector
-  \code{\alpha} = \eqn{(\alpha_1, \alpha_2, \alpha_3, \alpha_4)}:
+  \code{alpha} = \eqn{(\alpha_1, \alpha_2, \alpha_3, \alpha_4)}:
   as the parameters of beta distributions for ratio of exceedance
   probabilities
   \href{http://dx.doi.org/10.1201/b19721-14}{(Stephenson, 2016)}
