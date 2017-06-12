@@ -220,7 +220,7 @@ data(gom)
 u <- quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 bp <- set_bin_prior(prior = "jeffreys")
-bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u,
+bgpg <- rpost_rcpp(n = 1000, model = "bingp", prior = fp, thresh = u,
   data = gom, bin_prior = bp)
 plot(bgpg, pu_only = TRUE)
 plot(bgpg, add_pu = TRUE)
