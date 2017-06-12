@@ -86,10 +86,6 @@ Nothing is returned unless \code{use_bayesplot = TRUE} when a
   functions.
 }
 \details{
-Note that \code{suppressWarnings} is used to avoid potential benign warnings
-  caused by passing unused graphical parameters to \code{hist} and
-  \code{lines} via \code{...}.
-
 For details of the \strong{bayesplot} functions available when
   \code{use_bayesplot = TRUE} see \link[bayesplot]{MCMC-overview} and
   the \strong{bayesplot} vignette

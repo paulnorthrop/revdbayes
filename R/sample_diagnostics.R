@@ -57,11 +57,6 @@
 #'   with the initial \code{mcmc_} part removed.  See
 #'   \link[bayesplot]{MCMC-overview} and links therein for the names of these
 #'   functions. Some examples are given below.
-#' @details
-#' Note that \code{suppressWarnings} is used to avoid potential benign warnings
-#'   caused by passing unused graphical parameters to \code{hist} and
-#'   \code{lines} via \code{...}.
-#'
 #' @details For details of the \strong{bayesplot} functions available when
 #'   \code{use_bayesplot = TRUE} see \link[bayesplot]{MCMC-overview} and
 #'   the \strong{bayesplot} vignette
@@ -165,8 +160,7 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     x$d <- x$d + 1
   }
   if (x$d == 1) {
-    temp <- suppressWarnings(graphics::hist(plot_data, prob = TRUE,
-                                            plot = FALSE))
+    temp <- graphics::hist(plot_data, plot = FALSE)
     a <- temp$breaks[1]
     b <- temp$breaks[length(temp$breaks)]
     h <- (b-a)/n
@@ -190,19 +184,23 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     yy <- yy / area
     max_y <- max(temp$density, yy)
     temp <- list(...)
+    my_hist <- function(x, ..., type, lty, lwd, pch, lend, ljoin, lmitre) {
+      graphics::hist(x, ...)
+    }
     if (is.null(temp$xlab)) {
-      graphics::hist(plot_data, prob = TRUE, main="", ylim = c(0, max_y),
-                     xlab = "", ...)
-      suppressWarnings(graphics::hist(plot_data, prob = TRUE, main="",
-                                      ylim = c(0, max_y), xlab = "", ...))
+      my_hist(plot_data, prob = TRUE, main="", ylim = c(0, max_y), xlab = "",
+              ...)
       if (!is.null(colnames(plot_data))) {
         graphics::title(xlab = parse(text = colnames(plot_data)[1]))
       }
     } else {
-      suppressWarnings(graphics::hist(plot_data, prob = TRUE, main="",
-                                      ylim = c(0, max_y), ...))
+      my_hist(plot_data, prob = TRUE, main="", ylim = c(0, max_y), ...)
     }
-    suppressWarnings(graphics::lines(xx, yy, ...))
+    my_lines <- function(x, y, ..., breaks, freq, probability, include.lowest,
+                         right, density, angle, border, plot, labels, nclass) {
+      graphics::lines(x, y, ...)
+    }
+    my_lines(xx, yy, ...)
   }
   if (x$d == 2) {
     r <- apply(plot_data, 2, range)
