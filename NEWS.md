@@ -8,6 +8,8 @@
 
 * New vignette. "Faster simulation using revdbayes and Rcpp".
 
+* `set_prior` has been extended so that informative priors for GEV parameters can be specified using the arguments `prior = "prob"` or `prior = "quant"`.  It is no longer necessary to use the functions `prior.prob` and `prior.quant` to set these priors.
+
 ## Bug fixes and minor improvements
 
 * The list returned from `set_prior` now contains default values for all the required arguments of a given in-built prior, if these haven't been specified by the user.  This simplifies the evaluation of prior densities using C++.

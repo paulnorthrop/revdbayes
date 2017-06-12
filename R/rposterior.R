@@ -171,16 +171,19 @@
 #'     \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
 #'   }
 #' @seealso \code{\link{set_prior}} for setting a prior distribution.
+#' @seealso \code{\link{rpost_rcpp}} for faster posterior simulation using
+#'   the Rcpp package.
 #' @seealso \code{\link{plot.evpost}}, \code{\link{summary.evpost}} and
 #'   \code{\link{predict.evpost}} for the S3 \code{plot}, \code{summary}
 #'   and \code{predict} methods for objects of class \code{evpost}.
-#' @seealso \code{\link[rust]{ru}} in the \code{\link[rust]{rust}}
-#'   package for details of the arguments that can be passed to \code{ru} and
-#'   the form of the object returned by \code{rpost}.
-#' @seealso \code{\link[rust]{find_lambda}} in the
-#'   \code{\link[rust]{rust}} package is used inside \code{rpost} to set the
-#'   Box-Cox transformation parameter lambda when the \code{trans = "BC"}
-#'   argument is given.
+#' @seealso \code{\link[rust]{ru}} and \code{\link[rust]{ru_rcpp}} in the
+#'   \code{\link[rust]{rust}} package for details of the arguments that can
+#'   be passed to \code{ru} and the form of the object returned by
+#'   \code{rpost}.
+#' @seealso \code{\link[rust]{find_lambda}} and
+#'   \code{\link[rust]{find_lambda_rcpp}} in the \code{\link[rust]{rust}}
+#'   package is used inside \code{rpost} to set the Box-Cox transformation
+#'   parameter lambda when the \code{trans = "BC"} argument is given.
 #' @seealso \code{\link[evdbayes]{posterior}} for sampling from an extreme
 #'   value posterior using the evdbayes package.
 #' @references Coles, S. G. and Powell, E. A. (1996) Bayesian methods in

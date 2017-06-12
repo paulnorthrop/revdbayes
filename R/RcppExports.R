@@ -69,32 +69,22 @@ cpp_gev_beta <- function(x, ppars) {
     .Call('revdbayes_cpp_gev_beta', PACKAGE = 'revdbayes', x, ppars)
 }
 
-#' GEV density function
-#' @export
 lgdgev_cpp <- function(x, loc, scale, shape) {
     .Call('revdbayes_lgdgev_cpp', PACKAGE = 'revdbayes', x, loc, scale, shape)
 }
 
-#' GEV distribution function
-#' @export
 pgev_cpp <- function(q, loc, scale, shape) {
     .Call('revdbayes_pgev_cpp', PACKAGE = 'revdbayes', q, loc, scale, shape)
 }
 
-#' GEV quantile function
-#' @export
 qgev_cpp <- function(p, loc, scale, shape) {
     .Call('revdbayes_qgev_cpp', PACKAGE = 'revdbayes', p, loc, scale, shape)
 }
 
-#' Informative prior for GEV parameters constructed on the probability scale.
-#' @export
 cpp_gev_prob <- function(x, ppars) {
     .Call('revdbayes_cpp_gev_prob', PACKAGE = 'revdbayes', x, ppars)
 }
 
-#' Informative prior for GEV parameters constructed on the quantile scale.
-#' @export
 cpp_gev_quant <- function(x, ppars) {
     .Call('revdbayes_cpp_gev_quant', PACKAGE = 'revdbayes', x, ppars)
 }

@@ -2,8 +2,7 @@
 % Please edit documentation in R/informative_priors.R
 \name{gev_quant}
 \alias{gev_quant}
-\title{Informative prior for GEV parameters (\eqn{\mu, \sigma, \xi}) constructed on the
-probability scale.}
+\title{Informative GEV prior on a quantile scale}
 \usage{
 gev_quant(pars, prob, shape, scale, min_xi = -Inf, max_xi = Inf,
   trendsd = 0)
@@ -12,20 +11,49 @@ gev_quant(pars, prob, shape, scale, min_xi = -Inf, max_xi = Inf,
 \item{pars}{A numeric vector of length 3.
 GEV parameters (\eqn{\mu, \sigma, \xi}).}
 
+\item{prob}{A numeric vector of length 3 containing exceedance
+probabilities (\eqn{p1, p2, p3}) such that \eqn{p1 > p2 > p3}.
+If the values in \code{quant} are not ordered from largest to smallest
+then they will be ordered inside \code{set_prior} without warning.}
+
+\item{shape, scale}{Numeric vectors of length 3. Shape and scale
+parameters specifying (independent) gamma prior distributions placed
+on the differences between the quantiles corresponding to the
+probabilities given in \code{prob}.}
+
 \item{min_xi}{A numeric scalar.  Prior lower bound on \eqn{\xi}.}
 
 \item{max_xi}{A numeric scalar.  Prior upper bound on \eqn{\xi}.}
 
 \item{trendsd}{Has no function other than to achieve compatability with
 function in the evdbayes package.}
-
-\item{quant}{A numeric vector of length 3.}
-
-\item{alpha}{A numeric vector of length 4.}
 }
 \value{
 The log of the prior density.
 }
 \description{
-For information about this and other priors see \code{\link{set_prior}}.
+Informative GEV prior for GEV parameters (\eqn{\mu, \sigma, \xi})
+constructed on the quantile scale.  For information about how to set this
+prior see \code{\link{set_prior}}.
+}
+\details{
+See
+  \href{http://dx.doi.org/10.2307/2986068}{Coles and Tawn (1996)} and/or
+  \href{http://dx.doi.org/10.1201/b19721-14}{Stephenson (2016)}
+  for details.
+
+  Note that the lower end point of the distribution of the distribution
+  of the variable in question is assumed to be equal to zero.
+  If this is not the case then the user should shift the data to
+  ensure that this is true.
+}
+\references{
+Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
+  extreme rainfall data. \emph{Appl. Statist.}, \strong{45}, 463-478.
+  \url{http://dx.doi.org/10.2307/2986068}.
+
+Stephenson, A. (2016) Bayesian inference for extreme value
+  modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
+  and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
+  London. \url{http://dx.doi.org/10.1201/b19721-14}.
 }

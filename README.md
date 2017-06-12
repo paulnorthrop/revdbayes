@@ -23,6 +23,13 @@ gevp  <- rpost(n = 1000, model = "gev", prior = pn, data = portpirie)
 plot(gevp)
 ```
 
+From version 1.2.0 onwards the faster function `rpost_rcpp` can be used.
+See the vignette ""Faster simulation using revdbayes and Rcpp" for details. The syntax of `rpost` and `post_rcpp` is identical. For example:
+
+``` r
+gevp_rcpp  <- rpost_rcpp(n = 1000, model = "gev", prior = pn, data = portpirie)
+```
+
 ### Installation
 
 To get the current released version from CRAN:
@@ -31,6 +38,6 @@ To get the current released version from CRAN:
 install.packages("revdbayes")
 ```
 
-### Vignette
+### Vignettes
 
-See `vignette("revdbayes-vignette", package = "revdbayes")` for an overview of the package and `vignette("revdbayes-predictive-vignette", package = "revdbayes")` for an outline of how to use revdbayes to perform posterior predictive extreme value inference.
+See `vignette("revdbayes-vignette", package = "revdbayes")` for an overview of the package and `vignette("revdbayes-using-rcpp-vignette", package = "revdbayes")` for an illustration of the improvements in efficiency produced using the Rcpp package. See `vignette("revdbayes-predictive-vignette", package = "revdbayes")` for an outline of how to use revdbayes to perform posterior predictive extreme value inference.

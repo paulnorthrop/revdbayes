@@ -171,12 +171,14 @@
 #'     \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
 #'   }
 #' @seealso \code{\link{set_prior}} for setting a prior distribution.
+#' @seealso \code{\link{rpost}} for posterior simulation without using
+#'   the Rcpp package.
 #' @seealso \code{\link{plot.evpost}}, \code{\link{summary.evpost}} and
 #'   \code{\link{predict.evpost}} for the S3 \code{plot}, \code{summary}
 #'   and \code{predict} methods for objects of class \code{evpost}.
-#' @seealso \code{\link[rust]{ru}} in the \code{\link[rust]{rust}}
-#'   package for details of the arguments that can be passed to \code{ru} and
-#'   the form of the object returned by \code{rpost}.
+#' @seealso \code{\link[rust]{ru_rcpp}} in the \code{\link[rust]{rust}}
+#'   package for details of the arguments that can be passed to
+#'   \code{ru_rcpp} and the form of the object returned by \code{rpost_rcpp}.
 #' @seealso \code{\link[rust]{find_lambda}} in the
 #'   \code{\link[rust]{rust}} package is used inside \code{rpost} to set the
 #'   Box-Cox transformation parameter lambda when the \code{trans = "BC"}

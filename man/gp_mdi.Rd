@@ -15,7 +15,8 @@ GP parameters (\eqn{\sigma, \xi}).}
 MDI prior.}
 
 \item{min_xi}{A numeric scalar.  Prior lower bound on \eqn{\xi}.
-Must not be \code{-Inf} because this results in an improper posterior.}
+Must not be \code{-Inf} because this results in an improper posterior.
+See Northrop and Attalides (2016) for details.}
 
 \item{max_xi}{A numeric scalar.  Prior upper bound on \eqn{\xi}.}
 
@@ -27,4 +28,10 @@ The log of the prior density.
 }
 \description{
 For information about this and other priors see \code{\link{set_prior}}.
+}
+\references{
+Northrop, P.J. and Attalides, N. (2016) Posterior propriety in
+  Bayesian extreme value analyses using reference priors
+  \emph{Statistica Sinica}, \strong{26(2)}, 721--743
+  \url{http://dx.doi.org/10.5705/ss.2014.034}.
 }

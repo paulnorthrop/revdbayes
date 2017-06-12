@@ -315,8 +315,6 @@ double cpp_gev_beta(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
 
 // GEV functions
 
-//' GEV density function
-//' @export
 // [[Rcpp::export]]
 Rcpp::NumericVector lgdgev_cpp(const Rcpp::NumericVector& x, const double& loc,
                              const double& scale, const double& shape) {
@@ -340,8 +338,6 @@ Rcpp::NumericVector lgdgev_cpp(const Rcpp::NumericVector& x, const double& loc,
   return d - log(scale) ;
 }
 
-//' GEV distribution function
-//' @export
 // [[Rcpp::export]]
 Rcpp::NumericVector pgev_cpp(const Rcpp::NumericVector& q, const double& loc,
                              const double& scale, const double& shape) {
@@ -360,8 +356,6 @@ Rcpp::NumericVector pgev_cpp(const Rcpp::NumericVector& q, const double& loc,
   return p ;
 }
 
-//' GEV quantile function
-//' @export
 // [[Rcpp::export]]
 Rcpp::NumericVector qgev_cpp(const Rcpp::NumericVector& p, const double& loc,
                              const double& scale, const double& shape) {
@@ -381,8 +375,6 @@ Rcpp::NumericVector qgev_cpp(const Rcpp::NumericVector& p, const double& loc,
   return loc - scale * q  ;
 }
 
-//' Informative prior for GEV parameters constructed on the probability scale.
-//' @export
 // [[Rcpp::export]]
 double cpp_gev_prob(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
   // Extract GEV parameter values.
@@ -437,8 +429,6 @@ double cpp_gev_prob(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
   return val ;
 }
 
-//' Informative prior for GEV parameters constructed on the quantile scale.
-//' @export
 // [[Rcpp::export]]
 double cpp_gev_quant(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
   // Extract GEV parameter values.

@@ -1,23 +1,58 @@
-# Add lower bound lb (cf. rprior)
-#GEV.prior <- function(GEV.pars,q,N.in,N.out=N.in,log=TRUE,alpha,xi.tol=1e-6,j.max=4){
-
-#' Informative prior for GEV parameters (\eqn{\mu, \sigma, \xi}) constructed on the
-#' probability scale.
+#' Informative GEV prior on a probability scale
 #'
-#' For information about this and other priors see \code{\link{set_prior}}.
+#' Constructs an informative prior for GEV parameters (\eqn{\mu, \sigma, \xi}),
+#' constructed on the probability scale. For information about how to set this
+#' prior see \code{\link{set_prior}}.
 #'
 #' @param pars A numeric vector of length 3.
 #'   GEV parameters (\eqn{\mu, \sigma, \xi}).
-#' @param quant A numeric vector of length 3.
-#' @param alpha A numeric vector of length 4.
+#' @param quant A numeric vector of length 3 containing quantiles
+#'   (\eqn{q1, q2, q3}) such that \eqn{q1 < q2 < q3}. If the values
+#'   in \code{quant} are not ordered from smallest to largest then they
+#'   will be ordered inside \code{set_prior} without warning.
+#' @param alpha A numeric vector of length 4.  Parameters specifying a
+#'   prior distribution for probabilities related to the quantiles in
+#'   \code{quant}.  See \strong{Details} below.
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
+#' @details A prior for GEV parameters \eqn{(\mu, \sigma, \xi)},
+#'   based on Crowder (1992).  This construction is typically used to set
+#'   an informative prior, based on specified quantiles \eqn{q1, q2, q3}.
+#'   There are two interpretations of the parameter vector
+#'   \code{\alpha} = \eqn{(\alpha_1, \alpha_2, \alpha_3, \alpha_4)}:
+#'   as the parameters of beta distributions for ratio of exceedance
+#'   probabilities
+#'   \href{http://dx.doi.org/10.1201/b19721-14}{(Stephenson, 2016)}
+#'   and as the parameters of
+#'   a Dirichlet distribution for differences between non-exceedance
+#'   probabilities
+#'   \href{http://dx.doi.org/10.1111/rssc.12159}{(Northrop et al., 2017)}.
+#'   See these publications for details.
 #' @return The log of the prior density.
+#' @seealso \code{\link{set_prior}} for setting a prior distribution.
+#' @seealso \code{\link{rpost}} and \code{\link{rpost_rcpp}} for sampling
+#'   from an extreme value posterior distribution.
+#' @seealso Sets the same prior as the function
+#'   \code{\link[evdbayes]{prior.prob}} in the evdbayes package.
+#' @references Crowder, M. (1992) Bayesian priors based on parameter
+#'   transformation using the distribution function
+#'   \emph{Ann. Inst. Statist. Math.}, \strong{44}, 405-416.
+#'   \url{http://dx.doi.org/10.1007/BF00050695}.
+#' @references Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
+#'   Cross-validatory extreme value threshold selection and uncertainty
+#'   with application to ocean storm severity.
+#'   \emph{Journal of the Royal Statistical Society Series C: Applied
+#'   Statistics}, \emph{66}(1), 93-120.
+#'   \url{http://dx.doi.org/10.1111/rssc.12159}
+#' @references Stephenson, A. (2016) Bayesian inference for extreme value
+#'   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
+#'   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
+#'   London. \url{http://dx.doi.org/10.1201/b19721-14}.
 #' @export
 gev_prob <- function(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
-                     trendsd = 0){
+                     trendsd = 0) {
   # Extract GEV parameter values.
   mu <- pars[1]
   sigma <- pars[2]
@@ -68,20 +103,43 @@ gev_prob <- function(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
   return(val)
 }
 
-#' Informative prior for GEV parameters (\eqn{\mu, \sigma, \xi}) constructed on the
-#' probability scale.
+#' Informative GEV prior on a quantile scale
 #'
-#' For information about this and other priors see \code{\link{set_prior}}.
+#' Informative GEV prior for GEV parameters (\eqn{\mu, \sigma, \xi})
+#' constructed on the quantile scale.  For information about how to set this
+#' prior see \code{\link{set_prior}}.
 #'
 #' @param pars A numeric vector of length 3.
 #'   GEV parameters (\eqn{\mu, \sigma, \xi}).
-#' @param quant A numeric vector of length 3.
-#' @param alpha A numeric vector of length 4.
+#' @param prob A numeric vector of length 3 containing exceedance
+#'   probabilities (\eqn{p1, p2, p3}) such that \eqn{p1 > p2 > p3}.
+#'   If the values in \code{quant} are not ordered from largest to smallest
+#'   then they will be ordered inside \code{set_prior} without warning.
+#' @param shape,scale Numeric vectors of length 3. Shape and scale
+#'   parameters specifying (independent) gamma prior distributions placed
+#'   on the differences between the quantiles corresponding to the
+#'   probabilities given in \code{prob}.
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param trendsd  Has no function other than to achieve compatability with
 #'   function in the evdbayes package.
 #' @return The log of the prior density.
+#' @details See
+#'   \href{http://dx.doi.org/10.2307/2986068}{Coles and Tawn (1996)} and/or
+#'   \href{http://dx.doi.org/10.1201/b19721-14}{Stephenson (2016)}
+#'   for details.
+#'
+#'   Note that the lower end point of the distribution of the distribution
+#'   of the variable in question is assumed to be equal to zero.
+#'   If this is not the case then the user should shift the data to
+#'   ensure that this is true.
+#' @references Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
+#'   extreme rainfall data. \emph{Appl. Statist.}, \strong{45}, 463-478.
+#'   \url{http://dx.doi.org/10.2307/2986068}.
+#' @references Stephenson, A. (2016) Bayesian inference for extreme value
+#'   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
+#'   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
+#'   London. \url{http://dx.doi.org/10.1201/b19721-14}.
 #' @export
 gev_quant <- function(pars, prob, shape, scale, min_xi = -Inf, max_xi = Inf,
                       trendsd = 0){

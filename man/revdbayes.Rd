@@ -11,32 +11,40 @@ random samples from the posterior distributions commonly encountered in
 Bayesian extreme value analyses.
 }
 \details{
-The main function in the revbayes package is \code{rpost}, which
-  simulates random samples from the posterior distribution of extreme value
-  model parameters using the function \code{ru} from the rust package. The
+The main functions in the revbayes package are \code{rpost} and
+  \code{rpost_rcpp}, which simulate random samples from the posterior
+  distribution of extreme value model parameters using the functions
+  \code{ru} and \code{ru_rcpp} from the rust package, respectively. The
   user chooses the extreme value model, the prior density for the parameters
   and provides the data.  There are options to improve the probability of
   acceptance of the ratio-of-uniforms algorithm by working with
   transformation of the model parameters.
 
   See \code{vignette("revdbayes-vignette", package = "revdbayes")} for an
-  overview of the package.
+  overview of the package and
+  \code{vignette("revdbayes-using-rcpp-vignette", package = "revdbayes")}
+   for an illustration of the improvements in efficiency produced using
+   the Rcpp package.
+   See `vignette("revdbayes-predictive-vignette", package = "revdbayes")`
+   for an outline of how to use revdbayes to perform posterior predictive
+   extreme value inference.
 }
 \references{
 Northrop, P. J. (2016). rust: Ratio-of-Uniforms Simulation with
-  Transformation. R package version 1.1.0.
+  Transformation. R package version 1.2.2.
   \url{https://cran.r-project.org/package=rust}.
 }
 \seealso{
 \code{\link{set_prior}} to set a prior density for extreme value
   parameters.
 
-\code{\link{rpost}} to perform ratio-of-uniforms sampling from
-  an extreme value posterior distribution.
+\code{\link{rpost}} and \code{\link{rpost_rcpp}} to perform
+  ratio-of-uniforms sampling from an extreme value posterior distribution.
 
-The \code{\link[rust]{ru}} function in the \code{\link{rust}}
-  package for details of the arguments that can be passed to \code{ru}
-  via \code{rpost} and for the form of the object (of class "evprior")
-  returned from \code{rpost}, which has the same structure as an object
-  (of class "ru") returned by \code{ru}.
+The \code{\link[rust]{ru}} and \code{\link[rust]{ru_rcpp}}
+  functions in the \code{\link{rust}} package for details of the arguments
+  that can be passed to \code{ru} via \code{rpost} and for the form of the
+  object (of class "evprior") returned from \code{rpost}, which has the same
+  structure as an object (of class "ru") returned by \code{ru} and
+  \code{ru_rcpp}.
 }
