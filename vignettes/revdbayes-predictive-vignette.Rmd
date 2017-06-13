@@ -28,7 +28,7 @@ parameter-specific inferences over a posterior distribution for model
 parameters.  In practice, the integration averaging is performed using an 
 empirical average based on samples from the posterior distribution.
 The vignette
-[Introducing revdbayes](revdbayes-vignette.html) covers the sampling from extreme value posterior distributions.
+[Introducing revdbayes](revdbayes-vignette.html) covers the sampling from extreme value posterior distributions and the vignette [Faster simulation using revdbayes](revdbayes-using-rcpp-vignette.html) considers how to do this more quickly.
 
 We consider two uses of posterior predictive inference.  In the first we 
 simulate from the posterior predictive distribution many replicates of the 
