@@ -6,9 +6,9 @@
 
 * New function: `rpost_rcpp`.  
 
-* New vignette. "Faster simulation using revdbayes and Rcpp".
+* New vignette. "Faster simulation using revdbayes".
 
-* `set_prior` has been extended so that informative priors for GEV parameters can be specified using the arguments `prior = "prob"` or `prior = "quant"`.  It is no longer necessary to use the functions `prior.prob` and `prior.quant` to set these priors.
+* `set_prior` has been extended so that informative priors for GEV parameters can be specified using the arguments `prior = "prob"` or `prior = "quant"`.  It is no longer necessary to use the functions `prior.prob` and `prior.quant` from the evdbayes package to set these priors.
 
 ## Bug fixes and minor improvements
 
