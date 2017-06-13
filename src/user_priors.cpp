@@ -42,9 +42,6 @@ double user_gev_flat(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
   return -log(x[1]) ;
 }
 
-// Add examples in rpost_rcpp, set_prior, document create_prior_xptr,
-// User functions example(s) in vignette + link to rust vignette.
-
 //' Create an external pointer to a C++ prior
 //'
 //' This function provides an example of a way in which a user can specify
