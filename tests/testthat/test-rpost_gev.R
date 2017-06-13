@@ -10,10 +10,11 @@ my_tol <- 1e-5
 gev_test <- function(seed = 47, prior, n = 5, rotate = TRUE, trans = "none",
                      use_phi_map = FALSE, data = portpirie, ...){
   if (prior == "user") {
-    prior_rfn <- set_prior(prior = "flat", model = "gev", ...)
-    ptr_gev_flat <- create_prior_xptr("gev_flat")
-    prior_cfn <- set_prior(prior = ptr_gev_flat, model = "gev", min_xi = -1,
-                           max_xi = Inf)
+    prior_rfn <- set_prior(prior = "norm", model = "gev", ...)
+    ptr_gev_norm <- create_prior_xptr("gev_norm")
+    prior_cfn <- set_prior(prior = ptr_gev_norm, model = "gev",
+                           mean = c(0,0,0),
+                           icov = solve(diag(c(10000, 10000, 100))))
   } else {
     prior_rfn <- set_prior(prior = prior, model = "gev", ...)
     prior_cfn <- set_prior(prior = prior, model = "gev", ...)
@@ -68,7 +69,8 @@ for (rotate in rotate_vals) {
       x <- gev_test(prior = "beta",
                     rotate = rotate, trans = trans, use_phi_map = use_phi_map)
       test_function(x, test_string)
-      x <- gev_test(prior = "user",
+      x <- gev_test(prior = "user", mean = c(0,0,0),
+                    cov = diag(c(10000, 10000, 100)),
                     rotate = rotate, trans = trans, use_phi_map = use_phi_map)
       test_function(x, test_string)
       x <- gev_test(prior = "prob", quant = c(85, 88, 95),

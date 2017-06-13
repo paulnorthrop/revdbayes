@@ -45,6 +45,7 @@ A list with class \code{"evprior"}.  The first component is the
 Constructs a prior distribution for use as the argument \code{prior} in
 \code{\link{rpost}} and \code{\link{rpost_rcpp}}.
 The user can either specify their own prior function
+(using an R function or an external pointer to a comiled C++ function)
 and arguments for hyperparameters or choose from a list of in-built
 model-specific priors.  Note that the arguments \code{model = "gev"},
 \code{model = "pp"} and \code{model =="os"} are equivalent because
@@ -264,6 +265,9 @@ Stephenson, A. (2016) Bayesian inference for extreme value
 \seealso{
 \code{\link{rpost}} and \code{\link{rpost_rcpp}} for sampling
   from an extreme value posterior distribution.
+
+\code{\link{create_prior_xptr}} for creating an external
+  pointer to a C++ function to evaluate the log-prior density.
 
 \code{\link{rprior_prob}} and \code{\link{rprior_quant}} for
   sampling from informative prior distributions for GEV parameters.

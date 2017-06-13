@@ -183,8 +183,8 @@ double cpp_gp_norm(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
   Rcpp::NumericVector icov = ppars["icov"] ;
   double c0 = log(x[0]) - mean[0] ;
   double c1 = x[1] - mean[1] ;
-  double ld = icov[0] * pow(c0, 2) + 2 * icov[1] * c0 * c1 +
-    icov[2]*pow(c1, 2) ;
+  double ld = icov[0] * pow(c0, 2.0) + 2 * icov[1] * c0 * c1 +
+    icov[2] * pow(c1, 2.0) ;
   return (-ld / 2 - log(x[0])) ;
 }
 
@@ -249,9 +249,9 @@ double cpp_gev_norm(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
   double c0 = x[0] - mean[0] ;
   double c1 = log(x[1]) - mean[1] ;
   double c2 = x[2] - mean[2] ;
-  double ld = icov[0] * pow(c0, 2) + 2 * icov[1] * c0 * c1 +
-    2 * icov[2] * c0 * c2 + icov[3] * pow(c1, 2) + 2 * icov[4] * c1 * c2 +
-    icov[5] * pow(c2, 2) ;
+  double ld = icov[0] * pow(c0, 2.0) + 2 * icov[1] * c0 * c1 +
+    2 * icov[2] * c0 * c2 + icov[3] * pow(c1, 2.0) + 2 * icov[4] * c1 * c2 +
+    icov[5] * pow(c2, 2.0) ;
   return (-ld / 2 - log(x[1])) ;
 }
 
@@ -267,9 +267,9 @@ double cpp_gev_loglognorm(const Rcpp::NumericVector& x,
   double c0 = log(x[0]) - mean[0] ;
   double c1 = log(x[1]) - mean[1] ;
   double c2 = x[2] - mean[2] ;
-  double ld = icov[0] * pow(c0, 2) + 2 * icov[1] * c0 * c1 +
-    2 * icov[2] * c0 * c2 + icov[3] * pow(c1, 2) + 2 * icov[4] * c1 * c2 +
-    icov[5] * pow(c2, 2) ;
+  double ld = icov[0] * pow(c0, 2.0) + 2 * icov[1] * c0 * c1 +
+    2 * icov[2] * c0 * c2 + icov[3] * pow(c1, 2.0) + 2 * icov[4] * c1 * c2 +
+    icov[5] * pow(c2, 2.0) ;
   return (-ld / 2 - log(x[1]) - log(x[0])) ;
 }
 
