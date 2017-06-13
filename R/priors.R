@@ -5,6 +5,7 @@
 #' Constructs a prior distribution for use as the argument \code{prior} in
 #' \code{\link{rpost}} and \code{\link{rpost_rcpp}}.
 #' The user can either specify their own prior function
+#' (using an R function or an external pointer to a compiled C++ function)
 #' and arguments for hyperparameters or choose from a list of in-built
 #' model-specific priors.  Note that the arguments \code{model = "gev"},
 #' \code{model = "pp"} and \code{model =="os"} are equivalent because
@@ -37,6 +38,8 @@
 #'   \code{\link{gev_norm}}, \code{\link{gev_loglognorm}},
 #'   \code{\link{gev_mdi}}, \code{\link{gev_flat}}, \code{\link{gev_flatflat}},
 #'   \code{\link{gev_beta}}, \code{\link{gev_prob}}, \code{\link{gev_quant}}.
+#'   All these priors have the arguments \code{min_xi} (prior lower bound on
+#'   \eqn{\xi}) and \code{max_xi} (prior upper bound on \eqn{\xi}).
 #' @details Of the in-built named priors available in revdbayes only
 #'   those specified using \code{prior = "prob"} (\code{\link{gev_prob}}),
 #'   \code{prior = "quant"} (\code{\link{gev_quant}})
@@ -174,6 +177,8 @@
 #'   hyperparameters in the prior.
 #' @seealso \code{\link{rpost}} and \code{\link{rpost_rcpp}} for sampling
 #'   from an extreme value posterior distribution.
+#' @seealso \code{\link{create_prior_xptr}} for creating an external
+#'   pointer to a C++ function to evaluate the log-prior density.
 #' @seealso \code{\link{rprior_prob}} and \code{\link{rprior_quant}} for
 #'   sampling from informative prior distributions for GEV parameters.
 #' @seealso \code{\link{gp_norm}}, \code{\link{gp_mdi}},
