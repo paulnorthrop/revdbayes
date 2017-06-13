@@ -153,6 +153,11 @@ gev_quant <- function(pars, prob, shape, scale, min_xi = -Inf, max_xi = Inf,
   }
   # Calculate quantiles. Note: prob contains exceedance probabilities
   quant <- qgev(p = 1 - prob, loc = mu, scale = sigma, shape = xi)
+  # If the combination of (mu, sigma, xi) is such that any of the quantiles
+  # (quant[1] is the smallest) are non-positive then return -Inf.
+  if (quant[1] <= 0) {
+    return(-Inf)
+  }
   y <- (quant - mu) / sigma
   lin <- 1 + xi * y
   # prior is zero if any component of lin is not positive.

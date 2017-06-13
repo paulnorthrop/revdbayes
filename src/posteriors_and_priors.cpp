@@ -441,6 +441,11 @@ double cpp_gev_quant(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
   Rcpp::NumericVector prob = ppars["prob"] ;
 // Calculate quantiles. Note: prob contains exceedance probabilities
   Rcpp::NumericVector quant = qgev_cpp(1.0 - prob, mu, sigma, xi) ;
+// If the combination of (mu, sigma, xi) is such that any of the quantiles
+// (quant[1] is the smallest) are non-positive then return -Inf.
+  if (quant[0] <= 0) {
+    return R_NegInf ;
+  }
   Rcpp::NumericVector y = (quant - mu) / sigma ;
   Rcpp::NumericVector lin = 1 + xi * y ;
   // prior is zero if any component of lin is not positive.
