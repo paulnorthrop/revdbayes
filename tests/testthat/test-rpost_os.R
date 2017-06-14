@@ -28,7 +28,8 @@ os_test <- function(seed = 47, prior, n = 5, rotate = TRUE, trans = "none",
   res2 <- rpost_rcpp(n = n, model = "os", prior = prior_cfn,
                      data = data, rotate = rotate, trans = trans,
                      use_phi_map = use_phi_map)
-  return(list(sim1 = res1$sim_vals, sim2 = res2$sim_vals))
+  return(list(sim1 = as.numeric(res1$sim_vals),
+              sim2 = as.numeric(res2$sim_vals)))
 }
 
 os_test_gev <- function(seed = 47, prior, n = 5, rotate = TRUE, trans = "none",

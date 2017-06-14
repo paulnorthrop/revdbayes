@@ -28,7 +28,8 @@ gp_test <- function(seed = 47, prior, n = 5, rotate = TRUE,
   res2 <- rpost_rcpp(n = n, model = "gp", prior = prior_cfn, thresh = u,
                      data = data, rotate = rotate, trans = trans,
                      use_phi_map = use_phi_map)
-  return(list(sim1 = res1$sim_vals, sim2 = res2$sim_vals))
+  return(list(sim1 = as.numeric(res1$sim_vals),
+              sim2 = as.numeric(res2$sim_vals)))
 }
 
 test_function <- function(x, test_string) {
