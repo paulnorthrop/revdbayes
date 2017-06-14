@@ -225,12 +225,12 @@
 #'
 #' # GEV model
 #' mat <- diag(c(10000, 10000, 100))
-#' pn <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
+#' pn <- set_prior(prior = "norm", model = "gev", mean = c(0, 0, 0), cov = mat)
 #' gevp  <- rpost(n = 1000, model = "gev", prior = pn, data = portpirie)
 #' plot(gevp)
 #'
 #' # GEV model, informative prior constructed on the probability scale
-#' pip  <- set_prior(quant = c(85,88,95), alpha = c(4,2.5,2.25,0.25),
+#' pip  <- set_prior(quant = c(85, 88, 95), alpha = c(4, 2.5, 2.25, 0.25),
 #'                   model = "gev", prior = "prob")
 #' ox_post <- rpost(n = 1000, model = "gev", prior = pip, data = oxford)
 #' plot(ox_post)
@@ -242,15 +242,15 @@
 #' plot(ppr)
 #'
 #' # PP model, informative prior constructed on the quantile scale
-#' piq <- set_prior(prob = 10^-(1:3), shape = c(38.9,7.1,47),
-#'                  scale = c(1.5,6.3,2.6), model = "gev", prior = "quant")
+#' piq <- set_prior(prob = 10^-(1:3), shape = c(38.9, 7.1, 47),
+#'                  scale = c(1.5, 6.3, 2.6), model = "gev", prior = "quant")
 #' rn_post <- rpost(n = 1000, model = "pp", prior = piq, data = rainfall,
 #'                  thresh = 40, noy = 54)
 #' plot(rn_post)
 #'
 #' # OS model
 #' mat <- diag(c(10000, 10000, 100))
-#' pv <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
+#' pv <- set_prior(prior = "norm", model = "gev", mean = c(0, 0, 0), cov = mat)
 #' osv <- rpost(n = 1000, model = "os", prior = pv, data = venice)
 #' plot(osv)
 #' @export
