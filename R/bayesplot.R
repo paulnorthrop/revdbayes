@@ -7,6 +7,8 @@
 #' \strong{bayesplot} package.  See \link[bayesplot]{PPC-overview} for
 #' details of these functions.
 #'
+#' @aliases pp_check
+#'
 #' @param object An object of class "evpost", a result of a call to
 #'   \code{\link{rpost}}.  Currently \code{object$model = "gev"},
 #'   \code{"gp"}, \code{"bingp"} and \code{"pp"} are supported.
@@ -85,13 +87,13 @@
 #' Chapman & Hall/CRC Press, London, third edition. (Chapter 6)
 #' \url{www.stat.columbia.edu/~gelman/book}
 #' @examples
+#' \dontrun{
 #' # GEV model
 #' data(portpirie)
 #' mat <- diag(c(10000, 10000, 100))
 #' pn <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
 #' gevp  <- rpost(1000, model = "gev", prior = pn, data = portpirie, nrep = 50)
 #'
-#' library(bayesplot)
 #' # Posterior predictive test statistics
 #' pp_check(gevp)
 #' pp_check(gevp, stat = "min")
@@ -138,6 +140,8 @@
 #' ppr <- rpost(n = 1000, model = "pp", prior = pf, data = rainfall,
 #'   thresh = rthresh, noy = 54, nrep = 50)
 #' pp_check(ppr, stat = "max")
+#' }
+#' @export pp_check
 #' @export
 pp_check.evpost <- function(object, ...,
                             type = c("stat", "overlaid", "multiple",

@@ -2,6 +2,7 @@
 % Please edit documentation in R/bayesplot.R
 \name{pp_check.evpost}
 \alias{pp_check.evpost}
+\alias{pp_check}
 \title{Posterior predictive checks for an evpost object}
 \usage{
 \method{pp_check}{evpost}(object, ..., type = c("stat", "overlaid",
@@ -90,13 +91,13 @@ For details of these functions see \link[bayesplot]{PPC-overview}.
   only their sample maxima.
 }
 \examples{
+\dontrun{
 # GEV model
 data(portpirie)
 mat <- diag(c(10000, 10000, 100))
 pn <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
 gevp  <- rpost(1000, model = "gev", prior = pn, data = portpirie, nrep = 50)
 
-library(bayesplot)
 # Posterior predictive test statistics
 pp_check(gevp)
 pp_check(gevp, stat = "min")
@@ -143,6 +144,7 @@ pf <- set_prior(prior = "flat", model = "gev", min_xi = -1)
 ppr <- rpost(n = 1000, model = "pp", prior = pf, data = rainfall,
   thresh = rthresh, noy = 54, nrep = 50)
 pp_check(ppr, stat = "max")
+}
 }
 \references{
 Jonah Gabry (2016). bayesplot: Plotting for Bayesian
