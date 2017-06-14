@@ -33,7 +33,9 @@ and/or the relevant underlying function: \code{\link{gp_norm}},
 \code{\link{gp_jeffreys}}, \code{\link{gp_beta}},
 \code{\link{gev_norm}}, \code{\link{gev_loglognorm}},
 \code{\link{gev_mdi}}, \code{\link{gev_flat}}, \code{\link{gev_flatflat}},
-\code{\link{gev_beta}}, \code{\link{gev_prob}}, \code{\link{gev_quant}}.}
+\code{\link{gev_beta}}, \code{\link{gev_prob}}, \code{\link{gev_quant}}.
+All these priors have the arguments \code{min_xi} (prior lower bound on
+\eqn{\xi}) and \code{max_xi} (prior upper bound on \eqn{\xi}).}
 }
 \value{
 A list with class \code{"evprior"}.  The first component is the
@@ -45,7 +47,7 @@ A list with class \code{"evprior"}.  The first component is the
 Constructs a prior distribution for use as the argument \code{prior} in
 \code{\link{rpost}} and \code{\link{rpost_rcpp}}.
 The user can either specify their own prior function
-(using an R function or an external pointer to a comiled C++ function)
+(using an R function or an external pointer to a compiled C++ function)
 and arguments for hyperparameters or choose from a list of in-built
 model-specific priors.  Note that the arguments \code{model = "gev"},
 \code{model = "pp"} and \code{model =="os"} are equivalent because

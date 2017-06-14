@@ -18,7 +18,8 @@ their own prior density to \code{\link{rpost_rcpp}}.
 More specifically, a function like this (the user will need to create
 an edited version tailored to their own C++ function(s)) can be used to
 generate an external pointer to a compiled C++ function that evaluates
-the log-prior density.
+the log-prior density.  Please see the vignette
+"Faster simulation using revdbayes" for more information.
 }
 \details{
 Suppose that the user's C++ functions are in a file called "user_fns.cpp".
