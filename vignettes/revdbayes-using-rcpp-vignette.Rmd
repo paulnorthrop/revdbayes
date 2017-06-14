@@ -35,7 +35,7 @@ if (got_evdbayes) {
   library(evdbayes)
 }
 # Set the number of posterior samples required.
-n <- 1
+n <- 1000
 set.seed(46)
 ```
 
@@ -62,7 +62,7 @@ In this example `rpost_rcpp` is, on average, a factor of approximately 7-8 times
 
 ### Generalised Extreme Value (GEV) model
 
-We repeat the analysis of the Port Pirie annual maximum sea level data from the [Introducing revdbayes](revdbayes-vignette.html).  We add to the comparison of performances the example calculations that feature in the **evdbayes** user guide based on the `posterior` function.  
+We repeat the analysis of the Port Pirie annual maximum sea level data from the [Introducing revdbayes](revdbayes-vignette.html).  We add to the comparison the example calculations that feature in the **evdbayes** user guide, based on the `posterior` function.  
 
 ```{r}
 mat <- diag(c(10000, 10000, 100))
@@ -140,9 +140,9 @@ In this example `rpost` is more than a factor of two slower than `posterior` but
 
 If the user wishes to supply their own prior to `rpost_rcpp` then they must first write a C++ function that evaluates the log of the prior density.  The general way that **rust** (and hence **revdbayes**) enables users to provide their own C++ log-prior functions uses external pointers and is based on the [Rcpp Gallery](http://gallery.rcpp.org/) article [Passing user-supplied C++ functions](http://gallery.rcpp.org/articles/passing-cpp-function-pointers/) by Dirk Eddelbuettel.  
 
-The implementation in **rust** requires this C++ function to have a particular structure: it must take a constant reference to an `Rcpp::NumericVector`, say `x`, a constant reference to an `Rcpp::List`, say `ppars`, and return a `double` precision scalar. Here `x` is the argument of the prior density, i.e. the parameter vector of the extreme value model and `ppars` is a list containing the values of prior parameters whose values are not specified inside the function.  Thus values of any parameters in the prior can be changed without editing the function.  If there are no such parameters then the argument `ppars` must still be present in the C++ function, even though the list provided to the function when it is called will be empty. 
+The implementation in **rust** requires this C++ function to have a particular structure: it must take a constant reference to an `Rcpp::NumericVector`, say `x`, a constant reference to an `Rcpp::List`, say `ppars`, and return a `double` precision scalar. Here `x` is the argument of the prior density, i.e. the parameter vector of the extreme value model, and `ppars` is a list containing the values of prior parameters whose values are not specified inside the function.  Thus values of any parameters in the prior can be changed without editing the function.  If there are no such parameters then the argument `ppars` must still be present in the C++ function, even though the list provided to the function will be empty. 
 
-A simple way to provide C++ log-prior functions is to create them in a file, say `user_fns.cpp`, perhaps taking advantage of the R-like syntax made available by [Rcpp sugar](http://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf).  Example content is provided below.  This file is available on the [revdbayes Github page](https://github.com/paulnorthrop/revdbayes/blob/master/src/user_priors.cpp).The functions in this file are compiled and made available to R, either using the `Rcpp::sourceCpp` function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio's Source button on the editor toolbar.  The example content below also includes the function `create_prior_xptr`, which creates an external pointer to a C++ function. See \href{http://gallery.rcpp.org/articles/passing-cpp-function-pointers/}{Passing user-supplied C++ functions}.  It is this external pointer that is passed to `set_prior` to set the prior.  If the user has written a C++ function, say `new_name`, they need to add to `create_prior_xptr` two lines of code:
+A simple way to provide C++ log-prior functions is to put them in a file, say `user_fns.cpp`, perhaps taking advantage of the R-like syntax made available by [Rcpp sugar](http://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf).  Example content is provided below.  This file is available on the [revdbayes Github page](https://github.com/paulnorthrop/revdbayes/blob/master/src/user_priors.cpp).The functions in this file are compiled and made available to R, either using the `Rcpp::sourceCpp` function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio's Source button on the editor toolbar.  The example content below also includes the function `create_prior_xptr`, which creates an external pointer to a C++ function. See \href{http://gallery.rcpp.org/articles/passing-cpp-function-pointers/}{Passing user-supplied C++ functions}.  It is this external pointer that is passed to `set_prior` to set the prior.  If the user has written a C++ function, say `new_name`, they need to add to `create_prior_xptr` two lines of code:
 
     else if (fstr == "new_name")  
       return(Rcpp::XPtr<funcPtr>(new funcPtr(&new_name))) ;
@@ -175,14 +175,18 @@ The following excerpt from the example `user_fns.cpp` file contains a C++ functi
                       const Rcpp::List& ppars) ;
       if (fstr == "gp_flat") 
         return(Rcpp::XPtr<priorPtr>(new priorPtr(&user_gp_flat))) ;
-      else if (fstr == "gev_norm")
-        return(Rcpp::XPtr<priorPtr>(new priorPtr(&user_gev_norm))) ;
-      else if (fstr == "gev_flat")
-        return(Rcpp::XPtr<priorPtr>(new priorPtr(&user_gev_flat))) ;
       else
         return(Rcpp::XPtr<priorPtr>(R_NilValue)) ;
     }
+    
+    // We could create an external pointer when this file is sourced using
+    // this embedded R code below and/or (re)create them using the relevant
+    // pointer-creation functions in an R session or R package.
 
+    /*** R
+      ptr_gp_flat <- create_prior_xptr("gp_flat")
+    */
+    
 Once the external pointer to the user-supplied prior C++ function has been created it is passed to `set_prior`, along with any required parameter values. The following example repeats the example in [Generalised Pareto (GP) model](#gp_example).  The difference is that now we create the pointer `ptr_gp_flat` and pass it to `set_prior` using `prior = ptr_gp_flat` rather than using the arguments `prior = "flat", model = "gp"` to specify the equivalent in-built prior.
 
 ```{r}
