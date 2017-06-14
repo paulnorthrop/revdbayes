@@ -198,8 +198,6 @@ model.
   for further details and examples.
 }
 \examples{
-library(rust)
-
 # GP model
 u <- quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
