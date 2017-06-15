@@ -9,7 +9,7 @@ revdbayes <img src="tools/revdbayes_logo.png" height = "150" align="right" />
 
 ### What does revdbayes do?
 
-The `revdbayes` package uses the ratio-of-uniforms method to produce random samples from the posterior distributions that occur in some relatively simple Bayesian extreme value analyses. The functionality of revdbayes is similar to the evdbayes package <https://cran.r-project.org/package=evdbayes>, which uses Markov Chain Monte Carlo (MCMC) methods for posterior simulation.
+The `revdbayes` package uses the ratio-of-uniforms method to produce random samples from the posterior distributions that occur in some relatively simple Bayesian extreme value analyses. The functionality of revdbayes is similar to the `evdbayes` package <https://cran.r-project.org/package=evdbayes>, which uses Markov Chain Monte Carlo (MCMC) methods for posterior simulation. Advantages of the ratio-of-uniforms method over MCMC in this context are that the user is not required to set tuning parameters nor to monitor convergence and a random posterior sample is produced. Use of the Rcpp package <https://cran.r-project.org/package=evdbayes> enables `revdbayes` to be faster than `evdbayes`.
 
 ### A simple example
 
