@@ -14,7 +14,7 @@
 #'   functions.
 #'
 #' @param x An object of class "evpost", a result of a call to
-#'   \code{\link{rpost}}.
+#'   \code{\link{rpost}} or \code{\link{rpost_rcpp}}.
 #' @param y Not used.
 #' @param ... Additional arguments passed on to \code{hist}, \code{lines},
 #'   \code{contour}, \code{points} or functions from the \strong{bayesplot}
@@ -43,11 +43,12 @@
 #'   depicting the simulated values. Only relevant when \code{d = 2}.
 #' @param pu_only Only produce a plot relating to the posterior distribution
 #'   for the threshold exceedance probability \eqn{p}. Only relevant when
-#'   \code{model == "bingp"} was used in the call to \code{rpost}.
+#'   \code{model == "bingp"} was used in the call to \code{rpost} or
+#'   \code{rpost_rcpp}.
 #' @param add_pu Before producing the plots add the threshold exceedance
 #'   probability \eqn{p} to the parameters of the extreme value model. Only
 #'   relevant when \code{model == "bingp"} was used in the call to
-#'   \code{rpost}.
+#'   \code{rpost} or \code{rpost_rcpp}.
 #' @param use_bayesplot A logical scalar. If \code{TRUE} the bayesplot
 #'   function indicated by \code{fun_name} is called.  In principle \emph{any}
 #'   bayesplot function (that starts with \code{mcmc_}) can be called but
@@ -94,8 +95,8 @@
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 #' bp <- set_bin_prior(prior = "jeffreys")
 #' npy_gom <- length(gom)/105
-#' bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
-#'              bin_prior = bp, npy = npy_gom)
+#' bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u,
+#'               data = gom, bin_prior = bp, npy = npy_gom)
 #' plot(bgpg)
 #' plot(bgpg, pu_only = TRUE)
 #' plot(bgpg, add_pu = TRUE)
@@ -111,7 +112,9 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
                         ru_scale = FALSE, rows = NULL, xlabs = NULL,
                         ylabs = NULL, points_par = list(col = 8),
                         pu_only = FALSE, add_pu = FALSE, use_bayesplot = FALSE,
-                        fun_name = c("areas", "intervals", "dens", "hist")) {
+                        fun_name = c("areas", "intervals", "dens", "hist",
+                                     "scatter")) {
+  fun_name <- match.arg(fun_name)
   if (!inherits(x, "evpost")) {
     stop("use only with \"evpost\" objects")
   }
@@ -279,10 +282,10 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #' \code{summary} method for class "evpost"
 #'
 #' @param object An object of class "evpost", a result of a call to
-#'   \code{\link{rpost}}.
+#'   \code{\link{rpost}} or \code{\link{rpost_rcpp}}.
 #' @param add_pu Includes in the summary of the simulated values the threshold
 #'   exceedance probability \eqn{p}. Only relevant when \code{model == "bingp"}
-#'   was used in the call to \code{rpost}.
+#'   was used in the call to \code{rpost} or \code{rpost_rcpp}.
 #' @param ... Additional arguments passed on to \code{print} or \code{summary}.
 #' @return Prints
 #' \itemize{
@@ -298,11 +301,12 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #' data(gom)
 #' u <- stats::quantile(gom, probs = 0.65)
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
-#' gpg <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = gom)
+#' gpg <- rpost_rcpp(n = 1000, model = "gp", prior = fp, thresh = u,
+#'                   data = gom)
 #' summary(gpg)
-#' @seealso \code{\link{ru}} for descriptions of \code{object$sim_vals} and
-#'   \code{object$box}.
-#' @seealso \code{\link{plot.ru}} for a diagnostic plot.
+#' @seealso \code{\link[rust]{ru}} or \code{\link[rust]{ru_rcpp}} for
+#'   descriptions of \code{object$sim_vals} and \code{object$box}.
+#' @seealso \code{\link{plot.evpost}} for a diagnostic plot.
 #' @export
 summary.evpost <- function(object, add_pu = FALSE, ...) {
   if (!inherits(object, "evpost")) {

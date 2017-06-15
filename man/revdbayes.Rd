@@ -11,14 +11,15 @@ random samples from the posterior distributions commonly encountered in
 Bayesian extreme value analyses.
 }
 \details{
-The main functions in the revbayes package are \code{rpost} and
-  \code{rpost_rcpp}, which simulate random samples from the posterior
-  distribution of extreme value model parameters using the functions
-  \code{ru} and \code{ru_rcpp} from the rust package, respectively. The
-  user chooses the extreme value model, the prior density for the parameters
-  and provides the data.  There are options to improve the probability of
-  acceptance of the ratio-of-uniforms algorithm by working with
-  transformation of the model parameters.
+The main functions in the revbayes package are \code{\link{rpost}}
+  and \code{\link{rpost_rcpp}}, which simulate random samples from the
+  posterior distribution of extreme value model parameters using the
+  functions \code{\link[rust]{ru}} and \code{\link[rust]{ru_rcpp}}
+  from the rust package, respectively. The user chooses the extreme value
+  model, the prior density for the parameters and provides the data.
+  There are options to improve the probability of acceptance of the
+  ratio-of-uniforms algorithm by working with transformation of the model
+  parameters.
 
   See \code{vignette("revdbayes-vignette", package = "revdbayes")} for an
   overview of the package and

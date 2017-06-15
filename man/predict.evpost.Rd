@@ -10,12 +10,13 @@
 }
 \arguments{
 \item{object}{An object of class "evpost", a result of a call to
-\code{\link{rpost}} with \code{model = "gev"}, \code{model = "os"},
-\code{model = "pp"} or \code{model == "bingp"}.  Calling these functions
-after a call to \code{rpost} with \code{model == "gp"} will produce an
-error, because inferences about the probability of threshold exceedance
-are required, in addition to the distribution of threshold excesses.
-The model is stored in \code{object$model}.}
+\code{\link{rpost}} or \code{\link{rpost_rcpp}} with \code{model = "gev"},
+\code{model = "os"}, \code{model = "pp"} or \code{model == "bingp"}.
+Calling these functions after a call to \code{rpost} or \code{rpost_rcpp}
+with \code{model == "gp"} will produce an error, because inferences about
+the probability of threshold exceedance are required, in addition to the
+distribution of threshold excesses. The model is stored in
+\code{object$model}.}
 
 \item{type}{A character vector.  Indicates which type of inference is
   required:
@@ -66,11 +67,13 @@ in \code{x} for each value in \code{n_years}.}
   non-missing observations divided by total number of years of non-missing
   data.
 
-If \code{rpost} was called with \code{model == "bingp"} then \code{npy}
-must either have been supplied in that call or be supplied here.
+If \code{rpost} or \code{rpost_rcpp} was called with
+\code{model == "bingp"} then \code{npy} must either have been supplied
+in that call or be supplied here.
 
 Otherwise, a default value will be assumed if \code{npy} is not supplied,
-based on the value of \code{model} in the call to \code{rpost}:
+based on the value of \code{model} in the call to \code{rpost} or
+\code{rpost_rcpp}:
 \itemize{
   \item{\code{model = "gev"}:} \code{npy} = 1, i.e. the data were
     annual maxima so the block size is one year.
@@ -79,7 +82,7 @@ based on the value of \code{model} in the call to \code{rpost}:
   \item{\code{model = "pp"}:}
     \code{npy} = \code{length(x$data)} / \code{object$noy},
     i.e. the value of \code{noy} used in the call to \code{\link{rpost}}
-    is equated to a block size of one year.
+    or \code{\link{rpost_rcpp}} is equated to a block size of one year.
 }
 If \code{npy} is supplied twice then the value supplied here will be
 used and a warning given.}
@@ -146,7 +149,7 @@ An object of class "evpred", a list containing a subset of the
   to \code{predict.evpost} are also included, as is the argument \code{npy}
   supplied to, or set within, \code{predict.evpost} and
   the arguments \code{data} and \code{model} from the original call to
-  \code{\link{rpost}}.
+  \code{\link{rpost}} or \code{\link{rpost_rcpp}}.
 }
 \description{
 \code{predict} method for class "evpost".  Performs predictive inference
@@ -173,11 +176,11 @@ Inferences about future extreme observations are integrated over
 
   \strong{GEV / OS / PP}.
   If \code{model = "gev"}, \code{model = "os"} or \code{model = "pp"}
-  in the call to \code{\link{rpost}} we first calculate the number
-  of blocks \eqn{b} in \code{n_years} years.  To calculate the density
-  function or distribution function of the maximum over \code{n_years}
-  we call \code{\link{dgev}} or \code{\link{pgev}} with \code{m} =
-  \eqn{b}.
+  in the call to \code{\link{rpost}} or \code{\link{rpost_rcpp}}
+  we first calculate the number of blocks \eqn{b} in \code{n_years} years.
+  To calculate the density function or distribution function of the maximum
+  over \code{n_years} we call \code{\link{dgev}} or \code{\link{pgev}}
+  with \code{m} = \eqn{b}.
 
   \itemize{
     \item{\code{type = "p"}.} We calculate using \code{\link{pgev}}
@@ -210,13 +213,15 @@ Inferences about future extreme observations are integrated over
   }
 
   \strong{Binomial-GP}.  If \code{model = "bingp"} in the call to
-  \code{\link{rpost}} then we calculate the mean number of observations
-  in \code{n_years} years, i.e. \code{npy * n_years}.
+  \code{\link{rpost}} or \code{\link{rpost_rcpp}} then we calculate the
+  mean number of observations in \code{n_years} years, i.e.
+  \code{npy * n_years}.
 
   Following \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
   Let \eqn{M_N} be the largest value observed in \eqn{N} years,
   \eqn{m} = \code{npy * n_years} and \eqn{u} the threshold
-  \code{object$thresh} used in the call to \code{rpost}.
+  \code{object$thresh} used in the call to \code{rpost}
+  or \code{rpost_rcpp}.
   For fixed values of \eqn{\theta = (p, \sigma, \xi)} the distribution
   function of \eqn{M_N} is given by \eqn{F(z, \theta)^m}, for
   \eqn{z >= u}, where
@@ -253,7 +258,7 @@ Inferences about future extreme observations are integrated over
 data(portpirie)
 mat <- diag(c(10000, 10000, 100))
 pn <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
-gevp  <- rpost(n = 1000, model = "gev", prior = pn, data = portpirie)
+gevp  <- rpost_rcpp(n = 1000, model = "gev", prior = pn, data = portpirie)
 
 # Interval estimation
 predict(gevp)$long
@@ -276,15 +281,15 @@ u <- quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 bp <- set_bin_prior(prior = "jeffreys")
 npy_gom <- length(gom)/105
-bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
-              bin_prior = bp)
+bgpg <- rpost_rcpp(n = 1000, model = "bingp", prior = fp, thresh = u,
+                   data = gom, bin_prior = bp)
 
 # Setting npy in call to predict.evpost()
 predict(bgpg, npy = npy_gom)$long
 
-# Setting npy in call to rpost()
-bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
-              bin_prior = bp, npy = npy_gom)
+# Setting npy in call to rpost() or rpost_rcpp()
+bgpg <- rpost_rcpp(n = 1000, model = "bingp", prior = fp, thresh = u,
+                   data = gom, bin_prior = bp, npy = npy_gom)
 
 # Interval estimation
 predict(bgpg)$long
@@ -319,6 +324,6 @@ Stephenson, A. (2016). Bayesian Inference for Extreme Value
 \code{\link{plot.evpred}} for the S3 \code{plot} method for
   objects of class \code{evpred}.
 
-\code{\link{rpost}} for sampling from an extreme value posterior
-  distribution.
+\code{\link{rpost}} or \code{\link{rpost_rcpp}} for sampling
+  from an extreme value posterior distribution.
 }

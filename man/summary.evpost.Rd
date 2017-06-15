@@ -8,11 +8,11 @@
 }
 \arguments{
 \item{object}{An object of class "evpost", a result of a call to
-\code{\link{rpost}}.}
+\code{\link{rpost}} or \code{\link{rpost_rcpp}}.}
 
 \item{add_pu}{Includes in the summary of the simulated values the threshold
 exceedance probability \eqn{p}. Only relevant when \code{model == "bingp"}
-was used in the call to \code{rpost}.}
+was used in the call to \code{rpost} or \code{rpost_rcpp}.}
 
 \item{...}{Additional arguments passed on to \code{print} or \code{summary}.}
 }
@@ -35,12 +35,13 @@ Prints
 data(gom)
 u <- stats::quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
-gpg <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = gom)
+gpg <- rpost_rcpp(n = 1000, model = "gp", prior = fp, thresh = u,
+                  data = gom)
 summary(gpg)
 }
 \seealso{
-\code{\link{ru}} for descriptions of \code{object$sim_vals} and
-  \code{object$box}.
+\code{\link[rust]{ru}} or \code{\link[rust]{ru_rcpp}} for
+  descriptions of \code{object$sim_vals} and \code{object$box}.
 
-\code{\link{plot.ru}} for a diagnostic plot.
+\code{\link{plot.evpost}} for a diagnostic plot.
 }

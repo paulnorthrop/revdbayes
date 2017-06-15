@@ -43,8 +43,8 @@
 #' @seealso \code{\link[evdbayes]{posterior}}: evdbayes function that can
 #'   sample from this prior distribution (using MCMC) if the argument
 #'   \code{lh = "none"} is given.
-#' @seealso \code{\link{rpost}} for sampling from an extreme value posterior
-#'   distribution.
+#' @seealso \code{\link{rpost}} and \code{\link{rpost_rcpp}} for sampling
+#'   from an extreme value posterior distribution.
 #' @references Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
 #'   extreme rainfall data. \emph{Appl. Statist.}, \strong{45}, 463-478.
 #'   \url{http://dx.doi.org/10.2307/2986068}.
@@ -164,8 +164,8 @@ rprior_quant <- function(n, prob, shape, scale, lb = NULL, lb_prob = 0.001){
 #' @seealso \code{\link[evdbayes]{posterior}}: evdbayes function that can
 #'   sample from this prior distribution (using MCMC) if the argument
 #'   \code{lh = "none"} is given.
-#' @seealso \code{\link{rpost}} for sampling from an extreme value posterior
-#'   distribution.
+#' @seealso \code{\link{rpost}} and \code{\link{rpost_rcpp}} for sampling
+#'   from an extreme value posterior distribution.
 #' @references Crowder, M. (1992) Bayesian priors based on parameter
 #'   transformation using the distribution function.
 #'   \emph{Ann. Inst. Statist. Math.}, \strong{44}(3), 405-416.

@@ -9,12 +9,13 @@
 #' observations.
 #'
 #' @param object An object of class "evpost", a result of a call to
-#'   \code{\link{rpost}} with \code{model = "gev"}, \code{model = "os"},
-#'   \code{model = "pp"} or \code{model == "bingp"}.  Calling these functions
-#'   after a call to \code{rpost} with \code{model == "gp"} will produce an
-#'   error, because inferences about the probability of threshold exceedance
-#'   are required, in addition to the distribution of threshold excesses.
-#'   The model is stored in \code{object$model}.
+#'   \code{\link{rpost}} or \code{\link{rpost_rcpp}} with \code{model = "gev"},
+#'   \code{model = "os"}, \code{model = "pp"} or \code{model == "bingp"}.
+#'   Calling these functions after a call to \code{rpost} or \code{rpost_rcpp}
+#'   with \code{model == "gp"} will produce an error, because inferences about
+#'   the probability of threshold exceedance are required, in addition to the
+#'   distribution of threshold excesses. The model is stored in
+#'   \code{object$model}.
 #' @param type A character vector.  Indicates which type of inference is
 #'   required:
 #' \itemize{
@@ -60,11 +61,13 @@
 #'   non-missing observations divided by total number of years of non-missing
 #'   data.
 #'
-#' If \code{rpost} was called with \code{model == "bingp"} then \code{npy}
-#' must either have been supplied in that call or be supplied here.
+#' If \code{rpost} or \code{rpost_rcpp} was called with
+#' \code{model == "bingp"} then \code{npy} must either have been supplied
+#' in that call or be supplied here.
 #'
 #' Otherwise, a default value will be assumed if \code{npy} is not supplied,
-#' based on the value of \code{model} in the call to \code{rpost}:
+#' based on the value of \code{model} in the call to \code{rpost} or
+#' \code{rpost_rcpp}:
 #' \itemize{
 #'   \item{\code{model = "gev"}:} \code{npy} = 1, i.e. the data were
 #'     annual maxima so the block size is one year.
@@ -73,7 +76,7 @@
 #'   \item{\code{model = "pp"}:}
 #'     \code{npy} = \code{length(x$data)} / \code{object$noy},
 #'     i.e. the value of \code{noy} used in the call to \code{\link{rpost}}
-#'     is equated to a block size of one year.
+#'     or \code{\link{rpost_rcpp}} is equated to a block size of one year.
 #' }
 #' If \code{npy} is supplied twice then the value supplied here will be
 #' used and a warning given.
@@ -117,11 +120,11 @@
 #'
 #'   \strong{GEV / OS / PP}.
 #'   If \code{model = "gev"}, \code{model = "os"} or \code{model = "pp"}
-#'   in the call to \code{\link{rpost}} we first calculate the number
-#'   of blocks \eqn{b} in \code{n_years} years.  To calculate the density
-#'   function or distribution function of the maximum over \code{n_years}
-#'   we call \code{\link{dgev}} or \code{\link{pgev}} with \code{m} =
-#'   \eqn{b}.
+#'   in the call to \code{\link{rpost}} or \code{\link{rpost_rcpp}}
+#'   we first calculate the number of blocks \eqn{b} in \code{n_years} years.
+#'   To calculate the density function or distribution function of the maximum
+#'   over \code{n_years} we call \code{\link{dgev}} or \code{\link{pgev}}
+#'   with \code{m} = \eqn{b}.
 #'
 #'   \itemize{
 #'     \item{\code{type = "p"}.} We calculate using \code{\link{pgev}}
@@ -154,13 +157,15 @@
 #'   }
 #'
 #'   \strong{Binomial-GP}.  If \code{model = "bingp"} in the call to
-#'   \code{\link{rpost}} then we calculate the mean number of observations
-#'   in \code{n_years} years, i.e. \code{npy * n_years}.
+#'   \code{\link{rpost}} or \code{\link{rpost_rcpp}} then we calculate the
+#'   mean number of observations in \code{n_years} years, i.e.
+#'   \code{npy * n_years}.
 #'
 #'   Following \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
 #'   Let \eqn{M_N} be the largest value observed in \eqn{N} years,
 #'   \eqn{m} = \code{npy * n_years} and \eqn{u} the threshold
-#'   \code{object$thresh} used in the call to \code{rpost}.
+#'   \code{object$thresh} used in the call to \code{rpost}
+#'   or \code{rpost_rcpp}.
 #'   For fixed values of \eqn{\theta = (p, \sigma, \xi)} the distribution
 #'   function of \eqn{M_N} is given by \eqn{F(z, \theta)^m}, for
 #'   \eqn{z >= u}, where
@@ -224,7 +229,7 @@
 #'   to \code{predict.evpost} are also included, as is the argument \code{npy}
 #'   supplied to, or set within, \code{predict.evpost} and
 #'   the arguments \code{data} and \code{model} from the original call to
-#'   \code{\link{rpost}}.
+#'   \code{\link{rpost}} or \code{\link{rpost_rcpp}}.
 #' @references Coles, S. G. (2001) \emph{An Introduction to Statistical
 #'   Modeling of Extreme Values}, Springer-Verlag, London.
 #'   Chapter 9: \url{http://dx.doi.org/10.1007/978-1-4471-3675-0_9}
@@ -240,14 +245,14 @@
 #'   Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721-14}
 #' @seealso \code{\link{plot.evpred}} for the S3 \code{plot} method for
 #'   objects of class \code{evpred}.
-#' @seealso \code{\link{rpost}} for sampling from an extreme value posterior
-#'   distribution.
+#' @seealso \code{\link{rpost}} or \code{\link{rpost_rcpp}} for sampling
+#'   from an extreme value posterior distribution.
 #' @examples
 #' ### GEV
 #' data(portpirie)
 #' mat <- diag(c(10000, 10000, 100))
 #' pn <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
-#' gevp  <- rpost(n = 1000, model = "gev", prior = pn, data = portpirie)
+#' gevp  <- rpost_rcpp(n = 1000, model = "gev", prior = pn, data = portpirie)
 #'
 #' # Interval estimation
 #' predict(gevp)$long
@@ -270,15 +275,15 @@
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 #' bp <- set_bin_prior(prior = "jeffreys")
 #' npy_gom <- length(gom)/105
-#' bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
-#'               bin_prior = bp)
+#' bgpg <- rpost_rcpp(n = 1000, model = "bingp", prior = fp, thresh = u,
+#'                    data = gom, bin_prior = bp)
 #'
 #' # Setting npy in call to predict.evpost()
 #' predict(bgpg, npy = npy_gom)$long
 #'
-#' # Setting npy in call to rpost()
-#' bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
-#'               bin_prior = bp, npy = npy_gom)
+#' # Setting npy in call to rpost() or rpost_rcpp()
+#' bgpg <- rpost_rcpp(n = 1000, model = "bingp", prior = fp, thresh = u,
+#'                    data = gom, bin_prior = bp, npy = npy_gom)
 #'
 #' # Interval estimation
 #' predict(bgpg)$long
@@ -298,10 +303,10 @@ predict.evpost <- function(object, type = c("i", "p", "d", "q", "r"), x = NULL,
                            ...) {
   type <- match.arg(type)
   if (!inherits(object, "evpost")) {
-    stop("object must be an object of class evpost produced by rpost()")
+    stop("object must be an evpost object produced by rpost() or rpost_rcpp()")
   }
   if (object$model == "gp") {
-    stop("The model in the call to rpost() cannot be gp.  Use bingp instead.")
+    stop("The model cannot be gp.  Use bingp instead.")
   }
   if (!(object$model %in% c("gev", "os", "pp", "bingp"))) {
     stop(paste("Predictive functions are not available for model = ''",
@@ -402,7 +407,7 @@ set_npy <- function(object, npy = NULL){
   }
   if (object$model == "bingp") {
     if (is.null(object$npy) & is.null(npy)) {
-      stop("For model=bingp npy must be supplied, here or in call to rpost.")
+      stop("model=bingp: npy must be given, here or in call to rpost/rpost_rcpp.")
     }
   } else if (object$model %in% c("gev", "os")) {
     # If npy is not supplied and the model is GEV or OS then assume that
@@ -413,7 +418,8 @@ set_npy <- function(object, npy = NULL){
     }
   } else if (object$model == "pp") {
     # Similarly if npy is not supplied and the model is PP then assume that
-    # blocks of length one year were set by noy in the call to rpost().
+    # blocks of length one year were set by noy in the call to
+    # rpost()/rpost_rcpp().
     n <- length(object$data)
     noy <- object$noy
     if (is.null(npy)) {
@@ -488,9 +494,9 @@ ipred <- function(ev_obj, n_years = 100, npy = NULL, level = 95,
     qfun <- pred_qbingp
     pfun <- pred_pbingp
     # Find the smallest allowable value of p, i.e. the one that corresponds
-    # to the threshold used in the call to rpost().  This enables us to check
-    # whether or not that it is possible to calculate a given level% predictive
-    # interval without extending below the threshold.
+    # to the threshold used in the call to rpost()/rpost_rcpp().  This enables
+    # us to check whether or not that it is possible to calculate a given
+    # level% predictive interval without extending below the threshold.
     p_min <- pfun(ev_obj = ev_obj, q = ev_obj$thresh, n_years = n_years,
                   npy = npy, lower_tail = TRUE)$y
   }
@@ -816,13 +822,14 @@ setup_pred_gev <- function(ev_obj, n_years, npy) {
   # the GEV parameters can be converted to the n_years level of aggregation.
   #
   # Args:
-  #   ev_obj  : Object of class evpost return by rpost().
+  #   ev_obj  : Object of class evpost return by rpost()/rpost_rcpp().
   #   n_years : A numeric vector. Values of N.
   #   npy     : The mean number of observations per year of data, after
   #             excluding any missing values.  npy has either been supplied
   #             by the user or, if this is not the case, was set using
   #             set_npy() based on assumptions that in the original call to
-  #             rpost() the GEV parameters relate to blocks of length one year.
+  #             rpost()/rpost_rcpp() the GEV parameters relate to blocks
+  #             of length one year.
   #
   # Returns: A numeric scalar.  The value of mult.
   #
@@ -843,7 +850,8 @@ setup_pred_gev <- function(ev_obj, n_years, npy) {
 
 pred_dbingp <- function(ev_obj, x, n_years = 100, npy = NULL,
                         log = FALSE) {
-  # Check that q is not less than the threshold used in the call to rpost().
+  # Check that q is not less than the threshold used in the call to
+  # rpost()/rpost_rcpp().
   thresh <- ev_obj$thresh
   if (any(x < thresh)) {
     stop("Invalid x: no element of x can be less than the threshold.")
@@ -888,7 +896,8 @@ pred_dbingp <- function(ev_obj, x, n_years = 100, npy = NULL,
 
 pred_pbingp <- function(ev_obj, q, n_years = 100, npy = NULL,
                       lower_tail = TRUE) {
-  # Check that q is not less than the threshold used in the call to rpost().
+  # Check that q is not less than the threshold used in the call to
+  # rpost()/rpost_rcpp().
   thresh <- ev_obj$thresh
   if (any(q < thresh)) {
     stop("Invalid q: no element of q can be less than the threshold.")
@@ -945,7 +954,7 @@ pred_qbingp <- function(ev_obj, p, n_years = 100, npy = NULL,
     stop("quantiles must be a vector or a matrix with length(n_years) columns")
   }
   # Check that p is not less than the binGP predictive distribution function
-  # evaluated at the threshold used in the call to rpost().
+  # evaluated at the threshold used in the call to rpost()/rpost_rcpp().
   thresh <- ev_obj$thresh
   p_ok <- rep(TRUE, n_y)
   for (i in 1:n_y) {
@@ -1010,10 +1019,10 @@ pred_qbingp <- function(ev_obj, p, n_years = 100, npy = NULL,
 
 pred_rbingp <- function(ev_obj = ev_obj, n_years = n_years, npy = npy) {
   if (!inherits(ev_obj, "evpost")) {
-    stop("ev_obj must be an object of class evpost produced by rpost()")
+    stop("ev_obj must be an object produced by rpost() or rpost_rcpp()")
   }
   if (ev_obj$model != "bingp") {
-    stop("The model in the call to rpost() must be bingp.")
+    stop("The model in the call to rpost() or rpost_rcpp() must be bingp.")
   }
   if (is.null(npy)) {
     stop("npy must be supplied.")

@@ -79,6 +79,6 @@ Stephenson, A. 2016. Bayesian Inference for Extreme Value
   sample from this prior distribution (using MCMC) if the argument
   \code{lh = "none"} is given.
 
-\code{\link{rpost}} for sampling from an extreme value posterior
-  distribution.
+\code{\link{rpost}} and \code{\link{rpost_rcpp}} for sampling
+  from an extreme value posterior distribution.
 }
