@@ -58,7 +58,7 @@ if (got_microbenchmark) {
 }  
 ```
 
-In this example `rpost_rcpp` is, on average, a factor of approximately 7-8 times faster than `rpost`.
+In this example `rpost_rcpp` is, on average, a factor of approximately 8-9 times faster than `rpost`.
 
 ### Generalised Extreme Value (GEV) model
 
@@ -93,7 +93,7 @@ if (got_microbenchmark) {
 }  
 ```
 
-This comparison is generous to `posterior` because the burn-in has been set to zero and `posterior` produces a dependent sample rather than a random sample.  The *effective sample size* of an MCMC sample from `posterior` varies between simulations and across parameters.  The `effectiveSize` function in the **coda** package [@coda] suggests that the effective sample size in this example is of the order of 100 to 200, whereas the **revdbayes** functions `rpost` and `rpost_rcpp` produce random samples of size 1000. `rpost` is less than 50\% slower than `posterior` while `rpost_rcpp` is faster than `posterior` by a factor of almost 4.
+This comparison is generous to `posterior` because the burn-in has been set to zero and `posterior` produces a dependent sample rather than a random sample.  The *effective sample size* of an MCMC sample from `posterior` varies between simulations and across parameters.  The `effectiveSize` function in the **coda** package [@coda] suggests that the effective sample size in this example is of the order of 100 to 200, whereas the **revdbayes** functions `rpost` and `rpost_rcpp` produce random samples of size 1000. `rpost` is less than 50\% slower than `posterior` while `rpost_rcpp` is faster than `posterior` by a factor of 4.
 
 ### Point Process (PP) model
 
