@@ -21,7 +21,7 @@ Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
   Cross-validatory extreme value threshold selection and uncertainty
   with application to ocean storm severity.
   \emph{Journal of the Royal Statistical Society Series C: Applied
-  Statistics}, \emph{66}(1), 93-120.
+  Statistics}, \strong{66}(1), 93-120.
   \url{http://dx.doi.org/10.1111/rssc.12159}
 }
 \keyword{datasets}

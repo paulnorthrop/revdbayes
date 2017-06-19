@@ -222,13 +222,13 @@
 #'   \url{http://dx.doi.org/10.1029/2001WR000367}.
 #' @references Northrop, P.J. and Attalides, N. (2016) Posterior propriety in
 #'   Bayesian extreme value analyses using reference priors
-#'   \emph{Statistica Sinica}, \strong{26(2)}, 721--743
+#'   \emph{Statistica Sinica}, \strong{26}(2), 721--743
 #'   \url{http://dx.doi.org/10.5705/ss.2014.034}.
 #' @references Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
 #'   Cross-validatory extreme value threshold selection and uncertainty
 #'   with application to ocean storm severity.
 #'   \emph{Journal of the Royal Statistical Society Series C: Applied
-#'   Statistics}, \emph{66}(1), 93-120.
+#'   Statistics}, \strong{66}(1), 93-120.
 #'   \url{http://dx.doi.org/10.1111/rssc.12159}
 #' @references Stephenson, A. (2016) Bayesian inference for extreme value
 #'   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods

@@ -249,14 +249,14 @@ Martins, E. S. and Stedinger, J. R. (2001) Generalized maximum
 
 Northrop, P.J. and Attalides, N. (2016) Posterior propriety in
   Bayesian extreme value analyses using reference priors
-  \emph{Statistica Sinica}, \strong{26(2)}, 721--743
+  \emph{Statistica Sinica}, \strong{26}(2), 721--743
   \url{http://dx.doi.org/10.5705/ss.2014.034}.
 
 Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
   Cross-validatory extreme value threshold selection and uncertainty
   with application to ocean storm severity.
   \emph{Journal of the Royal Statistical Society Series C: Applied
-  Statistics}, \emph{66}(1), 93-120.
+  Statistics}, \strong{66}(1), 93-120.
   \url{http://dx.doi.org/10.1111/rssc.12159}
 
 Stephenson, A. (2016) Bayesian inference for extreme value
