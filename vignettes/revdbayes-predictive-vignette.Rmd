@@ -245,3 +245,6 @@ plot(i_bgpp, which_int = "both")
 
 ## References
 
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
+</script>

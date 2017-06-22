@@ -613,3 +613,6 @@ to the (positive) parameters $\phi_2$ and $\phi_3$.
 
 ## References
 
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
+</script>

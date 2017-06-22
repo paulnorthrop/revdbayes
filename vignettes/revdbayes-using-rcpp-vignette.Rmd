@@ -199,3 +199,6 @@ gpg <- rpost_rcpp(n = 1000, model = "gp", prior = p_user, thresh = u,
 
 ## References
 
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
+</script>
