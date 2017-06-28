@@ -288,7 +288,6 @@ pgp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
   if (any(scale < 0)) {
     stop("invalid scale: scale must be positive.")
   }
-
   max_len <- max(length(q), length(loc), length(scale), length(shape))
   q <- rep_len(q, max_len)
   loc <- rep_len(loc, max_len)

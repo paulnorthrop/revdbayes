@@ -109,8 +109,9 @@ process_data <- function(model, data, thresh, noy, use_noy, ros) {
 
 create_ru_list <- function(model, trans, rotate, min_xi, max_xi) {
   #
-  # Creates a list of arguments to pass to the function rou() to perform
-  # ratio-of-uniforms sampling from a posterior density.
+  # Creates a list of arguments to pass to the functions ru() or ru_rcpp()
+  # in the rust package to perform ratio-of-uniforms sampling from a
+  # posterior density.
   #
   # Args:
   #   model     : character string specifying the extreme value model.
