@@ -638,7 +638,6 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
                        list(d = fr$d, which_lam = which_lam),
                        find_lambda_args,
                        list(phi_to_theta = phi_to_theta, log_j = log_j))
-  min_max_phi$min_phi[3] <- 0.1
   lambda <- do.call(rust::find_lambda, for_find_lambda)
   #
   # Only set a_control$parscale if it hasn't been supplied and if a_algor
