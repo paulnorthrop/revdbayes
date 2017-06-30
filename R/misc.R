@@ -130,19 +130,31 @@ create_ru_list <- function(model, trans, rotate, min_xi, max_xi) {
   #
   if (model == "gp") {
     d <- 2L
-    lower <- c(0, min_xi)
-    upper <- c(Inf, max_xi)
+    if (trans == "none") {
+      lower <- c(0, min_xi)
+      upper <- c(Inf, max_xi)
+    } else if (trans == "BC") {
+      lower <- c(0, 0)
+      upper <- c(Inf, Inf)
+    } else {
+      lower <- rep(-Inf, 2)
+      upper <- rep(Inf, 2)
+    }
     var_names <- c("sigma[u]", "xi")
   }
   if (model == "gev" | model == "os" | model == "pp") {
     d <- 3L
-    lower <- c(-Inf, 0, min_xi)
-    upper <- c(Inf, Inf, max_xi)
+    if (trans == "none") {
+      lower <- c(-Inf, 0, min_xi)
+      upper <- c(Inf, Inf, max_xi)
+    } else if (trans == "BC") {
+      lower <- c(-Inf, 0, 0)
+      upper <- c(Inf, Inf, Inf)
+    } else {
+      lower <- rep(-Inf, 3)
+      upper <- rep(Inf, 3)
+    }
     var_names = c("mu","sigma", "xi")
-  }
-  if (rotate | trans == "BC") {
-    lower <- rep(-Inf, d)
-    upper <- rep(Inf, d)
   }
   return(list(d = d, lower = lower, upper = upper, var_names = var_names))
 }
