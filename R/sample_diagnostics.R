@@ -137,9 +137,11 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
   if (ru_scale) {
     plot_data <- x$sim_vals_rho
     plot_density <- x$logf_rho
+    density_args <- x$logf_rho_args
   } else {
     plot_data <- x$sim_vals
     plot_density <- x$logf
+    density_args <- x$logf_args
   }
   #
   if (pu_only & is.null(x$bin_sim_vals)) {
@@ -155,7 +157,7 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
   if (pu_only) {
     plot_data <- x$bin_sim_vals
     plot_density <- x$bin_logf
-    x$logf_args <- x$bin_logf_args
+    density_args <- x$bin_logf_args
     x$d <- 1
   }
   if (add_pu) {
@@ -169,7 +171,7 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     h <- (b-a)/n
     xx <- seq(a, b, by = h)
     density_fun <- function(z) {
-      density_list <- c(list(z), x$logf_args)
+      density_list <- c(list(z), density_args)
       exp(do.call(plot_density, density_list))
     }
     yy <- sapply(xx, density_fun)
@@ -213,7 +215,7 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     zz <- matrix(NA, ncol = length(xx), nrow = length(yy))
     for (i in 1:length(xx)) {
       for (j in 1:length(yy)) {
-        for_logf <- c(list(c(xx[i], yy[j])), x$logf_args)
+        for_logf <- c(list(c(xx[i], yy[j])), density_args)
         zz[i, j] <- exp(do.call(plot_density, for_logf))
       }
     }
@@ -224,7 +226,6 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     #
     graphics::contour(xx, yy, zz, levels = con.levs, add = FALSE, ann = FALSE,
       labels = prob * 100, ...)
-#    graphics::points(plot_data, col = 8, ...)
     do.call(graphics::points, c(list(x = plot_data), points_par))
     graphics::contour(xx, yy, zz, levels = con.levs, add = TRUE, ann = TRUE,
       labels = prob * 100, ...)
