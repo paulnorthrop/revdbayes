@@ -198,6 +198,7 @@ model.
   for further details and examples.
 }
 \examples{
+\dontrun{
 # GP model
 u <- quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
@@ -243,6 +244,7 @@ mat <- diag(c(10000, 10000, 100))
 pv <- set_prior(prior = "norm", model = "gev", mean = c(0, 0, 0), cov = mat)
 osv <- rpost(n = 1000, model = "os", prior = pv, data = venice)
 plot(osv)
+}
 }
 \references{
 Coles, S. G. and Powell, E. A. (1996) Bayesian methods in

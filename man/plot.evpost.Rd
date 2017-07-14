@@ -100,6 +100,7 @@ fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 gpg <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = gom)
 plot(gpg)
 
+\dontrun{
 # Using the bayesplot package
 plot(gpg, use_bayesplot = TRUE)
 plot(gpg, use_bayesplot = TRUE, pars = "xi", prob = 0.95)
@@ -107,6 +108,7 @@ plot(gpg, use_bayesplot = TRUE, fun_name = "intervals", pars = "xi")
 plot(gpg, use_bayesplot = TRUE, fun_name = "hist")
 plot(gpg, use_bayesplot = TRUE, fun_name = "dens")
 plot(gpg, use_bayesplot = TRUE, fun_name = "scatter")
+}
 
 ## bin-GP posterior
 data(gom)
@@ -120,11 +122,13 @@ plot(bgpg)
 plot(bgpg, pu_only = TRUE)
 plot(bgpg, add_pu = TRUE)
 
+\dontrun{
 # Using the bayesplot package
 dimnames(bgpg$bin_sim_vals)
 plot(bgpg, use_bayesplot = TRUE)
 plot(bgpg, use_bayesplot = TRUE, fun_name = "hist")
 plot(bgpg, use_bayesplot = TRUE, pars = "p[u]")
+}
 }
 \references{
 Jonah Gabry (2016). bayesplot: Plotting for Bayesian

@@ -81,6 +81,7 @@
 #' gpg <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = gom)
 #' plot(gpg)
 #'
+#' \dontrun{
 #' # Using the bayesplot package
 #' plot(gpg, use_bayesplot = TRUE)
 #' plot(gpg, use_bayesplot = TRUE, pars = "xi", prob = 0.95)
@@ -88,6 +89,7 @@
 #' plot(gpg, use_bayesplot = TRUE, fun_name = "hist")
 #' plot(gpg, use_bayesplot = TRUE, fun_name = "dens")
 #' plot(gpg, use_bayesplot = TRUE, fun_name = "scatter")
+#' }
 #'
 #' ## bin-GP posterior
 #' data(gom)
@@ -101,11 +103,13 @@
 #' plot(bgpg, pu_only = TRUE)
 #' plot(bgpg, add_pu = TRUE)
 #'
+#' \dontrun{
 #' # Using the bayesplot package
 #' dimnames(bgpg$bin_sim_vals)
 #' plot(bgpg, use_bayesplot = TRUE)
 #' plot(bgpg, use_bayesplot = TRUE, fun_name = "hist")
 #' plot(bgpg, use_bayesplot = TRUE, pars = "p[u]")
+#' }
 #' @export
 plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
                         prob = c(0.5, 0.1, 0.25, 0.75, 0.95, 0.99),
