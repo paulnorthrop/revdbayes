@@ -96,7 +96,7 @@ posterior predictive distribution, which seems to be the case here.
 
 ```{r, fig.show='hold'}
 # GEV
-pp_check(gevp, type = "overlaid") + ggtitle("GEV empirical distn functions")
+pp_check(gevp, type = "overlaid") + ggtitle("GEV empirical distribution functions")
 pp_check(gevp, type = "overlaid", subtype = "dens") + ggtitle("GEV kernel density estimates")
 ```
 
