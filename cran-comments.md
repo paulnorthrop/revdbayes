@@ -12,4 +12,4 @@
 
 ## Downstream dependencies
 
-Currently revdbayes has no downstream dependencies.
+revdbayes has no downstream dependencies.
