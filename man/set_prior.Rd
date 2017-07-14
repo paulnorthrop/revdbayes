@@ -227,7 +227,7 @@ Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
 Crowder, M. (1992) Bayesian priors based on parameter
   transformation using the distribution function
   \emph{Ann. Inst. Statist. Math.}, \strong{44}, 405-416.
-  \url{http://dx.doi.org/10.1007/BF00050695}.
+  \url{https://link.springer.com/article/10.1007/BF00050695}.
 
 Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
   for the Generalized Pareto Distribution.  \emph{Technometrics},

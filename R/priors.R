@@ -205,7 +205,7 @@
 #' @references Crowder, M. (1992) Bayesian priors based on parameter
 #'   transformation using the distribution function
 #'   \emph{Ann. Inst. Statist. Math.}, \strong{44}, 405-416.
-#'   \url{http://dx.doi.org/10.1007/BF00050695}.
+#'   \url{https://link.springer.com/article/10.1007/BF00050695}.
 #' @references Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
 #'   for the Generalized Pareto Distribution.  \emph{Technometrics},
 #'   \strong{35(2)}, 185-191. \url{http://dx.doi.org/10.2307/1269663}.
