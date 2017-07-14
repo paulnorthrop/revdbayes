@@ -90,7 +90,7 @@ beta(1/2, 1/2) prior is used.}
 for the mode of the posterior distribution.}
 
 \item{mult}{A numeric scalar.  The grid of values used to choose the Box-Cox
-transformation parameter lambda is based on the maximum aposteriori (MAP)
+transformation parameter lambda is based on the maximum a posteriori (MAP)
 estimate +/- mult x estimated posterior standard deviation.}
 
 \item{use_phi_map}{A logical scalar. If trans = "BC" then \code{use_phi_map}
@@ -99,7 +99,7 @@ centred on the maximum a posterior (MAP) estimate of phi
 (\code{use_phi_map = TRUE}), or on the initial estimate of phi
 (\code{use_phi_map = FALSE}).}
 
-\item{...}{Further argments to be passed to \code{\link[rust]{ru}}.  Most
+\item{...}{Further arguments to be passed to \code{\link[rust]{ru}}.  Most
 importantly \code{trans} and \code{rotate} (see \strong{Details}), and
 perhaps \code{r}, \code{ep}, \code{a_algor}, \code{b_algor},
 \code{a_method}, \code{b_method}, \code{a_control}, \code{b_control}.

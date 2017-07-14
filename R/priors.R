@@ -213,7 +213,7 @@
 #' Quantile Estimation for the Generalized Pareto Distribution. Technometrics,
 #' 29(3), 339-349. \url{http://dx.doi.org/10.2307/1269343}.
 #' @references Martins, E. S. and Stedinger, J. R. (2000) Generalized maximum
-#'   likelihood generalized extreme value quantlie estimators for hydrologic
+#'   likelihood generalized extreme value quantile estimators for hydrologic
 #'   data, \emph{Water Resources Research}, \strong{36(3)}, 737-744.
 #'   \url{http://dx.doi.org/10.1029/1999WR900330}.
 #' @references Martins, E. S. and Stedinger, J. R. (2001) Generalized maximum
