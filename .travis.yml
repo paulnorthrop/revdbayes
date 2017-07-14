@@ -23,10 +23,10 @@ addons:
 
 r:
   - release
-#  - devel
+  - devel
 #  - oldrel
 
 env:
 #  - COMPILER=gcc-4.4
-#  - COMPILER=gcc
+  - COMPILER=gcc
   - COMPILER=clang
