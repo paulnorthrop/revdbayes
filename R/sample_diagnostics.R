@@ -137,7 +137,11 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
   if (ru_scale) {
     plot_data <- x$sim_vals_rho
     plot_density <- x$logf_rho
-    density_args <- x$logf_rho_args
+    if (is.null(x$logf_rho_args)) {
+      density_args <- x$logf_args
+    } else {
+      density_args <- x$logf_rho_args
+    }
   } else {
     plot_data <- x$sim_vals
     plot_density <- x$logf
