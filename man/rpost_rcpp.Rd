@@ -121,6 +121,8 @@ An object (list) of class \code{"evpost"}, which has the same
       but any value lying below the threshold is set to \code{thresh}.
     \item{\code{prior}:} The argument \code{prior} to \code{rpost}
       detailed above.
+    \item{\code{logf_rho_args}:} A list of arguments to the (transformed)
+      target log-density.
   }
   If \code{nrep} is not \code{NULL} then this list also contains
   \code{data_rep}, a numerical matrix with \code{nrep} rows.  Each
