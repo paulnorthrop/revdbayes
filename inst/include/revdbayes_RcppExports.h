@@ -17,7 +17,7 @@ namespace revdbayes {
             require("revdbayes", Rcpp::Named("quietly") = true);
             typedef int(*Ptr_validate)(const char*);
             static Ptr_validate p_validate = (Ptr_validate)
-                R_GetCCallable("revdbayes", "revdbayes_RcppExport_validate");
+                R_GetCCallable("revdbayes", "_revdbayes_RcppExport_validate");
             if (!p_validate(sig)) {
                 throw Rcpp::function_not_exported(
                     "C++ function with signature '" + std::string(sig) + "' not found in revdbayes");
@@ -30,12 +30,12 @@ namespace revdbayes {
         static Ptr_any_nonpos p_any_nonpos = NULL;
         if (p_any_nonpos == NULL) {
             validateSignature("bool(*any_nonpos)(const Rcpp::NumericVector&)");
-            p_any_nonpos = (Ptr_any_nonpos)R_GetCCallable("revdbayes", "revdbayes_any_nonpos");
+            p_any_nonpos = (Ptr_any_nonpos)R_GetCCallable("revdbayes", "_revdbayes_any_nonpos");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_any_nonpos(Rcpp::wrap(x));
+            rcpp_result_gen = p_any_nonpos(Shield<SEXP>(Rcpp::wrap(x)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -49,12 +49,12 @@ namespace revdbayes {
         static Ptr_cpp_gp_loglik p_cpp_gp_loglik = NULL;
         if (p_cpp_gp_loglik == NULL) {
             validateSignature("double(*cpp_gp_loglik)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gp_loglik = (Ptr_cpp_gp_loglik)R_GetCCallable("revdbayes", "revdbayes_cpp_gp_loglik");
+            p_cpp_gp_loglik = (Ptr_cpp_gp_loglik)R_GetCCallable("revdbayes", "_revdbayes_cpp_gp_loglik");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gp_loglik(Rcpp::wrap(x), Rcpp::wrap(ss));
+            rcpp_result_gen = p_cpp_gp_loglik(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ss)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -68,12 +68,12 @@ namespace revdbayes {
         static Ptr_cpp_gev_loglik p_cpp_gev_loglik = NULL;
         if (p_cpp_gev_loglik == NULL) {
             validateSignature("double(*cpp_gev_loglik)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gev_loglik = (Ptr_cpp_gev_loglik)R_GetCCallable("revdbayes", "revdbayes_cpp_gev_loglik");
+            p_cpp_gev_loglik = (Ptr_cpp_gev_loglik)R_GetCCallable("revdbayes", "_revdbayes_cpp_gev_loglik");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gev_loglik(Rcpp::wrap(x), Rcpp::wrap(ss));
+            rcpp_result_gen = p_cpp_gev_loglik(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ss)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -87,12 +87,12 @@ namespace revdbayes {
         static Ptr_cpp_os_loglik p_cpp_os_loglik = NULL;
         if (p_cpp_os_loglik == NULL) {
             validateSignature("double(*cpp_os_loglik)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_os_loglik = (Ptr_cpp_os_loglik)R_GetCCallable("revdbayes", "revdbayes_cpp_os_loglik");
+            p_cpp_os_loglik = (Ptr_cpp_os_loglik)R_GetCCallable("revdbayes", "_revdbayes_cpp_os_loglik");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_os_loglik(Rcpp::wrap(x), Rcpp::wrap(ss));
+            rcpp_result_gen = p_cpp_os_loglik(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ss)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -106,12 +106,12 @@ namespace revdbayes {
         static Ptr_cpp_pp_loglik p_cpp_pp_loglik = NULL;
         if (p_cpp_pp_loglik == NULL) {
             validateSignature("double(*cpp_pp_loglik)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_pp_loglik = (Ptr_cpp_pp_loglik)R_GetCCallable("revdbayes", "revdbayes_cpp_pp_loglik");
+            p_cpp_pp_loglik = (Ptr_cpp_pp_loglik)R_GetCCallable("revdbayes", "_revdbayes_cpp_pp_loglik");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_pp_loglik(Rcpp::wrap(x), Rcpp::wrap(ss));
+            rcpp_result_gen = p_cpp_pp_loglik(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ss)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -125,12 +125,12 @@ namespace revdbayes {
         static Ptr_cpp_gp_norm p_cpp_gp_norm = NULL;
         if (p_cpp_gp_norm == NULL) {
             validateSignature("double(*cpp_gp_norm)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gp_norm = (Ptr_cpp_gp_norm)R_GetCCallable("revdbayes", "revdbayes_cpp_gp_norm");
+            p_cpp_gp_norm = (Ptr_cpp_gp_norm)R_GetCCallable("revdbayes", "_revdbayes_cpp_gp_norm");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gp_norm(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gp_norm(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -144,12 +144,12 @@ namespace revdbayes {
         static Ptr_cpp_gp_mdi p_cpp_gp_mdi = NULL;
         if (p_cpp_gp_mdi == NULL) {
             validateSignature("double(*cpp_gp_mdi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gp_mdi = (Ptr_cpp_gp_mdi)R_GetCCallable("revdbayes", "revdbayes_cpp_gp_mdi");
+            p_cpp_gp_mdi = (Ptr_cpp_gp_mdi)R_GetCCallable("revdbayes", "_revdbayes_cpp_gp_mdi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gp_mdi(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gp_mdi(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -163,12 +163,12 @@ namespace revdbayes {
         static Ptr_cpp_gp_flat p_cpp_gp_flat = NULL;
         if (p_cpp_gp_flat == NULL) {
             validateSignature("double(*cpp_gp_flat)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gp_flat = (Ptr_cpp_gp_flat)R_GetCCallable("revdbayes", "revdbayes_cpp_gp_flat");
+            p_cpp_gp_flat = (Ptr_cpp_gp_flat)R_GetCCallable("revdbayes", "_revdbayes_cpp_gp_flat");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gp_flat(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gp_flat(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -182,12 +182,12 @@ namespace revdbayes {
         static Ptr_cpp_gp_flatflat p_cpp_gp_flatflat = NULL;
         if (p_cpp_gp_flatflat == NULL) {
             validateSignature("double(*cpp_gp_flatflat)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gp_flatflat = (Ptr_cpp_gp_flatflat)R_GetCCallable("revdbayes", "revdbayes_cpp_gp_flatflat");
+            p_cpp_gp_flatflat = (Ptr_cpp_gp_flatflat)R_GetCCallable("revdbayes", "_revdbayes_cpp_gp_flatflat");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gp_flatflat(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gp_flatflat(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -201,12 +201,12 @@ namespace revdbayes {
         static Ptr_cpp_gp_jeffreys p_cpp_gp_jeffreys = NULL;
         if (p_cpp_gp_jeffreys == NULL) {
             validateSignature("double(*cpp_gp_jeffreys)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gp_jeffreys = (Ptr_cpp_gp_jeffreys)R_GetCCallable("revdbayes", "revdbayes_cpp_gp_jeffreys");
+            p_cpp_gp_jeffreys = (Ptr_cpp_gp_jeffreys)R_GetCCallable("revdbayes", "_revdbayes_cpp_gp_jeffreys");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gp_jeffreys(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gp_jeffreys(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -220,12 +220,12 @@ namespace revdbayes {
         static Ptr_cpp_gp_beta p_cpp_gp_beta = NULL;
         if (p_cpp_gp_beta == NULL) {
             validateSignature("double(*cpp_gp_beta)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gp_beta = (Ptr_cpp_gp_beta)R_GetCCallable("revdbayes", "revdbayes_cpp_gp_beta");
+            p_cpp_gp_beta = (Ptr_cpp_gp_beta)R_GetCCallable("revdbayes", "_revdbayes_cpp_gp_beta");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gp_beta(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gp_beta(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -239,12 +239,12 @@ namespace revdbayes {
         static Ptr_cpp_gev_norm p_cpp_gev_norm = NULL;
         if (p_cpp_gev_norm == NULL) {
             validateSignature("double(*cpp_gev_norm)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gev_norm = (Ptr_cpp_gev_norm)R_GetCCallable("revdbayes", "revdbayes_cpp_gev_norm");
+            p_cpp_gev_norm = (Ptr_cpp_gev_norm)R_GetCCallable("revdbayes", "_revdbayes_cpp_gev_norm");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gev_norm(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gev_norm(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -258,12 +258,12 @@ namespace revdbayes {
         static Ptr_cpp_gev_loglognorm p_cpp_gev_loglognorm = NULL;
         if (p_cpp_gev_loglognorm == NULL) {
             validateSignature("double(*cpp_gev_loglognorm)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gev_loglognorm = (Ptr_cpp_gev_loglognorm)R_GetCCallable("revdbayes", "revdbayes_cpp_gev_loglognorm");
+            p_cpp_gev_loglognorm = (Ptr_cpp_gev_loglognorm)R_GetCCallable("revdbayes", "_revdbayes_cpp_gev_loglognorm");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gev_loglognorm(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gev_loglognorm(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -277,12 +277,12 @@ namespace revdbayes {
         static Ptr_cpp_gev_mdi p_cpp_gev_mdi = NULL;
         if (p_cpp_gev_mdi == NULL) {
             validateSignature("double(*cpp_gev_mdi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gev_mdi = (Ptr_cpp_gev_mdi)R_GetCCallable("revdbayes", "revdbayes_cpp_gev_mdi");
+            p_cpp_gev_mdi = (Ptr_cpp_gev_mdi)R_GetCCallable("revdbayes", "_revdbayes_cpp_gev_mdi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gev_mdi(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gev_mdi(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -296,12 +296,12 @@ namespace revdbayes {
         static Ptr_cpp_gev_flat p_cpp_gev_flat = NULL;
         if (p_cpp_gev_flat == NULL) {
             validateSignature("double(*cpp_gev_flat)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gev_flat = (Ptr_cpp_gev_flat)R_GetCCallable("revdbayes", "revdbayes_cpp_gev_flat");
+            p_cpp_gev_flat = (Ptr_cpp_gev_flat)R_GetCCallable("revdbayes", "_revdbayes_cpp_gev_flat");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gev_flat(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gev_flat(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -315,12 +315,12 @@ namespace revdbayes {
         static Ptr_cpp_gev_flatflat p_cpp_gev_flatflat = NULL;
         if (p_cpp_gev_flatflat == NULL) {
             validateSignature("double(*cpp_gev_flatflat)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gev_flatflat = (Ptr_cpp_gev_flatflat)R_GetCCallable("revdbayes", "revdbayes_cpp_gev_flatflat");
+            p_cpp_gev_flatflat = (Ptr_cpp_gev_flatflat)R_GetCCallable("revdbayes", "_revdbayes_cpp_gev_flatflat");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gev_flatflat(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gev_flatflat(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -334,12 +334,12 @@ namespace revdbayes {
         static Ptr_cpp_gev_beta p_cpp_gev_beta = NULL;
         if (p_cpp_gev_beta == NULL) {
             validateSignature("double(*cpp_gev_beta)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gev_beta = (Ptr_cpp_gev_beta)R_GetCCallable("revdbayes", "revdbayes_cpp_gev_beta");
+            p_cpp_gev_beta = (Ptr_cpp_gev_beta)R_GetCCallable("revdbayes", "_revdbayes_cpp_gev_beta");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gev_beta(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gev_beta(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -353,12 +353,12 @@ namespace revdbayes {
         static Ptr_lgdgev_cpp p_lgdgev_cpp = NULL;
         if (p_lgdgev_cpp == NULL) {
             validateSignature("Rcpp::NumericVector(*lgdgev_cpp)(const Rcpp::NumericVector&,const double&,const double&,const double&)");
-            p_lgdgev_cpp = (Ptr_lgdgev_cpp)R_GetCCallable("revdbayes", "revdbayes_lgdgev_cpp");
+            p_lgdgev_cpp = (Ptr_lgdgev_cpp)R_GetCCallable("revdbayes", "_revdbayes_lgdgev_cpp");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_lgdgev_cpp(Rcpp::wrap(x), Rcpp::wrap(loc), Rcpp::wrap(scale), Rcpp::wrap(shape));
+            rcpp_result_gen = p_lgdgev_cpp(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(loc)), Shield<SEXP>(Rcpp::wrap(scale)), Shield<SEXP>(Rcpp::wrap(shape)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -372,12 +372,12 @@ namespace revdbayes {
         static Ptr_pgev_cpp p_pgev_cpp = NULL;
         if (p_pgev_cpp == NULL) {
             validateSignature("Rcpp::NumericVector(*pgev_cpp)(const Rcpp::NumericVector&,const double&,const double&,const double&)");
-            p_pgev_cpp = (Ptr_pgev_cpp)R_GetCCallable("revdbayes", "revdbayes_pgev_cpp");
+            p_pgev_cpp = (Ptr_pgev_cpp)R_GetCCallable("revdbayes", "_revdbayes_pgev_cpp");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pgev_cpp(Rcpp::wrap(q), Rcpp::wrap(loc), Rcpp::wrap(scale), Rcpp::wrap(shape));
+            rcpp_result_gen = p_pgev_cpp(Shield<SEXP>(Rcpp::wrap(q)), Shield<SEXP>(Rcpp::wrap(loc)), Shield<SEXP>(Rcpp::wrap(scale)), Shield<SEXP>(Rcpp::wrap(shape)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -391,12 +391,12 @@ namespace revdbayes {
         static Ptr_qgev_cpp p_qgev_cpp = NULL;
         if (p_qgev_cpp == NULL) {
             validateSignature("Rcpp::NumericVector(*qgev_cpp)(const Rcpp::NumericVector&,const double&,const double&,const double&)");
-            p_qgev_cpp = (Ptr_qgev_cpp)R_GetCCallable("revdbayes", "revdbayes_qgev_cpp");
+            p_qgev_cpp = (Ptr_qgev_cpp)R_GetCCallable("revdbayes", "_revdbayes_qgev_cpp");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_qgev_cpp(Rcpp::wrap(p), Rcpp::wrap(loc), Rcpp::wrap(scale), Rcpp::wrap(shape));
+            rcpp_result_gen = p_qgev_cpp(Shield<SEXP>(Rcpp::wrap(p)), Shield<SEXP>(Rcpp::wrap(loc)), Shield<SEXP>(Rcpp::wrap(scale)), Shield<SEXP>(Rcpp::wrap(shape)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -410,12 +410,12 @@ namespace revdbayes {
         static Ptr_cpp_gev_prob p_cpp_gev_prob = NULL;
         if (p_cpp_gev_prob == NULL) {
             validateSignature("double(*cpp_gev_prob)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gev_prob = (Ptr_cpp_gev_prob)R_GetCCallable("revdbayes", "revdbayes_cpp_gev_prob");
+            p_cpp_gev_prob = (Ptr_cpp_gev_prob)R_GetCCallable("revdbayes", "_revdbayes_cpp_gev_prob");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gev_prob(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gev_prob(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -429,12 +429,12 @@ namespace revdbayes {
         static Ptr_cpp_gev_quant p_cpp_gev_quant = NULL;
         if (p_cpp_gev_quant == NULL) {
             validateSignature("double(*cpp_gev_quant)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_cpp_gev_quant = (Ptr_cpp_gev_quant)R_GetCCallable("revdbayes", "revdbayes_cpp_gev_quant");
+            p_cpp_gev_quant = (Ptr_cpp_gev_quant)R_GetCCallable("revdbayes", "_revdbayes_cpp_gev_quant");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_cpp_gev_quant(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_cpp_gev_quant(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -448,12 +448,12 @@ namespace revdbayes {
         static Ptr_gp_user_logpost p_gp_user_logpost = NULL;
         if (p_gp_user_logpost == NULL) {
             validateSignature("double(*gp_user_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_user_logpost = (Ptr_gp_user_logpost)R_GetCCallable("revdbayes", "revdbayes_gp_user_logpost");
+            p_gp_user_logpost = (Ptr_gp_user_logpost)R_GetCCallable("revdbayes", "_revdbayes_gp_user_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_user_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_user_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -467,12 +467,12 @@ namespace revdbayes {
         static Ptr_gev_user_logpost p_gev_user_logpost = NULL;
         if (p_gev_user_logpost == NULL) {
             validateSignature("double(*gev_user_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_user_logpost = (Ptr_gev_user_logpost)R_GetCCallable("revdbayes", "revdbayes_gev_user_logpost");
+            p_gev_user_logpost = (Ptr_gev_user_logpost)R_GetCCallable("revdbayes", "_revdbayes_gev_user_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_user_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_user_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -486,12 +486,12 @@ namespace revdbayes {
         static Ptr_os_user_logpost p_os_user_logpost = NULL;
         if (p_os_user_logpost == NULL) {
             validateSignature("double(*os_user_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_user_logpost = (Ptr_os_user_logpost)R_GetCCallable("revdbayes", "revdbayes_os_user_logpost");
+            p_os_user_logpost = (Ptr_os_user_logpost)R_GetCCallable("revdbayes", "_revdbayes_os_user_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_user_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_user_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -505,12 +505,12 @@ namespace revdbayes {
         static Ptr_pp_user_logpost p_pp_user_logpost = NULL;
         if (p_pp_user_logpost == NULL) {
             validateSignature("double(*pp_user_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_user_logpost = (Ptr_pp_user_logpost)R_GetCCallable("revdbayes", "revdbayes_pp_user_logpost");
+            p_pp_user_logpost = (Ptr_pp_user_logpost)R_GetCCallable("revdbayes", "_revdbayes_pp_user_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_user_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_user_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -524,12 +524,12 @@ namespace revdbayes {
         static Ptr_gp_mdi_logpost p_gp_mdi_logpost = NULL;
         if (p_gp_mdi_logpost == NULL) {
             validateSignature("double(*gp_mdi_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_mdi_logpost = (Ptr_gp_mdi_logpost)R_GetCCallable("revdbayes", "revdbayes_gp_mdi_logpost");
+            p_gp_mdi_logpost = (Ptr_gp_mdi_logpost)R_GetCCallable("revdbayes", "_revdbayes_gp_mdi_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_mdi_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_mdi_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -543,12 +543,12 @@ namespace revdbayes {
         static Ptr_gp_norm_logpost p_gp_norm_logpost = NULL;
         if (p_gp_norm_logpost == NULL) {
             validateSignature("double(*gp_norm_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_norm_logpost = (Ptr_gp_norm_logpost)R_GetCCallable("revdbayes", "revdbayes_gp_norm_logpost");
+            p_gp_norm_logpost = (Ptr_gp_norm_logpost)R_GetCCallable("revdbayes", "_revdbayes_gp_norm_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_norm_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_norm_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -562,12 +562,12 @@ namespace revdbayes {
         static Ptr_gp_flat_logpost p_gp_flat_logpost = NULL;
         if (p_gp_flat_logpost == NULL) {
             validateSignature("double(*gp_flat_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_flat_logpost = (Ptr_gp_flat_logpost)R_GetCCallable("revdbayes", "revdbayes_gp_flat_logpost");
+            p_gp_flat_logpost = (Ptr_gp_flat_logpost)R_GetCCallable("revdbayes", "_revdbayes_gp_flat_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_flat_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_flat_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -581,12 +581,12 @@ namespace revdbayes {
         static Ptr_gp_flatflat_logpost p_gp_flatflat_logpost = NULL;
         if (p_gp_flatflat_logpost == NULL) {
             validateSignature("double(*gp_flatflat_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_flatflat_logpost = (Ptr_gp_flatflat_logpost)R_GetCCallable("revdbayes", "revdbayes_gp_flatflat_logpost");
+            p_gp_flatflat_logpost = (Ptr_gp_flatflat_logpost)R_GetCCallable("revdbayes", "_revdbayes_gp_flatflat_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_flatflat_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_flatflat_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -600,12 +600,12 @@ namespace revdbayes {
         static Ptr_gp_jeffreys_logpost p_gp_jeffreys_logpost = NULL;
         if (p_gp_jeffreys_logpost == NULL) {
             validateSignature("double(*gp_jeffreys_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_jeffreys_logpost = (Ptr_gp_jeffreys_logpost)R_GetCCallable("revdbayes", "revdbayes_gp_jeffreys_logpost");
+            p_gp_jeffreys_logpost = (Ptr_gp_jeffreys_logpost)R_GetCCallable("revdbayes", "_revdbayes_gp_jeffreys_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_jeffreys_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_jeffreys_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -619,12 +619,12 @@ namespace revdbayes {
         static Ptr_gp_beta_logpost p_gp_beta_logpost = NULL;
         if (p_gp_beta_logpost == NULL) {
             validateSignature("double(*gp_beta_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_beta_logpost = (Ptr_gp_beta_logpost)R_GetCCallable("revdbayes", "revdbayes_gp_beta_logpost");
+            p_gp_beta_logpost = (Ptr_gp_beta_logpost)R_GetCCallable("revdbayes", "_revdbayes_gp_beta_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_beta_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_beta_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -638,12 +638,12 @@ namespace revdbayes {
         static Ptr_gev_mdi_logpost p_gev_mdi_logpost = NULL;
         if (p_gev_mdi_logpost == NULL) {
             validateSignature("double(*gev_mdi_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_mdi_logpost = (Ptr_gev_mdi_logpost)R_GetCCallable("revdbayes", "revdbayes_gev_mdi_logpost");
+            p_gev_mdi_logpost = (Ptr_gev_mdi_logpost)R_GetCCallable("revdbayes", "_revdbayes_gev_mdi_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_mdi_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_mdi_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -657,12 +657,12 @@ namespace revdbayes {
         static Ptr_gev_norm_logpost p_gev_norm_logpost = NULL;
         if (p_gev_norm_logpost == NULL) {
             validateSignature("double(*gev_norm_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_norm_logpost = (Ptr_gev_norm_logpost)R_GetCCallable("revdbayes", "revdbayes_gev_norm_logpost");
+            p_gev_norm_logpost = (Ptr_gev_norm_logpost)R_GetCCallable("revdbayes", "_revdbayes_gev_norm_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_norm_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_norm_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -676,12 +676,12 @@ namespace revdbayes {
         static Ptr_gev_loglognorm_logpost p_gev_loglognorm_logpost = NULL;
         if (p_gev_loglognorm_logpost == NULL) {
             validateSignature("double(*gev_loglognorm_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_loglognorm_logpost = (Ptr_gev_loglognorm_logpost)R_GetCCallable("revdbayes", "revdbayes_gev_loglognorm_logpost");
+            p_gev_loglognorm_logpost = (Ptr_gev_loglognorm_logpost)R_GetCCallable("revdbayes", "_revdbayes_gev_loglognorm_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_loglognorm_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_loglognorm_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -695,12 +695,12 @@ namespace revdbayes {
         static Ptr_gev_flat_logpost p_gev_flat_logpost = NULL;
         if (p_gev_flat_logpost == NULL) {
             validateSignature("double(*gev_flat_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_flat_logpost = (Ptr_gev_flat_logpost)R_GetCCallable("revdbayes", "revdbayes_gev_flat_logpost");
+            p_gev_flat_logpost = (Ptr_gev_flat_logpost)R_GetCCallable("revdbayes", "_revdbayes_gev_flat_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_flat_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_flat_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -714,12 +714,12 @@ namespace revdbayes {
         static Ptr_gev_flatflat_logpost p_gev_flatflat_logpost = NULL;
         if (p_gev_flatflat_logpost == NULL) {
             validateSignature("double(*gev_flatflat_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_flatflat_logpost = (Ptr_gev_flatflat_logpost)R_GetCCallable("revdbayes", "revdbayes_gev_flatflat_logpost");
+            p_gev_flatflat_logpost = (Ptr_gev_flatflat_logpost)R_GetCCallable("revdbayes", "_revdbayes_gev_flatflat_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_flatflat_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_flatflat_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -733,12 +733,12 @@ namespace revdbayes {
         static Ptr_gev_beta_logpost p_gev_beta_logpost = NULL;
         if (p_gev_beta_logpost == NULL) {
             validateSignature("double(*gev_beta_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_beta_logpost = (Ptr_gev_beta_logpost)R_GetCCallable("revdbayes", "revdbayes_gev_beta_logpost");
+            p_gev_beta_logpost = (Ptr_gev_beta_logpost)R_GetCCallable("revdbayes", "_revdbayes_gev_beta_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_beta_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_beta_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -752,12 +752,12 @@ namespace revdbayes {
         static Ptr_gev_prob_logpost p_gev_prob_logpost = NULL;
         if (p_gev_prob_logpost == NULL) {
             validateSignature("double(*gev_prob_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_prob_logpost = (Ptr_gev_prob_logpost)R_GetCCallable("revdbayes", "revdbayes_gev_prob_logpost");
+            p_gev_prob_logpost = (Ptr_gev_prob_logpost)R_GetCCallable("revdbayes", "_revdbayes_gev_prob_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_prob_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_prob_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -771,12 +771,12 @@ namespace revdbayes {
         static Ptr_gev_quant_logpost p_gev_quant_logpost = NULL;
         if (p_gev_quant_logpost == NULL) {
             validateSignature("double(*gev_quant_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_quant_logpost = (Ptr_gev_quant_logpost)R_GetCCallable("revdbayes", "revdbayes_gev_quant_logpost");
+            p_gev_quant_logpost = (Ptr_gev_quant_logpost)R_GetCCallable("revdbayes", "_revdbayes_gev_quant_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_quant_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_quant_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -790,12 +790,12 @@ namespace revdbayes {
         static Ptr_pp_mdi_logpost p_pp_mdi_logpost = NULL;
         if (p_pp_mdi_logpost == NULL) {
             validateSignature("double(*pp_mdi_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_mdi_logpost = (Ptr_pp_mdi_logpost)R_GetCCallable("revdbayes", "revdbayes_pp_mdi_logpost");
+            p_pp_mdi_logpost = (Ptr_pp_mdi_logpost)R_GetCCallable("revdbayes", "_revdbayes_pp_mdi_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_mdi_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_mdi_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -809,12 +809,12 @@ namespace revdbayes {
         static Ptr_pp_norm_logpost p_pp_norm_logpost = NULL;
         if (p_pp_norm_logpost == NULL) {
             validateSignature("double(*pp_norm_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_norm_logpost = (Ptr_pp_norm_logpost)R_GetCCallable("revdbayes", "revdbayes_pp_norm_logpost");
+            p_pp_norm_logpost = (Ptr_pp_norm_logpost)R_GetCCallable("revdbayes", "_revdbayes_pp_norm_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_norm_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_norm_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -828,12 +828,12 @@ namespace revdbayes {
         static Ptr_pp_loglognorm_logpost p_pp_loglognorm_logpost = NULL;
         if (p_pp_loglognorm_logpost == NULL) {
             validateSignature("double(*pp_loglognorm_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_loglognorm_logpost = (Ptr_pp_loglognorm_logpost)R_GetCCallable("revdbayes", "revdbayes_pp_loglognorm_logpost");
+            p_pp_loglognorm_logpost = (Ptr_pp_loglognorm_logpost)R_GetCCallable("revdbayes", "_revdbayes_pp_loglognorm_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_loglognorm_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_loglognorm_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -847,12 +847,12 @@ namespace revdbayes {
         static Ptr_pp_flat_logpost p_pp_flat_logpost = NULL;
         if (p_pp_flat_logpost == NULL) {
             validateSignature("double(*pp_flat_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_flat_logpost = (Ptr_pp_flat_logpost)R_GetCCallable("revdbayes", "revdbayes_pp_flat_logpost");
+            p_pp_flat_logpost = (Ptr_pp_flat_logpost)R_GetCCallable("revdbayes", "_revdbayes_pp_flat_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_flat_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_flat_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -866,12 +866,12 @@ namespace revdbayes {
         static Ptr_pp_flatflat_logpost p_pp_flatflat_logpost = NULL;
         if (p_pp_flatflat_logpost == NULL) {
             validateSignature("double(*pp_flatflat_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_flatflat_logpost = (Ptr_pp_flatflat_logpost)R_GetCCallable("revdbayes", "revdbayes_pp_flatflat_logpost");
+            p_pp_flatflat_logpost = (Ptr_pp_flatflat_logpost)R_GetCCallable("revdbayes", "_revdbayes_pp_flatflat_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_flatflat_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_flatflat_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -885,12 +885,12 @@ namespace revdbayes {
         static Ptr_pp_beta_logpost p_pp_beta_logpost = NULL;
         if (p_pp_beta_logpost == NULL) {
             validateSignature("double(*pp_beta_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_beta_logpost = (Ptr_pp_beta_logpost)R_GetCCallable("revdbayes", "revdbayes_pp_beta_logpost");
+            p_pp_beta_logpost = (Ptr_pp_beta_logpost)R_GetCCallable("revdbayes", "_revdbayes_pp_beta_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_beta_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_beta_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -904,12 +904,12 @@ namespace revdbayes {
         static Ptr_pp_prob_logpost p_pp_prob_logpost = NULL;
         if (p_pp_prob_logpost == NULL) {
             validateSignature("double(*pp_prob_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_prob_logpost = (Ptr_pp_prob_logpost)R_GetCCallable("revdbayes", "revdbayes_pp_prob_logpost");
+            p_pp_prob_logpost = (Ptr_pp_prob_logpost)R_GetCCallable("revdbayes", "_revdbayes_pp_prob_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_prob_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_prob_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -923,12 +923,12 @@ namespace revdbayes {
         static Ptr_pp_quant_logpost p_pp_quant_logpost = NULL;
         if (p_pp_quant_logpost == NULL) {
             validateSignature("double(*pp_quant_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_quant_logpost = (Ptr_pp_quant_logpost)R_GetCCallable("revdbayes", "revdbayes_pp_quant_logpost");
+            p_pp_quant_logpost = (Ptr_pp_quant_logpost)R_GetCCallable("revdbayes", "_revdbayes_pp_quant_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_quant_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_quant_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -942,12 +942,12 @@ namespace revdbayes {
         static Ptr_os_mdi_logpost p_os_mdi_logpost = NULL;
         if (p_os_mdi_logpost == NULL) {
             validateSignature("double(*os_mdi_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_mdi_logpost = (Ptr_os_mdi_logpost)R_GetCCallable("revdbayes", "revdbayes_os_mdi_logpost");
+            p_os_mdi_logpost = (Ptr_os_mdi_logpost)R_GetCCallable("revdbayes", "_revdbayes_os_mdi_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_mdi_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_mdi_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -961,12 +961,12 @@ namespace revdbayes {
         static Ptr_os_norm_logpost p_os_norm_logpost = NULL;
         if (p_os_norm_logpost == NULL) {
             validateSignature("double(*os_norm_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_norm_logpost = (Ptr_os_norm_logpost)R_GetCCallable("revdbayes", "revdbayes_os_norm_logpost");
+            p_os_norm_logpost = (Ptr_os_norm_logpost)R_GetCCallable("revdbayes", "_revdbayes_os_norm_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_norm_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_norm_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -980,12 +980,12 @@ namespace revdbayes {
         static Ptr_os_loglognorm_logpost p_os_loglognorm_logpost = NULL;
         if (p_os_loglognorm_logpost == NULL) {
             validateSignature("double(*os_loglognorm_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_loglognorm_logpost = (Ptr_os_loglognorm_logpost)R_GetCCallable("revdbayes", "revdbayes_os_loglognorm_logpost");
+            p_os_loglognorm_logpost = (Ptr_os_loglognorm_logpost)R_GetCCallable("revdbayes", "_revdbayes_os_loglognorm_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_loglognorm_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_loglognorm_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -999,12 +999,12 @@ namespace revdbayes {
         static Ptr_os_flat_logpost p_os_flat_logpost = NULL;
         if (p_os_flat_logpost == NULL) {
             validateSignature("double(*os_flat_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_flat_logpost = (Ptr_os_flat_logpost)R_GetCCallable("revdbayes", "revdbayes_os_flat_logpost");
+            p_os_flat_logpost = (Ptr_os_flat_logpost)R_GetCCallable("revdbayes", "_revdbayes_os_flat_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_flat_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_flat_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1018,12 +1018,12 @@ namespace revdbayes {
         static Ptr_os_flatflat_logpost p_os_flatflat_logpost = NULL;
         if (p_os_flatflat_logpost == NULL) {
             validateSignature("double(*os_flatflat_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_flatflat_logpost = (Ptr_os_flatflat_logpost)R_GetCCallable("revdbayes", "revdbayes_os_flatflat_logpost");
+            p_os_flatflat_logpost = (Ptr_os_flatflat_logpost)R_GetCCallable("revdbayes", "_revdbayes_os_flatflat_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_flatflat_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_flatflat_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1037,12 +1037,12 @@ namespace revdbayes {
         static Ptr_os_beta_logpost p_os_beta_logpost = NULL;
         if (p_os_beta_logpost == NULL) {
             validateSignature("double(*os_beta_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_beta_logpost = (Ptr_os_beta_logpost)R_GetCCallable("revdbayes", "revdbayes_os_beta_logpost");
+            p_os_beta_logpost = (Ptr_os_beta_logpost)R_GetCCallable("revdbayes", "_revdbayes_os_beta_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_beta_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_beta_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1056,12 +1056,12 @@ namespace revdbayes {
         static Ptr_os_prob_logpost p_os_prob_logpost = NULL;
         if (p_os_prob_logpost == NULL) {
             validateSignature("double(*os_prob_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_prob_logpost = (Ptr_os_prob_logpost)R_GetCCallable("revdbayes", "revdbayes_os_prob_logpost");
+            p_os_prob_logpost = (Ptr_os_prob_logpost)R_GetCCallable("revdbayes", "_revdbayes_os_prob_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_prob_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_prob_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1075,12 +1075,12 @@ namespace revdbayes {
         static Ptr_os_quant_logpost p_os_quant_logpost = NULL;
         if (p_os_quant_logpost == NULL) {
             validateSignature("double(*os_quant_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_quant_logpost = (Ptr_os_quant_logpost)R_GetCCallable("revdbayes", "revdbayes_os_quant_logpost");
+            p_os_quant_logpost = (Ptr_os_quant_logpost)R_GetCCallable("revdbayes", "_revdbayes_os_quant_logpost");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_quant_logpost(Rcpp::wrap(x), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_quant_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1094,12 +1094,12 @@ namespace revdbayes {
         static Ptr_gp_logpost_xptr p_gp_logpost_xptr = NULL;
         if (p_gp_logpost_xptr == NULL) {
             validateSignature("SEXP(*gp_logpost_xptr)(std::string)");
-            p_gp_logpost_xptr = (Ptr_gp_logpost_xptr)R_GetCCallable("revdbayes", "revdbayes_gp_logpost_xptr");
+            p_gp_logpost_xptr = (Ptr_gp_logpost_xptr)R_GetCCallable("revdbayes", "_revdbayes_gp_logpost_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_logpost_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_gp_logpost_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1113,12 +1113,12 @@ namespace revdbayes {
         static Ptr_gev_logpost_xptr p_gev_logpost_xptr = NULL;
         if (p_gev_logpost_xptr == NULL) {
             validateSignature("SEXP(*gev_logpost_xptr)(std::string)");
-            p_gev_logpost_xptr = (Ptr_gev_logpost_xptr)R_GetCCallable("revdbayes", "revdbayes_gev_logpost_xptr");
+            p_gev_logpost_xptr = (Ptr_gev_logpost_xptr)R_GetCCallable("revdbayes", "_revdbayes_gev_logpost_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_logpost_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_gev_logpost_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1132,12 +1132,12 @@ namespace revdbayes {
         static Ptr_os_logpost_xptr p_os_logpost_xptr = NULL;
         if (p_os_logpost_xptr == NULL) {
             validateSignature("SEXP(*os_logpost_xptr)(std::string)");
-            p_os_logpost_xptr = (Ptr_os_logpost_xptr)R_GetCCallable("revdbayes", "revdbayes_os_logpost_xptr");
+            p_os_logpost_xptr = (Ptr_os_logpost_xptr)R_GetCCallable("revdbayes", "_revdbayes_os_logpost_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_logpost_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_os_logpost_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1151,12 +1151,12 @@ namespace revdbayes {
         static Ptr_pp_logpost_xptr p_pp_logpost_xptr = NULL;
         if (p_pp_logpost_xptr == NULL) {
             validateSignature("SEXP(*pp_logpost_xptr)(std::string)");
-            p_pp_logpost_xptr = (Ptr_pp_logpost_xptr)R_GetCCallable("revdbayes", "revdbayes_pp_logpost_xptr");
+            p_pp_logpost_xptr = (Ptr_pp_logpost_xptr)R_GetCCallable("revdbayes", "_revdbayes_pp_logpost_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_logpost_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_pp_logpost_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1170,12 +1170,12 @@ namespace revdbayes {
         static Ptr_gp_phi_to_theta p_gp_phi_to_theta = NULL;
         if (p_gp_phi_to_theta == NULL) {
             validateSignature("Rcpp::NumericVector(*gp_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_phi_to_theta = (Ptr_gp_phi_to_theta)R_GetCCallable("revdbayes", "revdbayes_gp_phi_to_theta");
+            p_gp_phi_to_theta = (Ptr_gp_phi_to_theta)R_GetCCallable("revdbayes", "_revdbayes_gp_phi_to_theta");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_phi_to_theta(Rcpp::wrap(phi), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_gp_phi_to_theta(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1189,12 +1189,12 @@ namespace revdbayes {
         static Ptr_gev_phi_to_theta p_gev_phi_to_theta = NULL;
         if (p_gev_phi_to_theta == NULL) {
             validateSignature("Rcpp::NumericVector(*gev_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_phi_to_theta = (Ptr_gev_phi_to_theta)R_GetCCallable("revdbayes", "revdbayes_gev_phi_to_theta");
+            p_gev_phi_to_theta = (Ptr_gev_phi_to_theta)R_GetCCallable("revdbayes", "_revdbayes_gev_phi_to_theta");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_phi_to_theta(Rcpp::wrap(phi), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_gev_phi_to_theta(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1208,12 +1208,12 @@ namespace revdbayes {
         static Ptr_pp_phi_to_theta p_pp_phi_to_theta = NULL;
         if (p_pp_phi_to_theta == NULL) {
             validateSignature("Rcpp::NumericVector(*pp_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_phi_to_theta = (Ptr_pp_phi_to_theta)R_GetCCallable("revdbayes", "revdbayes_pp_phi_to_theta");
+            p_pp_phi_to_theta = (Ptr_pp_phi_to_theta)R_GetCCallable("revdbayes", "_revdbayes_pp_phi_to_theta");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_phi_to_theta(Rcpp::wrap(phi), Rcpp::wrap(user_args));
+            rcpp_result_gen = p_pp_phi_to_theta(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(user_args)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1227,12 +1227,12 @@ namespace revdbayes {
         static Ptr_phi_to_theta_xptr p_phi_to_theta_xptr = NULL;
         if (p_phi_to_theta_xptr == NULL) {
             validateSignature("SEXP(*phi_to_theta_xptr)(std::string)");
-            p_phi_to_theta_xptr = (Ptr_phi_to_theta_xptr)R_GetCCallable("revdbayes", "revdbayes_phi_to_theta_xptr");
+            p_phi_to_theta_xptr = (Ptr_phi_to_theta_xptr)R_GetCCallable("revdbayes", "_revdbayes_phi_to_theta_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_phi_to_theta_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_phi_to_theta_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1246,12 +1246,12 @@ namespace revdbayes {
         static Ptr_gp_mdi_logpost_phi p_gp_mdi_logpost_phi = NULL;
         if (p_gp_mdi_logpost_phi == NULL) {
             validateSignature("double(*gp_mdi_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_mdi_logpost_phi = (Ptr_gp_mdi_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gp_mdi_logpost_phi");
+            p_gp_mdi_logpost_phi = (Ptr_gp_mdi_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gp_mdi_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_mdi_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_mdi_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1265,12 +1265,12 @@ namespace revdbayes {
         static Ptr_gp_norm_logpost_phi p_gp_norm_logpost_phi = NULL;
         if (p_gp_norm_logpost_phi == NULL) {
             validateSignature("double(*gp_norm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_norm_logpost_phi = (Ptr_gp_norm_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gp_norm_logpost_phi");
+            p_gp_norm_logpost_phi = (Ptr_gp_norm_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gp_norm_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_norm_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_norm_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1284,12 +1284,12 @@ namespace revdbayes {
         static Ptr_gp_flat_logpost_phi p_gp_flat_logpost_phi = NULL;
         if (p_gp_flat_logpost_phi == NULL) {
             validateSignature("double(*gp_flat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_flat_logpost_phi = (Ptr_gp_flat_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gp_flat_logpost_phi");
+            p_gp_flat_logpost_phi = (Ptr_gp_flat_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gp_flat_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_flat_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_flat_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1303,12 +1303,12 @@ namespace revdbayes {
         static Ptr_gp_flatflat_logpost_phi p_gp_flatflat_logpost_phi = NULL;
         if (p_gp_flatflat_logpost_phi == NULL) {
             validateSignature("double(*gp_flatflat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_flatflat_logpost_phi = (Ptr_gp_flatflat_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gp_flatflat_logpost_phi");
+            p_gp_flatflat_logpost_phi = (Ptr_gp_flatflat_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gp_flatflat_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_flatflat_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_flatflat_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1322,12 +1322,12 @@ namespace revdbayes {
         static Ptr_gp_jeffreys_logpost_phi p_gp_jeffreys_logpost_phi = NULL;
         if (p_gp_jeffreys_logpost_phi == NULL) {
             validateSignature("double(*gp_jeffreys_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_jeffreys_logpost_phi = (Ptr_gp_jeffreys_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gp_jeffreys_logpost_phi");
+            p_gp_jeffreys_logpost_phi = (Ptr_gp_jeffreys_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gp_jeffreys_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_jeffreys_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_jeffreys_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1341,12 +1341,12 @@ namespace revdbayes {
         static Ptr_gp_beta_logpost_phi p_gp_beta_logpost_phi = NULL;
         if (p_gp_beta_logpost_phi == NULL) {
             validateSignature("double(*gp_beta_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_beta_logpost_phi = (Ptr_gp_beta_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gp_beta_logpost_phi");
+            p_gp_beta_logpost_phi = (Ptr_gp_beta_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gp_beta_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_beta_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_beta_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1360,12 +1360,12 @@ namespace revdbayes {
         static Ptr_gp_user_logpost_phi p_gp_user_logpost_phi = NULL;
         if (p_gp_user_logpost_phi == NULL) {
             validateSignature("double(*gp_user_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gp_user_logpost_phi = (Ptr_gp_user_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gp_user_logpost_phi");
+            p_gp_user_logpost_phi = (Ptr_gp_user_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gp_user_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_user_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gp_user_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1379,12 +1379,12 @@ namespace revdbayes {
         static Ptr_gev_mdi_logpost_phi p_gev_mdi_logpost_phi = NULL;
         if (p_gev_mdi_logpost_phi == NULL) {
             validateSignature("double(*gev_mdi_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_mdi_logpost_phi = (Ptr_gev_mdi_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gev_mdi_logpost_phi");
+            p_gev_mdi_logpost_phi = (Ptr_gev_mdi_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gev_mdi_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_mdi_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_mdi_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1398,12 +1398,12 @@ namespace revdbayes {
         static Ptr_gev_norm_logpost_phi p_gev_norm_logpost_phi = NULL;
         if (p_gev_norm_logpost_phi == NULL) {
             validateSignature("double(*gev_norm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_norm_logpost_phi = (Ptr_gev_norm_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gev_norm_logpost_phi");
+            p_gev_norm_logpost_phi = (Ptr_gev_norm_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gev_norm_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_norm_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_norm_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1417,12 +1417,12 @@ namespace revdbayes {
         static Ptr_gev_loglognorm_logpost_phi p_gev_loglognorm_logpost_phi = NULL;
         if (p_gev_loglognorm_logpost_phi == NULL) {
             validateSignature("double(*gev_loglognorm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_loglognorm_logpost_phi = (Ptr_gev_loglognorm_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gev_loglognorm_logpost_phi");
+            p_gev_loglognorm_logpost_phi = (Ptr_gev_loglognorm_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gev_loglognorm_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_loglognorm_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_loglognorm_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1436,12 +1436,12 @@ namespace revdbayes {
         static Ptr_gev_flat_logpost_phi p_gev_flat_logpost_phi = NULL;
         if (p_gev_flat_logpost_phi == NULL) {
             validateSignature("double(*gev_flat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_flat_logpost_phi = (Ptr_gev_flat_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gev_flat_logpost_phi");
+            p_gev_flat_logpost_phi = (Ptr_gev_flat_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gev_flat_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_flat_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_flat_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1455,12 +1455,12 @@ namespace revdbayes {
         static Ptr_gev_flatflat_logpost_phi p_gev_flatflat_logpost_phi = NULL;
         if (p_gev_flatflat_logpost_phi == NULL) {
             validateSignature("double(*gev_flatflat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_flatflat_logpost_phi = (Ptr_gev_flatflat_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gev_flatflat_logpost_phi");
+            p_gev_flatflat_logpost_phi = (Ptr_gev_flatflat_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gev_flatflat_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_flatflat_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_flatflat_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1474,12 +1474,12 @@ namespace revdbayes {
         static Ptr_gev_beta_logpost_phi p_gev_beta_logpost_phi = NULL;
         if (p_gev_beta_logpost_phi == NULL) {
             validateSignature("double(*gev_beta_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_beta_logpost_phi = (Ptr_gev_beta_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gev_beta_logpost_phi");
+            p_gev_beta_logpost_phi = (Ptr_gev_beta_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gev_beta_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_beta_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_beta_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1493,12 +1493,12 @@ namespace revdbayes {
         static Ptr_gev_prob_logpost_phi p_gev_prob_logpost_phi = NULL;
         if (p_gev_prob_logpost_phi == NULL) {
             validateSignature("double(*gev_prob_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_prob_logpost_phi = (Ptr_gev_prob_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gev_prob_logpost_phi");
+            p_gev_prob_logpost_phi = (Ptr_gev_prob_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gev_prob_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_prob_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_prob_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1512,12 +1512,12 @@ namespace revdbayes {
         static Ptr_gev_quant_logpost_phi p_gev_quant_logpost_phi = NULL;
         if (p_gev_quant_logpost_phi == NULL) {
             validateSignature("double(*gev_quant_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_quant_logpost_phi = (Ptr_gev_quant_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gev_quant_logpost_phi");
+            p_gev_quant_logpost_phi = (Ptr_gev_quant_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gev_quant_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_quant_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_quant_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1531,12 +1531,12 @@ namespace revdbayes {
         static Ptr_gev_user_logpost_phi p_gev_user_logpost_phi = NULL;
         if (p_gev_user_logpost_phi == NULL) {
             validateSignature("double(*gev_user_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_gev_user_logpost_phi = (Ptr_gev_user_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_gev_user_logpost_phi");
+            p_gev_user_logpost_phi = (Ptr_gev_user_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_gev_user_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_user_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_gev_user_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1550,12 +1550,12 @@ namespace revdbayes {
         static Ptr_os_mdi_logpost_phi p_os_mdi_logpost_phi = NULL;
         if (p_os_mdi_logpost_phi == NULL) {
             validateSignature("double(*os_mdi_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_mdi_logpost_phi = (Ptr_os_mdi_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_os_mdi_logpost_phi");
+            p_os_mdi_logpost_phi = (Ptr_os_mdi_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_os_mdi_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_mdi_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_mdi_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1569,12 +1569,12 @@ namespace revdbayes {
         static Ptr_os_norm_logpost_phi p_os_norm_logpost_phi = NULL;
         if (p_os_norm_logpost_phi == NULL) {
             validateSignature("double(*os_norm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_norm_logpost_phi = (Ptr_os_norm_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_os_norm_logpost_phi");
+            p_os_norm_logpost_phi = (Ptr_os_norm_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_os_norm_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_norm_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_norm_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1588,12 +1588,12 @@ namespace revdbayes {
         static Ptr_os_loglognorm_logpost_phi p_os_loglognorm_logpost_phi = NULL;
         if (p_os_loglognorm_logpost_phi == NULL) {
             validateSignature("double(*os_loglognorm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_loglognorm_logpost_phi = (Ptr_os_loglognorm_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_os_loglognorm_logpost_phi");
+            p_os_loglognorm_logpost_phi = (Ptr_os_loglognorm_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_os_loglognorm_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_loglognorm_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_loglognorm_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1607,12 +1607,12 @@ namespace revdbayes {
         static Ptr_os_flat_logpost_phi p_os_flat_logpost_phi = NULL;
         if (p_os_flat_logpost_phi == NULL) {
             validateSignature("double(*os_flat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_flat_logpost_phi = (Ptr_os_flat_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_os_flat_logpost_phi");
+            p_os_flat_logpost_phi = (Ptr_os_flat_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_os_flat_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_flat_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_flat_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1626,12 +1626,12 @@ namespace revdbayes {
         static Ptr_os_flatflat_logpost_phi p_os_flatflat_logpost_phi = NULL;
         if (p_os_flatflat_logpost_phi == NULL) {
             validateSignature("double(*os_flatflat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_flatflat_logpost_phi = (Ptr_os_flatflat_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_os_flatflat_logpost_phi");
+            p_os_flatflat_logpost_phi = (Ptr_os_flatflat_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_os_flatflat_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_flatflat_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_flatflat_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1645,12 +1645,12 @@ namespace revdbayes {
         static Ptr_os_beta_logpost_phi p_os_beta_logpost_phi = NULL;
         if (p_os_beta_logpost_phi == NULL) {
             validateSignature("double(*os_beta_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_beta_logpost_phi = (Ptr_os_beta_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_os_beta_logpost_phi");
+            p_os_beta_logpost_phi = (Ptr_os_beta_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_os_beta_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_beta_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_beta_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1664,12 +1664,12 @@ namespace revdbayes {
         static Ptr_os_prob_logpost_phi p_os_prob_logpost_phi = NULL;
         if (p_os_prob_logpost_phi == NULL) {
             validateSignature("double(*os_prob_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_prob_logpost_phi = (Ptr_os_prob_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_os_prob_logpost_phi");
+            p_os_prob_logpost_phi = (Ptr_os_prob_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_os_prob_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_prob_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_prob_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1683,12 +1683,12 @@ namespace revdbayes {
         static Ptr_os_quant_logpost_phi p_os_quant_logpost_phi = NULL;
         if (p_os_quant_logpost_phi == NULL) {
             validateSignature("double(*os_quant_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_quant_logpost_phi = (Ptr_os_quant_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_os_quant_logpost_phi");
+            p_os_quant_logpost_phi = (Ptr_os_quant_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_os_quant_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_quant_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_quant_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1702,12 +1702,12 @@ namespace revdbayes {
         static Ptr_os_user_logpost_phi p_os_user_logpost_phi = NULL;
         if (p_os_user_logpost_phi == NULL) {
             validateSignature("double(*os_user_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_os_user_logpost_phi = (Ptr_os_user_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_os_user_logpost_phi");
+            p_os_user_logpost_phi = (Ptr_os_user_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_os_user_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_user_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_os_user_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1721,12 +1721,12 @@ namespace revdbayes {
         static Ptr_pp_mdi_logpost_phi p_pp_mdi_logpost_phi = NULL;
         if (p_pp_mdi_logpost_phi == NULL) {
             validateSignature("double(*pp_mdi_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_mdi_logpost_phi = (Ptr_pp_mdi_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_pp_mdi_logpost_phi");
+            p_pp_mdi_logpost_phi = (Ptr_pp_mdi_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_pp_mdi_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_mdi_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_mdi_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1740,12 +1740,12 @@ namespace revdbayes {
         static Ptr_pp_norm_logpost_phi p_pp_norm_logpost_phi = NULL;
         if (p_pp_norm_logpost_phi == NULL) {
             validateSignature("double(*pp_norm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_norm_logpost_phi = (Ptr_pp_norm_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_pp_norm_logpost_phi");
+            p_pp_norm_logpost_phi = (Ptr_pp_norm_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_pp_norm_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_norm_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_norm_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1759,12 +1759,12 @@ namespace revdbayes {
         static Ptr_pp_loglognorm_logpost_phi p_pp_loglognorm_logpost_phi = NULL;
         if (p_pp_loglognorm_logpost_phi == NULL) {
             validateSignature("double(*pp_loglognorm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_loglognorm_logpost_phi = (Ptr_pp_loglognorm_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_pp_loglognorm_logpost_phi");
+            p_pp_loglognorm_logpost_phi = (Ptr_pp_loglognorm_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_pp_loglognorm_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_loglognorm_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_loglognorm_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1778,12 +1778,12 @@ namespace revdbayes {
         static Ptr_pp_flat_logpost_phi p_pp_flat_logpost_phi = NULL;
         if (p_pp_flat_logpost_phi == NULL) {
             validateSignature("double(*pp_flat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_flat_logpost_phi = (Ptr_pp_flat_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_pp_flat_logpost_phi");
+            p_pp_flat_logpost_phi = (Ptr_pp_flat_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_pp_flat_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_flat_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_flat_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1797,12 +1797,12 @@ namespace revdbayes {
         static Ptr_pp_flatflat_logpost_phi p_pp_flatflat_logpost_phi = NULL;
         if (p_pp_flatflat_logpost_phi == NULL) {
             validateSignature("double(*pp_flatflat_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_flatflat_logpost_phi = (Ptr_pp_flatflat_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_pp_flatflat_logpost_phi");
+            p_pp_flatflat_logpost_phi = (Ptr_pp_flatflat_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_pp_flatflat_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_flatflat_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_flatflat_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1816,12 +1816,12 @@ namespace revdbayes {
         static Ptr_pp_beta_logpost_phi p_pp_beta_logpost_phi = NULL;
         if (p_pp_beta_logpost_phi == NULL) {
             validateSignature("double(*pp_beta_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_beta_logpost_phi = (Ptr_pp_beta_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_pp_beta_logpost_phi");
+            p_pp_beta_logpost_phi = (Ptr_pp_beta_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_pp_beta_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_beta_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_beta_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1835,12 +1835,12 @@ namespace revdbayes {
         static Ptr_pp_prob_logpost_phi p_pp_prob_logpost_phi = NULL;
         if (p_pp_prob_logpost_phi == NULL) {
             validateSignature("double(*pp_prob_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_prob_logpost_phi = (Ptr_pp_prob_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_pp_prob_logpost_phi");
+            p_pp_prob_logpost_phi = (Ptr_pp_prob_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_pp_prob_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_prob_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_prob_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1854,12 +1854,12 @@ namespace revdbayes {
         static Ptr_pp_quant_logpost_phi p_pp_quant_logpost_phi = NULL;
         if (p_pp_quant_logpost_phi == NULL) {
             validateSignature("double(*pp_quant_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_quant_logpost_phi = (Ptr_pp_quant_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_pp_quant_logpost_phi");
+            p_pp_quant_logpost_phi = (Ptr_pp_quant_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_pp_quant_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_quant_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_quant_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1873,12 +1873,12 @@ namespace revdbayes {
         static Ptr_pp_user_logpost_phi p_pp_user_logpost_phi = NULL;
         if (p_pp_user_logpost_phi == NULL) {
             validateSignature("double(*pp_user_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_pp_user_logpost_phi = (Ptr_pp_user_logpost_phi)R_GetCCallable("revdbayes", "revdbayes_pp_user_logpost_phi");
+            p_pp_user_logpost_phi = (Ptr_pp_user_logpost_phi)R_GetCCallable("revdbayes", "_revdbayes_pp_user_logpost_phi");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_user_logpost_phi(Rcpp::wrap(phi), Rcpp::wrap(pars));
+            rcpp_result_gen = p_pp_user_logpost_phi(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(pars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1892,12 +1892,12 @@ namespace revdbayes {
         static Ptr_gp_logpost_phi_xptr p_gp_logpost_phi_xptr = NULL;
         if (p_gp_logpost_phi_xptr == NULL) {
             validateSignature("SEXP(*gp_logpost_phi_xptr)(std::string)");
-            p_gp_logpost_phi_xptr = (Ptr_gp_logpost_phi_xptr)R_GetCCallable("revdbayes", "revdbayes_gp_logpost_phi_xptr");
+            p_gp_logpost_phi_xptr = (Ptr_gp_logpost_phi_xptr)R_GetCCallable("revdbayes", "_revdbayes_gp_logpost_phi_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gp_logpost_phi_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_gp_logpost_phi_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1911,12 +1911,12 @@ namespace revdbayes {
         static Ptr_gev_logpost_phi_xptr p_gev_logpost_phi_xptr = NULL;
         if (p_gev_logpost_phi_xptr == NULL) {
             validateSignature("SEXP(*gev_logpost_phi_xptr)(std::string)");
-            p_gev_logpost_phi_xptr = (Ptr_gev_logpost_phi_xptr)R_GetCCallable("revdbayes", "revdbayes_gev_logpost_phi_xptr");
+            p_gev_logpost_phi_xptr = (Ptr_gev_logpost_phi_xptr)R_GetCCallable("revdbayes", "_revdbayes_gev_logpost_phi_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_gev_logpost_phi_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_gev_logpost_phi_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1930,12 +1930,12 @@ namespace revdbayes {
         static Ptr_pp_logpost_phi_xptr p_pp_logpost_phi_xptr = NULL;
         if (p_pp_logpost_phi_xptr == NULL) {
             validateSignature("SEXP(*pp_logpost_phi_xptr)(std::string)");
-            p_pp_logpost_phi_xptr = (Ptr_pp_logpost_phi_xptr)R_GetCCallable("revdbayes", "revdbayes_pp_logpost_phi_xptr");
+            p_pp_logpost_phi_xptr = (Ptr_pp_logpost_phi_xptr)R_GetCCallable("revdbayes", "_revdbayes_pp_logpost_phi_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_pp_logpost_phi_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_pp_logpost_phi_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1949,12 +1949,12 @@ namespace revdbayes {
         static Ptr_os_logpost_phi_xptr p_os_logpost_phi_xptr = NULL;
         if (p_os_logpost_phi_xptr == NULL) {
             validateSignature("SEXP(*os_logpost_phi_xptr)(std::string)");
-            p_os_logpost_phi_xptr = (Ptr_os_logpost_phi_xptr)R_GetCCallable("revdbayes", "revdbayes_os_logpost_phi_xptr");
+            p_os_logpost_phi_xptr = (Ptr_os_logpost_phi_xptr)R_GetCCallable("revdbayes", "_revdbayes_os_logpost_phi_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_os_logpost_phi_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_os_logpost_phi_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1968,12 +1968,12 @@ namespace revdbayes {
         static Ptr_user_gp_flat p_user_gp_flat = NULL;
         if (p_user_gp_flat == NULL) {
             validateSignature("double(*user_gp_flat)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_user_gp_flat = (Ptr_user_gp_flat)R_GetCCallable("revdbayes", "revdbayes_user_gp_flat");
+            p_user_gp_flat = (Ptr_user_gp_flat)R_GetCCallable("revdbayes", "_revdbayes_user_gp_flat");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_user_gp_flat(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_user_gp_flat(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1987,12 +1987,12 @@ namespace revdbayes {
         static Ptr_user_gev_norm p_user_gev_norm = NULL;
         if (p_user_gev_norm == NULL) {
             validateSignature("double(*user_gev_norm)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_user_gev_norm = (Ptr_user_gev_norm)R_GetCCallable("revdbayes", "revdbayes_user_gev_norm");
+            p_user_gev_norm = (Ptr_user_gev_norm)R_GetCCallable("revdbayes", "_revdbayes_user_gev_norm");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_user_gev_norm(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_user_gev_norm(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -2006,12 +2006,12 @@ namespace revdbayes {
         static Ptr_user_gev_flat p_user_gev_flat = NULL;
         if (p_user_gev_flat == NULL) {
             validateSignature("double(*user_gev_flat)(const Rcpp::NumericVector&,const Rcpp::List&)");
-            p_user_gev_flat = (Ptr_user_gev_flat)R_GetCCallable("revdbayes", "revdbayes_user_gev_flat");
+            p_user_gev_flat = (Ptr_user_gev_flat)R_GetCCallable("revdbayes", "_revdbayes_user_gev_flat");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_user_gev_flat(Rcpp::wrap(x), Rcpp::wrap(ppars));
+            rcpp_result_gen = p_user_gev_flat(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(ppars)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -2025,12 +2025,12 @@ namespace revdbayes {
         static Ptr_create_prior_xptr p_create_prior_xptr = NULL;
         if (p_create_prior_xptr == NULL) {
             validateSignature("SEXP(*create_prior_xptr)(std::string)");
-            p_create_prior_xptr = (Ptr_create_prior_xptr)R_GetCCallable("revdbayes", "revdbayes_create_prior_xptr");
+            p_create_prior_xptr = (Ptr_create_prior_xptr)R_GetCCallable("revdbayes", "_revdbayes_create_prior_xptr");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_create_prior_xptr(Rcpp::wrap(fstr));
+            rcpp_result_gen = p_create_prior_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

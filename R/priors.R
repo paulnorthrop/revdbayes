@@ -3,8 +3,8 @@
 #' Construction of prior distributions for extreme value model parameters
 #'
 #' Constructs a prior distribution for use as the argument \code{prior} in
-#' \code{\link{rpost}} and \code{\link{rpost_rcpp}}.
-#' The user can either specify their own prior function
+#' \code{\link{rpost}} and \code{\link{rpost_rcpp}}.  The user can either
+#' specify their own prior function, returning the log of the prior density,
 #' (using an R function or an external pointer to a compiled C++ function)
 #' and arguments for hyperparameters or choose from a list of in-built
 #' model-specific priors.  Note that the arguments \code{model = "gev"},
@@ -18,7 +18,7 @@
 #' @param prior Either
 #' \itemize{
 #'   \item {An R function, or a pointer to a user-supplied compiled
-#'   C++ function, that returns the value of the prior
+#'   C++ function, that returns the value of the log of the prior density
 #'   (see \strong{Examples}), or}
 #'   \item {A character string giving the name of the prior.
 #'     See \strong{Details} for a list of priors available for each model.}

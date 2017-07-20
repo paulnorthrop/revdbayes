@@ -2,423 +2,423 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 any_nonpos <- function(x) {
-    .Call('revdbayes_any_nonpos', PACKAGE = 'revdbayes', x)
+    .Call('_revdbayes_any_nonpos', PACKAGE = 'revdbayes', x)
 }
 
 cpp_gp_loglik <- function(x, ss) {
-    .Call('revdbayes_cpp_gp_loglik', PACKAGE = 'revdbayes', x, ss)
+    .Call('_revdbayes_cpp_gp_loglik', PACKAGE = 'revdbayes', x, ss)
 }
 
 cpp_gev_loglik <- function(x, ss) {
-    .Call('revdbayes_cpp_gev_loglik', PACKAGE = 'revdbayes', x, ss)
+    .Call('_revdbayes_cpp_gev_loglik', PACKAGE = 'revdbayes', x, ss)
 }
 
 cpp_os_loglik <- function(x, ss) {
-    .Call('revdbayes_cpp_os_loglik', PACKAGE = 'revdbayes', x, ss)
+    .Call('_revdbayes_cpp_os_loglik', PACKAGE = 'revdbayes', x, ss)
 }
 
 cpp_pp_loglik <- function(x, ss) {
-    .Call('revdbayes_cpp_pp_loglik', PACKAGE = 'revdbayes', x, ss)
+    .Call('_revdbayes_cpp_pp_loglik', PACKAGE = 'revdbayes', x, ss)
 }
 
 cpp_gp_norm <- function(x, ppars) {
-    .Call('revdbayes_cpp_gp_norm', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gp_norm', PACKAGE = 'revdbayes', x, ppars)
 }
 
 cpp_gp_mdi <- function(x, ppars) {
-    .Call('revdbayes_cpp_gp_mdi', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gp_mdi', PACKAGE = 'revdbayes', x, ppars)
 }
 
 cpp_gp_flat <- function(x, ppars) {
-    .Call('revdbayes_cpp_gp_flat', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gp_flat', PACKAGE = 'revdbayes', x, ppars)
 }
 
 cpp_gp_flatflat <- function(x, ppars) {
-    .Call('revdbayes_cpp_gp_flatflat', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gp_flatflat', PACKAGE = 'revdbayes', x, ppars)
 }
 
 cpp_gp_jeffreys <- function(x, ppars) {
-    .Call('revdbayes_cpp_gp_jeffreys', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gp_jeffreys', PACKAGE = 'revdbayes', x, ppars)
 }
 
 cpp_gp_beta <- function(x, ppars) {
-    .Call('revdbayes_cpp_gp_beta', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gp_beta', PACKAGE = 'revdbayes', x, ppars)
 }
 
 cpp_gev_norm <- function(x, ppars) {
-    .Call('revdbayes_cpp_gev_norm', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gev_norm', PACKAGE = 'revdbayes', x, ppars)
 }
 
 cpp_gev_loglognorm <- function(x, ppars) {
-    .Call('revdbayes_cpp_gev_loglognorm', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gev_loglognorm', PACKAGE = 'revdbayes', x, ppars)
 }
 
 cpp_gev_mdi <- function(x, ppars) {
-    .Call('revdbayes_cpp_gev_mdi', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gev_mdi', PACKAGE = 'revdbayes', x, ppars)
 }
 
 cpp_gev_flat <- function(x, ppars) {
-    .Call('revdbayes_cpp_gev_flat', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gev_flat', PACKAGE = 'revdbayes', x, ppars)
 }
 
 cpp_gev_flatflat <- function(x, ppars) {
-    .Call('revdbayes_cpp_gev_flatflat', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gev_flatflat', PACKAGE = 'revdbayes', x, ppars)
 }
 
 cpp_gev_beta <- function(x, ppars) {
-    .Call('revdbayes_cpp_gev_beta', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gev_beta', PACKAGE = 'revdbayes', x, ppars)
 }
 
 lgdgev_cpp <- function(x, loc, scale, shape) {
-    .Call('revdbayes_lgdgev_cpp', PACKAGE = 'revdbayes', x, loc, scale, shape)
+    .Call('_revdbayes_lgdgev_cpp', PACKAGE = 'revdbayes', x, loc, scale, shape)
 }
 
 pgev_cpp <- function(q, loc, scale, shape) {
-    .Call('revdbayes_pgev_cpp', PACKAGE = 'revdbayes', q, loc, scale, shape)
+    .Call('_revdbayes_pgev_cpp', PACKAGE = 'revdbayes', q, loc, scale, shape)
 }
 
 qgev_cpp <- function(p, loc, scale, shape) {
-    .Call('revdbayes_qgev_cpp', PACKAGE = 'revdbayes', p, loc, scale, shape)
+    .Call('_revdbayes_qgev_cpp', PACKAGE = 'revdbayes', p, loc, scale, shape)
 }
 
 cpp_gev_prob <- function(x, ppars) {
-    .Call('revdbayes_cpp_gev_prob', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gev_prob', PACKAGE = 'revdbayes', x, ppars)
 }
 
 cpp_gev_quant <- function(x, ppars) {
-    .Call('revdbayes_cpp_gev_quant', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_cpp_gev_quant', PACKAGE = 'revdbayes', x, ppars)
 }
 
 gp_user_logpost <- function(x, pars) {
-    .Call('revdbayes_gp_user_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gp_user_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gev_user_logpost <- function(x, pars) {
-    .Call('revdbayes_gev_user_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gev_user_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 os_user_logpost <- function(x, pars) {
-    .Call('revdbayes_os_user_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_os_user_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 pp_user_logpost <- function(x, pars) {
-    .Call('revdbayes_pp_user_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_pp_user_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gp_mdi_logpost <- function(x, pars) {
-    .Call('revdbayes_gp_mdi_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gp_mdi_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gp_norm_logpost <- function(x, pars) {
-    .Call('revdbayes_gp_norm_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gp_norm_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gp_flat_logpost <- function(x, pars) {
-    .Call('revdbayes_gp_flat_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gp_flat_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gp_flatflat_logpost <- function(x, pars) {
-    .Call('revdbayes_gp_flatflat_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gp_flatflat_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gp_jeffreys_logpost <- function(x, pars) {
-    .Call('revdbayes_gp_jeffreys_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gp_jeffreys_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gp_beta_logpost <- function(x, pars) {
-    .Call('revdbayes_gp_beta_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gp_beta_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gev_mdi_logpost <- function(x, pars) {
-    .Call('revdbayes_gev_mdi_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gev_mdi_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gev_norm_logpost <- function(x, pars) {
-    .Call('revdbayes_gev_norm_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gev_norm_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gev_loglognorm_logpost <- function(x, pars) {
-    .Call('revdbayes_gev_loglognorm_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gev_loglognorm_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gev_flat_logpost <- function(x, pars) {
-    .Call('revdbayes_gev_flat_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gev_flat_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gev_flatflat_logpost <- function(x, pars) {
-    .Call('revdbayes_gev_flatflat_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gev_flatflat_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gev_beta_logpost <- function(x, pars) {
-    .Call('revdbayes_gev_beta_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gev_beta_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gev_prob_logpost <- function(x, pars) {
-    .Call('revdbayes_gev_prob_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gev_prob_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gev_quant_logpost <- function(x, pars) {
-    .Call('revdbayes_gev_quant_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_gev_quant_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 pp_mdi_logpost <- function(x, pars) {
-    .Call('revdbayes_pp_mdi_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_pp_mdi_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 pp_norm_logpost <- function(x, pars) {
-    .Call('revdbayes_pp_norm_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_pp_norm_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 pp_loglognorm_logpost <- function(x, pars) {
-    .Call('revdbayes_pp_loglognorm_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_pp_loglognorm_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 pp_flat_logpost <- function(x, pars) {
-    .Call('revdbayes_pp_flat_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_pp_flat_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 pp_flatflat_logpost <- function(x, pars) {
-    .Call('revdbayes_pp_flatflat_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_pp_flatflat_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 pp_beta_logpost <- function(x, pars) {
-    .Call('revdbayes_pp_beta_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_pp_beta_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 pp_prob_logpost <- function(x, pars) {
-    .Call('revdbayes_pp_prob_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_pp_prob_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 pp_quant_logpost <- function(x, pars) {
-    .Call('revdbayes_pp_quant_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_pp_quant_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 os_mdi_logpost <- function(x, pars) {
-    .Call('revdbayes_os_mdi_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_os_mdi_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 os_norm_logpost <- function(x, pars) {
-    .Call('revdbayes_os_norm_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_os_norm_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 os_loglognorm_logpost <- function(x, pars) {
-    .Call('revdbayes_os_loglognorm_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_os_loglognorm_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 os_flat_logpost <- function(x, pars) {
-    .Call('revdbayes_os_flat_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_os_flat_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 os_flatflat_logpost <- function(x, pars) {
-    .Call('revdbayes_os_flatflat_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_os_flatflat_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 os_beta_logpost <- function(x, pars) {
-    .Call('revdbayes_os_beta_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_os_beta_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 os_prob_logpost <- function(x, pars) {
-    .Call('revdbayes_os_prob_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_os_prob_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 os_quant_logpost <- function(x, pars) {
-    .Call('revdbayes_os_quant_logpost', PACKAGE = 'revdbayes', x, pars)
+    .Call('_revdbayes_os_quant_logpost', PACKAGE = 'revdbayes', x, pars)
 }
 
 gp_logpost_xptr <- function(fstr) {
-    .Call('revdbayes_gp_logpost_xptr', PACKAGE = 'revdbayes', fstr)
+    .Call('_revdbayes_gp_logpost_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
 gev_logpost_xptr <- function(fstr) {
-    .Call('revdbayes_gev_logpost_xptr', PACKAGE = 'revdbayes', fstr)
+    .Call('_revdbayes_gev_logpost_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
 os_logpost_xptr <- function(fstr) {
-    .Call('revdbayes_os_logpost_xptr', PACKAGE = 'revdbayes', fstr)
+    .Call('_revdbayes_os_logpost_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
 pp_logpost_xptr <- function(fstr) {
-    .Call('revdbayes_pp_logpost_xptr', PACKAGE = 'revdbayes', fstr)
+    .Call('_revdbayes_pp_logpost_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
 gp_phi_to_theta <- function(phi, user_args) {
-    .Call('revdbayes_gp_phi_to_theta', PACKAGE = 'revdbayes', phi, user_args)
+    .Call('_revdbayes_gp_phi_to_theta', PACKAGE = 'revdbayes', phi, user_args)
 }
 
 gev_phi_to_theta <- function(phi, user_args) {
-    .Call('revdbayes_gev_phi_to_theta', PACKAGE = 'revdbayes', phi, user_args)
+    .Call('_revdbayes_gev_phi_to_theta', PACKAGE = 'revdbayes', phi, user_args)
 }
 
 pp_phi_to_theta <- function(phi, user_args) {
-    .Call('revdbayes_pp_phi_to_theta', PACKAGE = 'revdbayes', phi, user_args)
+    .Call('_revdbayes_pp_phi_to_theta', PACKAGE = 'revdbayes', phi, user_args)
 }
 
 phi_to_theta_xptr <- function(fstr) {
-    .Call('revdbayes_phi_to_theta_xptr', PACKAGE = 'revdbayes', fstr)
+    .Call('_revdbayes_phi_to_theta_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
 gp_mdi_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gp_mdi_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gp_mdi_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gp_norm_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gp_norm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gp_norm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gp_flat_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gp_flat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gp_flat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gp_flatflat_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gp_flatflat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gp_flatflat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gp_jeffreys_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gp_jeffreys_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gp_jeffreys_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gp_beta_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gp_beta_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gp_beta_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gp_user_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gp_user_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gp_user_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gev_mdi_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gev_mdi_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gev_mdi_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gev_norm_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gev_norm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gev_norm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gev_loglognorm_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gev_loglognorm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gev_loglognorm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gev_flat_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gev_flat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gev_flat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gev_flatflat_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gev_flatflat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gev_flatflat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gev_beta_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gev_beta_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gev_beta_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gev_prob_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gev_prob_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gev_prob_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gev_quant_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gev_quant_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gev_quant_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gev_user_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_gev_user_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_gev_user_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 os_mdi_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_os_mdi_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_os_mdi_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 os_norm_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_os_norm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_os_norm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 os_loglognorm_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_os_loglognorm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_os_loglognorm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 os_flat_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_os_flat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_os_flat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 os_flatflat_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_os_flatflat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_os_flatflat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 os_beta_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_os_beta_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_os_beta_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 os_prob_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_os_prob_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_os_prob_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 os_quant_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_os_quant_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_os_quant_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 os_user_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_os_user_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_os_user_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 pp_mdi_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_pp_mdi_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_pp_mdi_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 pp_norm_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_pp_norm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_pp_norm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 pp_loglognorm_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_pp_loglognorm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_pp_loglognorm_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 pp_flat_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_pp_flat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_pp_flat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 pp_flatflat_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_pp_flatflat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_pp_flatflat_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 pp_beta_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_pp_beta_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_pp_beta_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 pp_prob_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_pp_prob_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_pp_prob_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 pp_quant_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_pp_quant_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_pp_quant_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 pp_user_logpost_phi <- function(phi, pars) {
-    .Call('revdbayes_pp_user_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
+    .Call('_revdbayes_pp_user_logpost_phi', PACKAGE = 'revdbayes', phi, pars)
 }
 
 gp_logpost_phi_xptr <- function(fstr) {
-    .Call('revdbayes_gp_logpost_phi_xptr', PACKAGE = 'revdbayes', fstr)
+    .Call('_revdbayes_gp_logpost_phi_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
 gev_logpost_phi_xptr <- function(fstr) {
-    .Call('revdbayes_gev_logpost_phi_xptr', PACKAGE = 'revdbayes', fstr)
+    .Call('_revdbayes_gev_logpost_phi_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
 pp_logpost_phi_xptr <- function(fstr) {
-    .Call('revdbayes_pp_logpost_phi_xptr', PACKAGE = 'revdbayes', fstr)
+    .Call('_revdbayes_pp_logpost_phi_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
 os_logpost_phi_xptr <- function(fstr) {
-    .Call('revdbayes_os_logpost_phi_xptr', PACKAGE = 'revdbayes', fstr)
+    .Call('_revdbayes_os_logpost_phi_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
 user_gp_flat <- function(x, ppars) {
-    .Call('revdbayes_user_gp_flat', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_user_gp_flat', PACKAGE = 'revdbayes', x, ppars)
 }
 
 user_gev_norm <- function(x, ppars) {
-    .Call('revdbayes_user_gev_norm', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_user_gev_norm', PACKAGE = 'revdbayes', x, ppars)
 }
 
 user_gev_flat <- function(x, ppars) {
-    .Call('revdbayes_user_gev_flat', PACKAGE = 'revdbayes', x, ppars)
+    .Call('_revdbayes_user_gev_flat', PACKAGE = 'revdbayes', x, ppars)
 }
 
 #' Create an external pointer to a C++ prior
@@ -464,10 +464,10 @@ user_gev_flat <- function(x, ppars) {
 #'                   icov = solve(mat))
 #' @export
 create_prior_xptr <- function(fstr) {
-    .Call('revdbayes_create_prior_xptr', PACKAGE = 'revdbayes', fstr)
+    .Call('_revdbayes_create_prior_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
-    .Call('revdbayes_RcppExport_registerCCallable', PACKAGE = 'revdbayes')
+    .Call('_revdbayes_RcppExport_registerCCallable', PACKAGE = 'revdbayes')
 })
