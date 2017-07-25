@@ -413,7 +413,6 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   #
   # If init is not admissible set xi = 0 and try again
   #
-  #  init_check <- cpp_logpost(x = init, pars = for_post)
   init_check <- calc_init_logpost(model = model, prior_type = prior_type,
                                   init = init, for_post = for_post)
   #
@@ -441,7 +440,6 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
     if (model == "pp" & use_noy == FALSE) {
       init_ests <- change_pp_pars(init_ests, in_noy = noy, out_noy = ds$n_exc)
     }
-#    init_check <- cpp_logpost(x = init_ests, pars = for_post)
     init_check <- calc_init_logpost(model = model, prior_type = prior_type,
                                     init = init_ests, for_post = for_post)
     print(init_check)
