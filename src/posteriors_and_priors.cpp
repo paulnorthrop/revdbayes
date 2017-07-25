@@ -213,7 +213,7 @@ double cpp_gp_flatflat(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
   double max_xi = ppars["max_xi"] ;
   if (x[0] <= 0 || x[1] < min_xi || x[1] > max_xi)
     return R_NegInf ;
-  return 1.0 ;
+  return 0.0 ;
 }
 
 // [[Rcpp::export]]
@@ -299,7 +299,7 @@ double cpp_gev_flatflat(const Rcpp::NumericVector& x,
   double max_xi = ppars["max_xi"] ;
   if (x[1] <= 0 || x[2] < min_xi || x[2] > max_xi)
     return R_NegInf ;
-  return 1.0 ;
+  return 0.0 ;
 }
 
 // [[Rcpp::export]]
