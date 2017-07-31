@@ -874,8 +874,7 @@ pred_dbingp <- function(ev_obj, x, n_years = 100, npy = NULL,
                      shape = shape)
     # Evaluate the derivative of raw_df ^ mult with respect to x.
     t1 <- mult * exp((mult - 1) * log(raw_df))
-    t2 <- p_u * dbingp(x = x, p_u = p_u, loc = thresh, scale = scale,
-                       shape = shape)
+    t2 <- dbingp(x = x, p_u = p_u, loc = thresh, scale = scale, shape = shape)
     # Return the mean of the posterior sample.
     return(mean(t1 * t2))
   }
