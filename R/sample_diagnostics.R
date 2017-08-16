@@ -198,16 +198,20 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     max_y <- max(temp$density, yy)
     temp <- list(...)
     my_hist <- function(x, ..., type, lty, lwd, pch, lend, ljoin, lmitre) {
-      graphics::hist(x, ...)
+      temp_hist <- list(...)
+      if (is.null(temp_hist$main)) {
+        graphics::hist(x, main = "", ...)
+      } else {
+        graphics::hist(x, ...)
+      }
     }
     if (is.null(temp$xlab)) {
-      my_hist(plot_data, prob = TRUE, main="", ylim = c(0, max_y), xlab = "",
-              ...)
+      my_hist(plot_data, prob = TRUE, ylim = c(0, max_y), xlab = "", ...)
       if (!is.null(colnames(plot_data))) {
         graphics::title(xlab = parse(text = colnames(plot_data)[1]))
       }
     } else {
-      my_hist(plot_data, prob = TRUE, main="", ylim = c(0, max_y), ...)
+      my_hist(plot_data, prob = TRUE, ylim = c(0, max_y), ...)
     }
     my_lines <- function(x, y, ..., breaks, freq, probability, include.lowest,
                          right, density, angle, border, plot, labels, nclass) {
@@ -219,7 +223,6 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     r <- apply(plot_data, 2, range)
     xx <- seq(r[1,1], r[2,1], len = n)
     yy <- seq(r[1,2], r[2,2], len = n)
-    xy <- cbind(xx, yy)
     zz <- matrix(NA, ncol = length(xx), nrow = length(yy))
     for (i in 1:length(xx)) {
       for (j in 1:length(yy)) {
@@ -230,12 +233,12 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     zz[zz == -Inf] <- NA
     dx <- diff(xx[1:2]); dy <- diff(yy[1:2]); sz <- sort(zz)
     c1 <- cumsum(sz) * dx * dy; c1 <- c1/max(c1)
-    con.levs <- sapply(prob, function(x) stats::approx(c1, sz, xout = 1 - x)$y)
+    con_levs <- sapply(prob, function(x) stats::approx(c1, sz, xout = 1 - x)$y)
     #
-    graphics::contour(xx, yy, zz, levels = con.levs, add = FALSE, ann = FALSE,
+    graphics::contour(xx, yy, zz, levels = con_levs, add = FALSE, ann = FALSE,
       labels = prob * 100, ...)
     do.call(graphics::points, c(list(x = plot_data), points_par))
-    graphics::contour(xx, yy, zz, levels = con.levs, add = TRUE, ann = TRUE,
+    graphics::contour(xx, yy, zz, levels = con_levs, add = TRUE, ann = TRUE,
       labels = prob * 100, ...)
     temp <- list(...)
     if (is.null(temp$xlab)) {
