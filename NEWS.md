@@ -2,7 +2,7 @@
 
 ## Bug fixes and minor improvements
 
-* A bug resulted meant that the values returned by `predict(evpost_object, type = "d")` being incorrect if `evpost_object` was returned from a call to `rpost` using `model = bingp`.  The values returned were too sall: they differ from the correct values by a factor approximately equal to the proportion of observations that lie above the threshold.  This bug has been corrected.
+* A bug resulted meant that the values returned by `predict(evpost_object, type = "d")` being incorrect if `evpost_object` was returned from a call to `rpost` using `model = bingp`.  The values returned were too small: they differ from the correct values by a factor approximately equal to the proportion of observations that lie above the threshold.  This bug has been corrected.
 
 # revdbayes 1.2.0
 
