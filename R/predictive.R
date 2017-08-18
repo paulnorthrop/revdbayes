@@ -893,7 +893,7 @@ pred_dbingp <- function(ev_obj, x, n_years = 100, npy = NULL,
 # ----------------------------- pred_pbingp ---------------------------------
 
 pred_pbingp <- function(ev_obj, q, n_years = 100, npy = NULL,
-                      lower_tail = TRUE) {
+                        lower_tail = TRUE) {
   # Check that q is not less than the threshold used in the call to
   # rpost()/rpost_rcpp().
   thresh <- ev_obj$thresh
