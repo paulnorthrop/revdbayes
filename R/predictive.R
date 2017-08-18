@@ -299,8 +299,7 @@
 #' @export
 predict.evpost <- function(object, type = c("i", "p", "d", "q", "r"), x = NULL,
                            x_num = 100, n_years = 100, npy = NULL, level = 95,
-                           hpd = FALSE, lower_tail = TRUE, log = FALSE,
-                           ...) {
+                           hpd = FALSE, lower_tail = TRUE, log = FALSE, ...) {
   type <- match.arg(type)
   if (!inherits(object, "evpost")) {
     stop("object must be an evpost object produced by rpost() or rpost_rcpp()")
