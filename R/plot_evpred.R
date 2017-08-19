@@ -98,12 +98,12 @@ plot.evpred <- function(x, ..., leg_pos = NULL, leg_text = NULL,
       warning("All hpd intervals missing, plot has equi-tailed intervals only")
     }
     if (which_int == "long") {
-      x <- object$long[, 1:2]
+      x <- object$long[, 1:2, drop = FALSE]
     } else if (which_int == "short") {
-      x <- object$short[, 1:2]
+      x <- object$short[, 1:2, drop = FALSE]
     } else {
-      x <- object$long[, 1:2]
-      x2 <- object$short[, 1:2]
+      x <- object$long[, 1:2, drop = FALSE]
+      x2 <- object$short[, 1:2, drop = FALSE]
     }
     y <- object$long[, 3]
     y <- factor(y)
