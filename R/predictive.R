@@ -750,6 +750,7 @@ pred_qgev <- function(ev_obj, p, n_years = 100, npy = NULL,
   }
   lower <- min(ev_obj$data)
   upper <- big_q
+  u_minus_l <- upper - lower
   for (i in 1:n_y) {
     # Calculate the GEV quantile at p for each combination of (loc, scale, shape)
     # in the posterior sample, and take the mean.
@@ -768,8 +769,10 @@ pred_qgev <- function(ev_obj, p, n_years = 100, npy = NULL,
     for (j in 1:n_p) {
       f_upper <- ob_fn(upper, ev_obj = ev_obj, p = p[j, i],
                        n_years = n_years[i], npy = npy)
+      k <- 1
       while (f_upper < 0) {
-        upper <- upper * 10
+        upper <- lower + u_minus_l * (10 ^ k)
+        k <- k + 1
         f_upper <- ob_fn(upper, ev_obj = ev_obj, p = p[j, i],
                          n_years = n_years[i], npy = npy)
       }
@@ -1004,8 +1007,9 @@ pred_qbingp <- function(ev_obj, p, n_years = 100, npy = NULL,
     }
   }
   mult <- npy * n_years
-  lower <- min(ev_obj$thresh)
+  lower <- ev_obj$thresh
   upper <- big_q
+  u_minus_l <- upper - lower
   for (i in 1:n_y) {
     # Calculate the quantile at p for each combination of parameters in the
     # in the posterior sample, and take the mean.
@@ -1024,8 +1028,10 @@ pred_qbingp <- function(ev_obj, p, n_years = 100, npy = NULL,
     for (j in 1:n_p) {
       f_upper <- ob_fn(upper, ev_obj = ev_obj, p = p[j, i],
                        n_years = n_years[i], npy = npy)
+      k <- 1
       while (f_upper < 0) {
-        upper <- upper * 10
+        upper <- lower + u_minus_l * (10 ^ k)
+        k <- k + 1
         f_upper <- ob_fn(upper, ev_obj = ev_obj, p = p[j, i],
                          n_years = n_years[i], npy = npy)
       }
