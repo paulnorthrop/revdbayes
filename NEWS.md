@@ -2,6 +2,8 @@
 
 ## Bug fixes and minor improvements
 
+* In some extreme cases (datasets with very small numbers of threshold excesses) calling `predict.evpost` with `type = "q"` and `x` close to 1 returns an imprecise value for the requested predictive quantiles.  This has been corrected by using `stats::uniroot` rather than `nlminb`.
+
 * A bug (missing `drop = FALSE` in subsetting a matrix) in `plot.evpred` produced an error message if `n_years` was scalar in the prior call to `predict.evpost`.  This bug has been corrected.
 
 * A bug meant that the values returned by `predict(evpost_object, type = "d")` being incorrect if `evpost_object` was returned from a call to `rpost` using `model = bingp`.  The values returned were too small: they differ from the correct values by a factor approximately equal to the proportion of observations that lie above the threshold.  This bug has been corrected.

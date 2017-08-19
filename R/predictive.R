@@ -101,6 +101,11 @@
 #'   otherwise, P[X > x].
 #' @param log A logical scalar.  Only relevant when \code{type = "d"}.
 #'   If TRUE the log-density is returned.
+#' @param big_q A numeric scalar.  Only relevant when \code{type = "q"}.
+#'   An initial upper bound for the desired quantiles to be passed to
+#'   \code{\link[stats]{uniroot}} (its argument \code{upper}) in the
+#'   search for the predictive quantiles.  If this is not sufficiently large
+#'   then it is increased until it does provide an upper bound.
 #' @param ... Additional optional arguments. At present no optional
 #'   arguments are used.
 #' @details Inferences about future extreme observations are integrated over
@@ -299,7 +304,8 @@
 #' @export
 predict.evpost <- function(object, type = c("i", "p", "d", "q", "r"), x = NULL,
                            x_num = 100, n_years = 100, npy = NULL, level = 95,
-                           hpd = FALSE, lower_tail = TRUE, log = FALSE, ...) {
+                           hpd = FALSE, lower_tail = TRUE, log = FALSE,
+                           big_q = 1000, ...) {
   type <- match.arg(type)
   if (!inherits(object, "evpost")) {
     stop("object must be an evpost object produced by rpost() or rpost_rcpp()")
@@ -323,7 +329,7 @@ predict.evpost <- function(object, type = c("i", "p", "d", "q", "r"), x = NULL,
     colnames(ret_obj$long) <- colnames(ret_obj$short) <- cnames
     if ((length(n_years) == 1 & length(level) == 1)) {
       temp <- ipred(object, n_years = n_years, npy = npy, level = level,
-                    hpd = hpd)
+                    hpd = hpd, big_q = big_q)
       ret_obj$long[1, ] <- c(temp$long, n_years, level)
       ret_obj$short[1, ] <- c(temp$short, n_years, level)
     } else {
@@ -331,7 +337,7 @@ predict.evpost <- function(object, type = c("i", "p", "d", "q", "r"), x = NULL,
       for (i in 1:n_y) {
         for (j in 1:n_l) {
         temp <- ipred(object, n_years = n_years[i], npy = npy,
-                      level = level[j], hpd = hpd)
+                      level = level[j], hpd = hpd, big_q = big_q)
         ret_obj$long[k, ] <- c(temp$long, n_years[i], level[j])
         ret_obj$short[k, ] <- c(temp$short, n_years[i], level[j])
         k <- k + 1
@@ -362,7 +368,7 @@ predict.evpost <- function(object, type = c("i", "p", "d", "q", "r"), x = NULL,
     x <- rbind(pmax(ep[1], p_min), pmax(1 - ep[2], p_min))
     x <- matrix(x, nrow = 2, ncol = n_y, byrow = FALSE)
     x <- qpred(object, p = x, n_years = n_years, npy = npy,
-               lower_tail = TRUE)$y
+               lower_tail = TRUE, big_q = big_q)$y
     x <- apply(x, 2, function(x) seq(from = x[1], to = x[2], len = x_num))
   }
   if (type == "p") {
@@ -375,7 +381,7 @@ predict.evpost <- function(object, type = c("i", "p", "d", "q", "r"), x = NULL,
   }
   if (type == "q") {
     ret_obj <- qpred(object, p = x, n_years = n_years, npy = npy,
-                     lower_tail = lower_tail)
+                     lower_tail = lower_tail, big_q = big_q)
   }
   if (type == "r") {
     ret_obj <- rpred(object, n_years = n_years, npy = npy)
@@ -456,13 +462,16 @@ ppred <- function(ev_obj, q, n_years = 100, npy = NULL, lower_tail = TRUE) {
 
 # ----------------------------- qpred ---------------------------------
 
-qpred <- function(ev_obj, p, n_years = 100, npy = NULL, lower_tail = TRUE) {
+qpred <- function(ev_obj, p, n_years = 100, npy = NULL, lower_tail = TRUE,
+                  big_q) {
   if (ev_obj$model %in% c("gev", "os", "pp")) {
     ret_obj <- pred_qgev(ev_obj = ev_obj, p = p, n_years = n_years,
-                         npy = npy, lower_tail = lower_tail)
+                         npy = npy, lower_tail = lower_tail,
+                         big_q = big_q)
   } else if (ev_obj$model == "bingp") {
     ret_obj <- pred_qbingp(ev_obj = ev_obj, p = p, n_years = n_years,
-                           npy = npy, lower_tail = lower_tail)
+                           npy = npy, lower_tail = lower_tail,
+                           big_q = big_q)
   }
   return(ret_obj)
 }
@@ -481,7 +490,7 @@ rpred <- function(ev_obj, n_years = 100, npy = NULL) {
 # ----------------------------- ipred ---------------------------------
 
 ipred <- function(ev_obj, n_years = 100, npy = NULL, level = 95,
-                  hpd = FALSE) {
+                  hpd = FALSE, big_q) {
   if (any(level <= 0) || any(level >= 100)) {
     stop("level must be in (0, 100)")
   }
@@ -515,7 +524,7 @@ ipred <- function(ev_obj, n_years = 100, npy = NULL, level = 95,
   pp <- c(p1, 1 - p1)
   # Find the corresponding predictive quantiles.
   ret_obj$long <- qfun(ev_obj = ev_obj, p = pp, n_years = n_years, npy = npy,
-                       lower_tail = TRUE)$y
+                       lower_tail = TRUE, big_q = big_q)$y
   if (!hpd) {
     ret_obj$short <- matrix(NA, ncol = 1, nrow = 2)
     return(ret_obj)
@@ -537,7 +546,7 @@ ipred <- function(ev_obj, n_years = 100, npy = NULL, level = 95,
   p_low <- c(ep, ep + level / 100)
   # Find the corresponding predictive quantiles.
   q_low <- qfun(ev_obj = ev_obj, p = p_low, n_years = n_years, npy = npy,
-                lower_tail = TRUE, init_q = qq)$y
+                lower_tail = TRUE, init_q = qq, big_q = big_q)$y
   # q_lower and q_upper are the respective intervals within which the lower
   # and upper limits of the hpd interval should fall.
   q_lower <- c(q_low[1], qq[1])
@@ -708,7 +717,7 @@ pred_pgev <- function(ev_obj, q, n_years = 100, npy = NULL,
 # ----------------------------- pred_qgev ---------------------------------
 
 pred_qgev <- function(ev_obj, p, n_years = 100, npy = NULL,
-                      lower_tail = TRUE, init_q = NULL) {
+                      lower_tail = TRUE, init_q = NULL, big_q) {
   # Determine the number, mult, of blocks in n_years years, so that
   # the GEV parameters can be converted to the n_years level of aggregation.
   mult <- setup_pred_gev(ev_obj = ev_obj, n_years = n_years, npy = npy)
@@ -739,6 +748,8 @@ pred_qgev <- function(ev_obj, p, n_years = 100, npy = NULL,
       return(mean(qgev(p = p, loc = loc, scale = scale, shape = shape, m = m)))
     }
   }
+  lower <- min(ev_obj$data)
+  upper <- big_q
   for (i in 1:n_y) {
     # Calculate the GEV quantile at p for each combination of (loc, scale, shape)
     # in the posterior sample, and take the mean.
@@ -749,16 +760,23 @@ pred_qgev <- function(ev_obj, p, n_years = 100, npy = NULL,
                             shape = shape, m = mult[i])
     }
     #
-    logit <- function(p) log(p / (1 - p))
     ob_fn <- function(q, ev_obj, p, n_years, npy) {
       p_val <- pred_pgev(ev_obj = ev_obj, q = q, n_years = n_years,
                          npy = npy)$y
-      (logit(p_val) - logit(p)) ^ 2
+      return(p_val - p)
     }
     for (j in 1:n_p) {
-      qtemp <- stats::nlminb(init_q[j, i], ob_fn, ev_obj = ev_obj, p = p[j, i],
-                             n_years = n_years[i], npy = npy)
-      q[j, i] <- qtemp$par
+      f_upper <- ob_fn(upper, ev_obj = ev_obj, p = p[j, i],
+                       n_years = n_years[i], npy = npy)
+      while (f_upper < 0) {
+        upper <- upper * 10
+        f_upper <- ob_fn(upper, ev_obj = ev_obj, p = p[j, i],
+                         n_years = n_years[i], npy = npy)
+      }
+      qtemp <- stats::uniroot(f = ob_fn, ev_obj = ev_obj, p = p[j, i],
+                              n_years = n_years[i], npy = npy,
+                              lower = lower, upper = upper, f.upper = f_upper)
+      q[j, i] <- qtemp$root
     }
   }
   return(list(x = p, y = q))
@@ -936,7 +954,7 @@ pred_pbingp <- function(ev_obj, q, n_years = 100, npy = NULL,
 # ----------------------------- pred_qbingp ---------------------------------
 
 pred_qbingp <- function(ev_obj, p, n_years = 100, npy = NULL,
-                        lower_tail = TRUE, init_q = NULL) {
+                        lower_tail = TRUE, init_q = NULL, big_q) {
   if (!lower_tail) {
     p <- 1 - p
   }
@@ -986,6 +1004,8 @@ pred_qbingp <- function(ev_obj, p, n_years = 100, npy = NULL,
     }
   }
   mult <- npy * n_years
+  lower <- min(ev_obj$thresh)
+  upper <- big_q
   for (i in 1:n_y) {
     # Calculate the quantile at p for each combination of parameters in the
     # in the posterior sample, and take the mean.
@@ -996,18 +1016,24 @@ pred_qbingp <- function(ev_obj, p, n_years = 100, npy = NULL,
                             scale = scale, shape = shape, mult = mult[i])
     }
     #
-    logit <- function(p) log(p / (1 - p))
     ob_fn <- function(q, ev_obj, p, n_years, npy) {
       p_val <- pred_pbingp(ev_obj = ev_obj, q = q, n_years = n_years,
                            npy = npy)$y
-      (logit(p_val) - logit(p)) ^ 2
+      return(p_val - p)
     }
     for (j in 1:n_p) {
+      f_upper <- ob_fn(upper, ev_obj = ev_obj, p = p[j, i],
+                       n_years = n_years[i], npy = npy)
+      while (f_upper < 0) {
+        upper <- upper * 10
+        f_upper <- ob_fn(upper, ev_obj = ev_obj, p = p[j, i],
+                         n_years = n_years[i], npy = npy)
+      }
       # Note: pred_pbingp() cannot be evaluated for q < ev_obj$thresh.
-      qtemp <- stats::nlminb(init_q[j, i], ob_fn, ev_obj = ev_obj, p = p[j, i],
-                             n_years = n_years[i], npy = npy,
-                             lower = ev_obj$thresh)
-      q[j, i] <- qtemp$par
+      qtemp <- stats::uniroot(f = ob_fn, ev_obj = ev_obj, p = p[j, i],
+                              n_years = n_years[i], npy = npy,
+                              lower = lower, upper = upper, f.upper = f_upper)
+      q[j, i] <- qtemp$root
     }
   }
   return(list(x = p, y = q))

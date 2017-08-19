@@ -6,7 +6,7 @@
 \usage{
 \method{predict}{evpost}(object, type = c("i", "p", "d", "q", "r"),
   x = NULL, x_num = 100, n_years = 100, npy = NULL, level = 95,
-  hpd = FALSE, lower_tail = TRUE, log = FALSE, ...)
+  hpd = FALSE, lower_tail = TRUE, log = FALSE, big_q = 1000, ...)
 }
 \arguments{
 \item{object}{An object of class "evpost", a result of a call to
@@ -111,6 +111,12 @@ otherwise, P[X > x].}
 
 \item{log}{A logical scalar.  Only relevant when \code{type = "d"}.
 If TRUE the log-density is returned.}
+
+\item{big_q}{A numeric scalar.  Only relevant when \code{type = "q"}.
+An initial upper bound for the desired quantiles to be passed to
+\code{\link[stats]{uniroot}} (its argument \code{upper}) in the
+search for the predictive quantiles.  If this is not sufficiently large
+then it is increased until it does provide an upper bound.}
 
 \item{...}{Additional optional arguments. At present no optional
 arguments are used.}
