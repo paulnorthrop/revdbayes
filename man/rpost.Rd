@@ -72,8 +72,8 @@ user's value of \code{noy} is used in the likelihood.}
   The value of \code{npy} does not affect any calculation in
   \code{rpost}, it only affects subsequent extreme value inferences using
   \code{predict.evpost}.  However, setting \code{npy} in the call to
-  \code{rpost} avoids the need to supply \code{npy} when calling these
-  latter functions.  This is likely to be useful only when
+  \code{rpost} avoids the need to supply \code{npy} when calling
+  \code{predict.evpost}.  This is likely to be useful only when
   \code{model = bingp}. See the documentation of
   \code{\link{predict.evpost}} for further details.}
 
