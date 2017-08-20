@@ -278,12 +278,12 @@
 #' plot(osv)
 #' @export
 rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
-                       prior, nrep = NULL, thresh = NULL, noy = NULL,
+                       prior, ..., nrep = NULL, thresh = NULL, noy = NULL,
                        use_noy = TRUE, npy = NULL, ros= NULL,
                        bin_prior = structure(list(prior = "bin_beta",
                                              ab = c(1 / 2, 1 / 2),
                                              class = "binprior")),
-                       init_ests = NULL, mult = 2, use_phi_map = FALSE, ...) {
+                       init_ests = NULL, mult = 2, use_phi_map = FALSE) {
   #
   model <- match.arg(model)
   save_model <- model
