@@ -298,8 +298,8 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #' @param add_pu Includes in the summary of the simulated values the threshold
 #'   exceedance probability \eqn{p}. Only relevant when \code{model == "bingp"}
 #'   was used in the call to \code{rpost} or \code{rpost_rcpp}.
-#' @param ... Additional arguments passed on to \code{\link{print}} or
-#'   \code{\link{summary}}.
+#' @param ... Additional arguments passed on to \code{print} or
+#'   \code{summary}.
 #' @return Prints
 #' \itemize{
 #'   \item {information about the ratio-of-uniforms bounding box, i.e.

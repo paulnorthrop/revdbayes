@@ -14,7 +14,8 @@
 exceedance probability \eqn{p}. Only relevant when \code{model == "bingp"}
 was used in the call to \code{rpost} or \code{rpost_rcpp}.}
 
-\item{...}{Additional arguments passed on to \code{print} or \code{summary}.}
+\item{...}{Additional arguments passed on to \code{print} or
+\code{summary}.}
 }
 \value{
 Prints
