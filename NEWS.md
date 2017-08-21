@@ -1,8 +1,8 @@
-# revdbayes 1.2.0.9000
+# revdbayes 1.2.1
 
 ## Bug fixes and minor improvements
 
-* In some extreme cases (datasets with very small numbers of threshold excesses) calling `predict.evpost` with `type = "q"` and `x` close to 1 returns an imprecise value for the requested predictive quantiles.  This has been corrected by using `stats::uniroot` rather than `nlminb`.
+* In some extreme cases (datasets with very small numbers of threshold excesses) calling `predict.evpost` with `type = "q"` and `x` close to 1 returns an imprecise value for the requested predictive quantiles.  This has been corrected by using `stats::uniroot` rather than `stats::nlminb`.
 
 * A bug (missing `drop = FALSE` in subsetting a matrix) in `plot.evpred` produced an error message if `n_years` was scalar in the prior call to `predict.evpost`.  This bug has been corrected.
 
