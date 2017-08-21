@@ -12,7 +12,7 @@ before_install:
 
 os:
   - linux
-  - osx
+#  - osx
 
 addons:
   apt:
@@ -24,7 +24,7 @@ addons:
 r:
   - release
 #  - devel
-  - oldrel
+#  - oldrel
 
 env:
 #  - COMPILER=gcc-4.4
