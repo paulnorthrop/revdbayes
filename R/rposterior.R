@@ -133,12 +133,15 @@
 #'   \itemize{
 #'     \item{\code{model}:} The argument \code{model} to \code{rpost}
 #'       detailed above.
-#'     \item{\code{data}:} The argument \code{data} to \code{rpost}
-#'       detailed above, with any missing values removed, except that
+#'     \item{\code{data}:} The content depends on \code{model}:
+#'       if \code{model = "gev"} then this is the argument \code{data} to
+#'       \code{rpost} detailed above, with missing values removed;
 #'       if \code{model = "gp"} then only the values that lie above the
-#'       threshold are included and if \code{model = "bingp"} or
+#'       threshold are included; if \code{model = "bingp"} or
 #'       \code{model = "pp"} then the input data are returned
-#'       but any value lying below the threshold is set to \code{thresh}.
+#'       but any value lying below the threshold is set to \code{thresh};
+#'       if \code{model = "os"} then the order statistics used are returned
+#'       as a single vector.
 #'     \item{\code{prior}:} The argument \code{prior} to \code{rpost}
 #'       detailed above.
 #'   }
