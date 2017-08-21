@@ -35,7 +35,7 @@ rpost_rcpp(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior, ...,
 \item{prior}{A list specifying the prior for the parameters of the extreme
 value model, created by \code{\link{set_prior}}.}
 
-\item{...}{Further argments to be passed to \code{\link[rust]{ru}}.  Most
+\item{...}{Further arguments to be passed to \code{\link[rust]{ru}}.  Most
 importantly \code{trans} and \code{rotate} (see \strong{Details}), and
 perhaps \code{r}, \code{ep}, \code{a_algor}, \code{b_algor},
 \code{a_method}, \code{b_method}, \code{a_control}, \code{b_control}.

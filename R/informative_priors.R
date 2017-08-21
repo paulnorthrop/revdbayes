@@ -15,7 +15,7 @@
 #'   \code{quant}.  See \strong{Details} below.
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param trendsd  Has no function other than to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatibility with
 #'   function in the evdbayes package.
 #' @details A prior for GEV parameters \eqn{(\mu, \sigma, \xi)},
 #'   based on Crowder (1992).  This construction is typically used to set
@@ -121,7 +121,7 @@ gev_prob <- function(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
 #'   probabilities given in \code{prob}.
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
-#' @param trendsd  Has no function other than to achieve compatability with
+#' @param trendsd  Has no function other than to achieve compatibility with
 #'   function in the evdbayes package.
 #' @return The log of the prior density.
 #' @details See

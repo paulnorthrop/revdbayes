@@ -4,7 +4,7 @@
 #' random samples from the posterior distributions commonly encountered in
 #' Bayesian extreme value analyses.
 #'
-#' @details The main functions in the revbayes package are \code{\link{rpost}}
+#' @details The main functions in the revdbayes package are \code{\link{rpost}}
 #'   and \code{\link{rpost_rcpp}}, which simulate random samples from the
 #'   posterior distribution of extreme value model parameters using the
 #'   functions \code{\link[rust]{ru}} and \code{\link[rust]{ru_rcpp}}
