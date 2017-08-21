@@ -12,7 +12,7 @@ before_install:
 
 os:
   - linux
-#  - osx
+  - osx
 
 addons:
   apt:
@@ -23,10 +23,10 @@ addons:
 
 r:
   - release
-  - devel
-#  - oldrel
+#  - devel
+  - oldrel
 
 env:
 #  - COMPILER=gcc-4.4
-  - COMPILER=gcc
-#  - COMPILER=clang
+#  - COMPILER=gcc
+  - COMPILER=clang
