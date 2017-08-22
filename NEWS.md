@@ -1,5 +1,9 @@
 # revdbayes 1.2.1.9000
 
+## Bug fixes and minor improvements
+
+* Added the attribute `attr(gom, "npy")` (with value 3) to the `gom` dataset.  This is for compatability with the **threshr** package.
+
 # revdbayes 1.2.1
 
 ## Bug fixes and minor improvements
