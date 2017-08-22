@@ -152,6 +152,9 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     density_args <- x$logf_args
   }
   #
+  if (pu_only & add_pu) {
+    stop("At most one of 'pu_only' and 'add_pu' can be TRUE")
+  }
   if (pu_only & is.null(x$bin_sim_vals)) {
     warning("pu_only = TRUE is not relevant and has been ignored",
             immediate. = TRUE)
