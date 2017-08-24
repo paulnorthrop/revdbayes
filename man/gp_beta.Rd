@@ -17,7 +17,7 @@ GP parameters (\eqn{\sigma, \xi}).}
 \item{pq}{A numeric vector of length 2.
 See \code{\link{set_prior}} for details.}
 
-\item{trendsd}{Has no function other than to achieve compatability with
+\item{trendsd}{Has no function other than to achieve compatibility with
 function in the evdbayes package.}
 }
 \value{

@@ -97,7 +97,7 @@ beta(1/2, 1/2) prior is used.}
 for the mode of the posterior distribution.}
 
 \item{mult}{A numeric scalar.  The grid of values used to choose the Box-Cox
-transformation parameter lambda is based on the maximum aposteriori (MAP)
+transformation parameter lambda is based on the maximum a posteriori (MAP)
 estimate +/- mult x estimated posterior standard deviation.}
 
 \item{use_phi_map}{A logical scalar. If trans = "BC" then \code{use_phi_map}

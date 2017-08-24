@@ -20,7 +20,7 @@ See Northrop and Attalides (2016) for details.}
 
 \item{max_xi}{A numeric scalar.  Prior upper bound on \eqn{\xi}.}
 
-\item{trendsd}{Has no function other than to achieve compatability with
+\item{trendsd}{Has no function other than to achieve compatibility with
 function in the evdbayes package.}
 }
 \value{
