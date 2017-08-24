@@ -823,14 +823,14 @@ hpar_drop <- function(x_list, hpar_vec) {
 #' Construction of a prior distribution for a binomial probability \eqn{p}
 #'
 #' Constructs a prior distribution for use as the argument \code{bin_prior} in
-#' \code{\link{rpost}} or in \code{\link{binpost}}.  The user can either
-#' specify their own prior function and arguments for hyperparameters or choose
+#' \code{\link{rpost}} or in \code{\link{binpost}}.  The user can choose
 #' from a list of in-built priors.
 #'
 #' @param prior A character string giving the name of the prior for \eqn{p}.
 #'   See \strong{Details} for a list of the priors available.
-#' @param ... Further arguments to be passed to the user-supplied or
-#'   in-built prior function.  For details of the latter see \strong{Details}.
+#' @param ... Further arguments to be passed to an in-built prior function.
+#'   This is only relevant if \code{model = "beta"}, when \code{ab} can be
+#'   passed. See \strong{Details}.
 #' @details
 #'   \strong{Binomial priors.} The names of the binomial priors set using
 #'   \code{bin_prior} are:
