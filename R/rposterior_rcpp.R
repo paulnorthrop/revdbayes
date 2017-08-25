@@ -445,7 +445,6 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
     }
     init_check <- calc_init_logpost(model = model, prior_type = prior_type,
                                     init = init_ests, for_post = for_post)
-    print(init_check)
     if (!is.infinite(init_check)) {
       init <- init_ests
       init_phi <- switch(model,
