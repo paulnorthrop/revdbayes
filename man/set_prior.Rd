@@ -121,14 +121,14 @@ Of the in-built named priors available in revdbayes only
   For \code{model = "gp"}: (an extended version
     of) the maximal data information (MDI) prior, that is,
     \deqn{\pi(\sigma, \xi) = (1/ \sigma) exp[- a (\xi + 1)], for
-    \sigma > 0, \xi >= -1, a > 0.}
+    \sigma > 0, \xi >= -1, a >= 0.}
     The value of \eqn{a} is set using the argument \code{a}.  The default
     value is \eqn{a = 1}, which gives the MDI prior.
 
     For \code{model = "gev"}: (an extended version
     of) the maximal data information (MDI) prior, that is,
     \deqn{\pi(\mu, \sigma, \xi) = (1/ \sigma) exp[- a (\xi + 1)], for
-    \sigma > 0, \xi >= -1, a > 0.}
+    \sigma > 0, \xi >= -1, a >= 0.}
     The value of \eqn{a} is set using the argument \code{a}.  The default
     value is \eqn{a = \gamma}, where \eqn{\gamma = 0.57721} is Euler's
     constant, which gives the MDI prior.
