@@ -6,6 +6,8 @@
 
 * Give an explicit error message if `plot.evpost` is called with the logically incompatible arguments `add_pu = TRUE` and `pu_only = TRUE`.
 
+* The documentation for `set_bin_prior` has been corrected: only in-built priors are available, i.e. it is not possible for the user to supply their own prior.
+
 # revdbayes 1.2.1
 
 ## Bug fixes and minor improvements
