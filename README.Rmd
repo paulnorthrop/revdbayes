@@ -49,7 +49,7 @@ plot(gevp)
 ```
 
 From version 1.2.0 onwards the faster function `rpost_rcpp` can be used.  
-See the vignette ""Faster simulation using revdbayes and Rcpp" for details.
+See the vignette "Faster simulation using revdbayes and Rcpp" for details.
 The syntax of `rpost` and `post_rcpp` is identical.  For example:
 
 ```{r, eval = FALSE}
