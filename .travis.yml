@@ -30,3 +30,9 @@ env:
 #  - COMPILER=gcc-4.4
 #  - COMPILER=gcc
   - COMPILER=clang
+
+r_packages:
+  - covr
+
+after_success:
+  - Rscript -e 'library(covr); codecov()'
