@@ -8,7 +8,7 @@ context("GEV: rpost_rcpp vs rpost")
 my_tol <- 1e-5
 
 gev_test <- function(seed = 47, prior, n = 5, rotate = TRUE, trans = "none",
-                     use_phi_map = FALSE, data = portpirie, ...){
+                     use_phi_map = FALSE, data = portpirie, nrep = 2, ...){
   if (prior == "user") {
     prior_rfn <- set_prior(prior = "norm", model = "gev", ...)
     ptr_gev_norm <- create_prior_xptr("gev_norm")
@@ -22,19 +22,22 @@ gev_test <- function(seed = 47, prior, n = 5, rotate = TRUE, trans = "none",
   set.seed(seed)
   res1 <- rpost(n = n, model = "gev", prior = prior_rfn,
                      data = data, rotate = rotate, trans = trans,
-                     use_phi_map = use_phi_map)
+                     use_phi_map = use_phi_map, nrep = nrep)
   set.seed(seed)
   res2 <- rpost_rcpp(n = n, model = "gev", prior = prior_cfn,
                      data = data, rotate = rotate, trans = trans,
-                     use_phi_map = use_phi_map)
+                     use_phi_map = use_phi_map, nrep = nrep)
   return(list(sim1 = as.numeric(res1$sim_vals),
-              sim2 = as.numeric(res2$sim_vals)))
+              sim2 = as.numeric(res2$sim_vals),
+              data_rep1 = as.numeric(res1$data_rep),
+              data_rep2 = as.numeric(res2$data_rep)))
 }
 
 test_function <- function(x, test_string) {
   testthat::test_that(test_string, {
 #    skip_on_cran()
     testthat::expect_equal(x$sim1, x$sim2, tolerance = my_tol)
+    testthat::expect_equal(x$data_rep1, x$data_rep2, tolerance = my_tol)
   })
 }
 

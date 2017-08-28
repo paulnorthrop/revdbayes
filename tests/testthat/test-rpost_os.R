@@ -10,7 +10,7 @@ context("OS: rpost_rcpp vs rpost")
 my_tol <- 1e-5
 
 os_test <- function(seed = 47, prior, n = 5, rotate = TRUE, trans = "none",
-                    use_phi_map = FALSE, data = venice, ...){
+                    use_phi_map = FALSE, data = venice, nrep = 2, ...){
   if (prior == "user") {
     prior_rfn <- set_prior(prior = "flat", model = "gev", ...)
     ptr_gev_flat <- create_prior_xptr("gev_flat")
@@ -23,13 +23,15 @@ os_test <- function(seed = 47, prior, n = 5, rotate = TRUE, trans = "none",
   set.seed(seed)
   res1 <- rpost(n = n, model = "os", prior = prior_rfn,
                 data = data, rotate = rotate, trans = trans,
-                use_phi_map = use_phi_map)
+                use_phi_map = use_phi_map, nrep = nrep)
   set.seed(seed)
   res2 <- rpost_rcpp(n = n, model = "os", prior = prior_cfn,
                      data = data, rotate = rotate, trans = trans,
-                     use_phi_map = use_phi_map)
+                     use_phi_map = use_phi_map, nrep = nrep)
   return(list(sim1 = as.numeric(res1$sim_vals),
-              sim2 = as.numeric(res2$sim_vals)))
+              sim2 = as.numeric(res2$sim_vals),
+              data_rep1 = as.numeric(res1$data_rep),
+              data_rep2 = as.numeric(res2$data_rep)))
 }
 
 os_test_gev <- function(seed = 47, prior, n = 5, rotate = TRUE, trans = "none",
@@ -63,7 +65,16 @@ os_test_gev <- function(seed = 47, prior, n = 5, rotate = TRUE, trans = "none",
                        data = data, rotate = rotate, trans = trans,
                        use_phi_map = use_phi_map)
   }
-  return(list(sim1 = res1$sim_vals, sim2 = res2$sim_vals))
+  return(list(sim1 = as.numeric(res1$sim_vals),
+              sim2 = as.numeric(res2$sim_vals)))
+}
+
+test_os_function <- function(x, test_string) {
+  testthat::test_that(test_string, {
+    #    skip_on_cran()
+    testthat::expect_equal(x$sim1, x$sim2, tolerance = my_tol)
+    testthat::expect_equal(x$data_rep1, x$data_rep2, tolerance = my_tol)
+  })
 }
 
 test_function <- function(x, test_string) {
@@ -96,7 +107,7 @@ for (rotate in rotate_vals) {
                             "use_phi_map =", use_phi_map)
       x <- os_test(prior = "user",
                    rotate = rotate, trans = trans, use_phi_map = use_phi_map)
-      test_function(x, test_string)
+      test_os_function(x, test_string)
       x <- os_test_gev(prior = "norm", which = "rpost", mean = c(0,0,0),
                        cov = diag(c(10000, 10000, 100)),
                        rotate = rotate, trans = trans,

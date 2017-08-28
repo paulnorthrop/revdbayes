@@ -1,4 +1,4 @@
-context("PP: rpost_rcpp vs rpost")
+context("binGP: rpost_rcpp vs rpost")
 
 # We check that the values simulated using rpost() and rpost_rcpp() are
 # (close enough to) identical when they are called using the same data,
@@ -7,27 +7,27 @@ context("PP: rpost_rcpp vs rpost")
 # Set a tolerance for the comparison of the simulated values
 my_tol <- 1e-5
 
-# Set a threshold
-rthresh <- 40
+# Set a threshold.
+u <- quantile(gom, probs = 0.65)
 
-pp_test <- function(seed = 47, prior, n = 5, rotate = TRUE, trans = "none",
-                     use_phi_map = FALSE, data = rainfall, nrep = 2, ...){
+bingp_test <- function(seed = 47, prior, n = 5, rotate = TRUE,
+                       trans = "none", use_phi_map = FALSE, data = gom,
+                       nrep = 2, ...){
   if (prior == "user") {
-    prior_rfn <- set_prior(prior = "flat", model = "gev", ...)
-    ptr_gev_flat <- create_prior_xptr("gev_flat")
-    prior_cfn <- set_prior(prior = ptr_gev_flat, model = "gev", min_xi = -1,
-                           max_xi = Inf)
+    prior_rfn <- set_prior(prior = "flat", model = "gp", min_xi = -1)
+    ptr_gp_flat <- create_prior_xptr("gp_flat")
+    prior_cfn <- set_prior(prior = ptr_gp_flat, model = "gp", min_xi = -1)
   } else {
-    prior_rfn <- set_prior(prior = prior, model = "gev", ...)
-    prior_cfn <- set_prior(prior = prior, model = "gev", ...)
+    prior_rfn <- set_prior(prior = prior, model = "gp", ...)
+    prior_cfn <- set_prior(prior = prior, model = "gp", ...)
   }
   set.seed(seed)
-  res1 <- rpost(n = n, model = "pp", prior = prior_rfn, thresh = rthresh,
-                noy = 54, data = data, rotate = rotate, trans = trans,
+  res1 <- rpost(n = n, model = "bingp", prior = prior_rfn, thresh = u,
+                data = data, rotate = rotate, trans = trans,
                 use_phi_map = use_phi_map, nrep = nrep)
   set.seed(seed)
-  res2 <- rpost_rcpp(n = n, model = "pp", prior = prior_cfn, thresh = rthresh,
-                     noy = 54, data = data, rotate = rotate, trans = trans,
+  res2 <- rpost_rcpp(n = n, model = "bingp", prior = prior_cfn, thresh = u,
+                     data = data, rotate = rotate, trans = trans,
                      use_phi_map = use_phi_map, nrep = nrep)
   return(list(sim1 = as.numeric(res1$sim_vals),
               sim2 = as.numeric(res2$sim_vals),
@@ -53,23 +53,30 @@ rotate_vals <- TRUE
 trans_vals <- "BC"
 use_phi_map_vals <- TRUE
 
-# As model = "pp" is based on the same priors as model = "gev" we don't need
-# to test all the possible in-built priors.  We just check that rpost() and
-# rpost_rcpp() agree for one prior.
-
 for (rotate in rotate_vals) {
   for (trans in trans_vals) {
     for (use_phi_map in use_phi_map_vals) {
       test_string <- paste("rotate =", rotate, "trans =", trans,
                             "use_phi_map =", use_phi_map)
-      x <- pp_test(prior = "flat", min_xi = -1,
+      x <- bingp_test(prior = "flat", min_xi = -1,
                    rotate = rotate, trans = trans, use_phi_map = use_phi_map)
       test_function(x, test_string)
-      x <- pp_test(prior = "user",
+      x <- bingp_test(prior = "flatflat", min_xi = -1,
                    rotate = rotate, trans = trans, use_phi_map = use_phi_map)
       test_function(x, test_string)
-      x <- pp_test(prior = "quant", prob = 10^-(1:3), shape = c(38.9,7.1,47),
-                   scale = c(1.5,6.3,2.6),
+      x <- bingp_test(prior = "norm", mean = c(0,0), cov = diag(100,2),
+                   rotate = rotate, trans = trans, use_phi_map = use_phi_map)
+      test_function(x, test_string)
+      x <- bingp_test(prior = "mdi",
+                   rotate = rotate, trans = trans, use_phi_map = use_phi_map)
+      test_function(x, test_string)
+      x <- bingp_test(prior = "jeffreys",
+                   rotate = rotate, trans = trans, use_phi_map = use_phi_map)
+      test_function(x, test_string)
+      x <- bingp_test(prior = "beta",
+                   rotate = rotate, trans = trans, use_phi_map = use_phi_map)
+      test_function(x, test_string)
+      x <- bingp_test(prior = "user",
                    rotate = rotate, trans = trans, use_phi_map = use_phi_map)
       test_function(x, test_string)
     }
