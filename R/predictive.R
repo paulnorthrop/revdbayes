@@ -778,7 +778,8 @@ pred_qgev <- function(ev_obj, p, n_years = 100, npy = NULL,
       }
       qtemp <- stats::uniroot(f = ob_fn, ev_obj = ev_obj, p = p[j, i],
                               n_years = n_years[i], npy = npy,
-                              lower = lower, upper = upper, f.upper = f_upper)
+                              lower = lower, upper = upper, f.upper = f_upper,
+                              tol = .Machine$double.eps^0.5)
       q[j, i] <- qtemp$root
     }
   }
@@ -1038,7 +1039,8 @@ pred_qbingp <- function(ev_obj, p, n_years = 100, npy = NULL,
       # Note: pred_pbingp() cannot be evaluated for q < ev_obj$thresh.
       qtemp <- stats::uniroot(f = ob_fn, ev_obj = ev_obj, p = p[j, i],
                               n_years = n_years[i], npy = npy,
-                              lower = lower, upper = upper, f.upper = f_upper)
+                              lower = lower, upper = upper, f.upper = f_upper,
+                              tol = .Machine$double.eps^0.5)
       q[j, i] <- qtemp$root
     }
   }
