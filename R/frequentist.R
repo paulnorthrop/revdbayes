@@ -709,8 +709,8 @@ grimshaw_gp_mle <- function(x) {
 ###############################################################################
 
 gev_mle <- function(init, ...){
-    x <- stats::optim(init, gev_loglik, control = list(fnscale = -1),
-               hessian = FALSE, ...)
+    x <- stats::optim(init, gev_loglik, ..., control = list(fnscale = -1),
+               hessian = FALSE)
     temp <- list()
     temp$mle <- x$par
     temp$nllh <- -x$value
@@ -859,8 +859,8 @@ gev_lrs <- function(x){
 ###############################################################################
 
 os_mle <- function(init, gumbel = FALSE, ...){
-  x <- stats::optim(init, os_loglik, control = list(fnscale = -1),
-                    hessian = FALSE, gumbel = gumbel, ...)
+  x <- stats::optim(init, os_loglik, ..., control = list(fnscale = -1),
+                    hessian = FALSE, gumbel = gumbel)
   temp <- list()
   temp$mle <- x$par
   if (gumbel) {
