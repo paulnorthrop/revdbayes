@@ -11,23 +11,23 @@ Description: Provides functions for the Bayesian analysis of extreme value
     <https://cran.r-project.org/package=evdbayes>, which uses Markov Chain
     Monte Carlo ('MCMC') methods for posterior simulation.  See the 'revdbayes' 
     website for more information, documentation and examples.
-Imports: stats,
+Imports: bayesplot (>= 1.1.0),
     graphics,
     methods,
-    utils,
+    Rcpp,
     rust (>= 1.2.2),
-    bayesplot (>= 1.1.0),
-    Rcpp
+    stats,
+    utils
 License: GPL (>= 2)
 LazyData: TRUE
 Depends:
     R (>= 3.3.1),
 RoxygenNote: 6.0.1
-Suggests: knitr,
-    rmarkdown,
-    evdbayes,
-    microbenchmark,
+Suggests: evdbayes,
     ggplot2 (>= 2.2.1),
+    knitr,
+    microbenchmark,
+    rmarkdown,
     testthat
 VignetteBuilder: knitr
 URL: http://github.com/paulnorthrop/revdbayes
