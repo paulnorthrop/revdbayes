@@ -22,7 +22,7 @@ if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = T
 ```
 
 This vignette focuses on random sampling from extreme value posterior 
-distributions using the function `rpost`.  From version 1.2.0 onwards sampling can be achieved more quickly using the function`rpost_rcpp`. See the vignette [Faster simulation using revdbayes](revdbayes-using-rcpp-vignette.html) for details.
+distributions using the function `rpost`.  From version 1.2.0 onwards sampling can be achieved more quickly using the function `rpost_rcpp`. See the vignette [Faster simulation using revdbayes](revdbayes-using-rcpp-vignette.html) for details.
 
 Performing posterior predictive extreme value inference using posterior samples
 is covered in a separate vignette
