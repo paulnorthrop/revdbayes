@@ -1,9 +1,105 @@
+# ================================= kgaps_post ================================
+
+#' Random sampling from K-gaps posterior distribution
+#'
+#' Uses the \code{\link[rust]{ru}} function in the \code{\link[rust]{rust}}
+#' package to simulate from the posterior distribution of the extremal value
+#' index \eqn{\theta} based on the K-gaps model for threshold interexceedance
+#' times of Suveges and Davison (2010).
+#'
+#' @param n A numeric scalar. The size of posterior sample required.
+#' @param data A numeric vector of raw data.  No missing values are allowed.
+#' @param u A numeric scalar.  Extreme value threshold applied to data.
+#' @param k A numeric scalar.  Run parameter \eqn{K}, as defined in Suveges and
+#'   Davison (2010).  Threshold inter-exceedances times that are not larger
+#'   than \code{k} units are assigned to the same cluster, resulting in a
+#'   \eqn{K}-gap equal to zero.  Specifically, the \eqn{K}-gap \eqn{S}
+#'   corresponding to an inter-exceedance time of \eqn{T} is given by
+#'   \eqn{S = max(T - K, 0)}.
+#' @param inc_cens A logical scalar indicating whether or not to include
+#'   contributions from censored inter-exceedance times relating to the
+#'   first and last observation.  See Attalides (2015) for details.
+#' @param alpha,beta Numeric scalars.  Parameters of a
+#'   beta(\eqn{\alpha}, \eqn{\beta}) prior for \eqn{\theta}.
+#' @details A beta(\eqn{\alpha}, \eqn{\beta}) prior distribution is used for
+#'   \eqn{\theta} so that the posterior from which values are simulated is
+#'   proportional to
+#'   \deqn{\theta ^ (2 N_1 + \alpha - 1) * (1 - \theta) ^ (N_0 + \beta - 1) *
+#'     exp(- \theta q (S_0 + ... + S_N)).}
+#'   See \code{\link{kgaps_stats}} for a description of the variables
+#'   involved in the contribution of the likelihood to this expression.
+#'
+#'   The \code{\link[rust]{ru}} function in the \code{\link[rust]{rust}}
+#'   package simulates from this posterior distribution using the
+#'   generalised ratio-of-uniforms distribution.  To improve the probability
+#'   of acceptance, and to ensure that the simulation will work even in
+#'   extreme cases where the posterior density of \eqn{\theta} is unbounded as
+#'   \eqn{\theta} approaches 0 or 1, we simulate from the posterior distribution
+#'   of \eqn{\phi = logit(\theta)} and then transform back to the
+#'   \eqn{\theta}-scale.
+#' @return An object (list) of class \code{"ru"} returned from
+#'   \code{\link[rust]{ru}}.
+#' @references Suveges, M. and Davison, A. C. (2010) Model
+#'   misspecification in peaks over threshold analysis, \emph{The Annals of
+#'   Applied Statistics}, \strong{4}(1), 203-221.
+#'   \url{http://dx.doi.org/10.1214/09-AOAS292"}
+#' @references Attalides, N. (2015) Threshold-based extreme value modelling,
+#'   PhD thesis, University College London.
+#'   \url{http://discovery.ucl.ac.uk/1471121/1/Nicolas_Attalides_Thesis.pdf}
+#' @seealso \code{\link{kgaps_mle}} for maximum likelihood estimation of the
+#'   extremal index \eqn{\theta} using the K-gaps model.
+#' @seealso \code{\link{kgaps_stats}} for the calculation of sufficient
+#'   statistics for the K-gaps model.
+#' @seealso \code{\link[rust]{ru}} for the form of the object returned by
+#'   \code{kgaps_post}.
+#' @examples
+#' u <- quantile(newlyn, probs = 0.90)
+#' k_postsim <- kgaps_post(newlyn, u)
+#' plot(k_postsim)
+kgaps_post <- function(data, u, k = 1, n = 1000, inc_cens = FALSE, alpha = 1,
+                       beta = 1) {
+  # Calculate the MLE and get the sufficient statistics
+  mle_list <- kgaps_mle(data, u, k, inc_cens)
+  theta_mle <- mle_list$theta_mle
+  ss <- mle_list$ss
+  # Define the K-gaps posterior distribution
+  logpost <- function(theta, ss) {
+    loglik <- do.call(kgaps_loglik, c(list(theta = theta), ss))
+    if (is.infinite(loglik)) return(loglik)
+    # Add beta(alpha, beta) prior
+    logprior <- dbeta(theta, alpha, beta, log = TRUE)
+    return(loglik + logprior)
+  }
+  # Sample on the logit scale phi = log(theta / (1 - theta))
+  phi_to_theta <- function(phi) {
+    ephi <- exp(phi)
+    return(ephi / (1 + ephi))
+  }
+  log_j <- function(theta) {
+    return(-log(theta) - log(1 - theta))
+  }
+  # Set an initial value for phi. We do this by noting that (a) the Jacobian
+  # of the transformation from theta to phi multiplies the likelihood by a
+  # factor of theta * (1 - theta), and (b) the beta prior includes a factor
+  # of theta ^ (alpha - 1) * (1 - theta) ^ (beta - 1).  Therefore, we can find
+  # the MAP of theta by solving a quadratic equation for theta, in the same
+  # way that we do to find the MLE for theta.
+  #
+  theta_init <- kgaps_quad_solve(ss$N0 + alpha, ss$N1 + beta, ss$sum_qs)
+  init_phi <- log(theta_init / (1 - theta_init))
+  for_ru <- c(list(logf = logpost, ss = ss, init = init_phi, n = n,
+                   trans = "user", phi_to_theta = phi_to_theta, log_j = log_j))
+  temp <- do.call(rust::ru, for_ru)
+  return(temp)
+}
+
 # ================================= kgaps_mle =================================
 #
 #' Maximum likelihood estimation for the K-gaps model
 #'
 #' Calculates maximum likelihood estimates of the extremal index \eqn{\theta}
-#' based on the K-gaps model of Suveges and Davison (2010).
+#' based on the K-gaps model for threshold inter-exceedances times of
+#' Suveges and Davison (2010).
 #'
 #' @param data A numeric vector of raw data.  No missing values are allowed.
 #' @param u A numeric scalar.  Extreme value threshold applied to data.
@@ -15,7 +111,7 @@
 #'   \eqn{S = max(T - K, 0)}.
 #' @param inc_cens A logical scalar indicating whether or not to include
 #'   contributions from censored inter-exceedance times relating to the
-#'   first and last observation.
+#'   first and last observation.  See Attalides (2015) for details.
 #' @param conf  A numeric scalar.  If \code{conf} is supplied then a
 #'   \code{conf}\% likelihood-based confidence interval for \eqn{\theta} is
 #'   estimated.
@@ -37,6 +133,8 @@
 #'     \item {\code{theta_mle} : } {The maximum likelihood estimate (MLE) of
 #'       \eqn{\theta}.}
 #'     \item {\code{theta_se} : } {The estimated standard error of the MLE.}
+#'     \item {\code{ss} : } {The list of summary statistics returned from
+#'       \code{\link{kgaps_stats}}.}
 #'     \item {\code{conf_int} : } {(If \code{conf} is supplied) a numeric
 #'       vector of length two giving lower and upper confidence limits for
 #'       \eqn{\theta}.}
@@ -59,16 +157,12 @@ kgaps_mle <- function(data, u, k = 1, inc_cens = FALSE, conf = NULL) {
   # (all K-gaps are zero) and the likelihood is maximised at theta = 0.
   N1 <- ss$N1
   if (N1 == 0) {
-    theta_mle <- 0
+    theta_mle <- 0L
   } else if (N0 == 0) {
-    theta_mle <- 1
+    theta_mle <- 1L
   } else {
     sum_qs <- ss$sum_qs
-    aa <- sum_qs
-    bb <- -(N0 + 2 * N1 + sum_qs)
-    cc <- 2 * N1
-    qq <- -(bb - sqrt(bb ^ 2 - 4 * aa * cc)) / 2
-    theta_mle <- cc / qq
+    theta_mle <- kgaps_quad_solve(N0, N1, sum_qs)
   }
   # Estimate standard error
   obs_info <- 0
@@ -80,10 +174,22 @@ kgaps_mle <- function(data, u, k = 1, inc_cens = FALSE, conf = NULL) {
   }
   theta_se <- sqrt(1 / obs_info)
   if (is.null(conf)) {
-    return(list(theta_mle = theta_mle, theta_se = theta_se))
+    return(list(theta_mle = theta_mle, theta_se = theta_se, ss = ss))
   }
   conf_int <- kgaps_conf_int(theta_mle, ss, conf = 95)
-  return(list(theta_mle = theta_mle, theta_se = theta_se, conf_int = conf_int))
+  return(list(theta_mle = theta_mle, theta_se = theta_se, conf_int = conf_int,
+              ss = ss))
+}
+
+# ============================== kgaps_quad_solve =============================
+
+kgaps_quad_solve <- function(N0, N1, sum_qs) {
+  aa <- sum_qs
+  bb <- -(N0 + 2 * N1 + sum_qs)
+  cc <- 2 * N1
+  qq <- -(bb - sqrt(bb ^ 2 - 4 * aa * cc)) / 2
+  theta_mle <- cc / qq
+  return(theta_mle)
 }
 
 # ================================ kgaps_stats ================================
@@ -103,7 +209,7 @@ kgaps_mle <- function(data, u, k = 1, inc_cens = FALSE, conf = NULL) {
 #'   \eqn{S = max(T - K, 0)}.
 #' @param inc_cens A logical scalar indicating whether or not to include
 #'   contributions from censored inter-exceedance times relating to the
-#'   first and last observation.
+#'   first and last observation.  See Attalides (2015) for details.
 #' @details The sample K-gaps are \eqn{S_0, S_1, ..., S_(N-1),
 #'   S_N}, where \eqn{S_1, ..., S_(N-1)} are uncensored and \eqn{S_0} and
 #'   \eqn{S_N} are censored.  Under the assumption that the K-gaps are
@@ -180,6 +286,9 @@ kgaps_stats <- function(data, u, k = 1, inc_cens = FALSE) {
 # =============================== kgaps_loglik ================================
 
 kgaps_loglik <- function(theta, N0, N1, sum_qs){
+  if (theta < 0 || theta > 1) {
+    return(-Inf)
+  }
   loglik <- 0
   if (N1 > 0) {
     loglik <- loglik + 2 * N1 * log(theta) - sum_qs * theta

@@ -20,7 +20,7 @@ corresponding to an inter-exceedance time of \eqn{T} is given by
 
 \item{inc_cens}{A logical scalar indicating whether or not to include
 contributions from censored inter-exceedance times relating to the
-first and last observation.}
+first and last observation.  See Attalides (2015) for details.}
 
 \item{conf}{A numeric scalar.  If \code{conf} is supplied then a
 \code{conf}\% likelihood-based confidence interval for \eqn{\theta} is
@@ -32,6 +32,8 @@ A list containing
     \item {\code{theta_mle} : } {The maximum likelihood estimate (MLE) of
       \eqn{\theta}.}
     \item {\code{theta_se} : } {The estimated standard error of the MLE.}
+    \item {\code{ss} : } {The list of summary statistics returned from
+      \code{\link{kgaps_stats}}.}
     \item {\code{conf_int} : } {(If \code{conf} is supplied) a numeric
       vector of length two giving lower and upper confidence limits for
       \eqn{\theta}.}
@@ -39,7 +41,8 @@ A list containing
 }
 \description{
 Calculates maximum likelihood estimates of the extremal index \eqn{\theta}
-based on the K-gaps model of Suveges and Davison (2010).
+based on the K-gaps model for threshold inter-exceedances times of
+Suveges and Davison (2010).
 }
 \details{
 The maximum likelihood estimate of the extremal index \eqn{\theta}

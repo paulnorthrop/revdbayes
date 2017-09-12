@@ -20,7 +20,7 @@ corresponding to an inter-exceedance time of \eqn{T} is given by
 
 \item{inc_cens}{A logical scalar indicating whether or not to include
 contributions from censored inter-exceedance times relating to the
-first and last observation.}
+first and last observation.  See Attalides (2015) for details.}
 }
 \value{
 A list containing the sufficient statistics, with components

@@ -1,5 +1,9 @@
 # revdbayes 1.2.1.9000
 
+## New features
+
+* Bayesian and maximum likelihood inference for the K-gaps model for inferring the extremal index using threshold inter-exceedances times. [Suveges, M. and Davison, A. C. (2010), Model misspecification in peaks over threshold analysis, The Annals of Applied Statistics, 4(1), 203-221. doi:10.1214/09-AOAS292.]
+
 ## Bug fixes and minor improvements
 
 * Added the attribute `attr(gom, "npy")` (with value 3) to the `gom` dataset.  This is for compatability with the **threshr** package.
