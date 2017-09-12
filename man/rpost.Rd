@@ -108,7 +108,8 @@ centred on the maximum a posterior (MAP) estimate of phi
 }
 \value{
 An object (list) of class \code{"evpost"}, which has the same
-  structure as an object of class "ru" returned from \code{\link[rust]{ru}}.
+  structure as an object of class \code{"ru"} returned from
+  \code{\link[rust]{ru}}.
   In addition this list contains
   \itemize{
     \item{\code{model}:} The argument \code{model} to \code{rpost}
