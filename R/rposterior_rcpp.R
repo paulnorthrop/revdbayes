@@ -394,8 +394,7 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
     )
   }
   #
-  # Combine lists ds (data) and prior (details of prior) into one list and
-  # add the log-likelihood and log-prior pointers to the list for_post.
+  # Combine lists ds (data) and prior (details of prior) into one list.
   #
   for_post <- c(ds, prior)
   # For the OS model add the largest sample size over all order statistics.
