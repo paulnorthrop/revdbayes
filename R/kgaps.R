@@ -9,7 +9,7 @@
 #'
 #' @param n A numeric scalar. The size of posterior sample required.
 #' @param data A numeric vector of raw data.  No missing values are allowed.
-#' @param u A numeric scalar.  Extreme value threshold applied to data.
+#' @param thresh A numeric scalar.  Extreme value threshold applied to data.
 #' @param k A numeric scalar.  Run parameter \eqn{K}, as defined in Suveges and
 #'   Davison (2010).  Threshold inter-exceedances times that are not larger
 #'   than \code{k} units are assigned to the same cluster, resulting in a
@@ -19,8 +19,20 @@
 #' @param inc_cens A logical scalar indicating whether or not to include
 #'   contributions from censored inter-exceedance times relating to the
 #'   first and last observation.  See Attalides (2015) for details.
-#' @param alpha,beta Numeric scalars.  Parameters of a
+#' @param alpha,beta Positive numeric scalars.  Parameters of a
 #'   beta(\eqn{\alpha}, \eqn{\beta}) prior for \eqn{\theta}.
+#' @param param A character scalar.  If \code{param = "logit"} (the default)
+#'   then we simulate from the posterior distribution of
+#'   \eqn{\phi = logit(\theta)} and then transform back to the
+#'   \eqn{\theta}-scale.  If \code{param = "theta"} then we simulate
+#'   directly from the posterior distribution of \eqn{\theta}, unless
+#'   the sample K-gaps are all equal to zero or all positive, when we revert
+#'   to \code{param = "logit"}.  This is to avoid sampling directly from a
+#'   posterior with mode equal to 0 or 1.
+#' @param use_rcpp A logical scalar.  If \code{TRUE} (the default) the
+#'   rust function \code{\link[rust]{ru_rcpp}} is used for
+#'   posterior simulation.  If \code{FALSE} the (slower) function
+#'   \code{\link[rust]{ru}} is used.
 #' @details A beta(\eqn{\alpha}, \eqn{\beta}) prior distribution is used for
 #'   \eqn{\theta} so that the posterior from which values are simulated is
 #'   proportional to
@@ -37,8 +49,16 @@
 #'   \eqn{\theta} approaches 0 or 1, we simulate from the posterior distribution
 #'   of \eqn{\phi = logit(\theta)} and then transform back to the
 #'   \eqn{\theta}-scale.
-#' @return An object (list) of class \code{"ru"} returned from
+#' @return An object (list) of class \code{"evpost"}, which has the same
+#'   structure as an object of class \code{"ru"} returned from
 #'   \code{\link[rust]{ru}}.
+#'   In addition this list contains
+#'   \itemize{
+#'     \item{\code{model}:} The character scalar \code{"kgaps"}.
+#'     \item{\code{thresh}:} The argument \code{thresh}.
+#'     \item{\code{ss}:} The sufficient statistics for the K-gaps likelihood,
+#'       as calculated by \code{\link{kgaps_stats}}.
+#'   }
 #' @references Suveges, M. and Davison, A. C. (2010) Model
 #'   misspecification in peaks over threshold analysis, \emph{The Annals of
 #'   Applied Statistics}, \strong{4}(1), 203-221.
@@ -53,16 +73,23 @@
 #' @seealso \code{\link[rust]{ru}} for the form of the object returned by
 #'   \code{kgaps_post}.
 #' @examples
-#' u <- quantile(newlyn, probs = 0.90)
-#' k_postsim <- kgaps_post(newlyn, u)
+#' thresh <- quantile(newlyn, probs = 0.90)
+#' k_postsim <- kgaps_post(newlyn, thresh)
 #' plot(k_postsim)
-kgaps_post <- function(data, u, k = 1, n = 1000, inc_cens = FALSE, alpha = 1,
-                       beta = 1) {
+kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE, alpha = 1,
+                       beta = 1, param = c("logit", "theta"), use_rcpp = TRUE) {
+  param <- match.arg(param)
+  if (k < 1) {
+    stop("k must be no smaller than 1.")
+  }
+  if (alpha <= 0 | beta <= 0) {
+    stop("alpha and beta must be positive.")
+  }
   # Calculate the MLE and get the sufficient statistics
-  mle_list <- kgaps_mle(data, u, k, inc_cens)
+  mle_list <- kgaps_mle(data, thresh, k, inc_cens)
   theta_mle <- mle_list$theta_mle
   ss <- mle_list$ss
-  # Define the K-gaps posterior distribution
+  # Define the K-gaps posterior distribution for theta
   logpost <- function(theta, ss) {
     loglik <- do.call(kgaps_loglik, c(list(theta = theta), ss))
     if (is.infinite(loglik)) return(loglik)
@@ -70,26 +97,59 @@ kgaps_post <- function(data, u, k = 1, n = 1000, inc_cens = FALSE, alpha = 1,
     logprior <- dbeta(theta, alpha, beta, log = TRUE)
     return(loglik + logprior)
   }
-  # Sample on the logit scale phi = log(theta / (1 - theta))
-  phi_to_theta <- function(phi) {
-    ephi <- exp(phi)
-    return(ephi / (1 + ephi))
-  }
-  log_j <- function(theta) {
-    return(-log(theta) - log(1 - theta))
-  }
-  # Set an initial value for phi. We do this by noting that (a) the Jacobian
-  # of the transformation from theta to phi multiplies the likelihood by a
-  # factor of theta * (1 - theta), and (b) the beta prior includes a factor
-  # of theta ^ (alpha - 1) * (1 - theta) ^ (beta - 1).  Therefore, we can find
-  # the MAP of theta by solving a quadratic equation for theta, in the same
-  # way that we do to find the MLE for theta.
+  # Set an initial value for theta, and perhaps phi. We do this by noting that
+  # (a) the Jacobian of the transformation from theta to phi multiplies the
+  # likelihood by a factor of theta * (1 - theta), and (b) the beta prior
+  # includes a factor of theta ^ (alpha - 1) * (1 - theta) ^ (beta - 1).
+  # Therefore, we can find the MAP of theta by solving a quadratic equation
+  # for theta, in the same way that we do to find the MLE for theta.
   #
   theta_init <- kgaps_quad_solve(ss$N0 + alpha, ss$N1 + beta, ss$sum_qs)
-  init_phi <- log(theta_init / (1 - theta_init))
-  for_ru <- c(list(logf = logpost, ss = ss, init = init_phi, n = n,
-                   trans = "user", phi_to_theta = phi_to_theta, log_j = log_j))
-  temp <- do.call(rust::ru, for_ru)
+  # Set essential arguments to ru()
+  if (use_rcpp) {
+    post_ptr <- kgaps_logpost_xptr("kgaps")
+    for_post <- c(ss, list(alpha = alpha, beta = beta))
+    for_ru <- list(logf = post_ptr, pars = for_post, n = n)
+  } else {
+    logpost <- function(theta, ss) {
+      loglik <- do.call(kgaps_loglik, c(list(theta = theta), ss))
+      if (is.infinite(loglik)) return(loglik)
+      # Add beta(alpha, beta) prior
+      logprior <- dbeta(theta, alpha, beta, log = TRUE)
+      return(loglik + logprior)
+    }
+    for_ru <- list(logf = logpost, ss = ss, n = n)
+  }
+  # Sample on the logit scale phi = log(theta / (1 - theta)) ?
+  if (ss$N0 == 0 || ss$N1 == 0) {
+    param = "logit"
+  }
+  if (param == "logit") {
+    # Transformation, Jacobian and initial estimate
+    if (use_rcpp) {
+      phi_to_theta <- phi_to_theta_xptr("kgaps")
+      log_j <- log_j_xptr("kgaps")
+    } else {
+      phi_to_theta <- function(phi) {
+        ephi <- exp(phi)
+        return(ephi / (1 + ephi))
+      }
+      log_j <- function(theta) {
+        return(-log(theta) - log(1 - theta))
+      }
+    }
+    phi_init <- log(theta_init / (1 - theta_init))
+    trans_list <- list(phi_to_theta = phi_to_theta, log_j = log_j)
+    for_ru <- c(for_ru, list(init = phi_init, trans = "user"), trans_list)
+  } else {
+    for_ru <- c(for_ru, list(init = theta_init, trans = "none"))
+  }
+  ru_fn <- ifelse(use_rcpp, rust::ru_rcpp, rust::ru)
+  temp <- do.call(ru_fn, for_ru)
+  temp$model <- "kgaps"
+  temp$thresh <- thresh
+  temp$ss <- ss
+  class(temp) <- "evpost"
   return(temp)
 }
 
@@ -102,7 +162,7 @@ kgaps_post <- function(data, u, k = 1, n = 1000, inc_cens = FALSE, alpha = 1,
 #' Suveges and Davison (2010).
 #'
 #' @param data A numeric vector of raw data.  No missing values are allowed.
-#' @param u A numeric scalar.  Extreme value threshold applied to data.
+#' @param thresh A numeric scalar.  Extreme value threshold applied to data.
 #' @param k A numeric scalar.  Run parameter \eqn{K}, as defined in Suveges and
 #'   Davison (2010).  Threshold inter-exceedances times that are not larger
 #'   than \code{k} units are assigned to the same cluster, resulting in a
@@ -147,9 +207,9 @@ kgaps_post <- function(data, u, k = 1, n = 1000, inc_cens = FALSE, alpha = 1,
 #' kgaps_mle(newlyn, u)
 #' # MLE, SE and 95% confidence interval
 #' kgaps_mle(newlyn, u, conf = 95)
-kgaps_mle <- function(data, u, k = 1, inc_cens = FALSE, conf = NULL) {
+kgaps_mle <- function(data, thresh, k = 1, inc_cens = FALSE, conf = NULL) {
   # Calculate sufficient statistics
-  ss <- kgaps_stats(data, u, k, inc_cens)
+  ss <- kgaps_stats(data, thresh, k, inc_cens)
   # If N0 = 0 then all exceedances occur singly (all K-gaps are positive)
   # and the likelihood is maximised at theta = 1.
   N0 <- ss$N0
@@ -181,17 +241,6 @@ kgaps_mle <- function(data, u, k = 1, inc_cens = FALSE, conf = NULL) {
               ss = ss))
 }
 
-# ============================== kgaps_quad_solve =============================
-
-kgaps_quad_solve <- function(N0, N1, sum_qs) {
-  aa <- sum_qs
-  bb <- -(N0 + 2 * N1 + sum_qs)
-  cc <- 2 * N1
-  qq <- -(bb - sqrt(bb ^ 2 - 4 * aa * cc)) / 2
-  theta_mle <- cc / qq
-  return(theta_mle)
-}
-
 # ================================ kgaps_stats ================================
 
 #' Sufficient statistics for the K-gaps model
@@ -200,7 +249,7 @@ kgaps_quad_solve <- function(N0, N1, sum_qs) {
 #' \eqn{\theta}.
 #'
 #' @param data A numeric vector of raw data.  No missing values are allowed.
-#' @param u A numeric scalar.  Extreme value threshold applied to data.
+#' @param thresh A numeric scalar.  Extreme value threshold applied to data.
 #' @param k A numeric scalar.  Run parameter \eqn{K}, as defined in Suveges and
 #'   Davison (2010).  Threshold inter-exceedances times that are not larger
 #'   than \code{k} units are assigned to the same cluster, resulting in a
@@ -247,13 +296,13 @@ kgaps_quad_solve <- function(N0, N1, sum_qs) {
 #' @examples
 #' u <- quantile(newlyn, probs = 0.90)
 #' kgaps_stats(newlyn, u)
-kgaps_stats <- function(data, u, k = 1, inc_cens = FALSE) {
+kgaps_stats <- function(data, thresh, k = 1, inc_cens = FALSE) {
   if (any(is.na(data))) {
     stop("No missing values are allowed in ''data''")
   }
   # Sample size, positions, number and proportion of exceedances
   nx <- length(data)
-  exc_u <- (1:nx)[data > u]
+  exc_u <- (1:nx)[data > thresh]
   N_u <- length(exc_u)
   q_u <- N_u / nx
   # Inter-exceedances times and K-gaps
@@ -320,3 +369,15 @@ kgaps_conf_int <- function(theta_mle, ss, conf = 95) {
   }
   return(c(ci_low, ci_up))
 }
+
+# ============================== kgaps_quad_solve =============================
+
+kgaps_quad_solve <- function(N0, N1, sum_qs) {
+  aa <- sum_qs
+  bb <- -(N0 + 2 * N1 + sum_qs)
+  cc <- 2 * N1
+  qq <- -(bb - sqrt(bb ^ 2 - 4 * aa * cc)) / 2
+  theta_mle <- cc / qq
+  return(theta_mle)
+}
+

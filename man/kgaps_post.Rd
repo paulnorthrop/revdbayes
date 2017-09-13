@@ -4,13 +4,13 @@
 \alias{kgaps_post}
 \title{Random sampling from K-gaps posterior distribution}
 \usage{
-kgaps_post(data, u, k = 1, n = 1000, inc_cens = FALSE, alpha = 1,
-  beta = 1)
+kgaps_post(data, thresh, k = 1, n = 1000, inc_cens = FALSE, alpha = 1,
+  beta = 1, param = c("logit", "theta"), use_rcpp = TRUE)
 }
 \arguments{
 \item{data}{A numeric vector of raw data.  No missing values are allowed.}
 
-\item{u}{A numeric scalar.  Extreme value threshold applied to data.}
+\item{thresh}{A numeric scalar.  Extreme value threshold applied to data.}
 
 \item{k}{A numeric scalar.  Run parameter \eqn{K}, as defined in Suveges and
 Davison (2010).  Threshold inter-exceedances times that are not larger
@@ -25,12 +25,34 @@ corresponding to an inter-exceedance time of \eqn{T} is given by
 contributions from censored inter-exceedance times relating to the
 first and last observation.  See Attalides (2015) for details.}
 
-\item{alpha, beta}{Numeric scalars.  Parameters of a
+\item{alpha, beta}{Positive numeric scalars.  Parameters of a
 beta(\eqn{\alpha}, \eqn{\beta}) prior for \eqn{\theta}.}
+
+\item{param}{A character scalar.  If \code{param = "logit"} (the default)
+then we simulate from the posterior distribution of
+\eqn{\phi = logit(\theta)} and then transform back to the
+\eqn{\theta}-scale.  If \code{param = "theta"} then we simulate
+directly from the posterior distribution of \eqn{\theta}, unless
+the sample K-gaps are all equal to zero or all positive, when we revert
+to \code{param = "logit"}.  This is to avoid sampling directly from a
+posterior with mode equal to 0 or 1.}
+
+\item{use_rcpp}{A logical scalar.  If \code{TRUE} (the default) the
+rust function \code{\link[rust]{ru_rcpp}} is used for
+posterior simulation.  If \code{FALSE} the (slower) function
+\code{\link[rust]{ru}} is used.}
 }
 \value{
-An object (list) of class \code{"ru"} returned from
+An object (list) of class \code{"evpost"}, which has the same
+  structure as an object of class \code{"ru"} returned from
   \code{\link[rust]{ru}}.
+  In addition this list contains
+  \itemize{
+    \item{\code{model}:} The character scalar \code{"kgaps"}.
+    \item{\code{thresh}:} The argument \code{thresh}.
+    \item{\code{ss}:} The sufficient statistics for the K-gaps likelihood,
+      as calculated by \code{\link{kgaps_stats}}.
+  }
 }
 \description{
 Uses the \code{\link[rust]{ru}} function in the \code{\link[rust]{rust}}

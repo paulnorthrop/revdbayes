@@ -1222,6 +1222,25 @@ namespace revdbayes {
         return Rcpp::as<Rcpp::NumericVector >(rcpp_result_gen);
     }
 
+    inline Rcpp::NumericVector kgaps_phi_to_theta(const Rcpp::NumericVector& phi, const Rcpp::List& user_args) {
+        typedef SEXP(*Ptr_kgaps_phi_to_theta)(SEXP,SEXP);
+        static Ptr_kgaps_phi_to_theta p_kgaps_phi_to_theta = NULL;
+        if (p_kgaps_phi_to_theta == NULL) {
+            validateSignature("Rcpp::NumericVector(*kgaps_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
+            p_kgaps_phi_to_theta = (Ptr_kgaps_phi_to_theta)R_GetCCallable("revdbayes", "_revdbayes_kgaps_phi_to_theta");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_kgaps_phi_to_theta(Shield<SEXP>(Rcpp::wrap(phi)), Shield<SEXP>(Rcpp::wrap(user_args)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<Rcpp::NumericVector >(rcpp_result_gen);
+    }
+
     inline SEXP phi_to_theta_xptr(std::string fstr) {
         typedef SEXP(*Ptr_phi_to_theta_xptr)(SEXP);
         static Ptr_phi_to_theta_xptr p_phi_to_theta_xptr = NULL;
@@ -1955,6 +1974,82 @@ namespace revdbayes {
         {
             RNGScope RCPP_rngScope_gen;
             rcpp_result_gen = p_os_logpost_phi_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<SEXP >(rcpp_result_gen);
+    }
+
+    inline double kgaps_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+        typedef SEXP(*Ptr_kgaps_logpost)(SEXP,SEXP);
+        static Ptr_kgaps_logpost p_kgaps_logpost = NULL;
+        if (p_kgaps_logpost == NULL) {
+            validateSignature("double(*kgaps_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
+            p_kgaps_logpost = (Ptr_kgaps_logpost)R_GetCCallable("revdbayes", "_revdbayes_kgaps_logpost");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_kgaps_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
+    inline SEXP kgaps_logpost_xptr(std::string fstr) {
+        typedef SEXP(*Ptr_kgaps_logpost_xptr)(SEXP);
+        static Ptr_kgaps_logpost_xptr p_kgaps_logpost_xptr = NULL;
+        if (p_kgaps_logpost_xptr == NULL) {
+            validateSignature("SEXP(*kgaps_logpost_xptr)(std::string)");
+            p_kgaps_logpost_xptr = (Ptr_kgaps_logpost_xptr)R_GetCCallable("revdbayes", "_revdbayes_kgaps_logpost_xptr");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_kgaps_logpost_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<SEXP >(rcpp_result_gen);
+    }
+
+    inline double kgaps_log_j(const Rcpp::NumericVector& theta, const Rcpp::List& user_args) {
+        typedef SEXP(*Ptr_kgaps_log_j)(SEXP,SEXP);
+        static Ptr_kgaps_log_j p_kgaps_log_j = NULL;
+        if (p_kgaps_log_j == NULL) {
+            validateSignature("double(*kgaps_log_j)(const Rcpp::NumericVector&,const Rcpp::List&)");
+            p_kgaps_log_j = (Ptr_kgaps_log_j)R_GetCCallable("revdbayes", "_revdbayes_kgaps_log_j");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_kgaps_log_j(Shield<SEXP>(Rcpp::wrap(theta)), Shield<SEXP>(Rcpp::wrap(user_args)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
+    inline SEXP log_j_xptr(std::string fstr) {
+        typedef SEXP(*Ptr_log_j_xptr)(SEXP);
+        static Ptr_log_j_xptr p_log_j_xptr = NULL;
+        if (p_log_j_xptr == NULL) {
+            validateSignature("SEXP(*log_j_xptr)(std::string)");
+            p_log_j_xptr = (Ptr_log_j_xptr)R_GetCCallable("revdbayes", "_revdbayes_log_j_xptr");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_log_j_xptr(Shield<SEXP>(Rcpp::wrap(fstr)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

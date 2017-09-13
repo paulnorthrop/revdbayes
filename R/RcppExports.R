@@ -253,6 +253,10 @@ pp_phi_to_theta <- function(phi, user_args) {
     .Call('_revdbayes_pp_phi_to_theta', PACKAGE = 'revdbayes', phi, user_args)
 }
 
+kgaps_phi_to_theta <- function(phi, user_args) {
+    .Call('_revdbayes_kgaps_phi_to_theta', PACKAGE = 'revdbayes', phi, user_args)
+}
+
 phi_to_theta_xptr <- function(fstr) {
     .Call('_revdbayes_phi_to_theta_xptr', PACKAGE = 'revdbayes', fstr)
 }
@@ -407,6 +411,22 @@ pp_logpost_phi_xptr <- function(fstr) {
 
 os_logpost_phi_xptr <- function(fstr) {
     .Call('_revdbayes_os_logpost_phi_xptr', PACKAGE = 'revdbayes', fstr)
+}
+
+kgaps_logpost <- function(x, pars) {
+    .Call('_revdbayes_kgaps_logpost', PACKAGE = 'revdbayes', x, pars)
+}
+
+kgaps_logpost_xptr <- function(fstr) {
+    .Call('_revdbayes_kgaps_logpost_xptr', PACKAGE = 'revdbayes', fstr)
+}
+
+kgaps_log_j <- function(theta, user_args) {
+    .Call('_revdbayes_kgaps_log_j', PACKAGE = 'revdbayes', theta, user_args)
+}
+
+log_j_xptr <- function(fstr) {
+    .Call('_revdbayes_log_j_xptr', PACKAGE = 'revdbayes', fstr)
 }
 
 user_gp_flat <- function(x, ppars) {

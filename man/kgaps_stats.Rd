@@ -4,12 +4,12 @@
 \alias{kgaps_stats}
 \title{Sufficient statistics for the K-gaps model}
 \usage{
-kgaps_stats(data, u, k = 1, inc_cens = FALSE)
+kgaps_stats(data, thresh, k = 1, inc_cens = FALSE)
 }
 \arguments{
 \item{data}{A numeric vector of raw data.  No missing values are allowed.}
 
-\item{u}{A numeric scalar.  Extreme value threshold applied to data.}
+\item{thresh}{A numeric scalar.  Extreme value threshold applied to data.}
 
 \item{k}{A numeric scalar.  Run parameter \eqn{K}, as defined in Suveges and
 Davison (2010).  Threshold inter-exceedances times that are not larger

@@ -1963,6 +1963,37 @@ RcppExport SEXP _revdbayes_pp_phi_to_theta(SEXP phiSEXP, SEXP user_argsSEXP) {
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// kgaps_phi_to_theta
+Rcpp::NumericVector kgaps_phi_to_theta(const Rcpp::NumericVector& phi, const Rcpp::List& user_args);
+static SEXP _revdbayes_kgaps_phi_to_theta_try(SEXP phiSEXP, SEXP user_argsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type user_args(user_argsSEXP);
+    rcpp_result_gen = Rcpp::wrap(kgaps_phi_to_theta(phi, user_args));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _revdbayes_kgaps_phi_to_theta(SEXP phiSEXP, SEXP user_argsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_revdbayes_kgaps_phi_to_theta_try(phiSEXP, user_argsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // phi_to_theta_xptr
 SEXP phi_to_theta_xptr(std::string fstr);
 static SEXP _revdbayes_phi_to_theta_xptr_try(SEXP fstrSEXP) {
@@ -3167,6 +3198,128 @@ RcppExport SEXP _revdbayes_os_logpost_phi_xptr(SEXP fstrSEXP) {
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// kgaps_logpost
+double kgaps_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars);
+static SEXP _revdbayes_kgaps_logpost_try(SEXP xSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(kgaps_logpost(x, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _revdbayes_kgaps_logpost(SEXP xSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_revdbayes_kgaps_logpost_try(xSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// kgaps_logpost_xptr
+SEXP kgaps_logpost_xptr(std::string fstr);
+static SEXP _revdbayes_kgaps_logpost_xptr_try(SEXP fstrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< std::string >::type fstr(fstrSEXP);
+    rcpp_result_gen = Rcpp::wrap(kgaps_logpost_xptr(fstr));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _revdbayes_kgaps_logpost_xptr(SEXP fstrSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_revdbayes_kgaps_logpost_xptr_try(fstrSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// kgaps_log_j
+double kgaps_log_j(const Rcpp::NumericVector& theta, const Rcpp::List& user_args);
+static SEXP _revdbayes_kgaps_log_j_try(SEXP thetaSEXP, SEXP user_argsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type user_args(user_argsSEXP);
+    rcpp_result_gen = Rcpp::wrap(kgaps_log_j(theta, user_args));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _revdbayes_kgaps_log_j(SEXP thetaSEXP, SEXP user_argsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_revdbayes_kgaps_log_j_try(thetaSEXP, user_argsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// log_j_xptr
+SEXP log_j_xptr(std::string fstr);
+static SEXP _revdbayes_log_j_xptr_try(SEXP fstrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< std::string >::type fstr(fstrSEXP);
+    rcpp_result_gen = Rcpp::wrap(log_j_xptr(fstr));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _revdbayes_log_j_xptr(SEXP fstrSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_revdbayes_log_j_xptr_try(fstrSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // user_gp_flat
 double user_gp_flat(const Rcpp::NumericVector& x, const Rcpp::List& ppars);
 static SEXP _revdbayes_user_gp_flat_try(SEXP xSEXP, SEXP pparsSEXP) {
@@ -3358,6 +3511,7 @@ static int _revdbayes_RcppExport_validate(const char* sig) {
         signatures.insert("Rcpp::NumericVector(*gp_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("Rcpp::NumericVector(*gev_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("Rcpp::NumericVector(*pp_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("Rcpp::NumericVector(*kgaps_phi_to_theta)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("SEXP(*phi_to_theta_xptr)(std::string)");
         signatures.insert("double(*gp_mdi_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*gp_norm_logpost_phi)(const Rcpp::NumericVector&,const Rcpp::List&)");
@@ -3397,6 +3551,10 @@ static int _revdbayes_RcppExport_validate(const char* sig) {
         signatures.insert("SEXP(*gev_logpost_phi_xptr)(std::string)");
         signatures.insert("SEXP(*pp_logpost_phi_xptr)(std::string)");
         signatures.insert("SEXP(*os_logpost_phi_xptr)(std::string)");
+        signatures.insert("double(*kgaps_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("SEXP(*kgaps_logpost_xptr)(std::string)");
+        signatures.insert("double(*kgaps_log_j)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("SEXP(*log_j_xptr)(std::string)");
         signatures.insert("double(*user_gp_flat)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*user_gev_norm)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("double(*user_gev_flat)(const Rcpp::NumericVector&,const Rcpp::List&)");
@@ -3470,6 +3628,7 @@ RcppExport SEXP _revdbayes_RcppExport_registerCCallable() {
     R_RegisterCCallable("revdbayes", "_revdbayes_gp_phi_to_theta", (DL_FUNC)_revdbayes_gp_phi_to_theta_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_gev_phi_to_theta", (DL_FUNC)_revdbayes_gev_phi_to_theta_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_pp_phi_to_theta", (DL_FUNC)_revdbayes_pp_phi_to_theta_try);
+    R_RegisterCCallable("revdbayes", "_revdbayes_kgaps_phi_to_theta", (DL_FUNC)_revdbayes_kgaps_phi_to_theta_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_phi_to_theta_xptr", (DL_FUNC)_revdbayes_phi_to_theta_xptr_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_gp_mdi_logpost_phi", (DL_FUNC)_revdbayes_gp_mdi_logpost_phi_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_gp_norm_logpost_phi", (DL_FUNC)_revdbayes_gp_norm_logpost_phi_try);
@@ -3509,6 +3668,10 @@ RcppExport SEXP _revdbayes_RcppExport_registerCCallable() {
     R_RegisterCCallable("revdbayes", "_revdbayes_gev_logpost_phi_xptr", (DL_FUNC)_revdbayes_gev_logpost_phi_xptr_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_pp_logpost_phi_xptr", (DL_FUNC)_revdbayes_pp_logpost_phi_xptr_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_os_logpost_phi_xptr", (DL_FUNC)_revdbayes_os_logpost_phi_xptr_try);
+    R_RegisterCCallable("revdbayes", "_revdbayes_kgaps_logpost", (DL_FUNC)_revdbayes_kgaps_logpost_try);
+    R_RegisterCCallable("revdbayes", "_revdbayes_kgaps_logpost_xptr", (DL_FUNC)_revdbayes_kgaps_logpost_xptr_try);
+    R_RegisterCCallable("revdbayes", "_revdbayes_kgaps_log_j", (DL_FUNC)_revdbayes_kgaps_log_j_try);
+    R_RegisterCCallable("revdbayes", "_revdbayes_log_j_xptr", (DL_FUNC)_revdbayes_log_j_xptr_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_user_gp_flat", (DL_FUNC)_revdbayes_user_gp_flat_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_user_gev_norm", (DL_FUNC)_revdbayes_user_gev_norm_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_user_gev_flat", (DL_FUNC)_revdbayes_user_gev_flat_try);
@@ -3581,6 +3744,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_revdbayes_gp_phi_to_theta", (DL_FUNC) &_revdbayes_gp_phi_to_theta, 2},
     {"_revdbayes_gev_phi_to_theta", (DL_FUNC) &_revdbayes_gev_phi_to_theta, 2},
     {"_revdbayes_pp_phi_to_theta", (DL_FUNC) &_revdbayes_pp_phi_to_theta, 2},
+    {"_revdbayes_kgaps_phi_to_theta", (DL_FUNC) &_revdbayes_kgaps_phi_to_theta, 2},
     {"_revdbayes_phi_to_theta_xptr", (DL_FUNC) &_revdbayes_phi_to_theta_xptr, 1},
     {"_revdbayes_gp_mdi_logpost_phi", (DL_FUNC) &_revdbayes_gp_mdi_logpost_phi, 2},
     {"_revdbayes_gp_norm_logpost_phi", (DL_FUNC) &_revdbayes_gp_norm_logpost_phi, 2},
@@ -3620,6 +3784,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_revdbayes_gev_logpost_phi_xptr", (DL_FUNC) &_revdbayes_gev_logpost_phi_xptr, 1},
     {"_revdbayes_pp_logpost_phi_xptr", (DL_FUNC) &_revdbayes_pp_logpost_phi_xptr, 1},
     {"_revdbayes_os_logpost_phi_xptr", (DL_FUNC) &_revdbayes_os_logpost_phi_xptr, 1},
+    {"_revdbayes_kgaps_logpost", (DL_FUNC) &_revdbayes_kgaps_logpost, 2},
+    {"_revdbayes_kgaps_logpost_xptr", (DL_FUNC) &_revdbayes_kgaps_logpost_xptr, 1},
+    {"_revdbayes_kgaps_log_j", (DL_FUNC) &_revdbayes_kgaps_log_j, 2},
+    {"_revdbayes_log_j_xptr", (DL_FUNC) &_revdbayes_log_j_xptr, 1},
     {"_revdbayes_user_gp_flat", (DL_FUNC) &_revdbayes_user_gp_flat, 2},
     {"_revdbayes_user_gev_norm", (DL_FUNC) &_revdbayes_user_gev_norm, 2},
     {"_revdbayes_user_gev_flat", (DL_FUNC) &_revdbayes_user_gev_flat, 2},

@@ -823,7 +823,7 @@ Rcpp::NumericVector gev_phi_to_theta(const Rcpp::NumericVector& phi,
 
 // [[Rcpp::export]]
 Rcpp::NumericVector pp_phi_to_theta(const Rcpp::NumericVector& phi,
-                                     const Rcpp::List& user_args) {
+                                    const Rcpp::List& user_args) {
   double thresh = user_args["thresh"] ;
   double xm = user_args["xm"] ;
   double sr = sqrt(xm - thresh) ;
@@ -832,6 +832,15 @@ Rcpp::NumericVector pp_phi_to_theta(const Rcpp::NumericVector& phi,
   val[2] = (phi[2] - phi[1]) / sr ;
   val[1] = ((xm - phi[0]) * phi[1] + (phi[0] - thresh) * phi[2]) / sr ;
   return val ;
+}
+
+// K-gaps model phi_to_theta
+
+// [[Rcpp::export]]
+Rcpp::NumericVector kgaps_phi_to_theta(const Rcpp::NumericVector& phi,
+                                       const Rcpp::List& user_args) {
+  Rcpp::NumericVector ephi = exp(phi) ;
+  return ephi / (1 + ephi) ;
 }
 
 // Create external pointers to phi_to_theta functions
@@ -848,6 +857,8 @@ SEXP phi_to_theta_xptr(std::string fstr) {
     return(Rcpp::XPtr<p2tPtr>(new p2tPtr(&gev_phi_to_theta))) ;
   else if (fstr == "pp")
     return(Rcpp::XPtr<p2tPtr>(new p2tPtr(&pp_phi_to_theta))) ;
+  else if (fstr == "kgaps")
+    return(Rcpp::XPtr<p2tPtr>(new p2tPtr(&kgaps_phi_to_theta))) ;
   else
     return(Rcpp::XPtr<p2tPtr>(R_NilValue)) ;
 }
@@ -1196,4 +1207,54 @@ SEXP os_logpost_phi_xptr(std::string fstr) {
     return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&os_user_logpost_phi))) ;
   else
     return(Rcpp::XPtr<logpostPtr>(R_NilValue)) ;
+}
+
+// K-gaps
+
+// [[Rcpp::export]]
+double kgaps_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+  if (x[0] < 0 || x[0] > 1)
+    return R_NegInf ;
+  int N0 = pars["N0"] ;
+  int N1 = pars["N1"] ;
+  double sum_qs = pars["sum_qs"] ;
+  double loglik = 0.0 ;
+  if (N1 > 0)
+    loglik = loglik + 2 * N1 * log(x[0]) - sum_qs * x[0] ;
+  if (N0 > 0)
+    loglik = loglik + N0 * log(1 - x[0]) ;
+  double alpha = pars["alpha"] ;
+  double beta = pars["beta"] ;
+  double logprior = (alpha - 1) * log(x[0]) + (beta - 1) * log(1 - x[0]) ;
+  return loglik + logprior ;
+}
+
+// [[Rcpp::export]]
+SEXP kgaps_logpost_xptr(std::string fstr) {
+  typedef double (*logpostPtr)(const Rcpp::NumericVector& x,
+                  const Rcpp::List& pars) ;
+  if (fstr == "kgaps")
+    return(Rcpp::XPtr<logpostPtr>(new logpostPtr(&kgaps_logpost))) ;
+  else
+    return(Rcpp::XPtr<logpostPtr>(R_NilValue)) ;
+}
+
+// K-gaps model log_j
+
+// [[Rcpp::export]]
+double kgaps_log_j(const Rcpp::NumericVector& theta,
+                   const Rcpp::List& user_args) {
+  return -log(theta[0]) - log(1 - theta[0]) ;
+}
+
+// Create external pointers to log_j functions
+
+// [[Rcpp::export]]
+SEXP log_j_xptr(std::string fstr) {
+  typedef double (*p2tPtr)(const Rcpp::NumericVector& theta,
+                  const Rcpp::List& user_args) ;
+  if (fstr == "kgaps")
+    return(Rcpp::XPtr<p2tPtr>(new p2tPtr(&kgaps_log_j))) ;
+  else
+    return(Rcpp::XPtr<p2tPtr>(R_NilValue)) ;
 }
