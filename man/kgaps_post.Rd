@@ -79,8 +79,8 @@ A beta(\eqn{\alpha}, \eqn{\beta}) prior distribution is used for
   \eqn{\theta}-scale.
 }
 \examples{
-u <- quantile(newlyn, probs = 0.90)
-k_postsim <- kgaps_post(newlyn, u)
+thresh <- quantile(newlyn, probs = 0.90)
+k_postsim <- kgaps_post(newlyn, thresh)
 plot(k_postsim)
 }
 \references{

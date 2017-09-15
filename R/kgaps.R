@@ -76,6 +76,7 @@
 #' thresh <- quantile(newlyn, probs = 0.90)
 #' k_postsim <- kgaps_post(newlyn, thresh)
 #' plot(k_postsim)
+#' @export
 kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE, alpha = 1,
                        beta = 1, param = c("logit", "theta"), use_rcpp = TRUE) {
   param <- match.arg(param)
@@ -207,6 +208,7 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE, alpha = 
 #' kgaps_mle(newlyn, u)
 #' # MLE, SE and 95% confidence interval
 #' kgaps_mle(newlyn, u, conf = 95)
+#' @export
 kgaps_mle <- function(data, thresh, k = 1, inc_cens = FALSE, conf = NULL) {
   # Calculate sufficient statistics
   ss <- kgaps_stats(data, thresh, k, inc_cens)
@@ -296,6 +298,7 @@ kgaps_mle <- function(data, thresh, k = 1, inc_cens = FALSE, conf = NULL) {
 #' @examples
 #' u <- quantile(newlyn, probs = 0.90)
 #' kgaps_stats(newlyn, u)
+#' @export
 kgaps_stats <- function(data, thresh, k = 1, inc_cens = FALSE) {
   if (any(is.na(data))) {
     stop("No missing values are allowed in ''data''")
