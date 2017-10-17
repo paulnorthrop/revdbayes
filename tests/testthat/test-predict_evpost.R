@@ -22,7 +22,8 @@ ps <- predict(gevp, type = "p", x = qs, n_years = c(100, 1000))$y
 
 check_ps <- matrix(c(0.025, 0.25, 0.5, 0.75, 0.975), 5, 2)
 
-testthat::expect_equal(ps, check_ps, tolerance = my_tol)
+testthat::test_that("GEV_predict",
+                    testthat::expect_equal(ps, check_ps, tolerance = my_tol))
 
 # 2. binGP
 #
@@ -44,5 +45,6 @@ ps <- predict(bgpg, type = "p", x = qs, n_years = c(100, 1000))$y
 
 check_ps <- matrix(c(0.025, 0.25, 0.5, 0.75, 0.975), 5, 2)
 
-testthat::expect_equal(ps, check_ps, tolerance = my_tol)
+testthat::test_that("binGP_predict",
+                    testthat::expect_equal(ps, check_ps, tolerance = my_tol))
 
