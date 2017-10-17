@@ -13,26 +13,30 @@ got_evdbayes <- requireNamespace("evdbayes", quietly = TRUE)
 # prior_prob
 
 prior_prob_test <- function(x, quant, alpha) {
-  if(got_evdbayes) {
-    e_val <- evdbayes::dprior.prob(par = x, quant = quant, alpha = alpha,
-                                   trendsd = 0)
-  }
   r_val <- as.numeric(gev_prob(pars = x, quant = quant, alpha = alpha))
   c_val <- cpp_gev_prob(x = x, ppars = list(quant = quant, alpha = alpha))
+  if (got_evdbayes) {
+    e_val <- evdbayes::dprior.prob(par = x, quant = quant, alpha = alpha,
+                                   trendsd = 0)
+  } else {
+    return(list(r_val = r_val, c_val = c_val))
+  }
   return(list(e_val = e_val, r_val = r_val, c_val = c_val))
 }
 
 # prior_quant
 
 prior_quant_test <- function(x, prob, shape, scale) {
-  if(got_evdbayes) {
-    e_val <- evdbayes::dprior.quant(par = x, prob = prob, shape = shape,
-                                    scale = scale, trendsd = 0)
-  }
   r_val <- as.numeric(gev_quant(pars = x, prob = prob, shape = shape,
                                 scale = scale))
   c_val <- cpp_gev_quant(x = x, ppars = list(prob = prob, shape = shape,
                                              scale = scale))
+  if(got_evdbayes) {
+    e_val <- evdbayes::dprior.quant(par = x, prob = prob, shape = shape,
+                                    scale = scale, trendsd = 0)
+  } else {
+    return(list(r_val = r_val, c_val = c_val))
+  }
   return(list(e_val = e_val, r_val = r_val, c_val = c_val))
 }
 
