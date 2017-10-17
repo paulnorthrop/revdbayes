@@ -34,7 +34,7 @@ A list containing
     \item {\code{theta_se} : } {The estimated standard error of the MLE.}
     \item {\code{ss} : } {The list of summary statistics returned from
       \code{\link{kgaps_stats}}.}
-    \item {\code{conf_int} : } {(If \code{conf} is supplied) a numeric
+    \item {\code{theta_ci} : } {(If \code{conf} is supplied) a numeric
       vector of length two giving lower and upper confidence limits for
       \eqn{\theta}.}
   }
@@ -53,11 +53,11 @@ The maximum likelihood estimate of the extremal index \eqn{\theta}
   \strong{Details} section of \code{\link{kgaps_stats}}.
 }
 \examples{
-u <- quantile(newlyn, probs = 0.90)
+thresh <- quantile(newlyn, probs = 0.90)
 # MLE and SE only
-kgaps_mle(newlyn, u)
+kgaps_mle(newlyn, thresh)
 # MLE, SE and 95\% confidence interval
-kgaps_mle(newlyn, u, conf = 95)
+kgaps_mle(newlyn, thresh, conf = 95)
 }
 \references{
 Suveges, M. and Davison, A. C. (2010) Model

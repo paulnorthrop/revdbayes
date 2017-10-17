@@ -196,18 +196,18 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE, alpha = 
 #'     \item {\code{theta_se} : } {The estimated standard error of the MLE.}
 #'     \item {\code{ss} : } {The list of summary statistics returned from
 #'       \code{\link{kgaps_stats}}.}
-#'     \item {\code{conf_int} : } {(If \code{conf} is supplied) a numeric
+#'     \item {\code{theta_ci} : } {(If \code{conf} is supplied) a numeric
 #'       vector of length two giving lower and upper confidence limits for
 #'       \eqn{\theta}.}
 #'   }
 #' @seealso \code{\link{kgaps_stats}} for the calculation of sufficient
 #'   statistics for the K-gaps model.
 #' @examples
-#' u <- quantile(newlyn, probs = 0.90)
+#' thresh <- quantile(newlyn, probs = 0.90)
 #' # MLE and SE only
-#' kgaps_mle(newlyn, u)
+#' kgaps_mle(newlyn, thresh)
 #' # MLE, SE and 95% confidence interval
-#' kgaps_mle(newlyn, u, conf = 95)
+#' kgaps_mle(newlyn, thresh, conf = 95)
 #' @export
 kgaps_mle <- function(data, thresh, k = 1, inc_cens = FALSE, conf = NULL) {
   # Calculate sufficient statistics
@@ -239,7 +239,7 @@ kgaps_mle <- function(data, thresh, k = 1, inc_cens = FALSE, conf = NULL) {
     return(list(theta_mle = theta_mle, theta_se = theta_se, ss = ss))
   }
   conf_int <- kgaps_conf_int(theta_mle, ss, conf = 95)
-  return(list(theta_mle = theta_mle, theta_se = theta_se, conf_int = conf_int,
+  return(list(theta_mle = theta_mle, theta_se = theta_se, theta_ci = conf_int,
               ss = ss))
 }
 
