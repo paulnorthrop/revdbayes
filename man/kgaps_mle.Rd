@@ -32,11 +32,11 @@ A list containing
     \item {\code{theta_mle} : } {The maximum likelihood estimate (MLE) of
       \eqn{\theta}.}
     \item {\code{theta_se} : } {The estimated standard error of the MLE.}
-    \item {\code{ss} : } {The list of summary statistics returned from
-      \code{\link{kgaps_stats}}.}
     \item {\code{theta_ci} : } {(If \code{conf} is supplied) a numeric
       vector of length two giving lower and upper confidence limits for
       \eqn{\theta}.}
+    \item {\code{ss} : } {The list of summary statistics returned from
+      \code{\link{kgaps_stats}}.}
   }
 }
 \description{
