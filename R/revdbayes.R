@@ -66,7 +66,7 @@
 #' @importFrom bayesplot mcmc_intervals
 #' @importFrom bayesplot mcmc_dens
 #' @importFrom bayesplot mcmc_hist
-#' @useDynLib revdbayes
+#' @useDynLib revdbayes, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
 
