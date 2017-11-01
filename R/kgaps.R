@@ -89,14 +89,6 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE, alpha = 
   mle_list <- kgaps_mle(data, thresh, k, inc_cens)
   theta_mle <- mle_list$theta_mle
   ss <- mle_list$ss
-  # Define the K-gaps posterior distribution for theta
-  logpost <- function(theta, ss) {
-    loglik <- do.call(kgaps_loglik, c(list(theta = theta), ss))
-    if (is.infinite(loglik)) return(loglik)
-    # Add beta(alpha, beta) prior
-    logprior <- stats::dbeta(theta, alpha, beta, log = TRUE)
-    return(loglik + logprior)
-  }
   # Set an initial value for theta, and perhaps phi. We do this by noting that
   # (a) the Jacobian of the transformation from theta to phi multiplies the
   # likelihood by a factor of theta * (1 - theta), and (b) the beta prior
@@ -106,6 +98,7 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE, alpha = 
   #
   theta_init <- kgaps_quad_solve(ss$N0 + alpha, ss$N1 + beta, ss$sum_qs)
   # Set essential arguments to ru()
+  # ... including the K-gaps posterior distribution for theta
   if (use_rcpp) {
     post_ptr <- kgaps_logpost_xptr("kgaps")
     for_post <- c(ss, list(alpha = alpha, beta = beta))
