@@ -22,8 +22,8 @@ addons:
       - clang
 
 r:
-#  - release
-  - devel
+  - release
+#  - devel
 #  - oldrel
 
 env:
