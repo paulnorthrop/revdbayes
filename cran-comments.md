@@ -12,4 +12,4 @@
 
 ## Downstream dependencies
 
-revdbayes has no downstream dependencies.
+The one downstream dependency of revdbayes (threshr) passed R CMD check.
