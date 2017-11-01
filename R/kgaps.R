@@ -3,7 +3,7 @@
 #' Random sampling from K-gaps posterior distribution
 #'
 #' Uses the \code{\link[rust]{ru}} function in the \code{\link[rust]{rust}}
-#' package to simulate from the posterior distribution of the extremal value
+#' package to simulate from the posterior distribution of the extremal
 #' index \eqn{\theta} based on the K-gaps model for threshold interexceedance
 #' times of Suveges and Davison (2010).
 #'
@@ -95,7 +95,7 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE, alpha = 
     loglik <- do.call(kgaps_loglik, c(list(theta = theta), ss))
     if (is.infinite(loglik)) return(loglik)
     # Add beta(alpha, beta) prior
-    logprior <- dbeta(theta, alpha, beta, log = TRUE)
+    logprior <- stats::dbeta(theta, alpha, beta, log = TRUE)
     return(loglik + logprior)
   }
   # Set an initial value for theta, and perhaps phi. We do this by noting that
@@ -116,7 +116,7 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE, alpha = 
       loglik <- do.call(kgaps_loglik, c(list(theta = theta), ss))
       if (is.infinite(loglik)) return(loglik)
       # Add beta(alpha, beta) prior
-      logprior <- dbeta(theta, alpha, beta, log = TRUE)
+      logprior <- stats::dbeta(theta, alpha, beta, log = TRUE)
       return(loglik + logprior)
     }
     for_ru <- list(logf = logpost, ss = ss, n = n)
@@ -354,7 +354,7 @@ kgaps_loglik <- function(theta, N0, N1, sum_qs){
 # ============================== kgaps_conf_int ===============================
 
 kgaps_conf_int <- function(theta_mle, ss, conf = 95) {
-  cutoff <- qchisq(conf / 100, df = 1)
+  cutoff <- stats::qchisq(conf / 100, df = 1)
   theta_list <- c(list(theta = theta_mle), ss)
   max_loglik <- do.call(kgaps_loglik, theta_list)
   ob_fn <- function(theta) {
@@ -365,10 +365,10 @@ kgaps_conf_int <- function(theta_mle, ss, conf = 95) {
   ci_low <- 0
   ci_up <- 1
   if (ss$N1 > 0) {
-    ci_low <- uniroot(ob_fn, c(0, theta_mle))$root
+    ci_low <- stats::uniroot(ob_fn, c(0, theta_mle))$root
   }
   if (ss$N0 > 0) {
-    ci_up <- uniroot(ob_fn, c(theta_mle, 1))$root
+    ci_up <- stats::uniroot(ob_fn, c(theta_mle, 1))$root
   }
   return(c(ci_low, ci_up))
 }
