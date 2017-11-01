@@ -2,10 +2,9 @@
 
 #' Random sampling from K-gaps posterior distribution
 #'
-#' Uses the \code{\link[rust]{ru}} function in the \code{\link[rust]{rust}}
-#' package to simulate from the posterior distribution of the extremal
-#' index \eqn{\theta} based on the K-gaps model for threshold interexceedance
-#' times of Suveges and Davison (2010).
+#' Uses the \code{\link[rust]{rust}} package to simulate from the posterior
+#' distribution of the extremal index \eqn{\theta} based on the K-gaps model
+#' for threshold interexceedance times of Suveges and Davison (2010).
 #'
 #' @param n A numeric scalar. The size of posterior sample required.
 #' @param data A numeric vector of raw data.  No missing values are allowed.
