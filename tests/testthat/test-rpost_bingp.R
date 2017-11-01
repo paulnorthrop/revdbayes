@@ -37,7 +37,6 @@ bingp_test <- function(seed = 47, prior, n = 5, rotate = TRUE,
 
 test_function <- function(x, test_string) {
   testthat::test_that(test_string, {
-#    skip_on_cran()
     testthat::expect_equal(x$sim1, x$sim2, tolerance = my_tol)
     testthat::expect_equal(x$data_rep1, x$data_rep2, tolerance = my_tol)
   })
