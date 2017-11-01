@@ -21,6 +21,11 @@ The main functions in the revdbayes package are \code{\link{rpost}}
   ratio-of-uniforms algorithm by working with transformation of the model
   parameters.
 
+  The function \code{\link{kgaps_post}} simulates from the posterior
+  distribution of the extremal index \eqn{\theta} based on the
+  K-gaps model for threshold interexceedance times of Suveges and Davison
+  (2010).  See also Attalides (2015).
+
   See \code{vignette("revdbayes-vignette", package = "revdbayes")} for an
   overview of the package and
   \code{vignette("revdbayes-using-rcpp-vignette", package = "revdbayes")}
@@ -34,6 +39,15 @@ The main functions in the revdbayes package are \code{\link{rpost}}
 Northrop, P. J. (2016). rust: Ratio-of-Uniforms Simulation with
   Transformation. R package version 1.2.2.
   \url{https://cran.r-project.org/package=rust}.
+
+Suveges, M. and Davison, A. C. (2010) Model
+  misspecification in peaks over threshold analysis, \emph{The Annals of
+  Applied Statistics}, \strong{4}(1), 203-221.
+  \url{http://dx.doi.org/10.1214/09-AOAS292}
+
+Attalides, N. (2015) Threshold-based extreme value modelling,
+  PhD thesis, University College London.
+  \url{http://discovery.ucl.ac.uk/1471121/1/Nicolas_Attalides_Thesis.pdf}
 }
 \seealso{
 \code{\link{set_prior}} to set a prior density for extreme value
@@ -41,6 +55,9 @@ Northrop, P. J. (2016). rust: Ratio-of-Uniforms Simulation with
 
 \code{\link{rpost}} and \code{\link{rpost_rcpp}} to perform
   ratio-of-uniforms sampling from an extreme value posterior distribution.
+
+\code{\link{kgaps_post}} to sample from the posterior distribution
+  for the extremal index.
 
 The \code{\link[rust]{ru}} and \code{\link[rust]{ru_rcpp}}
   functions in the \code{\link{rust}} package for details of the arguments
