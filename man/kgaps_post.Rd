@@ -73,8 +73,8 @@ A beta(\eqn{\alpha}, \eqn{\beta}) prior distribution is used for
   generalised ratio-of-uniforms distribution.  To improve the probability
   of acceptance, and to ensure that the simulation will work even in
   extreme cases where the posterior density of \eqn{\theta} is unbounded as
-  \eqn{\theta} approaches 0 or 1, we simulate from the posterior distribution
-  of \eqn{\phi = logit(\theta)} and then transform back to the
+  \eqn{\theta} approaches 0 or 1, we simulate from the posterior
+  distribution of \eqn{\phi = logit(\theta)} and then transform back to the
   \eqn{\theta}-scale.
 }
 \examples{

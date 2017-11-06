@@ -45,8 +45,8 @@
 #'   generalised ratio-of-uniforms distribution.  To improve the probability
 #'   of acceptance, and to ensure that the simulation will work even in
 #'   extreme cases where the posterior density of \eqn{\theta} is unbounded as
-#'   \eqn{\theta} approaches 0 or 1, we simulate from the posterior distribution
-#'   of \eqn{\phi = logit(\theta)} and then transform back to the
+#'   \eqn{\theta} approaches 0 or 1, we simulate from the posterior
+#'   distribution of \eqn{\phi = logit(\theta)} and then transform back to the
 #'   \eqn{\theta}-scale.
 #' @return An object (list) of class \code{"evpost"}, which has the same
 #'   structure as an object of class \code{"ru"} returned from
@@ -76,8 +76,9 @@
 #' k_postsim <- kgaps_post(newlyn, thresh)
 #' plot(k_postsim)
 #' @export
-kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE, alpha = 1,
-                       beta = 1, param = c("logit", "theta"), use_rcpp = TRUE) {
+kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE,
+                       alpha = 1, beta = 1, param = c("logit", "theta"),
+                       use_rcpp = TRUE) {
   param <- match.arg(param)
   if (k < 1) {
     stop("k must be no smaller than 1.")
