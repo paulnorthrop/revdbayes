@@ -1,3 +1,11 @@
+# revdbayes 1.4.1
+
+## New features
+
+## Bug fixes and minor improvements
+
+* In `pp_check.evpost` the argument `subtype` is now documented properly.
+
 # revdbayes 1.3.1
 
 ## New features

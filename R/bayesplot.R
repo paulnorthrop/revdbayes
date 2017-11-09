@@ -32,7 +32,14 @@
 #'     \code{fun} to be supplied
 #'     (see \link[bayesplot]{pp_check}).
 #' }
-#' @param subtype A character scalar.
+#' @param subtype A character scalar.  Specifies the form of the plot(s)
+#'   produced.  Could be one of
+#'   \code{"dens", "hist", "boxplot", "ribbon", "intervals"}.
+#'   If \code{subtype} is not supplied then the defaults are:
+#'   \code{"ecdf"} if \code{type = overlaid},
+#'   \code{"dens"} if \code{type = multiple},
+#'   \code{"intervals"} if \code{type = intervals}.
+#'   \code{subtype} is not relevant if \code{type = "stat"}.
 #' @param stat See \link[bayesplot]{PPC-test-statistics}.
 #' @param nrep If \code{type = "multiple"} the maximum number of
 #'   summary plots of the predictive simulated datasets to include.
