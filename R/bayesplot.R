@@ -37,6 +37,7 @@
 #' @param nrep If \code{type = "multiple"} the maximum number of
 #'   summary plots of the predictive simulated datasets to include.
 #' @param fun The plotting function to call.
+#'   Only relevant if \code{type = "user"}.
 #'   Can be any of the functions detailed at \link[bayesplot]{PPC-overview}.
 #'   The "ppc_" prefix can optionally be dropped if fun is specified
 #'   as a string.

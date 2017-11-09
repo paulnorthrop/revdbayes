@@ -44,6 +44,7 @@ Currently \code{object$model = "gev"},
 summary plots of the predictive simulated datasets to include.}
 
 \item{fun}{The plotting function to call.
+Only relevant if \code{type = "user"}.
 Can be any of the functions detailed at \link[bayesplot]{PPC-overview}.
 The "ppc_" prefix can optionally be dropped if fun is specified
 as a string.}
