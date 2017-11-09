@@ -38,7 +38,7 @@ Currently \code{object$model = "gev"},
 
 \item{subtype}{A character scalar.  Specifies the form of the plot(s)
 produced.  Could be one of
-\code{"dens", "hist", "boxplot", "ribbon", "intervals"}.
+\code{"dens", "hist", "boxplot", "ribbon"} or \code{"intervals"}.
 If \code{subtype} is not supplied then the defaults are:
 \code{"ecdf"} if \code{type = overlaid},
 \code{"dens"} if \code{type = multiple},
