@@ -167,7 +167,7 @@ Chapman & Hall/CRC Press, London, third edition. (Chapter 6)
 \url{www.stat.columbia.edu/~gelman/book}
 }
 \seealso{
-\code{\link{rpost}} and \code{\link{rpost_rcpp}}for sampling
+\code{\link{rpost}} and \code{\link{rpost_rcpp}} for sampling
   from an extreme value posterior distribution.
 
 \strong{bayesplot} functions \link[bayesplot]{PPC-overview},

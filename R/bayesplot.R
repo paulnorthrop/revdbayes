@@ -81,7 +81,7 @@
 #'   only their sample maxima.
 #' @return A ggplot object that can be further customized using the
 #'   \strong{ggplot2} package.
-#' @seealso \code{\link{rpost}} and \code{\link{rpost_rcpp}}for sampling
+#' @seealso \code{\link{rpost}} and \code{\link{rpost_rcpp}} for sampling
 #'   from an extreme value posterior distribution.
 #' @seealso \strong{bayesplot} functions \link[bayesplot]{PPC-overview},
 #'   \link[bayesplot]{PPC-distributions},
