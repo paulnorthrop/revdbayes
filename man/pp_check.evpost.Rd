@@ -48,7 +48,9 @@ If \code{subtype} is not supplied then the defaults are:
 \item{stat}{See \link[bayesplot]{PPC-test-statistics}.}
 
 \item{nrep}{If \code{type = "multiple"} the maximum number of
-summary plots of the predictive simulated datasets to include.}
+summary plots of the predictive simulated datasets to include.
+If \code{nrep} is greater than \code{nrow(object$data_rep)} then
+\code{nrep} is set equal to \code{nrow(object$data_rep)}.}
 
 \item{fun}{The plotting function to call.
 Only relevant if \code{type = "user"}.

@@ -43,6 +43,8 @@
 #' @param stat See \link[bayesplot]{PPC-test-statistics}.
 #' @param nrep If \code{type = "multiple"} the maximum number of
 #'   summary plots of the predictive simulated datasets to include.
+#'   If \code{nrep} is greater than \code{nrow(object$data_rep)} then
+#'   \code{nrep} is set equal to \code{nrow(object$data_rep)}.
 #' @param fun The plotting function to call.
 #'   Only relevant if \code{type = "user"}.
 #'   Can be any of the functions detailed at \link[bayesplot]{PPC-overview}.
