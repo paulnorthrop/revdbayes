@@ -6,6 +6,8 @@
 
 * In `pp_check.evpost` the argument `subtype` is now documented properly.
 
+* The `conf` argument to `kgaps_mle` didn't work properly: `conf = 95` was always used.  This has been corrected.
+
 # revdbayes 1.3.1
 
 ## New features

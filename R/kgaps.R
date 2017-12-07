@@ -231,7 +231,7 @@ kgaps_mle <- function(data, thresh, k = 1, inc_cens = FALSE, conf = NULL) {
   if (is.null(conf)) {
     return(list(theta_mle = theta_mle, theta_se = theta_se, ss = ss))
   }
-  conf_int <- kgaps_conf_int(theta_mle, ss, conf = 95)
+  conf_int <- kgaps_conf_int(theta_mle, ss, conf = conf)
   return(list(theta_mle = theta_mle, theta_se = theta_se, theta_ci = conf_int,
               ss = ss))
 }
