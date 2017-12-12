@@ -79,6 +79,12 @@
 kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE,
                        alpha = 1, beta = 1, param = c("logit", "theta"),
                        use_rcpp = TRUE) {
+  if (!is.numeric(thresh) || length(thresh) != 1) {
+    stop("thresh must be a numeric scalar")
+  }
+  if (!is.numeric(k) || length(k) != 1) {
+    stop("k must be a numeric scalar")
+  }
   param <- match.arg(param)
   if (k < 1) {
     stop("k must be no smaller than 1.")
@@ -203,6 +209,12 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE,
 #' kgaps_mle(newlyn, thresh, conf = 95)
 #' @export
 kgaps_mle <- function(data, thresh, k = 1, inc_cens = FALSE, conf = NULL) {
+  if (!is.numeric(thresh) || length(thresh) != 1) {
+    stop("thresh must be a numeric scalar")
+  }
+  if (!is.numeric(k) || length(k) != 1) {
+    stop("k must be a numeric scalar")
+  }
   # Calculate sufficient statistics
   ss <- kgaps_stats(data, thresh, k, inc_cens)
   # If N0 = 0 then all exceedances occur singly (all K-gaps are positive)
@@ -295,6 +307,12 @@ kgaps_mle <- function(data, thresh, k = 1, inc_cens = FALSE, conf = NULL) {
 kgaps_stats <- function(data, thresh, k = 1, inc_cens = FALSE) {
   if (any(is.na(data))) {
     stop("No missing values are allowed in ''data''")
+  }
+  if (!is.numeric(thresh) || length(thresh) != 1) {
+    stop("thresh must be a numeric scalar")
+  }
+  if (!is.numeric(k) || length(k) != 1) {
+    stop("k must be a numeric scalar")
   }
   # Sample size, positions, number and proportion of exceedances
   nx <- length(data)
