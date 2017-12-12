@@ -82,6 +82,9 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE,
   if (!is.numeric(thresh) || length(thresh) != 1) {
     stop("thresh must be a numeric scalar")
   }
+  if (thresh >= max(data)) {
+    stop("thresh must be less than max(data)")
+  }
   if (!is.numeric(k) || length(k) != 1) {
     stop("k must be a numeric scalar")
   }
@@ -215,6 +218,9 @@ kgaps_mle <- function(data, thresh, k = 1, inc_cens = FALSE, conf = NULL) {
   if (!is.numeric(k) || length(k) != 1) {
     stop("k must be a numeric scalar")
   }
+  if (thresh >= max(data)) {
+    stop("thresh must be less than max(data)")
+  }
   # Calculate sufficient statistics
   ss <- kgaps_stats(data, thresh, k, inc_cens)
   # If N0 = 0 then all exceedances occur singly (all K-gaps are positive)
@@ -310,6 +316,9 @@ kgaps_stats <- function(data, thresh, k = 1, inc_cens = FALSE) {
   }
   if (!is.numeric(thresh) || length(thresh) != 1) {
     stop("thresh must be a numeric scalar")
+  }
+  if (thresh >= max(data)) {
+    stop("thresh must be less than max(data)")
   }
   if (!is.numeric(k) || length(k) != 1) {
     stop("k must be a numeric scalar")
