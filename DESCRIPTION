@@ -1,7 +1,7 @@
 Package: revdbayes
 Title: Ratio-of-Uniforms Sampling for Bayesian Extreme Value Analysis
 Version: 1.3.1.9000
-Date: 2017-11-01
+Date: 2017-12-22
 Authors@R: person(c("Paul", "J."), "Northrop", email = "p.northrop@ucl.ac.uk",
   role = c("aut", "cre", "cph"))
 Description: Provides functions for the Bayesian analysis of extreme value
@@ -18,11 +18,12 @@ Imports: bayesplot (>= 1.1.0),
     Rcpp,
     rust (>= 1.2.2),
     stats,
-    utils
+    utils,
+    zoo
 License: GPL (>= 2)
 LazyData: TRUE
 Depends:
-    R (>= 3.3.1),
+    R (>= 3.3.0),
 RoxygenNote: 6.0.1
 Suggests: evdbayes,
     ggplot2 (>= 2.2.1),
