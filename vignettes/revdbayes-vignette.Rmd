@@ -203,7 +203,7 @@ each time that the posterior density is evaluated means that posterior
 sampling is slower than the default setting of `rotate = TRUE` and 
 `trans = "none"`.  That is, in this example at least, the increase is $p_a$ 
 resulting from the addition of the Box-Cox transformation is not sufficient 
-offset the extra time needed to compute the posterior density.  
+to offset the extra time needed to compute the posterior density.  
 
 ```{r, echo = FALSE}
 thresh <- quantile(gom, probs = 0.95)
