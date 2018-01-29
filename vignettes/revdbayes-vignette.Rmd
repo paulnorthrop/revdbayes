@@ -208,10 +208,10 @@ offset the extra time needed to compute the posterior density.
 ```{r, echo = FALSE}
 thresh <- quantile(gom, probs = 0.95)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
-t1 <- system.time(
-gp1 <- rpost(n = n, model = "gp", prior = fp, thresh = thresh, data = gom,
-             rotate = FALSE)
-)[3]
+#t1 <- system.time(
+#gp1 <- rpost(n = n, model = "gp", prior = fp, thresh = thresh, data = gom,
+#             rotate = FALSE)
+#)[3]
 t2 <- system.time(
 gp2 <- rpost(n = n, model = "gp", prior = fp, thresh = thresh, data = gom)
 )[3]
