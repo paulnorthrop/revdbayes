@@ -234,7 +234,7 @@ time. Box-Cox transformation also produces a distribution for which the
 optimisations involved in the ratio-of-uniforms method will have greater 
 stability.
 
-```{r, fig.show='hold'}
+```{r, fig.show='hold', echo = FALSE}
 plot(gp1, ru_scale = FALSE, cex.main = 0.75, cex.lab = 0.75, 
   main = paste("no transformation \n pa = ", round(gp1$pa, 3), 
                ", time = ", round(t1, 2), "s"))
