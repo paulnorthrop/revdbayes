@@ -6,4 +6,6 @@
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^before-install\.sh$
+^man/ts_post\.Rd$
+^man/find_clusters\.Rd$
 ^ts_post\.R$
