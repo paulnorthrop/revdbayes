@@ -3,3 +3,6 @@
 .RData
 inst/doc
 create_logo
+ts_post.R
+man/ts_post.Rd
+man/find_clusters.Rd
