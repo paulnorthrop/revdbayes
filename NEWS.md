@@ -1,8 +1,8 @@
 # revdbayes 1.3.1.9000
 
-## New features
-
 ## Bug fixes and minor improvements
+
+* The arguments to `d/p/q/rgev` and `d/p/q/rgp` now obey the usual conventions for R's dpqr probability distribution functions.
 
 * In `pp_check.evpost` the argument `subtype` is now documented properly.
 
