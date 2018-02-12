@@ -12,4 +12,4 @@
 
 ## Downstream dependencies
 
-The one downstream dependency of revdbayes (threshr) passed R CMD check.
+The three downstream dependencies of revdbayes (threshr, fitteR, rust) passed R CMD check.
