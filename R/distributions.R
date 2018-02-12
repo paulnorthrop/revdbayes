@@ -14,8 +14,9 @@
 #' @param n Numeric scalar.  The number of observations to be simulated.
 #'   If \code{length(n) > 1} then \code{length(n)} is taken to be the number
 #'   required.
-#' @param log A logical scalar.  If TRUE the log-density is returned.
-#' @param lower_tail A logical scalar.  If TRUE (default), probabilities
+#' @param log,log.p A logical scalar; if TRUE, probabilities p are given as
+#'   log(p).
+#' @param lower.tail A logical scalar.  If TRUE (default), probabilities
 #'   are P[X <= x], otherwise, P[X > x].
 #' @param m A numeric scalar.  The distribution is reparameterised by working
 #'  with the GEV(\code{loc, scale, shape}) distribution function raised to the
@@ -33,10 +34,10 @@
 #'  Note that if \eqn{\xi < -1} the GEV density function becomes infinite
 #'  as \eqn{x} approaches \eqn{\mu -\sigma / \xi} from below.
 #'
-#'  If \code{lower_tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
+#'  If \code{lower.tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
 #'  the lower (upper) limit of the distribution is returned, which is
 #'  \code{-Inf} or \code{Inf} in some cases.  Similarly, but reversed,
-#'  if \code{lower_tail = FALSE}.
+#'  if \code{lower.tail = FALSE}.
 #'
 #'  See
 #'  \url{https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution}
@@ -122,7 +123,8 @@ dgev <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE, m = 1) {
 
 #' @rdname gev
 #' @export
-pgev <- function(q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE, m = 1) {
+pgev <- function(q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
+                 log.p = FALSE, m = 1) {
   if (any(scale <= 0)) {
     stop("invalid scale: scale must be positive.")
   }
@@ -136,10 +138,17 @@ pgev <- function(q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE, m = 1) {
   q <- (q - loc) / scale
   p <- 1 + shape * q
   p <- ifelse(abs(shape) > 1e-6 | p < 0,
-              exp(-m * pmax(p, 0) ^ (-1 / shape)),
-              exp(-m * exp(-q + shape * q ^ 2 / 2)))
-  if (!lower_tail) {
-    p <- 1 - p
+              -m * pmax(p, 0) ^ (-1 / shape),
+              -m * exp(-q + shape * q ^ 2 / 2))
+  if (lower.tail) {
+    if (!log.p) {
+      p <- exp(p)
+    }
+  } else {
+    p <- -expm1(p)
+    if (log.p) {
+      p <- log(p)
+    }
   }
   return(p)
 }
@@ -148,11 +157,12 @@ pgev <- function(q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE, m = 1) {
 
 #' @rdname gev
 #' @export
-qgev <- function (p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE, m = 1) {
+qgev <- function (p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
+                  log.p = FALSE, m = 1) {
   if (any(scale <= 0)) {
     stop("invalid scale: scale must be positive.")
   }
-  if (any(p < 0 | p > 1)) {
+  if (!log.p & any(p < 0 | p > 1)) {
     stop("invalid p: p must be in [0,1].")
   }
   max_len <- max(length(p), length(loc), length(scale), length(shape),
@@ -162,7 +172,10 @@ qgev <- function (p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE, m = 1) {
   scale <- rep_len(scale, max_len)
   shape <- rep_len(shape, max_len)
   m <- rep_len(m, max_len)
-  if (!lower_tail) {
+  if (log.p) {
+    p <- exp(p)
+  }
+  if (!lower.tail) {
     p <- 1 - p
   }
   xp <- -log(p) / m
@@ -199,8 +212,9 @@ rgev <- function (n, loc = 0, scale = 1, shape = 0, m = 1) {
 #' @param n Numeric scalar.  The number of observations to be simulated.
 #'   If \code{length(n) > 1} then \code{length(n)} is taken to be the number
 #'   required.
-#' @param log A logical scalar.  If TRUE the log-density is returned.
-#' @param lower_tail A logical scalar.  If TRUE (default), probabilities
+#' @param log,log.p A logical scalar; if TRUE, probabilities p are given as
+#'   log(p).
+#' @param lower.tail A logical scalar.  If TRUE (default), probabilities
 #'   are P[X <= x], otherwise, P[X > x].
 #' @details The distribution function of a GP distribution with parameters
 #'  \code{location} = \eqn{\mu}, \code{scale} = \eqn{\sigma} (>0) and
@@ -214,10 +228,10 @@ rgev <- function (n, loc = 0, scale = 1, shape = 0, m = 1) {
 #'  if \eqn{\xi < -1} the GP density function becomes infinite as \eqn{x}
 #'  approaches \eqn{\mu - \sigma/\xi}.
 #'
-#'  If \code{lower_tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
+#'  If \code{lower.tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
 #'  the lower (upper) limit of the distribution is returned.
 #'  The upper limit is \code{Inf} if \code{shape} is non-negative.
-#'  Similarly, but reversed, if \code{lower_tail = FALSE}.
+#'  Similarly, but reversed, if \code{lower.tail = FALSE}.
 #'
 #'  See
 #'  \url{https://en.wikipedia.org/wiki/Generalized_Pareto_distribution}
@@ -284,7 +298,8 @@ dgp <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE) {
 
 #' @rdname gp
 #' @export
-pgp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
+pgp <- function (q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
+                 log.p = FALSE){
   if (any(scale < 0)) {
     stop("invalid scale: scale must be positive.")
   }
@@ -298,8 +313,16 @@ pgp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
   p <- ifelse(abs(shape) > 1e-6 | p < 0,
               1 - pmax(p, 0) ^ (-1 / shape),
               1 - exp(-q + shape * q ^ 2 / 2))
-  if (!lower_tail) {
-    p <- 1 - p
+  if (lower.tail) {
+    if (log.p) {
+      p <- log(p)
+    }
+  } else {
+    if (log.p) {
+      p <- log1p(-p)
+    } else {
+      p <- 1 - p
+    }
   }
   return(p)
 }
@@ -308,11 +331,12 @@ pgp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 
 #' @rdname gp
 #' @export
-qgp <- function (p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE) {
+qgp <- function (p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
+                 log.p = FALSE) {
   if (any(scale < 0)) {
     stop("invalid scale: scale must be positive.")
   }
-  if (any(p < 0 | p > 1)) {
+  if (!log.p & any(p < 0 | p > 1)) {
     stop("invalid p: p must be in [0,1].")
   }
   max_len <- max(length(p), length(loc), length(scale), length(shape))
@@ -320,7 +344,10 @@ qgp <- function (p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE) {
   loc <- rep_len(loc, max_len)
   scale <- rep_len(scale, max_len)
   shape <- rep_len(shape, max_len)
-  if (!lower_tail) {
+  if (log.p) {
+    p <- exp(p)
+  }
+  if (!lower.tail) {
     p <- 1 - p
   }
   mult <- box_cox_vec(x = 1 - p, lambda = -shape)
@@ -375,7 +402,7 @@ dbingp <- function(x, p_u = 0.5 , loc = 0, scale = 1, shape = 0, log = FALSE) {
 # --------------------------- pbingp ---------------------------------
 
 pbingp <- function(q, p_u = 0.5 , loc = 0, scale = 1, shape = 0,
-                   lower_tail = TRUE) {
+                   lower.tail = TRUE) {
   #
   # Binomial-GP distribution function.
   #`
@@ -387,7 +414,7 @@ pbingp <- function(q, p_u = 0.5 , loc = 0, scale = 1, shape = 0,
   #               threshold.
   #   scale      : Numeric vector of GP scale parameters.
   #   shape      : Numeric vector of GP shape parameters.
-  #   lower_tail : A logical scalar.  If TRUE (default), probabilities
+  #   lower.tail : A logical scalar.  If TRUE (default), probabilities
   #                are P[X <= x], otherwise, P[X > x].
   #
   if (any(q < loc)) {
@@ -400,8 +427,8 @@ pbingp <- function(q, p_u = 0.5 , loc = 0, scale = 1, shape = 0,
     stop("invalid p_u: p_u must be in (0,1).")
   }
   p <- 1 - p_u * pgp(q = q, loc = loc, scale = scale, shape = shape,
-                     lower_tail = FALSE)
-  if (!lower_tail) {
+                     lower.tail = FALSE)
+  if (!lower.tail) {
     p <- 1 - p
   }
   return(p)
@@ -410,7 +437,7 @@ pbingp <- function(q, p_u = 0.5 , loc = 0, scale = 1, shape = 0,
 # --------------------------- qbingp ---------------------------------
 
 qbingp <- function(p, p_u = 0.5, loc = 0, scale = 1, shape = 0,
-                   lower_tail = TRUE) {
+                   lower.tail = TRUE) {
   #
   # Binomial-GP quantiles.
   #`
@@ -422,17 +449,17 @@ qbingp <- function(p, p_u = 0.5, loc = 0, scale = 1, shape = 0,
   #                threshold.
   #   scale      : Numeric vector of GP scale parameters.
   #   shape      : Numeric vector of GP shape parameters.
-  #   lower_tail : A logical scalar.  If TRUE (default), probabilities
+  #   lower.tail : A logical scalar.  If TRUE (default), probabilities
   #                are P[X <= x], otherwise, P[X > x].
   #
-  if (!lower_tail) {
+  if (!lower.tail) {
     p <- 1 - p
   }
   if (any(p < 1 - p_u)) {
-    if (lower_tail) {
+    if (lower.tail) {
       stop("Invalid p: no element of p can be less than 1 - p_u.")
     }
-    if (!lower_tail) {
+    if (!lower.tail) {
       stop("Invalid p: no element of p can be greater than than p_u.")
     }
   }

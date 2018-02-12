@@ -10,9 +10,11 @@
 \usage{
 dgev(x, loc = 0, scale = 1, shape = 0, log = FALSE, m = 1)
 
-pgev(q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE, m = 1)
+pgev(q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
+  log.p = FALSE, m = 1)
 
-qgev(p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE, m = 1)
+qgev(p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
+  log.p = FALSE, m = 1)
 
 rgev(n, loc = 0, scale = 1, shape = 0, m = 1)
 }
@@ -23,13 +25,14 @@ rgev(n, loc = 0, scale = 1, shape = 0, m = 1)
 Location, scale and shape parameters.
 All elements of \code{scale} must be positive.}
 
-\item{log}{A logical scalar.  If TRUE the log-density is returned.}
+\item{log, log.p}{A logical scalar; if TRUE, probabilities p are given as
+log(p).}
 
 \item{m}{A numeric scalar.  The distribution is reparameterised by working
 with the GEV(\code{loc, scale, shape}) distribution function raised to the
 power \code{m}.  See \strong{Details}.}
 
-\item{lower_tail}{A logical scalar.  If TRUE (default), probabilities
+\item{lower.tail}{A logical scalar.  If TRUE (default), probabilities
 are P[X <= x], otherwise, P[X > x].}
 
 \item{p}{A numeric vector of probabilities in [0,1].}
@@ -69,10 +72,10 @@ The distribution function of a GEV distribution with parameters
  Note that if \eqn{\xi < -1} the GEV density function becomes infinite
  as \eqn{x} approaches \eqn{\mu -\sigma / \xi} from below.
 
- If \code{lower_tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
+ If \code{lower.tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
  the lower (upper) limit of the distribution is returned, which is
  \code{-Inf} or \code{Inf} in some cases.  Similarly, but reversed,
- if \code{lower_tail = FALSE}.
+ if \code{lower.tail = FALSE}.
 
  See
  \url{https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution}

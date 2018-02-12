@@ -10,9 +10,11 @@
 \usage{
 dgp(x, loc = 0, scale = 1, shape = 0, log = FALSE)
 
-pgp(q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE)
+pgp(q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
+  log.p = FALSE)
 
-qgp(p, loc = 0, scale = 1, shape = 0, lower_tail = TRUE)
+qgp(p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
+  log.p = FALSE)
 
 rgp(n, loc = 0, scale = 1, shape = 0)
 }
@@ -24,9 +26,10 @@ and \code{q} must be non-negative.}
 Location, scale and shape parameters.
 All elements of \code{scale} must be positive.}
 
-\item{log}{A logical scalar.  If TRUE the log-density is returned.}
+\item{log, log.p}{A logical scalar; if TRUE, probabilities p are given as
+log(p).}
 
-\item{lower_tail}{A logical scalar.  If TRUE (default), probabilities
+\item{lower.tail}{A logical scalar.  If TRUE (default), probabilities
 are P[X <= x], otherwise, P[X > x].}
 
 \item{p}{A numeric vector of probabilities in [0,1].}
@@ -57,10 +60,10 @@ The distribution function of a GP distribution with parameters
  if \eqn{\xi < -1} the GP density function becomes infinite as \eqn{x}
  approaches \eqn{\mu - \sigma/\xi}.
 
- If \code{lower_tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
+ If \code{lower.tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
  the lower (upper) limit of the distribution is returned.
  The upper limit is \code{Inf} if \code{shape} is non-negative.
- Similarly, but reversed, if \code{lower_tail = FALSE}.
+ Similarly, but reversed, if \code{lower.tail = FALSE}.
 
  See
  \url{https://en.wikipedia.org/wiki/Generalized_Pareto_distribution}
