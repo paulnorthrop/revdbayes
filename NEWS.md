@@ -1,5 +1,9 @@
 # revdbayes 1.3.2.9000
 
+## Bug fixes and minor improvements
+
+* The summary method for class "evpost" is now set up according to Section 8.1 of the R FAQ at (https://cran.r-project.org/doc/FAQ/R-FAQ.html).
+
 # revdbayes 1.3.2
 
 ## Bug fixes and minor improvements

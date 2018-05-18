@@ -301,8 +301,7 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #' @param add_pu Includes in the summary of the simulated values the threshold
 #'   exceedance probability \eqn{p}. Only relevant when \code{model == "bingp"}
 #'   was used in the call to \code{rpost} or \code{rpost_rcpp}.
-#' @param ... Additional arguments passed on to \code{print} or
-#'   \code{summary}.
+#' @param ... Additional arguments passed on to \code{print}.
 #' @return Prints
 #' \itemize{
 #'   \item {information about the ratio-of-uniforms bounding box, i.e.
@@ -328,23 +327,65 @@ summary.evpost <- function(object, add_pu = FALSE, ...) {
   if (!inherits(object, "evpost")) {
     stop("use only with \"evpost\" objects")
   }
+  if (!add_pu) {
+    sim_vals <- object$sim_vals
+  } else {
+    sim_vals <- cbind(object$bin_sim_vals, object$sim_vals)
+  }
+  object <- object[c("box", "pa")]
+  object$sim_vals <- sim_vals
+  class(object) <- "summary.evpost"
+  return(object)
+}
+
+# ========================== print.summary.evpost =============================
+
+#' Print method for objects of class "summary.evpost"
+#'
+#' \code{print} method for an object \code{object} of class "summary.evpost".
+#'
+#' @param x An object of class "summary.evpost", a result of a call to
+#'   \code{\link{summary.evpost}}.
+#' @param ... Additional arguments passed on to \code{print}.
+#' @return Prints
+#' \itemize{
+#'   \item {information about the ratio-of-uniforms bounding box, i.e.
+#'     \code{object$box}}
+#'   \item {an estimate of the probability of acceptance, i.e.
+#'     \code{object$pa}}
+#'   \item {a summary of the simulated values, via
+#'     \code{summary(object$sim_vals)}}
+#' }
+#' @examples
+#' # GP posterior
+#' data(gom)
+#' u <- stats::quantile(gom, probs = 0.65)
+#' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
+#' gpg <- rpost_rcpp(n = 1000, model = "gp", prior = fp, thresh = u,
+#'                   data = gom)
+#' summary(gpg)
+#' @seealso \code{\link[rust]{ru}} or \code{\link[rust]{ru_rcpp}} for
+#'   descriptions of \code{object$sim_vals} and \code{$box}.
+#' @seealso \code{\link{plot.evpost}} for a diagnostic plot.
+#' @export
+print.summary.evpost <- function(x, add_pu = FALSE, ...) {
+  if (!inherits(x, "summary.evpost")) {
+    stop("use only with \"summary.evpost\" objects")
+  }
   cat("ru bounding box: ", "\n")
-  print(object$box, ...)
+  print(x$box, ...)
   cat("\n")
   cat("estimated probability of acceptance: ", "\n")
-  print(object$pa, ...)
+  print(x$pa, ...)
   cat("\n")
   cat("sample summary", "\n")
-  if (add_pu & is.null(object$bin_sim_vals)) {
-    warning("add_pu = TRUE is not relevant and has been ignored",
-            immediate. = FALSE)
-    add_pu <- FALSE
-  }
-  if (!add_pu) {
-    print(summary(object$sim_vals, ...), ...)
-  } else {
-    print(summary(cbind(object$bin_sim_vals, object$sim_vals), ...), ...)
-  }
+  print(summary(x$sim_vals, ...), ...)
+#  if (!add_pu) {
+#    print(summary(x$sim_vals, ...), ...)
+#  } else {
+#    print(summary(cbind(x$bin_sim_vals, x$sim_vals), ...), ...)
+#  }
+  invisible(x)
 }
 
 # ========================= create_sim_vals ===========================
