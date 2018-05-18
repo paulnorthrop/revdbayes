@@ -380,11 +380,6 @@ print.summary.evpost <- function(x, add_pu = FALSE, ...) {
   cat("\n")
   cat("sample summary", "\n")
   print(summary(x$sim_vals, ...), ...)
-#  if (!add_pu) {
-#    print(summary(x$sim_vals, ...), ...)
-#  } else {
-#    print(summary(cbind(x$bin_sim_vals, x$sim_vals), ...), ...)
-#  }
   invisible(x)
 }
 
