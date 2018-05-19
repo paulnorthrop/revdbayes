@@ -4,7 +4,7 @@
 \alias{print.summary.evpost}
 \title{Print method for objects of class "summary.evpost"}
 \usage{
-\method{print}{summary.evpost}(x, add_pu = FALSE, ...)
+\method{print}{summary.evpost}(x, ...)
 }
 \arguments{
 \item{x}{An object of class "summary.evpost", a result of a call to

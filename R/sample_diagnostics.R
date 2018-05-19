@@ -368,7 +368,7 @@ summary.evpost <- function(object, add_pu = FALSE, ...) {
 #'   descriptions of \code{object$sim_vals} and \code{$box}.
 #' @seealso \code{\link{plot.evpost}} for a diagnostic plot.
 #' @export
-print.summary.evpost <- function(x, add_pu = FALSE, ...) {
+print.summary.evpost <- function(x, ...) {
   if (!inherits(x, "summary.evpost")) {
     stop("use only with \"summary.evpost\" objects")
   }
