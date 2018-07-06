@@ -4,6 +4,8 @@
 
 * The summary method for class "evpost" is now set up according to Section 8.1 of the R FAQ at (https://cran.r-project.org/doc/FAQ/R-FAQ.html).
 
+* A bug in `grimshaw_gp_mle` has been fixed, so that now solutions with K greater than 1 are discarded.  (Many thanks to Leo Belzile.)
+
 # revdbayes 1.3.2
 
 ## Bug fixes and minor improvements

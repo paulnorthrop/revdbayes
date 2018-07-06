@@ -678,8 +678,13 @@ grimshaw_gp_mle <- function(x) {
   }
   if(nomle!=0){
     mles<-mles[ind,]
+    # 6/7/2018: Start of codeprovided by Leo  Belzile, to fix a bug
+    # Discard values of k that are greater than 1
+    outside <- which(mles[,1]> 1+1e-10)
+    if (length(outside) > 0){ #at most 2 such values
+        mles[outside,3] <- -Inf #replace by hard bound
+    }
     nmles<-nrow(mles)
-    #
     #  Add the boundary value where k=1 to the candidates for the
     #  maximum of the log-likelihood.
     #
