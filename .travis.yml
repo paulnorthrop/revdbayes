@@ -22,7 +22,7 @@ addons:
       - clang
 
 r:
-   - release
+  - release
 #  - devel
 #  - oldrel
 
