@@ -684,7 +684,9 @@ grimshaw_gp_mle <- function(x) {
     if (length(outside) > 0){ #at most 2 such values
         mles[outside,3] <- -Inf #replace by hard bound
     }
+    # End of code provided by Leo
     nmles<-nrow(mles)
+    #
     #  Add the boundary value where k=1 to the candidates for the
     #  maximum of the log-likelihood.
     #
