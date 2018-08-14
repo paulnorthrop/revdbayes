@@ -278,6 +278,9 @@ grimshaw_gp_mle <- function(x) {
       thhi<-epsilon
     }
     thzero<-hibnd    #{  Initial value for modified Newton-Raphson is hibnd. }
+    # 14/8/2018, PJN: Try a different initial value, away from hibnd
+    thzero <- (hibnd + epsilon) / 2
+    #
     dxold<-abs(thhi-thlo)
     dx<-dxold
     temp1<-sum(log(1-thzero*x))/n
@@ -512,6 +515,9 @@ grimshaw_gp_mle <- function(x) {
       thhi<-epsilon
     }
     thzero<-hibnd    #{  Initial value for modified Newton-Raphson is hibnd. }
+    # 14/8/2018, PJN: Try a different initial value, away from hibnd
+    thzero <- (hibnd + epsilon) / 2
+    #
     dxold<-abs(thhi-thlo)
     dx<-dxold
     temp1<-sum(log(1-thzero*x))/n
