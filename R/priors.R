@@ -300,7 +300,7 @@ set_prior <- function(prior = c("norm", "loglognorm", "mdi", "flat",
 
 gp_prior <- function(prior = c("norm", "mdi", "flat", "flatflat", "jeffreys",
                                "beta"), ...) {
-  prior <- match.arg(prior)
+  prior <- match.arg(prior, c("norm", "mdi", "flat", "flatflat", "jeffreys","beta"))
   temp <- list(prior = paste("gp_", prior, sep=""), ...)
   # For v1.2.0 ...
   # Add default value for min_xi in Jeffreys prior if it isn't present.
@@ -317,6 +317,11 @@ gp_prior <- function(prior = c("norm", "mdi", "flat", "flatflat", "jeffreys",
   }
   if (prior == "beta" & is.null(temp$max_xi)) {
     temp$max_xi = 1/2
+  }
+  # Check for cov argument and flip if user provided icov instead
+  if(all(c(prior == "norm", is.null(temp$cov), !is.null(temp$icov)))){
+    temp$cov <- solve(temp$icov)
+    temp$icov <- NULL
   }
   # Force min_xi and max_xi to be present in the list temp.
   temp$min_xi <- max(temp$min_xi, -Inf)
