@@ -4,8 +4,9 @@
 \alias{kgaps_post}
 \title{Random sampling from K-gaps posterior distribution}
 \usage{
-kgaps_post(data, thresh, k = 1, n = 1000, inc_cens = FALSE, alpha = 1,
-  beta = 1, param = c("logit", "theta"), use_rcpp = TRUE)
+kgaps_post(data, thresh, k = 1, n = 1000, inc_cens = FALSE,
+  alpha = 1, beta = 1, param = c("logit", "theta"),
+  use_rcpp = TRUE)
 }
 \arguments{
 \item{data}{A numeric vector of raw data.  No missing values are allowed.}

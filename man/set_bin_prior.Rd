@@ -4,7 +4,8 @@
 \alias{set_bin_prior}
 \title{Construction of a prior distribution for a binomial probability \eqn{p}}
 \usage{
-set_bin_prior(prior = c("jeffreys", "laplace", "haldane", "beta", "mdi"), ...)
+set_bin_prior(prior = c("jeffreys", "laplace", "haldane", "beta", "mdi"),
+  ...)
 }
 \arguments{
 \item{prior}{A character string giving the name of the prior for \eqn{p}.

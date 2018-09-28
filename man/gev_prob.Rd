@@ -4,7 +4,8 @@
 \alias{gev_prob}
 \title{Informative GEV prior on a probability scale}
 \usage{
-gev_prob(pars, quant, alpha, min_xi = -Inf, max_xi = Inf, trendsd = 0)
+gev_prob(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
+  trendsd = 0)
 }
 \arguments{
 \item{pars}{A numeric vector of length 3.
