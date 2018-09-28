@@ -6,6 +6,8 @@
 
 * A bug in `grimshaw_gp_mle` has been fixed, so that now solutions with K greater than 1 are discarded.  (Many thanks to Leo Belzile.)
 
+* In `set_prior()` if `prior = "norm"` or `prior = "loglognorm"` then an explicit error is thrown if `cov` is not supplied. (Many thanks to Leo Belzile.)
+
 # revdbayes 1.3.2
 
 ## Bug fixes and minor improvements
