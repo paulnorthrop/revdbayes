@@ -356,6 +356,8 @@ gp_prior <- function(prior = c("norm", "mdi", "flat", "flatflat", "jeffreys",
     cov <- temp$cov
     if (length(mean) != 2 | mode(mean) != "numeric")
         stop("mean must be a numeric vector of length two")
+    if (is.null(cov))
+      stop("cov must be supplied")
     if (!is.matrix(cov) | any(dim(cov) != 2) | mode(cov) != "numeric")
         stop("cov must be a symmetric two by two matrix")
     if (any(abs(cov - t(cov)) > .Machine$double.eps ^ 0.5))
@@ -578,6 +580,8 @@ gev_prior <- function(prior=c("norm", "loglognorm", "mdi", "flat", "flatflat",
     cov <- temp$cov
     if (length(mean) != 3 | mode(mean) != "numeric")
         stop("mean must be a numeric vector of length three")
+    if (is.null(cov))
+        stop("cov must be supplied")
     if (!is.matrix(cov) | any(dim(cov) != 3) | mode(cov) != "numeric")
         stop("cov must be a symmetric three by three matrix")
     if (any(abs(cov - t(cov)) > .Machine$double.eps ^ 0.5))
