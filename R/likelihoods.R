@@ -8,7 +8,7 @@ gp_loglik <- function(pars, data, m, xm, sum_gp) {
   #
   # Args:
   #   pars   : numeric vector (sigma_u, xi).
-  #   data   : sample of threshold exceesses.
+  #   data   : sample of threshold excesses.
   #   m      : sample size.
   #   xm     : largest sample excess.
   #   sum_gp : sum of sample excesses.
@@ -151,14 +151,12 @@ pp_loglik <- function(pars, data, n_exc, thresh, xm = NULL, noy, sum_pp,
   # Args:
   #   pars      : numeric vector (mu, sigma, xi).
   #   data      : sample of threshold exceedances.
-  #   n_exc     : number of threshold excesses
-  #   thresh    : threshold
+  #   n_exc     : number of threshold excesses.
+  #   thresh    : threshold.
   #   xm        : the maximum data value. (Not used in pp_loglik.)
   #   noy       : number of years (or periods) of data.
   #   sum_pp    : sum of the threshold exceedances.
   #   m         : the number of raw data values. (Not used in pp_loglik.)
-  #   f_thresh   : an estimate of the density underlying the raw data
-  #               at the threshold thresh. (Not used in pp_loglik.)
   #
   # Returns:
   #   the value of the log-likelihood.
