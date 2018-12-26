@@ -88,13 +88,13 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE,
   if (!is.numeric(k) || length(k) != 1) {
     stop("k must be a numeric scalar")
   }
-  param <- match.arg(param)
   if (k < 1) {
     stop("k must be no smaller than 1.")
   }
   if (alpha <= 0 | beta <= 0) {
     stop("alpha and beta must be positive.")
   }
+  param <- match.arg(param)
   # Calculate the MLE and get the sufficient statistics
   mle_list <- kgaps_mle(data, thresh, k, inc_cens)
   theta_mle <- mle_list$theta_mle
