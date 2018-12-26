@@ -12,6 +12,9 @@ Description: Provides functions for the Bayesian analysis of extreme value
     Monte Carlo ('MCMC') methods for posterior simulation.  Also provided
     are functions for making inferences about the extremal index, using 
     the K-gaps model of Suveges and Davison (2010) <doi:10.1214/09-AOAS292>.
+    Also provided are d,p,q,r functions for the GEV and GP distributions that 
+    deal appropriately with cases where the shape parameter is very close to 
+    zero.
 Imports: bayesplot (>= 1.1.0),
     graphics,
     methods,
