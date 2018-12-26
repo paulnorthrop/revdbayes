@@ -6,6 +6,8 @@
 
 * A bug in `grimshaw_gp_mle` has been fixed, so that now solutions with K greater than 1 are discarded.  (Many thanks to Leo Belzile.)
 
+* In `grimshaw_gp_mle` using the starting value equal to the upper bound can result in early termination of the Newton-Raphson search.  A starting value away from the upper bound is now used (lines 282 and 519 of frequentist.R). (Many thanks to Jeremy Rohmer for sending me a dataset that triggered this problem.)
+
 * In `set_prior()` if `prior = "norm"` or `prior = "loglognorm"` then an explicit error is thrown if `cov` is not supplied. (Many thanks to Leo Belzile.)
 
 # revdbayes 1.3.2
