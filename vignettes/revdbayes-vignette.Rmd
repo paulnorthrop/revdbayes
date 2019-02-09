@@ -18,7 +18,6 @@ knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 required <- c("evdbayes")
 
 if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
-  knitr::opts_chunk$set(eval = FALSE)
 ```
 
 This vignette focuses on random sampling from extreme value posterior 
