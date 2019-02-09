@@ -72,11 +72,11 @@ Stephenson, A. 2016. Bayesian Inference for Extreme Value
   Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721-14}
 }
 \seealso{
-\code{\link[evdbayes]{prior.quant}} to set this prior using the
-  evdbayes package.
+\code{\link[evdbayes:prior]{prior.quant}} to set this prior
+  using the evdbayes package.
 
-\code{\link[evdbayes]{posterior}}: evdbayes function that can
-  sample from this prior distribution (using MCMC) if the argument
+\code{\link[evdbayes:prior]{posterior}}: evdbayes function that
+  can sample from this prior distribution (using MCMC) if the argument
   \code{lh = "none"} is given.
 
 \code{\link{rpost}} and \code{\link{rpost_rcpp}} for sampling

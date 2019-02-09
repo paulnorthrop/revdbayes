@@ -813,10 +813,10 @@ pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 #'   \item {\code{m} : number of threshold exceedances.}
 #' }
 #' @details If \code{prior$prior == "bin_beta"} then the posterior for \eqn{p}
-#'   is a beta distribution so \code{\link[stats]{rbeta}} is used to sample
-#'   from the posterior.  If \code{prior$prior == "bin_mdi"} then rejection
-#'   sampling is used to sample from the posterior with an envelope function
-#'   equal to the density of a
+#'   is a beta distribution so \code{\link[stats:Beta]{rbeta}} is used to
+#'   sample from the posterior.  If \code{prior$prior == "bin_mdi"} then
+#'   rejection sampling is used to sample from the posterior with an envelope
+#'   function equal to the density of a
 #'   beta(\code{ds$m} + 1, \code{ds$n_raw - ds$m} + 1) density.
 #' @return An object (list) of class \code{"binpost"} with components
 #'   \itemize{

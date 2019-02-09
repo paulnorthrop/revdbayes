@@ -35,7 +35,7 @@
 #' @seealso \code{\link{rpost}} and \code{\link{rpost_rcpp}} for sampling
 #'   from an extreme value posterior distribution.
 #' @seealso Sets the same prior as the function
-#'   \code{\link[evdbayes]{prior.prob}} in the evdbayes package.
+#'   \code{\link[evdbayes:prior]{prior.prob}} in the evdbayes package.
 #' @references Crowder, M. (1992) Bayesian priors based on parameter
 #'   transformation using the distribution function
 #'   \emph{Ann. Inst. Statist. Math.}, \strong{44}, 405-416.
