@@ -52,7 +52,7 @@ a Dirichlet prior on differences between these probabilities).
 \details{
 The simulation is based on the way that the prior is constructed.
   See
-  \href{http://dx.doi.org/10.1201/b19721-14}{Stephenson (1996)}
+  \href{http://dx.doi.org/10.1201/b19721}{Stephenson (1996)}
   the evdbayes user guide or Northrop et al. (2017)
   \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
   for details of the construction of the prior.  First, differences between
@@ -79,7 +79,7 @@ Crowder, M. (1992) Bayesian priors based on parameter
 Stephenson, A. 2016. Bayesian Inference for Extreme Value
   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
-  Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721-14}
+  Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721}
 
 Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
   Cross-validatory extreme value threshold selection and uncertainty

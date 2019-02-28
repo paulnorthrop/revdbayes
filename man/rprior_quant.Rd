@@ -43,7 +43,7 @@ between quantiles.
 The simulation is based on the way that the prior is constructed.
   See
   \href{https://dx.doi.org/10.2307/2986068}{Coles and Tawn (1996)},
-  \href{https://dx.doi.org/10.1201/b19721-14}{Stephenson (1996)}
+  \href{https://dx.doi.org/10.1201/b19721}{Stephenson (1996)}
   or the evdbayes user guide
   for details of the construction of the prior. First, the quantile
   differences are simulated from the specified gamma distributions.
@@ -69,7 +69,7 @@ Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
 Stephenson, A. 2016. Bayesian Inference for Extreme Value
   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
-  Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721-14}
+  Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721}
 }
 \seealso{
 \code{\link[evdbayes:prior]{prior.quant}} to set this prior

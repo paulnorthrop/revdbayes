@@ -290,7 +290,7 @@ Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
 Stephenson, A. (2016) Bayesian Inference for Extreme Value
   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
-  Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721-14}
+  Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721}
   value posterior using the evdbayes package.
 
 Wadsworth, J. L., Tawn, J. A. and Jonathan, P. (2010)

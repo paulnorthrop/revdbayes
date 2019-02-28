@@ -43,7 +43,7 @@ A prior for GEV parameters \eqn{(\mu, \sigma, \xi)},
   \code{alpha} = \eqn{(\alpha_1, \alpha_2, \alpha_3, \alpha_4)}:
   as the parameters of beta distributions for ratio of exceedance
   probabilities
-  \href{http://dx.doi.org/10.1201/b19721-14}{(Stephenson, 2016)}
+  \href{http://dx.doi.org/10.1201/b19721}{(Stephenson, 2016)}
   and as the parameters of
   a Dirichlet distribution for differences between non-exceedance
   probabilities
@@ -66,7 +66,7 @@ Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
 Stephenson, A. (2016) Bayesian inference for extreme value
   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-  London. \url{http://dx.doi.org/10.1201/b19721-14}.
+  London. \url{http://dx.doi.org/10.1201/b19721}.
 }
 \seealso{
 \code{\link{set_prior}} for setting a prior distribution.

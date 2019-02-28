@@ -173,7 +173,7 @@ Inferences about future extreme observations are integrated over
   See, for example,
   \href{http://dx.doi.org/10.1007/978-1-4471-3675-0_9}{Coles (2001),
   chapter 9},
-  \href{http://dx.doi.org/10.1201/b19721-14}{Stephenson (2016)}
+  \href{http://dx.doi.org/10.1201/b19721}{Stephenson (2016)}
   or
   \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
   for details.
@@ -324,7 +324,7 @@ Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
 Stephenson, A. (2016). Bayesian Inference for Extreme Value
   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
-  Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721-14}
+  Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721}
 }
 \seealso{
 \code{\link{plot.evpred}} for the S3 \code{plot} method for

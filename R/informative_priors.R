@@ -24,7 +24,7 @@
 #'   \code{alpha} = \eqn{(\alpha_1, \alpha_2, \alpha_3, \alpha_4)}:
 #'   as the parameters of beta distributions for ratio of exceedance
 #'   probabilities
-#'   \href{http://dx.doi.org/10.1201/b19721-14}{(Stephenson, 2016)}
+#'   \href{http://dx.doi.org/10.1201/b19721}{(Stephenson, 2016)}
 #'   and as the parameters of
 #'   a Dirichlet distribution for differences between non-exceedance
 #'   probabilities
@@ -49,7 +49,7 @@
 #' @references Stephenson, A. (2016) Bayesian inference for extreme value
 #'   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
 #'   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-#'   London. \url{http://dx.doi.org/10.1201/b19721-14}.
+#'   London. \url{http://dx.doi.org/10.1201/b19721}.
 #' @export
 gev_prob <- function(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
                      trendsd = 0) {
@@ -139,7 +139,7 @@ gev_prob <- function(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
 #' @references Stephenson, A. (2016) Bayesian inference for extreme value
 #'   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
 #'   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-#'   London. \url{https://dx.doi.org/10.1201/b19721-14}.
+#'   London. \url{https://dx.doi.org/10.1201/b19721}.
 #' @export
 gev_quant <- function(pars, prob, shape, scale, min_xi = -Inf, max_xi = Inf,
                       trendsd = 0){

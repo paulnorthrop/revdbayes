@@ -234,7 +234,7 @@
 #' @references Stephenson, A. (2016) Bayesian inference for extreme value
 #'   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
 #'   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-#'   London. \url{http://dx.doi.org/10.1201/b19721-14}.
+#'   London. \url{http://dx.doi.org/10.1201/b19721}.
 #' @examples
 #' # Normal prior for GEV parameters (mu, log(sigma), xi).
 #' mat <- diag(c(10000, 10000, 100))
