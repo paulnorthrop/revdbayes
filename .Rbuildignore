@@ -1,3 +1,5 @@
+^R/find_clusters\.R$
+^R/ts_post\.R$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$
@@ -8,4 +10,3 @@
 ^before-install\.sh$
 ^man/ts_post\.Rd$
 ^man/find_clusters\.Rd$
-^ts_post\.R$
