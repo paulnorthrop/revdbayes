@@ -2,6 +2,8 @@
 
 ## Bug fixes and minor improvements
 
+* The format of the `data` supplied to `rpost()` and `rpost_rcpp()` is checked and an error is thrown if it is not appropriate.
+
 * The summary method for class "evpost" is now set up according to Section 8.1 of the R FAQ at (https://cran.r-project.org/doc/FAQ/R-FAQ.html).
 
 * A bug in `grimshaw_gp_mle` has been fixed, so that now solutions with K greater than 1 are discarded.  (Many thanks to Leo Belzile.)
