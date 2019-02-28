@@ -29,7 +29,8 @@ rpost(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior, ...,
     then the corresponding row should be padded by \code{NA}s. If
     \code{ros} is supplied then only the largest \code{ros} values in
     each row are used.  If a vector is supplied then this is converted
-    to a matrix with one column.}
+    to a matrix with one column.  This is equivalent to using
+    \code{model = "gev"}.}
 }}
 
 \item{prior}{A list specifying the prior for the parameters of the extreme
