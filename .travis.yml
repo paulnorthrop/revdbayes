@@ -22,14 +22,14 @@ addons:
       - clang
 
 r:
-  - release
+#  - release
   - devel
 #  - oldrel
 
 env:
 #  - COMPILER=gcc-4.4
-#  - COMPILER=gcc
-  - COMPILER=clang
+  - COMPILER=gcc
+#  - COMPILER=clang
 
 r_packages:
   - covr
