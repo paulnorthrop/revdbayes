@@ -255,7 +255,7 @@ plot(osv)
 Coles, S. G. and Powell, E. A. (1996) Bayesian methods in
   extreme value modelling: a review and new developments.
   \emph{Int. Statist. Rev.}, \strong{64}, 119-136.
-  \url{http://dx.doi.org/10.2307/1403426}
+  \url{https://dx.doi.org/10.2307/1403426}
 
 Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
   Cross-validatory extreme value threshold selection and uncertainty

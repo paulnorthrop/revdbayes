@@ -218,11 +218,11 @@ u_prior_ptr <- set_prior(prior = ptr_gp_flat, model = "gp")
 Castellanos, E. M. and Cabras, S. (2007) A default Bayesian
   procedure for the generalized Pareto distribution.
   \emph{Journal of Statistical Planning and Inference} \strong{137(2)},
-  473-483. \url{http://dx.doi.org/10.1016/j.jspi.2006.01.006}.
+  473-483. \url{https://dx.doi.org/10.1016/j.jspi.2006.01.006}.
 
 Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
   extreme rainfall data. \emph{Appl. Statist.}, \strong{45}, 463-478.
-  \url{http://dx.doi.org/10.2307/2986068}.
+  \url{https://dx.doi.org/10.2307/2986068}.
 
 Crowder, M. (1992) Bayesian priors based on parameter
   transformation using the distribution function

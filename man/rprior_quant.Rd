@@ -42,8 +42,8 @@ between quantiles.
 \details{
 The simulation is based on the way that the prior is constructed.
   See
-  \href{http://dx.doi.org/10.2307/2986068}{Coles and Tawn (1996)},
-  \href{http://dx.doi.org/10.1201/b19721-14}{Stephenson (1996)}
+  \href{https://dx.doi.org/10.2307/2986068}{Coles and Tawn (1996)},
+  \href{https://dx.doi.org/10.1201/b19721-14}{Stephenson (1996)}
   or the evdbayes user guide
   for details of the construction of the prior. First, the quantile
   differences are simulated from the specified gamma distributions.
