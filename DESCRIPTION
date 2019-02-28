@@ -1,7 +1,7 @@
 Package: revdbayes
 Title: Ratio-of-Uniforms Sampling for Bayesian Extreme Value Analysis
 Version: 1.3.3
-Date: 2018-02-28
+Date: 2019-02-28
 Authors@R: person(c("Paul", "J."), "Northrop", email = "p.northrop@ucl.ac.uk",
   role = c("aut", "cre", "cph"))
 Description: Provides functions for the Bayesian analysis of extreme value
