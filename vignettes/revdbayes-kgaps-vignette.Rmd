@@ -41,7 +41,7 @@ mle$theta_ci
 
 ## Bayesian Inference
 
-The function `kgaps_post` simulates a random sample from the posterior distribution of $\theta$ based on a Beta($\alpha, \beta$) prior.  The use can choose the values of $\alpha$ and $\beta$.  The default setting is $\alpha = \beta = 1$, that is, a U(0,1) prior for $\theta$.  See @Attalides2015 for further information and for a methods for selecting the value of the threshold in this situation.  The plot produced below is is histgram of the sample from the posterior with the posterior density superimposed.
+The function `kgaps_post` simulates a random sample from the posterior distribution of $\theta$ based on a Beta($\alpha, \beta$) prior.  The use can choose the values of $\alpha$ and $\beta$.  The default setting is $\alpha = \beta = 1$, that is, a U(0,1) prior for $\theta$.  See @Attalides2015 for further information and for a methods for selecting the value of the threshold in this situation.  The plot produced below is is histogram of the sample from the posterior with the posterior density superimposed.
 
 ```{r, fig.width = 5, fig.align='center'}
 thresh <- quantile(newlyn, probs = 0.90)
