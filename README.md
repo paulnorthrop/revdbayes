@@ -24,7 +24,7 @@ plot(gevp)
 ```
 
 From version 1.2.0 onwards the faster function `rpost_rcpp` can be used.
-See the vignette "Faster simulation using revdbayes and Rcpp" for details. The syntax of `rpost` and `post_rcpp` is identical. For example:
+See the vignette "Faster simulation using revdbayes and Rcpp" for details. The functions `rpost` and `post_rcpp` have the same syntax. For example:
 
 ``` r
 gevp_rcpp  <- rpost_rcpp(n = 1000, model = "gev", prior = pn, data = portpirie)
