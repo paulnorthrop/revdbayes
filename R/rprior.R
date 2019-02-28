@@ -47,7 +47,7 @@
 #'   from an extreme value posterior distribution.
 #' @references Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
 #'   extreme rainfall data. \emph{Appl. Statist.}, \strong{45}, 463-478.
-#'   \url{http://dx.doi.org/10.2307/2986068}.
+#'   \url{https://dx.doi.org/10.2307/2986068}.
 #' @references Stephenson, A. 2016. Bayesian Inference for Extreme Value
 #'   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
 #'   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
