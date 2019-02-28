@@ -12,4 +12,4 @@
 
 ## Downstream dependencies
 
-The three downstream dependencies of revdbayes (threshr, fitteR, rust) passed R CMD check.
+The five downstream dependencies of revdbayes (mev, smovie, threshr, fitteR, rust) passed R CMD check.
