@@ -81,9 +81,9 @@
 #'   centred on the maximum a posterior (MAP) estimate of phi
 #'   (\code{use_phi_map = TRUE}), or on the initial estimate of phi
 #'   (\code{use_phi_map = FALSE}).
-#' @param ... Further arguments to be passed to \code{\link[rust]{ru}}.  Most
-#'   importantly \code{trans} and \code{rotate} (see \strong{Details}), and
-#'   perhaps \code{r}, \code{ep}, \code{a_algor}, \code{b_algor},
+#' @param ... Further arguments to be passed to \code{\link[rust]{ru_rcpp}}.
+#'   Most importantly \code{trans} and \code{rotate} (see \strong{Details}),
+#'   and perhaps \code{r}, \code{ep}, \code{a_algor}, \code{b_algor},
 #'   \code{a_method}, \code{b_method}, \code{a_control}, \code{b_control}.
 #'   May also be used to pass the arguments \code{n_grid} and/or \code{ep_bc}
 #'   to \code{\link[rust]{find_lambda}}.
