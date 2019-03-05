@@ -38,8 +38,8 @@ prior see \code{\link{set_prior}}.
 }
 \details{
 See
-  \href{https://dx.doi.org/10.2307/2986068}{Coles and Tawn (1996)} and/or
-  \href{https://dx.doi.org/10.1201/b19721}{Stephenson (2016)}
+  \href{https://doi.org/10.2307/2986068}{Coles and Tawn (1996)} and/or
+  \href{https://doi.org/10.1201/b19721}{Stephenson (2016)}
   for details.
 
   Note that the lower end point of the distribution of the distribution
@@ -50,10 +50,10 @@ See
 \references{
 Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
   extreme rainfall data. \emph{Appl. Statist.}, \strong{45}, 463-478.
-  \url{https://dx.doi.org/10.2307/2986068}.
+  \url{https://doi.org/10.2307/2986068}.
 
 Stephenson, A. (2016) Bayesian inference for extreme value
   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-  London. \url{https://dx.doi.org/10.1201/b19721}.
+  London. \url{https://doi.org/10.1201/b19721}.
 }

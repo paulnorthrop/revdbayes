@@ -52,9 +52,9 @@ a Dirichlet prior on differences between these probabilities).
 \details{
 The simulation is based on the way that the prior is constructed.
   See
-  \href{http://dx.doi.org/10.1201/b19721}{Stephenson (1996)}
+  \href{https://doi.org/10.1201/b19721}{Stephenson (1996)}
   the evdbayes user guide or Northrop et al. (2017)
-  \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
+  \href{https://doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
   for details of the construction of the prior.  First, differences between
   probabilities are simulated from a Dirichlet distribution. Then the GEV
   location, scale and shape parameters that correspond to these quantile
@@ -79,14 +79,14 @@ Crowder, M. (1992) Bayesian priors based on parameter
 Stephenson, A. 2016. Bayesian Inference for Extreme Value
   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
-  Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721}
+  Chapman and Hall. \url{https://doi.org/10.1201/b19721}
 
 Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
   Cross-validatory extreme value threshold selection and uncertainty
   with application to ocean storm severity.
   \emph{Journal of the Royal Statistical Society Series C: Applied
   Statistics}, \strong{66}(1), 93-120.
-  \url{http://dx.doi.org/10.1111/rssc.12159}
+  \url{https://doi.org/10.1111/rssc.12159}
 }
 \seealso{
 \code{\link[evdbayes:prior]{prior.prob}} to set this prior using

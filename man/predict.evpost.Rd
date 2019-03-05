@@ -171,11 +171,11 @@ Inferences about future extreme observations are integrated over
   variability of future observations.  In practice the integrals involved
   are estimated using an empirical mean over the posterior sample.
   See, for example,
-  \href{http://dx.doi.org/10.1007/978-1-4471-3675-0_9}{Coles (2001),
+  \href{https://doi.org/10.1007/978-1-4471-3675-0_9}{Coles (2001),
   chapter 9},
-  \href{http://dx.doi.org/10.1201/b19721}{Stephenson (2016)}
+  \href{https://doi.org/10.1201/b19721}{Stephenson (2016)}
   or
-  \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
+  \href{https://doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
   for details.
   See also the vignette
   \href{https://CRAN.R-project.org/package=revdbayes}{Posterior Predictive Extreme Value Inference}
@@ -223,7 +223,7 @@ Inferences about future extreme observations are integrated over
   mean number of observations in \code{n_years} years, i.e.
   \code{npy * n_years}.
 
-  Following \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
+  Following \href{https://doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
   Let \eqn{M_N} be the largest value observed in \eqn{N} years,
   \eqn{m} = \code{npy * n_years} and \eqn{u} the threshold
   \code{object$thresh} used in the call to \code{rpost}
@@ -312,19 +312,19 @@ plot(predict(bgpg, type = "r"))
 \references{
 Coles, S. G. (2001) \emph{An Introduction to Statistical
   Modeling of Extreme Values}, Springer-Verlag, London.
-  Chapter 9: \url{http://dx.doi.org/10.1007/978-1-4471-3675-0_9}
+  Chapter 9: \url{https://doi.org/10.1007/978-1-4471-3675-0_9}
 
 Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
   Cross-validatory extreme value threshold selection and uncertainty
   with application to ocean storm severity.
   \emph{Journal of the Royal Statistical Society Series C: Applied
   Statistics}, \strong{66}(1), 93-120.
-  \url{http://dx.doi.org/10.1111/rssc.12159}
+  \url{https://doi.org/10.1111/rssc.12159}
 
 Stephenson, A. (2016). Bayesian Inference for Extreme Value
   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
-  Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721}
+  Chapman and Hall. \url{https://doi.org/10.1201/b19721}
 }
 \seealso{
 \code{\link{plot.evpred}} for the S3 \code{plot} method for

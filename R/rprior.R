@@ -26,8 +26,8 @@
 #'   then \code{lb_prob} is not used.
 #' @details The simulation is based on the way that the prior is constructed.
 #'   See
-#'   \href{https://dx.doi.org/10.2307/2986068}{Coles and Tawn (1996)},
-#'   \href{https://dx.doi.org/10.1201/b19721}{Stephenson (1996)}
+#'   \href{https://doi.org/10.2307/2986068}{Coles and Tawn (1996)},
+#'   \href{https://doi.org/10.1201/b19721}{Stephenson (1996)}
 #'   or the evdbayes user guide
 #'   for details of the construction of the prior. First, the quantile
 #'   differences are simulated from the specified gamma distributions.
@@ -47,11 +47,11 @@
 #'   from an extreme value posterior distribution.
 #' @references Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
 #'   extreme rainfall data. \emph{Appl. Statist.}, \strong{45}, 463-478.
-#'   \url{https://dx.doi.org/10.2307/2986068}.
+#'   \url{https://doi.org/10.2307/2986068}.
 #' @references Stephenson, A. 2016. Bayesian Inference for Extreme Value
 #'   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
 #'   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
-#'   Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721}
+#'   Chapman and Hall. \url{https://doi.org/10.1201/b19721}
 #' @examples
 #' pr <- 10 ^ -(1:3)
 #' sh <- c(38.9, 7.1, 47)
@@ -147,9 +147,9 @@ rprior_quant <- function(n, prob, shape, scale, lb = NULL, lb_prob = 0.001){
 #'   then \code{lb_prob} is not used.
 #' @details The simulation is based on the way that the prior is constructed.
 #'   See
-#'   \href{http://dx.doi.org/10.1201/b19721}{Stephenson (1996)}
+#'   \href{https://doi.org/10.1201/b19721}{Stephenson (1996)}
 #'   the evdbayes user guide or Northrop et al. (2017)
-#'   \href{http://dx.doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
+#'   \href{https://doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
 #'   for details of the construction of the prior.  First, differences between
 #'   probabilities are simulated from a Dirichlet distribution. Then the GEV
 #'   location, scale and shape parameters that correspond to these quantile
@@ -173,13 +173,13 @@ rprior_quant <- function(n, prob, shape, scale, lb = NULL, lb_prob = 0.001){
 #' @references Stephenson, A. 2016. Bayesian Inference for Extreme Value
 #'   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
 #'   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
-#'   Chapman and Hall. \url{http://dx.doi.org/10.1201/b19721}
+#'   Chapman and Hall. \url{https://doi.org/10.1201/b19721}
 #' @references Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
 #'   Cross-validatory extreme value threshold selection and uncertainty
 #'   with application to ocean storm severity.
 #'   \emph{Journal of the Royal Statistical Society Series C: Applied
 #'   Statistics}, \strong{66}(1), 93-120.
-#'   \url{http://dx.doi.org/10.1111/rssc.12159}
+#'   \url{https://doi.org/10.1111/rssc.12159}
 #' @examples
 #' quant <- c(85, 88, 95)
 #' alpha <- c(4, 2.5, 2.25, 0.25)
@@ -336,7 +336,7 @@ quantile_to_gev <- function(quant, prob){
 #' @references Kotz, S., Balakrishnan, N. and Johnson, N. L. (2000)
 #'   \emph{Continuous Multivariate Distributions, vol. 1, Models and
 #'   Applications, 2nd edn}, ch. 49. New York: Wiley.
-#'   \url{http://dx.doi.org/10.1002/0471722065}
+#'   \url{https://doi.org/10.1002/0471722065}
 #' @examples
 #' rDir(n = 10, alpha = 1:4)
 #' @export
