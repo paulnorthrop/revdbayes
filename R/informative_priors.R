@@ -24,11 +24,11 @@
 #'   \code{alpha} = \eqn{(\alpha_1, \alpha_2, \alpha_3, \alpha_4)}:
 #'   as the parameters of beta distributions for ratio of exceedance
 #'   probabilities
-#'   \href{http://dx.doi.org/10.1201/b19721}{(Stephenson, 2016)}
+#'   \href{https://doi.org/10.1201/b19721}{(Stephenson, 2016)}
 #'   and as the parameters of
 #'   a Dirichlet distribution for differences between non-exceedance
 #'   probabilities
-#'   \href{http://dx.doi.org/10.1111/rssc.12159}{(Northrop et al., 2017)}.
+#'   \href{https://doi.org/10.1111/rssc.12159}{(Northrop et al., 2017)}.
 #'   See these publications for details.
 #' @return The log of the prior density.
 #' @seealso \code{\link{set_prior}} for setting a prior distribution.
@@ -45,11 +45,11 @@
 #'   with application to ocean storm severity.
 #'   \emph{Journal of the Royal Statistical Society Series C: Applied
 #'   Statistics}, \strong{66}(1), 93-120.
-#'   \url{http://dx.doi.org/10.1111/rssc.12159}
+#'   \url{https://doi.org/10.1111/rssc.12159}
 #' @references Stephenson, A. (2016) Bayesian inference for extreme value
 #'   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
 #'   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-#'   London. \url{http://dx.doi.org/10.1201/b19721}.
+#'   London. \url{https://doi.org/10.1201/b19721}.
 #' @export
 gev_prob <- function(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
                      trendsd = 0) {
@@ -125,8 +125,8 @@ gev_prob <- function(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
 #'   function in the evdbayes package.
 #' @return The log of the prior density.
 #' @details See
-#'   \href{https://dx.doi.org/10.2307/2986068}{Coles and Tawn (1996)} and/or
-#'   \href{https://dx.doi.org/10.1201/b19721}{Stephenson (2016)}
+#'   \href{https://doi.org/10.2307/2986068}{Coles and Tawn (1996)} and/or
+#'   \href{https://doi.org/10.1201/b19721}{Stephenson (2016)}
 #'   for details.
 #'
 #'   Note that the lower end point of the distribution of the distribution
@@ -135,11 +135,11 @@ gev_prob <- function(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
 #'   ensure that this is true.
 #' @references Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
 #'   extreme rainfall data. \emph{Appl. Statist.}, \strong{45}, 463-478.
-#'   \url{https://dx.doi.org/10.2307/2986068}.
+#'   \url{https://doi.org/10.2307/2986068}.
 #' @references Stephenson, A. (2016) Bayesian inference for extreme value
 #'   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
 #'   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-#'   London. \url{https://dx.doi.org/10.1201/b19721}.
+#'   London. \url{https://doi.org/10.1201/b19721}.
 #' @export
 gev_quant <- function(pars, prob, shape, scale, min_xi = -Inf, max_xi = Inf,
                       trendsd = 0){

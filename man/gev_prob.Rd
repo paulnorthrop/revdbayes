@@ -43,11 +43,11 @@ A prior for GEV parameters \eqn{(\mu, \sigma, \xi)},
   \code{alpha} = \eqn{(\alpha_1, \alpha_2, \alpha_3, \alpha_4)}:
   as the parameters of beta distributions for ratio of exceedance
   probabilities
-  \href{http://dx.doi.org/10.1201/b19721}{(Stephenson, 2016)}
+  \href{https://doi.org/10.1201/b19721}{(Stephenson, 2016)}
   and as the parameters of
   a Dirichlet distribution for differences between non-exceedance
   probabilities
-  \href{http://dx.doi.org/10.1111/rssc.12159}{(Northrop et al., 2017)}.
+  \href{https://doi.org/10.1111/rssc.12159}{(Northrop et al., 2017)}.
   See these publications for details.
 }
 \references{
@@ -61,12 +61,12 @@ Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
   with application to ocean storm severity.
   \emph{Journal of the Royal Statistical Society Series C: Applied
   Statistics}, \strong{66}(1), 93-120.
-  \url{http://dx.doi.org/10.1111/rssc.12159}
+  \url{https://doi.org/10.1111/rssc.12159}
 
 Stephenson, A. (2016) Bayesian inference for extreme value
   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-  London. \url{http://dx.doi.org/10.1201/b19721}.
+  London. \url{https://doi.org/10.1201/b19721}.
 }
 \seealso{
 \code{\link{set_prior}} for setting a prior distribution.

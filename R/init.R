@@ -200,14 +200,14 @@ gp_init <- function(data, m = length(data[!is.na(data)]),
   #   \code{init_phi} is returned.
   # @references Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
   #   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
-  #   \url{http://dx.doi.org/10.2307/1269663}.
+  #   \url{https://doi.org/10.2307/1269663}.
   # @references Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and
   #   Quantile Estimation for the Generalized Pareto Distribution.
-  #   Technometrics, 29(3), 339-349. \url{http://dx.doi.org/10.2307/1269343}.
+  #   Technometrics, 29(3), 339-349. \url{https://doi.org/10.2307/1269343}.
   # @references Reiss, R.-D., Thomas, M. (2007) Statistical Analysis of
   #   Extreme Values with Applications to Insurance, Finance, Hydrology and
   #   Other Fields.Birkhauser.
-  #   \url{http://dx.doi.org/10.1007/978-3-7643-7399-3}.
+  #   \url{https://doi.org/10.1007/978-3-7643-7399-3}.
   # @seealso \code{\link{gev_init}} to calculate initial estimates for
   #   Generalized extreme value distribution parameters.
   #
@@ -361,14 +361,14 @@ gev_init <- function(data, m = length(data[!is.na(data)]),
   #   \code{init_phi} is returned.
   # @references Smith, R. L. (1985) Maximum likelihood estimation in a class of
   #   nonregular cases.  Biometrika, 72(1), 67-90.
-  #   \url{http://dx.doi.org/10.1093/biomet/72.1.67}.
+  #   \url{https://doi.org/10.1093/biomet/72.1.67}.
   # @references Hosking, J. R. M. and Wallis, J. R. and Wood, E. F. (1985)
   #   Estimation of the Generalized Extreme-Value Distribution by the Method of
   #   Probability-Weighted Moments. Technometrics, 27(3), 251-261.
-  #   \url{http://dx.doi.org/10.1080/00401706.1985.10488049}.
+  #   \url{https://doi.org/10.1080/00401706.1985.10488049}.
   # @references Reiss, R.-D., Thomas, M. (2007) Statistical Analysis of Extreme
   #   Values with Applications to Insurance, Finance, Hydrology and Other
-  #   Fields. Birkhauser. \url{http://dx.doi.org/10.1007/978-3-7643-7399-3}.
+  #   Fields. Birkhauser. \url{https://doi.org/10.1007/978-3-7643-7399-3}.
   # @seealso \code{\link{gp_init}} to calculate initial estimates for
   #   Generalized Pareto distribution parameters.
   #
