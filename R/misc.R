@@ -29,6 +29,10 @@ process_data <- function(model, data, thresh, noy, use_noy, ros) {
     }
     nas <- is.na(data)
     data <- data[!nas]
+    # Check that the threshold is not lower than the smallest observation
+    if (thresh < min(data)) {
+      stop("the threshold is lower than the smallest observation")
+    }
     if (model == "bingp") {
       lik_args$n_raw <- length(data)              # number of raw observations
     }
@@ -62,6 +66,10 @@ process_data <- function(model, data, thresh, noy, use_noy, ros) {
     }
     nas <- is.na(data)
     data <- data[!nas]
+    # Check that the threshold is not lower than the smallest observation
+    if (thresh < min(data)) {
+      stop("the threshold is lower than the smallest observation")
+    }
     lik_args$data <- data[data > thresh]    # threshold exceedances
     lik_args$n_exc <- length(lik_args$data) # number of threshold excesses
     lik_args$thresh <- thresh               # threshold
