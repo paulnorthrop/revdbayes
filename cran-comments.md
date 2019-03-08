@@ -5,6 +5,8 @@ Debian: <https://win-builder.r-project.org/incoming_pretest/revdbayes_1.3.3_2019
 
 I am also the maintainer for affected package, threshr.  I have fixed the problem (in threshr) and submitted a new version, threshr 1.0.1 to CRAN.  The check results for threshr 1.0.1 are now complete on all platforms.
 
+revdbayes 1.3.3 also addresses the NOTE "Found the following sources/headers with CR or CRLF line endings:" in the check results of revdbayes 1.3.2. 
+
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
