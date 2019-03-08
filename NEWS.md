@@ -4,7 +4,9 @@
 
 * The format of the `data` supplied to `rpost()` and `rpost_rcpp()` is checked and an error is thrown if it is not appropriate.
 
-* LF line endings used in inst/include/revdbayes.h and inst/include/revdbayes_RcppExports.h to avoid CRAN NOTE
+* In `rpost()` and `rpost_rcpp()` an error is thrown if the input threshold `thresh` is lower than the smallest observation in `data`.  This is only relevant when `model = "gp"`, `model = "bingp"` or `model = "pp"`.
+
+* LF line endings used in inst/include/revdbayes.h and inst/include/revdbayes_RcppExports.h to avoid CRAN NOTE.
 
 * The summary method for class "evpost" is now set up according to Section 8.1 of the R FAQ at (https://cran.r-project.org/doc/FAQ/R-FAQ.html).
 
