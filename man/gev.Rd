@@ -33,7 +33,7 @@ with the GEV(\code{loc, scale, shape}) distribution function raised to the
 power \code{m}.  See \strong{Details}.}
 
 \item{lower.tail}{A logical scalar.  If TRUE (default), probabilities
-are P[X <= x], otherwise, P[X > x].}
+are \eqn{P[X \leq x]}{P[X <= x]}, otherwise, \eqn{P[X > x]}{P[X > x]}.}
 
 \item{p}{A numeric vector of probabilities in [0,1].}
 
@@ -62,7 +62,8 @@ distribution.
 The distribution function of a GEV distribution with parameters
  \code{loc} = \eqn{\mu}, \code{scale} = \eqn{\sigma} (>0) and
  \code{shape} = \eqn{\xi} is
- \deqn{F(x) = exp { - [1 + \xi (x - \mu) / \sigma] ^ (-1/\xi)} }
+ \deqn{F(x) = \exp\{-[1 + \xi (x - \mu) / \sigma] ^ {-1/\xi} \}}{%
+       F(x) = exp{ -[1 + \xi (x - \mu) / \sigma] ^ (-1/\xi)} }
  for \eqn{1 + \xi (x - \mu) / \sigma > 0}.  If \eqn{\xi = 0} the
  distribution function is defined as the limit as \eqn{\xi} tends to zero.
  The support of the distribution depends on \eqn{\xi}: it is
@@ -83,7 +84,8 @@ The distribution function of a GEV distribution with parameters
 
  The effect of \code{m} is to change the location, scale and shape
  parameters to
- \eqn{(\mu + \sigma log m, \sigma, \xi)} if \eqn{\xi = 0} and
+ \eqn{(\mu + \sigma \log m, \sigma, \xi)}{(\mu + \sigma log m, \sigma, \xi)}
+ if \eqn{\xi = 0} and
  \eqn{(\mu + \sigma (m ^ \xi - 1) / \xi, \sigma m ^ \xi, \xi)}.
  For integer \code{m} we can think of this as working with the
  maximum of \code{m} independent copies of the original

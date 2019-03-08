@@ -12,7 +12,8 @@ gev_prob(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
 GEV parameters (\eqn{\mu, \sigma, \xi}).}
 
 \item{quant}{A numeric vector of length 3 containing quantiles
-(\eqn{q1, q2, q3}) such that \eqn{q1 < q2 < q3}. If the values
+(\eqn{q_1, q_2, q_3}{q1, q2, q3}) such that
+\eqn{q_1 < q_2 < q_3}{q1 < q2 < q3}. If the values
 in \code{quant} are not ordered from smallest to largest then they
 will be ordered inside \code{set_prior} without warning.}
 
@@ -38,7 +39,8 @@ prior see \code{\link{set_prior}}.
 \details{
 A prior for GEV parameters \eqn{(\mu, \sigma, \xi)},
   based on Crowder (1992).  This construction is typically used to set
-  an informative prior, based on specified quantiles \eqn{q1, q2, q3}.
+  an informative prior, based on specified quantiles
+  \eqn{q_1, q_2, q_3}{q1, q2, q3}.
   There are two interpretations of the parameter vector
   \code{alpha} = \eqn{(\alpha_1, \alpha_2, \alpha_3, \alpha_4)}:
   as the parameters of beta distributions for ratio of exceedance

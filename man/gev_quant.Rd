@@ -12,7 +12,8 @@ gev_quant(pars, prob, shape, scale, min_xi = -Inf, max_xi = Inf,
 GEV parameters (\eqn{\mu, \sigma, \xi}).}
 
 \item{prob}{A numeric vector of length 3 containing exceedance
-probabilities (\eqn{p1, p2, p3}) such that \eqn{p1 > p2 > p3}.
+probabilities (\eqn{p_1, p_2, p_3}{p1, p2, p3}) such that
+\eqn{p_1 > p_2 > p_3}{p1 > p2 > p3}.
 If the values in \code{quant} are not ordered from largest to smallest
 then they will be ordered inside \code{set_prior} without warning.}
 

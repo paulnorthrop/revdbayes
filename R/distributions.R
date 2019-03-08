@@ -17,14 +17,15 @@
 #' @param log,log.p A logical scalar; if TRUE, probabilities p are given as
 #'   log(p).
 #' @param lower.tail A logical scalar.  If TRUE (default), probabilities
-#'   are P[X <= x], otherwise, P[X > x].
+#'   are \eqn{P[X \leq x]}{P[X <= x]}, otherwise, \eqn{P[X > x]}{P[X > x]}.
 #' @param m A numeric scalar.  The distribution is reparameterised by working
 #'  with the GEV(\code{loc, scale, shape}) distribution function raised to the
 #'  power \code{m}.  See \strong{Details}.
 #' @details The distribution function of a GEV distribution with parameters
 #'  \code{loc} = \eqn{\mu}, \code{scale} = \eqn{\sigma} (>0) and
 #'  \code{shape} = \eqn{\xi} is
-#'  \deqn{F(x) = exp { - [1 + \xi (x - \mu) / \sigma] ^ (-1/\xi)} }
+#'  \deqn{F(x) = \exp\{-[1 + \xi (x - \mu) / \sigma] ^ {-1/\xi} \}}{%
+#'        F(x) = exp{ -[1 + \xi (x - \mu) / \sigma] ^ (-1/\xi)} }
 #'  for \eqn{1 + \xi (x - \mu) / \sigma > 0}.  If \eqn{\xi = 0} the
 #'  distribution function is defined as the limit as \eqn{\xi} tends to zero.
 #'  The support of the distribution depends on \eqn{\xi}: it is
@@ -45,7 +46,8 @@
 #'
 #'  The effect of \code{m} is to change the location, scale and shape
 #'  parameters to
-#'  \eqn{(\mu + \sigma log m, \sigma, \xi)} if \eqn{\xi = 0} and
+#'  \eqn{(\mu + \sigma \log m, \sigma, \xi)}{(\mu + \sigma log m, \sigma, \xi)}
+#'  if \eqn{\xi = 0} and
 #'  \eqn{(\mu + \sigma (m ^ \xi - 1) / \xi, \sigma m ^ \xi, \xi)}.
 #'  For integer \code{m} we can think of this as working with the
 #'  maximum of \code{m} independent copies of the original
@@ -215,11 +217,12 @@ rgev <- function (n, loc = 0, scale = 1, shape = 0, m = 1) {
 #' @param log,log.p A logical scalar; if TRUE, probabilities p are given as
 #'   log(p).
 #' @param lower.tail A logical scalar.  If TRUE (default), probabilities
-#'   are P[X <= x], otherwise, P[X > x].
+#'   are \eqn{P[X \leq x]}{P[X <= x]}, otherwise, \eqn{P[X > x]}{P[X > x]}.
 #' @details The distribution function of a GP distribution with parameters
 #'  \code{location} = \eqn{\mu}, \code{scale} = \eqn{\sigma} (>0) and
 #'  \code{shape} = \eqn{\xi} is
-#'  \deqn{F(x) = 1 - [1 + \xi (x - \mu) / \sigma] ^ (-1/\xi) }
+#'  \deqn{F(x) = 1 - [1 + \xi (x - \mu) / \sigma] ^ {-1/\xi}}{%
+#'        F(x) = 1 - [1 + \xi (x - \mu) / \sigma] ^ (-1/\xi)}
 #'  for \eqn{1 + \xi (x - \mu) / \sigma > 0}.  If \eqn{\xi = 0} the
 #'  distribution function is defined as the limit as \eqn{\xi} tends to zero.
 #'  The support of the distribution depends on \eqn{\xi}: it is

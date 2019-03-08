@@ -22,7 +22,8 @@
 #'   beta(\eqn{\alpha}, \eqn{\beta}) prior for \eqn{\theta}.
 #' @param param A character scalar.  If \code{param = "logit"} (the default)
 #'   then we simulate from the posterior distribution of
-#'   \eqn{\phi = logit(\theta)} and then transform back to the
+#'   \eqn{\phi = \log(\theta / (1-\theta))}{\phi = log(\theta / (1-\theta))}
+#'   and then transform back to the
 #'   \eqn{\theta}-scale.  If \code{param = "theta"} then we simulate
 #'   directly from the posterior distribution of \eqn{\theta}, unless
 #'   the sample K-gaps are all equal to zero or all positive, when we revert
@@ -35,8 +36,10 @@
 #' @details A beta(\eqn{\alpha}, \eqn{\beta}) prior distribution is used for
 #'   \eqn{\theta} so that the posterior from which values are simulated is
 #'   proportional to
-#'   \deqn{\theta ^ (2 N_1 + \alpha - 1) * (1 - \theta) ^ (N_0 + \beta - 1) *
-#'     exp(- \theta q (S_0 + ... + S_N)).}
+#'   \deqn{\theta ^ {2 N_1 + \alpha - 1} (1 - \theta) ^ {N_0 + \beta - 1}
+#'     \exp\{- \theta q (S_0 + \cdots + S_N)\}.}{%
+#'     \theta ^ (2 N_1 + \alpha - 1) * (1 - \theta) ^ (N_0 + \beta - 1) *
+#'     exp(- \theta q (S_0 + \dots + S_N)).}
 #'   See \code{\link{kgaps_stats}} for a description of the variables
 #'   involved in the contribution of the likelihood to this expression.
 #'
@@ -46,8 +49,9 @@
 #'   of acceptance, and to ensure that the simulation will work even in
 #'   extreme cases where the posterior density of \eqn{\theta} is unbounded as
 #'   \eqn{\theta} approaches 0 or 1, we simulate from the posterior
-#'   distribution of \eqn{\phi = logit(\theta)} and then transform back to the
-#'   \eqn{\theta}-scale.
+#'   distribution of
+#'   \eqn{\phi = \log(\theta / (1-\theta))}{\phi = log(\theta / (1-\theta))}
+#'   and then transform back to the \eqn{\theta}-scale.
 #' @return An object (list) of class \code{"evpost"}, which has the same
 #'   structure as an object of class \code{"ru"} returned from
 #'   \code{\link[rust]{ru}}.
