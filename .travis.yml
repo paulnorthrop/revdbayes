@@ -11,8 +11,8 @@ before_install:
   - source before-install.sh
 
 os:
-#  - linux
-  - osx
+ - linux
+#  - osx
 
 addons:
   apt:
@@ -22,8 +22,8 @@ addons:
       - clang
 
 r:
-  - release
-#  - devel
+#  - release
+  - devel
 #  - oldrel
 
 env:
