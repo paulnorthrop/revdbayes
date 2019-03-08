@@ -194,7 +194,7 @@
 #' @references Coles, S. G. and Powell, E. A. (1996) Bayesian methods in
 #'   extreme value modelling: a review and new developments.
 #'   \emph{Int. Statist. Rev.}, \strong{64}, 119-136.
-#'   \url{https://doi.org/10.2307/1403426}
+#'   \url{https://www.jstor.org/stable/1403426}
 #' @references Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
 #'   Cross-validatory extreme value threshold selection and uncertainty
 #'   with application to ocean storm severity.
