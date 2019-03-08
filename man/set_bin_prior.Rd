@@ -37,7 +37,8 @@ from a list of in-built priors.
     \code{ab} is a vector containing \code{c}(\eqn{\alpha, \beta}).}
     The default is \code{ab = c(1, 1)}.
   \item{\code{"mdi"}: the MDI prior
-    \eqn{\pi(p) = 1.6186 p^p (1-p)^(1-p),     0 < p < 1.}
+    \eqn{\pi(p) = 1.6186 p^p (1-p)^{1-p}}{\pi(p) = 1.6186 p^p (1-p)^(1-p)},
+        for \eqn{0 < p < 1.}
   }
 }
 Apart from the MDI prior these are all beta distributions.

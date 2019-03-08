@@ -121,7 +121,7 @@ rprior_quant <- function(n, prob, shape, scale, lb = NULL, lb_prob = 0.001){
 #' @param n A numeric scalar. The size of sample required.
 #' @param quant A numeric vector of length 3.  Contains quantiles
 #'   \eqn{q_1, q_2, q_3}.  A prior distribution is placed on the
-#'   non-exceedance (\code{exc=FALSE}) or exceedance (\code{exc=TRUE})
+#'   non-exceedance (\code{exc = FALSE}) or exceedance (\code{exc = TRUE})
 #'   probabilities corresponding to these quantiles.
 #'   The values should \emph{increase} with the index of the vector.
 #'   If not, the values in \code{quant} will be sorted into increasing order
@@ -129,13 +129,18 @@ rprior_quant <- function(n, prob, shape, scale, lb = NULL, lb_prob = 0.001){
 #' @param alpha A numeric vector of length 4. Parameters of the Dirichlet
 #'   distribution for the exceedance probabilities.
 #' @param exc A logical scalar.  Let \eqn{M} be the GEV variable,
-#'   \eqn{r_q = P(M <= q)}, \eqn{p_q = P(M > q) = 1-r_q} and
+#'   \eqn{r_q = P(M \leq q)}{r_q = P(M <= q)},
+#'   \eqn{p_q = P(M > q) = 1 - r_q} and
 #'   \code{quant} = (\eqn{q_1, q_2, q_3}).
-#'   If \code{exc=FALSE} then a Dirichlet(\code{alpha}) distribution is placed on
-#'   (\eqn{r_q1, r_q2 - r_q1, r_q3 - r_q2, 1 - r_q3}), as in
+#'   If \code{exc = FALSE} then a Dirichlet(\code{alpha}) distribution is
+#'   placed on
+#'   \eqn{(r_{q_1}, r_{q_2} - r_{q_1}, r_{q_3} - r_{q_2}, 1 - r_{q_3})}{%
+#'         (r_q1, r_q2 - r_q1, r_q3 - r_q2, 1 - r_q3)}, as in
 #'   Northrop et al. (2017).
-#'   If \code{exc=TRUE} then a Dirichlet(\code{alpha}) distribution is placed on
-#'   (\eqn{1 - p_q1, p_q1 - p_q2, p_q2 - p_q3, p_q3}), where
+#'   If \code{exc = TRUE} then a Dirichlet(\code{alpha}) distribution
+#'   is placed on
+#'   \eqn{(1 - p_{q_1}, p_{q_1} - p_{q_2}, p_{q_2} - p_{q_3}, p_{q_3})}{%
+#'        (1 - p_q1, p_q1 - p_q2, p_q2 - p_q3, p_q3)}, where
 #'   \eqn{p_q = P(M > q)}, as in Stephenson (2016).
 #' @param lb A numeric scalar.  If this is not \code{NULL} then the simulation
 #'   is constrained so that \code{lb} is an approximate lower bound on the
@@ -265,9 +270,9 @@ rprior_prob <- function(n, quant, alpha, exc = FALSE, lb = NULL,
 #' @details Suppose that \eqn{G(x)} is the distribution function of
 #'   a GEV(\eqn{\mu, \sigma, \xi}) distribution.  This function attempts to
 #'   solve numerically the set of three non-linear equations
-#'   \deqn{G(q[i]) = 1 - p[i], i = 1, 2, 3}
-#'   where \eqn{q[i], i=1,2,3} are the quantiles in \code{quant} and
-#'   \eqn{p[i], i=1,2,3} are the exceedance probabilities in \code{prob}.
+#'   \deqn{G(q_i) = 1 - p_i, i = 1, 2, 3}
+#'   where \eqn{q_i, i=1,2,3} are the quantiles in \code{quant} and
+#'   \eqn{p_i, i=1,2,3} are the exceedance probabilities in \code{prob}.
 #'   This is reduced to a one-dimensional optimisation over the GEV
 #'   shape parameter.
 #' @return A numeric vector of length 3 containing the GEV location, scale and
@@ -323,9 +328,10 @@ quantile_to_gev <- function(quant, prob){
 #' @param n A numeric scalar. The size of sample required.
 #' @param alpha A numeric vector.  Dirichlet concentration parameter.
 #' @details The simulation is based on the property that if
-#'   \eqn{Y_1}, ..., \eqn{Y_K} are independent, \eqn{Y_i} has a
-#'   gamma(\eqn{\alpha_i}, 1) distribution and \eqn{S = Y_1 + ... + Y_k}
-#'   then \eqn{(Y_1, ..., Y_K) / S} has a
+#'   \eqn{Y_1, \ldots, Y_K}{Y_1, ..., Y_K} are independent, \eqn{Y_i} has a
+#'   gamma(\eqn{\alpha_i}, 1) distribution and
+#'   \eqn{S = Y_1 + \cdots + Y_k}{S = Y_1 + ... + Y_k}
+#'   then \eqn{(Y_1, \ldots, Y_K) / S}{(Y_1, ..., Y_K) / S} has a
 #'   Dirichlet(\eqn{\alpha_1}, ..., \eqn{\alpha_K}) distribution.
 #'
 #'   See
@@ -340,7 +346,7 @@ quantile_to_gev <- function(quant, prob){
 #' @examples
 #' rDir(n = 10, alpha = 1:4)
 #' @export
-rDir <- function(n = 1, alpha = c(1,1)){
+rDir <- function(n = 1, alpha = c(1, 1)){
   y <- matrix(NA, nrow = n, ncol = length(alpha))
   for (j in 1:ncol(y)){
     y[, j] <- stats::rgamma(n, shape = alpha[j])

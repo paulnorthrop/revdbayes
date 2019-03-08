@@ -96,7 +96,8 @@ N years, i.e. level\% predictive intervals are returned.}
   Only relevant when \code{type = "i"}.
 
   If \code{hpd = FALSE} then the interval is
-  equi-tailed, equal to \code{predict.evpost(}\code{object, type ="q", x = p)},
+  equi-tailed, with its limits produced by
+  \code{predict.evpost(}\code{object, type ="q", x = p)},
   where \code{p = c((1-level/100)/2,} \code{(1+level/100)/2)}.
 
   If \code{hpd = TRUE} then, in addition to the equi-tailed interval,
@@ -106,8 +107,8 @@ N years, i.e. level\% predictive intervals are returned.}
 
 \item{lower_tail}{A logical scalar.
 Only relevant when \code{type = "p"} or \code{type = "q"}.
-If TRUE (default), (output or input) probabilities are P[X <= x],
-otherwise, P[X > x].}
+If TRUE (default), (output or input) probabilities are
+\eqn{P[X \leq x]}{P[X <= x]}, otherwise, \eqn{P[X > x]}{P[X > x]}.}
 
 \item{log}{A logical scalar.  Only relevant when \code{type = "d"}.
 If TRUE the log-density is returned.}
@@ -224,14 +225,15 @@ Inferences about future extreme observations are integrated over
   \code{npy * n_years}.
 
   Following \href{https://doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
-  Let \eqn{M_N} be the largest value observed in \eqn{N} years,
+  let \eqn{M_N} be the largest value observed in \eqn{N} years,
   \eqn{m} = \code{npy * n_years} and \eqn{u} the threshold
   \code{object$thresh} used in the call to \code{rpost}
   or \code{rpost_rcpp}.
   For fixed values of \eqn{\theta = (p, \sigma, \xi)} the distribution
   function of \eqn{M_N} is given by \eqn{F(z, \theta)^m}, for
-  \eqn{z >= u}, where
-  \deqn{F(z, \theta) = 1 - p * [1 + \xi (x - u) / \sigma] ^ (-1/\xi).}
+  \eqn{z \geq u}{z >= u}, where
+  \deqn{F(z, \theta) = 1 - p [1 + \xi (x - u) / \sigma] ^ {-1/\xi}.}{%
+        F(z, \theta) = 1 - p * [1 + \xi (x - u) / \sigma] ^ (-1/\xi).}
   The distribution function of \eqn{M_N} cannot be evaluated for
   \eqn{z < u} because no model has been supposed for observations below
   the threshold.

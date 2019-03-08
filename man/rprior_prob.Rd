@@ -11,7 +11,7 @@ rprior_prob(n, quant, alpha, exc = FALSE, lb = NULL, lb_prob = 0.001)
 
 \item{quant}{A numeric vector of length 3.  Contains quantiles
 \eqn{q_1, q_2, q_3}.  A prior distribution is placed on the
-non-exceedance (\code{exc=FALSE}) or exceedance (\code{exc=TRUE})
+non-exceedance (\code{exc = FALSE}) or exceedance (\code{exc = TRUE})
 probabilities corresponding to these quantiles.
 The values should \emph{increase} with the index of the vector.
 If not, the values in \code{quant} will be sorted into increasing order
@@ -21,13 +21,18 @@ without warning.}
 distribution for the exceedance probabilities.}
 
 \item{exc}{A logical scalar.  Let \eqn{M} be the GEV variable,
-\eqn{r_q = P(M <= q)}, \eqn{p_q = P(M > q) = 1-r_q} and
+\eqn{r_q = P(M \leq q)}{r_q = P(M <= q)},
+\eqn{p_q = P(M > q) = 1 - r_q} and
 \code{quant} = (\eqn{q_1, q_2, q_3}).
-If \code{exc=FALSE} then a Dirichlet(\code{alpha}) distribution is placed on
-(\eqn{r_q1, r_q2 - r_q1, r_q3 - r_q2, 1 - r_q3}), as in
+If \code{exc = FALSE} then a Dirichlet(\code{alpha}) distribution is
+placed on
+\eqn{(r_{q_1}, r_{q_2} - r_{q_1}, r_{q_3} - r_{q_2}, 1 - r_{q_3})}{%
+      (r_q1, r_q2 - r_q1, r_q3 - r_q2, 1 - r_q3)}, as in
 Northrop et al. (2017).
-If \code{exc=TRUE} then a Dirichlet(\code{alpha}) distribution is placed on
-(\eqn{1 - p_q1, p_q1 - p_q2, p_q2 - p_q3, p_q3}), where
+If \code{exc = TRUE} then a Dirichlet(\code{alpha}) distribution
+is placed on
+\eqn{(1 - p_{q_1}, p_{q_1} - p_{q_2}, p_{q_2} - p_{q_3}, p_{q_3})}{%
+     (1 - p_q1, p_q1 - p_q2, p_q2 - p_q3, p_q3)}, where
 \eqn{p_q = P(M > q)}, as in Stephenson (2016).}
 
 \item{lb}{A numeric scalar.  If this is not \code{NULL} then the simulation

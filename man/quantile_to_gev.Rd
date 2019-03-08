@@ -32,9 +32,9 @@ has these quantiles.
 Suppose that \eqn{G(x)} is the distribution function of
   a GEV(\eqn{\mu, \sigma, \xi}) distribution.  This function attempts to
   solve numerically the set of three non-linear equations
-  \deqn{G(q[i]) = 1 - p[i], i = 1, 2, 3}
-  where \eqn{q[i], i=1,2,3} are the quantiles in \code{quant} and
-  \eqn{p[i], i=1,2,3} are the exceedance probabilities in \code{prob}.
+  \deqn{G(q_i) = 1 - p_i, i = 1, 2, 3}
+  where \eqn{q_i, i=1,2,3} are the quantiles in \code{quant} and
+  \eqn{p_i, i=1,2,3} are the exceedance probabilities in \code{prob}.
   This is reduced to a one-dimensional optimisation over the GEV
   shape parameter.
 }

@@ -20,9 +20,10 @@ vector \eqn{\alpha} = (\eqn{\alpha_1}, ..., \eqn{\alpha_K}).
 }
 \details{
 The simulation is based on the property that if
-  \eqn{Y_1}, ..., \eqn{Y_K} are independent, \eqn{Y_i} has a
-  gamma(\eqn{\alpha_i}, 1) distribution and \eqn{S = Y_1 + ... + Y_k}
-  then \eqn{(Y_1, ..., Y_K) / S} has a
+  \eqn{Y_1, \ldots, Y_K}{Y_1, ..., Y_K} are independent, \eqn{Y_i} has a
+  gamma(\eqn{\alpha_i}, 1) distribution and
+  \eqn{S = Y_1 + \cdots + Y_k}{S = Y_1 + ... + Y_k}
+  then \eqn{(Y_1, \ldots, Y_K) / S}{(Y_1, ..., Y_K) / S} has a
   Dirichlet(\eqn{\alpha_1}, ..., \eqn{\alpha_K}) distribution.
 
   See
