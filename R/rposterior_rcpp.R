@@ -312,8 +312,7 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
     check_model <- "gp"
   }
   if (prior_model != check_model) {
-    warning("Are you sure that the prior is compatible with the model?",
-            immediate. = TRUE)
+    stop("The prior is not compatible with the model.")
   }
   # ---------- Create list of additional arguments to the likelihood --------- #
   # Check that any required arguments to the likelihood are present.

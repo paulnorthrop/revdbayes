@@ -1,5 +1,11 @@
 # revdbayes 1.3.3.9000
 
+## New features
+
+## Bug fixes and minor improvements
+
+* In `rpost()` and `rpost_rcpp()` an error is thrown if the prior and the model are not compatible.  Previously a warning was given.
+
 # revdbayes 1.3.3
 
 ## Bug fixes and minor improvements
