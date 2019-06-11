@@ -6,6 +6,8 @@
 
 * In `rpost()` and `rpost_rcpp()` an error is thrown if the prior and the model are not compatible.  Previously a warning was given.
 
+* The penultimate example in the documentation for `set_prior()` has been corrected by adding `model = "gp".  The default `model = "gev"` is not appropriate here because the prior is set up for the GP model.
+
 # revdbayes 1.3.3
 
 ## Bug fixes and minor improvements
