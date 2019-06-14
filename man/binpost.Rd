@@ -51,6 +51,13 @@ ds_bin$m <- sum(gom > u)
 bp <- set_bin_prior(prior = "jeffreys")
 temp <- binpost(n = 1000, prior = bp, ds_bin = ds_bin)
 graphics::hist(temp$bin_sim_vals, prob = TRUE)
+
+# Setting a beta prior (Jeffreys in this case) by hand
+beta_prior_fn <- function(p, ab) {
+  return(stats::dbeta(p, shape1 = ab[1], shape2 = ab[2], log = TRUE))
+}
+jeffreys <- set_bin_prior(beta_prior_fn, ab = c(1 / 2, 1 / 2))
+temp <- binpost(n = 1000, prior = jeffreys, ds_bin = ds_bin)
 }
 \seealso{
 \code{\link{set_bin_prior}} for setting a prior distribution
