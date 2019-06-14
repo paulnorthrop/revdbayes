@@ -227,6 +227,16 @@
 #' plot(bgpg, pu_only = TRUE)
 #' plot(bgpg, add_pu = TRUE)
 #'
+#' # Setting the same binomial (Jeffreys) prior by hand
+#' beta_prior_fn <- function(p, ab) {
+#'   return(stats::dbeta(p, shape1 = ab[1], shape2 = ab[2], log = TRUE))
+#' }
+#' jeffreys <- set_bin_prior(beta_prior_fn, ab = c(1 / 2, 1 / 2))
+#' bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
+#'               bin_prior = jeffreys)
+#' plot(bgpg, pu_only = TRUE)
+#' plot(bgpg, add_pu = TRUE)
+#'
 #' # GEV model
 #' mat <- diag(c(10000, 10000, 100))
 #' pn <- set_prior(prior = "norm", model = "gev", mean = c(0, 0, 0), cov = mat)
@@ -838,11 +848,18 @@ pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 #' bp <- set_bin_prior(prior = "jeffreys")
 #' temp <- binpost(n = 1000, prior = bp, ds_bin = ds_bin)
 #' graphics::hist(temp$bin_sim_vals, prob = TRUE)
+#'
+#' # Setting a beta prior (Jeffreys in this case) by hand
+#' beta_prior_fn <- function(p, ab) {
+#'   return(stats::dbeta(p, shape1 = ab[1], shape2 = ab[2], log = TRUE))
+#' }
+#' jeffreys <- set_bin_prior(beta_prior_fn, ab = c(1 / 2, 1 / 2))
+#' temp <- binpost(n = 1000, prior = jeffreys, ds_bin = ds_bin)
 #' @export
 binpost <- function(n, prior, ds_bin) {
   n_success <- ds_bin$m
   n_failure <- ds_bin$n_raw - ds_bin$m
-  if (prior$prior == "bin_beta") {
+  if (is.character(prior$prior) && prior$prior == "bin_beta") {
     shape1 <- n_success + prior$ab[1]
     shape2 <- n_failure + prior$ab[2]
     bin_sim_vals <- stats::rbeta(n = n, shape1 = shape1, shape2 = shape2)
@@ -853,7 +870,7 @@ binpost <- function(n, prior, ds_bin) {
     temp <- list(bin_sim_vals = bin_sim_vals, bin_logf = bin_logf_beta,
                  bin_logf_args = bin_logf_args)
   }
-  if (prior$prior == "bin_mdi") {
+  if (is.character(prior$prior) && prior$prior == "bin_mdi") {
     bin_sim_vals <- r_pu_MDI(n = n, n_success = n_success,
                              n_failure = n_failure)
     beta_const <- beta(n_success + 1, n_failure + 1)
@@ -872,6 +889,29 @@ binpost <- function(n, prior, ds_bin) {
     }
     temp <- list(bin_sim_vals = bin_sim_vals, bin_logf = bin_logf_mdi,
                  bin_logf_args = bin_logf_args)
+  }
+  if (is.function(prior$prior)) {
+    binlogpost <- function(pu, ...) {
+      binloglik <- stats::dbeta(pu, shape1 = n_success + 1,
+                                shape2 = n_failure + 1, log = TRUE)
+      binlogprior <- do.call(prior$prior, c(list(pu), prior[-1]))
+      return(binloglik + binlogprior)
+    }
+    binpostfn <- function(pu, ...) {
+      exp(binlogpost(pu, ...))
+    }
+    log_user_const <- log(stats::integrate(binpostfn, 0, 1)$value)
+    bininit <- n_success / (n_success + n_failure)
+    for_ru <- c(list(logf = binlogpost), list(n = n, d =  1, init = bininit))
+    temp2 <- do.call(rust::ru, for_ru)
+    bin_logf_user <- function(pu, ...) {
+      binlogpost(pu, ...) - log_user_const
+    }
+    temp <- list()
+    temp$bin_sim_vals <- temp2$sim_vals
+    temp$bin_logf <- bin_logf_user
+    temp$bin_logf_args <- c(list(n_success = n_success, n_failure = n_failure),
+                          prior[-1])
   }
   class(temp) <- "binpost"
   return(temp)

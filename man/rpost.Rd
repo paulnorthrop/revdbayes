@@ -219,6 +219,16 @@ bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
 plot(bgpg, pu_only = TRUE)
 plot(bgpg, add_pu = TRUE)
 
+# Setting the same binomial (Jeffreys) prior by hand
+beta_prior_fn <- function(p, ab) {
+  return(stats::dbeta(p, shape1 = ab[1], shape2 = ab[2], log = TRUE))
+}
+jeffreys <- set_bin_prior(beta_prior_fn, ab = c(1 / 2, 1 / 2))
+bgpg <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
+              bin_prior = jeffreys)
+plot(bgpg, pu_only = TRUE)
+plot(bgpg, add_pu = TRUE)
+
 # GEV model
 mat <- diag(c(10000, 10000, 100))
 pn <- set_prior(prior = "norm", model = "gev", mean = c(0, 0, 0), cov = mat)
