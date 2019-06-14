@@ -10,9 +10,8 @@ set_bin_prior(prior = c("jeffreys", "laplace", "haldane", "beta", "mdi"),
 \arguments{
 \item{prior}{Either
 \itemize{
-  \item {An R function, or a pointer to a user-supplied compiled
-  C++ function, that returns the value of the log of the prior density
-  (see \strong{Examples}), or}
+  \item {An R function that returns the value of the log of the prior
+  density (see \strong{Examples}), or}
   \item {A character string giving the name of the prior for \eqn{p}.
     See \strong{Details} for a list of priors available.}
 }}
@@ -30,7 +29,9 @@ A list of class \code{"binprior"}.  The first component is the
 \description{
 Constructs a prior distribution for use as the argument \code{bin_prior} in
 \code{\link{rpost}} or in \code{\link{binpost}}.  The user can choose
-from a list of in-built priors.
+from a list of in-built priors or specify their own prior function,
+returning the log of the prior density, using an R function
+and arguments for hyperparameters.
 }
 \details{
 \strong{Binomial priors.} The names of the binomial priors set using
@@ -51,6 +52,12 @@ Apart from the MDI prior these are all beta distributions.
 }
 \examples{
 bp <- set_bin_prior(prior = "jeffreys")
+
+# Setting the Jeffreys prior by hand
+beta_prior_fn <- function(p, ab) {
+  return(stats::dbeta(p, shape1 = ab[1], shape2 = ab[2], log = TRUE))
+}
+jeffreys <- set_bin_prior(beta_prior_fn, ab = c(1 / 2, 1 / 2))
 }
 \seealso{
 \code{\link{binpost}} for sampling from a binomial posterior
