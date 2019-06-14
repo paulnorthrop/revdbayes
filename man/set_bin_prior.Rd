@@ -8,12 +8,18 @@ set_bin_prior(prior = c("jeffreys", "laplace", "haldane", "beta", "mdi"),
   ...)
 }
 \arguments{
-\item{prior}{A character string giving the name of the prior for \eqn{p}.
-See \strong{Details} for a list of the priors available.}
+\item{prior}{Either
+\itemize{
+  \item {An R function, or a pointer to a user-supplied compiled
+  C++ function, that returns the value of the log of the prior density
+  (see \strong{Examples}), or}
+  \item {A character string giving the name of the prior for \eqn{p}.
+    See \strong{Details} for a list of priors available.}
+}}
 
-\item{...}{Further arguments to be passed to an in-built prior function.
-This is only relevant if \code{model = "beta"}, when \code{ab} can be
-passed. See \strong{Details}.}
+\item{...}{Further arguments to be passed to the user-supplied or in-built
+prior function.  For the latter this is only relevant if
+\code{prior = "beta"}, when \code{ab} can be passed. See \strong{Details}.}
 }
 \value{
 A list of class \code{"binprior"}.  The first component is the

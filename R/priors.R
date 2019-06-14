@@ -850,11 +850,17 @@ hpar_drop <- function(x_list, hpar_vec) {
 #' \code{\link{rpost}} or in \code{\link{binpost}}.  The user can choose
 #' from a list of in-built priors.
 #'
-#' @param prior A character string giving the name of the prior for \eqn{p}.
-#'   See \strong{Details} for a list of the priors available.
-#' @param ... Further arguments to be passed to an in-built prior function.
-#'   This is only relevant if \code{model = "beta"}, when \code{ab} can be
-#'   passed. See \strong{Details}.
+#' @param prior Either
+#' \itemize{
+#'   \item {An R function, or a pointer to a user-supplied compiled
+#'   C++ function, that returns the value of the log of the prior density
+#'   (see \strong{Examples}), or}
+#'   \item {A character string giving the name of the prior for \eqn{p}.
+#'     See \strong{Details} for a list of priors available.}
+#' }
+#' @param ... Further arguments to be passed to the user-supplied or in-built
+#'   prior function.  For the latter this is only relevant if
+#'   \code{prior = "beta"}, when \code{ab} can be passed. See \strong{Details}.
 #' @details
 #'   \strong{Binomial priors.} The names of the binomial priors set using
 #'   \code{bin_prior} are:
@@ -882,6 +888,13 @@ hpar_drop <- function(x_list, hpar_vec) {
 #' @export
 set_bin_prior <- function(prior = c("jeffreys", "laplace", "haldane", "beta",
                                     "mdi"), ...) {
+  # If prior is a function or a pointer to an external C++ function then just
+  # return it in the required format.
+  if (is.function(prior) || class(prior) == "externalptr") {
+    temp <- list(prior = prior, ...)
+    return(structure(temp, class = "binprior"))
+  }
+  # Otherwise, call the appropriate function to set the prior with name prior.
   prior <- match.arg(prior)
   temp <- list(prior = paste("bin_", prior, sep=""), ...)
   # Check for unused hyperparameter names and drop them
