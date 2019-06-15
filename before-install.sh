@@ -2,10 +2,10 @@
 
 mkdir -p ~/.R
 
-if [ "${COMPILER}" = "gcc-4.4" ]; then
-    echo "CC=gcc-4.4 -std=gnu99"    >> ~/.R/Makevars
-    echo "CXX=g++-4.4"              >> ~/.R/Makevars
-    echo "CXX1X=g++-4.4 -std=c++0x" >> ~/.R/Makevars
+if [ "${COMPILER}" = "gcc-4.9" ]; then
+    echo "CC=gcc-4.9 -std=gnu99"    >> ~/.R/Makevars
+    echo "CXX=g++-4.9"              >> ~/.R/Makevars
+    echo "CXX1X=g++-4.9 -std=c++0x" >> ~/.R/Makevars
 fi
 
 if [ "${COMPILER}" = "gcc" ]; then
