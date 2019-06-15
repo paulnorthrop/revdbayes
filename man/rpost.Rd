@@ -7,8 +7,9 @@
 rpost(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior, ...,
   nrep = NULL, thresh = NULL, noy = NULL, use_noy = TRUE,
   npy = NULL, ros = NULL, bin_prior = structure(list(prior =
-  "bin_beta", ab = c(1/2, 1/2), class = "binprior")), init_ests = NULL,
-  mult = 2, use_phi_map = FALSE)
+  "bin_beta", ab = c(1/2, 1/2), class = "binprior")),
+  bin_param = "logit", init_ests = NULL, mult = 2,
+  use_phi_map = FALSE)
 }
 \arguments{
 \item{n}{A numeric scalar. The size of posterior sample required.}
@@ -93,6 +94,10 @@ in the analysis.}
 \eqn{p}, created by \code{\link{set_bin_prior}}.  Only relevant if
 \code{model = "bingp"}.  If this is not supplied then the Jeffreys
 beta(1/2, 1/2) prior is used.}
+
+\item{bin_param}{A character scalar.  The argument \code{param} passed to
+\code{\link{binpost}}.  Only relevant if a user-supplied prior function
+is set using \code{\link{set_bin_prior}}.}
 
 \item{init_ests}{A numeric vector.  Initial parameter estimates for search
 for the mode of the posterior distribution.}

@@ -71,6 +71,9 @@
 #'   \eqn{p}, created by \code{\link{set_bin_prior}}.  Only relevant if
 #'   \code{model = "bingp"}.  If this is not supplied then the Jeffreys
 #'   beta(1/2, 1/2) prior is used.
+#' @param bin_param A character scalar.  The argument \code{param} passed to
+#'   \code{\link{binpost}}.  Only relevant if a user-supplied prior function
+#'   is set using \code{\link{set_bin_prior}}.
 #' @param init_ests A numeric vector.  Initial parameter estimates for search
 #'   for the mode of the posterior distribution.
 #' @param mult A numeric scalar.  The grid of values used to choose the Box-Cox
@@ -275,6 +278,7 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
                   bin_prior = structure(list(prior = "bin_beta",
                                              ab = c(1 / 2, 1 / 2),
                                              class = "binprior")),
+                  bin_param = "logit",
                   init_ests = NULL, mult = 2, use_phi_map = FALSE) {
   #
   model <- match.arg(model)
@@ -335,7 +339,8 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
     ds_bin$m <- ds$m
     ds_bin$n_raw <- ds$n_raw
     ds$n_raw <- NULL
-    temp_bin <- binpost(n = n, prior = bin_prior, ds_bin = ds_bin)
+    temp_bin <- binpost(n = n, prior = bin_prior, ds_bin = ds_bin,
+                        param = bin_param)
     add_binomial <- TRUE
     model <- "gp"
   }
@@ -822,12 +827,33 @@ pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 #'   \item {\code{n_raw} : number of raw observations}
 #'   \item {\code{m} : number of threshold exceedances.}
 #' }
+#' @param param A character scalar.  Only relevant if \code{prior$prior} is a
+#'   (user-supplied) R function.  \code{param} specifies the parameterization
+#'   of the posterior distribution that \code{\link[rust]{ru}} uses for
+#'   sampling.
+#'
+#'   If \code{param = "p"} the original parameterization \eqn{p} is
+#'   used.
+#'
+#'   If \code{param = "logit"} (the default) then \code{\link[rust]{ru}}
+#'   samples from the posterior for the logit of \eqn{p}, before transforming
+#'   back to the \eqn{p}-scale.
+#'
+#'   The latter tends to make the optimizations involved in the
+#'   ratio-of-uniforms algorithm more stable and to increase the probability
+#'   of acceptance, but at the expense of slower function evaluations.
 #' @details If \code{prior$prior == "bin_beta"} then the posterior for \eqn{p}
 #'   is a beta distribution so \code{\link[stats:Beta]{rbeta}} is used to
-#'   sample from the posterior.  If \code{prior$prior == "bin_mdi"} then
+#'   sample from the posterior.
+#'
+#'   If \code{prior$prior == "bin_mdi"} then
 #'   rejection sampling is used to sample from the posterior with an envelope
 #'   function equal to the density of a
 #'   beta(\code{ds$m} + 1, \code{ds$n_raw - ds$m} + 1) density.
+#'
+#'   If \code{prior$prior} is a (user-supplied) R function then
+#'   \code{\link[rust]{ru}} is used to sample from the posterior using the
+#'   generalised ratio-of-uniforms method.
 #' @return An object (list) of class \code{"binpost"} with components
 #'   \itemize{
 #'     \item{\code{bin_sim_vals}:} {An \code{n} by 1 numeric matrix of values
@@ -837,6 +863,9 @@ pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 #'       \eqn{p}.}
 #'     \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
 #'   }
+#'   If \code{prior$prior} is a (user-supplied) R function then this list
+#'   also contains \code{ru_object} the object of class \code{"ru"}
+#'   returned by \code{\link[rust]{ru}}.
 #' @seealso \code{\link{set_bin_prior}} for setting a prior distribution
 #'   for the binomial probability \eqn{p}.
 #' @examples
@@ -856,7 +885,8 @@ pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 #' jeffreys <- set_bin_prior(beta_prior_fn, ab = c(1 / 2, 1 / 2))
 #' temp <- binpost(n = 1000, prior = jeffreys, ds_bin = ds_bin)
 #' @export
-binpost <- function(n, prior, ds_bin) {
+binpost <- function(n, prior, ds_bin, param = c("logit", "p")) {
+  param <- match.arg(param)
   n_success <- ds_bin$m
   n_failure <- ds_bin$n_raw - ds_bin$m
   if (is.character(prior$prior) && prior$prior == "bin_beta") {
@@ -903,6 +933,22 @@ binpost <- function(n, prior, ds_bin) {
     log_user_const <- log(stats::integrate(binpostfn, 0, 1)$value)
     bininit <- n_success / (n_success + n_failure)
     for_ru <- c(list(logf = binlogpost), list(n = n, d =  1, init = bininit))
+    if (param == "logit") {
+      for_ru$trans <- "user"
+      # Transformation from phi (logit(p)) to theta (p)
+      phi_to_theta <- function(phi) {
+        return(exp(phi) / (1 + exp(phi)))
+      }
+      # Log-Jacobian of the transformation from theta to phi, i.e. based on the
+      # derivatives of phi with respect to theta
+      log_j <- function(theta) {
+        return(-log(theta) - log(1 - theta))
+      }
+      for_ru$phi_to_theta <- phi_to_theta
+      for_ru$log_j <- log_j
+      for_ru$init <- log(bininit / (1 - bininit))
+    }
+    for_ru$var_names <- "p"
     temp2 <- do.call(rust::ru, for_ru)
     bin_logf_user <- function(pu, ...) {
       binlogpost(pu, ...) - log_user_const
@@ -912,6 +958,7 @@ binpost <- function(n, prior, ds_bin) {
     temp$bin_logf <- bin_logf_user
     temp$bin_logf_args <- c(list(n_success = n_success, n_failure = n_failure),
                           prior[-1])
+    temp$ru_object <- temp2
   }
   class(temp) <- "binpost"
   return(temp)

@@ -4,7 +4,7 @@
 \alias{binpost}
 \title{Random sampling from a binomial posterior distribution}
 \usage{
-binpost(n, prior, ds_bin)
+binpost(n, prior, ds_bin, param = c("logit", "p"))
 }
 \arguments{
 \item{n}{A numeric scalar. The size of posterior sample required.}
@@ -18,6 +18,22 @@ binpost(n, prior, ds_bin)
   \item {\code{n_raw} : number of raw observations}
   \item {\code{m} : number of threshold exceedances.}
 }}
+
+\item{param}{A character scalar.  Only relevant if \code{prior$prior} is a
+  (user-supplied) R function.  \code{param} specifies the parameterization
+  of the posterior distribution that \code{\link[rust]{ru}} uses for
+  sampling.
+
+  If \code{param = "p"} the original parameterization \eqn{p} is
+  used.
+
+  If \code{param = "logit"} (the default) then \code{\link[rust]{ru}}
+  samples from the posterior for the logit of \eqn{p}, before transforming
+  back to the \eqn{p}-scale.
+
+  The latter tends to make the optimizations involved in the
+  ratio-of-uniforms algorithm more stable and to increase the probability
+  of acceptance, but at the expense of slower function evaluations.}
 }
 \value{
 An object (list) of class \code{"binpost"} with components
@@ -29,6 +45,9 @@ An object (list) of class \code{"binpost"} with components
       \eqn{p}.}
     \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
   }
+  If \code{prior$prior} is a (user-supplied) R function then this list
+  also contains \code{ru_object} the object of class \code{"ru"}
+  returned by \code{\link[rust]{ru}}.
 }
 \description{
 Samples from the posterior distribution of the probability \eqn{p}
@@ -37,10 +56,16 @@ of a binomial distribution.
 \details{
 If \code{prior$prior == "bin_beta"} then the posterior for \eqn{p}
   is a beta distribution so \code{\link[stats:Beta]{rbeta}} is used to
-  sample from the posterior.  If \code{prior$prior == "bin_mdi"} then
+  sample from the posterior.
+
+  If \code{prior$prior == "bin_mdi"} then
   rejection sampling is used to sample from the posterior with an envelope
   function equal to the density of a
   beta(\code{ds$m} + 1, \code{ds$n_raw - ds$m} + 1) density.
+
+  If \code{prior$prior} is a (user-supplied) R function then
+  \code{\link[rust]{ru}} is used to sample from the posterior using the
+  generalised ratio-of-uniforms method.
 }
 \examples{
 data(gom)
