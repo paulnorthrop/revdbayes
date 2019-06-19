@@ -3,7 +3,7 @@
 #' Predictive inference for the largest value observed in N years.
 #'
 #' \code{predict} method for class "evpost".  Performs predictive inference
-#' about this largest value to be observed over a future time period of
+#' about the largest value to be observed over a future time period of
 #' N years.  Predictive inferences accounts for uncertainty in model
 #' parameters and for uncertainty owing to the variability of future
 #' observations.
