@@ -30,7 +30,7 @@ process_data <- function(model, data, thresh, noy, use_noy, ros) {
     nas <- is.na(data)
     data <- data[!nas]
     # Check that the threshold is not lower than the smallest observation
-    if (thresh < min(data)) {
+    if (model == "bingp" && thresh < min(data)) {
       stop("the threshold is lower than the smallest observation")
     }
     if (model == "bingp") {

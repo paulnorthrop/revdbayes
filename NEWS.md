@@ -10,6 +10,8 @@
 
 * The penultimate example in the documentation for `set_prior()` has been corrected by adding `model = "gp".  The default `model = "gev"` is not appropriate here because the prior is set up for the GP model.
 
+* (This is an amendment to the third minor improvement in the NEWS for v1.3.3.) In `rpost()` and `rpost_rcpp()` an error is thrown if the input threshold `thresh` is lower than the smallest observation in `data`.  This is only checked when `model = "bingp"` or `model = "pp"`.  This not checked when `model = "gp"` because the user may legitimately supply only threshold excesses. (Many thanks to Leo Belzile for spotting this.)
+
 # revdbayes 1.3.3
 
 ## Bug fixes and minor improvements
