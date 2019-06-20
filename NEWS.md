@@ -2,7 +2,7 @@
 
 ## New features
 
-* In `set_bin_prior()` the user can specify their own prior for the binomial probability by providing an R function.
+* In `set_bin_prior()` the user can specify their own prior for the binomial probability, by providing an R function.
 
 ## Bug fixes and minor improvements
 
