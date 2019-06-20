@@ -55,10 +55,11 @@ Currently only implemented if \code{model = "gev"} or \code{"gp"} or
 \code{model = "os"}.}
 
 \item{thresh}{A numeric scalar.  Extreme value threshold applied to data.
-Only relevant when \code{model = "gp"} or \code{model = "pp"}.  Must
-be supplied when \code{model = "pp"}.  If \code{model = "gp"} and
-\code{thresh} is not supplied then \code{thresh = 0} is used and
-\code{data} should contain threshold excesses.}
+Only relevant when \code{model = "gp"}, \code{"pp"} or \code{"bingp"}.
+Must be supplied when \code{model = "pp"} or \code{"bingp"}.
+If \code{model = "gp"} and \code{thresh} is not supplied then
+\code{thresh = 0} is used and \code{data} should contain threshold
+excesses.}
 
 \item{noy}{A numeric scalar. The number of blocks of observations,
 excluding any missing values.  A block is often a year.

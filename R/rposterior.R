@@ -37,10 +37,11 @@
 #'   \code{"bingp"} or \code{"pp"}, i.e. \emph{not} implemented if
 #'   \code{model = "os"}.
 #' @param thresh A numeric scalar.  Extreme value threshold applied to data.
-#'   Only relevant when \code{model = "gp"} or \code{model = "pp"}.  Must
-#'   be supplied when \code{model = "pp"}.  If \code{model = "gp"} and
-#'   \code{thresh} is not supplied then \code{thresh = 0} is used and
-#'   \code{data} should contain threshold excesses.
+#'   Only relevant when \code{model = "gp"}, \code{"pp"} or \code{"bingp"}.
+#'   Must be supplied when \code{model = "pp"} or \code{"bingp"}.
+#'   If \code{model = "gp"} and \code{thresh} is not supplied then
+#'   \code{thresh = 0} is used and \code{data} should contain threshold
+#'   excesses.
 #' @param noy A numeric scalar. The number of blocks of observations,
 #'   excluding any missing values.  A block is often a year.
 #'   Only relevant, and must be supplied, if \code{model = "pp"}.
@@ -312,6 +313,9 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
     thresh <- 0
     warning("threshold thresh was not supplied so thresh = 0 is used",
             immediate. = TRUE)
+  }
+  if (model == "bingp" & is.null(thresh)) {
+    stop("threshold thresh must be supplied when model is bingp")
   }
   if (model == "pp" & is.null(thresh)) {
     stop("threshold thresh must be supplied when model is pp")
