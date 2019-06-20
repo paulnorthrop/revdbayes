@@ -60,7 +60,7 @@
 #'   with a matrix \code{object$data_rep} in which each row is a
 #'   replication of the observed data simulated from the posterior predictive
 #'   distribution.  For greater detail see Chapter 6 of
-#'   \href{www.stat.columbia.edu/~gelman/book}{Gelman et al. (2014)}.
+#'   \href{www.stat.columbia.edu/~gelman/book}{Gelman et al. (2013)}.
 #'
 #'   The format of \code{object$data} depends on the model:
 #'   \itemize{
@@ -96,7 +96,6 @@
 #' @references Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B.,
 #' Vehtari, A., and Rubin, D. B. (2013). \emph{Bayesian Data Analysis}.
 #' Chapman & Hall/CRC Press, London, third edition. (Chapter 6)
-#' \url{www.stat.columbia.edu/~gelman/book}
 #' @examples
 #' \dontrun{
 #' # GEV model
