@@ -43,7 +43,7 @@ the observed data. This accounts for uncertainty in model parameters and
 for uncertainty owing to the variability of future observations.
 
 We illustrate the code used to perform these two tasks using the 
-`portpirie` and `gom` datasets that feature in the vignette [Introducing revdbayes](revdbayes-vignette.html).
+`portpirie` and `gom` datasets that feature in the vignette [Introducing revdbayes](revdbayes-a-vignette.html).
 
 ```{r}
 # Set the number of posterior samples required.

@@ -62,7 +62,7 @@ In this example `rpost_rcpp` is indeed much faster than `rpost`.
 
 ### Generalised Extreme Value (GEV) model
 
-We repeat the analysis of the Port Pirie annual maximum sea level data from the [Introducing revdbayes](revdbayes-vignette.html).  We add to the comparison the example calculations that feature in the **evdbayes** user guide, based on the `posterior` function.  
+We repeat the analysis of the Port Pirie annual maximum sea level data from the [Introducing revdbayes](revdbayes-a-vignette.html).  We add to the comparison the example calculations that feature in the **evdbayes** user guide, based on the `posterior` function.  
 
 ```{r}
 mat <- diag(c(10000, 10000, 100))
@@ -97,7 +97,7 @@ This comparison is generous to `posterior` because the burn-in has been set to z
 
 ### Point Process (PP) model
 
-We compare the computational efficiencies of `rpost`, `rpost_rcpp` and the evdbayes function `posterior` when performing the analysis of daily rainfall totals from the [Introducing revdbayes](revdbayes-vignette.html).  
+We compare the computational efficiencies of `rpost`, `rpost_rcpp` and the evdbayes function `posterior` when performing the analysis of daily rainfall totals from the [Introducing revdbayes](revdbayes-a-vignette.html).  
 
 ```{r}
 # Informative prior set using revdbayes
