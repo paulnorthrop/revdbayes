@@ -78,8 +78,7 @@ For details of these functions see \link[bayesplot]{PPC-overview}.
   The general idea is to compare the observed data \code{object$data}
   with a matrix \code{object$data_rep} in which each row is a
   replication of the observed data simulated from the posterior predictive
-  distribution.  For greater detail see Chapter 6 of
-  \href{www.stat.columbia.edu/~gelman/book}{Gelman et al. (2013)}.
+  distribution.  For greater detail see Chapter 6 of Gelman et al. (2013).
 
   The format of \code{object$data} depends on the model:
   \itemize{
