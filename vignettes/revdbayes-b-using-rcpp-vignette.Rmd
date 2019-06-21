@@ -41,7 +41,7 @@ set.seed(46)
 
 ### Generalised Pareto (GP) model {#gp_example}
 
-We repeat the analysis of the Gulf of Mexico Wave Height Data from the [Introducing revdbayes](revdbayes-vignette.html) vignette to check that using Rcpp does indeed reduce computation time.
+We repeat the analysis of the Gulf of Mexico Wave Height Data from the [Introducing revdbayes](revdbayes-a-vignette.html) vignette to check that using Rcpp does indeed reduce computation time.
 
 ```{r}
 u <- quantile(gom, probs = 0.65)
