@@ -1,12 +1,3 @@
-This is a resubmission of revdbayes 1.3.3, which was submitted on 28/2 but didn't make it to CRAN owing to a failing test in a strong dependency:
-
-*** Changes to worse in reverse dependencies ***
-Debian: <https://win-builder.r-project.org/incoming_pretest/revdbayes_1.3.3_20190228_173557/reverseDependencies/summary.txt>
-
-I am also the maintainer for affected package, threshr.  I have fixed the problem (in threshr) and submitted a new version, threshr 1.0.1 to CRAN.  The check results for threshr 1.0.1 are now complete on all platforms.
-
-revdbayes 1.3.3 also addresses the NOTE "Found the following sources/headers with CR or CRLF line endings:" in the check results of revdbayes 1.3.2. 
-
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
