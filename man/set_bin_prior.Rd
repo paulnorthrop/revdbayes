@@ -30,7 +30,7 @@ A list of class \code{"binprior"}.  The first component is the
 Constructs a prior distribution for use as the argument \code{bin_prior} in
 \code{\link{rpost}} or in \code{\link{binpost}}.  The user can choose
 from a list of in-built priors or specify their own prior function,
-returning the log of the prior density, using an R function
+returning the \strong{log} of the prior density, using an R function
 and arguments for hyperparameters.
 }
 \details{

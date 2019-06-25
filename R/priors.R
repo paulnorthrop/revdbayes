@@ -4,12 +4,13 @@
 #'
 #' Constructs a prior distribution for use as the argument \code{prior} in
 #' \code{\link{rpost}} and \code{\link{rpost_rcpp}}.  The user can either
-#' specify their own prior function, returning the log of the prior density,
-#' (using an R function or an external pointer to a compiled C++ function)
-#' and arguments for hyperparameters or choose from a list of in-built
-#' model-specific priors.  Note that the arguments \code{model = "gev"},
-#' \code{model = "pp"} and \code{model =="os"} are equivalent because
-#' a prior is specified is the GEV parameterisation in each of these cases.
+#' specify their own prior function, returning the \strong{log} of the prior
+#' density, (using an R function or an external pointer to a compiled C++
+#' function) and arguments for hyperparameters or choose from a list of
+#' in-built model-specific priors.  Note that the arguments
+#' \code{model = "gev"}, \code{model = "pp"} and \code{model =="os"} are
+#' equivalent because a prior is specified is the GEV parameterisation in each
+#' of these cases.
 #' Note also that for \code{model = "pp"} the prior GEV parameterisation
 #' relates to the value of \code{noy} subsequently supplied to
 #' \code{\link{rpost}} or \code{\link{rpost_rcpp}}.
@@ -849,7 +850,7 @@ hpar_drop <- function(x_list, hpar_vec) {
 #' Constructs a prior distribution for use as the argument \code{bin_prior} in
 #' \code{\link{rpost}} or in \code{\link{binpost}}.  The user can choose
 #' from a list of in-built priors or specify their own prior function,
-#' returning the log of the prior density, using an R function
+#' returning the \strong{log} of the prior density, using an R function
 #' and arguments for hyperparameters.
 #'
 #' @param prior Either
