@@ -26,12 +26,12 @@ The main functions in the revdbayes package are \code{\link{rpost}}
   K-gaps model for threshold interexceedance times of Suveges and Davison
   (2010).  See also Attalides (2015).
 
-  See \code{vignette("revdbayes-vignette", package = "revdbayes")} for an
+  See \code{vignette("revdbayes-a-vignette", package = "revdbayes")} for an
   overview of the package and
-  \code{vignette("revdbayes-using-rcpp-vignette", package = "revdbayes")}
+  \code{vignette("revdbayes-b-using-rcpp-vignette", package = "revdbayes")}
    for an illustration of the improvements in efficiency produced using
    the Rcpp package.
-   See `vignette("revdbayes-predictive-vignette", package = "revdbayes")`
+   See `vignette("revdbayes-c-predictive-vignette", package = "revdbayes")`
    for an outline of how to use revdbayes to perform posterior predictive
    extreme value inference.
 }
