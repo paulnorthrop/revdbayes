@@ -1,3 +1,10 @@
+diag_pos <- function(x) {
+  # Diagonal elements of a matrix, returning NA for any negative values
+  y <- diag(x)
+  y[y < 0] <- NA
+  return(y)
+}
+
 # ======================= change_pp_pars ========================
 
 change_pp_pars <- function(pars, in_noy, out_noy) {
@@ -241,7 +248,7 @@ gp_init <- function(data, m = length(data[!is.na(data)]),
     # Check whether or not we should use the SE
     if (init[2] > -0.25){
       cov_mtx <- solve(gp_obs_info(init, data))
-      se <- sqrt(diag(cov_mtx))
+      se <- sqrt(diag_pos(cov_mtx))
       mat <- matrix(c(1, 0, 1 / xm, 1), 2, 2, byrow = TRUE)
       var_phi <- mat %*% cov_mtx %*% t(mat)
       if (all(diag(var_phi) > 0)){
@@ -414,7 +421,7 @@ gev_init <- function(data, m = length(data[!is.na(data)]),
     # Check whether or not we should use the SE
     if (init[3] > -0.25 & !is.null(temp$cov)){
       cov_mtx <- temp$cov
-      se <- sqrt(diag(cov_mtx))
+      se <- sqrt(diag_pos(cov_mtx))
       row1 <- c(1, 0, 0)
       row2 <- c(-init[3], 1, x1 - init[1]) / sr
       row3 <- c(-init[3], 1, xm - init[1]) / sr
@@ -499,7 +506,7 @@ os_init <- function(data, min_data = apply(data, 1, min, na.rm = TRUE),
     init <- temp$mle
     init_phi <- theta_to_phi(init)
     cov_mtx <- temp$cov
-    se <- sqrt(diag(cov_mtx))
+    se <- sqrt(diag_pos(cov_mtx))
     row1 <- c(1, 0, 0)
     row2 <- c(-gum_init[3], 1, x1 - gum_init[1]) / sr
     row3 <- c(-gum_init[3], 1, xm - gum_init[1]) / sr
@@ -521,7 +528,7 @@ os_init <- function(data, min_data = apply(data, 1, min, na.rm = TRUE),
     # Check whether or not we should use the SE
     if (init[3] > -0.5 & !is.null(temp$cov)){
       cov_mtx <- temp$cov
-      se <- sqrt(diag(cov_mtx))
+      se <- sqrt(diag_pos(cov_mtx))
       row1 <- c(1, 0, 0)
       row2 <- c(-init[3], 1, x1 - init[1]) / sr
       row3 <- c(-init[3], 1, xm - init[1]) / sr
@@ -536,18 +543,4 @@ os_init <- function(data, min_data = apply(data, 1, min, na.rm = TRUE),
   init_phi <- theta_to_phi(init)
   return(list(init = init, se = se, init_phi = init_phi, se_phi = se_phi))
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
