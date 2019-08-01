@@ -855,6 +855,11 @@ pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 #'   function equal to the density of a
 #'   beta(\code{ds$m} + 1, \code{ds$n_raw - ds$m} + 1) density.
 #'
+#'   If \code{prior$prior == "bin_northrop"} then
+#'   rejection sampling is used to sample from the posterior with an envelope
+#'   function equal to the posterior density that results from using a
+#'   Haldane prior.
+#'
 #'   If \code{prior$prior} is a (user-supplied) R function then
 #'   \code{\link[rust]{ru}} is used to sample from the posterior using the
 #'   generalised ratio-of-uniforms method.
@@ -918,10 +923,31 @@ binpost <- function(n, prior, ds_bin, param = c("logit", "p")) {
                           log_beta_const = log_beta_const)
     bin_logf_mdi <- function(pu, n_success, n_failure, log_MDI_const,
                              log_beta_const) {
+      if (pu > 1 || pu < 0) return(NA)
       (pu + n_success) * log(pu) + (1 - pu + n_failure) * log(1 - pu) -
         log_MDI_const - log_beta_const
     }
     temp <- list(bin_sim_vals = bin_sim_vals, bin_logf = bin_logf_mdi,
+                 bin_logf_args = bin_logf_args)
+  }
+  if (is.character(prior$prior) && prior$prior == "bin_northrop") {
+    bin_sim_vals <- r_pu_N(n = n, n_success = n_success, n_failure = n_failure)
+    beta_const <- beta(n_success, n_failure)
+    log_beta_const <- log(beta_const)
+    N_post <- function(pu) {
+      pu ^ n_success * (1 - pu) ^ (n_failure - 1) / (-log(1 - pu)) / beta_const
+    }
+    log_N_const <- log(stats::integrate(N_post, 0, 1)$value)
+    bin_logf_args <- list(n_success = n_success, n_failure = n_failure,
+                          log_N_const = log_N_const,
+                          log_beta_const = log_beta_const)
+    bin_logf_N <- function(pu, n_success, n_failure, log_N_const,
+                           log_beta_const) {
+      if (pu > 1 || pu < 0) return(NA)
+      n_success * log(pu) + (n_failure - 1) * log(1 - pu) - log(-log(1 - pu)) -
+        log_N_const - log_beta_const
+    }
+    temp <- list(bin_sim_vals = bin_sim_vals, bin_logf = bin_logf_N,
                  bin_logf_args = bin_logf_args)
   }
   if (is.function(prior$prior)) {
@@ -992,5 +1018,40 @@ r_pu_MDI <- function(n, n_success, n_failure) {
       p_sim[n_acc] <- p
     }
   }
-  p_sim
+  return(p_sim)
+}
+
+# ================================= r_pu_N ====================================
+
+r_pu_N <- function(n, n_success, n_failure, alpha = 0, beta = 0) {
+  #
+  # Uses rejection sampling to sample from the posterior distribution of
+  # a binomial probability p, based on the prior pi(p) that is proportional to
+  #             1 / [ -ln(1 - p) * (1 - p) ], for 0 < p < 1.
+  # We use the posterior under a Beta(alpha, beta) prior as the envelope.
+  # The posterior under this prior is Beta(n_success + alpha, n_failure + beta).
+  # The default case, alpha = beta = 0, corresponds to using the posterior
+  # under a Haldane prior as the envelope.  A slight improvement in the
+  # probability of acceptance results from (alpha, beta) = (0.040842 0.005571).
+  #
+  # Args:
+  #   n         : A numeric scalar.  The sample size required.
+  #   n_success : A numeric scalar.  The number of successes.
+  #   n_failure : A numeric scalar.  The number of failures.
+  #   alpha     : A numeric scalar in [0, 1). Argument shape1 of rbeta()          alpha
+  #   beta      : A numeric scalar in [0, 1). Argument shape1 of rbeta()          alpha
+  # Returns:
+  #   A numeric vector containing the n sampled values.
+  #
+  n_acc <- 0
+  p_sim <- NULL
+  while (n_acc < n) {
+    p <- stats::rbeta(1, n_success + alpha, n_failure + beta)
+    u <- stats::runif(1)
+    if (u <= -p / log(1 - p)) {
+      n_acc <- n_acc+1
+      p_sim[n_acc] <- p
+    }
+  }
+  return(p_sim)
 }

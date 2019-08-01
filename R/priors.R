@@ -867,18 +867,20 @@ hpar_drop <- function(x_list, hpar_vec) {
 #'   \strong{Binomial priors.} The names of the binomial priors set using
 #'   \code{bin_prior} are:
 #' \itemize{
-#'   \item {\code{"jeffreys"}: the \emph{Jeffreys} beta(1/2, 1/2) prior.}
-#'   \item {\code{"laplace"}: the \emph{Bayes-Laplace} beta(1, 1) prior.}
+#'   \item{\code{"jeffreys"}: the \emph{Jeffreys} beta(1/2, 1/2) prior.}
+#'   \item{\code{"laplace"}: the \emph{Bayes-Laplace} beta(1, 1) prior.}
 #'   \item{\code{"haldane"}: the \emph{Haldane} beta(0, 0) prior.}
 #'   \item{\code{"beta"}: a beta(\eqn{\alpha, \beta}) prior.  The argument
-#'     \code{ab} is a vector containing \code{c}(\eqn{\alpha, \beta}).}
-#'     The default is \code{ab = c(1, 1)}.
+#'     \code{ab} is a vector containing \code{c}(\eqn{\alpha, \beta}).
+#'     The default is \code{ab = c(1, 1)}.}
 #'   \item{\code{"mdi"}: the MDI prior
 #'     \eqn{\pi(p) = 1.6186 p^p (1-p)^{1-p}}{\pi(p) = 1.6186 p^p (1-p)^(1-p)},
-#'         for \eqn{0 < p < 1.}
-#'   }
+#'         for \eqn{0 < p < 1.}}
+#'   \item{\code{"northrop"}: the improper prior
+#'     \eqn{\pi(p)=\{-\ln(1-p)\}^{-1}(1-p)^{-1}}{\pi(p)=1 / [ -ln(1-p) (1-p) ]},
+#'         for \eqn{0 < p < 1.}}
 #' }
-#' Apart from the MDI prior these are all beta distributions.
+#' Apart from the last two priors these are all beta distributions.
 #' @return A list of class \code{"binprior"}.  The first component is the
 #'   name of the input prior.  Apart from the MDI prior this will be "beta",
 #'   in which case the other component of the list is a vector of length two
@@ -895,7 +897,7 @@ hpar_drop <- function(x_list, hpar_vec) {
 #' jeffreys <- set_bin_prior(beta_prior_fn, ab = c(1 / 2, 1 / 2))
 #' @export
 set_bin_prior <- function(prior = c("jeffreys", "laplace", "haldane", "beta",
-                                    "mdi"), ...) {
+                                    "mdi", "northrop"), ...) {
   # If prior is a function then return it in the required format.
   if (is.function(prior)) {
     temp <- list(prior = prior, ...)

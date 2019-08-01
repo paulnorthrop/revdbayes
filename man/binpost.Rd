@@ -63,6 +63,11 @@ If \code{prior$prior == "bin_beta"} then the posterior for \eqn{p}
   function equal to the density of a
   beta(\code{ds$m} + 1, \code{ds$n_raw - ds$m} + 1) density.
 
+  If \code{prior$prior == "bin_northrop"} then
+  rejection sampling is used to sample from the posterior with an envelope
+  function equal to the posterior density that results from using a
+  Haldane prior.
+
   If \code{prior$prior} is a (user-supplied) R function then
   \code{\link[rust]{ru}} is used to sample from the posterior using the
   generalised ratio-of-uniforms method.
