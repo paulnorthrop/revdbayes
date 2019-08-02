@@ -101,7 +101,7 @@ For details of these functions see \link[bayesplot]{PPC-overview}.
   only their sample maxima.
 }
 \examples{
-\dontrun{
+\donttest{
 # GEV model
 data(portpirie)
 mat <- diag(c(10000, 10000, 100))

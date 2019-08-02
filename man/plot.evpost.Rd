@@ -100,7 +100,7 @@ fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 gpg <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = gom)
 plot(gpg)
 
-\dontrun{
+\donttest{
 # Using the bayesplot package
 plot(gpg, use_bayesplot = TRUE)
 plot(gpg, use_bayesplot = TRUE, pars = "xi", prob = 0.95)
@@ -122,7 +122,7 @@ plot(bgpg)
 plot(bgpg, pu_only = TRUE)
 plot(bgpg, add_pu = TRUE)
 
-\dontrun{
+\donttest{
 # Using the bayesplot package
 dimnames(bgpg$bin_sim_vals)
 plot(bgpg, use_bayesplot = TRUE)
