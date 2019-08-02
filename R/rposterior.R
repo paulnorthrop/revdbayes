@@ -215,7 +215,7 @@
 #'  \emph{The Annals of Applied Statistics}, \strong{4}(3), 1558-1578.
 #'   \url{https://doi.org/10.1214/10-AOAS333}
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # GP model
 #' u <- quantile(gom, probs = 0.65)
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)

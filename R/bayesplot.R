@@ -96,7 +96,7 @@
 #' Vehtari, A., and Rubin, D. B. (2013). \emph{Bayesian Data Analysis}.
 #' Chapman & Hall/CRC Press, London, third edition. (Chapter 6)
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # GEV model
 #' data(portpirie)
 #' mat <- diag(c(10000, 10000, 100))
