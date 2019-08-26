@@ -52,6 +52,8 @@
 #' @docType package
 #' @name revdbayes
 #' @import methods
+#' @importFrom graphics plot
+#' @importFrom stats predict
 #' @importFrom bayesplot ppc_stat
 #' @importFrom bayesplot ppc_stat_2d
 #' @importFrom bayesplot ppc_dens_overlay
