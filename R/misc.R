@@ -253,10 +253,10 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6,
   #                transformed.
   #   lambda     : A numeric scalar.  Transformation parameter.
   #   gm         : A numeric scalar.  Optional scaling parameter.
-  #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda.tol use
+  #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda_tol use
   #                a Taylor series expansion.
   #   poly_order : order of Taylor series polynomial in lambda used as
-  #                an approximation if abs(lambda) < lambda.tol
+  #                an approximation if abs(lambda) < lambda_tol
   #
   # Returns:
   #   A numeric vector.  The transformed value
@@ -289,7 +289,7 @@ box_cox_vec <- function(x, lambda = 1, lambda_tol = 1e-6) {
   #   x          : A numeric vector. (Non-negative) values to be Box-Cox
   #                transformed.
   #   lambda     : A numeric scalar.  Transformation parameter.
-  #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda.tol use
+  #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda_tol use
   #                a Taylor series expansion.
   # Returns:
   #   A numeric vector.  The transformed value
@@ -322,10 +322,10 @@ box_cox_deriv <- function (x, lambda = 1, lambda_tol = 1e-6,
   #   x          : A numeric vector. (Positive) values to be Box-Cox
   #                transformed.
   #   lambda     : A numeric scalar.  Transformation parameter.
-  #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda.tol use
+  #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda_tol use
   #                a Taylor series expansion.
   #   poly_order : order of Taylor series polynomial in lambda used as
-  #                an approximation if abs(lambda) < lambda.tol
+  #                an approximation if abs(lambda) < lambda_tol
   #
   # Returns:
   #   A numeric vector.  The transformed value
