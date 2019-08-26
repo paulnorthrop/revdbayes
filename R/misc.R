@@ -306,7 +306,7 @@ box_cox_vec <- function(x, lambda = 1, lambda_tol = 1e-6) {
                           ifelse(is.infinite(x),
                                  ifelse(lambda < 0, -1 / lambda, Inf),
                           ifelse(x == 0, ifelse(lambda > 0, -1 / lambda, -Inf),
-                                 log(x) * (1 + lambda / 2)))))
+                                 log(x) * (1 + log(x) * lambda / 2)))))
   return(retval)
 }
 
