@@ -1,5 +1,16 @@
+#' Internal revdbayes functions
+#'
+#' Internal revdbayes functions
+#' @details
+#' These functions are not intended to be called by the user.
+#' @name revdbayes-internal
+#' @keywords internal
+NULL
+
 # =========================== process_data =====================================
 
+#' @keywords internal
+#' @rdname revdbayes-internal
 process_data <- function(model, data, thresh, noy, use_noy, ros) {
   #
   # Removes missings, extracts sample summaries.
@@ -133,6 +144,8 @@ process_data <- function(model, data, thresh, noy, use_noy, ros) {
 
 # ========================== create_ru_list ====================================
 
+#' @keywords internal
+#' @rdname revdbayes-internal
 create_ru_list <- function(model, trans, rotate, min_xi, max_xi) {
   #
   # Creates a list of arguments to pass to the functions ru() or ru_rcpp()
@@ -187,6 +200,8 @@ create_ru_list <- function(model, trans, rotate, min_xi, max_xi) {
 
 # =========================== set_which_lam ====================================
 
+#' @keywords internal
+#' @rdname revdbayes-internal
 set_which_lam <- function(model) {
   #
   # Sets which_lam, the indices of the parameter vector that are to be
@@ -207,6 +222,8 @@ set_which_lam <- function(model) {
 
 # =========================== set_range_phi ====================================
 
+#' @keywords internal
+#' @rdname revdbayes-internal
 set_range_phi <- function(model, phi_mid, se_phi, mult) {
   #
   # Sets min_phi and max_phi, the smallest and largest values of the
@@ -243,6 +260,8 @@ set_range_phi <- function(model, phi_mid, se_phi, mult) {
 
 # =========================== box_cox ===========================
 
+#' @keywords internal
+#' @rdname revdbayes-internal
 box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6,
                      poly_order = 3) {
   #
@@ -280,6 +299,8 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6,
 
 # =========================== box_cox_vec ===========================
 
+#' @keywords internal
+#' @rdname revdbayes-internal
 box_cox_vec <- function(x, lambda = 1, lambda_tol = 1e-6) {
   #
   # Computes the Box-Cox transformation of a vector.  If lambda is very close
@@ -312,6 +333,8 @@ box_cox_vec <- function(x, lambda = 1, lambda_tol = 1e-6) {
 
 # ====================== box_cox_deriv ==========================
 
+#' @keywords internal
+#' @rdname revdbayes-internal
 box_cox_deriv <- function (x, lambda = 1, lambda_tol = 1e-6,
                            poly_order = 3) {
   #
@@ -342,6 +365,8 @@ box_cox_deriv <- function (x, lambda = 1, lambda_tol = 1e-6,
 
 # ========================= check_sample_size ==================================
 
+#' @keywords internal
+#' @rdname revdbayes-internal
 check_sample_size <- function(prior_name, n_check) {
   #
   # Checks that if one of the in-built improper priors is used then the sample
@@ -372,6 +397,8 @@ check_sample_size <- function(prior_name, n_check) {
   }
 }
 
+#' @keywords internal
+#' @rdname revdbayes-internal
 check_sample_size_message <- function(prior_name, n_check) {
   text1 <- "A sample size of"
   text2 <- "is not large enough to produce a proper posterior when prior"
