@@ -501,7 +501,7 @@ gp_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
   if (pars[1] <= 0 | pars[2] < min_xi | pars[2] > max_xi) {
     return(-Inf)
   }
-  return(1)
+  return(0)
 }
 
 #' Jeffreys prior for GP parameters (\eqn{\sigma, \xi})
@@ -789,7 +789,7 @@ gev_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
   if (pars[2] <= 0 | pars[3] < min_xi | pars[3] > max_xi) {
     return(-Inf)
   }
-  return(1)
+  return(0)
 }
 
 #' Beta-type prior for GEV shape parameter \eqn{\xi}
