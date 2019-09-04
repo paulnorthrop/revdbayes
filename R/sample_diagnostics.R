@@ -236,7 +236,9 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     zz[zz == -Inf] <- NA
     dx <- diff(xx[1:2]); dy <- diff(yy[1:2]); sz <- sort(zz)
     c1 <- cumsum(sz) * dx * dy; c1 <- c1/max(c1)
-    con_levs <- sapply(prob, function(x) stats::approx(c1, sz, xout = 1 - x)$y)
+    # Suppress a warning that comes from stats:::regularize.values
+    con_levs <- suppressWarnings(sapply(prob, function(x)
+      stats::approx(c1, sz, xout = 1 - x)$y))
     #
     graphics::contour(xx, yy, zz, levels = con_levs, add = FALSE, ann = FALSE,
       labels = prob * 100, ...)
