@@ -48,7 +48,7 @@ for (i in 1:length(lambda_vec)) {
                trans = "BC")
   sigma <- res$sim_vals[, "sigma[u]"]
   xi <- res$sim_vals[, "xi"]
-  xf <- -sigma / xi
+  xf <- u - sigma / xi
 
   testthat::test_that(paste0("Half-normal, Box-Cox lambda = ", lambda), {
     testthat::expect_true(all(xf <= -1 / lambda))
