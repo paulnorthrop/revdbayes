@@ -38,8 +38,10 @@ thresh <- quantile(x, probs = 0.7)
 for (i in 1:length(lambda_vec)) {
   # Box-Cox transform: data and threshold
   lambda <- lambda_vec[i]
-  y <- threshr:::bc(x, lambda)
-  u <- threshr:::bc(thresh, lambda)
+  y <- (x ^ lambda - 1) / lambda
+  u <- (thresh ^ lambda - 1) / lambda
+#  y <- threshr:::bc(x, lambda)
+#  u <- threshr:::bc(thresh, lambda)
   # Set prior
   fp <- set_prior(prior = "flatflat", model = "gp", upper = u - 1 / lambda)
   res <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = y,
