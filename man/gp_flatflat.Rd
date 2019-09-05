@@ -4,7 +4,8 @@
 \alias{gp_flatflat}
 \title{Flat prior for GP parameters (\eqn{\sigma, \xi})}
 \usage{
-gp_flatflat(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0)
+gp_flatflat(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0,
+  upper = NULL)
 }
 \arguments{
 \item{pars}{A numeric vector of length 2.

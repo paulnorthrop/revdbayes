@@ -353,7 +353,7 @@ gp_prior <- function(prior = c("norm", "mdi", "flat", "flatflat", "jeffreys",
   # Check for unused hyperparameter names and drop them
   hpar_vec <- switch(prior, norm = c("mean", "cov"), mdi = "a",
                      flat = NULL, jeffreys = NULL, beta = "pq")
-  hpar_vec <- c(hpar_vec, "min_xi", "max_xi")
+  hpar_vec <- c(hpar_vec, "min_xi", "max_xi", "upper")
   temp <- hpar_drop(temp, hpar_vec)
   # Check for problems with min_xi and/or max_xi
   if (!is.null(temp$min_xi) & !is.null(temp$max_xi)) {
@@ -497,9 +497,15 @@ gp_flat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
 #'   function in the evdbayes package.
 #' @return The log of the prior density.
 #' @export
-gp_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
+gp_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0,
+                        upper = NULL) {
   if (pars[1] <= 0 | pars[2] < min_xi | pars[2] > max_xi) {
     return(-Inf)
+  }
+  if (!is.null(upper)) {
+    if (pars[2] > min(0, max_xi) | -pars[1] / pars[2] > upper) {
+      return(-Inf)
+    }
   }
   return(0)
 }
