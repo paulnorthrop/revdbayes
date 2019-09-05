@@ -28,17 +28,21 @@ prior_args <- list(prior = "flatflat", bin_prior = "haldane",
 
 set.seed(5092019)
 
-lambda_vec <- c(-1, -0.5, -0.1)
+lambda_vec <- c(-0.5, -0.1)
 n <- 1000
 # Sample from a half-normal distribution
 x <- abs(rnorm(10000))
+# Threshold
+thresh <- quantile(x, probs = 1 / 2)
 
 for (i in 1:length(lambda_vec)) {
-  # Box-Cox transform
-  lambda <- -0.1
+  # Box-Cox transform: data and threshold
+  lambda <- lambda_vec[i]
   y <- threshr:::bc(x, lambda)
+  u <- threshr:::bc(thresh, lambda)
+  # Set prior
   fp <- set_prior(prior = "flatflat", model = "gp", upper = -1 / lambda)
-  res <- rpost(n = 1000, model = "gp", prior = fp, thresh = 0, data = y,
+  res <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = y,
                trans = "BC")
   sigma <- res$sim_vals[, "sigma[u]"]
   xi <- res$sim_vals[, "xi"]
