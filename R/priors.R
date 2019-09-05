@@ -495,6 +495,7 @@ gp_flat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0) {
 #' @param max_xi  A numeric scalar.  Prior upper bound on \eqn{\xi}.
 #' @param trendsd  Has no function other than to achieve compatibility with
 #'   function in the evdbayes package.
+#' @param upper experimental!
 #' @return The log of the prior density.
 #' @export
 gp_flatflat <- function(pars, min_xi = -Inf, max_xi = Inf, trendsd = 0,
