@@ -33,7 +33,7 @@ n <- 1000
 # Sample from a half-normal distribution
 x <- abs(rnorm(10000))
 # Threshold
-thresh <- quantile(x, probs = 1 / 2)
+thresh <- quantile(x, probs = 0.7)
 
 for (i in 1:length(lambda_vec)) {
   # Box-Cox transform: data and threshold
@@ -41,7 +41,7 @@ for (i in 1:length(lambda_vec)) {
   y <- threshr:::bc(x, lambda)
   u <- threshr:::bc(thresh, lambda)
   # Set prior
-  fp <- set_prior(prior = "flatflat", model = "gp", upper = -1 / lambda)
+  fp <- set_prior(prior = "flatflat", model = "gp", upper = u - 1 / lambda)
   res <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = y,
                trans = "BC")
   sigma <- res$sim_vals[, "sigma[u]"]
