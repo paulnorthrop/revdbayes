@@ -43,7 +43,7 @@ for (i in 1:length(lambda_vec)) {
 #  y <- threshr:::bc(x, lambda)
 #  u <- threshr:::bc(thresh, lambda)
   # Set prior
-  fp <- set_prior(prior = "flatflat", model = "gp", upper = u - 1 / lambda)
+  fp <- set_prior(prior = "flatflat", model = "gp", upper = - 1 / lambda - u)
   res <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = y,
                trans = "BC")
   sigma <- res$sim_vals[, "sigma[u]"]
