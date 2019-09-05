@@ -277,7 +277,7 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
       }
     }
     oldpar <- graphics::par(mfrow = c(rows, cols))
-    on.exit(par(oldpar))
+    on.exit(graphics::par(oldpar))
     pairwise_plots <- function(x) {
       for (i in 1:(ncol(x)-1)) {
         for (j in (i+1):ncol(x)) {
