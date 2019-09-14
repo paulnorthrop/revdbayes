@@ -9,7 +9,7 @@ rpost(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior, ...,
   npy = NULL, ros = NULL, bin_prior = structure(list(prior =
   "bin_beta", ab = c(1/2, 1/2), class = "binprior")),
   bin_param = "logit", init_ests = NULL, mult = 2,
-  use_phi_map = FALSE)
+  use_phi_map = FALSE, weights = NULL)
 }
 \arguments{
 \item{n}{A numeric scalar. The size of posterior sample required.}
@@ -112,6 +112,12 @@ determines whether the grid of values for phi used to set lambda is
 centred on the maximum a posterior (MAP) estimate of phi
 (\code{use_phi_map = TRUE}), or on the initial estimate of phi
 (\code{use_phi_map = FALSE}).}
+
+\item{weights}{An optional numeric vector of weights by which to multiply
+the observations when constructing the log-likelihood.
+Currently only implemented for \code{model = "gp"} or
+\code{model = "bingp"}.
+\code{weights} mst have the same length as \code{data}.}
 }
 \value{
 An object (list) of class \code{"evpost"}, which has the same
