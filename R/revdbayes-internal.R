@@ -11,7 +11,7 @@ NULL
 
 #' @keywords internal
 #' @rdname revdbayes-internal
-process_data <- function(model, data, thresh, noy, use_noy, ros) {
+process_data <- function(model, data, thresh, noy, use_noy, ros, weights) {
   #
   # Removes missings, extracts sample summaries.
   #
@@ -28,6 +28,8 @@ process_data <- function(model, data, thresh, noy, use_noy, ros) {
   #                number of threshold excesses?
   #   ros        : when model == "os", the number of order statistics to
   #                retain from each row of data.
+  #   weights    : a numeric vector of weights by which to multiply the
+  #                contributions to the log-likelihood.
   #
   # Returns: a list containing
   #   lik_args   : basic sample summaries to add to lik_args in rpost().
@@ -37,6 +39,9 @@ process_data <- function(model, data, thresh, noy, use_noy, ros) {
   if (model == "gp" | model == "bingp") {
     if (!(is.atomic(data) || is.list(data)) || !is.numeric(data)) {
       stop("''data'' must be a numeric vector")
+    }
+    if (!is.null(weights) && length(weights) != length(data)) {
+      stop("weights does not have the correct length")
     }
     nas <- is.na(data)
     data <- data[!nas]
@@ -55,6 +60,17 @@ process_data <- function(model, data, thresh, noy, use_noy, ros) {
     lik_args$xm <- max(lik_args$data)             # maximum threshold excess
     lik_args$sum_gp <- sum(lik_args$data)         # sum of threshold excesses
     lik_args$n_check <- lik_args$m
+    # Add weights, if they have been supplied.
+    # (For the moment at least) bin and GP inferences are separate.
+    # lik_args$w and lik_args$sumw apply to threshold excesses (the GP bit)
+    if (!is.null(weights)) {
+      weights <- weights[!nas]
+      if (length(weights) != length(data)) {
+        stop("weights does not have the correct length")
+      }
+      lik_args$w <- weights[data > thresh]
+      lik_args$sumw <- sum(lik_args$w)
+    }
     return(lik_args)
   }
   if (model == "gev") {
