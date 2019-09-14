@@ -6,6 +6,8 @@
 
 * In `set_bin_prior()` the user can specify their own prior for the binomial probability, by providing an R function.
 
+* upper?
+
 ## Bug fixes and minor improvements
 
 * In `rpost()` and `rpost_rcpp()` an error is thrown if the prior and the model are not compatible.  Previously a warning was given.

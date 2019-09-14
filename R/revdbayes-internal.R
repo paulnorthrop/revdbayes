@@ -7,7 +7,7 @@
 #' @keywords internal
 NULL
 
-# =========================== process_data =====================================
+# =========================== process_data ================================== #
 
 #' @keywords internal
 #' @rdname revdbayes-internal
@@ -142,7 +142,7 @@ process_data <- function(model, data, thresh, noy, use_noy, ros) {
   }
 }
 
-# ========================== create_ru_list ====================================
+# ========================== create_ru_list ================================= #
 
 #' @keywords internal
 #' @rdname revdbayes-internal
@@ -198,7 +198,7 @@ create_ru_list <- function(model, trans, rotate, min_xi, max_xi) {
   return(list(d = d, lower = lower, upper = upper, var_names = var_names))
 }
 
-# =========================== set_which_lam ====================================
+# =========================== set_which_lam ================================= #
 
 #' @keywords internal
 #' @rdname revdbayes-internal
@@ -220,7 +220,7 @@ set_which_lam <- function(model) {
   }
 }
 
-# =========================== set_range_phi ====================================
+# =========================== set_range_phi ================================= #
 
 #' @keywords internal
 #' @rdname revdbayes-internal
@@ -258,7 +258,7 @@ set_range_phi <- function(model, phi_mid, se_phi, mult) {
   }
 }
 
-# =========================== box_cox ===========================
+# ============================== box_cox ==================================== #
 
 #' @keywords internal
 #' @rdname revdbayes-internal
@@ -297,7 +297,7 @@ box_cox <- function (x, lambda = 1, gm = 1, lambda_tol = 1e-6,
   return(retval)
 }
 
-# =========================== box_cox_vec ===========================
+# =============================== box_cox_vec =============================== #
 
 #' @keywords internal
 #' @rdname revdbayes-internal
@@ -331,7 +331,7 @@ box_cox_vec <- function(x, lambda = 1, lambda_tol = 1e-6) {
   return(retval)
 }
 
-# ====================== box_cox_deriv ==========================
+# ============================= box_cox_deriv =============================== #
 
 #' @keywords internal
 #' @rdname revdbayes-internal
@@ -363,7 +363,7 @@ box_cox_deriv <- function (x, lambda = 1, lambda_tol = 1e-6,
   return(retval)
 }
 
-# ========================= check_sample_size ==================================
+# ========================= check_sample_size =============================== #
 
 #' @keywords internal
 #' @rdname revdbayes-internal
@@ -396,6 +396,8 @@ check_sample_size <- function(prior_name, n_check) {
     }
   }
 }
+
+# ======================= check_sample_size_message ========================= #
 
 #' @keywords internal
 #' @rdname revdbayes-internal
