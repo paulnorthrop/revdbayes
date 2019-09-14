@@ -336,8 +336,6 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
   #
   ds <- process_data(model = model, data = data, thresh = thresh, noy = noy,
                      use_noy = use_noy, ros = ros, weights = weights)
-  print(ds$w)
-  print(ds$sumw)
   #
   # If model = "bingp" then extract sufficient statistics for the binomial
   # model, and remove n_raw from ds because it isn't used in the GP
