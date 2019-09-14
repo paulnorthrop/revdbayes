@@ -85,6 +85,11 @@
 #'   centred on the maximum a posterior (MAP) estimate of phi
 #'   (\code{use_phi_map = TRUE}), or on the initial estimate of phi
 #'   (\code{use_phi_map = FALSE}).
+#' @param weights An optional numeric vector of weights by which to multiply
+#'   the observations when constructing the log-likelihood.
+#'   Currently only implemented for \code{model = "gp"} or
+#'   \code{model = "bingp"}.
+#'   \code{weights} mst have the same length as \code{data}.
 #' @param ... Further arguments to be passed to \code{\link[rust]{ru}}.  Most
 #'   importantly \code{trans} and \code{rotate} (see \strong{Details}), and
 #'   perhaps \code{r}, \code{ep}, \code{a_algor}, \code{b_algor},
@@ -280,7 +285,8 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
                                              ab = c(1 / 2, 1 / 2),
                                              class = "binprior")),
                   bin_param = "logit",
-                  init_ests = NULL, mult = 2, use_phi_map = FALSE) {
+                  init_ests = NULL, mult = 2, use_phi_map = FALSE,
+                  weights = NULL) {
   #
   model <- match.arg(model)
   save_model <- model
@@ -329,7 +335,9 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
   # result if the posterior scales of the parameters are very different.
   #
   ds <- process_data(model = model, data = data, thresh = thresh, noy = noy,
-                     use_noy = use_noy, ros = ros)
+                     use_noy = use_noy, ros = ros, weights = weights)
+  print(ds$w)
+  print(ds$sumw)
   #
   # If model = "bingp" then extract sufficient statistics for the binomial
   # model, and remove n_raw from ds because it isn't used in the GP
@@ -371,7 +379,11 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
   #
   if (model == "gp") {
     logpost <- function(pars, ds) {
-      loglik <- do.call(gp_loglik, c(list(pars = pars), ds))
+      if (is.null(weights)) {
+        loglik <- do.call(gp_loglik, c(list(pars = pars), ds))
+      } else {
+        loglik <- do.call(gp_wloglik, c(list(pars = pars), ds))
+      }
       if (is.infinite(loglik)) return(loglik)
       logprior <- do.call(prior$prior, c(list(pars), prior[-1]))
       return(loglik + logprior)
