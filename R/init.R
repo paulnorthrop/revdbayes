@@ -146,7 +146,7 @@ pp_init <- function(data, n_exc = length(data[!is.na(data)]), thresh,
 gp_init <- function(data, m = length(data[!is.na(data)]),
                     xm = max(data, na.rm = TRUE),
                     sum_gp = sum(data, na.rm = TRUE), xi_eq_zero = FALSE,
-                    init_ests = NULL) {
+                    init_ests = NULL, w = NULL, sumw = NULL) {
   #
   # Initial estimates for Generalized Pareto distribution parameters
   #
