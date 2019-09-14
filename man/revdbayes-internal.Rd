@@ -13,7 +13,7 @@
 \alias{check_sample_size_message}
 \title{Internal revdbayes functions}
 \usage{
-process_data(model, data, thresh, noy, use_noy, ros, weights)
+process_data(model, data, thresh, noy, use_noy, ros, weights = NULL)
 
 create_ru_list(model, trans, rotate, min_xi, max_xi)
 

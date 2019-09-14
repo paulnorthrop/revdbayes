@@ -11,7 +11,8 @@ NULL
 
 #' @keywords internal
 #' @rdname revdbayes-internal
-process_data <- function(model, data, thresh, noy, use_noy, ros, weights) {
+process_data <- function(model, data, thresh, noy, use_noy, ros,
+                         weights = NULL) {
   #
   # Removes missings, extracts sample summaries.
   #
@@ -65,9 +66,6 @@ process_data <- function(model, data, thresh, noy, use_noy, ros, weights) {
     # lik_args$w and lik_args$sumw apply to threshold excesses (the GP bit)
     if (!is.null(weights)) {
       weights <- weights[!nas]
-      if (length(weights) != length(data)) {
-        stop("weights does not have the correct length")
-      }
       lik_args$w <- weights[data > thresh]
       lik_args$sumw <- sum(lik_args$w)
     }
