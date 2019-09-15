@@ -68,8 +68,10 @@ process_data <- function(model, data, thresh, noy, use_noy, ros,
       weights <- weights[!nas]
       lik_args$w <- weights[data > thresh]
       lik_args$sumw <- sum(lik_args$w)
-      lik_args$binw <- weights
-      lik_args$sf <- data > thresh
+      if (model == "bingp") {
+        lik_args$binw <- weights
+        lik_args$sf <- data > thresh
+      }
     }
     return(lik_args)
   }
