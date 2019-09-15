@@ -89,7 +89,8 @@
 #'   the observations when constructing the log-likelihood.
 #'   Currently only implemented for \code{model = "gp"} or
 #'   \code{model = "bingp"}.
-#'   \code{weights} mst have the same length as \code{data}.
+#'   In the latter case \code{bin_prior$prior} must be \code{"bin_beta"}.
+#'   \code{weights} must have the same length as \code{data}.
 #' @param ... Further arguments to be passed to \code{\link[rust]{ru}}.  Most
 #'   importantly \code{trans} and \code{rotate} (see \strong{Details}), and
 #'   perhaps \code{r}, \code{ep}, \code{a_algor}, \code{b_algor},
@@ -348,9 +349,17 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
     ds_bin <- list()
     ds_bin$m <- ds$m
     ds_bin$n_raw <- ds$n_raw
+    if (is.null(weights)) {
+      temp_bin <- binpost(n = n, prior = bin_prior, ds_bin = ds_bin,
+                          param = bin_param)
+    } else {
+      ds_bin$sf <- ds$sf
+      ds_bin$w <- ds$binw
+      ds$sf <- ds$binw <- NULL
+      temp_bin <- wbinpost(n = n, prior = bin_prior, ds_bin = ds_bin,
+                           param = bin_param)
+    }
     ds$n_raw <- NULL
-    temp_bin <- binpost(n = n, prior = bin_prior, ds_bin = ds_bin,
-                        param = bin_param)
     add_binomial <- TRUE
     model <- "gp"
   }
@@ -1064,4 +1073,64 @@ r_pu_N <- function(n, n_success, n_failure, alpha = 0, beta = 0) {
     }
   }
   return(p_sim)
+}
+
+# =============================== wbinpost ================================== #
+
+#' Random sampling from a binomial posterior distribution, using weights
+#'
+#' Samples from the posterior distribution of the probability \eqn{p}
+#' of a binomial distribution.  User-supplied weights are applied to each
+#' observation when constructing the log-likelihood.
+#'
+#' @param n A numeric scalar. The size of posterior sample required.
+#' @param prior A function to evaluate the prior, created by
+#'   \code{\link{set_bin_prior}}.
+#'   \code{prior$prior} must be \code{"bin_beta"}.
+#' @param ds_bin A numeric list.  Sufficient statistics for inference
+#'   about the binomial probability \eqn{p}.  Contains
+#' \itemize{
+#'   \item {\code{sf} : a logical vector of success (\code{TRUE}) and failure
+#'     (\code{FALSE}) indicators.}
+#'   \item {\code{w} : a numeric vector of length \code{length(sf)} containing
+#'     the values by which to multiply the observations when constructing the
+#'     log-likelihood.}
+#' }
+#' @details For \code{prior$prior == "bin_beta"} the posterior for \eqn{p}
+#'   is a beta distribution so \code{\link[stats:Beta]{rbeta}} is used to
+#'   sample from the posterior.
+#' @return An object (list) of class \code{"binpost"} with components
+#'   \itemize{
+#'     \item{\code{bin_sim_vals}:} {An \code{n} by 1 numeric matrix of values
+#'       simulated from the posterior for the binomial
+#'       probability \eqn{p}}
+#'     \item{\code{bin_logf}:} {A function returning the log-posterior for
+#'       \eqn{p}.}
+#'     \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
+#'   }
+#' @seealso \code{\link{set_bin_prior}} for setting a prior distribution
+#'   for the binomial probability \eqn{p}.
+#' @examples
+#' u <- quantile(gom, probs = 0.65)
+#' ds_bin <- list(sf = gom > u, w = rep(1, length(gom)))
+#' bp <- set_bin_prior(prior = "jeffreys")
+#' temp <- wbinpost(n = 1000, prior = bp, ds_bin = ds_bin)
+#' graphics::hist(temp$bin_sim_vals, prob = TRUE)
+#' @export
+wbinpost <- function(n, prior, ds_bin) {
+  n_success <- ds_bin$m
+  n_failure <- ds_bin$n_raw - ds_bin$m
+  if (is.character(prior$prior) && prior$prior == "bin_beta") {
+    shape1 <- sum(ds_bin$w * ds_bin$sf) + prior$ab[1]
+    shape2 <- sum(ds_bin$w * (1 - ds_bin$sf)) + prior$ab[2]
+    bin_sim_vals <- stats::rbeta(n = n, shape1 = shape1, shape2 = shape2)
+    bin_logf_args <- list(shape1 = shape1, shape2 = shape2)
+    bin_logf_beta <- function(x, shape1 , shape2) {
+      stats::dbeta(x, shape1 = shape1, shape2 = shape2, log = TRUE)
+    }
+    temp <- list(bin_sim_vals = bin_sim_vals, bin_logf = bin_logf_beta,
+                 bin_logf_args = bin_logf_args)
+  }
+  class(temp) <- "binpost"
+  return(temp)
 }

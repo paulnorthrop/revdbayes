@@ -117,7 +117,8 @@ centred on the maximum a posterior (MAP) estimate of phi
 the observations when constructing the log-likelihood.
 Currently only implemented for \code{model = "gp"} or
 \code{model = "bingp"}.
-\code{weights} mst have the same length as \code{data}.}
+In the latter case \code{bin_prior$prior} must be \code{"bin_beta"}.
+\code{weights} must have the same length as \code{data}.}
 }
 \value{
 An object (list) of class \code{"evpost"}, which has the same
