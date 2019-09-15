@@ -1,4 +1,4 @@
-# =========================== rpost ===========================
+# ================================ rpost ==================================== #
 #
 #' Random sampling from extreme value posterior distributions
 #'
@@ -775,7 +775,7 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
   return(temp)
 }
 
-# =========================== pu_pp ===========================
+# ================================ pu_pp ==================================== #
 
 pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
   if (any(scale < 0)) {
@@ -825,7 +825,7 @@ pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
   return(p)
 }
 
-# =========================== binpost ===========================
+# =============================== binpost =================================== #
 
 #' Random sampling from a binomial posterior distribution
 #'
@@ -1004,7 +1004,7 @@ binpost <- function(n, prior, ds_bin, param = c("logit", "p")) {
   return(temp)
 }
 
-# =========================== r_pu_MDI ===========================
+# ================================ r_pu_MDI ================================= #
 
 r_pu_MDI <- function(n, n_success, n_failure) {
   #
@@ -1031,7 +1031,7 @@ r_pu_MDI <- function(n, n_success, n_failure) {
   return(p_sim)
 }
 
-# ================================= r_pu_N ====================================
+# ================================= r_pu_N ================================== #
 
 r_pu_N <- function(n, n_success, n_failure, alpha = 0, beta = 0) {
   #
