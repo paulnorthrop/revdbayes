@@ -356,8 +356,7 @@ rpost <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
       ds_bin$sf <- ds$sf
       ds_bin$w <- ds$binw
       ds$sf <- ds$binw <- NULL
-      temp_bin <- wbinpost(n = n, prior = bin_prior, ds_bin = ds_bin,
-                           param = bin_param)
+      temp_bin <- wbinpost(n = n, prior = bin_prior, ds_bin = ds_bin)
     }
     ds$n_raw <- NULL
     add_binomial <- TRUE
