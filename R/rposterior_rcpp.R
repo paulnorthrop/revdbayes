@@ -391,7 +391,7 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
   # Create a pointer to the log-posterior function.
   #
   if (class(prior$prior) == "externalptr") {
-    prior_type = "user"
+    prior_type <- "user"
     post_ptr <- switch(model,
                        gp = gp_logpost_xptr("gp_user"),
                        gev = gev_logpost_xptr("gev_user"),
@@ -399,7 +399,7 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
                        os = os_logpost_xptr("gev_user")
     )
   } else {
-    prior_type = prior$prior
+    prior_type <- prior$prior
     post_ptr <- switch(model,
                        gp = gp_logpost_xptr(prior$prior),
                        gev = gev_logpost_xptr(prior$prior),
