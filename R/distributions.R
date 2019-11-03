@@ -109,11 +109,12 @@ dgev <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE, m = 1) {
   x <- (x - loc) / scale
   xx <- 1 + shape * x
   d <- ifelse(xx < 0, 0,
-           ifelse(xx == 0 & shape == -1, 1,
-                ifelse(xx == 0 & shape < -1, Inf,
-                     ifelse(abs(shape) > 1e-6,
-                          xx ^ (-(1 + 1 / shape)) * exp(-m * xx ^ (-1/ shape)),
-        exp(-x + shape * x * (x - 2) / 2 - m * exp(-x + shape * x ^ 2 / 2))))))
+         ifelse(xx == 0 & shape == -1, 1,
+           ifelse(xx == 0 & shape < -1, Inf,
+             ifelse(xx == 0, 0,
+               ifelse(abs(shape) > 1e-6,
+                 xx ^ (-(1 + 1 / shape)) * exp(-m * xx ^ (-1/ shape)),
+       exp(-x + shape * x * (x - 2) / 2 - m * exp(-x + shape * x ^ 2 / 2)))))))
   d <- d * m / scale
   if (log) {
     d <- log(d)
