@@ -19,4 +19,3 @@ res2 <- rpost(n = 1000, model = "bingp", prior = fp, thresh = u, data = gom,
 testthat::test_that("binGP rpost: weights vs no weights", {
   testthat::expect_equal(res1$sim_vals, res2$sim_vals, tolerance = my_tol)
 })
-
