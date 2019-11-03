@@ -334,7 +334,7 @@ box_cox_vec <- function(x, lambda = 1, lambda_tol = 1e-6) {
   #   A numeric vector.  The transformed value
   #     (x^lambda - 1) / lambda
   #
-  if (any(x < 0)) {
+  if (any(x < 0, na.rm = TRUE)) {
     stop("Invalid x: x must be non-negative")
   }
   max_len <- max(length(x), length(lambda))
