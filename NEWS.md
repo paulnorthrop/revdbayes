@@ -1,12 +1,14 @@
 # revdbayes 1.3.4.9000
 
+## Bug fixes and minor improvements
+
+* The d/p/q function for the GEV and GP distributions now handle correctly cases where the input has length 0 and/or is `NA` and inputs `Inf` and `-Inf`. 
+
 # revdbayes 1.3.4
 
 ## New features
 
 * In `set_bin_prior()` the user can specify their own prior for the binomial probability, by providing an R function.
-
-* upper?
 
 ## Bug fixes and minor improvements
 
