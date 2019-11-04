@@ -288,6 +288,9 @@ dgp <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE) {
   if (any(scale < 0)) {
     stop("invalid scale: scale must be positive.")
   }
+  if (length(x) == 0) {
+    return(numeric(0))
+  }
   max_len <- max(length(x), length(loc), length(scale), length(shape))
   x <- rep_len(x, max_len)
   loc <- rep_len(loc, max_len)
@@ -295,6 +298,8 @@ dgp <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE) {
   shape <- rep_len(shape, max_len)
   x <- (x - loc) / scale
   xx <- 1 + shape * x
+  print(x)
+  print(xx)
   x <- ifelse(x < 0 | xx < 0, 0,
               ifelse(xx == 0 & shape == -1, 1,
                      ifelse(xx == 0 & shape < -1, Inf,
@@ -316,6 +321,9 @@ pgp <- function (q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
                  log.p = FALSE){
   if (any(scale < 0)) {
     stop("invalid scale: scale must be positive.")
+  }
+  if (length(q) == 0) {
+    return(numeric(0))
   }
   max_len <- max(length(q), length(loc), length(scale), length(shape))
   q <- rep_len(q, max_len)
@@ -349,6 +357,9 @@ qgp <- function (p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
                  log.p = FALSE) {
   if (any(scale < 0)) {
     stop("invalid scale: scale must be positive.")
+  }
+  if (length(p) == 0) {
+    return(numeric(0))
   }
   if (!log.p & any(p < 0 | p > 1)) {
     stop("invalid p: p must be in [0,1].")
