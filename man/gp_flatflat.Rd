@@ -19,7 +19,8 @@ Must not be \code{-Inf} because this results in an improper posterior.}
 \item{trendsd}{Has no function other than to achieve compatibility with
 function in the evdbayes package.}
 
-\item{upper}{experimental!}
+\item{upper}{A positive numeric scalar.  The upper endpoint of the GP
+distribution.}
 }
 \value{
 The log of the prior density.
