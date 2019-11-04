@@ -298,9 +298,7 @@ dgp <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE) {
   shape <- rep_len(shape, max_len)
   x <- (x - loc) / scale
   xx <- 1 + shape * x
-  print(x)
-  print(xx)
-  x <- ifelse(x < 0 | xx < 0, 0,
+  x <- ifelse(x < 0 | xx < 0 | is.infinite(x), 0,
               ifelse(xx == 0 & shape == -1, 1,
                      ifelse(xx == 0 & shape < -1, Inf,
                             ifelse(abs(shape) > 1e-6,
@@ -332,9 +330,10 @@ pgp <- function (q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
   shape <- rep_len(shape, max_len)
   q <- pmax(q - loc, 0) / scale
   p <- 1 + shape * q
-  p <- ifelse(abs(shape) > 1e-6 | p < 0,
+  p <- ifelse(abs(shape) > 1e-6,
               1 - pmax(p, 0) ^ (-1 / shape),
-              1 - exp(-q + shape * q ^ 2 / 2))
+              ifelse(is.infinite(q), (1 + sign(q)) / 2,
+                     1 - exp(-q + shape * q ^ 2 / 2)))
   if (lower.tail) {
     if (log.p) {
       p <- log(p)
@@ -361,7 +360,7 @@ qgp <- function (p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
   if (length(p) == 0) {
     return(numeric(0))
   }
-  if (!log.p & any(p < 0 | p > 1)) {
+  if (!log.p & any(p < 0 | p > 1, na.rm = TRUE)) {
     stop("invalid p: p must be in [0,1].")
   }
   max_len <- max(length(p), length(loc), length(scale), length(shape))
