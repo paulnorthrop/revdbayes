@@ -10,7 +10,7 @@ low <- -1 / xi1
 xi2 <- 0
 
 # Negative
-xi3 <- -0.1
+xi3 <- -1e-7
 up <- -1 / xi3
 
 ## Example input vectors
