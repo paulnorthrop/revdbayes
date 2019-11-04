@@ -254,8 +254,9 @@ Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
   \strong{35(2)}, 185-191. \url{https://doi.org/10.2307/1269663}.
 
 Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and
-Quantile Estimation for the Generalized Pareto Distribution. Technometrics,
-29(3), 339-349. \url{https://doi.org/10.2307/1269343}.
+  Quantile Estimation for the Generalized Pareto Distribution.
+  \emph{Technometrics}, \strong{29(3)}, 339-349.
+  \url{https://doi.org/10.2307/1269343}.
 
 Martins, E. S. and Stedinger, J. R. (2000) Generalized maximum
   likelihood generalized extreme value quantile estimators for hydrologic

@@ -231,8 +231,9 @@
 #'   for the Generalized Pareto Distribution.  \emph{Technometrics},
 #'   \strong{35(2)}, 185-191. \url{https://doi.org/10.2307/1269663}.
 #' @references Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and
-#' Quantile Estimation for the Generalized Pareto Distribution. Technometrics,
-#' 29(3), 339-349. \url{https://doi.org/10.2307/1269343}.
+#'   Quantile Estimation for the Generalized Pareto Distribution.
+#'   \emph{Technometrics}, \strong{29(3)}, 339-349.
+#'   \url{https://doi.org/10.2307/1269343}.
 #' @references Martins, E. S. and Stedinger, J. R. (2000) Generalized maximum
 #'   likelihood generalized extreme value quantile estimators for hydrologic
 #'   data, \emph{Water Resources Research}, \strong{36(3)}, 737-744.
