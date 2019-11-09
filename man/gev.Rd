@@ -60,15 +60,15 @@ distribution.
 }
 \details{
 The distribution function of a GEV distribution with parameters
- \code{loc} = \eqn{\mu}, \code{scale} = \eqn{\sigma} (>0) and
+ \code{loc} = \eqn{\mu}, \code{scale} = \eqn{\sigma (> 0)} and
  \code{shape} = \eqn{\xi} is
  \deqn{F(x) = \exp\{-[1 + \xi (x - \mu) / \sigma] ^ {-1/\xi} \}}{%
        F(x) = exp{ -[1 + \xi (x - \mu) / \sigma] ^ (-1/\xi)} }
  for \eqn{1 + \xi (x - \mu) / \sigma > 0}.  If \eqn{\xi = 0} the
  distribution function is defined as the limit as \eqn{\xi} tends to zero.
  The support of the distribution depends on \eqn{\xi}: it is
- \eqn{x <= \mu - \sigma / \xi} for \eqn{\xi < 0};
- \eqn{x >= \mu - \sigma / \xi} for \eqn{\xi > 0};
+ \eqn{x \leq \mu - \sigma / \xi}{x <= \mu - \sigma / \xi} for \eqn{\xi < 0};
+ \eqn{x \geq \mu - \sigma / \xi}{x >= \mu - \sigma / \xi} for \eqn{\xi > 0};
  and \eqn{x} is unbounded for \eqn{\xi = 0}.
  Note that if \eqn{\xi < -1} the GEV density function becomes infinite
  as \eqn{x} approaches \eqn{\mu -\sigma / \xi} from below.

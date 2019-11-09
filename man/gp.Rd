@@ -49,17 +49,17 @@ random generation for the generalised Pareto (GP) distribution.
 }
 \details{
 The distribution function of a GP distribution with parameters
- \code{location} = \eqn{\mu}, \code{scale} = \eqn{\sigma} (>0) and
+ \code{location} = \eqn{\mu}, \code{scale} = \eqn{\sigma (> 0)} and
  \code{shape} = \eqn{\xi} is
  \deqn{F(x) = 1 - [1 + \xi (x - \mu) / \sigma] ^ {-1/\xi}}{%
        F(x) = 1 - [1 + \xi (x - \mu) / \sigma] ^ (-1/\xi)}
  for \eqn{1 + \xi (x - \mu) / \sigma > 0}.  If \eqn{\xi = 0} the
  distribution function is defined as the limit as \eqn{\xi} tends to zero.
  The support of the distribution depends on \eqn{\xi}: it is
- \eqn{x >= \mu} for \eqn{\xi >= 0};
- and \eqn{\mu <= x <= \mu - \sigma / \xi} for \eqn{\xi < 0}.  Note that
- if \eqn{\xi < -1} the GP density function becomes infinite as \eqn{x}
- approaches \eqn{\mu - \sigma/\xi}.
+ \eqn{x \geq \mu}{x >= \mu} for \eqn{\xi \geq 0}{\xi >= 0}; and
+ \eqn{\mu \leq x \leq \mu - \sigma / \xi}{\mu <= x <= \mu - \sigma / \xi}
+ for \eqn{\xi < 0}.  Note that if \eqn{\xi < -1} the GP density function
+ becomes infinite as \eqn{x} approaches \eqn{\mu - \sigma/\xi}.
 
  If \code{lower.tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
  the lower (upper) limit of the distribution is returned.

@@ -22,15 +22,15 @@
 #'  with the GEV(\code{loc, scale, shape}) distribution function raised to the
 #'  power \code{m}.  See \strong{Details}.
 #' @details The distribution function of a GEV distribution with parameters
-#'  \code{loc} = \eqn{\mu}, \code{scale} = \eqn{\sigma} (>0) and
+#'  \code{loc} = \eqn{\mu}, \code{scale} = \eqn{\sigma (> 0)} and
 #'  \code{shape} = \eqn{\xi} is
 #'  \deqn{F(x) = \exp\{-[1 + \xi (x - \mu) / \sigma] ^ {-1/\xi} \}}{%
 #'        F(x) = exp{ -[1 + \xi (x - \mu) / \sigma] ^ (-1/\xi)} }
 #'  for \eqn{1 + \xi (x - \mu) / \sigma > 0}.  If \eqn{\xi = 0} the
 #'  distribution function is defined as the limit as \eqn{\xi} tends to zero.
 #'  The support of the distribution depends on \eqn{\xi}: it is
-#'  \eqn{x <= \mu - \sigma / \xi} for \eqn{\xi < 0};
-#'  \eqn{x >= \mu - \sigma / \xi} for \eqn{\xi > 0};
+#'  \eqn{x \leq \mu - \sigma / \xi}{x <= \mu - \sigma / \xi} for \eqn{\xi < 0};
+#'  \eqn{x \geq \mu - \sigma / \xi}{x >= \mu - \sigma / \xi} for \eqn{\xi > 0};
 #'  and \eqn{x} is unbounded for \eqn{\xi = 0}.
 #'  Note that if \eqn{\xi < -1} the GEV density function becomes infinite
 #'  as \eqn{x} approaches \eqn{\mu -\sigma / \xi} from below.
@@ -230,17 +230,17 @@ rgev <- function (n, loc = 0, scale = 1, shape = 0, m = 1) {
 #' @param lower.tail A logical scalar.  If TRUE (default), probabilities
 #'   are \eqn{P[X \leq x]}{P[X <= x]}, otherwise, \eqn{P[X > x]}{P[X > x]}.
 #' @details The distribution function of a GP distribution with parameters
-#'  \code{location} = \eqn{\mu}, \code{scale} = \eqn{\sigma} (>0) and
+#'  \code{location} = \eqn{\mu}, \code{scale} = \eqn{\sigma (> 0)} and
 #'  \code{shape} = \eqn{\xi} is
 #'  \deqn{F(x) = 1 - [1 + \xi (x - \mu) / \sigma] ^ {-1/\xi}}{%
 #'        F(x) = 1 - [1 + \xi (x - \mu) / \sigma] ^ (-1/\xi)}
 #'  for \eqn{1 + \xi (x - \mu) / \sigma > 0}.  If \eqn{\xi = 0} the
 #'  distribution function is defined as the limit as \eqn{\xi} tends to zero.
 #'  The support of the distribution depends on \eqn{\xi}: it is
-#'  \eqn{x >= \mu} for \eqn{\xi >= 0};
-#'  and \eqn{\mu <= x <= \mu - \sigma / \xi} for \eqn{\xi < 0}.  Note that
-#'  if \eqn{\xi < -1} the GP density function becomes infinite as \eqn{x}
-#'  approaches \eqn{\mu - \sigma/\xi}.
+#'  \eqn{x \geq \mu}{x >= \mu} for \eqn{\xi \geq 0}{\xi >= 0}; and
+#'  \eqn{\mu \leq x \leq \mu - \sigma / \xi}{\mu <= x <= \mu - \sigma / \xi}
+#'  for \eqn{\xi < 0}.  Note that if \eqn{\xi < -1} the GP density function
+#'  becomes infinite as \eqn{x} approaches \eqn{\mu - \sigma/\xi}.
 #'
 #'  If \code{lower.tail = TRUE} then if \code{p = 0} (\code{p = 1}) then
 #'  the lower (upper) limit of the distribution is returned.
