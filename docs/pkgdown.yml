@@ -1,0 +1,9 @@
+pandoc: 1.19.2.1
+pkgdown: 1.4.1
+pkgdown_sha: ~
+articles:
+  revdbayes-a-vignette: revdbayes-a-vignette.html
+  revdbayes-b-using-rcpp-vignette: revdbayes-b-using-rcpp-vignette.html
+  revdbayes-c-predictive-vignette: revdbayes-c-predictive-vignette.html
+  revdbayes-d-kgaps-vignette: revdbayes-d-kgaps-vignette.html
+

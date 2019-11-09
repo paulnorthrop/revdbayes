@@ -1,0 +1,77 @@
+destination: docs
+
+development:
+  mode: release
+
+template:
+  params:
+    bootswatch: paper
+
+reference:
+  - title: Package
+    desc: ~
+    contents:
+      - "revdbayes"
+  - title: Priors
+    desc: ~
+    contents:
+      - "set_prior"
+      - "set_bin_prior"
+      - "gev_beta"
+      - "gev_flat"
+      - "gev_flatflat"
+      - "gev_loglognorm"
+      - "gev_mdi"
+      - "gev_norm"
+      - "gev_prob"
+      - "gev_quant"
+      - "gp_beta"
+      - "gp_flat"
+      - "gp_flatflat"
+      - "gp_jeffreys"
+      - "gp_mdi"
+      - "gp_norm"
+      - "rprior_prob"
+      - "rprior_quant"
+      - "rDir"
+  - title: Posterior sampling
+    desc: ~
+    contents:
+      - "rpost"
+      - "rpost_rcpp"
+      - "kgaps_post"
+      - "binpost"
+      - "wbinpost"
+  - title: Predictive inference and checking
+    desc: ~
+    contents:
+      - "predict.evpost"
+      - "pp_check"
+  - title: Distributions
+    desc: ~
+    contents:
+      - "gev"
+      - "gp"
+  - title: Example data
+    desc: ~
+    contents:
+      - "gom"
+      - "newlyn"
+      - "oxford"
+      - "portpirie"
+      - "rainfall"
+      - "venice"
+  - title: Generics
+    desc: ~
+    contents:
+      - "plot.evpost"
+      - "plot.evpred"
+      - "summary.evpost"
+      - "print.summary.evpost"
+  - title: Miscellaneous
+    desc: ~
+    contents:
+      - "kgaps_mle"
+      - "kgaps_stats"
+      - "quantile_to_gev"
+      - "create_prior_xptr"
