@@ -425,3 +425,19 @@ check_sample_size_message <- function(prior_name, n_check) {
   text3 <- "is used."
   paste(text1, n_check, text2, prior_name, text3)
 }
+
+# ============== log(x) that returns NA when x is non-positive ============== #
+
+#' @keywords internal
+#' @rdname revdbayes-internal
+logNegNA <- function(x) {
+  # A version of log(x) that returns NA when x is non-positive
+  # Args:
+  #   x : a vector
+  # Returns : a vector
+  xx <- x
+  xx[x < 0] <- NA
+  xx[x > 0 & !is.na(x)] <- log(x[x > 0  & !is.na(x)])
+  xx[x == 0] <- -Inf
+  return(xx)
+}

@@ -11,6 +11,7 @@
 \alias{box_cox_deriv}
 \alias{check_sample_size}
 \alias{check_sample_size_message}
+\alias{logNegNA}
 \title{Internal revdbayes functions}
 \usage{
 process_data(model, data, thresh, noy, use_noy, ros, weights = NULL)
@@ -30,6 +31,8 @@ box_cox_deriv(x, lambda = 1, lambda_tol = 1e-06, poly_order = 3)
 check_sample_size(prior_name, n_check)
 
 check_sample_size_message(prior_name, n_check)
+
+logNegNA(x)
 }
 \description{
 Internal revdbayes functions
