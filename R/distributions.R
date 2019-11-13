@@ -298,15 +298,15 @@ dgp <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE) {
   shape <- rep_len(shape, max_len)
   x <- (x - loc) / scale
   xx <- 1 + shape * x
-  x <- ifelse(x < 0 | xx < 0 | is.infinite(x), 0,
-              ifelse(xx == 0 & shape == -1, 1,
+  x <- ifelse(x < 0 | xx < 0 | is.infinite(x), -Inf,
+              ifelse(xx == 0 & shape == -1, 0,
                      ifelse(xx == 0 & shape < -1, Inf,
                             ifelse(abs(shape) > 1e-6,
-                                   xx ^ (-(1 + 1 / shape)),
-                                   exp(-x + shape * x * (x - 2) / 2)))))
-  x <- x / scale
-  if (log) {
-    x <- log(x)
+                                   -(1 + 1 / shape) * logNegNA(xx),
+                                   -x + shape * x * (x - 2) / 2))))
+  x <- x - log(scale)
+  if (!log) {
+    x <- exp(x)
   }
   return(x)
 }
