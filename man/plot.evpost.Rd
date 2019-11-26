@@ -4,11 +4,22 @@
 \alias{plot.evpost}
 \title{Plot diagnostics for an evpost object}
 \usage{
-\method{plot}{evpost}(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
-  prob = c(0.5, 0.1, 0.25, 0.75, 0.95, 0.99), ru_scale = FALSE,
-  rows = NULL, xlabs = NULL, ylabs = NULL, points_par = list(col =
-  8), pu_only = FALSE, add_pu = FALSE, use_bayesplot = FALSE,
-  fun_name = c("areas", "intervals", "dens", "hist", "scatter"))
+\method{plot}{evpost}(
+  x,
+  y,
+  ...,
+  n = ifelse(x$d == 1, 1001, 101),
+  prob = c(0.5, 0.1, 0.25, 0.75, 0.95, 0.99),
+  ru_scale = FALSE,
+  rows = NULL,
+  xlabs = NULL,
+  ylabs = NULL,
+  points_par = list(col = 8),
+  pu_only = FALSE,
+  add_pu = FALSE,
+  use_bayesplot = FALSE,
+  fun_name = c("areas", "intervals", "dens", "hist", "scatter")
+)
 }
 \arguments{
 \item{x}{An object of class "evpost", a result of a call to

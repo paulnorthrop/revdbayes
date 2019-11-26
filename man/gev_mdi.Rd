@@ -5,8 +5,7 @@
 \title{Maximal data information (MDI) prior for GEV parameters
 (\eqn{\mu, \sigma, \xi})}
 \usage{
-gev_mdi(pars, a = 0.577215664901532, min_xi = -1, max_xi = Inf,
-  trendsd = 0)
+gev_mdi(pars, a = 0.577215664901532, min_xi = -1, max_xi = Inf, trendsd = 0)
 }
 \arguments{
 \item{pars}{A numeric vector of length 3.

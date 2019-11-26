@@ -10,11 +10,9 @@
 \usage{
 dgp(x, loc = 0, scale = 1, shape = 0, log = FALSE)
 
-pgp(q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
-  log.p = FALSE)
+pgp(q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE, log.p = FALSE)
 
-qgp(p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
-  log.p = FALSE)
+qgp(p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE, log.p = FALSE)
 
 rgp(n, loc = 0, scale = 1, shape = 0)
 }

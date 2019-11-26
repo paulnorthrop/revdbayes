@@ -4,8 +4,13 @@
 \alias{plot.evpred}
 \title{Plot diagnostics for an evpred object}
 \usage{
-\method{plot}{evpred}(x, ..., leg_pos = NULL, leg_text = NULL,
-  which_int = c("long", "short", "both"))
+\method{plot}{evpred}(
+  x,
+  ...,
+  leg_pos = NULL,
+  leg_text = NULL,
+  which_int = c("long", "short", "both")
+)
 }
 \arguments{
 \item{x}{An object of class "evpost", a result of a call to

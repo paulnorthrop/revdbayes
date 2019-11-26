@@ -4,11 +4,23 @@
 \alias{rpost_rcpp}
 \title{Random sampling from extreme value posterior distributions}
 \usage{
-rpost_rcpp(n, model = c("gev", "gp", "bingp", "pp", "os"), data, prior,
-  ..., nrep = NULL, thresh = NULL, noy = NULL, use_noy = TRUE,
-  npy = NULL, ros = NULL, bin_prior = structure(list(prior =
-  "bin_beta", ab = c(1/2, 1/2), class = "binprior")), init_ests = NULL,
-  mult = 2, use_phi_map = FALSE)
+rpost_rcpp(
+  n,
+  model = c("gev", "gp", "bingp", "pp", "os"),
+  data,
+  prior,
+  ...,
+  nrep = NULL,
+  thresh = NULL,
+  noy = NULL,
+  use_noy = TRUE,
+  npy = NULL,
+  ros = NULL,
+  bin_prior = structure(list(prior = "bin_beta", ab = c(1/2, 1/2), class = "binprior")),
+  init_ests = NULL,
+  mult = 2,
+  use_phi_map = FALSE
+)
 }
 \arguments{
 \item{n}{A numeric scalar. The size of posterior sample required.}

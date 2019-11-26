@@ -4,8 +4,7 @@
 \alias{gp_beta}
 \title{Beta-type prior for GP shape parameter \eqn{\xi}}
 \usage{
-gp_beta(pars, min_xi = -1/2, max_xi = 1/2, pq = c(6, 9),
-  trendsd = 0)
+gp_beta(pars, min_xi = -1/2, max_xi = 1/2, pq = c(6, 9), trendsd = 0)
 }
 \arguments{
 \item{pars}{A numeric vector of length 2.

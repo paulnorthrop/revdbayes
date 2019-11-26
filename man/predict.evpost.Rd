@@ -4,9 +4,20 @@
 \alias{predict.evpost}
 \title{Predictive inference for the largest value observed in N years.}
 \usage{
-\method{predict}{evpost}(object, type = c("i", "p", "d", "q", "r"),
-  x = NULL, x_num = 100, n_years = 100, npy = NULL, level = 95,
-  hpd = FALSE, lower_tail = TRUE, log = FALSE, big_q = 1000, ...)
+\method{predict}{evpost}(
+  object,
+  type = c("i", "p", "d", "q", "r"),
+  x = NULL,
+  x_num = 100,
+  n_years = 100,
+  npy = NULL,
+  level = 95,
+  hpd = FALSE,
+  lower_tail = TRUE,
+  log = FALSE,
+  big_q = 1000,
+  ...
+)
 }
 \arguments{
 \item{object}{An object of class "evpost", a result of a call to

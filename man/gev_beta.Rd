@@ -4,8 +4,7 @@
 \alias{gev_beta}
 \title{Beta-type prior for GEV shape parameter \eqn{\xi}}
 \usage{
-gev_beta(pars, min_xi = -1/2, max_xi = 1/2, pq = c(6, 9),
-  trendsd = 0)
+gev_beta(pars, min_xi = -1/2, max_xi = 1/2, pq = c(6, 9), trendsd = 0)
 }
 \arguments{
 \item{pars}{A numeric vector of length 3.

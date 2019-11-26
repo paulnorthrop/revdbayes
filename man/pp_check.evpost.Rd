@@ -5,9 +5,15 @@
 \alias{pp_check}
 \title{Posterior predictive checks for an evpost object}
 \usage{
-\method{pp_check}{evpost}(object, ..., type = c("stat", "overlaid",
-  "multiple", "intervals", "user"), subtype = NULL, stat = "median",
-  nrep = 8, fun = NULL)
+\method{pp_check}{evpost}(
+  object,
+  ...,
+  type = c("stat", "overlaid", "multiple", "intervals", "user"),
+  subtype = NULL,
+  stat = "median",
+  nrep = 8,
+  fun = NULL
+)
 }
 \arguments{
 \item{object}{An object of class "evpost", a result of a call to

@@ -10,11 +10,9 @@
 \usage{
 dgev(x, loc = 0, scale = 1, shape = 0, log = FALSE, m = 1)
 
-pgev(q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
-  log.p = FALSE, m = 1)
+pgev(q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE, log.p = FALSE, m = 1)
 
-qgev(p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
-  log.p = FALSE, m = 1)
+qgev(p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE, log.p = FALSE, m = 1)
 
 rgev(n, loc = 0, scale = 1, shape = 0, m = 1)
 }

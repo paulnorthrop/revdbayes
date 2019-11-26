@@ -4,8 +4,7 @@
 \alias{gev_quant}
 \title{Informative GEV prior on a quantile scale}
 \usage{
-gev_quant(pars, prob, shape, scale, min_xi = -Inf, max_xi = Inf,
-  trendsd = 0)
+gev_quant(pars, prob, shape, scale, min_xi = -Inf, max_xi = Inf, trendsd = 0)
 }
 \arguments{
 \item{pars}{A numeric vector of length 3.

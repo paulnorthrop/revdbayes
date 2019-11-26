@@ -3,7 +3,6 @@
 \docType{package}
 \name{revdbayes}
 \alias{revdbayes}
-\alias{revdbayes-package}
 \title{revdbayes: Ratio-of-Uniforms Sampling for Bayesian Extreme Value Analysis}
 \description{
 Uses the multivariate generalized ratio-of-uniforms method to simulate
