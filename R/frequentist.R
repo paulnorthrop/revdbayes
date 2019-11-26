@@ -730,12 +730,12 @@ gev_mle <- function(init, ...){
     temp$nllh <- -x$value
     temp$hessian <- try(stats::optimHess(temp$mle, gev_loglik, ...),
                         silent = TRUE)
-    if (class(temp$hessian) == "try-error") {
+    if (inherits(temp$hessian, "try-error")) {
       temp$cov <- temp$se <- NULL
       return(temp)
     }
     temp$cov <- try(-solve(temp$hessian), silent = TRUE)
-    if (class(temp$cov) == "try-error") {
+    if (inherits(temp$cov, "try-error")) {
       temp$cov <- temp$se <- NULL
     } else {
       temp$se <- sqrt(diag(temp$cov))
@@ -883,12 +883,12 @@ os_mle <- function(init, gumbel = FALSE, ...){
   temp$nllh <- -x$value
   temp$hessian <- try(stats::optimHess(temp$mle, os_loglik, gumbel = gumbel,
                                        ...), silent = TRUE)
-  if (class(temp$hessian) == "try-error") {
+  if (inherits(temp$hessian, "try-error")) {
     temp$cov <- temp$se <- NULL
     return(temp)
   }
   temp$cov <- try(-solve(temp$hessian), silent = TRUE)
-  if (class(temp$cov) == "try-error") {
+  if (inherits(temp$cov, "try-error")) {
     temp$cov <- temp$se <- NULL
   } else {
     temp$se <- sqrt(diag(temp$cov))

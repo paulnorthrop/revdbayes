@@ -1,5 +1,9 @@
 # revdbayes 1.3.5.9000
 
+## Bug fixes and minor improvements
+
+* Use `inherits()` to check the class of objects returned from `try()`, rather than `class()`.
+
 # revdbayes 1.3.5
 
 ## Bug fixes and minor improvements
