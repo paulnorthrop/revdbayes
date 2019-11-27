@@ -51,7 +51,6 @@
 #'   \code{ru_rcpp}.
 #' @docType package
 #' @name revdbayes
-#' @import methods
 #' @importFrom graphics plot
 #' @importFrom stats predict
 #' @importFrom bayesplot ppc_stat

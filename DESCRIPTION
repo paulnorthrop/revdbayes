@@ -17,7 +17,6 @@ Description: Provides functions for the Bayesian analysis of extreme value
     appropriately with cases where the shape parameter is very close to zero.
 Imports: bayesplot (>= 1.1.0),
     graphics,
-    methods,
     Rcpp,
     rust (>= 1.2.2),
     stats,
