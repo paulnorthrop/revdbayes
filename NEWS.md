@@ -4,6 +4,8 @@
 
 * Use `inherits()` to check the class of objects returned from `try()`, rather than `class()`.
 
+* pkgdown documentation at [https://paulnorthrop.github.io/revdbayes/](https://paulnorthrop.github.io/revdbayes/)
+
 # revdbayes 1.3.5
 
 ## Bug fixes and minor improvements
