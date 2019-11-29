@@ -34,6 +34,7 @@ Suggests: evdbayes,
     rmarkdown,
     testthat
 VignetteBuilder: knitr
-URL: http://github.com/paulnorthrop/revdbayes
+URL: https://paulnorthrop.github.io/revdbayes/, 
+     http://github.com/paulnorthrop/revdbayes
 BugReports: http://github.com/paulnorthrop/revdbayes/issues
 LinkingTo: Rcpp (>= 0.12.10), RcppArmadillo
