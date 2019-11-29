@@ -8,10 +8,12 @@
 
 <title>Random sampling from a binomial posterior distribution, using weights — wbinpost • revdbayes</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -32,12 +34,13 @@
 
 
 
-<meta property="og:title" content="Random sampling from a binomial posterior distribution, using weights — wbinpost" />
 
+<meta property="og:title" content="Random sampling from a binomial posterior distribution, using weights — wbinpost" />
 <meta property="og:description" content="Samples from the posterior distribution of the probability \(p\)
 of a binomial distribution.  User-supplied weights are applied to each
 observation when constructing the log-likelihood." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -68,7 +71,7 @@ observation when constructing the log-likelihood." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6</span>
       </span>
     </div>
 
@@ -108,7 +111,6 @@ observation when constructing the log-likelihood." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes">
@@ -135,15 +137,13 @@ observation when constructing the log-likelihood." />
     </div>
 
     <div class="ref-description">
-    
     <p>Samples from the posterior distribution of the probability \(p\)
 of a binomial distribution.  User-supplied weights are applied to each
 observation when constructing the log-likelihood.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>wbinpost</span>(<span class='no'>n</span>, <span class='no'>prior</span>, <span class='no'>ds_bin</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -169,7 +169,7 @@ observation when constructing the log-likelihood.</p>
 </ul></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object (list) of class <code>"binpost"</code> with components</p><ul>
@@ -181,18 +181,15 @@ observation when constructing the log-likelihood.</p>
 <li><p><code>bin_logf_args</code>: A list of arguments to <code>bin_logf</code>.</p></li>
 </ul>
 
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For <code>prior$prior == "bin_beta"</code> the posterior for \(p\)
   is a beta distribution so <code><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></code> is used to
   sample from the posterior.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='set_bin_prior.html'>set_bin_prior</a></code> for setting a prior distribution
   for the binomial probability \(p\).</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>u</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span>(<span class='no'>gom</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fl'>0.65</span>)
@@ -205,13 +202,9 @@ observation when constructing the log-likelihood.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

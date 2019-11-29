@@ -8,10 +8,12 @@
 
 <title>Plot diagnostics for an evpost object — plot.evpost • revdbayes</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -32,8 +34,8 @@
 
 
 
-<meta property="og:title" content="Plot diagnostics for an evpost object — plot.evpost" />
 
+<meta property="og:title" content="Plot diagnostics for an evpost object — plot.evpost" />
 <meta property="og:description" content="plot method for class &quot;evpost&quot;.  For d = 1 a histogram of the
   simulated values is plotted with a the density function superimposed.
   The density is normalized crudely using the trapezium rule.  For
@@ -45,6 +47,7 @@
   simulations.  See MCMC-overview for details of these
   functions." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -75,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6</span>
       </span>
     </div>
 
@@ -115,7 +118,6 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes">
@@ -142,7 +144,6 @@
     </div>
 
     <div class="ref-description">
-    
     <p><code>plot</code> method for class "evpost".  For <code>d = 1</code> a histogram of the
   simulated values is plotted with a the density function superimposed.
   The density is normalized crudely using the trapezium rule.  For
@@ -153,16 +154,26 @@
   package that produce plots of Markov chain Monte Carlo (MCMC)
   simulations.  See <a href='https://mc-stan.org/bayesplot/reference/MCMC-overview.html'>MCMC-overview</a> for details of these
   functions.</p>
-    
     </div>
 
     <pre class="usage"><span class='co'># S3 method for evpost</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span>(<span class='no'>x</span>$<span class='no'>d</span> <span class='kw'>==</span> <span class='fl'>1</span>, <span class='fl'>1001</span>, <span class='fl'>101</span>),
-  <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.1</span>, <span class='fl'>0.25</span>, <span class='fl'>0.75</span>, <span class='fl'>0.95</span>, <span class='fl'>0.99</span>), <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>xlabs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylabs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>points_par</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>col</span> <span class='kw'>=</span>
-  <span class='fl'>8</span>), <span class='kw'>pu_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>add_pu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>use_bayesplot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>fun_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"areas"</span>, <span class='st'>"intervals"</span>, <span class='st'>"dens"</span>, <span class='st'>"hist"</span>, <span class='st'>"scatter"</span>))</pre>
-    
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(
+  <span class='no'>x</span>,
+  <span class='no'>y</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span>(<span class='no'>x</span>$<span class='no'>d</span> <span class='kw'>==</span> <span class='fl'>1</span>, <span class='fl'>1001</span>, <span class='fl'>101</span>),
+  <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.1</span>, <span class='fl'>0.25</span>, <span class='fl'>0.75</span>, <span class='fl'>0.95</span>, <span class='fl'>0.99</span>),
+  <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>xlabs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ylabs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>points_par</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>8</span>),
+  <span class='kw'>pu_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>add_pu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>use_bayesplot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>fun_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"areas"</span>, <span class='st'>"intervals"</span>, <span class='st'>"dens"</span>, <span class='st'>"hist"</span>, <span class='st'>"scatter"</span>)
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -250,26 +261,23 @@ with the initial <code>mcmc_</code> part removed.  See
 functions. Some examples are given below.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Nothing is returned unless <code>use_bayesplot = TRUE</code> when a
   ggplot object, which can be further customized using the
   <strong>ggplot2</strong> package, is returned.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For details of the <strong>bayesplot</strong> functions available when
   <code>use_bayesplot = TRUE</code> see <a href='https://mc-stan.org/bayesplot/reference/MCMC-overview.html'>MCMC-overview</a> and
   the <strong>bayesplot</strong> vignette
   <a href='https://CRAN.R-project.org/package=bayesplot'>Plotting MCMC draws</a>.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Jonah Gabry (2016). bayesplot: Plotting for Bayesian
 Models. R package version 1.1.0.
 <a href='https://CRAN.R-project.org/package=bayesplot'>https://CRAN.R-project.org/package=bayesplot</a></p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='summary.evpost.html'>summary.evpost</a></code> for summaries of the simulated values
@@ -277,7 +285,6 @@ Models. R package version 1.1.0.
 <p><code><a href='https://mc-stan.org/bayesplot/reference/MCMC-overview.html'>MCMC-overview</a></code>,
   <code><a href='https://mc-stan.org/bayesplot/reference/MCMC-intervals.html'>MCMC-intervals</a></code>,
   <code><a href='https://mc-stan.org/bayesplot/reference/MCMC-distributions.html'>MCMC-distributions</a></code>.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## GP posterior</span>
@@ -313,15 +320,10 @@ Models. R package version 1.1.0.
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

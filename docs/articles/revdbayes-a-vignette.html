@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@
       <h1>Introducing revdbayes: Ratio-of-Uniforms Sampling for Bayesian Extreme Value Analysis</h1>
                         <h4 class="author">Paul J. Northrop</h4>
             
-            <h4 class="date">2019-11-09</h4>
+            <h4 class="date">2019-11-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/master/vignettes/revdbayes-a-vignette.Rmd"><code>vignettes/revdbayes-a-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>revdbayes-a-vignette.Rmd</code></div>
@@ -169,13 +169,13 @@ gp4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rpost.h
                <span class="st">", time = "</span>, <span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(t4, <span class="dv">2</span>), <span class="st">"s"</span>))</code></pre></div>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-7-1.png" width="700"><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-7-2.png" width="700"><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-7-3.png" width="700"><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-7-4.png" width="700"></p>
 <p>Comparison of the plots on the right to the plots on the left shows that rotation of the parameter axes about the mode of the posterior has reduced dependence between the components. The estimated probabilities of acceptance for the plots on the right are close to the 0.534 obtained for a 2-dimensional normal distribution with independent components. Box-Cox transformation has increased the estimated value of <span class="math inline">\(p_a\)</span> but not by much. In fact, the extra computation time required to calculate the Box-Cox transformation each time that the posterior density is evaluated means that posterior sampling is slower than the default setting of <code>rotate = TRUE</code> and <code>trans = "none"</code>. That is, in this example at least, the increase is <span class="math inline">\(p_a\)</span> resulting from the addition of the Box-Cox transformation is not sufficient to offset the extra time needed to compute the posterior density.</p>
-<pre><code>#&gt; Warning in (function (logf, ..., n = 1, d = 1, init = NULL, trans =
-#&gt; c("none", : One or more convergence indicators are non-zero.
+<pre><code>#&gt; Warning in (function (logf, ..., n = 1, d = 1, init = NULL, trans = c("none", :
+#&gt; One or more convergence indicators are non-zero.
 #&gt;                box      vals1        vals2 conv
 #&gt; a        1.0000000  0.0000000  0.000000000    0
 #&gt; b1minus -0.4702123 -0.6881406 -0.009798245    0
 #&gt; b2minus -0.5005432  1.4939262 -0.826484913    0
-#&gt; b1plus   1.1543425  3.1506455 -1.257680739   52
+#&gt; b1plus   1.1383666  3.2009424 -1.257330147   52
 #&gt; b2plus   1.0506748  2.6525730  2.409230370    0</code></pre>
 <p>Repeating the rotation only and Box-Cox transformation plus rotation analyses for a much higher threshold, set at the 95% sample quantile, produces the following plots. Strong asymmetry in the posterior distribution means that the combination of marginal Box-Cox transformation and rotation produces a larger improvement in <span class="math inline">\(p_a\)</span> and means that now this strategy is competitive with using rotation alone in terms of computation time. Box-Cox transformation also produces a distribution for which the optimisations involved in the ratio-of-uniforms method will have greater stability.</p>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-9-1.png" width="700"><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-9-2.png" width="700"></p>
@@ -204,9 +204,9 @@ up &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set_prio
 gp_u &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rpost.html">rpost</a></span>(<span class="dt">n =</span> n, <span class="dt">model =</span> <span class="st">"gp"</span>, <span class="dt">prior =</span> up, <span class="dt">thresh =</span> thresh, <span class="dt">data =</span> gom)</code></pre></div>
 </div>
 </div>
-<div id="the-generalised-extreme-value-gev-model" class="section level2">
+<div id="generalised-extreme-value-gev-model" class="section level2">
 <h2 class="hasAnchor">
-<a href="#the-generalised-extreme-value-gev-model" class="anchor"></a>The Generalised Extreme Value (GEV) model</h2>
+<a href="#generalised-extreme-value-gev-model" class="anchor"></a>Generalised Extreme Value (GEV) model</h2>
 <p>We consider two examples involving the GEV distribution, which is used to model block maxima. The GEV distribution has three parameters: a location parameter <span class="math inline">\(\mu\)</span>, a scale parameter <span class="math inline">\(\sigma\)</span> and a shape parameter <span class="math inline">\(\xi\)</span>. In the first example we illustrate the use of <code>set_prior</code> to set a prior distribution for the GEV parameters and show that a prior set using <code>set_prior</code> (including user-defined prior) can be used as an argument to the evdbayes function <code>posterior</code>. In the second example we show that the reverse is also true, that is, a prior set using an evdbayes function (<code>prior.prob</code>) can be used an an argument to the revdbayes function <code>rpost</code>.</p>
 <div id="port-pirie-sea-level-data" class="section level3">
 <h3 class="hasAnchor">
@@ -217,7 +217,7 @@ mat &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/ba
 pn &lt;-<span class="st"> </span><span class="kw"><a href="../reference/set_prior.html">set_prior</a></span>(<span class="dt">prior =</span> <span class="st">"norm"</span>, <span class="dt">model =</span> <span class="st">"gev"</span>, <span class="dt">mean =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">cov =</span> mat)
 p1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rpost.html">rpost</a></span>(<span class="dt">n =</span> n, <span class="dt">model =</span> <span class="st">"gev"</span>, <span class="dt">prior =</span> pn, <span class="dt">data =</span> portpirie)
 p1<span class="op">$</span>pa
-<span class="co">#&gt; [1] 0.2981159</span></code></pre></div>
+<span class="co">#&gt; [1] 0.3022426</span></code></pre></div>
 <p>The proportion of accepted values is close to the best we can hope for in this 3-dimensional example, i.e. 0.316. The following plots illustrate the effect of <code>rotate = TRUE</code>. The plot on the left shows the simulated values of the GEV parameters. There is some association between the parameters <em>a posteriori</em>, albeit weak association. The plot on the right shows the values simulated on the scale used in the ratio-of-uniforms algorithm. The association has been reduced by rotating the parameter axes. The increase in the proportion of accepted values is only modest in this example (from approximately 0.26 to 0.30) but this improvement is more substantial in other examples.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(p1, <span class="dt">cex.main =</span> <span class="fl">0.75</span>, <span class="dt">cex.lab =</span> <span class="fl">0.75</span>, 
   <span class="dt">main =</span> <span class="st">"original scale"</span>)</code></pre></div>
@@ -315,25 +315,25 @@ rn0 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rpost.h
 <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(rn0)</code></pre></div>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rn0<span class="op">$</span>pa
-<span class="co">#&gt; [1] 0.1664475</span>
+<span class="co">#&gt; [1] 0.1665973</span>
 <span class="co"># Rotation about maximum a posteriori estimate (MAP)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(
 rn1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rpost.html">rpost</a></span>(<span class="dt">n =</span> n, <span class="dt">model =</span> <span class="st">"pp"</span>, <span class="dt">prior =</span> prrain, <span class="dt">data =</span> rainfall, 
   <span class="dt">thresh =</span> rthresh, <span class="dt">noy =</span> <span class="dv">54</span>)
 )
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;    1.68    0.00    1.67</span>
+<span class="co">#&gt;    1.94    0.00    1.94</span>
 <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(rn1, <span class="dt">ru_scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-19-2.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rn1<span class="op">$</span>pa
-<span class="co">#&gt; [1] 0.3074369</span></code></pre></div>
+<span class="co">#&gt; [1] 0.3057076</span></code></pre></div>
 <p>Using the <span class="citation">Wadsworth, Tawn, and Jonathan (2010)</span> parameterisation reduces the posterior dependence between <span class="math inline">\(\mu\)</span> and the other two parameters, but not between <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\xi\)</span> (plot on the left). Using the <span class="citation">Wadsworth, Tawn, and Jonathan (2010)</span> parameterisation and <code>rotate = TRUE</code> also reduces posterior dependence between all parameters but the earlier plot suggests that using <code>rotate = TRUE</code> alone is sufficient in this example.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Number of blocks = number of threshold excesses</span>
 n_exc &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(rainfall <span class="op">&gt;</span><span class="st"> </span>rthresh, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
 rn2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rpost.html">rpost</a></span>(<span class="dt">n =</span> n, <span class="dt">model =</span> <span class="st">"pp"</span>, <span class="dt">prior =</span> prrain, <span class="dt">data =</span> rainfall, 
   <span class="dt">thresh =</span> rthresh, <span class="dt">noy =</span> <span class="dv">54</span>, <span class="dt">use_noy =</span> <span class="ot">FALSE</span>, <span class="dt">rotate =</span> <span class="ot">FALSE</span>)
 rn2<span class="op">$</span>pa
-<span class="co">#&gt; [1] 0.195023</span>
+<span class="co">#&gt; [1] 0.1917472</span>
 <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(rn2, <span class="dt">ru_scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-20-1.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Number of blocks = number of threshold excesses, rotation about MAP</span>
@@ -342,11 +342,11 @@ rn3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rpost.h
   <span class="dt">thresh =</span> rthresh, <span class="dt">noy =</span> <span class="dv">54</span>, <span class="dt">use_noy =</span> <span class="ot">FALSE</span>)
 )
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;    2.11    0.00    2.11</span>
+<span class="co">#&gt;    2.81    0.00    2.83</span>
 <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(rn3, <span class="dt">ru_scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-20-2.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rn3<span class="op">$</span>pa
-<span class="co">#&gt; [1] 0.2965071</span></code></pre></div>
+<span class="co">#&gt; [1] 0.3002913</span></code></pre></div>
 <p>In this example rotation of the posterior about its mode using <code>rotate = TRUE</code> produces the greatest increases in <span class="math inline">\(p_a\)</span> and, if this is performed, there is little to choose between the two choices of the number of blocks. Setting the number of blocks equal to the number of threshold excesses does reduce posterior dependence between <span class="math inline">\(\mu\)</span> and the other parameters but enough dependence between <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\xi\)</span> remains that the value of <span class="math inline">\(p_a\)</span> doesn’t increase substantially. The reparameterisation resulting from the rotation is linear in the parameters <span class="math inline">\((\mu, \sigma, \xi)\)</span>, which is simpler than the non-linear transformation from one value of the number of blocks to another. Using this non-linear transformation in addition to the rotation has increased the computation time in this example, that is, <code>rn1</code> takes a little longer to produce than <code>rn3</code> and this is also the case for other choices of prior.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># evdbayes</span>
 t0 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">43.2</span>, <span class="fl">7.64</span>, <span class="fl">0.32</span>) 
@@ -413,12 +413,13 @@ osv &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rpost.h
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#generalised-pareto-gp-model">Generalised Pareto (GP) model</a></li>
-      <li><a href="#the-generalised-extreme-value-gev-model">The Generalised Extreme Value (GEV) model</a></li>
+      <li><a href="#generalised-extreme-value-gev-model">Generalised Extreme Value (GEV) model</a></li>
       <li><a href="#point-process-pp-model">Point Process (PP) model</a></li>
       <li><a href="#r-largest-order-statistics-os-model"><span class="math inline">\(r\)</span>-largest Order Statistics (OS) model</a></li>
       <li><a href="#references">References</a></li>

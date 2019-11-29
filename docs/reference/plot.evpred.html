@@ -8,10 +8,12 @@
 
 <title>Plot diagnostics for an evpred object — plot.evpred • revdbayes</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -32,8 +34,8 @@
 
 
 
-<meta property="og:title" content="Plot diagnostics for an evpred object — plot.evpred" />
 
+<meta property="og:title" content="Plot diagnostics for an evpred object — plot.evpred" />
 <meta property="og:description" content="plot method for class &quot;evpred&quot;.  Plots summarising the predictive
 distribution of the largest value to be observed in N years are produced.
 The plot produced depends on x$type.
@@ -47,6 +49,7 @@ If x$type = &quot;i&quot; then lines representing estimated predictive
 intervals are plotted, with the level of the interval indicated next to
 the line." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -77,7 +80,7 @@ the line." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6</span>
       </span>
     </div>
 
@@ -117,7 +120,6 @@ the line." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes">
@@ -144,7 +146,6 @@ the line." />
     </div>
 
     <div class="ref-description">
-    
     <p><code>plot</code> method for class "evpred".  Plots summarising the predictive
 distribution of the largest value to be observed in N years are produced.
 The plot produced depends on <code>x$type</code>.
@@ -157,13 +158,17 @@ If <code>x$type = "r"</code> then estimates of the predictive density
 If <code>x$type = "i"</code> then lines representing estimated predictive
 intervals are plotted, with the level of the interval indicated next to
 the line.</p>
-    
     </div>
 
     <pre class="usage"><span class='co'># S3 method for evpred</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>leg_pos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>leg_text</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>which_int</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"long"</span>, <span class='st'>"short"</span>, <span class='st'>"both"</span>))</pre>
-    
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(
+  <span class='no'>x</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>leg_pos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>leg_text</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>which_int</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"long"</span>, <span class='st'>"short"</span>, <span class='st'>"both"</span>)
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -194,12 +199,11 @@ intervals should be plotted?  <code>"long"</code> for equi-tailed intervals,
 both.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='predict.evpost.html'>predict.evpost</a></code> for the S3 <code>predict</code> method
  for objects of class <code>evpost</code>.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>portpirie</span>)
@@ -228,9 +232,7 @@ both.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

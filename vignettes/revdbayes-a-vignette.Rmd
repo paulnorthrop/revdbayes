@@ -274,7 +274,7 @@ up <- set_prior(prior = u_prior_fn, ab = c(2, 2), model = "gp")
 gp_u <- rpost(n = n, model = "gp", prior = up, thresh = thresh, data = gom)
 ```
 
-## The Generalised Extreme Value (GEV) model
+## Generalised Extreme Value (GEV) model
 
 We consider two examples involving the GEV distribution, which is used
 to model block maxima.  The GEV distribution has three parameters: a 

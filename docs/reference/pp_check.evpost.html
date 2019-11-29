@@ -8,10 +8,12 @@
 
 <title>Posterior predictive checks for an evpost object — pp_check.evpost • revdbayes</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -32,13 +34,14 @@
 
 
 
-<meta property="og:title" content="Posterior predictive checks for an evpost object — pp_check.evpost" />
 
+<meta property="og:title" content="Posterior predictive checks for an evpost object — pp_check.evpost" />
 <meta property="og:description" content="pp_check method for class &quot;evpost&quot;.  This provides an interface
 to the functions that perform posterior predictive checks in the
 bayesplot package.  See PPC-overview for
 details of these functions." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -69,7 +72,7 @@ details of these functions." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6</span>
       </span>
     </div>
 
@@ -109,7 +112,6 @@ details of these functions." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes">
@@ -136,19 +138,23 @@ details of these functions." />
     </div>
 
     <div class="ref-description">
-    
     <p><code>pp_check</code> method for class "evpost".  This provides an interface
 to the functions that perform posterior predictive checks in the
 <strong>bayesplot</strong> package.  See <a href='https://mc-stan.org/bayesplot/reference/PPC-overview.html'>PPC-overview</a> for
 details of these functions.</p>
-    
     </div>
 
     <pre class="usage"><span class='co'># S3 method for evpost</span>
-<span class='fu'>pp_check</span>(<span class='no'>object</span>, <span class='no'>...</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stat"</span>, <span class='st'>"overlaid"</span>,
-  <span class='st'>"multiple"</span>, <span class='st'>"intervals"</span>, <span class='st'>"user"</span>), <span class='kw'>subtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"median"</span>,
-  <span class='kw'>nrep</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+<span class='fu'>pp_check</span>(
+  <span class='no'>object</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stat"</span>, <span class='st'>"overlaid"</span>, <span class='st'>"multiple"</span>, <span class='st'>"intervals"</span>, <span class='st'>"user"</span>),
+  <span class='kw'>subtype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"median"</span>,
+  <span class='kw'>nrep</span> <span class='kw'>=</span> <span class='fl'>8</span>,
+  <span class='kw'>fun</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -214,12 +220,11 @@ The "ppc_" prefix can optionally be dropped if fun is specified
 as a string.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A ggplot object that can be further customized using the
   <strong>ggplot2</strong> package.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For details of these functions see <a href='https://mc-stan.org/bayesplot/reference/PPC-overview.html'>PPC-overview</a>.
@@ -247,7 +252,6 @@ as a string.</p></td>
   predictive checks that it is useful to perform.  In the examples below
   we have compared <code>object$data</code> and <code>object$data_rep</code> using
   only their sample maxima.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Jonah Gabry (2016). bayesplot: Plotting for Bayesian
@@ -256,7 +260,6 @@ Models. R package version 1.1.0.
 <p>Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B.,
 Vehtari, A., and Rubin, D. B. (2013). <em>Bayesian Data Analysis</em>.
 Chapman &amp; Hall/CRC Press, London, third edition. (Chapter 6)</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='rpost.html'>rpost</a></code> and <code><a href='rpost_rcpp.html'>rpost_rcpp</a></code> for sampling
@@ -266,7 +269,6 @@ Chapman &amp; Hall/CRC Press, London, third edition. (Chapter 6)</p>
   <a href='https://mc-stan.org/bayesplot/reference/PPC-test-statistics.html'>PPC-test-statistics</a>,
   <a href='https://mc-stan.org/bayesplot/reference/PPC-intervals.html'>PPC-intervals</a>,
   <a href='https://mc-stan.org/bayesplot/reference/pp_check.html'>pp_check</a>.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
@@ -314,15 +316,10 @@ Chapman &amp; Hall/CRC Press, London, third edition. (Chapter 6)</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

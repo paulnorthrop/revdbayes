@@ -8,10 +8,12 @@
 
 <title>Informative GEV prior on a probability scale — gev_prob • revdbayes</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -32,12 +34,13 @@
 
 
 
-<meta property="og:title" content="Informative GEV prior on a probability scale — gev_prob" />
 
+<meta property="og:title" content="Informative GEV prior on a probability scale — gev_prob" />
 <meta property="og:description" content="Constructs an informative prior for GEV parameters (\(\mu, \sigma, \xi\)),
 constructed on the probability scale. For information about how to set this
 prior see set_prior." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -68,7 +71,7 @@ prior see set_prior." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6</span>
       </span>
     </div>
 
@@ -108,7 +111,6 @@ prior see set_prior." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes">
@@ -135,16 +137,13 @@ prior see set_prior." />
     </div>
 
     <div class="ref-description">
-    
     <p>Constructs an informative prior for GEV parameters (\(\mu, \sigma, \xi\)),
 constructed on the probability scale. For information about how to set this
 prior see <code><a href='set_prior.html'>set_prior</a></code>.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>gev_prob</span>(<span class='no'>pars</span>, <span class='no'>quant</span>, <span class='no'>alpha</span>, <span class='kw'>min_xi</span> <span class='kw'>=</span> -<span class='fl'>Inf</span>, <span class='kw'>max_xi</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
-  <span class='kw'>trendsd</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>gev_prob</span>(<span class='no'>pars</span>, <span class='no'>quant</span>, <span class='no'>alpha</span>, <span class='kw'>min_xi</span> <span class='kw'>=</span> -<span class='fl'>Inf</span>, <span class='kw'>max_xi</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>trendsd</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -181,11 +180,10 @@ prior distribution for probabilities related to the quantiles in
 function in the evdbayes package.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The log of the prior density.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>A prior for GEV parameters \((\mu, \sigma, \xi)\),
@@ -202,7 +200,6 @@ function in the evdbayes package.</p></td>
   probabilities
   <a href='https://doi.org/10.1111/rssc.12159'>(Northrop et al., 2017)</a>.
   See these publications for details.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Crowder, M. (1992) Bayesian priors based on parameter
@@ -219,7 +216,6 @@ function in the evdbayes package.</p></td>
   modelling.  In <em>Extreme Value Modeling and Risk Analysis: Methods
   and Applications</em> (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
   London. <a href='https://doi.org/10.1201/b19721'>https://doi.org/10.1201/b19721</a>.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='set_prior.html'>set_prior</a></code> for setting a prior distribution.</p>
@@ -227,22 +223,17 @@ function in the evdbayes package.</p></td>
   from an extreme value posterior distribution.</p>
 <p>Sets the same prior as the function
   <code>prior.prob</code> in the evdbayes package.</p></div>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>
