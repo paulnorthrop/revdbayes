@@ -1,4 +1,4 @@
-# revdbayes 1.3.5.9000
+# revdbayes 1.3.6
 
 ## Bug fixes and minor improvements
 
