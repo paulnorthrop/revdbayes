@@ -14,11 +14,6 @@ bibliography: revdbayes.bib
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
-
-required <- c("stringr")
-
-if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
-  knitr::opts_chunk$set(eval = FALSE)
 ```
 
 The models considered in the [Introducing revdbayes](revdbayes-a-vignette.html) vignette are based on the assumption that observations of a (univariate) quantity of interest can be treated as independent and identically distributed (iid) variates.  In many instances these assumptions are unrealistic.  In this vignette we consider the situation when it is not reasonable to make the former assumption, that is, temporal dependence is present.  In this circumstance a key issue is the strength of dependence between extreme events.  Under conditions that preclude dependence between extreme events that occur far apart in time, the effect of dependence is local in time, resulting in a tendency for extreme to a occur in clusters.  The most common measure of the strength of local extremal dependence is the *extremal index* $\theta$.  For a review of theory and methods for time series extremes see @CDD2012.
