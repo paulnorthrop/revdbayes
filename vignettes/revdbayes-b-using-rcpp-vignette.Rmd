@@ -14,6 +14,11 @@ bibliography: revdbayes.bib
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
+
+required <- c("stringr")
+
+if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
+  knitr::opts_chunk$set(eval = FALSE)
 ```
 
 This vignette introduces a new feature of *revdbayes*: reducing posterior simulation time by performing the most time-consuming tasks using C++ functions.  This achieved using a new facility in the *rust* package [@rust], which in turn uses the **Rcpp** package [@Rcpp, @RcppDEbook]. The result is a new function `rpost_rcpp`, which has the same structure as the existing function `rpost`.  From a user's perspective the only difference between these two functions occurs if they wish to supply their own prior distribution: `rpost_rcpp` requires an external pointer to a C++ function (see [Providing a user-defined prior](#cpp_fun)), whereas `rpost` requires an input R function (see the vignette

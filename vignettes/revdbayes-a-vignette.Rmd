@@ -15,7 +15,7 @@ bibliography: revdbayes.bib
 ```{r, include = FALSE}
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 
-required <- c("evdbayes")
+required <- c("evdbayes", "stringr")
 
 if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
   knitr::opts_chunk$set(eval = FALSE)
