@@ -68,7 +68,6 @@
 #'   \url{https://doi.org/10.1214/09-AOAS292}
 #' @references Attalides, N. (2015) Threshold-based extreme value modelling,
 #'   PhD thesis, University College London.
-#'   \url{http://discovery.ucl.ac.uk/1471121/1/Nicolas_Attalides_Thesis.pdf}
 #' @seealso \code{\link{kgaps_mle}} for maximum likelihood estimation of the
 #'   extremal index \eqn{\theta} using the K-gaps model.
 #' @seealso \code{\link{kgaps_stats}} for the calculation of sufficient
@@ -194,7 +193,6 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE,
 #'   \url{https://doi.org/10.1214/09-AOAS292}
 #' @references Attalides, N. (2015) Threshold-based extreme value modelling,
 #'   PhD thesis, University College London.
-#'   \url{http://discovery.ucl.ac.uk/1471121/1/Nicolas_Attalides_Thesis.pdf}
 #' @return A list containing
 #'   \itemize{
 #'     \item {\code{theta_mle} : } {The maximum likelihood estimate (MLE) of
@@ -311,7 +309,6 @@ kgaps_mle <- function(data, thresh, k = 1, inc_cens = FALSE, conf = NULL) {
 #'   \url{https://doi.org/10.1214/09-AOAS292}
 #' @references Attalides, N. (2015) Threshold-based extreme value modelling,
 #'   PhD thesis, University College London.
-#'   \url{http://discovery.ucl.ac.uk/1471121/1/Nicolas_Attalides_Thesis.pdf}
 #' @seealso \code{\link{kgaps_mle}} for maximum likelihood estimation of the
 #'   extremal index \eqn{\theta} using the K-gaps model.
 #' @examples
