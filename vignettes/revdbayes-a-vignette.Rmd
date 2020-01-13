@@ -72,7 +72,7 @@ these analyses.
 
 The ratio-of-uniforms method is an acceptance-rejection type of simulation
 algorithm.  A crude measure of the efficiency of the algorithm is the 
-probability $p_a$ that a proposed value is accepted.  In the rust package 
+probability $p_a$ that a proposed value is accepted.  In the *rust* package 
 [@rust] variable transformation is used to increase $p_a$. In the current 
 context two transformations are of interest: (i) marginal Box-Cox 
 transformation of (positive functions of) extreme value parameters (using 
@@ -88,7 +88,7 @@ mode of the posterior to the origin, because this tends to increase the
 probability of acceptance [@WGS1991].
 
 For details of the ratio-of-uniforms method and the transformations used see 
-the vignette of the rust package [@rust].  In the **rust* vignette it 
+the vignette of the *rust* package [@rust].  In the *rust* vignette it 
 is argued that the largest attainable value of $p_a$ for a typical 
 $d$-dimensional problem is the value resulting from the special case of a
 $d$-dimensional normal distribution with independent components.  For $d=2$ 
