@@ -37,7 +37,12 @@ constructed on the quantile scale.  For information about how to set this
 prior see \code{\link{set_prior}}.
 }
 \details{
+See Coles and Tawn (1996) and/or Stephenson (2016) for details.
 
+  Note that the lower end point of the distribution of the distribution
+  of the variable in question is assumed to be equal to zero.
+  If this is not the case then the user should shift the data to
+  ensure that this is true.
 }
 \references{
 Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of

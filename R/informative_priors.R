@@ -127,7 +127,7 @@ gev_prob <- function(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
 #' @param trendsd  Has no function other than to achieve compatibility with
 #'   function in the evdbayes package.
 #' @return The log of the prior density.
-#' @details See Coles and Tawn (1996)} and/or Stephenson (2016) for details.
+#' @details See Coles and Tawn (1996) and/or Stephenson (2016) for details.
 #'
 #'   Note that the lower end point of the distribution of the distribution
 #'   of the variable in question is assumed to be equal to zero.
