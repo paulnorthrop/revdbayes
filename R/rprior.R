@@ -25,10 +25,7 @@
 #'   in the specification of \code{lb}.  Must be in (0,1).  If \code{lb=NULL}
 #'   then \code{lb_prob} is not used.
 #' @details The simulation is based on the way that the prior is constructed.
-#'   See
-#'   \href{https://doi.org/10.2307/2986068}{Coles and Tawn (1996)},
-#'   \href{https://doi.org/10.1201/b19721}{Stephenson (1996)}
-#'   or the evdbayes user guide
+#'   See Coles and Tawn (1996), Stephenson (2016) or the evdbayes user guide
 #'   for details of the construction of the prior. First, the quantile
 #'   differences are simulated from the specified gamma distributions.
 #'   Then the simulated quantiles are calculated. Then the GEV location,
@@ -47,7 +44,6 @@
 #'   from an extreme value posterior distribution.
 #' @references Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
 #'   extreme rainfall data. \emph{Appl. Statist.}, \strong{45}, 463-478.
-#'   \url{https://doi.org/10.2307/2986068}.
 #' @references Stephenson, A. 2016. Bayesian Inference for Extreme Value
 #'   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
 #'   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:

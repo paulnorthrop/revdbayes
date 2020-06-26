@@ -6,19 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inference for the extremal index using the K-gaps model • revdbayes</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Inference for the extremal index using the K-gaps model">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="revdbayes">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7</span>
       </span>
     </div>
 
@@ -73,7 +73,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/paulnorthrop/revdbayes">
+  <a href="http://github.com/paulnorthrop/revdbayes/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -91,12 +91,12 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Inference for the extremal index using the K-gaps model</h1>
+      <h1 data-toc-skip>Inference for the extremal index using the K-gaps model</h1>
                         <h4 class="author">Paul J. Northrop</h4>
             
-            <h4 class="date">2019-11-30</h4>
+            <h4 class="date">2020-06-26</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/master/vignettes/revdbayes-d-kgaps-vignette.Rmd"><code>vignettes/revdbayes-d-kgaps-vignette.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="http://github.com/paulnorthrop/revdbayes/blob/master/vignettes/revdbayes-d-kgaps-vignette.Rmd"><code>vignettes/revdbayes-d-kgaps-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>revdbayes-d-kgaps-vignette.Rmd</code></div>
 
     </div>
@@ -114,25 +114,25 @@
 <h2 class="hasAnchor">
 <a href="#maximum-likelihood-estimation" class="anchor"></a>Maximum likelihood estimation</h2>
 <p>The function <code>kgaps_mle</code> finds the maximum likelihood estimate and its estimated standard error and (optionally) a <code>conf</code>% level likelihood-based confidence interval for <span class="math inline">\(\theta\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(revdbayes)
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">revdbayes</span>)
 <span class="co"># Set a threshold at the 90% quantile</span>
-thresh &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(newlyn, <span class="dt">probs =</span> <span class="fl">0.90</span>)
+<span class="no">thresh</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">newlyn</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fl">0.90</span>)
 <span class="co"># MLE, SE and 95% likelihood-based confidence interval</span>
-mle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/kgaps_mle.html">kgaps_mle</a></span>(newlyn, thresh, <span class="dt">conf =</span> <span class="dv">95</span>)
-mle<span class="op">$</span>theta_mle
+<span class="no">mle</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/kgaps_mle.html">kgaps_mle</a></span>(<span class="no">newlyn</span>, <span class="no">thresh</span>, <span class="kw">conf</span> <span class="kw">=</span> <span class="fl">95</span>)
+<span class="no">mle</span>$<span class="no">theta_mle</span>
 <span class="co">#&gt; [1] 0.3779466</span>
-mle<span class="op">$</span>theta_se
+<span class="no">mle</span>$<span class="no">theta_se</span>
 <span class="co">#&gt; [1] 0.02275285</span>
-mle<span class="op">$</span>theta_ci
-<span class="co">#&gt; [1] 0.3344465 0.4235232</span></code></pre></div>
+<span class="no">mle</span>$<span class="no">theta_ci</span>
+<span class="co">#&gt; [1] 0.3344465 0.4235232</span></pre></body></html></div>
 </div>
 <div id="bayesian-inference" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bayesian-inference" class="anchor"></a>Bayesian Inference</h2>
 <p>The function <code>kgaps_post</code> simulates a random sample from the posterior distribution of <span class="math inline">\(\theta\)</span> based on a Beta(<span class="math inline">\(\alpha, \beta\)</span>) prior. The use can choose the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. The default setting is <span class="math inline">\(\alpha = \beta = 1\)</span>, that is, a U(0,1) prior for <span class="math inline">\(\theta\)</span>. See <span class="citation">Attalides (2015)</span> for further information and for a methods for selecting the value of the threshold in this situation. The plot produced below is is histogram of the sample from the posterior with the posterior density superimposed.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">thresh &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(newlyn, <span class="dt">probs =</span> <span class="fl">0.90</span>)
-postsim &lt;-<span class="st"> </span><span class="kw"><a href="../reference/kgaps_post.html">kgaps_post</a></span>(newlyn, thresh)
-<span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(postsim, <span class="dt">xlab =</span> <span class="kw"><a href="https://rdrr.io/r/base/expression.html">expression</a></span>(theta))</code></pre></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">thresh</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">newlyn</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fl">0.90</span>)
+<span class="no">postsim</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/kgaps_post.html">kgaps_post</a></span>(<span class="no">newlyn</span>, <span class="no">thresh</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">postsim</span>, <span class="kw">xlab</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span>(<span class="no">theta</span>))</pre></body></html></div>
 <p><img src="revdbayes-d-kgaps-vignette_files/figure-html/unnamed-chunk-3-1.png" width="480" style="display: block; margin: auto;"></p>
 </div>
 <div id="references" class="section level2">
@@ -145,34 +145,26 @@ postsim &lt;-<span class="st"> </span><span class="kw"><a href="../reference/kga
 <p>Attalides, N. 2015. “Threshold-Based Extreme Value Modelling.” PhD thesis, University College London.</p>
 </div>
 <div id="ref-CDD2012">
-<p>Chavez-Demoulin, V., and A. C. Davison. 2012. “Modelling Time Series Extremes.” <em>REVSTAT-Statistical Journal</em> 10 (1): 109–33. <a href="https://www.ine.pt/revstat/pdf/rs120105.pdf" class="uri">https://www.ine.pt/revstat/pdf/rs120105.pdf</a>.</p>
+<p>Chavez-Demoulin, V., and A. C. Davison. 2012. “Modelling Time Series Extremes.” <em>REVSTAT-Statistical Journal</em> 10 (1): 109–33. <a href="https://www.ine.pt/revstat/pdf/rs120105.pdf">https://www.ine.pt/revstat/pdf/rs120105.pdf</a>.</p>
 </div>
 <div id="ref-FW2012">
-<p>Fawcett, L., and D. Walshaw. 2012. “Estimating Return Levels from Serially Dependent Extremes.” <em>Environmetrics</em> 23 (3): 272–83. doi:<a href="https://doi.org/10.1002/env.2133">10.1002/env.2133</a>.</p>
+<p>Fawcett, L., and D. Walshaw. 2012. “Estimating Return Levels from Serially Dependent Extremes.” <em>Environmetrics</em> 23 (3): 272–83. <a href="https://doi.org/10.1002/env.2133">https://doi.org/10.1002/env.2133</a>.</p>
 </div>
 <div id="ref-FS2003">
-<p>Ferro, C. A. T., and J. Segers. 2003. “Inference for Clusters of Extreme Values.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 65 (2). Blackwell Publishing: 545–56. doi:<a href="https://doi.org/10.1111/1467-9868.00401">10.1111/1467-9868.00401</a>.</p>
+<p>Ferro, C. A. T., and J. Segers. 2003. “Inference for Clusters of Extreme Values.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 65 (2): 545–56. <a href="https://doi.org/10.1111/1467-9868.00401">https://doi.org/10.1111/1467-9868.00401</a>.</p>
 </div>
 <div id="ref-SD2010">
-<p>Süveges, M., and A. C. Davison. 2010. “Model Misspecification in Peaks over Threshold Analysis.” <em>The Annals of Applied Statistics</em> 4 (1): 203–21. doi:<a href="https://doi.org/10.1214/09-AOAS292">10.1214/09-AOAS292</a>.</p>
+<p>Süveges, M., and A. C. Davison. 2010. “Model Misspecification in Peaks over Threshold Analysis.” <em>The Annals of Applied Statistics</em> 4 (1): 203–21. <a href="https://doi.org/10.1214/09-AOAS292">https://doi.org/10.1214/09-AOAS292</a>.</p>
 </div>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#k-gaps-model">K-gaps model</a></li>
-      <li><a href="#maximum-likelihood-estimation">Maximum likelihood estimation</a></li>
-      <li><a href="#bayesian-inference">Bayesian Inference</a></li>
-      <li><a href="#references">References</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -183,7 +175,7 @@ postsim &lt;-<span class="st"> </span><span class="kw"><a href="../reference/kga
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

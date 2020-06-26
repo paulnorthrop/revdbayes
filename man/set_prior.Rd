@@ -245,7 +245,6 @@ Castellanos, E. M. and Cabras, S. (2007) A default Bayesian
 
 Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
   extreme rainfall data. \emph{Appl. Statist.}, \strong{45}, 463-478.
-  \url{https://doi.org/10.2307/2986068}.
 
 Crowder, M. (1992) Bayesian priors based on parameter
   transformation using the distribution function

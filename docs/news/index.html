@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -53,7 +57,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -67,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7</span>
       </span>
     </div>
 
@@ -109,7 +113,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/paulnorthrop/revdbayes">
+  <a href="http://github.com/paulnorthrop/revdbayes/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -127,38 +131,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/paulnorthrop/revdbayes/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='http://github.com/paulnorthrop/revdbayes/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="revdbayes-1-3-6" class="section level1">
-<h1 class="page-header">
-<a href="#revdbayes-1-3-6" class="anchor"></a>revdbayes 1.3.6<small> Unreleased </small>
+    <div id="revdbayes-137" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.7">
+<a href="#revdbayes-137" class="anchor"></a>revdbayes 1.3.7<small> Unreleased </small>
 </h1>
 <div id="bug-fixes-and-minor-improvements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes-and-minor-improvements" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
-<li><p>Use <code><a href="https://rdrr.io/r/base/class.html">inherits()</a></code> to check the class of objects returned from <code><a href="https://rdrr.io/r/base/try.html">try()</a></code>, rather than <code><a href="https://rdrr.io/r/base/class.html">class()</a></code>.</p></li>
-<li><p>pkgdown documentation at <a href="https://paulnorthrop.github.io/revdbayes/" class="uri">https://paulnorthrop.github.io/revdbayes/</a></p></li>
+<li>Fixed a bug in <code>dgp</code> that produced an incorrect value for the log-density (<code>log = TRUE</code>) when <code>shape</code> is negative and very close to zero and <code>x = -1/shape</code>.</li>
 </ul>
 </div>
 </div>
-    <div id="revdbayes-1-3-5" class="section level1">
-<h1 class="page-header">
-<a href="#revdbayes-1-3-5" class="anchor"></a>revdbayes 1.3.5<small> 2019-11-04 </small>
+    <div id="revdbayes-136" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.6">
+<a href="#revdbayes-136" class="anchor"></a>revdbayes 1.3.6<small> 2019-12-02 </small>
 </h1>
 <div id="bug-fixes-and-minor-improvements-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes-and-minor-improvements-1" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
+<li><p>Use <code><a href="https://rdrr.io/r/base/class.html">inherits()</a></code> to check the class of objects returned from <code><a href="https://rdrr.io/r/base/try.html">try()</a></code>, rather than <code><a href="https://rdrr.io/r/base/class.html">class()</a></code>.</p></li>
+<li><p>pkgdown documentation at <a href="https://paulnorthrop.github.io/revdbayes/">https://paulnorthrop.github.io/revdbayes/</a></p></li>
+</ul>
+</div>
+</div>
+    <div id="revdbayes-135" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.5">
+<a href="#revdbayes-135" class="anchor"></a>revdbayes 1.3.5<small> 2019-11-04 </small>
+</h1>
+<div id="bug-fixes-and-minor-improvements-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-and-minor-improvements-2" class="anchor"></a>Bug fixes and minor improvements</h2>
+<ul>
 <li>The d/p/q function for the GEV and GP distributions now handle correctly cases where the input has length 0 and/or is <code>NA</code> and inputs <code>Inf</code> and <code>-Inf</code>.</li>
 </ul>
 </div>
 </div>
-    <div id="revdbayes-1-3-4" class="section level1">
-<h1 class="page-header">
-<a href="#revdbayes-1-3-4" class="anchor"></a>revdbayes 1.3.4<small> 2019-06-21 </small>
+    <div id="revdbayes-134" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.4">
+<a href="#revdbayes-134" class="anchor"></a>revdbayes 1.3.4<small> 2019-06-21 </small>
 </h1>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
@@ -167,9 +183,9 @@
 <li>In <code><a href="../reference/set_bin_prior.html">set_bin_prior()</a></code> the user can specify their own prior for the binomial probability, by providing an R function.</li>
 </ul>
 </div>
-<div id="bug-fixes-and-minor-improvements-2" class="section level2">
+<div id="bug-fixes-and-minor-improvements-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-2" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-3" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>In <code><a href="../reference/rpost.html">rpost()</a></code> and <code><a href="../reference/rpost_rcpp.html">rpost_rcpp()</a></code> an error is thrown if the prior and the model are not compatible. Previously a warning was given.</p></li>
 <li><p>The penultimate example in the documentation for <code><a href="../reference/set_prior.html">set_prior()</a></code> has been corrected by adding <code>model = "gp".  The default</code>model = “gev”` is not appropriate here because the prior is set up for the GP model.</p></li>
@@ -177,13 +193,13 @@
 </ul>
 </div>
 </div>
-    <div id="revdbayes-1-3-3" class="section level1">
-<h1 class="page-header">
-<a href="#revdbayes-1-3-3" class="anchor"></a>revdbayes 1.3.3<small> 2019-03-08 </small>
+    <div id="revdbayes-133" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.3">
+<a href="#revdbayes-133" class="anchor"></a>revdbayes 1.3.3<small> 2019-03-08 </small>
 </h1>
-<div id="bug-fixes-and-minor-improvements-3" class="section level2">
+<div id="bug-fixes-and-minor-improvements-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-3" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-4" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>LF line endings used in inst/include/revdbayes.h and inst/include/revdbayes_RcppExports.h to avoid CRAN NOTE.</p></li>
 <li><p>The format of the <code>data</code> supplied to <code><a href="../reference/rpost.html">rpost()</a></code> and <code><a href="../reference/rpost_rcpp.html">rpost_rcpp()</a></code> is checked and an error is thrown if it is not appropriate.</p></li>
@@ -196,13 +212,13 @@
 </ul>
 </div>
 </div>
-    <div id="revdbayes-1-3-2" class="section level1">
-<h1 class="page-header">
-<a href="#revdbayes-1-3-2" class="anchor"></a>revdbayes 1.3.2<small> 2018-02-12 </small>
+    <div id="revdbayes-132" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.2">
+<a href="#revdbayes-132" class="anchor"></a>revdbayes 1.3.2<small> 2018-02-12 </small>
 </h1>
-<div id="bug-fixes-and-minor-improvements-4" class="section level2">
+<div id="bug-fixes-and-minor-improvements-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-4" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-5" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>The arguments to <code>d/p/q/rgev</code> and <code>d/p/q/rgp</code> now obey the usual conventions for R’s dpqr probability distribution functions.</p></li>
 <li><p>In <code>pp_check.evpost</code> the argument <code>subtype</code> is now documented properly.</p></li>
@@ -210,9 +226,9 @@
 </ul>
 </div>
 </div>
-    <div id="revdbayes-1-3-1" class="section level1">
-<h1 class="page-header">
-<a href="#revdbayes-1-3-1" class="anchor"></a>revdbayes 1.3.1<small> 2017-11-01 </small>
+    <div id="revdbayes-131" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.1">
+<a href="#revdbayes-131" class="anchor"></a>revdbayes 1.3.1<small> 2017-11-01 </small>
 </h1>
 <div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
@@ -222,9 +238,9 @@
 <li><p>New vignette: “Inference for the extremal index using the K-gaps model”.</p></li>
 </ul>
 </div>
-<div id="bug-fixes-and-minor-improvements-5" class="section level2">
+<div id="bug-fixes-and-minor-improvements-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-5" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-6" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>Added the attribute <code><a href="https://rdrr.io/r/base/attr.html">attr(gom, "npy")</a></code> (with value 3) to the <code>gom</code> dataset. This is for compatability with the <strong>threshr</strong> package.</p></li>
 <li><p>Give an explicit error message if <code>plot.evpost</code> is called with the logically incompatible arguments <code>add_pu = TRUE</code> and <code>pu_only = TRUE</code>.</p></li>
@@ -232,13 +248,13 @@
 </ul>
 </div>
 </div>
-    <div id="revdbayes-1-2-1" class="section level1">
-<h1 class="page-header">
-<a href="#revdbayes-1-2-1" class="anchor"></a>revdbayes 1.2.1<small> 2017-08-21 </small>
+    <div id="revdbayes-121" class="section level1">
+<h1 class="page-header" data-toc-text="1.2.1">
+<a href="#revdbayes-121" class="anchor"></a>revdbayes 1.2.1<small> 2017-08-21 </small>
 </h1>
-<div id="bug-fixes-and-minor-improvements-6" class="section level2">
+<div id="bug-fixes-and-minor-improvements-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-6" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-7" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>In some extreme cases (datasets with very small numbers of threshold excesses) calling <code>predict.evpost</code> with <code>type = "q"</code> and <code>x</code> close to 1 returns an imprecise value for the requested predictive quantiles. This has been corrected by using <code><a href="https://rdrr.io/r/stats/uniroot.html">stats::uniroot</a></code> rather than <code><a href="https://rdrr.io/r/stats/nlminb.html">stats::nlminb</a></code>.</p></li>
 <li><p>A bug (missing <code>drop = FALSE</code> in subsetting a matrix) in <code>plot.evpred</code> produced an error message if <code>n_years</code> was scalar in the prior call to <code>predict.evpost</code>. This bug has been corrected.</p></li>
@@ -247,9 +263,9 @@
 </ul>
 </div>
 </div>
-    <div id="revdbayes-1-2-0" class="section level1">
-<h1 class="page-header">
-<a href="#revdbayes-1-2-0" class="anchor"></a>revdbayes 1.2.0<small> 2017-07-14 </small>
+    <div id="revdbayes-120" class="section level1">
+<h1 class="page-header" data-toc-text="1.2.0">
+<a href="#revdbayes-120" class="anchor"></a>revdbayes 1.2.0<small> 2017-07-14 </small>
 </h1>
 <div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
@@ -261,9 +277,9 @@
 <li><p><code>set_prior</code> has been extended so that informative priors for GEV parameters can be specified using the arguments <code>prior = "prob"</code> or <code>prior = "quant"</code>. It is no longer necessary to use the functions <code>prior.prob</code> and <code>prior.quant</code> from the evdbayes package to set these priors.</p></li>
 </ul>
 </div>
-<div id="bug-fixes-and-minor-improvements-7" class="section level2">
+<div id="bug-fixes-and-minor-improvements-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-7" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-8" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>The list returned from <code>set_prior</code> now contains default values for all the required arguments of a given in-built prior, if these haven’t been specified by the user. This simplifies the evaluation of prior densities using C++.</p></li>
 <li><p>The GEV functions <code>dgev</code>, <code>pgev</code>, <code>qgev</code>, <code>rgev</code> and the GP functions <code>dgp</code>, <code>pgp</code>, <code>qgp</code>, <code>rgp</code> have been rewritten to conform with the vectorised style of the standard functions for distributions, e.g. those found at <code><a href="https://rdrr.io/r/stats/Normal.html">?Normal</a></code>. This makes these functions more flexible, but also means that the user take care when calling them with vectors arguments or different lengths.</p></li>
@@ -276,9 +292,9 @@
 </ul>
 </div>
 </div>
-    <div id="revdbayes-1-1-0" class="section level1">
-<h1 class="page-header">
-<a href="#revdbayes-1-1-0" class="anchor"></a>revdbayes 1.1.0<small> 2017-03-14 </small>
+    <div id="revdbayes-110" class="section level1">
+<h1 class="page-header" data-toc-text="1.1.0">
+<a href="#revdbayes-110" class="anchor"></a>revdbayes 1.1.0<small> 2017-03-14 </small>
 </h1>
 <div id="new-features-3" class="section level2">
 <h2 class="hasAnchor">
@@ -286,7 +302,7 @@
 <ul>
 <li><p>A new vignette (Posterior Predictive Extreme Value Inference using the revdbayes Package) provides an overview of most of the new features. Run browseVignettes(“revdbayes”) to access.</p></li>
 <li><p>S3 <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> method for class ‘evpost’ performs predictive inference about the largest observation observed in N years, returning an object of class <code>evpred</code>.</p></li>
-<li><p>S3 <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code> for the <code>evpred</code> object returned by <code>predict.evpost</code>.</p></li>
+<li><p>S3 <code><a href="https://rdrr.io/r/base/plot.html">plot()</a></code> for the <code>evpred</code> object returned by <code>predict.evpost</code>.</p></li>
 <li><p>S3 <code><a href="../reference/pp_check.evpost.html">pp_check()</a></code> method for class ‘evpost’ performs posterior predictive checks using the bayesplot package.</p></li>
 <li><p>Interface to the bayesplot package added in the S3 <code>plot.evpost</code> method.</p></li>
 <li><p><code>model = bingp</code> can now be supplied to <code><a href="../reference/rpost.html">rpost()</a></code> to add inferences about the probability of threshold exceedance to inferences about threshold excesses based on the Generalised Pareto (GP) model. <code><a href="../reference/set_bin_prior.html">set_bin_prior()</a></code> can be used to set a prior for this probability.</p></li>
@@ -294,9 +310,9 @@
 <li><p><code>prior_prob()</code>: to simulate from the prior distribution for GEV parameters based on Crowder (1992), in which independent beta priors are specified for ratios of probabilities (which is equivalent to a Dirichlet prior on differences between these probabilities).</p></li>
 </ul>
 </div>
-<div id="bug-fixes-and-minor-improvements-8" class="section level2">
+<div id="bug-fixes-and-minor-improvements-9" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-8" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-9" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>The spurious warning messages relating to checking that the model argument to <code><a href="../reference/rpost.html">rpost()</a></code> is consistent with the prior set using <code>set-prior()</code> have been corrected. These occurred when <code>model = "pp"</code> or <code>model = "os"</code>.</p></li>
 <li><p>The hyperparameter in the MDI prior was <code>a</code> in the documentation and <code>a_mdi</code> in the code. Now it is <code>a</code> everywhere.</p></li>
@@ -308,21 +324,10 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#revdbayes-1-3-6">1.3.6</a></li>
-        <li><a href="#revdbayes-1-3-5">1.3.5</a></li>
-        <li><a href="#revdbayes-1-3-4">1.3.4</a></li>
-        <li><a href="#revdbayes-1-3-3">1.3.3</a></li>
-        <li><a href="#revdbayes-1-3-2">1.3.2</a></li>
-        <li><a href="#revdbayes-1-3-1">1.3.1</a></li>
-        <li><a href="#revdbayes-1-2-1">1.2.1</a></li>
-        <li><a href="#revdbayes-1-2-0">1.2.0</a></li>
-        <li><a href="#revdbayes-1-1-0">1.1.0</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -334,7 +339,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

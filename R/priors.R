@@ -222,7 +222,6 @@
 #'   473-483. \url{https://doi.org/10.1016/j.jspi.2006.01.006}.
 #' @references Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
 #'   extreme rainfall data. \emph{Appl. Statist.}, \strong{45}, 463-478.
-#'   \url{https://doi.org/10.2307/2986068}.
 #' @references Crowder, M. (1992) Bayesian priors based on parameter
 #'   transformation using the distribution function
 #'   \emph{Ann. Inst. Statist. Math.}, \strong{44}, 405-416.
