@@ -28,8 +28,8 @@ r:
 
 env:
 #  - COMPILER=gcc-4.9
-  - COMPILER=gcc
-#  - COMPILER=clang
+#  - COMPILER=gcc
+  - COMPILER=clang
 
 r_packages:
   - covr
