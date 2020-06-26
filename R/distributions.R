@@ -301,7 +301,7 @@ dgp <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE) {
   x <- ifelse(x < 0 | xx < 0 | is.infinite(x), -Inf,
               ifelse(xx == 0 & shape == -1, 0,
                      ifelse(xx == 0 & shape < -1, Inf,
-                            ifelse(xx == 0 & shape < 0, -Inf,
+                            ifelse(xx == 0, -Inf,
                                    ifelse(abs(shape) > 1e-6,
                                           -(1 + 1 / shape) * logNegNA(xx),
                                           -x + shape * x * (x - 2) / 2)))))
