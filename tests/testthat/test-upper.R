@@ -33,7 +33,7 @@ n <- 1000
 # Sample from a half-normal distribution
 x <- abs(rnorm(10000))
 # Threshold
-thresh <- quantile(x, probs = 0.7)
+thresh <- stats::quantile(x, probs = 0.7)
 
 for (i in 1:length(lambda_vec)) {
   # Box-Cox transform: data and threshold

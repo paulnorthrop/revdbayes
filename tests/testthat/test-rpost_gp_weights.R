@@ -6,7 +6,7 @@ context("GP rpost: weights vs no weights")
 # Set a tolerance for the comparison of the simulated values
 my_tol <- 1e-5
 
-u <- quantile(gom, probs = 0.65)
+u <- stats::quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 set.seed(14092019)
 res1 <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = gom)

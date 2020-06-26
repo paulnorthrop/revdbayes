@@ -28,7 +28,7 @@ test_function <- function(x, test_string) {
 }
 
 # Set a threshold
-thresh <- quantile(newlyn, probs = 0.90)
+thresh <- stats::quantile(newlyn, probs = 0.90)
 
 x <- kgaps_test(data = newlyn, thresh = thresh)
 test_function(x, "inc_cens = TRUE, param = logit")

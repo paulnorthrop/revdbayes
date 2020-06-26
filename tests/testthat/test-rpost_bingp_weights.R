@@ -6,7 +6,7 @@ context("binGP rpost: weights vs no weights")
 # Set a tolerance for the comparison of the simulated values
 my_tol <- 1e-5
 
-u <- quantile(gom, probs = 0.65)
+u <- stats::quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 bp <- set_bin_prior(prior = "jeffreys")
 set.seed(14092019)

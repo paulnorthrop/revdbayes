@@ -32,7 +32,7 @@ testthat::test_that("GEV_predict",
 #    with the results and with type = "p" gets us back to the initial
 #    probabilities.
 
-u <- quantile(gom, probs = 0.65)
+u <- stats::quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 bp <- set_bin_prior(prior = "jeffreys")
 # NB. Update when npy as an attribute is used.

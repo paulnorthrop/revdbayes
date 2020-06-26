@@ -8,7 +8,7 @@ context("GP: rpost_rcpp vs rpost")
 my_tol <- 1e-5
 
 # Set a threshold.
-u <- quantile(gom, probs = 0.65)
+u <- stats::quantile(gom, probs = 0.65)
 
 gp_test <- function(seed = 47, prior, n = 5, rotate = TRUE,
                     trans = "none", use_phi_map = FALSE, data = gom,
