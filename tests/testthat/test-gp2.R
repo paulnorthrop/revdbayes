@@ -104,3 +104,53 @@ test_that("pgp and qgp are consistent", {
   expect_equal(pgp(qgp(pvec, shape = xi2), shape = xi2), pvec)
   expect_equal(pgp(qgp(pvec, shape = xi3), shape = xi3), pvec)
 })
+
+# Add the test that caused a problem in distributions3
+
+## Example distributions
+
+# Positive shape, finite lower end point
+xi1 <- 0.1
+g1 <- list(mu = 0, scale = 1, xi = xi1)
+class(g1) <- c("GP", "distribution")
+
+# Zero shape
+xi2 <- 0
+g2 <- list(mu = 0, scale = 1, xi = xi2)
+class(g2) <- c("GP", "distribution")
+
+# Negative shape, finite upper end point
+xi3 <- -1e-7
+g3 <- list(mu = 0, scale = 1, xi = xi3)
+class(g3) <- c("GP", "distribution")
+up <- -1 / xi3
+
+log_GP_pdf <- function(d, x) {
+  revdbayes::dgp(x = x, loc = d$mu, scale = d$scale, shape = d$xi, log = TRUE)
+}
+
+## Example input vectors
+
+# For testing pdf, log_pdf and cdf
+xvec <- c(0, Inf, NA)
+x1 <- xvec
+x2 <- xvec
+x3 <- c(up, xvec)
+
+test_that("log_pdf.GP works correctly", {
+  expect_equal(log_GP_pdf(g1, x1), c(0, -Inf, NA))
+  expect_length(log_GP_pdf(g1, seq_len(0)), 0)
+  expect_length(log_GP_pdf(g1, seq_len(1)), 1)
+  expect_length(log_GP_pdf(g1, seq_len(10)), 10)
+
+  expect_equal(log_GP_pdf(g2, x2), c(0, -Inf, NA))
+  expect_length(log_GP_pdf(g2, seq_len(0)), 0)
+  expect_length(log_GP_pdf(g2, seq_len(1)), 1)
+  expect_length(log_GP_pdf(g2, seq_len(10)), 10)
+
+  expect_equal(log_GP_pdf(g3, x3), c(-Inf, 0, -Inf, NA))
+  expect_length(log_GP_pdf(g3, seq_len(0)), 0)
+  expect_length(log_GP_pdf(g3, seq_len(1)), 1)
+  expect_length(log_GP_pdf(g3, seq_len(10)), 10)
+})
+
