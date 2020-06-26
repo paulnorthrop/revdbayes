@@ -4,7 +4,9 @@
 \name{rainfall}
 \alias{rainfall}
 \title{Daily Aggregate Rainfall}
-\format{A vector containing 20820 observations.}
+\format{
+A vector containing 20820 observations.
+}
 \source{
 Unknown
 }

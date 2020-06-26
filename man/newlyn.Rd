@@ -4,7 +4,9 @@
 \name{newlyn}
 \alias{newlyn}
 \title{Newlyn sea surges}
-\format{A vector of length 2894.}
+\format{
+A vector of length 2894.
+}
 \source{
 Coles, S.G. (1991) Modelling extreme multivariate events. PhD thesis,
   University of Sheffield, U.K.

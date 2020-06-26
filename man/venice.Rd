@@ -4,7 +4,9 @@
 \name{venice}
 \alias{venice}
 \title{Largest Sea Levels in Venice}
-\format{A data frame with 51 rows and 10 columns.}
+\format{
+A data frame with 51 rows and 10 columns.
+}
 \source{
 Smith, R. L. (1986) Extreme value theory based on the \emph{r}
   largest annual events. \emph{Journal of Hydrology}, \strong{86}, 27-43.

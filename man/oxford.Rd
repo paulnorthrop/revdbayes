@@ -4,7 +4,9 @@
 \name{oxford}
 \alias{oxford}
 \title{Annual Maximum Temperatures at Oxford}
-\format{A vector containing 80 observations.}
+\format{
+A vector containing 80 observations.
+}
 \source{
 Tabony, R. C. (1983) Extreme value analysis in meteorology.
  \emph{The Meteorological Magazine}, \strong{112}, 77-98.

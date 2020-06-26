@@ -4,7 +4,9 @@
 \name{portpirie}
 \alias{portpirie}
 \title{Annual Maximum Sea Levels at Port Pirie, South Australia}
-\format{A numeric vector containing 65 observations.}
+\format{
+A numeric vector containing 65 observations.
+}
 \source{
 Coles, S. G. (2001) \emph{An Introduction to Statistical Modelling
   of Extreme Values}. London: Springer.
