@@ -1,3 +1,9 @@
+# revdbayes 1.3.7
+
+## Bug fixes and minor improvements
+
+* Fixed a bug in `dgp` that produced an incorrect value for the log-density (`log = TRUE`) when `shape` is negative and very close to zero and `x = -1/shape`.
+
 # revdbayes 1.3.6
 
 ## Bug fixes and minor improvements
