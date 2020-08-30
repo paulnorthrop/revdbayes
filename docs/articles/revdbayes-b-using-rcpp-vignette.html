@@ -73,7 +73,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://github.com/paulnorthrop/revdbayes/">
+  <a href="https://github.com/paulnorthrop/revdbayes/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -96,7 +96,7 @@
             
             <h4 class="date">2020-08-30</h4>
       
-      <small class="dont-index">Source: <a href="http://github.com/paulnorthrop/revdbayes/blob/master/vignettes/revdbayes-b-using-rcpp-vignette.Rmd"><code>vignettes/revdbayes-b-using-rcpp-vignette.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/master/vignettes/revdbayes-b-using-rcpp-vignette.Rmd"><code>vignettes/revdbayes-b-using-rcpp-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>revdbayes-b-using-rcpp-vignette.Rmd</code></div>
 
     </div>
@@ -139,11 +139,11 @@
 }
 <span class="co">#&gt; Unit: milliseconds</span>
 <span class="co">#&gt;        expr   min    lq  mean median    uq   max neval</span>
-<span class="co">#&gt;       rpost 105.0 113.0 118.0  117.0 121.0 185.0   100</span>
-<span class="co">#&gt;  rpost_rcpp  19.1  20.4  22.5   21.5  23.3  63.8   100</span>
+<span class="co">#&gt;       rpost 102.0 109.0 114.0  112.0 117.0 191.0   100</span>
+<span class="co">#&gt;  rpost_rcpp  18.7  19.8  21.5   20.4  22.1  52.6   100</span>
 <span class="co">#&gt; Unit: relative</span>
 <span class="co">#&gt;        expr min  lq mean median  uq max neval</span>
-<span class="co">#&gt;       rpost 5.5 5.5  5.2    5.5 5.2 2.9   100</span>
+<span class="co">#&gt;       rpost 5.4 5.5  5.3    5.5 5.3 3.6   100</span>
 <span class="co">#&gt;  rpost_rcpp 1.0 1.0  1.0    1.0 1.0 1.0   100</span></pre></body></html></div>
 <p>In this example <code>rpost_rcpp</code> is indeed much faster than <code>rpost</code>.</p>
 </div>
@@ -178,15 +178,15 @@
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">res</span>, <span class="kw">signif</span> <span class="kw">=</span> <span class="fl">2</span>)
 }
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;        expr   min    lq mean median    uq max neval</span>
-<span class="co">#&gt;       rpost 259.0 275.0  288  282.0 289.0 485   100</span>
-<span class="co">#&gt;  rpost_rcpp  66.3  70.9   78   74.3  79.1 147   100</span>
-<span class="co">#&gt;    evdbayes 204.0 211.0  221  215.0 220.0 335   100</span>
+<span class="co">#&gt;        expr   min    lq  mean median    uq max neval</span>
+<span class="co">#&gt;       rpost 254.0 267.0 273.0  272.0 277.0 335   100</span>
+<span class="co">#&gt;  rpost_rcpp  66.4  70.5  74.1   73.2  76.5 137   100</span>
+<span class="co">#&gt;    evdbayes 201.0 207.0 211.0  209.0 211.0 282   100</span>
 <span class="co">#&gt; Unit: relative</span>
 <span class="co">#&gt;        expr min  lq mean median  uq max neval</span>
-<span class="co">#&gt;       rpost 3.9 3.9  3.7    3.8 3.7 3.3   100</span>
+<span class="co">#&gt;       rpost 3.8 3.8  3.7    3.7 3.6 2.5   100</span>
 <span class="co">#&gt;  rpost_rcpp 1.0 1.0  1.0    1.0 1.0 1.0   100</span>
-<span class="co">#&gt;    evdbayes 3.1 3.0  2.8    2.9 2.8 2.3   100</span></pre></body></html></div>
+<span class="co">#&gt;    evdbayes 3.0 2.9  2.8    2.9 2.8 2.1   100</span></pre></body></html></div>
 <p>This comparison is generous to <code>posterior</code> because the burn-in has been set to zero and <code>posterior</code> produces a dependent sample rather than a random sample. The <em>effective sample size</em> of an MCMC sample from <code>posterior</code> varies between simulations and across parameters. The <code>effectiveSize</code> function in the <strong>coda</strong> package <span class="citation">(Plummer et al. 2006)</span> suggests that the effective sample size in this example is of the order of 100 to 200, whereas the <strong>revdbayes</strong> functions <code>rpost</code> and <code>rpost_rcpp</code> produce random samples of size 1000. <code>rpost</code> is a little slower than <code>posterior</code> while <code>rpost_rcpp</code> is much faster than <code>posterior</code>.</p>
 </div>
 <div id="point-process-pp-model" class="section level3">
@@ -226,24 +226,24 @@
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">res</span>, <span class="kw">signif</span> <span class="kw">=</span> <span class="fl">2</span>)
 }
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;        expr   min    lq  mean median    uq   max neval</span>
-<span class="co">#&gt;       rpost 491.0 515.0 541.0  527.0 539.0 942.0   100</span>
-<span class="co">#&gt;  rpost_rcpp  40.8  43.3  47.2   46.4  50.4  59.2   100</span>
-<span class="co">#&gt;    evdbayes 264.0 268.0 274.0  272.0 277.0 343.0   100</span>
+<span class="co">#&gt;        expr   min    lq mean median    uq   max neval</span>
+<span class="co">#&gt;       rpost 462.0 490.0  518  510.0 533.0 666.0   100</span>
+<span class="co">#&gt;  rpost_rcpp  40.9  43.5   47   47.2  49.8  64.1   100</span>
+<span class="co">#&gt;    evdbayes 255.0 263.0  271  268.0 273.0 341.0   100</span>
 <span class="co">#&gt; Unit: relative</span>
 <span class="co">#&gt;        expr  min   lq mean median   uq  max neval</span>
-<span class="co">#&gt;       rpost 12.0 12.0 11.0   11.0 11.0 16.0   100</span>
+<span class="co">#&gt;       rpost 11.0 11.0 11.0   11.0 11.0 10.0   100</span>
 <span class="co">#&gt;  rpost_rcpp  1.0  1.0  1.0    1.0  1.0  1.0   100</span>
-<span class="co">#&gt;    evdbayes  6.5  6.2  5.8    5.9  5.5  5.8   100</span></pre></body></html></div>
+<span class="co">#&gt;    evdbayes  6.2  6.1  5.8    5.7  5.5  5.3   100</span></pre></body></html></div>
 <p>In this example <code>rpost</code> is slower than <code>posterior</code> but <code>rpost_rcpp</code> is substantially faster than <code>posterior</code>.</p>
 </div>
 </div>
 <div id="cpp_fun" class="section level2">
 <h2 class="hasAnchor">
 <a href="#cpp_fun" class="anchor"></a>Providing a user-defined prior</h2>
-<p>If the user wishes to supply their own prior to <code>rpost_rcpp</code> then they must first write a C++ function that evaluates the log of the prior density. The general way that <strong>rust</strong> (and hence <strong>revdbayes</strong>) enables users to provide their own C++ log-prior functions uses external pointers and is based on the <a href="http://gallery.rcpp.org/">Rcpp Gallery</a> article <a href="http://gallery.rcpp.org/articles/passing-cpp-function-pointers/">Passing user-supplied C++ functions</a> by Dirk Eddelbuettel.</p>
+<p>If the user wishes to supply their own prior to <code>rpost_rcpp</code> then they must first write a C++ function that evaluates the log of the prior density. The general way that <strong>rust</strong> (and hence <strong>revdbayes</strong>) enables users to provide their own C++ log-prior functions uses external pointers and is based on the <a href="https://gallery.rcpp.org/">Rcpp Gallery</a> article <a href="https://gallery.rcpp.org/articles/passing-cpp-function-pointers/">Passing user-supplied C++ functions</a> by Dirk Eddelbuettel.</p>
 <p>The implementation in <strong>rust</strong> requires this C++ function to have a particular structure: it must take a constant reference to an <code>Rcpp::NumericVector</code>, say <code>x</code>, a constant reference to an <code>Rcpp::List</code>, say <code>ppars</code>, and return a <code>double</code> precision scalar. Here <code>x</code> is the argument of the prior density, i.e. the parameter vector of the extreme value model, and <code>ppars</code> is a list containing the values of prior parameters whose values are not specified inside the function. Thus values of any parameters in the prior can be changed without editing the function. If there are no such parameters then the argument <code>ppars</code> must still be present in the C++ function, even though the list provided to the function will be empty.</p>
-<p>A simple way to provide C++ log-prior functions is to put them in a file, say <code>user_fns.cpp</code>, perhaps taking advantage of the R-like syntax made available by <a href="http://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf">Rcpp sugar</a>. Example content is provided below. This file is available on the <a href="https://github.com/paulnorthrop/revdbayes/blob/master/src/user_priors.cpp">revdbayes Github page</a>.The functions in this file are compiled and made available to R, either using the <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html">Rcpp::sourceCpp</a></code> function (e.g. <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html">Rcpp::sourceCpp("user_fns.cpp")</a></code>) or using RStudio’s Source button on the editor toolbar. The example content below also includes the function <code>create_prior_xptr</code>, which creates an external pointer to a C++ function. See . It is this external pointer that is passed to <code>set_prior</code> to set the prior. If the user has written a C++ function, say <code>new_name</code>, they need to add to <code>create_prior_xptr</code> two lines of code:</p>
+<p>A simple way to provide C++ log-prior functions is to put them in a file, say <code>user_fns.cpp</code>, perhaps taking advantage of the R-like syntax made available by <a href="https://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf">Rcpp sugar</a>. Example content is provided below. This file is available on the <a href="https://github.com/paulnorthrop/revdbayes/blob/master/src/user_priors.cpp">revdbayes Github page</a>.The functions in this file are compiled and made available to R, either using the <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html">Rcpp::sourceCpp</a></code> function (e.g. <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html">Rcpp::sourceCpp("user_fns.cpp")</a></code>) or using RStudio’s Source button on the editor toolbar. The example content below also includes the function <code>create_prior_xptr</code>, which creates an external pointer to a C++ function. See . It is this external pointer that is passed to <code>set_prior</code> to set the prior. If the user has written a C++ function, say <code>new_name</code>, they need to add to <code>create_prior_xptr</code> two lines of code:</p>
 <pre><code>else if (fstr == "new_name")  
   return(Rcpp::XPtr&lt;funcPtr&gt;(new funcPtr(&amp;new_name))) ;</code></pre>
 <p>in order that they can create an external pointer for <code>new_name</code> using <code>create_xptr</code>.</p>
@@ -297,7 +297,7 @@ SEXP create_prior_xptr(std::string fstr) {
    MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
 </script><div id="refs" class="references">
 <div id="ref-RcppDEbook">
-<p>Eddelbuettel, D. 2013. <em>Seamless R and C++ Integration with Rcpp</em>. New York: Springer. <a href="http://www.springer.com/gb/book/9781461468677">http://www.springer.com/gb/book/9781461468677</a>.</p>
+<p>Eddelbuettel, D. 2013. <em>Seamless R and C++ Integration with Rcpp</em>. New York: Springer. <a href="https://www.springer.com/gb/book/9781461468677">https://www.springer.com/gb/book/9781461468677</a>.</p>
 </div>
 <div id="ref-Rcpp">
 <p>Eddelbuettel, D., and R. Francois. 2011. “Rcpp: Seamless R and C++ Integration.” <em>Journal of Statistical Software</em> 40 (8): 1–18. <a href="https://doi.org/10.18637/jss.v040.i08">https://doi.org/10.18637/jss.v040.i08</a>.</p>
