@@ -11,8 +11,8 @@ before_install:
   - source before-install.sh
 
 os:
-#  - linux
-  - osx
+  - linux
+#  - osx
 
 addons:
   apt:
@@ -22,9 +22,9 @@ addons:
       - clang
 
 r:
-  - release
-#  - devel
-  - oldrel
+#  - release
+  - devel
+#  - oldrel
 
 env:
 #  - COMPILER=gcc-4.9
