@@ -253,7 +253,8 @@ Crowder, M. (1992) Bayesian priors based on parameter
 
 Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
   for the Generalized Pareto Distribution.  \emph{Technometrics},
-  \strong{35(2)}, 185-191. \url{https://doi.org/10.2307/1269663}.
+  \strong{35(2)}, 185-191.
+  \url{http://doi.org/10.1080/00401706.1993.10485040}.
 
 Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and
   Quantile Estimation for the Generalized Pareto Distribution.
