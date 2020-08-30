@@ -198,7 +198,7 @@ gp_obs_info <- function(gp_pars, y) {
 #' @references Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
 #'   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
 #'   and Computing (1991) 1, 129-133.
-#'   \url{http://doi.org/10.1080/00401706.1993.10485040}.
+#'   \url{https://doi.org/10.1080/00401706.1993.10485040}.
 #' @seealso \code{\link{gp}} for details of the parameterisation of the GP
 #'   distribution, in terms of \eqn{\sigma} and \eqn{\xi}.
 #' @examples

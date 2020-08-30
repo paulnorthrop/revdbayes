@@ -36,6 +36,6 @@ Suggests: evdbayes,
     testthat
 VignetteBuilder: knitr
 URL: https://paulnorthrop.github.io/revdbayes/, 
-     http://github.com/paulnorthrop/revdbayes
-BugReports: http://github.com/paulnorthrop/revdbayes/issues
+     https://github.com/paulnorthrop/revdbayes
+BugReports: https://github.com/paulnorthrop/revdbayes/issues
 LinkingTo: Rcpp (>= 0.12.10), RcppArmadillo

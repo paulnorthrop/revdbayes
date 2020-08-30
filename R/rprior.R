@@ -170,7 +170,7 @@ rprior_quant <- function(n, prob, shape, scale, lb = NULL, lb_prob = 0.001){
 #' @references Crowder, M. (1992) Bayesian priors based on parameter
 #'   transformation using the distribution function.
 #'   \emph{Ann. Inst. Statist. Math.}, \strong{44}(3), 405-416.
-#'   \url{http://link.springer.com/article/10.1007/BF00050695}
+#'   \url{https://link.springer.com/article/10.1007/BF00050695}
 #' @references Stephenson, A. 2016. Bayesian Inference for Extreme Value
 #'   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
 #'   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
