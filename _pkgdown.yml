@@ -75,3 +75,6 @@ reference:
       - "kgaps_stats"
       - "quantile_to_gev"
       - "create_prior_xptr"
+      - "grimshaw_gp_mle"
+      - "gp_pwm"
+      - "gp_lrs"

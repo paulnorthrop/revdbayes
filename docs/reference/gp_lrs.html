@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bivariate normal prior for GP parameters (\(log \sigma, \xi\)) — gp_norm • revdbayes</title>
+<title>Linear Combinations of Ratios of Spacings estimation of generalised Pareto
+parameters — gp_lrs • revdbayes</title>
 
 
 <!-- jquery -->
@@ -39,8 +40,11 @@
 
 
 
-<meta property="og:title" content="Bivariate normal prior for GP parameters (\(log \sigma, \xi\)) — gp_norm" />
-<meta property="og:description" content="For information about this and other priors see set_prior." />
+<meta property="og:title" content="Linear Combinations of Ratios of Spacings estimation of generalised Pareto
+parameters — gp_lrs" />
+<meta property="og:description" content="Uses the Linear Combinations of Ratios of Spacings (LRS) methodology of
+(Reiss and Thomas, 2007, page 134) to estimate the parameters of the
+generalised Pareto (GP) distribution, based on a sample of positive values." />
 
 
 
@@ -132,53 +136,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bivariate normal prior for GP parameters (\(log \sigma, \xi\))</h1>
-    <small class="dont-index">Source: <a href='http://github.com/paulnorthrop/revdbayes/blob/master/R/priors.R'><code>R/priors.R</code></a></small>
-    <div class="hidden name"><code>gp_norm.Rd</code></div>
+    <h1>Linear Combinations of Ratios of Spacings estimation of generalised Pareto
+parameters</h1>
+    <small class="dont-index">Source: <a href='http://github.com/paulnorthrop/revdbayes/blob/master/R/frequentist.R'><code>R/frequentist.R</code></a></small>
+    <div class="hidden name"><code>gp_lrs.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>For information about this and other priors see <code><a href='set_prior.html'>set_prior</a></code>.</p>
+    <p>Uses the Linear Combinations of Ratios of Spacings (LRS) methodology of
+(Reiss and Thomas, 2007, page 134) to estimate the parameters of the
+generalised Pareto (GP) distribution, based on a sample of positive values.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gp_norm</span>(<span class='no'>pars</span>, <span class='no'>mean</span>, <span class='no'>icov</span>, <span class='kw'>min_xi</span> <span class='kw'>=</span> -<span class='fl'>Inf</span>, <span class='kw'>max_xi</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>trendsd</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>gp_lrs</span>(<span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pars</th>
-      <td><p>A numeric vector of length 2.
-GP parameters (\(\sigma, \xi\)).</p></td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td><p>A numeric vector of length 2.  Prior mean.</p></td>
-    </tr>
-    <tr>
-      <th>icov</th>
-      <td><p>A 2x2 numeric matrix.
-The inverse of the prior covariance matrix.</p></td>
-    </tr>
-    <tr>
-      <th>min_xi</th>
-      <td><p>A numeric scalar.  Prior lower bound on \(\xi\).</p></td>
-    </tr>
-    <tr>
-      <th>max_xi</th>
-      <td><p>A numeric scalar.  Prior upper bound on \(\xi\).</p></td>
-    </tr>
-    <tr>
-      <th>trendsd</th>
-      <td><p>Has no function other than to achieve compatibility with
-function in the evdbayes package.</p></td>
+      <th>x</th>
+      <td><p>A numeric vector containing only <strong>positive</strong> values, assumed
+to be a random sample from a generalized Pareto distribution.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The log of the prior density.</p>
+    <p>A numeric vector of length 2.  The estimates of the scale parameter
+  \(\sigma\) and the shape parameter \(\xi\).</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
+    <p>Reiss, R.-D., Thomas, M. (2007) Statistical Analysis of
+  Extreme Values with Applications to Insurance, Finance, Hydrology and
+  Other Fields.Birkhauser.
+  <a href='https://doi.org/10.1007/978-3-7643-7399-3'>https://doi.org/10.1007/978-3-7643-7399-3</a>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='gp.html'>gp</a></code> for details of the parameterisation of the GP
+  distribution.</p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>u</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span>(<span class='no'>gom</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fl'>0.65</span>)
+<span class='fu'>gp_lrs</span>((<span class='no'>gom</span> - <span class='no'>u</span>)[<span class='no'>gom</span> <span class='kw'>&gt;</span> <span class='no'>u</span>])</div><div class='output co'>#&gt; <span class='error'>Error in gp_lrs((gom - u)[gom &gt; u]): could not find function "gp_lrs"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

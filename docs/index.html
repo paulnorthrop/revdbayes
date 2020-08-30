@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.8</span>
       </span>
     </div>
 
@@ -123,7 +123,8 @@
 <span class="no">pn</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/set_prior.html">set_prior</a></span>(<span class="kw">prior</span> <span class="kw">=</span> <span class="st">"norm"</span>, <span class="kw">model</span> <span class="kw">=</span> <span class="st">"gev"</span>, <span class="kw">mean</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>), <span class="kw">cov</span> <span class="kw">=</span> <span class="no">mat</span>)
 <span class="no">gevp</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rpost.html">rpost</a></span>(<span class="kw">n</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">model</span> <span class="kw">=</span> <span class="st">"gev"</span>, <span class="kw">prior</span> <span class="kw">=</span> <span class="no">pn</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">portpirie</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">gevp</span>)</pre></div>
-<p>From version 1.2.0 onwards the faster function <code>rpost_rcpp</code> can be used. See the vignette “Faster simulation using revdbayes and Rcpp” for details. The functions <code>rpost</code> and <code>post_rcpp</code> have the same syntax. For example:</p>
+<p>From version 1.2.0 onwards the faster function <code>rpost_rcpp</code> can be used.<br>
+See the vignette “Faster simulation using revdbayes and Rcpp” for details. The functions <code>rpost</code> and <code>post_rcpp</code> have the same syntax. For example:</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="no">gevp_rcpp</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="reference/rpost_rcpp.html">rpost_rcpp</a></span>(<span class="kw">n</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">model</span> <span class="kw">=</span> <span class="st">"gev"</span>, <span class="kw">prior</span> <span class="kw">=</span> <span class="no">pn</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">portpirie</span>)</pre></div>
 </div>
 <div id="installation" class="section level3">
@@ -162,6 +163,7 @@
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Paul J. Northrop <br><small class="roles"> Author, maintainer, copyright holder </small>  </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
