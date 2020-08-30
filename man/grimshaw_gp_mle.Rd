@@ -31,3 +31,7 @@ Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
   and Computing (1991) 1, 129-133.
   \url{http://doi.org/10.1080/00401706.1993.10485040}.
 }
+\seealso{
+\code{\link{gp}} for details of the parameterisation of the GP
+  distribution, in terms of \eqn{\sigma} and \eqn{\xi}.
+}
