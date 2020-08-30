@@ -29,5 +29,5 @@ grimshaw_gp_mle((gom - u)[gom > u])
 Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
   and Computing (1991) 1, 129-133.
-  \url{http://dx.doi.org/10.1007/BF01889987}.
+  \url{http://doi.org/10.1080/00401706.1993.10485040}.
 }
