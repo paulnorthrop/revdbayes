@@ -138,12 +138,12 @@
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">res</span>, <span class="kw">signif</span> <span class="kw">=</span> <span class="fl">2</span>)
 }
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;        expr   min    lq  mean median    uq   max neval</span>
-<span class="co">#&gt;       rpost 102.0 109.0 114.0  112.0 117.0 191.0   100</span>
-<span class="co">#&gt;  rpost_rcpp  18.7  19.8  21.5   20.4  22.1  52.6   100</span>
+<span class="co">#&gt;        expr  min    lq  mean median    uq   max neval</span>
+<span class="co">#&gt;       rpost 98.6 104.0 110.0  107.0 113.0 170.0   100</span>
+<span class="co">#&gt;  rpost_rcpp 17.8  18.7  20.5   19.7  20.7  38.7   100</span>
 <span class="co">#&gt; Unit: relative</span>
 <span class="co">#&gt;        expr min  lq mean median  uq max neval</span>
-<span class="co">#&gt;       rpost 5.4 5.5  5.3    5.5 5.3 3.6   100</span>
+<span class="co">#&gt;       rpost 5.5 5.6  5.4    5.4 5.4 4.4   100</span>
 <span class="co">#&gt;  rpost_rcpp 1.0 1.0  1.0    1.0 1.0 1.0   100</span></pre></body></html></div>
 <p>In this example <code>rpost_rcpp</code> is indeed much faster than <code>rpost</code>.</p>
 </div>
@@ -178,15 +178,15 @@
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">res</span>, <span class="kw">signif</span> <span class="kw">=</span> <span class="fl">2</span>)
 }
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;        expr   min    lq  mean median    uq max neval</span>
-<span class="co">#&gt;       rpost 254.0 267.0 273.0  272.0 277.0 335   100</span>
-<span class="co">#&gt;  rpost_rcpp  66.4  70.5  74.1   73.2  76.5 137   100</span>
-<span class="co">#&gt;    evdbayes 201.0 207.0 211.0  209.0 211.0 282   100</span>
+<span class="co">#&gt;        expr   min  lq  mean median    uq max neval</span>
+<span class="co">#&gt;       rpost 248.0 259 279.0  270.0 288.0 446   100</span>
+<span class="co">#&gt;  rpost_rcpp  63.9  67  72.2   70.2  73.5 147   100</span>
+<span class="co">#&gt;    evdbayes 192.0 201 215.0  207.0 220.0 294   100</span>
 <span class="co">#&gt; Unit: relative</span>
 <span class="co">#&gt;        expr min  lq mean median  uq max neval</span>
-<span class="co">#&gt;       rpost 3.8 3.8  3.7    3.7 3.6 2.5   100</span>
-<span class="co">#&gt;  rpost_rcpp 1.0 1.0  1.0    1.0 1.0 1.0   100</span>
-<span class="co">#&gt;    evdbayes 3.0 2.9  2.8    2.9 2.8 2.1   100</span></pre></body></html></div>
+<span class="co">#&gt;       rpost 3.9 3.9  3.9    3.8 3.9   3   100</span>
+<span class="co">#&gt;  rpost_rcpp 1.0 1.0  1.0    1.0 1.0   1   100</span>
+<span class="co">#&gt;    evdbayes 3.0 3.0  3.0    2.9 3.0   2   100</span></pre></body></html></div>
 <p>This comparison is generous to <code>posterior</code> because the burn-in has been set to zero and <code>posterior</code> produces a dependent sample rather than a random sample. The <em>effective sample size</em> of an MCMC sample from <code>posterior</code> varies between simulations and across parameters. The <code>effectiveSize</code> function in the <strong>coda</strong> package <span class="citation">(Plummer et al. 2006)</span> suggests that the effective sample size in this example is of the order of 100 to 200, whereas the <strong>revdbayes</strong> functions <code>rpost</code> and <code>rpost_rcpp</code> produce random samples of size 1000. <code>rpost</code> is a little slower than <code>posterior</code> while <code>rpost_rcpp</code> is much faster than <code>posterior</code>.</p>
 </div>
 <div id="point-process-pp-model" class="section level3">
@@ -227,14 +227,14 @@
 }
 <span class="co">#&gt; Unit: milliseconds</span>
 <span class="co">#&gt;        expr   min    lq mean median    uq   max neval</span>
-<span class="co">#&gt;       rpost 462.0 490.0  518  510.0 533.0 666.0   100</span>
-<span class="co">#&gt;  rpost_rcpp  40.9  43.5   47   47.2  49.8  64.1   100</span>
-<span class="co">#&gt;    evdbayes 255.0 263.0  271  268.0 273.0 341.0   100</span>
+<span class="co">#&gt;       rpost 449.0 467.0  486  478.0 493.0 625.0   100</span>
+<span class="co">#&gt;  rpost_rcpp  38.6  40.7   43   42.5  45.5  49.5   100</span>
+<span class="co">#&gt;    evdbayes 250.0 256.0  262  260.0 264.0 335.0   100</span>
 <span class="co">#&gt; Unit: relative</span>
 <span class="co">#&gt;        expr  min   lq mean median   uq  max neval</span>
-<span class="co">#&gt;       rpost 11.0 11.0 11.0   11.0 11.0 10.0   100</span>
+<span class="co">#&gt;       rpost 12.0 11.0 11.0   11.0 11.0 13.0   100</span>
 <span class="co">#&gt;  rpost_rcpp  1.0  1.0  1.0    1.0  1.0  1.0   100</span>
-<span class="co">#&gt;    evdbayes  6.2  6.1  5.8    5.7  5.5  5.3   100</span></pre></body></html></div>
+<span class="co">#&gt;    evdbayes  6.5  6.3  6.1    6.1  5.8  6.8   100</span></pre></body></html></div>
 <p>In this example <code>rpost</code> is slower than <code>posterior</code> but <code>rpost_rcpp</code> is substantially faster than <code>posterior</code>.</p>
 </div>
 </div>
