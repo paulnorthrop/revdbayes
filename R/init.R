@@ -207,7 +207,7 @@ gp_init <- function(data, m = length(data[!is.na(data)]),
   #   \code{init_phi} is returned.
   # @references Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
   #   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
-  #   \url{https://doi.org/10.2307/1269663}.
+  #   \url{http://doi.org/10.1080/00401706.1993.10485040}.
   # @references Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and
   #   Quantile Estimation for the Generalized Pareto Distribution.
   #   Technometrics, 29(3), 339-349. \url{https://doi.org/10.2307/1269343}.
