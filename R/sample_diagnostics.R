@@ -227,8 +227,8 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
     xx <- seq(r[1,1], r[2,1], len = n)
     yy <- seq(r[1,2], r[2,2], len = n)
     zz <- matrix(NA, ncol = length(xx), nrow = length(yy))
-    for (i in 1:length(xx)) {
-      for (j in 1:length(yy)) {
+    for (i in seq_along(xx)) {
+      for (j in seq_along(yy)) {
         for_logf <- c(list(c(xx[i], yy[j])), density_args)
         zz[i, j] <- exp(do.call(plot_density, for_logf))
       }
