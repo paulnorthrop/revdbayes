@@ -2,7 +2,7 @@
 
 ## Bug fixes and minor improvements
 
-* The functions `grimshaw_gp_mle()`, `gp_pwm()` and `gp_lrs()` are now exported.
+* The functions `grimshaw_gp_mle()`, `gp_pwm()` and `gp_lrs()` are now exported, so that the rust package can access them using :: not :::.
 
 * The hyperlinks to the Grimshaw (1993) paper in the documentation to `grimshaw_gp_mle()` and `set_prior()` have been corrected.
 
