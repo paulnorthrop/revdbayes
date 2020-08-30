@@ -743,7 +743,7 @@ grimshaw_gp_mle <- function(x) {
     mles[i,4]<-999
     i<-i+1
   }
-  ind <- seq_along(mles[, 4])
+  ind<-1:length(mles[,4])
   ind<-ind[mles[,4]==999]
   if(sum(ind)==0){   #{ Check to see if there are any local maxima. }
     nomle<-0          #{ If not, there is no mle. }
