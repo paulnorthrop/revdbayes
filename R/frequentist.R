@@ -32,13 +32,40 @@ gp_mle <- function(gp_data) {
 
 # =========================== gp_pwm ===========================
 
+#' Probability-weighted moments estimation of generalised Pareto parameters
+#'
+#' Uses the methodology of Hosking and Wallis (1987) to estimate the parameters
+#' of the generalised Pareto (GP) distribution.
+#'
+#' @param gp_data A numeric vector of raw data, assumed to be a random sample
+#'   from a probability distribution.
+#' @param u A numeric scalar.  A threshold.  The GP distribution is fitted to
+#'   the excesses of \code{u}.
+#' @return A list with components
+#'   \itemize{
+#'     \item{\code{est}:} A numeric vector.  PWM estimates of GP parameters
+#'       \eqn{\sigma} (scale) and \eqn{\xi} (shape).
+#'     \item{\code{se}:} A numeric vector.  Estimated standard errors of
+#'       \eqn{\sigma} and \eqn{\xi}.
+#'     \item{\code{cov}:} A numeric matrix.  Estimate covariance matrix of the
+#'       the PWM estimators of \eqn{\sigma} and \eqn{\xi}.
+#'   }
+#' @references Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and
+#'  Quantile Estimation for the Generalized Pareto Distribution.
+#'  Technometrics, 29(3), 339-349. \url{https://doi.org/10.2307/1269343}.
+#' @seealso \code{\link{gp}} for details of the parameterisation of the GP
+#'   distribution.
+#' @examples
+#' u <- quantile(gom, probs = 0.65)
+#' gp_pwm(gom, u)
+#' @export
 gp_pwm <- function(gp_data, u = 0) {
   # Probability weighted moments estimation for the generalized Pareto
   # distribution.
   #
   # Args:
-  #   gp_data : A numeric vector containing positive values, assumed to be a
-  #             random sample from a generalized Pareto distribution.
+  #   gp_data : A numeric vector of raw data, assumed to be a random sample
+  #             from a probability distribution.
   #   u       : A numeric scalar.  A threshold.  The GP distribution is
   #             fitted to the excesses of u.
   # Returns:
@@ -56,10 +83,10 @@ gp_pwm <- function(gp_data, u = 0) {
   a0 <- xbar
   gamma <- -0.35
   delta <- 0
-  pvec <- ((1:nu) + gamma)/(nu + delta)
+  pvec <- ((1:nu) + gamma) / (nu + delta)
   a1 <- mean(sort(excess) * (1 - pvec))
-  xi <- 2 - a0/(a0 - 2 * a1)
-  sigma <- (2 * a0 * a1)/(a0 - 2 * a1)
+  xi <- 2 - a0 / (a0 - 2 * a1)
+  sigma <- (2 * a0 * a1) / (a0 - 2 * a1)
   pwm <- c(sigma, xi)
   names(pwm) = c("sigma","xi")
   denom <- nu * (1 - 2 * xi) * (3 - 2 * xi)
@@ -79,6 +106,27 @@ gp_pwm <- function(gp_data, u = 0) {
 
 # =========================== gp_lrs ===========================
 
+#' Linear Combinations of Ratios of Spacings estimation of generalised Pareto
+#' parameters
+#'
+#' Uses the Linear Combinations of Ratios of Spacings (LRS) methodology of
+#' (Reiss and Thomas, 2007, page 134) to estimate the parameters of the
+#' generalised Pareto (GP) distribution, based on a sample of positive values.
+#'
+#' @param x A numeric vector containing only \strong{positive} values, assumed
+#'   to be a random sample from a generalized Pareto distribution.
+#' @return A numeric vector of length 2.  The estimates of the scale parameter
+#'   \eqn{\sigma} and the shape parameter \eqn{\xi}.
+#' @seealso \code{\link{gp}} for details of the parameterisation of the GP
+#'   distribution.
+#' @references Reiss, R.-D., Thomas, M. (2007) Statistical Analysis of
+#'   Extreme Values with Applications to Insurance, Finance, Hydrology and
+#'   Other Fields.Birkhauser.
+#'   \url{https://doi.org/10.1007/978-3-7643-7399-3}.
+#' @examples
+#' u <- quantile(gom, probs = 0.65)
+#' gp_lrs((gom - u)[gom > u])
+#' @export
 gp_lrs <- function(x) {
   # LRS estimation for the generalized Pareto distribution.
   #
@@ -151,6 +199,8 @@ gp_obs_info <- function(gp_pars, y) {
 #'   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
 #'   and Computing (1991) 1, 129-133.
 #'   \url{http://doi.org/10.1080/00401706.1993.10485040}.
+#' @seealso \code{\link{gp}} for details of the parameterisation of the GP
+#'   distribution, in terms of \eqn{\sigma} and \eqn{\xi}.
 #' @examples
 #' u <- quantile(gom, probs = 0.65)
 #' grimshaw_gp_mle((gom - u)[gom > u])
