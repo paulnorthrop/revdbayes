@@ -136,6 +136,25 @@ gp_obs_info <- function(gp_pars, y) {
 
 # =========================== grimshaw_gp_mle ===========================
 
+#' Maximum likelihood estimation of generalised Pareto parameters
+#'
+#' Uses the methodology of Grimshaw (1993) to find the MLEs of the parameters
+#' of the generalised Pareto distribution, based on a sample of positive
+#' values.  The function is essentially the same as that made available with
+#' Grimshaw (1993), with only minor modifications.
+#' @param x A numeric vector containing only \strong{positive} values, assumed
+#'   to be a random sample from a generalized Pareto distribution.
+#' @return A numeric vector of length 2.  The estimates of the \strong{negated}
+#'   shape parameter \eqn{k (= -\xi)} and the scale parameter
+#'   \eqn{a (= \sigma)}.
+#' @references Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
+#'   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
+#'   and Computing (1991) 1, 129-133.
+#'   \url{http://dx.doi.org/10.1007/BF01889987}.
+#' @examples
+#' u <- quantile(gom, probs = 0.65)
+#' grimshaw_gp_mle((gom - u)[gom > u])
+#' @export
 grimshaw_gp_mle <- function(x) {
   #  Argument for function:
   #
