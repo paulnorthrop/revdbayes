@@ -79,7 +79,7 @@ x <- rprior_prob(n = 1000, quant = quant, alpha = alpha, exc = TRUE, lb = 0)
 Crowder, M. (1992) Bayesian priors based on parameter
   transformation using the distribution function.
   \emph{Ann. Inst. Statist. Math.}, \strong{44}(3), 405-416.
-  \url{http://link.springer.com/article/10.1007/BF00050695}
+  \url{https://link.springer.com/article/10.1007/BF00050695}
 
 Stephenson, A. 2016. Bayesian Inference for Extreme Value
   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
