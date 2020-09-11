@@ -32,7 +32,7 @@ shape_check <- c(-1, -0.5, -0.1, -ep, 0, ep, 0.1, 0.5, 1)
 par_vals <- cbind(pu_check, loc_check, scale_check, shape_check)
 p_vals <- 1 - pu_check + c(0.01, 0.1, 0.5, 0.9, 0.99) * pu_check
 for (i in 1:nrow(par_vals)) {
-  test_string <- paste("GP shape = ", par_vals[i, ])
+  test_string <- paste("GP shape = ", par_vals[i, 4])
   x <- pqbingp_test_fn(x = par_vals[i, ], p = p_vals)
   test_function(x, test_string)
 }

@@ -1,4 +1,8 @@
-# revdbayes 1.3.8.9000
+# revdbayes 1.3.9
+
+## Bug fixes and minor improvements
+
+* Tests in `test-gp.R`, `test-gev.R` and `test-bingp.R` have been modified to avoid errors in the upcoming new release of the `testthat` package.
 
 # revdbayes 1.3.8
 
