@@ -1,5 +1,9 @@
 # revdbayes 1.3.9.9000
 
+## Bug fixes and minor improvements
+
+* Corrected a minor typo in the introductory vignette: "random example" to "random sample".
+
 # revdbayes 1.3.9
 
 ## Bug fixes and minor improvements

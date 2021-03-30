@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.8.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9.9000</span>
       </span>
     </div>
 
@@ -135,18 +135,37 @@
       <small>Source: <a href='https://github.com/paulnorthrop/revdbayes/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="revdbayes-1389000" class="section level1">
-<h1 class="page-header" data-toc-text="1.3.8.9000">
-<a href="#revdbayes-1389000" class="anchor"></a>revdbayes 1.3.8.9000<small> Unreleased </small>
+    <div id="revdbayes-1399000" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.9.9000">
+<a href="#revdbayes-1399000" class="anchor"></a>revdbayes 1.3.9.9000<small> Unreleased </small>
 </h1>
+<div id="bug-fixes-and-minor-improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-and-minor-improvements" class="anchor"></a>Bug fixes and minor improvements</h2>
+<ul>
+<li>Corrected a minor typo in the introductory vignette: “random example” to “random sample”.</li>
+</ul>
+</div>
+</div>
+    <div id="revdbayes-139" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.9">
+<a href="#revdbayes-139" class="anchor"></a>revdbayes 1.3.9<small> 2020-09-12 </small>
+</h1>
+<div id="bug-fixes-and-minor-improvements-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-and-minor-improvements-1" class="anchor"></a>Bug fixes and minor improvements</h2>
+<ul>
+<li>Tests in <code>test-gp.R</code>, <code>test-gev.R</code> and <code>test-bingp.R</code> have been modified to avoid errors in the upcoming new release of the <code>testthat</code> package.</li>
+</ul>
+</div>
 </div>
     <div id="revdbayes-138" class="section level1">
 <h1 class="page-header" data-toc-text="1.3.8">
 <a href="#revdbayes-138" class="anchor"></a>revdbayes 1.3.8<small> 2020-08-31 </small>
 </h1>
-<div id="bug-fixes-and-minor-improvements" class="section level2">
+<div id="bug-fixes-and-minor-improvements-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-2" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>The functions <code><a href="../reference/grimshaw_gp_mle.html">grimshaw_gp_mle()</a></code>, <code><a href="../reference/gp_pwm.html">gp_pwm()</a></code> and <code><a href="../reference/gp_lrs.html">gp_lrs()</a></code> are now exported, so that the rust package can access them using :: not :::.</p></li>
 <li><p>The hyperlinks to the Grimshaw (1993) paper in the documentation to <code><a href="../reference/grimshaw_gp_mle.html">grimshaw_gp_mle()</a></code> and <code><a href="../reference/set_prior.html">set_prior()</a></code> have been corrected.</p></li>
@@ -157,9 +176,9 @@
 <h1 class="page-header" data-toc-text="1.3.7">
 <a href="#revdbayes-137" class="anchor"></a>revdbayes 1.3.7<small> 2020-06-26 </small>
 </h1>
-<div id="bug-fixes-and-minor-improvements-1" class="section level2">
+<div id="bug-fixes-and-minor-improvements-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-1" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-3" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li>Fixed a bug in <code><a href="../reference/gp.html">dgp()</a></code> that produced an incorrect value for the log-density (<code>log = TRUE</code>) when <code>shape</code> is negative and very close to zero and <code>x = -1/shape</code>.</li>
 </ul>
@@ -169,9 +188,9 @@
 <h1 class="page-header" data-toc-text="1.3.6">
 <a href="#revdbayes-136" class="anchor"></a>revdbayes 1.3.6<small> 2019-12-02 </small>
 </h1>
-<div id="bug-fixes-and-minor-improvements-2" class="section level2">
+<div id="bug-fixes-and-minor-improvements-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-2" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-4" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>Use <code><a href="https://rdrr.io/r/base/class.html">inherits()</a></code> to check the class of objects returned from <code><a href="https://rdrr.io/r/base/try.html">try()</a></code>, rather than <code><a href="https://rdrr.io/r/base/class.html">class()</a></code>.</p></li>
 <li><p>pkgdown documentation at <a href="https://paulnorthrop.github.io/revdbayes/">https://paulnorthrop.github.io/revdbayes/</a></p></li>
@@ -182,9 +201,9 @@
 <h1 class="page-header" data-toc-text="1.3.5">
 <a href="#revdbayes-135" class="anchor"></a>revdbayes 1.3.5<small> 2019-11-04 </small>
 </h1>
-<div id="bug-fixes-and-minor-improvements-3" class="section level2">
+<div id="bug-fixes-and-minor-improvements-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-3" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-5" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li>The d/p/q function for the GEV and GP distributions now handle correctly cases where the input has length 0 and/or is <code>NA</code> and inputs <code>Inf</code> and <code>-Inf</code>.</li>
 </ul>
@@ -201,9 +220,9 @@
 <li>In <code><a href="../reference/set_bin_prior.html">set_bin_prior()</a></code> the user can specify their own prior for the binomial probability, by providing an R function.</li>
 </ul>
 </div>
-<div id="bug-fixes-and-minor-improvements-4" class="section level2">
+<div id="bug-fixes-and-minor-improvements-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-4" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-6" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>In <code><a href="../reference/rpost.html">rpost()</a></code> and <code><a href="../reference/rpost_rcpp.html">rpost_rcpp()</a></code> an error is thrown if the prior and the model are not compatible. Previously a warning was given.</p></li>
 <li><p>The penultimate example in the documentation for <code><a href="../reference/set_prior.html">set_prior()</a></code> has been corrected by adding <code>model = "gp".  The default</code>model = “gev”` is not appropriate here because the prior is set up for the GP model.</p></li>
@@ -215,9 +234,9 @@
 <h1 class="page-header" data-toc-text="1.3.3">
 <a href="#revdbayes-133" class="anchor"></a>revdbayes 1.3.3<small> 2019-03-08 </small>
 </h1>
-<div id="bug-fixes-and-minor-improvements-5" class="section level2">
+<div id="bug-fixes-and-minor-improvements-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-5" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-7" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>LF line endings used in inst/include/revdbayes.h and inst/include/revdbayes_RcppExports.h to avoid CRAN NOTE.</p></li>
 <li><p>The format of the <code>data</code> supplied to <code><a href="../reference/rpost.html">rpost()</a></code> and <code><a href="../reference/rpost_rcpp.html">rpost_rcpp()</a></code> is checked and an error is thrown if it is not appropriate.</p></li>
@@ -234,9 +253,9 @@
 <h1 class="page-header" data-toc-text="1.3.2">
 <a href="#revdbayes-132" class="anchor"></a>revdbayes 1.3.2<small> 2018-02-12 </small>
 </h1>
-<div id="bug-fixes-and-minor-improvements-6" class="section level2">
+<div id="bug-fixes-and-minor-improvements-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-6" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-8" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>The arguments to <code>d/p/q/rgev</code> and <code>d/p/q/rgp</code> now obey the usual conventions for R’s dpqr probability distribution functions.</p></li>
 <li><p>In <code>pp_check.evpost</code> the argument <code>subtype</code> is now documented properly.</p></li>
@@ -256,9 +275,9 @@
 <li><p>New vignette: “Inference for the extremal index using the K-gaps model”.</p></li>
 </ul>
 </div>
-<div id="bug-fixes-and-minor-improvements-7" class="section level2">
+<div id="bug-fixes-and-minor-improvements-9" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-7" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-9" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>Added the attribute <code><a href="https://rdrr.io/r/base/attr.html">attr(gom, "npy")</a></code> (with value 3) to the <code>gom</code> dataset. This is for compatability with the <strong>threshr</strong> package.</p></li>
 <li><p>Give an explicit error message if <code>plot.evpost</code> is called with the logically incompatible arguments <code>add_pu = TRUE</code> and <code>pu_only = TRUE</code>.</p></li>
@@ -270,9 +289,9 @@
 <h1 class="page-header" data-toc-text="1.2.1">
 <a href="#revdbayes-121" class="anchor"></a>revdbayes 1.2.1<small> 2017-08-21 </small>
 </h1>
-<div id="bug-fixes-and-minor-improvements-8" class="section level2">
+<div id="bug-fixes-and-minor-improvements-10" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-8" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-10" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>In some extreme cases (datasets with very small numbers of threshold excesses) calling <code>predict.evpost</code> with <code>type = "q"</code> and <code>x</code> close to 1 returns an imprecise value for the requested predictive quantiles. This has been corrected by using <code><a href="https://rdrr.io/r/stats/uniroot.html">stats::uniroot</a></code> rather than <code><a href="https://rdrr.io/r/stats/nlminb.html">stats::nlminb</a></code>.</p></li>
 <li><p>A bug (missing <code>drop = FALSE</code> in subsetting a matrix) in <code>plot.evpred</code> produced an error message if <code>n_years</code> was scalar in the prior call to <code>predict.evpost</code>. This bug has been corrected.</p></li>
@@ -295,9 +314,9 @@
 <li><p><code>set_prior</code> has been extended so that informative priors for GEV parameters can be specified using the arguments <code>prior = "prob"</code> or <code>prior = "quant"</code>. It is no longer necessary to use the functions <code>prior.prob</code> and <code>prior.quant</code> from the evdbayes package to set these priors.</p></li>
 </ul>
 </div>
-<div id="bug-fixes-and-minor-improvements-9" class="section level2">
+<div id="bug-fixes-and-minor-improvements-11" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-9" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-11" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>The list returned from <code>set_prior</code> now contains default values for all the required arguments of a given in-built prior, if these haven’t been specified by the user. This simplifies the evaluation of prior densities using C++.</p></li>
 <li><p>The GEV functions <code>dgev</code>, <code>pgev</code>, <code>qgev</code>, <code>rgev</code> and the GP functions <code>dgp</code>, <code>pgp</code>, <code>qgp</code>, <code>rgp</code> have been rewritten to conform with the vectorised style of the standard functions for distributions, e.g. those found at <code><a href="https://rdrr.io/r/stats/Normal.html">?Normal</a></code>. This makes these functions more flexible, but also means that the user take care when calling them with vectors arguments or different lengths.</p></li>
@@ -328,9 +347,9 @@
 <li><p><code>prior_prob()</code>: to simulate from the prior distribution for GEV parameters based on Crowder (1992), in which independent beta priors are specified for ratios of probabilities (which is equivalent to a Dirichlet prior on differences between these probabilities).</p></li>
 </ul>
 </div>
-<div id="bug-fixes-and-minor-improvements-10" class="section level2">
+<div id="bug-fixes-and-minor-improvements-12" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-and-minor-improvements-10" class="anchor"></a>Bug fixes and minor improvements</h2>
+<a href="#bug-fixes-and-minor-improvements-12" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p>The spurious warning messages relating to checking that the model argument to <code><a href="../reference/rpost.html">rpost()</a></code> is consistent with the prior set using <code>set-prior()</code> have been corrected. These occurred when <code>model = "pp"</code> or <code>model = "os"</code>.</p></li>
 <li><p>The hyperparameter in the MDI prior was <code>a</code> in the documentation and <code>a_mdi</code> in the code. Now it is <code>a</code> everywhere.</p></li>

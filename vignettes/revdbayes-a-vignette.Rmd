@@ -50,7 +50,7 @@ algorithm to be set and results in a dependent sample from the posterior.  Diagn
 values, are used to check convergence and to decide which values should 
 be discarded prior to approximate convergence.  An advantage of using a direct 
 method of simulation, such as the generalised ratio-of-uniforms method, is that
-it produces a random example from the posterior distribution.  This method 
+it produces a random sample from the posterior distribution.  This method 
 also involves tuning parameters, but the revdbayes package has been 
 designed to set those automatically.
 
