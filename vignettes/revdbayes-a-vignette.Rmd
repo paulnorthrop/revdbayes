@@ -205,7 +205,10 @@ sampling is slower than the default setting of `rotate = TRUE` and
 resulting from the addition of the Box-Cox transformation is not sufficient 
 to offset the extra time needed to compute the posterior density.  
 
-```{r, echo = FALSE}
+We repeat the rotation only and Box-Cox transformation plus rotation analyses 
+for a much higher threshold, set at the 95\% sample quantile.  
+
+```{r, echo = TRUE}
 thresh <- quantile(gom, probs = 0.95)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 t2 <- system.time(
@@ -217,15 +220,9 @@ gp4 <- rpost(n = n, model = "gp", prior = fp, thresh = thresh, data = gom,
 )[3]
 ```
 
-Repeating the rotation only and Box-Cox transformation plus rotation analyses 
-for a much higher threshold, set at the 95\% sample
-quantile, produces the following plots.  Strong asymmetry in the posterior 
-distribution means that the combination of marginal Box-Cox transformation 
-and rotation produces a larger improvement in $p_a$ and means that now
-this strategy is competitive with using rotation alone in terms of computation
-time. Box-Cox transformation also produces a distribution for which the 
-optimisations involved in the ratio-of-uniforms method will have greater 
-stability.
+It is optimistic to use such a high threshold in this example, because it results in only 16 threshold excesses.  In the rotation only case, a convergence warning is triggered by one of the optimisations used to created the bounding box of the ratio-of-uniforms method.  This appears to be a spurious warning, because the plots of the simulations below seem fine.  When a Box-Cox transformation is used there are no warnings, because the optimisations have greater stability and it is now easier for the convergence of the optimisations to be confirmed. 
+
+Strong asymmetry in the posterior distribution means that the combination of marginal Box-Cox transformation and rotation produces a larger improvement in $p_a$ and means that now this strategy is competitive with using rotation alone in terms of computation time. 
 
 ```{r, fig.show='hold', echo = FALSE}
 plot(gp2, ru_scale = TRUE, cex.main = 0.75, cex.lab = 0.75, 

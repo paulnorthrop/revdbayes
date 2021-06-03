@@ -2,6 +2,8 @@
 
 ## Bug fixes and minor improvements
 
+* In the generalised Pareto example in the introductory vignette, it is now noted that for the Gulf of Mexico data a threshold set at the 95% threshold results in only a small number (16) of threshold excesses. 
+
 * Corrected a minor typo in the introductory vignette: "random example" to "random sample".
 
 # revdbayes 1.3.9
