@@ -271,6 +271,8 @@ up <- set_prior(prior = u_prior_fn, ab = c(2, 2), model = "gp")
 gp_u <- rpost(n = n, model = "gp", prior = up, thresh = thresh, data = gom)
 ```
 
+See also the "Posterior predictive extreme value inference" section of the [Posterior Predictive Extreme Value Inference using the revdbayes Package](revdbayes-c-predictive-vignette.html) for an analysis that adds inferences about the probability of threshold exceedance to the analysis of threshold excesses using a GP distribution.
+
 ## Generalised Extreme Value (GEV) model
 
 We consider two examples involving the GEV distribution, which is used
@@ -300,9 +302,9 @@ p1$pa
 
 The proportion of accepted values is close to the best we can hope for in this
 3-dimensional example, i.e. 0.316.  The following plots illustrate the effect 
-of `rotate = TRUE`.  The plot on the left shows the simulated values of 
+of `rotate = TRUE`.  The first set of plots below show the simulated values of 
 the GEV parameters.  There is some association between the parameters 
-*a posteriori*, albeit weak association.  The plot on the right shows the
+*a posteriori*, albeit weak association.  The second set of plots show the
 values simulated on the scale used in the ratio-of-uniforms algorithm.  The
 association has been reduced by rotating the parameter axes.  The increase in 
 the proportion of accepted values is only modest in this example (from 
@@ -473,10 +475,9 @@ rthresh <- 40
 prrain <- prior.quant(shape = c(38.9,7.1,47), scale = c(1.5,6.3,2.6))
 ```
 
-The plot on the left below relates to the standard parameterisation.
-There is posterior dependence between all parameters.  The plot on the right 
-shows that rotating the posterior using `rotate = TRUE` reduce the 
-dependence.
+The first set of plots below relate to the standard parameterisation.
+There is posterior dependence between all parameters.  The second set of plots
+show that rotating the posterior using `rotate = TRUE` reduces the dependence.
 
 ```{r, fig.width = 7}
 # Annual maximum parameterisation (number of blocks = number of years of data)
@@ -495,9 +496,9 @@ rn1$pa
 
 Using the @WTJ2010 parameterisation reduces the posterior dependence
 between $\mu$ and the other two parameters, but not between $\sigma$ and
-$\xi$ (plot on the left).  Using the @WTJ2010 parameterisation and 
-`rotate = TRUE` also reduces posterior dependence between all 
-parameters but the earlier plot suggests that using `rotate = TRUE`
+$\xi$ (see plot on the right labelled with $\rho_1$ and $\rho_2$).  Using the
+@WTJ2010 parameterisation and `rotate = TRUE` also reduces posterior dependence
+between all parameters but the earlier plot suggests that using `rotate = TRUE`
 alone is sufficient in this example.
 
 ```{r, fig.width = 7}

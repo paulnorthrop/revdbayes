@@ -4,7 +4,9 @@
 
 * In the generalised Pareto example in the introductory vignette, it is now noted that for the Gulf of Mexico data a threshold set at the 95% threshold results in only a small number (16) of threshold excesses. 
 
-* Corrected a minor typo in the introductory vignette: "random example" to "random sample".
+* In the GP section of the introductory vignette a link is given to the binomial-GP analysis in the Posterior Predictive Extreme Value Inference vignette.
+
+* In the introductory vignette: corrected references to plots as "on the left" when in fact they were below, and corrected "random example" to "random sample".
 
 # revdbayes 1.3.9
 
