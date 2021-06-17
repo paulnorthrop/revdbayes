@@ -79,7 +79,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -114,7 +114,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -143,7 +143,9 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-and-minor-improvements" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
-<li>Corrected a minor typo in the introductory vignette: “random example” to “random sample”.</li>
+<li><p>In the generalised Pareto example in the introductory vignette, it is now noted that for the Gulf of Mexico data a threshold set at the 95% threshold results in only a small number (16) of threshold excesses.</p></li>
+<li><p>In the GP section of the introductory vignette a link is given to the binomial-GP analysis in the Posterior Predictive Extreme Value Inference vignette.</p></li>
+<li><p>In the introductory vignette: corrected references to plots as “on the left” when in fact they were below, and corrected “random example” to “random sample”.</p></li>
 </ul>
 </div>
 </div>
@@ -295,7 +297,7 @@
 <ul>
 <li><p>In some extreme cases (datasets with very small numbers of threshold excesses) calling <code>predict.evpost</code> with <code>type = "q"</code> and <code>x</code> close to 1 returns an imprecise value for the requested predictive quantiles. This has been corrected by using <code><a href="https://rdrr.io/r/stats/uniroot.html">stats::uniroot</a></code> rather than <code><a href="https://rdrr.io/r/stats/nlminb.html">stats::nlminb</a></code>.</p></li>
 <li><p>A bug (missing <code>drop = FALSE</code> in subsetting a matrix) in <code>plot.evpred</code> produced an error message if <code>n_years</code> was scalar in the prior call to <code>predict.evpost</code>. This bug has been corrected.</p></li>
-<li><p>The placing of … in the function definitions of <code>rpost</code> and <code>rpost_rcpp</code> meant that it was not possible to supply the argument <code>r</code> to be passed to <code><a href="https://rdrr.io/pkg/rust/man/ru.html">rust::ru</a></code> or <code><a href="https://rdrr.io/pkg/rust/man/ru_rcpp.html">rust::ru_rcpp</a></code> to change the ratio-of-uniforms tuning parameter <code>r</code>. Furthermore, if <code>model = "os"</code> then trying to do this sets <code>ros</code> in error. This has been corrected.</p></li>
+<li><p>The placing of … in the function definitions of <code>rpost</code> and <code>rpost_rcpp</code> meant that it was not possible to supply the argument <code>r</code> to be passed to <code><a href="https://paulnorthrop.github.io/rust/reference/ru.html">rust::ru</a></code> or <code><a href="https://paulnorthrop.github.io/rust/reference/ru_rcpp.html">rust::ru_rcpp</a></code> to change the ratio-of-uniforms tuning parameter <code>r</code>. Furthermore, if <code>model = "os"</code> then trying to do this sets <code>ros</code> in error. This has been corrected.</p></li>
 <li><p>A bug meant that the values returned by <code><a href="https://rdrr.io/r/stats/predict.html">predict(evpost_object, type = "d")</a></code> being incorrect if <code>evpost_object</code> was returned from a call to <code>rpost</code> using <code>model = bingp</code>. The values returned were too small: they differ from the correct values by a factor approximately equal to the proportion of observations that lie above the threshold. This bug has been corrected.</p></li>
 </ul>
 </div>
@@ -339,7 +341,7 @@
 <ul>
 <li><p>A new vignette (Posterior Predictive Extreme Value Inference using the revdbayes Package) provides an overview of most of the new features. Run browseVignettes(“revdbayes”) to access.</p></li>
 <li><p>S3 <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> method for class ‘evpost’ performs predictive inference about the largest observation observed in N years, returning an object of class <code>evpred</code>.</p></li>
-<li><p>S3 <code><a href="https://rdrr.io/r/base/plot.html">plot()</a></code> for the <code>evpred</code> object returned by <code>predict.evpost</code>.</p></li>
+<li><p>S3 <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> for the <code>evpred</code> object returned by <code>predict.evpost</code>.</p></li>
 <li><p>S3 <code><a href="../reference/pp_check.evpost.html">pp_check()</a></code> method for class ‘evpost’ performs posterior predictive checks using the bayesplot package.</p></li>
 <li><p>Interface to the bayesplot package added in the S3 <code>plot.evpost</code> method.</p></li>
 <li><p><code>model = bingp</code> can now be supplied to <code><a href="../reference/rpost.html">rpost()</a></code> to add inferences about the probability of threshold exceedance to inferences about threshold excesses based on the Generalised Pareto (GP) model. <code><a href="../reference/set_bin_prior.html">set_bin_prior()</a></code> can be used to set a prior for this probability.</p></li>
@@ -376,7 +378,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -89,7 +89,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -124,7 +124,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -160,22 +160,22 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for evpost</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(
-  <span class='no'>x</span>,
-  <span class='no'>y</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span>(<span class='no'>x</span>$<span class='no'>d</span> <span class='kw'>==</span> <span class='fl'>1</span>, <span class='fl'>1001</span>, <span class='fl'>101</span>),
-  <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.1</span>, <span class='fl'>0.25</span>, <span class='fl'>0.75</span>, <span class='fl'>0.95</span>, <span class='fl'>0.99</span>),
-  <span class='kw'>ru_scale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>xlabs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ylabs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>points_par</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>8</span>),
-  <span class='kw'>pu_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>add_pu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>use_bayesplot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>fun_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"areas"</span>, <span class='st'>"intervals"</span>, <span class='st'>"dens"</span>, <span class='st'>"hist"</span>, <span class='st'>"scatter"</span>)
-)</pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>y</span>,
+  <span class='va'>...</span>,
+  n <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>$</span><span class='va'>d</span> <span class='op'>==</span> <span class='fl'>1</span>, <span class='fl'>1001</span>, <span class='fl'>101</span><span class='op'>)</span>,
+  prob <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>0.1</span>, <span class='fl'>0.25</span>, <span class='fl'>0.75</span>, <span class='fl'>0.95</span>, <span class='fl'>0.99</span><span class='op'>)</span>,
+  ru_scale <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  rows <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xlabs <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ylabs <span class='op'>=</span> <span class='cn'>NULL</span>,
+  points_par <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>col <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span>,
+  pu_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  add_pu <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  use_bayesplot <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  fun_name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"areas"</span>, <span class='st'>"intervals"</span>, <span class='st'>"dens"</span>, <span class='st'>"hist"</span>, <span class='st'>"scatter"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -291,32 +291,46 @@ Models. R package version 1.1.0.
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## GP posterior</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>gom</span>)
-<span class='no'>u</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span>(<span class='no'>gom</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fl'>0.65</span>)
-<span class='no'>fp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set_prior.html'>set_prior</a></span>(<span class='kw'>prior</span> <span class='kw'>=</span> <span class='st'>"flat"</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"gp"</span>, <span class='kw'>min_xi</span> <span class='kw'>=</span> -<span class='fl'>1</span>)
-<span class='no'>gpg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rpost.html'>rpost</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"gp"</span>, <span class='kw'>prior</span> <span class='kw'>=</span> <span class='no'>fp</span>, <span class='kw'>thresh</span> <span class='kw'>=</span> <span class='no'>u</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>gom</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>gpg</span>)</div><div class='img'><img src='plot.evpost-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>gom</span><span class='op'>)</span>
+<span class='va'>u</span> <span class='op'>&lt;-</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span><span class='op'>(</span><span class='va'>gom</span>, probs <span class='op'>=</span> <span class='fl'>0.65</span><span class='op'>)</span>
+<span class='va'>fp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='set_prior.html'>set_prior</a></span><span class='op'>(</span>prior <span class='op'>=</span> <span class='st'>"flat"</span>, model <span class='op'>=</span> <span class='st'>"gp"</span>, min_xi <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>gpg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rpost.html'>rpost</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>1000</span>, model <span class='op'>=</span> <span class='st'>"gp"</span>, prior <span class='op'>=</span> <span class='va'>fp</span>, thresh <span class='op'>=</span> <span class='va'>u</span>, data <span class='op'>=</span> <span class='va'>gom</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>gpg</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.evpost-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># \donttest{</span>
 <span class='co'># Using the bayesplot package</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>gpg</span>, <span class='kw'>use_bayesplot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='plot.evpost-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>gpg</span>, <span class='kw'>use_bayesplot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pars</span> <span class='kw'>=</span> <span class='st'>"xi"</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</div><div class='img'><img src='plot.evpost-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>gpg</span>, <span class='kw'>use_bayesplot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fun_name</span> <span class='kw'>=</span> <span class='st'>"intervals"</span>, <span class='kw'>pars</span> <span class='kw'>=</span> <span class='st'>"xi"</span>)</div><div class='img'><img src='plot.evpost-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>gpg</span>, <span class='kw'>use_bayesplot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fun_name</span> <span class='kw'>=</span> <span class='st'>"hist"</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='plot.evpost-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>gpg</span>, <span class='kw'>use_bayesplot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fun_name</span> <span class='kw'>=</span> <span class='st'>"dens"</span>)</div><div class='img'><img src='plot.evpost-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>gpg</span>, <span class='kw'>use_bayesplot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fun_name</span> <span class='kw'>=</span> <span class='st'>"scatter"</span>)</div><div class='img'><img src='plot.evpost-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>gpg</span>, use_bayesplot <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.evpost-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>gpg</span>, use_bayesplot <span class='op'>=</span> <span class='cn'>TRUE</span>, pars <span class='op'>=</span> <span class='st'>"xi"</span>, prob <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.evpost-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>gpg</span>, use_bayesplot <span class='op'>=</span> <span class='cn'>TRUE</span>, fun_name <span class='op'>=</span> <span class='st'>"intervals"</span>, pars <span class='op'>=</span> <span class='st'>"xi"</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.evpost-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>gpg</span>, use_bayesplot <span class='op'>=</span> <span class='cn'>TRUE</span>, fun_name <span class='op'>=</span> <span class='st'>"hist"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='plot.evpost-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>gpg</span>, use_bayesplot <span class='op'>=</span> <span class='cn'>TRUE</span>, fun_name <span class='op'>=</span> <span class='st'>"dens"</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.evpost-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>gpg</span>, use_bayesplot <span class='op'>=</span> <span class='cn'>TRUE</span>, fun_name <span class='op'>=</span> <span class='st'>"scatter"</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.evpost-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
 
 <span class='co'>## bin-GP posterior</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>gom</span>)
-<span class='no'>u</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span>(<span class='no'>gom</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fl'>0.65</span>)
-<span class='no'>fp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set_prior.html'>set_prior</a></span>(<span class='kw'>prior</span> <span class='kw'>=</span> <span class='st'>"flat"</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"gp"</span>, <span class='kw'>min_xi</span> <span class='kw'>=</span> -<span class='fl'>1</span>)
-<span class='no'>bp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set_bin_prior.html'>set_bin_prior</a></span>(<span class='kw'>prior</span> <span class='kw'>=</span> <span class='st'>"jeffreys"</span>)
-<span class='no'>npy_gom</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>gom</span>)/<span class='fl'>105</span>
-<span class='no'>bgpg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rpost.html'>rpost</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"bingp"</span>, <span class='kw'>prior</span> <span class='kw'>=</span> <span class='no'>fp</span>, <span class='kw'>thresh</span> <span class='kw'>=</span> <span class='no'>u</span>,
-              <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>gom</span>, <span class='kw'>bin_prior</span> <span class='kw'>=</span> <span class='no'>bp</span>, <span class='kw'>npy</span> <span class='kw'>=</span> <span class='no'>npy_gom</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bgpg</span>)</div><div class='img'><img src='plot.evpost-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bgpg</span>, <span class='kw'>pu_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='plot.evpost-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bgpg</span>, <span class='kw'>add_pu</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='plot.evpost-10.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>gom</span><span class='op'>)</span>
+<span class='va'>u</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span><span class='op'>(</span><span class='va'>gom</span>, probs <span class='op'>=</span> <span class='fl'>0.65</span><span class='op'>)</span>
+<span class='va'>fp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='set_prior.html'>set_prior</a></span><span class='op'>(</span>prior <span class='op'>=</span> <span class='st'>"flat"</span>, model <span class='op'>=</span> <span class='st'>"gp"</span>, min_xi <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>bp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='set_bin_prior.html'>set_bin_prior</a></span><span class='op'>(</span>prior <span class='op'>=</span> <span class='st'>"jeffreys"</span><span class='op'>)</span>
+<span class='va'>npy_gom</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>gom</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>105</span>
+<span class='va'>bgpg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rpost.html'>rpost</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>1000</span>, model <span class='op'>=</span> <span class='st'>"bingp"</span>, prior <span class='op'>=</span> <span class='va'>fp</span>, thresh <span class='op'>=</span> <span class='va'>u</span>,
+              data <span class='op'>=</span> <span class='va'>gom</span>, bin_prior <span class='op'>=</span> <span class='va'>bp</span>, npy <span class='op'>=</span> <span class='va'>npy_gom</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bgpg</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.evpost-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bgpg</span>, pu_only <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.evpost-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bgpg</span>, add_pu <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.evpost-10.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># \donttest{</span>
 <span class='co'># Using the bayesplot package</span>
-<span class='fu'><a href='https://rdrr.io/r/base/dimnames.html'>dimnames</a></span>(<span class='no'>bgpg</span>$<span class='no'>bin_sim_vals</span>)</div><div class='output co'>#&gt; [[1]]
+<span class='fu'><a href='https://rdrr.io/r/base/dimnames.html'>dimnames</a></span><span class='op'>(</span><span class='va'>bgpg</span><span class='op'>$</span><span class='va'>bin_sim_vals</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [[1]]
 #&gt; NULL
 #&gt; 
 #&gt; [[2]]
 #&gt; [1] "p[u]"
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bgpg</span>, <span class='kw'>use_bayesplot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='plot.evpost-11.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bgpg</span>, <span class='kw'>use_bayesplot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fun_name</span> <span class='kw'>=</span> <span class='st'>"hist"</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='plot.evpost-12.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>bgpg</span>, <span class='kw'>use_bayesplot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pars</span> <span class='kw'>=</span> <span class='st'>"p[u]"</span>)</div><div class='img'><img src='plot.evpost-13.png' alt='' width='700' height='433' /></div><div class='input'># }
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bgpg</span>, use_bayesplot <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.evpost-11.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bgpg</span>, use_bayesplot <span class='op'>=</span> <span class='cn'>TRUE</span>, fun_name <span class='op'>=</span> <span class='st'>"hist"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='plot.evpost-12.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>bgpg</span>, use_bayesplot <span class='op'>=</span> <span class='cn'>TRUE</span>, pars <span class='op'>=</span> <span class='st'>"p[u]"</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.evpost-13.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -333,7 +347,7 @@ Models. R package version 1.1.0.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

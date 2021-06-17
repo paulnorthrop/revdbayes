@@ -81,7 +81,7 @@ random generation for the generalised Pareto (GP) distribution." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -116,7 +116,7 @@ random generation for the generalised Pareto (GP) distribution." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -143,13 +143,13 @@ random generation for the generalised Pareto (GP) distribution." />
 random generation for the generalised Pareto (GP) distribution.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dgp</span>(<span class='no'>x</span>, <span class='kw'>loc</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dgp</span><span class='op'>(</span><span class='va'>x</span>, loc <span class='op'>=</span> <span class='fl'>0</span>, scale <span class='op'>=</span> <span class='fl'>1</span>, shape <span class='op'>=</span> <span class='fl'>0</span>, log <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>pgp</span>(<span class='no'>q</span>, <span class='kw'>loc</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>pgp</span><span class='op'>(</span><span class='va'>q</span>, loc <span class='op'>=</span> <span class='fl'>0</span>, scale <span class='op'>=</span> <span class='fl'>1</span>, shape <span class='op'>=</span> <span class='fl'>0</span>, lower.tail <span class='op'>=</span> <span class='cn'>TRUE</span>, log.p <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>qgp</span>(<span class='no'>p</span>, <span class='kw'>loc</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>qgp</span><span class='op'>(</span><span class='va'>p</span>, loc <span class='op'>=</span> <span class='fl'>0</span>, scale <span class='op'>=</span> <span class='fl'>1</span>, shape <span class='op'>=</span> <span class='fl'>0</span>, lower.tail <span class='op'>=</span> <span class='cn'>TRUE</span>, log.p <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>rgp</span>(<span class='no'>n</span>, <span class='kw'>loc</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+<span class='fu'>rgp</span><span class='op'>(</span><span class='va'>n</span>, loc <span class='op'>=</span> <span class='fl'>0</span>, scale <span class='op'>=</span> <span class='fl'>1</span>, shape <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -222,13 +222,24 @@ required.</p></td>
   Chapter 4: <a href='https://doi.org/10.1007/978-1-4471-3675-0_4'>https://doi.org/10.1007/978-1-4471-3675-0_4</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>dgp</span>(<span class='fl'>0</span>:<span class='fl'>4</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>0.8</span>)</div><div class='output co'>#&gt; [1] 2.00000000 0.23299144 0.07919889 0.03831043 0.02214413</div><div class='input'><span class='fu'>dgp</span>(<span class='fl'>1</span>:<span class='fl'>6</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>shape</span> <span class='kw'>=</span> -<span class='fl'>0.2</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] -1.350155 -5.744604      -Inf      -Inf      -Inf      -Inf</div><div class='input'><span class='fu'>dgp</span>(<span class='fl'>1</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>0.2</span>, <span class='fl'>0.4</span>))</div><div class='output co'>#&gt; [1] 0.4096000 0.3080008</div><div class='input'>
-<span class='fu'>pgp</span>(<span class='fl'>0</span>:<span class='fl'>4</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>0.8</span>)</div><div class='output co'>#&gt; [1] 0.0000000 0.6971111 0.8336823 0.8888998 0.9180667</div><div class='input'><span class='fu'>pgp</span>(<span class='fl'>1</span>:<span class='fl'>6</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>shape</span> <span class='kw'>=</span> -<span class='fl'>0.2</span>)</div><div class='output co'>#&gt; [1] 0.92224 0.99968 1.00000 1.00000 1.00000 1.00000</div><div class='input'><span class='fu'>pgp</span>(<span class='fl'>1</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>0.2</span>, <span class='fl'>0.4</span>))</div><div class='output co'>#&gt; [1] 0.6723200 0.3660619</div><div class='input'><span class='fu'>pgp</span>(<span class='fl'>7</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>0.2</span>, <span class='fl'>0.4</span>))</div><div class='output co'>#&gt; [1] 1.0000000 0.9644744</div><div class='input'>
-<span class='fu'>qgp</span>((<span class='fl'>0</span>:<span class='fl'>9</span>)/<span class='fl'>10</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>0.8</span>)</div><div class='output co'>#&gt;  [1] 0.00000000 0.05496414 0.12215039 0.20638385 0.31550047 0.46318820
-#&gt;  [7] 0.67586439 1.01250643 1.63993645 3.31848340</div><div class='input'><span class='fu'>qgp</span>(<span class='fl'>0.5</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>), <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>0.5</span>, <span class='fl'>0.5</span>))</div><div class='output co'>#&gt; [1] 0.2928932 0.8284271</div><div class='input'>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> (<span class='fl'>1</span>:<span class='fl'>9</span>)/<span class='fl'>10</span>
-<span class='fu'>pgp</span>(<span class='fu'>qgp</span>(<span class='no'>p</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>0.8</span>), <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>0.8</span>)</div><div class='output co'>#&gt; [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9</div><div class='input'>
-<span class='fu'>rgp</span>(<span class='fl'>6</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>0.8</span>)</div><div class='output co'>#&gt; [1] 1.55662486 0.01411101 3.77365078 0.41502594 2.10403149 0.13302686</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>dgp</span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>4</span>, scale <span class='op'>=</span> <span class='fl'>0.5</span>, shape <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 2.00000000 0.23299144 0.07919889 0.03831043 0.02214413</div><div class='input'><span class='fu'>dgp</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, scale <span class='op'>=</span> <span class='fl'>0.5</span>, shape <span class='op'>=</span> <span class='op'>-</span><span class='fl'>0.2</span>, log <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] -1.350155 -5.744604      -Inf      -Inf      -Inf      -Inf</div><div class='input'><span class='fu'>dgp</span><span class='op'>(</span><span class='fl'>1</span>, scale <span class='op'>=</span> <span class='fl'>1</span>, shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.2</span>, <span class='fl'>0.4</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.4096000 0.3080008</div><div class='input'>
+<span class='fu'>pgp</span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>4</span>, scale <span class='op'>=</span> <span class='fl'>0.5</span>, shape <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.0000000 0.6971111 0.8336823 0.8888998 0.9180667</div><div class='input'><span class='fu'>pgp</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, scale <span class='op'>=</span> <span class='fl'>0.5</span>, shape <span class='op'>=</span> <span class='op'>-</span><span class='fl'>0.2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.92224 0.99968 1.00000 1.00000 1.00000 1.00000</div><div class='input'><span class='fu'>pgp</span><span class='op'>(</span><span class='fl'>1</span>, scale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>, shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.2</span>, <span class='fl'>0.4</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.6723200 0.3660619</div><div class='input'><span class='fu'>pgp</span><span class='op'>(</span><span class='fl'>7</span>, scale <span class='op'>=</span> <span class='fl'>1</span>, shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.2</span>, <span class='fl'>0.4</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 1.0000000 0.9644744</div><div class='input'>
+<span class='fu'>qgp</span><span class='op'>(</span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>10</span>, scale <span class='op'>=</span> <span class='fl'>0.5</span>, shape <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] 0.00000000 0.05496414 0.12215039 0.20638385 0.31550047 0.46318820
+#&gt;  [7] 0.67586439 1.01250643 1.63993645 3.31848340</div><div class='input'><span class='fu'>qgp</span><span class='op'>(</span><span class='fl'>0.5</span>, scale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>1</span><span class='op'>)</span>, shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.5</span>, <span class='fl'>0.5</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.2928932 0.8284271</div><div class='input'>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>10</span>
+<span class='fu'>pgp</span><span class='op'>(</span><span class='fu'>qgp</span><span class='op'>(</span><span class='va'>p</span>, scale <span class='op'>=</span> <span class='fl'>2</span>, shape <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span>, scale <span class='op'>=</span> <span class='fl'>2</span>, shape <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9</div><div class='input'>
+<span class='fu'>rgp</span><span class='op'>(</span><span class='fl'>6</span>, scale <span class='op'>=</span> <span class='fl'>0.5</span>, shape <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 1.55662486 0.01411101 3.77365078 0.41502594 2.10403149 0.13302686</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -244,7 +255,7 @@ required.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

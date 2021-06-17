@@ -83,7 +83,7 @@ a Dirichlet prior on differences between these probabilities)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -118,7 +118,7 @@ a Dirichlet prior on differences between these probabilities)." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -147,7 +147,7 @@ for ratios of probabilities (which is equivalent to
 a Dirichlet prior on differences between these probabilities).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rprior_prob</span>(<span class='no'>n</span>, <span class='no'>quant</span>, <span class='no'>alpha</span>, <span class='kw'>exc</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>lb</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lb_prob</span> <span class='kw'>=</span> <span class='fl'>0.001</span>)</pre>
+    <pre class="usage"><span class='fu'>rprior_prob</span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>quant</span>, <span class='va'>alpha</span>, exc <span class='op'>=</span> <span class='cn'>FALSE</span>, lb <span class='op'>=</span> <span class='cn'>NULL</span>, lb_prob <span class='op'>=</span> <span class='fl'>0.001</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -247,10 +247,11 @@ then <code>lb_prob</code> is not used.</p></td>
   from an extreme value posterior distribution.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>quant</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>85</span>, <span class='fl'>88</span>, <span class='fl'>95</span>)
-<span class='no'>alpha</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>2.5</span>, <span class='fl'>2.25</span>, <span class='fl'>0.25</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>rprior_prob</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>quant</span> <span class='kw'>=</span> <span class='no'>quant</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>exc</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>rprior_prob</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>quant</span> <span class='kw'>=</span> <span class='no'>quant</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>alpha</span>, <span class='kw'>exc</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>lb</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>quant</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>85</span>, <span class='fl'>88</span>, <span class='fl'>95</span><span class='op'>)</span>
+<span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>2.5</span>, <span class='fl'>2.25</span>, <span class='fl'>0.25</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>rprior_prob</span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>1000</span>, quant <span class='op'>=</span> <span class='va'>quant</span>, alpha <span class='op'>=</span> <span class='va'>alpha</span>, exc <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>rprior_prob</span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>1000</span>, quant <span class='op'>=</span> <span class='va'>quant</span>, alpha <span class='op'>=</span> <span class='va'>alpha</span>, exc <span class='op'>=</span> <span class='cn'>TRUE</span>, lb <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -266,7 +267,7 @@ then <code>lb_prob</code> is not used.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

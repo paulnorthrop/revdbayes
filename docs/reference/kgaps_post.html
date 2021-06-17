@@ -82,7 +82,7 @@ for threshold interexceedance times of Suveges and Davison (2010)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -117,7 +117,7 @@ for threshold interexceedance times of Suveges and Davison (2010)." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -140,22 +140,22 @@ for threshold interexceedance times of Suveges and Davison (2010)." />
     </div>
 
     <div class="ref-description">
-    <p>Uses the <code><a href='https://rdrr.io/pkg/rust/man/rust.html'>rust</a></code> package to simulate from the posterior
+    <p>Uses the <code><a href='https://paulnorthrop.github.io/rust/reference/rust.html'>rust</a></code> package to simulate from the posterior
 distribution of the extremal index \(\theta\) based on the K-gaps model
 for threshold interexceedance times of Suveges and Davison (2010).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kgaps_post</span>(
-  <span class='no'>data</span>,
-  <span class='no'>thresh</span>,
-  <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>inc_cens</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>beta</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>param</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"logit"</span>, <span class='st'>"theta"</span>),
-  <span class='kw'>use_rcpp</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>kgaps_post</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  <span class='va'>thresh</span>,
+  k <span class='op'>=</span> <span class='fl'>1</span>,
+  n <span class='op'>=</span> <span class='fl'>1000</span>,
+  inc_cens <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  alpha <span class='op'>=</span> <span class='fl'>1</span>,
+  beta <span class='op'>=</span> <span class='fl'>1</span>,
+  param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"logit"</span>, <span class='st'>"theta"</span><span class='op'>)</span>,
+  use_rcpp <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -207,9 +207,9 @@ posterior with mode equal to 0 or 1.</p></td>
     <tr>
       <th>use_rcpp</th>
       <td><p>A logical scalar.  If <code>TRUE</code> (the default) the
-rust function <code><a href='https://rdrr.io/pkg/rust/man/ru_rcpp.html'>ru_rcpp</a></code> is used for
+rust function <code><a href='https://paulnorthrop.github.io/rust/reference/ru_rcpp.html'>ru_rcpp</a></code> is used for
 posterior simulation.  If <code>FALSE</code> the (slower) function
-<code><a href='https://rdrr.io/pkg/rust/man/ru.html'>ru</a></code> is used.</p></td>
+<code><a href='https://paulnorthrop.github.io/rust/reference/ru.html'>ru</a></code> is used.</p></td>
     </tr>
     </table>
 
@@ -217,7 +217,7 @@ posterior simulation.  If <code>FALSE</code> the (slower) function
 
     <p>An object (list) of class <code>"evpost"</code>, which has the same
   structure as an object of class <code>"ru"</code> returned from
-  <code><a href='https://rdrr.io/pkg/rust/man/ru.html'>ru</a></code>.
+  <code><a href='https://paulnorthrop.github.io/rust/reference/ru.html'>ru</a></code>.
   In addition this list contains</p><ul>
 <li><p><code>model</code>: The character scalar <code>"kgaps"</code>.</p></li>
 <li><p><code>thresh</code>: The argument <code>thresh</code>.</p></li>
@@ -234,7 +234,7 @@ posterior simulation.  If <code>FALSE</code> the (slower) function
     \exp\{- \theta q (S_0 + \cdots + S_N)\}.$$
   See <code><a href='kgaps_stats.html'>kgaps_stats</a></code> for a description of the variables
   involved in the contribution of the likelihood to this expression.</p>
-<p>The <code><a href='https://rdrr.io/pkg/rust/man/ru.html'>ru</a></code> function in the <code><a href='https://rdrr.io/pkg/rust/man/rust.html'>rust</a></code>
+<p>The <code><a href='https://paulnorthrop.github.io/rust/reference/ru.html'>ru</a></code> function in the <code><a href='https://paulnorthrop.github.io/rust/reference/rust.html'>rust</a></code>
   package simulates from this posterior distribution using the
   generalised ratio-of-uniforms distribution.  To improve the probability
   of acceptance, and to ensure that the simulation will work even in
@@ -257,13 +257,14 @@ posterior simulation.  If <code>FALSE</code> the (slower) function
   extremal index \(\theta\) using the K-gaps model.</p>
 <p><code><a href='kgaps_stats.html'>kgaps_stats</a></code> for the calculation of sufficient
   statistics for the K-gaps model.</p>
-<p><code><a href='https://rdrr.io/pkg/rust/man/ru.html'>ru</a></code> for the form of the object returned by
+<p><code><a href='https://paulnorthrop.github.io/rust/reference/ru.html'>ru</a></code> for the form of the object returned by
   <code>kgaps_post</code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>thresh</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span>(<span class='no'>newlyn</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fl'>0.90</span>)
-<span class='no'>k_postsim</span> <span class='kw'>&lt;-</span> <span class='fu'>kgaps_post</span>(<span class='no'>newlyn</span>, <span class='no'>thresh</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>k_postsim</span>)</div><div class='img'><img src='kgaps_post-1.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='va'>thresh</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span><span class='op'>(</span><span class='va'>newlyn</span>, probs <span class='op'>=</span> <span class='fl'>0.90</span><span class='op'>)</span>
+<span class='va'>k_postsim</span> <span class='op'>&lt;-</span> <span class='fu'>kgaps_post</span><span class='op'>(</span><span class='va'>newlyn</span>, <span class='va'>thresh</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k_postsim</span><span class='op'>)</span>
+</div><div class='img'><img src='kgaps_post-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -279,7 +280,7 @@ posterior simulation.  If <code>FALSE</code> the (slower) function
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

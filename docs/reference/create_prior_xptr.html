@@ -86,7 +86,7 @@ the log-prior density.  Please see the vignette
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -121,7 +121,7 @@ the log-prior density.  Please see the vignette
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -153,7 +153,7 @@ the log-prior density.  Please see the vignette
 "Faster simulation using revdbayes" for more information.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_prior_xptr</span>(<span class='no'>fstr</span>)</pre>
+    <pre class="usage"><span class='fu'>create_prior_xptr</span><span class='op'>(</span><span class='va'>fstr</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,17 +187,18 @@ and the vignette "Rusting Faster: Simulation using Rcpp" in the package
 <p>The examples in the documentation of <code><a href='rpost_rcpp.html'>rpost_rcpp</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ptr_gp_flat</span> <span class='kw'>&lt;-</span> <span class='fu'>create_prior_xptr</span>(<span class='st'>"gp_flat"</span>)
-<span class='no'>prior_cfn</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set_prior.html'>set_prior</a></span>(<span class='kw'>prior</span> <span class='kw'>=</span> <span class='no'>ptr_gp_flat</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"gp"</span>, <span class='kw'>min_xi</span> <span class='kw'>=</span> -<span class='fl'>1</span>)
+    <pre class="examples"><div class='input'><span class='va'>ptr_gp_flat</span> <span class='op'>&lt;-</span> <span class='fu'>create_prior_xptr</span><span class='op'>(</span><span class='st'>"gp_flat"</span><span class='op'>)</span>
+<span class='va'>prior_cfn</span> <span class='op'>&lt;-</span> <span class='fu'><a href='set_prior.html'>set_prior</a></span><span class='op'>(</span>prior <span class='op'>=</span> <span class='va'>ptr_gp_flat</span>, model <span class='op'>=</span> <span class='st'>"gp"</span>, min_xi <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
 
-<span class='no'>ptr_gev_flat</span> <span class='kw'>&lt;-</span> <span class='fu'>create_prior_xptr</span>(<span class='st'>"gev_flat"</span>)
-<span class='no'>prior_cfn</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set_prior.html'>set_prior</a></span>(<span class='kw'>prior</span> <span class='kw'>=</span> <span class='no'>ptr_gev_flat</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"gev"</span>, <span class='kw'>min_xi</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
-                       <span class='kw'>max_xi</span> <span class='kw'>=</span> <span class='fl'>Inf</span>)
+<span class='va'>ptr_gev_flat</span> <span class='op'>&lt;-</span> <span class='fu'>create_prior_xptr</span><span class='op'>(</span><span class='st'>"gev_flat"</span><span class='op'>)</span>
+<span class='va'>prior_cfn</span> <span class='op'>&lt;-</span> <span class='fu'><a href='set_prior.html'>set_prior</a></span><span class='op'>(</span>prior <span class='op'>=</span> <span class='va'>ptr_gev_flat</span>, model <span class='op'>=</span> <span class='st'>"gev"</span>, min_xi <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span>,
+                       max_xi <span class='op'>=</span> <span class='cn'>Inf</span><span class='op'>)</span>
 
-<span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10000</span>, <span class='fl'>10000</span>, <span class='fl'>100</span>))
-<span class='no'>ptr_gev_norm</span> <span class='kw'>&lt;-</span> <span class='fu'>create_prior_xptr</span>(<span class='st'>"gev_norm"</span>)
-<span class='no'>pn_u</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set_prior.html'>set_prior</a></span>(<span class='kw'>prior</span> <span class='kw'>=</span> <span class='no'>ptr_gev_norm</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"gev"</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span>),
-                  <span class='kw'>icov</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span>(<span class='no'>mat</span>))</div></pre>
+<span class='va'>mat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10000</span>, <span class='fl'>10000</span>, <span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>ptr_gev_norm</span> <span class='op'>&lt;-</span> <span class='fu'>create_prior_xptr</span><span class='op'>(</span><span class='st'>"gev_norm"</span><span class='op'>)</span>
+<span class='va'>pn_u</span> <span class='op'>&lt;-</span> <span class='fu'><a href='set_prior.html'>set_prior</a></span><span class='op'>(</span>prior <span class='op'>=</span> <span class='va'>ptr_gev_norm</span>, model <span class='op'>=</span> <span class='st'>"gev"</span>, mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span>,
+                  icov <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -213,7 +214,7 @@ and the vignette "Rusting Faster: Simulation using Rcpp" in the package
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

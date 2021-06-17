@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -115,7 +115,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -141,25 +141,25 @@
     <p>Internal revdbayes functions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>process_data</span>(<span class='no'>model</span>, <span class='no'>data</span>, <span class='no'>thresh</span>, <span class='no'>noy</span>, <span class='no'>use_noy</span>, <span class='no'>ros</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>process_data</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>data</span>, <span class='va'>thresh</span>, <span class='va'>noy</span>, <span class='va'>use_noy</span>, <span class='va'>ros</span>, weights <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>create_ru_list</span>(<span class='no'>model</span>, <span class='no'>trans</span>, <span class='no'>rotate</span>, <span class='no'>min_xi</span>, <span class='no'>max_xi</span>)
+<span class='fu'>create_ru_list</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>trans</span>, <span class='va'>rotate</span>, <span class='va'>min_xi</span>, <span class='va'>max_xi</span><span class='op'>)</span>
 
-<span class='fu'>set_which_lam</span>(<span class='no'>model</span>)
+<span class='fu'>set_which_lam</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 
-<span class='fu'>set_range_phi</span>(<span class='no'>model</span>, <span class='no'>phi_mid</span>, <span class='no'>se_phi</span>, <span class='no'>mult</span>)
+<span class='fu'>set_range_phi</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>phi_mid</span>, <span class='va'>se_phi</span>, <span class='va'>mult</span><span class='op'>)</span>
 
-<span class='fu'>box_cox</span>(<span class='no'>x</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>gm</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lambda_tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='kw'>poly_order</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+<span class='fu'>box_cox</span><span class='op'>(</span><span class='va'>x</span>, lambda <span class='op'>=</span> <span class='fl'>1</span>, gm <span class='op'>=</span> <span class='fl'>1</span>, lambda_tol <span class='op'>=</span> <span class='fl'>1e-06</span>, poly_order <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
 
-<span class='fu'>box_cox_vec</span>(<span class='no'>x</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lambda_tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>)
+<span class='fu'>box_cox_vec</span><span class='op'>(</span><span class='va'>x</span>, lambda <span class='op'>=</span> <span class='fl'>1</span>, lambda_tol <span class='op'>=</span> <span class='fl'>1e-06</span><span class='op'>)</span>
 
-<span class='fu'>box_cox_deriv</span>(<span class='no'>x</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lambda_tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='kw'>poly_order</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+<span class='fu'>box_cox_deriv</span><span class='op'>(</span><span class='va'>x</span>, lambda <span class='op'>=</span> <span class='fl'>1</span>, lambda_tol <span class='op'>=</span> <span class='fl'>1e-06</span>, poly_order <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
 
-<span class='fu'>check_sample_size</span>(<span class='no'>prior_name</span>, <span class='no'>n_check</span>)
+<span class='fu'>check_sample_size</span><span class='op'>(</span><span class='va'>prior_name</span>, <span class='va'>n_check</span><span class='op'>)</span>
 
-<span class='fu'>check_sample_size_message</span>(<span class='no'>prior_name</span>, <span class='no'>n_check</span>)
+<span class='fu'>check_sample_size_message</span><span class='op'>(</span><span class='va'>prior_name</span>, <span class='va'>n_check</span><span class='op'>)</span>
 
-<span class='fu'>logNegNA</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>logNegNA</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -181,7 +181,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -82,7 +82,7 @@ Suveges and Davison (2010)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -117,7 +117,7 @@ Suveges and Davison (2010)." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -145,7 +145,7 @@ based on the K-gaps model for threshold inter-exceedances times of
 Suveges and Davison (2010).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kgaps_mle</span>(<span class='no'>data</span>, <span class='no'>thresh</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>inc_cens</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>kgaps_mle</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>thresh</span>, k <span class='op'>=</span> <span class='fl'>1</span>, inc_cens <span class='op'>=</span> <span class='cn'>FALSE</span>, conf <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -216,9 +216,10 @@ estimated.</p></td>
   statistics for the K-gaps model.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>thresh</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span>(<span class='no'>newlyn</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fl'>0.90</span>)
+    <pre class="examples"><div class='input'><span class='va'>thresh</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span><span class='op'>(</span><span class='va'>newlyn</span>, probs <span class='op'>=</span> <span class='fl'>0.90</span><span class='op'>)</span>
 <span class='co'># MLE and SE only</span>
-<span class='fu'>kgaps_mle</span>(<span class='no'>newlyn</span>, <span class='no'>thresh</span>)</div><div class='output co'>#&gt; $theta_mle
+<span class='fu'>kgaps_mle</span><span class='op'>(</span><span class='va'>newlyn</span>, <span class='va'>thresh</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $theta_mle
 #&gt; [1] 0.3779466
 #&gt; 
 #&gt; $theta_se
@@ -235,7 +236,8 @@ estimated.</p></td>
 #&gt; [1] 254.5477
 #&gt; 
 #&gt; </div><div class='input'><span class='co'># MLE, SE and 95% confidence interval</span>
-<span class='fu'>kgaps_mle</span>(<span class='no'>newlyn</span>, <span class='no'>thresh</span>, <span class='kw'>conf</span> <span class='kw'>=</span> <span class='fl'>95</span>)</div><div class='output co'>#&gt; $theta_mle
+<span class='fu'>kgaps_mle</span><span class='op'>(</span><span class='va'>newlyn</span>, <span class='va'>thresh</span>, conf <span class='op'>=</span> <span class='fl'>95</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $theta_mle
 #&gt; [1] 0.3779466
 #&gt; 
 #&gt; $theta_se
@@ -270,7 +272,7 @@ estimated.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

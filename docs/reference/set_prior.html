@@ -92,7 +92,7 @@ The argument model is used for consistency with rpost." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -127,7 +127,7 @@ The argument model is used for consistency with rpost." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/paulnorthrop/revdbayes/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -165,12 +165,12 @@ relates to the value of <code>noy</code> subsequently supplied to
 The argument <code>model</code> is used for consistency with <code>rpost</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_prior</span>(
-  <span class='kw'>prior</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"norm"</span>, <span class='st'>"loglognorm"</span>, <span class='st'>"mdi"</span>, <span class='st'>"flat"</span>, <span class='st'>"flatflat"</span>, <span class='st'>"jeffreys"</span>, <span class='st'>"beta"</span>,
-    <span class='st'>"prob"</span>, <span class='st'>"quant"</span>),
-  <span class='kw'>model</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gev"</span>, <span class='st'>"gp"</span>, <span class='st'>"pp"</span>, <span class='st'>"os"</span>),
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>set_prior</span><span class='op'>(</span>
+  prior <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"norm"</span>, <span class='st'>"loglognorm"</span>, <span class='st'>"mdi"</span>, <span class='st'>"flat"</span>, <span class='st'>"flatflat"</span>, <span class='st'>"jeffreys"</span>, <span class='st'>"beta"</span>,
+    <span class='st'>"prob"</span>, <span class='st'>"quant"</span><span class='op'>)</span>,
+  model <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"gev"</span>, <span class='st'>"gp"</span>, <span class='st'>"pp"</span>, <span class='st'>"os"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -384,9 +384,10 @@ All these priors have the arguments <code>min_xi</code> (prior lower bound on
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Normal prior for GEV parameters (mu, log(sigma), xi).</span>
-<span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10000</span>, <span class='fl'>10000</span>, <span class='fl'>100</span>))
-<span class='no'>pn</span> <span class='kw'>&lt;-</span> <span class='fu'>set_prior</span>(<span class='kw'>prior</span> <span class='kw'>=</span> <span class='st'>"norm"</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"gev"</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span>), <span class='kw'>cov</span> <span class='kw'>=</span> <span class='no'>mat</span>)
-<span class='no'>pn</span></div><div class='output co'>#&gt; $prior
+<span class='va'>mat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10000</span>, <span class='fl'>10000</span>, <span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>pn</span> <span class='op'>&lt;-</span> <span class='fu'>set_prior</span><span class='op'>(</span>prior <span class='op'>=</span> <span class='st'>"norm"</span>, model <span class='op'>=</span> <span class='st'>"gev"</span>, mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span>, cov <span class='op'>=</span> <span class='va'>mat</span><span class='op'>)</span>
+<span class='va'>pn</span>
+</div><div class='output co'>#&gt; $prior
 #&gt; [1] "gev_norm"
 #&gt; 
 #&gt; $mean
@@ -409,8 +410,9 @@ All these priors have the arguments <code>min_xi</code> (prior lower bound on
 #&gt; attr(,"model")
 #&gt; [1] "gev"</div><div class='input'>
 <span class='co'># Prior for GP parameters with flat prior for xi on (-1, infinity).</span>
-<span class='no'>fp</span> <span class='kw'>&lt;-</span> <span class='fu'>set_prior</span>(<span class='kw'>prior</span> <span class='kw'>=</span> <span class='st'>"flat"</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"gp"</span>, <span class='kw'>min_xi</span> <span class='kw'>=</span> -<span class='fl'>1</span>)
-<span class='no'>fp</span></div><div class='output co'>#&gt; $prior
+<span class='va'>fp</span> <span class='op'>&lt;-</span> <span class='fu'>set_prior</span><span class='op'>(</span>prior <span class='op'>=</span> <span class='st'>"flat"</span>, model <span class='op'>=</span> <span class='st'>"gp"</span>, min_xi <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>fp</span>
+</div><div class='output co'>#&gt; $prior
 #&gt; [1] "gp_flat"
 #&gt; 
 #&gt; $min_xi
@@ -427,18 +429,19 @@ All these priors have the arguments <code>min_xi</code> (prior lower bound on
 #&gt; attr(,"model")
 #&gt; [1] "gp"</div><div class='input'>
 <span class='co'># A user-defined prior (see the vignette for details).</span>
-<span class='no'>u_prior_fn</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>ab</span>) {
-  <span class='kw'>if</span> (<span class='no'>x</span>[<span class='fl'>1</span>] <span class='kw'>&lt;=</span> <span class='fl'>0</span> <span class='kw'>|</span> <span class='no'>x</span>[<span class='fl'>2</span>] <span class='kw'>&lt;=</span> -<span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>x</span>[<span class='fl'>2</span>] <span class='kw'>&gt;=</span> <span class='fl'>1</span>) {
-    <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(-<span class='fl'>Inf</span>)
-  }
-  <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(-<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>x</span>[<span class='fl'>1</span>]) + (<span class='no'>ab</span>[<span class='fl'>1</span>] - <span class='fl'>1</span>) * <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='fl'>1</span> + <span class='no'>x</span>[<span class='fl'>2</span>]) +
-         (<span class='no'>ab</span>[<span class='fl'>2</span>] - <span class='fl'>1</span>) * <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='fl'>1</span> - <span class='no'>x</span>[<span class='fl'>2</span>]))
-}
-<span class='no'>up</span> <span class='kw'>&lt;-</span> <span class='fu'>set_prior</span>(<span class='kw'>prior</span> <span class='kw'>=</span> <span class='no'>u_prior_fn</span>, <span class='kw'>ab</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>), <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"gp"</span>)
+<span class='va'>u_prior_fn</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>ab</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='kw'>if</span> <span class='op'>(</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'>&lt;=</span> <span class='fl'>0</span> <span class='op'>|</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>&lt;=</span> <span class='op'>-</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>&gt;=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='op'>-</span><span class='cn'>Inf</span><span class='op'>)</span>
+  <span class='op'>}</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>+</span> <span class='op'>(</span><span class='va'>ab</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>+</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>+</span>
+         <span class='op'>(</span><span class='va'>ab</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+<span class='va'>up</span> <span class='op'>&lt;-</span> <span class='fu'>set_prior</span><span class='op'>(</span>prior <span class='op'>=</span> <span class='va'>u_prior_fn</span>, ab <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>, model <span class='op'>=</span> <span class='st'>"gp"</span><span class='op'>)</span>
 
 <span class='co'># A user-defined prior using a pointer to a C++ function</span>
-<span class='no'>ptr_gp_flat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_prior_xptr.html'>create_prior_xptr</a></span>(<span class='st'>"gp_flat"</span>)
-<span class='no'>u_prior_ptr</span> <span class='kw'>&lt;-</span> <span class='fu'>set_prior</span>(<span class='kw'>prior</span> <span class='kw'>=</span> <span class='no'>ptr_gp_flat</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"gp"</span>)</div></pre>
+<span class='va'>ptr_gp_flat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='create_prior_xptr.html'>create_prior_xptr</a></span><span class='op'>(</span><span class='st'>"gp_flat"</span><span class='op'>)</span>
+<span class='va'>u_prior_ptr</span> <span class='op'>&lt;-</span> <span class='fu'>set_prior</span><span class='op'>(</span>prior <span class='op'>=</span> <span class='va'>ptr_gp_flat</span>, model <span class='op'>=</span> <span class='st'>"gp"</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -454,7 +457,7 @@ All these priors have the arguments <code>min_xi</code> (prior lower bound on
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
