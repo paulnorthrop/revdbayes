@@ -111,8 +111,6 @@ gpg <- rpost(n = n, model = "gp", prior = fp, thresh = u, data = gom,
 # Information about pp_check.evpost
 ?pp_check.evpost
 # Compare real and fake datasets
-#library(bayesplot)
-#library(ggplot2)
 pp_check(gpg, type = "multiple", subtype = "dens") + ggtitle("GP kernel density estimates")
 # Compare real and fake summary statistics
 pp_check(gpg, stat = "max")
