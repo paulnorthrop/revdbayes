@@ -1,5 +1,5 @@
 ---
-title: "EVA 2021 R exercises 1"
+title: "EVA 2021 revdbayes exercises 1"
 subtitle: "Ratio-of-uniforms using rust"
 output: html_notebook
 ---

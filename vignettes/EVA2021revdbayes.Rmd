@@ -37,7 +37,7 @@ rownames(tab) <- c("method", "tuning", "sample", "checking")
 knitr::kable(tab)
 ```
 
-## Generalised ratio-of-uniforms method {.smaller}
+## Ratio-of-uniforms method {.smaller}
 
 <!--
 <span style="color: blue;">Have any of you used this method before?</span>
@@ -65,7 +65,7 @@ for some $r \geq 0$, then $(v_1 / u ^r, \ldots, v_d / u ^ r)$ has density $f(x) 
 See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 -->
 
-## Increasing probability of acceptance
+## Increasing efficiency
 
 $$ p_a(d, r) = \frac{\int f(x) {\rm ~d}x}{(r d + 1) \, a(r) \displaystyle\prod_{i=1}^d \left[b_i^+(r) -b_i^-(r) \right]} $$
 
