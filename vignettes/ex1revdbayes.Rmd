@@ -22,7 +22,7 @@ output: html_notebook
     
 There is further information in the [Introduction to rust](https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html) vignette.
 
-```{r packages}
+```{r packages, message=FALSE}
 # We need the rust and mvtnorm packages
 if (!require(rust)) install.packages("rust")
 if (!require(mvtnorm)) install.packages("mvtnorm")
@@ -72,7 +72,6 @@ plot(x2)
 ## 2D normal
 
 ```{r 2Dnormal}
-library(mvtnorm)
 # two-dimensional normal with positive association ----------------
 rho <- 0.9
 covmat <- matrix(c(1, rho, rho, 1), 2, 2)
