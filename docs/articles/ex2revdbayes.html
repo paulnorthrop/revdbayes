@@ -111,6 +111,19 @@
 
     
     
+<div id="getting-started" class="section level2">
+<h2 class="hasAnchor">
+<a href="#getting-started" class="anchor"></a>Getting started</h2>
+<ul>
+<li>Install <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio Desktop</a> (if you do not already have it) and open it</li>
+<li>Save <a href="https://raw.githubusercontent.com/paulnorthrop/revdbayes/master/vignettes/ex2revdbayes.Rmd">ex2revdbayes.Rmd</a> to your computer (there is also a link to it above)</li>
+<li>Open <code>ex2revdbayes.Rmd</code> in Rstudio</li>
+<li>The R code is arranged in <em>chunks</em> highlighted in grey</li>
+<li>You can run the code in a chunk by clicking on the <strong>green triangle</strong> on the top right of the chunk</li>
+<li>There is information about Exercises 2 (and Exercises 1) in the <a href="https://paulnorthrop.github.io/revdbayes/articles/EVA2021revdbayes.html">EVA2021 revdbayes slides</a>
+</li>
+</ul>
+</div>
 <div id="aims" class="section level2">
 <h2 class="hasAnchor">
 <a href="#aims" class="anchor"></a>Aims</h2>
@@ -147,9 +160,9 @@
 <span class="co"># Simulation sample size</span>
 <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">10000</span></code></pre></div>
 </div>
-<div id="getting-started" class="section level2">
+<div id="getting-started-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-started" class="anchor"></a>Getting started</h2>
+<a href="#getting-started-1" class="anchor"></a>Getting started</h2>
 <ul>
 <li>Install <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio Desktop</a> (if you do not already have it) and open it</li>
 <li>Save <a href="https://raw.githubusercontent.com/paulnorthrop/revdbayes/master/vignettes/ex2revdbayes.Rmd">ex2revdbayes.Rmd</a> to your computer (there is also a link to it above)</li>
@@ -278,8 +291,15 @@
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">i_bgpp</span><span class="op">$</span><span class="va">short</span> </code></pre></div>
 <pre><code>##          lower    upper n_years level
-## [1,] 10.218917 40.39762     200    95
-## [2,]  9.305983 71.50933     200    99</code></pre>
+## [1,] 10.301938 40.43806     200    95
+## [2,]  9.426075 72.42416     200    99</code></pre>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># The predictive 100, 200 and 500 year return levels </span>
+<span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, type <span class="op">=</span> <span class="st">"q"</span>, n_years <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.99</span>, <span class="fl">0.995</span>, <span class="fl">0.998</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">y</span></code></pre></div>
+<pre><code>##          [,1]
+## [1,] 15.35108
+## [2,] 18.25417
+## [3,] 23.16753</code></pre>
 <p>See <a href="https://doi.org/10.1111/rssc.12159">Northrop and Attalides (2017)</a> for an analysis of these data using an informative prior.</p>
 </div>
 </div>
@@ -294,19 +314,10 @@
 </li>
 <li>Empirical rotation to reduce association</li>
 </ol>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Information about the rainfall data</span>
-<span class="op">?</span><span class="va">rainfall</span></code></pre></div>
-<pre><code>## Help on topic 'rainfall' was found in the following packages:
-## 
-##   Package               Library
-##   evdbayes              C:/Users/paul/Documents/R/win-library/4.1
-##   revdbayes             C:/Users/paul/Documents/R/win-library/4.1
-## 
-## 
-## Using the first match ...</code></pre>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Set a threshold and use the prior from the evdbayes user guide</span>
+<code class="sourceCode R"><span class="co"># Information about the rainfall data</span>
+<span class="op">?</span><span class="fu">revdbayes</span><span class="fu">::</span><span class="va"><a href="../reference/rainfall.html">rainfall</a></span>
+<span class="co"># Set a threshold and use the prior from the evdbayes user guide</span>
 <span class="va">rthresh</span> <span class="op">&lt;-</span> <span class="fl">40</span>
 <span class="va">prrain</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/evdbayes/man/prior.html">prior.quant</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">38.9</span>,<span class="fl">7.1</span>,<span class="fl">47</span><span class="op">)</span>, scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.5</span>,<span class="fl">6.3</span>,<span class="fl">2.6</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
@@ -330,7 +341,7 @@
 <p><img src="ex2revdbayes_files/figure-html/PPsampling-3.png" width="700"></p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">r1</span><span class="op">$</span><span class="va">pa</span>, <span class="va">r2</span><span class="op">$</span><span class="va">pa</span>, <span class="va">r3</span><span class="op">$</span><span class="va">pa</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 0.1678556 0.1922818 0.2994371</code></pre>
+<pre><code>## [1] 0.1701317 0.1919312 0.3017137</code></pre>
 <ul>
 <li>Based on the plots, which approach do you expect to have the largest probability of acceptance?</li>
 <li>Is this what you see in the values of <code>r1$pa</code>, <code>r2$pa</code> and <code>r3$pa</code>?</li>
@@ -340,7 +351,9 @@
 <h2 class="hasAnchor">
 <a href="#gev-model-for-block-maxima" class="anchor"></a>GEV model for block maxima</h2>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Use the prior from the evdbayes user guide</span>
+<code class="sourceCode R"><span class="co"># Information about the portpirie data</span>
+<span class="op">?</span><span class="fu">revdbayes</span><span class="fu">::</span><span class="va"><a href="../reference/portpirie.html">portpirie</a></span>
+<span class="co"># Use the prior from the evdbayes user guide</span>
 <span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>         
 <span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></code></pre></div>
 <div id="revdbayes" class="section level3">
@@ -374,15 +387,20 @@
                           tol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0.02</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">psd</span></code></pre></div>
 <pre><code>## Accept Rate values and proposal standard deviations at each iterations...
 ## Accept Rate   Prop. Std
-## 0.9 0.98 0.96     0.01 0.01 0.01 
-## 0.64 0.9 0.88     0.03 0.03 0.03 
-## 0.47 0.74 0.76    0.055 0.071 0.07 
-## 0.4 0.56 0.57     0.074 0.14 0.14 
-## 0.4 0.44 0.38     0.074 0.216 0.219 
-## 0.35 0.37 0.56    0.074 0.268 0.143 
-## 0.5 0.49 0.49     0.052 0.199 0.169 
-## 0.46 0.42 0.44    0.06 0.231 0.204 
-## 0.39 0.42 0.41    0.07 0.231 0.234</code></pre>
+## 0.86 0.95 0.97    0.01 0.01 0.01 
+## 0.67 0.9 0.89     0.03 0.03 0.03 
+## 0.49 0.76 0.74    0.057 0.071 0.071 
+## 0.37 0.57 0.59    0.08 0.143 0.138 
+## 0.47 0.41 0.42    0.054 0.224 0.221 
+## 0.45 0.43 0.43    0.06 0.224 0.221 
+## 0.42 0.34 0.34    0.068 0.268 0.27 
+## 0.39 0.48 0.44    0.068 0.195 0.194 
+## 0.42 0.43 0.39    0.068 0.231 0.218 
+## 0.4 0.37 0.41     0.068 0.26 0.218 
+## 0.41 0.46 0.44    0.068 0.22 0.218 
+## 0.42 0.39 0.43    0.068 0.243 0.206 
+## 0.43 0.39 0.45    0.068 0.243 0.207 
+## 0.39 0.42 0.41    0.073 0.243 0.221</code></pre>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">post</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/evdbayes/man/posterior.html">posterior</a></span><span class="op">(</span><span class="va">n</span>, init <span class="op">=</span> <span class="va">init</span>, prior <span class="op">=</span> <span class="va">pn</span>, lh <span class="op">=</span> <span class="st">"gev"</span>, 
                   data <span class="op">=</span> <span class="va">portpirie</span>, psd <span class="op">=</span> <span class="va">prop.sd.auto</span><span class="op">)</span>
@@ -404,7 +422,11 @@
 <code class="sourceCode R"><span class="co"># Effective sample sizes (10,000 for revdbayes)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html">effectiveSize</a></span><span class="op">(</span><span class="va">post_for_coda</span><span class="op">)</span></code></pre></div>
 <pre><code>##       mu    sigma       xi 
-## 1596.938 1415.019 1294.403</code></pre>
+## 1211.188 1195.183 1379.181</code></pre>
+<ul>
+<li>In practice one would run multiple chains and use the Gelman-Rubin convergence diagnostic, e.g. <code>gelamn.diag</code> in the <code>coda</code> package.</li>
+<li>The <a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html">Introduction to revdbayes</a> shows that the posterior samples from <code>evdbayes</code> and <code>revdbayes</code> are in agreement.</li>
+</ul>
 </div>
 </div>
   </div>

@@ -4,6 +4,15 @@ subtitle: "EV inference using revdbayes"
 output: html_notebook
 ---
 
+## Getting started
+
+* Install [RStudio Desktop](https://www.rstudio.com/products/rstudio/download/#download) (if you do not already have it) and open it
+* Save [ex2revdbayes.Rmd](https://raw.githubusercontent.com/paulnorthrop/revdbayes/master/vignettes/ex2revdbayes.Rmd) to your computer (there is also a link to it above)
+* Open `ex2revdbayes.Rmd` in Rstudio
+* The R code is arranged in *chunks* highlighted in grey
+* You can run the code in a chunk by clicking on the **green triangle** on the top right of the chunk
+* There is information about Exercises 2 (and Exercises 1) in the [EVA2021 revdbayes slides](https://paulnorthrop.github.io/revdbayes/articles/EVA2021revdbayes.html)
+
 ## Aims
 
 * Compare ROU approaches for sampling from a GP posterior
@@ -140,6 +149,10 @@ plot(i_bgpp, which_int = "both")
 i_bgpp$short 
 ```
 
+```{r}
+# The predictive 100, 200 and 500 year return levels 
+predict(bgpg, type = "q", n_years = 1, x = c(0.99, 0.995, 0.998))$y
+```
 See [Northrop and Attalides (2017)](https://doi.org/10.1111/rssc.12159) for an analysis of these data using an informative prior.
 
 ## PP model for threshold exceedances
@@ -152,7 +165,7 @@ We compare three ways to sample from a PP posterior distribution
 
 ```{r PPsetup}
 # Information about the rainfall data
-?rainfall
+?revdbayes::rainfall
 # Set a threshold and use the prior from the evdbayes user guide
 rthresh <- 40
 prrain <- prior.quant(shape = c(38.9,7.1,47), scale = c(1.5,6.3,2.6))
@@ -181,6 +194,8 @@ c(r1$pa, r2$pa, r3$pa)
 ## GEV model for block maxima
 
 ```{r GEVprior}
+# Information about the portpirie data
+?revdbayes::portpirie
 # Use the prior from the evdbayes user guide
 mat <- diag(c(10000, 10000, 100))         
 pn <- set_prior(prior = "norm", model = "gev", mean = c(0, 0, 0), cov = mat)
@@ -229,6 +244,7 @@ acfplot(post_for_coda)
 effectiveSize(post_for_coda)
 ```
 
-
+* In practice one would run multiple chains and use the Gelman-Rubin convergence diagnostic, e.g. `gelamn.diag` in the `coda` package. 
+* The [Introduction to revdbayes](https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html) shows that the posterior samples from `evdbayes` and `revdbayes` are in agreement.
 
 
