@@ -1,5 +1,10 @@
 destination: docs
 
+navbar:
+ structure:
+   left:  [intro, reference, articles, EVA2021, news]
+   right: [github]
+
 development:
   mode: release
 
