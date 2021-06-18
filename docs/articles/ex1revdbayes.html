@@ -40,7 +40,7 @@
 <li>
   <a href="../index.html">
     <span class="fas fa-home fa-lg"></span>
-     
+
   </a>
 </li>
 <li>
@@ -48,8 +48,8 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
+    EVA 2021
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -84,7 +84,7 @@
 <li>
   <a href="https://github.com/paulnorthrop/revdbayes/">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -95,22 +95,22 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><script src="ex1revdbayes_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>EVA 2021 revdbayes exercises 1</h1>
             <h3 class="subtitle">Ratio-of-uniforms using rust</h3>
-            
-      
+
+
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/master/vignettes/ex1revdbayes.Rmd"><code>vignettes/ex1revdbayes.Rmd</code></a></small>
       <div class="hidden name"><code>ex1revdbayes.Rmd</code></div>
 
     </div>
 
-    
-    
+
+
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting started</h2>
@@ -206,9 +206,9 @@
 <span class="co"># two-dimensional normal with positive association ----------------</span>
 <span class="va">rho</span> <span class="op">&lt;-</span> <span class="fl">0.9</span>
 <span class="va">covmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">rho</span>, <span class="va">rho</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>
-<span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulnorthrop.github.io/rust/reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="fu">mvtnorm</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">dmvnorm</a></span>, sigma <span class="op">=</span> <span class="va">covmat</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, 
+<span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulnorthrop.github.io/rust/reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="fu">mvtnorm</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">dmvnorm</a></span>, sigma <span class="op">=</span> <span class="va">covmat</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>,
          init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulnorthrop.github.io/rust/reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="fu">mvtnorm</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">dmvnorm</a></span>, sigma <span class="op">=</span> <span class="va">covmat</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, 
+<span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulnorthrop.github.io/rust/reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="fu">mvtnorm</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">dmvnorm</a></span>, sigma <span class="op">=</span> <span class="va">covmat</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>,
          init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, rotate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x1</span><span class="op">$</span><span class="va">pa</span>, <span class="va">x2</span><span class="op">$</span><span class="va">pa</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.2396932 0.5293806</code></pre>
@@ -280,7 +280,7 @@
       </footer>
 </div>
 
-  
+
 
 
   </body>
