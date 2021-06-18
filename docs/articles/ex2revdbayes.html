@@ -291,15 +291,15 @@
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">i_bgpp</span><span class="op">$</span><span class="va">short</span> </code></pre></div>
 <pre><code>##          lower    upper n_years level
-## [1,] 10.301938 40.43806     200    95
-## [2,]  9.426075 72.42416     200    99</code></pre>
+## [1,] 10.241065 42.52533     200    95
+## [2,]  9.353272 77.51587     200    99</code></pre>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># The predictive 100, 200 and 500 year return levels </span>
 <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, type <span class="op">=</span> <span class="st">"q"</span>, n_years <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.99</span>, <span class="fl">0.995</span>, <span class="fl">0.998</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">y</span></code></pre></div>
 <pre><code>##          [,1]
-## [1,] 15.35108
-## [2,] 18.25417
-## [3,] 23.16753</code></pre>
+## [1,] 15.55365
+## [2,] 18.61038
+## [3,] 23.83449</code></pre>
 <p>See <a href="https://doi.org/10.1111/rssc.12159">Northrop and Attalides (2017)</a> for an analysis of these data using an informative prior.</p>
 </div>
 </div>
@@ -341,7 +341,7 @@
 <p><img src="ex2revdbayes_files/figure-html/PPsampling-3.png" width="700"></p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">r1</span><span class="op">$</span><span class="va">pa</span>, <span class="va">r2</span><span class="op">$</span><span class="va">pa</span>, <span class="va">r3</span><span class="op">$</span><span class="va">pa</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 0.1701317 0.1919312 0.3017137</code></pre>
+<pre><code>## [1] 0.1673752 0.1928417 0.2976279</code></pre>
 <ul>
 <li>Based on the plots, which approach do you expect to have the largest probability of acceptance?</li>
 <li>Is this what you see in the values of <code>r1$pa</code>, <code>r2$pa</code> and <code>r3$pa</code>?</li>
@@ -387,20 +387,17 @@
                           tol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0.02</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">psd</span></code></pre></div>
 <pre><code>## Accept Rate values and proposal standard deviations at each iterations...
 ## Accept Rate   Prop. Std
-## 0.86 0.95 0.97    0.01 0.01 0.01 
-## 0.67 0.9 0.89     0.03 0.03 0.03 
-## 0.49 0.76 0.74    0.057 0.071 0.071 
-## 0.37 0.57 0.59    0.08 0.143 0.138 
-## 0.47 0.41 0.42    0.054 0.224 0.221 
-## 0.45 0.43 0.43    0.06 0.224 0.221 
-## 0.42 0.34 0.34    0.068 0.268 0.27 
-## 0.39 0.48 0.44    0.068 0.195 0.194 
-## 0.42 0.43 0.39    0.068 0.231 0.218 
-## 0.4 0.37 0.41     0.068 0.26 0.218 
-## 0.41 0.46 0.44    0.068 0.22 0.218 
-## 0.42 0.39 0.43    0.068 0.243 0.206 
-## 0.43 0.39 0.45    0.068 0.243 0.207 
-## 0.39 0.42 0.41    0.073 0.243 0.221</code></pre>
+## 0.89 0.97 0.98    0.01 0.01 0.01 
+## 0.67 0.92 0.89    0.03 0.03 0.03 
+## 0.45 0.76 0.73    0.057 0.073 0.071 
+## 0.37 0.55 0.57    0.076 0.146 0.137 
+## 0.48 0.42 0.42    0.052 0.223 0.213 
+## 0.46 0.43 0.4     0.06 0.223 0.213 
+## 0.4 0.4 0.43      0.069 0.269 0.213 
+## 0.37 0.37 0.38    0.069 0.269 0.258 
+## 0.45 0.44 0.46    0.06 0.207 0.194 
+## 0.44 0.42 0.42    0.064 0.226 0.22 
+## 0.39 0.42 0.42    0.069 0.226 0.22</code></pre>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">post</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/evdbayes/man/posterior.html">posterior</a></span><span class="op">(</span><span class="va">n</span>, init <span class="op">=</span> <span class="va">init</span>, prior <span class="op">=</span> <span class="va">pn</span>, lh <span class="op">=</span> <span class="st">"gev"</span>, 
                   data <span class="op">=</span> <span class="va">portpirie</span>, psd <span class="op">=</span> <span class="va">prop.sd.auto</span><span class="op">)</span>
@@ -422,7 +419,7 @@
 <code class="sourceCode R"><span class="co"># Effective sample sizes (10,000 for revdbayes)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html">effectiveSize</a></span><span class="op">(</span><span class="va">post_for_coda</span><span class="op">)</span></code></pre></div>
 <pre><code>##       mu    sigma       xi 
-## 1211.188 1195.183 1379.181</code></pre>
+## 1448.709 1273.948 1595.889</code></pre>
 <ul>
 <li>In practice one would run multiple chains and use the Gelman-Rubin convergence diagnostic, e.g. <code>gelamn.diag</code> in the <code>coda</code> package.</li>
 <li>The <a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html">Introduction to revdbayes</a> shows that the posterior samples from <code>evdbayes</code> and <code>revdbayes</code> are in agreement.</li>
