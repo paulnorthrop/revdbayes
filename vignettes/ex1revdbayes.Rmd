@@ -11,7 +11,7 @@ output: html_notebook
 * Open `ex1revdbayes.Rmd` in Rstudio
 * The R code is arranged in *chunks* highlighted in grey
 * You can run the code in a chunk by clicking on the green triangle on the top right of the chunk
-* There is information about Exercises 1 (and Exercises 2) in the ]EVA2021 revdbayes slides](https://paulnorthrop.github.io/revdbayes/articles/EVA2021revdbayes.html)
+* There is information about Exercises 1 (and Exercises 2) in the [EVA2021 revdbayes slides](https://paulnorthrop.github.io/revdbayes/articles/EVA2021revdbayes.html)
 
 ## Aims
 

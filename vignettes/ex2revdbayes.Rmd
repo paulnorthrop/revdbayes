@@ -35,7 +35,7 @@ n <- 10000
 * Open `ex2revdbayes.Rmd` in Rstudio
 * The R code is arranged in *chunks* highlighted in grey
 * You can run the code in a chunk by clicking on the green triangle on the top right of the chunk
-* There is information about Exercises 2 (and Exercises 1) in the ]EVA2021 revdbayes slides](https://paulnorthrop.github.io/revdbayes/articles/EVA2021revdbayes.html)
+* There is information about Exercises 2 (and Exercises 1) in the [EVA2021 revdbayes slides](https://paulnorthrop.github.io/revdbayes/articles/EVA2021revdbayes.html)
 
 ## GP model for threshold excesses
 
