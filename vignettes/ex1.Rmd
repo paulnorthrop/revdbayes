@@ -1,0 +1,109 @@
+---
+title: "EVA 2021 R exercises 1"
+subtitle: "Ratio-of-uniforms using rust"
+output: html_notebook
+---
+
+## Aims
+
+* Show the ROU method in action
+* Use rotation and transformation to
+    - increase the probability of acceptance
+    - enable the ROU to be used in otherwise unsuitable cases 
+    
+There is further information in the [Introduction to rust](https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html) vignette.
+
+```{r packages}
+# We need the rust and mvtnorm packages
+if (!require(rust)) install.packages("rust")
+if (!require(mvtnorm)) install.packages("mvtnorm")
+```
+
+```{r setup}
+library(rust)
+# Information about the ru() function
+?ru
+
+# Simulation sample size
+n <- 1000
+```
+
+## 1D normal
+
+```{r normal}
+# By default r = 1/2
+# init is an initial estimate of the mode of logf
+x1 <- ru(logf = dnorm, log = TRUE, d = 1, n = n, init = 0.1)
+x1$pa
+plot(x1)
+# r = 1 will be slightly less efficient
+x2 <- ru(logf = dnorm, log = TRUE, d = 1, n = n, init = 0.1, r = 1)
+x2$pa
+```
+
+## 1D log-normal
+
+```{r log-normal}
+# lower = 0 tells ru() that the log-normal is bounded below at 0
+x1 <- ru(logf = dlnorm, log = TRUE, d = 1, n = n, lower = 0, init = 1)
+x1$pa
+plot(x1)
+# We know that ln(X) is normal.  
+# First transform using a Box-Cox transformation with lambda=0 then simulate
+lambda <- 0
+x2 <- ru(logf = dlnorm, log = TRUE, d = 1, n = n, init = 0.1, trans = "BC",
+         lambda = lambda)
+x2$pa
+# Plot the (normal) distribution from which we have simulated using ROU 
+plot(x2, ru_scale = TRUE)
+# A check that the inverse (exponential) transformation has been applied
+plot(x2)
+```
+
+## 2D normal
+
+```{r 2Dnormal}
+library(mvtnorm)
+# two-dimensional normal with positive association ----------------
+rho <- 0.9
+covmat <- matrix(c(1, rho, rho, 1), 2, 2)
+x1 <- ru(logf = mvtnorm::dmvnorm, sigma = covmat, log = TRUE, d = 2, n = n, 
+         init = c(0, 0), rotate = FALSE)
+x2 <- ru(logf = mvtnorm::dmvnorm, sigma = covmat, log = TRUE, d = 2, n = n, 
+         init = c(0, 0), rotate = TRUE)
+c(x1$pa, x2$pa)
+```
+
+```{r}
+plot(x1, ru_scale = TRUE)
+plot(x2, ru_scale = TRUE)
+```
+
+## 1D gamma
+
+```{r gamma}
+# Exponential case, with strong skewness
+# A cube root transformation results in approximate symmetry
+alpha <- 1
+x1 <- ru(logf = dgamma, shape = alpha, log = TRUE, d = 1, n = n, trans = "BC",
+       lambda = 1/3, init = alpha)
+x1$pa
+# If alpha < 1 then the gamma density is extremely skewed and unbounded at 0
+# A transformation can avoid this, but it needs to be stronger than a cube root
+alpha <- 0.1
+x2 <- ru(logf = dgamma, shape = alpha, log = TRUE, d = 1, n = n, trans = "BC",
+         lambda = 0.068, init = 0)
+x2$pa
+plot(x2)
+plot(x2, ru_scale = TRUE)
+```
+
+## Can you break rust?
+
+```{r EpicFail?}
+# Pick a standard distribution
+?Distributions
+# Change dnorm to a d???? of your choice below
+# Perhaps also set lower, upper or init
+x <- ru(logf = dnorm, log = TRUE, n = n)
+```

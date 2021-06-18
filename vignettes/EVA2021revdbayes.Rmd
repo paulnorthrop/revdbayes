@@ -1,0 +1,387 @@
+---
+title: "EVA 2021 R Workshop: revdbayes"
+author: Paul Northrop, [p.northrop@ucl.ac.uk](p.northrop@ucl.ac.uk)
+date: 
+output:
+  ioslides_presentation: default
+  beamer_presentation: default
+lang: en-gb
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, fig.align = 'center',
+                      comment = "", fig.width = 5.5, fig.height = 3, 
+                      prompt = TRUE)
+knitr::opts_knit$set(global.par = TRUE)
+```
+
+## How did revdbayes start?
+
+* I needed to sample **quickly and automatically** from many EV (generalised Pareto) posteriors  
+* [threshr](https://cran.r-project.org/package=threshr): threshold selection based on 
+    - out-of-sample EV predictions 
+    - leave-one-out cross-validation
+* wanted to account for parameter uncertainty
+* wanted to avoid MCMC tuning and convergence diagnostics
+
+## What does revdbayes do?
+
+* Direct sampling from (simple) EV posterior distributions 
+* Has similar functionality to [evdbayes](https://cran.r-project.org/package=evdbayes)
+
+```{r, echo = FALSE}
+revdbayes <- c("ratio-of-uniforms (ROU)", "largely automatic", "random", "no") 
+evdbayes <- c("Markov chain Monte Carlo (MCMC)", "required", "dependent", "yes")
+tab <- cbind(evdbayes, revdbayes)
+rownames(tab) <- c("method", "tuning", "sample", "checking")
+knitr::kable(tab)
+```
+
+## Generalised ratio-of-uniforms method {.smaller}
+
+<!--
+<span style="color: blue;">Have any of you used this method before?</span>
+-->
+
+$d$-dimensional continuous $X = (X_1, \ldots, X_d)$ with density $\propto$ $f(x)$
+
+If $(u, v_1, \ldots, v_d)$ are uniformly distributed over
+
+$$ C(r) = \left\{ (u, v_1, \ldots, v_d): 0 < u \leq \left[ f\left( \frac{v_1}{u^r}, \ldots, \frac{v_d}{u^r} \right) \right] ^ {1/(r d + 1)} \right\} $$
+
+for some $r \geq 0$, then $(v_1 / u ^r, \ldots, v_d / u ^ r)$ has density $f(x) / \int f(x) {\rm ~d}x$
+
+**Acceptance-rejection algorithm**
+
+* simulate uniformly over a $(d+1)$-dimensional bounding box $\{ 0 < u \leq a(r), \, b_i^-(r) \leq v_i \leq b_i^+(r), \, i = 1, \ldots, d \}$
+* if simulated $(u, v_1, \ldots, v_d) \in C(r)$ then accept $x = (v_1 / u ^r, \ldots, v_d / u ^ r)$ 
+
+**Limitations**
+
+* $f$ must be bounded
+* $C(r)$ must be 'boxable'
+
+<!--
+See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
+-->
+
+## Increasing probability of acceptance
+
+$$ p_a(d, r) = \frac{\int f(x) {\rm ~d}x}{(r d + 1) \, a(r) \displaystyle\prod_{i=1}^d \left[b_i^+(r) -b_i^-(r) \right]} $$
+
+* **Relocate the mode to zero** (hard-coded into rust)
+* **Choice of $r$** ($r = 1/2$ optimal for zero-mean normal)
+* **Rotation** ($d > 1$): the weaker the association the better
+* **Transformation**: symmetric better than asymmetric
+
+(EV posteriors can exhibit strong dependence and asymmetry)
+
+* [rust](https://paulnorthrop.github.io/rust/) R package
+* [Introduction to rust](https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html) vignette
+
+## $C(r)$ for N(10, 1) 
+
+<center>
+<img src="ROUnormal.png"	alt="" height="450px" />
+</center>
+
+```{r, eval = FALSE, echo  = FALSE, fig.width = 7, fig.height = 5}
+# 1D normal example: effects of r and mode relocation
+layout(matrix(c(1,2,3,4,5,6), 2, 3, byrow = TRUE))
+#par(mfrow = c(2, 2))
+par(mar = c(2, 2, 2, 2))
+#, pty = "s")
+n <- 100
+mu <- 10
+quad <- function(x, r, mu) {
+  1 / x - r * (x - mu) / (r + 1)
+}
+ep <- 1e-10  
+f <- function(x) exp(-(x - mu) ^ 2 / 2)
+bfn <- function(x) x * f(x) ^ (r / (r + 1))
+a <- 1
+pa <- function(r, a, bp, bm) {
+  sqrt(2 * pi) / ((r + 1) * a * (bp - bm))
+}
+
+# (a) r = 1, no relocation
+r <- 1
+bp <- optim(mu, bfn, lower = 0, upper = 5 * mu + 5, method = "Brent",
+            control = list(fnscale = -1))$value
+bm <- optim(-mu, bfn, lower = -5 * mu - 5, upper = 0, method = "Brent")$value
+
+u <- seq(0, a, len = n)
+v <- seq(bm, bp, len = n)
+uv <- expand.grid(u, v)
+shade <- uv[, 1] < (f(uv[, 2] / uv[, 1] ^ r)) ^ (1 / (r + 1))
+colour <- character(n)
+colour[shade] <- "skyblue"
+colour[!shade] <- "white"
+
+plot(uv[, 1], uv[, 2], col = colour, pch = 20, xlab = "u", ylab = "v",
+     main = "r = 1, no relocation", axes = FALSE)
+legend("center", legend = round(pa(r, a, bp, bm), 3), bty = "n")
+title(xlab = "u", line = 0.5)
+title(ylab = "v", line = 0.5)
+box()
+
+# (b) r = 1/2, no relocation
+r <- 1 / 2
+bp <- optim(mu, bfn, lower = 0, upper = 5 * mu + 5, method = "Brent",
+            control = list(fnscale = -1))$value
+bm <- optim(-mu, bfn, lower = -5 * mu - 5, upper = 0, method = "Brent")$value
+
+u <- seq(0, a, len = n)
+v <- seq(bm, bp, len = n)
+uv <- expand.grid(u, v)
+shade <- uv[, 1] < (f(uv[, 2] / uv[, 1] ^ r)) ^ (1 / (r + 1))
+colour <- character(n)
+colour[shade] <- "skyblue"
+colour[!shade] <- "white"
+
+plot(uv[, 1], uv[, 2], col = colour, pch = 20, xlab = "u", ylab = "v",
+     main = "r = 1/2, no relocation", axes = FALSE)
+legend("center", legend = round(pa(r, a, bp, bm), 3), bty = "n")
+title(xlab = "u", line = 0.5)
+title(ylab = "v", line = 0.5)
+box()
+
+# (c) r = 1/4, no relocation
+r <- 1 / 4
+bp <- optim(mu, bfn, lower = 0, upper = 5 * mu + 5, method = "Brent",
+            control = list(fnscale = -1))$value
+bm <- optim(-mu, bfn, lower = -5 * mu - 5, upper = 0, method = "Brent")$value
+
+u <- seq(0, a, len = n)
+v <- seq(bm, bp, len = n)
+uv <- expand.grid(u, v)
+shade <- uv[, 1] < (f(uv[, 2] / uv[, 1] ^ r)) ^ (1 / (r + 1))
+colour <- character(n)
+colour[shade] <- "skyblue"
+colour[!shade] <- "white"
+
+plot(uv[, 1], uv[, 2], col = colour, pch = 20, xlab = "u", ylab = "v",
+     main = "r = 1/4, no relocation", axes = FALSE)
+legend("center", legend = round(pa(r, a, bp, bm), 3), bty = "n")
+title(xlab = "u", line = 0.5)
+title(ylab = "v", line = 0.5)
+box()
+
+
+f <- function(x) exp(-x ^ 2 / 2) 
+
+pa <- function(r) {
+  sqrt(2 * r * pi * exp(1)) / (2 * (r + 1) ^ (3 / 2))
+}
+# (d) r = 1, mode relocation
+r <- 1
+bp <- sqrt((r + 1) / r) * exp(-1 / 2)
+bm <- -bp
+u <- seq(0, a, len = n)
+v <- seq(bm, bp, len = n)
+uv <- expand.grid(u, v)
+shade <- uv[, 1] < (f(uv[, 2] / uv[, 1] ^ r)) ^ (1 / (r + 1))
+colour <- character(n)
+colour[shade] <- "skyblue"
+colour[!shade] <- "white"
+
+plot(uv[, 1], uv[, 2], col = colour, pch = 20, xlab = "u", ylab = "v",
+     main = "r = 1, mode relocation", axes = FALSE)
+legend("center", legend = round(pa(r), 3), bty = "n")
+title(xlab = "u", line = 0.5)
+title(ylab = "v", line = 0.5)
+box()
+  
+# (e) r = 1/2, mode relocation
+r <- 1 / 2
+bp <- sqrt((r + 1) / r) * exp(-1 / 2)
+bm <- -bp
+u <- seq(0, a, len = n)
+v <- seq(bm, bp, len = n)
+uv <- expand.grid(u, v)
+shade <- uv[, 1] < (f(uv[, 2] / uv[, 1] ^ r)) ^ (1 / (r + 1))
+plot(uv[, 1], uv[, 2], col = colour, pch = 20, xlab = "u", ylab = "v",
+     main = "r = 1/2, mode relocation", axes = FALSE)
+legend("center", legend = round(pa(r), 3), bty = "n")
+title(xlab = "u", line = 0.5)
+title(ylab = "v", line = 0.5)
+box()
+
+# (f) r = 1/4, mode relocation
+r <- 1 / 4
+bp <- sqrt((r + 1) / r) * exp(-1 / 2)
+bm <- -bp
+u <- seq(0, a, len = n)
+v <- seq(bm, bp, len = n)
+uv <- expand.grid(u, v)
+shade <- uv[, 1] < (f(uv[, 2] / uv[, 1] ^ r)) ^ (1 / (r + 1))
+plot(uv[, 1], uv[, 2], col = colour, pch = 20, xlab = "u", ylab = "v",
+     main = "r = 1/4, mode relocation", axes = FALSE)
+legend("center", legend = round(pa(r), 3), bty = "n")
+title(xlab = "u", line = 0.5)
+title(ylab = "v", line = 0.5)
+box()
+```
+
+## R exercises 1
+
+* 1D normal 
+* 1D log-normal
+* 2D normal
+* 1D gamma
+
+<span style="color: blue;">For fun!</span>
+
+Can you find simple (1D) examples that throw 
+
+* a warning? 
+* an error?
+
+Use `?Distributions` for possibilities
+
+## Summary of ROU and rust
+
+* Can be useful for 
+    - suitable low-dimensional distributions
+    - for which a bespoke method does not exist
+* Box-Cox transformation requires positive variable(s)
+    - to do: generalise to Yeo-Johnson transformation
+* Cannot be used in all cases
+    - unbounded densities: perhaps OK after transformation
+    - heavy tails: choose $r$ appropriately and/or transform 
+    - multi-modal: OK in theory, but need to find global optima
+
+See [When can rust be used?](https://paulnorthrop.github.io/rust/articles/rust-b-when-to-use-vignette.html)
+
+## Bayesian EV analyses
+
+* **Prior** $\pi(\theta)$ for model parameter vector $\theta$
+* **Likelihood** $L(\theta \mid \mbox{data})$
+* **Posterior** $\pi(\theta \mid \mbox{data})$ via Bayes' theorem
+$$ \pi(\theta \mid \mbox{data}) = \frac{L(\theta \mid \mbox{data}) \pi(\theta)}{P(\mbox{data})} = \frac{L(\theta \mid \mbox{data}) \pi(\theta)}{\int L(\theta \mid \mbox{data}) \pi(\theta) \,\mbox{d}\theta} $$
+* Simulate a large sample from $\pi(\theta \mid \mbox{data})$, often using MCMC 
+
+### In revdbayes
+
+* 4 standard univariate models: GEV, OS, GP, PP
+* Simplest, i.i.d. case
+
+```{r posteriorSampling, echo = FALSE, warning = FALSE}
+set.seed(18062021)
+library(threshr)
+library(revdbayes)
+egdat <- ns
+u <- quantile(egdat, probs = 0.95)
+xm <- max(egdat) - u
+n <- 10000
+# Set an 'uninformative' prior for the GP parameters
+fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
+# Sample on (sigma_u, xi) scale
+gp1 <- rpost(n = n, model = "gp", prior = fp, thresh = u, data = egdat,
+             rotate = FALSE)
+# Rotation
+gp2 <- rpost(n = n, model = "gp", prior = fp, thresh = u, data = egdat)
+# Box-Cox transformation (after transformation to positivity)
+gp3 <- rpost(n = n, model = "gp", prior = fp, thresh = u, data = egdat,
+             rotate = FALSE, trans = "BC")
+# Box-Cox transformation and then rotation
+gp4 <- rpost(n = n, model = "gp", prior = fp, thresh = u, data = egdat,
+             trans = "BC")
+```
+
+## GP model for threshold excesses 1 {.smaller}
+
+Negative association + asymmetry $\phantom{\xi + \sigma / x_{(m)}}$
+
+```{r plots1, echo = FALSE, fig.width = 6.5, fig.height = 4.5}
+# Samples and posterior density contours
+par(mar = c(4, 4, 1, 0))
+plot(gp1, main = paste("mode relocation only, pa = ", round(gp1$pa, 3)),
+     n = 201)
+text(2.25, 0.5, expression(xi > -sigma[u] / x[(m)]), cex = 1.5)
+abline(a = 0, b = -1 / xm)
+u <- par("usr")
+xs <- c(u[1], u[1], u[2])
+ys <- c(u[3], -u[1] / xm, -u[2] / xm)
+polygon(xs, ys, col = "red", density = 10)
+```
+
+## GP model for threshold excesses 2 {.smaller}
+
+Rotation about the MAP estimate based on the Hessian at the MAP $\phantom{\xi + \sigma / x_{(m)}}$ 
+
+```{r plots2, echo = FALSE, fig.width = 6.5, fig.height = 4.5}
+par(mar = c(4, 4, 1, 0))
+plot(gp2, ru_scale = TRUE, main = paste("rotation, pa = ", round(gp2$pa, 3)))
+```
+
+## GP model for threshold excesses 3 {.smaller}
+
+Box-Cox transformations of $\phi_1 = \sigma_u > 0$ and $\phi_2 = \xi + \sigma / x_{(m)} > 0$
+
+```{r plots3, echo = FALSE, fig.width = 6.5, fig.height = 4.5}
+par(mar = c(4, 4, 1, 0))
+plot(gp3, ru_scale = TRUE, main = paste("Box-Cox, pa = ", round(gp3$pa, 3)))
+```
+
+## GP model for threshold excesses 4 {.smaller}
+
+Box-Cox first then rotate $\phantom{\xi + \sigma / x_{(m)}}$
+
+```{r plots4, echo = FALSE, fig.width = 6.5, fig.height = 4.5}
+par(mar = c(4, 4, 1, 0))
+plot(gp4, ru_scale = TRUE, main = paste("Box-Cox and rotation, pa = ",
+                                        round(gp4$pa, 3)))
+```
+
+## Other models in revdbayes
+
+* GEV for block (annual?) maxima
+* Order statistics (OS): largest $k$ observations per block
+* Non-homogeneous point process (PP) for threshold exceedances
+    - approximates binomial for threshold exceedance and GP for excesses
+    - GEV parameterisation: $(\mu, \sigma, \xi)$
+    - choice of block length affects posterior sampling efficiency
+
+## R exercises 2
+
+* **GP** and **binomial-GP** 
+    - compare ROU posterior sampling approaches
+    - posterior predictive model checking 
+    - predictive inference
+* **PP**: sampling efficiently from the posterior 
+* **GEV**: compare `revdbayes` and `evdbayes` 
+
+Options to experiment
+
+* changing threshold
+* playing with function arguments 
+
+## Reflections
+
+**Limitations**
+
+* Very simple EV models 
+* ROU efficiency drops with number of parameters
+
+**Current uses**
+
+* [threshr](https://paulnorthrop.github.io/threshr/) Threshold Selection and Uncertainty for Extreme Value Analysis
+* [mev](https://cran.r-project.org/package=mev)
+    - `lambdadep()`: a bivariate dependence function (many posterior samples required)
+    - `tstab.gpd()`: threshold stability plot
+* [Estimation of the extremal index](https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-d-kgaps-vignette.html) using the $K$-gaps model
+
+## Resources {.smaller}
+
+* [rust](https://paulnorthrop.github.io/rust/) 
+    - [Introduction](https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html)
+    - [When can rust be used?](https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html)
+    - [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987) Efficiency of the ROU method
+* [revdbayes](https://paulnorthrop.github.io/revdbayes/) 
+    - [Introduction](https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html)
+    - [Posterior predictive inference](https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html)
+    - [Stephenson (2016)](https://doi.org/10.1201/b19721) Bayesian EV analysis review 
+    - [Northrop and Attalides (2016)](https://doi.org/10.5705/ss.2014.034) Certain improper priors should not be used!
+* [threshr](https://paulnorthrop.github.io/threshr/) 
+    - [Introduction](https://paulnorthrop.github.io/threshr/articles/threshr-vignette.html)     
