@@ -81,7 +81,9 @@ $$ p_a(d, r) = \frac{\int f(x) {\rm ~d}x}{(r d + 1) \, a(r) \displaystyle\prod_{
 
 ## Acceptance region for N(10, 1) 
 
-![](ROUnormal.png)
+```{r Cpics, echo = FALSE, fig.align='center', out.width="600px"}
+knitr::include_graphics("ROUnormal.png")
+```
 
 ```{r, eval = FALSE, echo  = FALSE, fig.width = 7, fig.height = 5}
 # 1D normal example: effects of r and mode relocation
