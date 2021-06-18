@@ -111,6 +111,18 @@
 
     
     
+<div id="getting-started" class="section level2">
+<h2 class="hasAnchor">
+<a href="#getting-started" class="anchor"></a>Getting started</h2>
+<ul>
+<li>Install <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio Desktop</a> (if you do not already have it) and open it</li>
+<li>Save <a href="https://raw.githubusercontent.com/paulnorthrop/revdbayes/master/vignettes/ex1revdbayes.Rmd">ex1revdbayes.Rmd</a> to your computer (there is also a link to it above)</li>
+<li>Open <code>ex1revdbayes.Rmd</code> in Rstudio</li>
+<li>The R code is arranged in <em>chunks</em> highlighted in grey</li>
+<li>You can run the code in a chunk by clicking on the green triangle on the top right of the chunk</li>
+<li>There is information about Exercises 1 (and Exercises 2) in the ]EVA2021 revdbayes slides](<a href="https://paulnorthrop.github.io/revdbayes/articles/EVA2021revdbayes.html" class="uri">https://paulnorthrop.github.io/revdbayes/articles/EVA2021revdbayes.html</a>)</li>
+</ul>
+</div>
 <div id="aims" class="section level2">
 <h2 class="hasAnchor">
 <a href="#aims" class="anchor"></a>Aims</h2>
@@ -147,7 +159,7 @@
 <span class="co"># init is an initial estimate of the mode of logf</span>
 <span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulnorthrop.github.io/rust/reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
 <span class="va">x1</span><span class="op">$</span><span class="va">pa</span></code></pre></div>
-<pre><code>## [1] 0.805153</code></pre>
+<pre><code>## [1] 0.7861635</code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span></code></pre></div>
 <p><img src="ex1revdbayes_files/figure-html/normal-1.png" width="700"></p>
@@ -155,7 +167,7 @@
 <code class="sourceCode R"><span class="co"># r = 1 will be slightly less efficient</span>
 <span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulnorthrop.github.io/rust/reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="fl">0.1</span>, r <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="va">x2</span><span class="op">$</span><span class="va">pa</span></code></pre></div>
-<pre><code>## [1] 0.7336757</code></pre>
+<pre><code>## [1] 0.7380074</code></pre>
 </div>
 <div id="d-log-normal" class="section level2">
 <h2 class="hasAnchor">
@@ -164,7 +176,7 @@
 <code class="sourceCode R"><span class="co"># lower = 0 tells ru() that the log-normal is bounded below at 0</span>
 <span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulnorthrop.github.io/rust/reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, lower <span class="op">=</span> <span class="fl">0</span>, init <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="va">x1</span><span class="op">$</span><span class="va">pa</span></code></pre></div>
-<pre><code>## [1] 0.5803831</code></pre>
+<pre><code>## [1] 0.5630631</code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span></code></pre></div>
 <p><img src="ex1revdbayes_files/figure-html/log-normal-1.png" width="700"></p>
@@ -175,7 +187,7 @@
 <span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulnorthrop.github.io/rust/reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="fl">0.1</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,
          lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span>
 <span class="va">x2</span><span class="op">$</span><span class="va">pa</span></code></pre></div>
-<pre><code>## [1] 0.7880221</code></pre>
+<pre><code>## [1] 0.7949126</code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot the (normal) distribution from which we have simulated using ROU </span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x2</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -198,7 +210,7 @@
 <span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulnorthrop.github.io/rust/reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="fu">mvtnorm</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">dmvnorm</a></span>, sigma <span class="op">=</span> <span class="va">covmat</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, 
          init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, rotate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x1</span><span class="op">$</span><span class="va">pa</span>, <span class="va">x2</span><span class="op">$</span><span class="va">pa</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 0.2385496 0.5186722</code></pre>
+<pre><code>## [1] 0.2265006 0.5299417</code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x1</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="ex1revdbayes_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
@@ -216,7 +228,7 @@
 <span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulnorthrop.github.io/rust/reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,
        lambda <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>, init <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span>
 <span class="va">x1</span><span class="op">$</span><span class="va">pa</span></code></pre></div>
-<pre><code>## [1] 0.7800312</code></pre>
+<pre><code>## [1] 0.7770008</code></pre>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># If alpha &lt; 1 then the gamma density is extremely skewed and unbounded at 0</span>
 <span class="co"># A transformation can avoid this, but it needs to be stronger than a cube root</span>
@@ -224,7 +236,7 @@
 <span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulnorthrop.github.io/rust/reference/ru.html">ru</a></span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,
          lambda <span class="op">=</span> <span class="fl">0.068</span>, init <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 <span class="va">x2</span><span class="op">$</span><span class="va">pa</span></code></pre></div>
-<pre><code>## [1] 0.7501875</code></pre>
+<pre><code>## [1] 0.7440476</code></pre>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span></code></pre></div>
 <p><img src="ex1revdbayes_files/figure-html/gamma-1.png" width="700"></p>

@@ -4,6 +4,15 @@ subtitle: "Ratio-of-uniforms using rust"
 output: html_notebook
 ---
 
+## Getting started
+
+* Install [RStudio Desktop](https://www.rstudio.com/products/rstudio/download/#download) (if you do not already have it) and open it
+* Save [ex1revdbayes.Rmd](https://raw.githubusercontent.com/paulnorthrop/revdbayes/master/vignettes/ex1revdbayes.Rmd) to your computer (there is also a link to it above)
+* Open `ex1revdbayes.Rmd` in Rstudio
+* The R code is arranged in *chunks* highlighted in grey
+* You can run the code in a chunk by clicking on the green triangle on the top right of the chunk
+* There is information about Exercises 1 (and Exercises 2) in the ]EVA2021 revdbayes slides](https://paulnorthrop.github.io/revdbayes/articles/EVA2021revdbayes.html)
+
 ## Aims
 
 * Show the ROU method in action
