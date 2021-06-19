@@ -23,7 +23,7 @@ output: html_notebook
 There is further information in the [Introduction to revdbayes](https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html) vignette.
 
 ```{r packages, message=FALSE}
-# We need evdbayes, revdbayes, bayesplot and ggplot2
+# We need evdbayes, revdbayes, bayesplot, ggplot2 and coda
 if (!require(evdbayes)) install.packages("evdbayes")
 if (!require(revdbayes)) install.packages("revdbayes")
 if (!require(bayesplot)) install.packages("bayesplot")
@@ -244,7 +244,7 @@ coda::acfplot(post_for_coda)
 coda::effectiveSize(post_for_coda)
 ```
 
-* In practice one would run multiple chains and use the Gelman-Rubin convergence diagnostic, e.g. `gelamn.diag` in the `coda` package. 
+* In practice one would run multiple chains and use the Gelman-Rubin convergence diagnostic, e.g. `gelman.diag` in the `coda` package. 
 * The [Introduction to revdbayes](https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html) shows that the posterior samples from `evdbayes` and `revdbayes` are in agreement.
 
 
