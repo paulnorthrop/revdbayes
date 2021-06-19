@@ -23,16 +23,15 @@ output: html_notebook
 There is further information in the [Introduction to revdbayes](https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html) vignette.
 
 ```{r packages, message=FALSE}
-# We need evdbayes, revdbayes, bayesplot, ggplot2 and coda
-if (!require(evdbayes)) install.packages("evdbayes")
-if (!require(revdbayes)) install.packages("revdbayes")
-if (!require(bayesplot)) install.packages("bayesplot")
-if (!require(ggplot2)) install.packages("ggplot2")
-if (!require(coda)) install.packages("coda")
+# We need the evdbayes, revdbayes, ggplot2, bayesplot and coda packages
+pkg <- c("evdbayes", "revdbayes", "ggplot2", "bayesplot", "coda")
+pkg_list <- pkg[!pkg %in% installed.packages()[, "Package"]]
+install.packages(pkg_list)
+# Load all packages
+invisible(lapply(pkg, library, character.only = TRUE))
 ```
 
 ```{r setup}
-library(revdbayes)
 # Simulation sample size
 n <- 10000
 ```
@@ -216,7 +215,6 @@ plot(gevp, use_bayesplot = TRUE, pars = "xi", prob = 0.95)
 ### evdbayes
 
 ```{r evdbayes}
-library(evdbayes)
 # evdbayes has a function ar.choice to help set the proposal SDs
 # It does this by searching for values that achieve approximately
 # target values for the acceptance rates (default 0.4 for all parameters)

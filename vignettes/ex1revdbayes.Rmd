@@ -24,12 +24,14 @@ There is further information in the [Introduction to rust](https://paulnorthrop.
 
 ```{r packages, message=FALSE}
 # We need the rust and mvtnorm packages
-if (!require(rust)) install.packages("rust")
-if (!require(mvtnorm)) install.packages("mvtnorm")
+pkg <- c("rust", "mvtnorm")
+pkg_list <- pkg[!pkg %in% installed.packages()[, "Package"]]
+if (length(pkg_list) > 0) install.packages(pkg_list)
+# Load both packages
+invisible(lapply(pkg, library, character.only = TRUE))
 ```
 
 ```{r setup}
-library(rust)
 # Information about the ru() function
 ?ru
 
