@@ -26,7 +26,7 @@ There is further information in the [Introduction to rust](https://paulnorthrop.
 # We need the rust and mvtnorm packages
 pkg <- c("rust", "mvtnorm")
 pkg_list <- pkg[!pkg %in% installed.packages()[, "Package"]]
-if (length(pkg_list) > 0) install.packages(pkg_list)
+install.packages(pkg_list)
 # Load both packages
 invisible(lapply(pkg, library, character.only = TRUE))
 ```
