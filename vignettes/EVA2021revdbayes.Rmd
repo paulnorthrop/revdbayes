@@ -223,7 +223,7 @@ title(ylab = "v", line = 0.5)
 box()
 ```
 
-## R exercises 1
+## [R exercises 1](https://paulnorthrop.github.io/revdbayes/articles/ex1revdbayes.html)
 
 * 1D normal 
 * 1D log-normal
@@ -343,7 +343,7 @@ plot(gp4, ru_scale = TRUE, main = paste("Box-Cox and rotation, pa = ",
     - GEV parameterisation: $(\mu, \sigma, \xi)$
     - choice of block length affects posterior sampling efficiency
 
-## R exercises 2
+## [R exercises 2](https://paulnorthrop.github.io/revdbayes/articles/ex1revdbayes.html)
 
 * **GP** and **binomial-GP** 
     - compare ROU posterior sampling approaches
