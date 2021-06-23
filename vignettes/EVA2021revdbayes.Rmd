@@ -343,7 +343,7 @@ plot(gp4, ru_scale = TRUE, main = paste("Box-Cox and rotation, pa = ",
     - GEV parameterisation: $(\mu, \sigma, \xi)$
     - choice of block length affects posterior sampling efficiency
 
-## [R exercises 2](https://paulnorthrop.github.io/revdbayes/articles/ex1revdbayes.html)
+## [R exercises 2](https://paulnorthrop.github.io/revdbayes/articles/ex2revdbayes.html)
 
 * **GP** and **binomial-GP** 
     - compare ROU posterior sampling approaches
