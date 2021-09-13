@@ -96,7 +96,7 @@
 
 ## Bug fixes and minor improvements
 
-* Added the attribute `attr(gom, "npy")` (with value 3) to the `gom` dataset.  This is for compatability with the **threshr** package.
+* Added the attribute `attr(gom, "npy")` (with value 3) to the `gom` dataset.  This is for compatibility with the **threshr** package.
 
 * Give an explicit error message if `plot.evpost` is called with the logically incompatible arguments `add_pu = TRUE` and `pu_only = TRUE`.
 
