@@ -8,6 +8,8 @@
 
 * In the introductory vignette: corrected references to plots as "on the left" when in fact they were below, and corrected "random example" to "random sample".
 
+* The microbenchmark results have been reinstated in the "Faster simulation using revdbayes" vignette.
+
 # revdbayes 1.3.9
 
 ## Bug fixes and minor improvements
