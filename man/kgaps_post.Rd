@@ -98,8 +98,7 @@ plot(k_postsim)
 \references{
 Suveges, M. and Davison, A. C. (2010) Model
   misspecification in peaks over threshold analysis, \emph{The Annals of
-  Applied Statistics}, \strong{4}(1), 203-221.
-  \url{https://doi.org/10.1214/09-AOAS292}
+  Applied Statistics}, \strong{4}(1), 203-221. \doi{10.1214/09-AOAS292}
 
 Attalides, N. (2015) Threshold-based extreme value modelling,
   PhD thesis, University College London.

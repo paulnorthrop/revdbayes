@@ -47,7 +47,7 @@
 #' @references Stephenson, A. 2016. Bayesian Inference for Extreme Value
 #'   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
 #'   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
-#'   Chapman and Hall. \url{https://doi.org/10.1201/b19721}
+#'   Chapman and Hall. \doi{10.1201/b19721}
 #' @examples
 #' pr <- 10 ^ -(1:3)
 #' sh <- c(38.9, 7.1, 47)
@@ -147,18 +147,15 @@ rprior_quant <- function(n, prob, shape, scale, lb = NULL, lb_prob = 0.001){
 #'   in the specification of \code{lb}.  Must be in (0,1).  If \code{lb=NULL}
 #'   then \code{lb_prob} is not used.
 #' @details The simulation is based on the way that the prior is constructed.
-#'   See
-#'   \href{https://doi.org/10.1201/b19721}{Stephenson (1996)}
-#'   the evdbayes user guide or Northrop et al. (2017)
-#'   \href{https://doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
-#'   for details of the construction of the prior.  First, differences between
-#'   probabilities are simulated from a Dirichlet distribution. Then the GEV
-#'   location, scale and shape parameters that correspond to these quantile
-#'   values are found, by solving numerically a set of three non-linear
-#'   equations in which the GEV quantile function evaluated at the simulated
-#'   probabilities is equated to the quantiles in \code{quant}.
-#'   This is reduced to a one-dimensional optimisation over the GEV shape
-#'   parameter.
+#'   See Stephenson (1996) the evdbayes user guide or Northrop et al. (2017)
+#'   Northrop et al. (2017) for details of the construction of the prior.
+#'   First, differences between probabilities are simulated from a Dirichlet
+#'   distribution. Then the GEV location, scale and shape parameters that
+#'   correspond to these quantile values are found, by solving numerically a
+#'   set of three non-linear equations in which the GEV quantile function
+#'   evaluated at the simulated probabilities is equated to the quantiles in
+#'   \code{quant}. This is reduced to a one-dimensional optimisation over the
+#'   GEV shape parameter.
 #' @return An \code{n} by 3 numeric matrix.
 #' @seealso \code{\link[evdbayes:prior]{prior.prob}} to set this prior using
 #'   the evdbayes package.
@@ -174,13 +171,13 @@ rprior_quant <- function(n, prob, shape, scale, lb = NULL, lb_prob = 0.001){
 #' @references Stephenson, A. 2016. Bayesian Inference for Extreme Value
 #'   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
 #'   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
-#'   Chapman and Hall. \url{https://doi.org/10.1201/b19721}
+#'   Chapman and Hall. \doi{10.1201/b19721}
 #' @references Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
 #'   Cross-validatory extreme value threshold selection and uncertainty
 #'   with application to ocean storm severity.
 #'   \emph{Journal of the Royal Statistical Society Series C: Applied
 #'   Statistics}, \strong{66}(1), 93-120.
-#'   \url{https://doi.org/10.1111/rssc.12159}
+#'   \doi{10.1111/rssc.12159}
 #' @examples
 #' quant <- c(85, 88, 95)
 #' alpha <- c(4, 2.5, 2.25, 0.25)
@@ -338,7 +335,7 @@ quantile_to_gev <- function(quant, prob){
 #' @references Kotz, S., Balakrishnan, N. and Johnson, N. L. (2000)
 #'   \emph{Continuous Multivariate Distributions, vol. 1, Models and
 #'   Applications, 2nd edn}, ch. 49. New York: Wiley.
-#'   \url{https://doi.org/10.1002/0471722065}
+#'   \doi{10.1002/0471722065}
 #' @examples
 #' rDir(n = 10, alpha = 1:4)
 #' @export

@@ -36,7 +36,7 @@ rDir(n = 10, alpha = 1:4)
 Kotz, S., Balakrishnan, N. and Johnson, N. L. (2000)
   \emph{Continuous Multivariate Distributions, vol. 1, Models and
   Applications, 2nd edn}, ch. 49. New York: Wiley.
-  \url{https://doi.org/10.1002/0471722065}
+  \doi{10.1002/0471722065}
 }
 \seealso{
 \code{\link{rprior_prob}} for prior simulation of

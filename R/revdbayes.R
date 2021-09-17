@@ -33,7 +33,7 @@
 #' @references Suveges, M. and Davison, A. C. (2010) Model
 #'   misspecification in peaks over threshold analysis, \emph{The Annals of
 #'   Applied Statistics}, \strong{4}(1), 203-221.
-#'   \url{https://doi.org/10.1214/09-AOAS292}
+#'   \doi{10.1214/09-AOAS292}
 #' @references Attalides, N. (2015) Threshold-based extreme value modelling,
 #'   PhD thesis, University College London.
 #' @seealso \code{\link{set_prior}} to set a prior density for extreme value
@@ -78,7 +78,7 @@ NULL
 #' @format A numeric vector containing 65 observations.
 #' @source Coles, S. G. (2001) \emph{An Introduction to Statistical Modelling
 #'   of Extreme Values}. London: Springer.
-#'   \url{https://doi.org/10.1007/978-1-4471-3675-0}
+#'   \doi{10.1007/978-1-4471-3675-0}
 "portpirie"
 
 #' Annual Maximum Temperatures at Oxford
@@ -115,7 +115,7 @@ NULL
 #'   with application to ocean storm severity.
 #'   \emph{Journal of the Royal Statistical Society Series C: Applied
 #'   Statistics}, \strong{66}(1), 93-120.
-#'   \url{https://doi.org/10.1111/rssc.12159}
+#'   \doi{10.1111/rssc.12159}
 "gom"
 
 #' Largest Sea Levels in Venice
@@ -129,10 +129,10 @@ NULL
 #' @format A data frame with 51 rows and 10 columns.
 #' @source Smith, R. L. (1986) Extreme value theory based on the \emph{r}
 #'   largest annual events. \emph{Journal of Hydrology}, \strong{86}, 27-43.
-#'   \url{https://doi.org/10.1016/0022-1694(86)90004-1}
+#'   \doi{10.1016/0022-1694(86)90004-1}
 #' @references Coles, S. G. (2001) \emph{An Introduction to Statistical
 #'   Modelling of Extreme Values}. London: Springer.
-#'   \url{https://doi.org/10.1007/978-1-4471-3675-0}
+#'   \doi{10.1007/978-1-4471-3675-0}
 "venice"
 
 #' Newlyn sea surges
@@ -146,8 +146,8 @@ NULL
 #'   University of Sheffield, U.K.
 #' @references Fawcett, L. and Walshaw, D. (2012) Estimating return levels from
 #'   serially dependent extremes. \emph{Environmetrics}, \strong{23}(3),
-#'   272-283.  \url{https://doi.org/10.1002/env.2133}
+#'   272-283.  \doi{10.1002/env.2133}
 #' @references Northrop, P. J. (2015) An efficient semiparametric maxima
 #'   estimator of the extremal index. \emph{Extremes}, \strong{18},
-#'   585-603.  \url{https://doi.org/10.1007/s10687-015-0221-5}
+#'   585-603.  \doi{10.1007/s10687-015-0221-5}
 "newlyn"

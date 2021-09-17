@@ -65,7 +65,7 @@ Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
 Stephenson, A. 2016. Bayesian Inference for Extreme Value
   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
-  Chapman and Hall. \url{https://doi.org/10.1201/b19721}
+  Chapman and Hall. \doi{10.1201/b19721}
 }
 \seealso{
 \code{\link[evdbayes:prior]{prior.quant}} to set this prior

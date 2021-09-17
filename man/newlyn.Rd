@@ -23,10 +23,10 @@ periods.
 \references{
 Fawcett, L. and Walshaw, D. (2012) Estimating return levels from
   serially dependent extremes. \emph{Environmetrics}, \strong{23}(3),
-  272-283.  \url{https://doi.org/10.1002/env.2133}
+  272-283.  \doi{10.1002/env.2133}
 
 Northrop, P. J. (2015) An efficient semiparametric maxima
   estimator of the extremal index. \emph{Extremes}, \strong{18},
-  585-603.  \url{https://doi.org/10.1007/s10687-015-0221-5}
+  585-603.  \doi{10.1007/s10687-015-0221-5}
 }
 \keyword{datasets}

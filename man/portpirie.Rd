@@ -10,7 +10,7 @@ A numeric vector containing 65 observations.
 \source{
 Coles, S. G. (2001) \emph{An Introduction to Statistical Modelling
   of Extreme Values}. London: Springer.
-  \url{https://doi.org/10.1007/978-1-4471-3675-0}
+  \doi{10.1007/978-1-4471-3675-0}
 }
 \usage{
 portpirie

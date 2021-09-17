@@ -35,7 +35,7 @@ gp_pwm(gom, u)
 \references{
 Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and
  Quantile Estimation for the Generalized Pareto Distribution.
- Technometrics, 29(3), 339-349. \url{https://doi.org/10.2307/1269343}.
+ Technometrics, 29(3), 339-349. \doi{10.2307/1269343}.
 }
 \seealso{
 \code{\link{gp}} for details of the parameterisation of the GP

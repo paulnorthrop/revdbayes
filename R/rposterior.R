@@ -49,7 +49,7 @@
 #'   If \code{use_noy = FALSE} then sampling is based on a likelihood in
 #'   which the number of blocks (years) is set equal to the number of threshold
 #'   excesses, to reduce posterior dependence between the parameters
-#'   (\href{https://doi.org/10.1214/10-AOAS333}{Wadsworth \emph{et al}. (2010)}).
+#'   (Wadsworth \emph{et al}., 2010).
 #'   The sampled values are transformed back to the required parameterisation
 #'   before returning them to the user.  If \code{use_noy = TRUE} then the
 #'   user's value of \code{noy} is used in the likelihood.
@@ -109,8 +109,7 @@
 #'
 #' \emph{Binomial-GP}: \code{model = "bingp"}.  The GP model for threshold
 #'   excesses supplemented by a binomial(\code{length(data)}, \eqn{p})
-#'   model for the number of threshold excesses.  See
-#'   \href{https://doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
+#'   model for the number of threshold excesses.  See Northrop et al. (2017)
 #'   for details.  Currently, the GP and binomial parameters are assumed to
 #'   be independent \emph{a priori}.
 #'
@@ -209,16 +208,16 @@
 #'   with application to ocean storm severity.
 #'   \emph{Journal of the Royal Statistical Society Series C: Applied
 #'   Statistics}, \strong{66}(1), 93-120.
-#'   \url{https://doi.org/10.1111/rssc.12159}
+#'   \doi{10.1111/rssc.12159}
 #' @references Stephenson, A. (2016) Bayesian Inference for Extreme Value
 #'   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
 #'   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
-#'   Chapman and Hall. \url{https://doi.org/10.1201/b19721}
+#'   Chapman and Hall. \doi{10.1201/b19721}
 #'   value posterior using the evdbayes package.
 #' @references Wadsworth, J. L., Tawn, J. A. and Jonathan, P. (2010)
 #'   Accounting for choice of measurement scale in extreme value modeling.
 #'  \emph{The Annals of Applied Statistics}, \strong{4}(3), 1558-1578.
-#'   \url{https://doi.org/10.1214/10-AOAS333}
+#'   \doi{10.1214/10-AOAS333}
 #' @examples
 #' \donttest{
 #' # GP model

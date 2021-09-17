@@ -51,5 +51,5 @@ Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
 Stephenson, A. (2016) Bayesian inference for extreme value
   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-  London. \url{https://doi.org/10.1201/b19721}.
+  London. \doi{10.1201/b19721}.
 }

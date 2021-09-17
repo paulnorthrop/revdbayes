@@ -52,7 +52,7 @@ gp_mle <- function(gp_data) {
 #'   }
 #' @references Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and
 #'  Quantile Estimation for the Generalized Pareto Distribution.
-#'  Technometrics, 29(3), 339-349. \url{https://doi.org/10.2307/1269343}.
+#'  Technometrics, 29(3), 339-349. \doi{10.2307/1269343}.
 #' @seealso \code{\link{gp}} for details of the parameterisation of the GP
 #'   distribution.
 #' @examples
@@ -122,7 +122,7 @@ gp_pwm <- function(gp_data, u = 0) {
 #' @references Reiss, R.-D., Thomas, M. (2007) Statistical Analysis of
 #'   Extreme Values with Applications to Insurance, Finance, Hydrology and
 #'   Other Fields.Birkhauser.
-#'   \url{https://doi.org/10.1007/978-3-7643-7399-3}.
+#'   \doi{10.1007/978-3-7643-7399-3}.
 #' @examples
 #' u <- quantile(gom, probs = 0.65)
 #' gp_lrs((gom - u)[gom > u])
@@ -198,7 +198,7 @@ gp_obs_info <- function(gp_pars, y) {
 #' @references Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
 #'   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
 #'   and Computing (1991) 1, 129-133.
-#'   \url{https://doi.org/10.1080/00401706.1993.10485040}.
+#'   \doi{10.1080/00401706.1993.10485040}.
 #' @seealso \code{\link{gp}} for details of the parameterisation of the GP
 #'   distribution, in terms of \eqn{\sigma} and \eqn{\xi}.
 #' @examples

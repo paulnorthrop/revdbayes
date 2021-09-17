@@ -65,10 +65,10 @@
 #' @references Jenkinson, A. F. (1955) The frequency distribution of the
 #'   annual maximum (or minimum) of meteorological elements.
 #'   \emph{Quart. J. R. Met. Soc.}, \strong{81}, 158-171.
-#'   Chapter 3: \url{https://doi.org/10.1002/qj.49708134804}
+#'   Chapter 3: \doi{10.1002/qj.49708134804}
 #' @references Coles, S. G. (2001) \emph{An Introduction to Statistical
 #'   Modeling of Extreme Values}, Springer-Verlag, London.
-#'   \url{https://doi.org/10.1007/978-1-4471-3675-0_3}
+#'   \doi{10.1007/978-1-4471-3675-0_3}
 #' @examples
 #' dgev(-1:4, 1, 0.5, 0.8)
 #' dgev(1:6, 1, 0.5, -0.2, log = TRUE)
@@ -255,10 +255,10 @@ rgev <- function (n, loc = 0, scale = 1, shape = 0, m = 1) {
 #'   and \code{rgp} generates random deviates.
 #' @references Pickands, J. (1975) Statistical inference using extreme
 #'   order statistics. \emph{Annals of Statistics}, \strong{3}, 119-131.
-#'   \url{https://doi.org/10.1214/aos/1176343003}
+#'   \doi{10.1214/aos/1176343003}
 #' @references Coles, S. G. (2001) \emph{An Introduction to Statistical
 #'   Modeling of Extreme Values}, Springer-Verlag, London.
-#'   Chapter 4: \url{https://doi.org/10.1007/978-1-4471-3675-0_4}
+#'   Chapter 4: \doi{10.1007/978-1-4471-3675-0_4}
 #' @examples
 #' dgp(0:4, scale = 0.5, shape = 0.8)
 #' dgp(1:6, scale = 0.5, shape = -0.2, log = TRUE)

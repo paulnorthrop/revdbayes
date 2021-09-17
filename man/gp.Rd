@@ -89,9 +89,9 @@ rgp(6, scale = 0.5, shape = 0.8)
 \references{
 Pickands, J. (1975) Statistical inference using extreme
   order statistics. \emph{Annals of Statistics}, \strong{3}, 119-131.
-  \url{https://doi.org/10.1214/aos/1176343003}
+  \doi{10.1214/aos/1176343003}
 
 Coles, S. G. (2001) \emph{An Introduction to Statistical
   Modeling of Extreme Values}, Springer-Verlag, London.
-  Chapter 4: \url{https://doi.org/10.1007/978-1-4471-3675-0_4}
+  Chapter 4: \doi{10.1007/978-1-4471-3675-0_4}
 }

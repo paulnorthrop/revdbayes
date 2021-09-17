@@ -219,7 +219,7 @@
 #' @references Castellanos, E. M. and Cabras, S. (2007) A default Bayesian
 #'   procedure for the generalized Pareto distribution.
 #'   \emph{Journal of Statistical Planning and Inference} \strong{137(2)},
-#'   473-483. \url{https://doi.org/10.1016/j.jspi.2006.01.006}.
+#'   473-483. \doi{10.1016/j.jspi.2006.01.006}.
 #' @references Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
 #'   extreme rainfall data. \emph{Appl. Statist.}, \strong{45}, 463-478.
 #' @references Crowder, M. (1992) Bayesian priors based on parameter
@@ -229,33 +229,33 @@
 #' @references Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
 #'   for the Generalized Pareto Distribution.  \emph{Technometrics},
 #'   \strong{35(2)}, 185-191.
-#'   \url{https://doi.org/10.1080/00401706.1993.10485040}.
+#'   \doi{10.1080/00401706.1993.10485040}.
 #' @references Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and
 #'   Quantile Estimation for the Generalized Pareto Distribution.
 #'   \emph{Technometrics}, \strong{29(3)}, 339-349.
-#'   \url{https://doi.org/10.2307/1269343}.
+#'   \doi{10.2307/1269343}.
 #' @references Martins, E. S. and Stedinger, J. R. (2000) Generalized maximum
 #'   likelihood generalized extreme value quantile estimators for hydrologic
 #'   data, \emph{Water Resources Research}, \strong{36(3)}, 737-744.
-#'   \url{https://doi.org/10.1029/1999WR900330}.
+#'   \doi{10.1029/1999WR900330}.
 #' @references Martins, E. S. and Stedinger, J. R. (2001) Generalized maximum
 #'   likelihood Pareto-Poisson estimators for partial duration series,
 #'   \emph{Water Resources Research}, \strong{37(10)}, 2551-2557.
-#'   \url{https://doi.org/10.1029/2001WR000367}.
+#'   \doi{10.1029/2001WR000367}.
 #' @references Northrop, P.J. and Attalides, N. (2016) Posterior propriety in
 #'   Bayesian extreme value analyses using reference priors
 #'   \emph{Statistica Sinica}, \strong{26}(2), 721--743
-#'   \url{https://doi.org/10.5705/ss.2014.034}.
+#'   \doi{10.5705/ss.2014.034}.
 #' @references Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
 #'   Cross-validatory extreme value threshold selection and uncertainty
 #'   with application to ocean storm severity.
 #'   \emph{Journal of the Royal Statistical Society Series C: Applied
 #'   Statistics}, \strong{66}(1), 93-120.
-#'   \url{https://doi.org/10.1111/rssc.12159}
+#'   \doi{10.1111/rssc.12159}
 #' @references Stephenson, A. (2016) Bayesian inference for extreme value
 #'   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
 #'   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-#'   London. \url{https://doi.org/10.1201/b19721}.
+#'   London. \doi{10.1201/b19721}.
 #' @examples
 #' # Normal prior for GEV parameters (mu, log(sigma), xi).
 #' mat <- diag(c(10000, 10000, 100))
@@ -456,7 +456,7 @@ gp_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
 #' @references Northrop, P.J. and Attalides, N. (2016) Posterior propriety in
 #'   Bayesian extreme value analyses using reference priors
 #'   \emph{Statistica Sinica}, \strong{26(2)}, 721--743
-#'   \url{https://doi.org/10.5705/ss.2014.034}.
+#'   \doi{10.5705/ss.2014.034}.
 #' @export
 gp_mdi <- function(pars, a = 1, min_xi = -1, max_xi = Inf, trendsd = 0) {
   if (pars[1] <= 0 | pars[2] < min_xi | pars[2] > max_xi) {

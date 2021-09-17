@@ -33,5 +33,5 @@ For information about this and other priors see \code{\link{set_prior}}.
 Northrop, P.J. and Attalides, N. (2016) Posterior propriety in
   Bayesian extreme value analyses using reference priors
   \emph{Statistica Sinica}, \strong{26(2)}, 721--743
-  \url{https://doi.org/10.5705/ss.2014.034}.
+  \doi{10.5705/ss.2014.034}.
 }

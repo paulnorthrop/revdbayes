@@ -28,7 +28,7 @@ gp_lrs((gom - u)[gom > u])
 Reiss, R.-D., Thomas, M. (2007) Statistical Analysis of
   Extreme Values with Applications to Insurance, Finance, Hydrology and
   Other Fields.Birkhauser.
-  \url{https://doi.org/10.1007/978-3-7643-7399-3}.
+  \doi{10.1007/978-3-7643-7399-3}.
 }
 \seealso{
 \code{\link{gp}} for details of the parameterisation of the GP

@@ -25,13 +25,9 @@
 #'   There are two interpretations of the parameter vector
 #'   \code{alpha} = \eqn{(\alpha_1, \alpha_2, \alpha_3, \alpha_4)}:
 #'   as the parameters of beta distributions for ratio of exceedance
-#'   probabilities
-#'   \href{https://doi.org/10.1201/b19721}{(Stephenson, 2016)}
-#'   and as the parameters of
-#'   a Dirichlet distribution for differences between non-exceedance
-#'   probabilities
-#'   \href{https://doi.org/10.1111/rssc.12159}{(Northrop et al., 2017)}.
-#'   See these publications for details.
+#'   probabilities (Stephenson, 2016) and as the parameters of a Dirichlet
+#'   distribution for differences between non-exceedance probabilities
+#'   (Northrop et al., 2017). See these publications for details.
 #' @return The log of the prior density.
 #' @seealso \code{\link{set_prior}} for setting a prior distribution.
 #' @seealso \code{\link{rpost}} and \code{\link{rpost_rcpp}} for sampling
@@ -47,11 +43,11 @@
 #'   with application to ocean storm severity.
 #'   \emph{Journal of the Royal Statistical Society Series C: Applied
 #'   Statistics}, \strong{66}(1), 93-120.
-#'   \url{https://doi.org/10.1111/rssc.12159}
+#'   \doi{10.1111/rssc.12159}
 #' @references Stephenson, A. (2016) Bayesian inference for extreme value
 #'   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
 #'   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-#'   London. \url{https://doi.org/10.1201/b19721}.
+#'   London. \doi{10.1201/b19721}.
 #' @export
 gev_prob <- function(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
                      trendsd = 0) {
@@ -138,7 +134,7 @@ gev_prob <- function(pars, quant, alpha, min_xi = -Inf, max_xi = Inf,
 #' @references Stephenson, A. (2016) Bayesian inference for extreme value
 #'   modelling.  In \emph{Extreme Value Modeling and Risk Analysis: Methods
 #'   and Applications} (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-#'   London. \url{https://doi.org/10.1201/b19721}.
+#'   London. \doi{10.1201/b19721}.
 #' @export
 gev_quant <- function(pars, prob, shape, scale, min_xi = -Inf, max_xi = Inf,
                       trendsd = 0){

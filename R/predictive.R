@@ -114,14 +114,8 @@
 #'   for uncertainty in model parameters and uncertainty owing to the
 #'   variability of future observations.  In practice the integrals involved
 #'   are estimated using an empirical mean over the posterior sample.
-#'   See, for example,
-#'   \href{https://doi.org/10.1007/978-1-4471-3675-0_9}{Coles (2001),
-#'   chapter 9},
-#'   \href{https://doi.org/10.1201/b19721}{Stephenson (2016)}
-#'   or
-#'   \href{https://doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
-#'   for details.
-#'   See also the vignette
+#'   See, for example, Coles (2001), Stephenson (2016) or
+#'   Northrop et al. (2017) for details. See also the vignette
 #'   \href{https://CRAN.R-project.org/package=revdbayes}{Posterior Predictive Extreme Value Inference}
 #'
 #'   \strong{GEV / OS / PP}.
@@ -167,10 +161,9 @@
 #'   mean number of observations in \code{n_years} years, i.e.
 #'   \code{npy * n_years}.
 #'
-#'   Following \href{https://doi.org/10.1111/rssc.12159}{Northrop et al. (2017)}
-#'   let \eqn{M_N} be the largest value observed in \eqn{N} years,
-#'   \eqn{m} = \code{npy * n_years} and \eqn{u} the threshold
-#'   \code{object$thresh} used in the call to \code{rpost}
+#'   Following Northrop et al. (2017), let \eqn{M_N} be the largest value
+#'   observed in \eqn{N} years, \eqn{m} = \code{npy * n_years} and \eqn{u} the
+#'   threshold \code{object$thresh} used in the call to \code{rpost}
 #'   or \code{rpost_rcpp}.
 #'   For fixed values of \eqn{\theta = (p, \sigma, \xi)} the distribution
 #'   function of \eqn{M_N} is given by \eqn{F(z, \theta)^m}, for
@@ -239,17 +232,17 @@
 #'   \code{\link{rpost}} or \code{\link{rpost_rcpp}}.
 #' @references Coles, S. G. (2001) \emph{An Introduction to Statistical
 #'   Modeling of Extreme Values}, Springer-Verlag, London.
-#'   Chapter 9: \url{https://doi.org/10.1007/978-1-4471-3675-0_9}
+#'   Chapter 9: \doi{10.1007/978-1-4471-3675-0_9}
 #' @references Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
 #'   Cross-validatory extreme value threshold selection and uncertainty
 #'   with application to ocean storm severity.
 #'   \emph{Journal of the Royal Statistical Society Series C: Applied
 #'   Statistics}, \strong{66}(1), 93-120.
-#'   \url{https://doi.org/10.1111/rssc.12159}
+#'   \doi{10.1111/rssc.12159}
 #' @references Stephenson, A. (2016). Bayesian Inference for Extreme Value
 #'   Modelling. In \emph{Extreme Value Modeling and Risk Analysis: Methods and
 #'   Applications}, edited by D. K. Dey and J. Yan, 257-80. London:
-#'   Chapman and Hall. \url{https://doi.org/10.1201/b19721}
+#'   Chapman and Hall. \doi{10.1201/b19721}
 #' @seealso \code{\link{plot.evpred}} for the S3 \code{plot} method for
 #'   objects of class \code{evpred}.
 #' @seealso \code{\link{rpost}} or \code{\link{rpost_rcpp}} for sampling
