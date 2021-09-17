@@ -217,18 +217,15 @@ then <code>lb_prob</code> is not used.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The simulation is based on the way that the prior is constructed.
-  See
-  <a href='https://doi.org/10.1201/b19721'>Stephenson (1996)</a>
-  the evdbayes user guide or Northrop et al. (2017)
-  <a href='https://doi.org/10.1111/rssc.12159'>Northrop et al. (2017)</a>
-  for details of the construction of the prior.  First, differences between
-  probabilities are simulated from a Dirichlet distribution. Then the GEV
-  location, scale and shape parameters that correspond to these quantile
-  values are found, by solving numerically a set of three non-linear
-  equations in which the GEV quantile function evaluated at the simulated
-  probabilities is equated to the quantiles in <code>quant</code>.
-  This is reduced to a one-dimensional optimisation over the GEV shape
-  parameter.</p>
+  See Stephenson (1996) the evdbayes user guide or Northrop et al. (2017)
+  Northrop et al. (2017) for details of the construction of the prior.
+  First, differences between probabilities are simulated from a Dirichlet
+  distribution. Then the GEV location, scale and shape parameters that
+  correspond to these quantile values are found, by solving numerically a
+  set of three non-linear equations in which the GEV quantile function
+  evaluated at the simulated probabilities is equated to the quantiles in
+  <code>quant</code>. This is reduced to a one-dimensional optimisation over the
+  GEV shape parameter.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Crowder, M. (1992) Bayesian priors based on parameter
@@ -238,13 +235,13 @@ then <code>lb_prob</code> is not used.</p></td>
 <p>Stephenson, A. 2016. Bayesian Inference for Extreme Value
   Modelling. In <em>Extreme Value Modeling and Risk Analysis: Methods and
   Applications</em>, edited by D. K. Dey and J. Yan, 257-80. London:
-  Chapman and Hall. <a href='https://doi.org/10.1201/b19721'>https://doi.org/10.1201/b19721</a></p>
+  Chapman and Hall. doi: <a href='https://doi.org/10.1201/b19721'>10.1201/b19721</a></p>
 <p>Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
   Cross-validatory extreme value threshold selection and uncertainty
   with application to ocean storm severity.
   <em>Journal of the Royal Statistical Society Series C: Applied
   Statistics</em>, <strong>66</strong>(1), 93-120.
-  <a href='https://doi.org/10.1111/rssc.12159'>https://doi.org/10.1111/rssc.12159</a></p>
+  doi: <a href='https://doi.org/10.1111/rssc.12159'>10.1111/rssc.12159</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code>prior.prob</code> to set this prior using

@@ -251,7 +251,7 @@ Only relevant, and must be supplied, if <code>model = "pp"</code>.</p></td>
 If <code>use_noy = FALSE</code> then sampling is based on a likelihood in
 which the number of blocks (years) is set equal to the number of threshold
 excesses, to reduce posterior dependence between the parameters
-(<a href='https://doi.org/10.1214/10-AOAS333'>Wadsworth <em>et al</em>. (2010)</a>).
+(Wadsworth <em>et al</em>., 2010).
 The sampled values are transformed back to the required parameterisation
 before returning them to the user.  If <code>use_noy = TRUE</code> then the
 user's value of <code>noy</code> is used in the likelihood.</p></td>
@@ -375,8 +375,7 @@ In the latter case <code>bin_prior$prior</code> must be <code>"bin_beta"</code>.
   See also <code><a href='gp.html'>gp</a></code>.</p>
 <p><em>Binomial-GP</em>: <code>model = "bingp"</code>.  The GP model for threshold
   excesses supplemented by a binomial(<code><a href='https://rdrr.io/r/base/length.html'>length(data)</a></code>, \(p\))
-  model for the number of threshold excesses.  See
-  <a href='https://doi.org/10.1111/rssc.12159'>Northrop et al. (2017)</a>
+  model for the number of threshold excesses.  See Northrop et al. (2017)
   for details.  Currently, the GP and binomial parameters are assumed to
   be independent <em>a priori</em>.</p>
 <p><em>Generalised extreme value (GEV) model</em>: <code>model = "gev"</code>.  A
@@ -408,16 +407,17 @@ In the latter case <code>bin_prior$prior</code> must be <code>"bin_beta"</code>.
   with application to ocean storm severity.
   <em>Journal of the Royal Statistical Society Series C: Applied
   Statistics</em>, <strong>66</strong>(1), 93-120.
-  <a href='https://doi.org/10.1111/rssc.12159'>https://doi.org/10.1111/rssc.12159</a></p>
+  doi: <a href='https://doi.org/10.1111/rssc.12159'>10.1111/rssc.12159</a></p>
 <p>Stephenson, A. (2016) Bayesian Inference for Extreme Value
   Modelling. In <em>Extreme Value Modeling and Risk Analysis: Methods and
   Applications</em>, edited by D. K. Dey and J. Yan, 257-80. London:
-  Chapman and Hall. <a href='https://doi.org/10.1201/b19721'>https://doi.org/10.1201/b19721</a>
+  Chapman and Hall. doi: <a href='https://doi.org/10.1201/b19721'>10.1201/b19721</a>
+
   value posterior using the evdbayes package.</p>
 <p>Wadsworth, J. L., Tawn, J. A. and Jonathan, P. (2010)
   Accounting for choice of measurement scale in extreme value modeling.
  <em>The Annals of Applied Statistics</em>, <strong>4</strong>(3), 1558-1578.
-  <a href='https://doi.org/10.1214/10-AOAS333'>https://doi.org/10.1214/10-AOAS333</a></p>
+  doi: <a href='https://doi.org/10.1214/10-AOAS333'>10.1214/10-AOAS333</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='set_prior.html'>set_prior</a></code> for setting a prior distribution.</p>
