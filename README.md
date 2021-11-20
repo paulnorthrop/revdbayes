@@ -3,13 +3,11 @@
 
 # revdbayes <img src="tools/revdbayes_logo.png" height = "150" align="right" />
 
-[![Travis-CI Build
-Status](https://travis-ci.org/paulnorthrop/revdbayes.svg?branch=master)](https://travis-ci.org/paulnorthrop/revdbayes)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/revdbayes?branch=master&svg=true)](https://ci.appveyor.com/project/paulnorthrop/revdbayes)
 [![Coverage
 Status](https://codecov.io/github/paulnorthrop/revdbayes/coverage.svg?branch=master)](https://codecov.io/github/paulnorthrop/revdbayes?branch=master)
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/revdbayes)](https://cran.r-project.org/package=revdbayes)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/revdbayes)](https://cran.r-project.org/package=revdbayes)
 
 ### Ratio-of-uniforms Sampling for Bayesian Extreme Value Analysis
 
@@ -69,11 +67,12 @@ install.packages("revdbayes")
 ### Vignettes
 
 See `vignette("revdbayes-vignette", package = "revdbayes")` for an
-overview of the package and `vignette("revdbayes-using-rcpp-vignette",
-package = "revdbayes")` for an illustration of the improvements in
-efficiency produced using the Rcpp package. See
+overview of the package and
+`vignette("revdbayes-using-rcpp-vignette", package = "revdbayes")` for
+an illustration of the improvements in efficiency produced using the
+Rcpp package. See
 `vignette("revdbayes-predictive-vignette", package = "revdbayes")` for
 an outline of how to use revdbayes to perform posterior predictive
 extreme value inference. Inference for the extremal index using the
-K-gaps model is described in `vignette("revdbayes-kgaps-vignette",
-package = "revdbayes")`
+K-gaps model is described in
+`vignette("revdbayes-kgaps-vignette", package = "revdbayes")`
