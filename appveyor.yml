@@ -31,7 +31,6 @@ on_failure:
   - appveyor PushArtifact failure.zip
 
 on_success:
-  - Rscript -e "install.packages("covr")"
   - Rscript -e "covr::codecov()"
 
 artifacts:
