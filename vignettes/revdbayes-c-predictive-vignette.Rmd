@@ -10,6 +10,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: revdbayes.bib
+csl: taylor-and-francis-chicago-author-date.csl
 ---
 
 ```{r, include = FALSE}
@@ -94,7 +95,7 @@ of the observed and replicated data are compared.  If the model fits well then
 the observed data should look like a typical replication from the
 posterior predictive distribution, which seems to be the case here.
 
-```{r, fig.show='hold', out.width="50%"}
+```{r, fig.show='hold', out.width="45%"}
 # GEV
 pp_check(gevp, type = "overlaid") + ggtitle("GEV empirical distribution functions")
 pp_check(gevp, type = "overlaid", subtype = "dens") + ggtitle("GEV kernel density estimates")
@@ -108,7 +109,7 @@ with `subtype` indicating the type of plots to be drawn.  By default only
 `nrep` argument.  Again, the plot of the observed data is not obviously
 different from those of the replicated data.
 
-```{r, fig.show='hold', out.width="50%"}
+```{r, fig.show='hold', out.width="45%"}
 pp_check(gpg, type = "multiple") + ggtitle("GP kernel density estimates")
 pp_check(gpg, type = "multiple", subtype = "boxplot") + ggtitle("GP boxplots")
 ```
@@ -124,7 +125,7 @@ calculated from the observed data should not be unusual compared to the
 values calculated from the replicated data.  In this example, the plots
 do not suggest clear lack-of-fit.
 
-```{r, fig.show='hold', out.width="50%"}
+```{r, fig.show='hold', out.width="45%"}
 pp_check(gpg)
 pp_check(gpg, stat = "max")
 pp_check(gpg, stat = c("min", "max"))
@@ -197,13 +198,13 @@ datasets, the estimated posterior predictive density functions and
 distributions functions of $M_N$ for $N = 100$ and $N = 1000$.
 The argument `n_years` gives the value(s) of $N$.
 
-```{r, fig.show='hold', out.width="50%"}
+```{r, fig.show='hold', out.width="45%"}
 # GEV (Portpirie)
 plot(predict(gevp, type = "d", n_years = c(100, 1000)), cex = 0.7)
 plot(predict(gevp, type = "p", n_years = c(100, 1000)), cex = 0.7)
 ```
 
-```{r, fig.show='hold', out.width="50%"}
+```{r, fig.show='hold', out.width="45%"}
 # binGP (Gulf-of-Mexico)
 plot(predict(bgpg, type = "d", n_years = c(100, 1000)), cex = 0.7)
 plot(predict(bgpg, type = "p", n_years = c(100, 1000)), cex = 0.7)

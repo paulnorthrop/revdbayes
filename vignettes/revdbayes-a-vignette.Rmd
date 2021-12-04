@@ -10,6 +10,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: revdbayes.bib
+csl: taylor-and-francis-chicago-author-date.csl
 ---
 
 ```{r, include = FALSE}
@@ -177,7 +178,7 @@ ratio-of-uniforms algorithm is applied, i.e. after any transformation
 (Box-Cox and/or rotation of axes) and relocation of the mode to the 
 origin.
 
-```{r, fig.show='hold', out.width="50%"}
+```{r, fig.show='hold', out.width="45%"}
 plot(gp1, ru_scale = FALSE, cex.main = 0.75, cex.lab = 0.75, 
   main = paste("no transformation \n pa = ", round(gp1$pa, 3), 
                ", time = ", round(t1, 2), "s"))
@@ -224,7 +225,7 @@ It is optimistic to use such a high threshold in this example, because it result
 
 Strong asymmetry in the posterior distribution means that the combination of marginal Box-Cox transformation and rotation produces a larger improvement in $p_a$ and means that now this strategy is competitive with using rotation alone in terms of computation time. 
 
-```{r, fig.show='hold', echo = FALSE, out.width="50%"}
+```{r, fig.show='hold', echo = FALSE, out.width="45%"}
 plot(gp2, ru_scale = TRUE, cex.main = 0.75, cex.lab = 0.75, 
   main = paste("rotation \n pa = ", round(gp2$pa, 3),
                ", time = ", round(t2, 2), "s"))

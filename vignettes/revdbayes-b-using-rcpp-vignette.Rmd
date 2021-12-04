@@ -10,13 +10,14 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: revdbayes.bib
+csl: taylor-and-francis-chicago-author-date.csl
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 ```
 
-This vignette introduces a new feature of *revdbayes*: reducing posterior simulation time by performing the most time-consuming tasks using C++ functions.  This achieved using a new facility in the *rust* package [@rust], which in turn uses the **Rcpp** package [@Rcpp, @RcppDEbook]. The result is a new function `rpost_rcpp`, which has the same structure as the existing function `rpost`.  From a user's perspective the only difference between these two functions occurs if they wish to supply their own prior distribution: `rpost_rcpp` requires an external pointer to a C++ function (see [Providing a user-defined prior](#cpp_fun)), whereas `rpost` requires an input R function (see the vignette
+This vignette introduces a new feature of *revdbayes*: reducing posterior simulation time by performing the most time-consuming tasks using C++ functions.  This achieved using a new facility in the *rust* package [@rust], which in turn uses the **Rcpp** package [@Rcpp]. The result is a new function `rpost_rcpp`, which has the same structure as the existing function `rpost`.  From a user's perspective the only difference between these two functions occurs if they wish to supply their own prior distribution: `rpost_rcpp` requires an external pointer to a C++ function (see [Providing a user-defined prior](#cpp_fun)), whereas `rpost` requires an input R function (see the vignette
 [Introducing revdbayes](revdbayes-a-vignette.html).
 
 Before we deal with user-supplied priors we compare posterior simulation times using `rpost` and `rpost_rcpp` for examples based on in-built prior distributions.  We use the default settings of `rpost` and `rpost_rcpp` throughout.  We also compare the speed of these functions with the function `posterior` in the **evdbayes** package [@evdbayes], using the **microbenchmark** package [@microbenchmark].
