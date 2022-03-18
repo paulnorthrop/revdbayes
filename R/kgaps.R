@@ -14,7 +14,7 @@
 #'   than \code{k} units are assigned to the same cluster, resulting in a
 #'   \eqn{K}-gap equal to zero.  Specifically, the \eqn{K}-gap \eqn{S}
 #'   corresponding to an inter-exceedance time of \eqn{T} is given by
-#'   \eqn{S = max(T - K, 0)}.
+#'   \eqn{S = \max(T - K, 0)}{S = max(T - K, 0)}.
 #' @param inc_cens A logical scalar indicating whether or not to include
 #'   contributions from censored inter-exceedance times relating to the
 #'   first and last observation.  See Attalides (2015) for details.
@@ -173,7 +173,7 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = FALSE,
 #'   than \code{k} units are assigned to the same cluster, resulting in a
 #'   \eqn{K}-gap equal to zero.  Specifically, the \eqn{K}-gap \eqn{S}
 #'   corresponding to an inter-exceedance time of \eqn{T} is given by
-#'   \eqn{S = max(T - K, 0)}.
+#'   \eqn{S = \max(T - K, 0)}{S = max(T - K, 0)}.
 #' @param inc_cens A logical scalar indicating whether or not to include
 #'   contributions from censored inter-exceedance times relating to the
 #'   first and last observation.  See Attalides (2015) for details.
@@ -269,7 +269,7 @@ kgaps_mle <- function(data, thresh, k = 1, inc_cens = FALSE, conf = NULL) {
 #'   than \code{k} units are assigned to the same cluster, resulting in a
 #'   \eqn{K}-gap equal to zero.  Specifically, the \eqn{K}-gap \eqn{S}
 #'   corresponding to an inter-exceedance time of \eqn{T} is given by
-#'   \eqn{S = max(T - K, 0)}.
+#'   \eqn{S = \max(T - K, 0)}{S = max(T - K, 0)}.
 #' @param inc_cens A logical scalar indicating whether or not to include
 #'   contributions from censored inter-exceedance times relating to the
 #'   first and last observation.  See Attalides (2015) for details.
