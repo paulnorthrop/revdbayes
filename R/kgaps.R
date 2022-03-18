@@ -361,6 +361,8 @@ kgaps_stats <- function(data, thresh, k = 1, inc_cens = FALSE) {
 
 # =============================== kgaps_loglik ================================
 
+# No n_kgaps as an argument here because revdbayes::kgaps_stats() does not
+# include n_kgaps in its output list (exdex::kgaps_stat() does include this)
 kgaps_loglik <- function(theta, N0, N1, sum_qs){
   if (theta < 0 || theta > 1) {
     return(-Inf)
