@@ -276,16 +276,16 @@ kgaps_mle <- function(data, thresh, k = 1, inc_cens = FALSE, conf = NULL) {
 #' @details The sample K-gaps are
 #'   \eqn{S_0, S_1, \ldots, S_{N-1}, S_N}{S_0, S_1, ..., S_(N-1), S_N}, where
 #'   \eqn{S_1, \ldots, S_{N-1}}{S_1, ..., S_(N-1)} are uncensored and \eqn{S_0}
-#'   and \eqn{S_N} are censored.  Under the assumption that the K-gaps are
-#'   independent, the log-likelihood of the K-gaps model is given by
+#'   and \eqn{S_N} are censored.  Under the assumption that the \eqn{K}-gaps
+#'   are independent, the log-likelihood of the \eqn{K}-gaps model is given by
 #'   \deqn{l(\theta; S_0, \ldots, S_N) = N_0 \log(1 - \theta) +
 #'     2 N_1 \log \theta - \theta q (S_0 + \cdots + S_N),}{%
 #'     l(\theta; S_0, ..., S_N) = N_0 log(1 - \theta) + 2 N_1 log \theta -
 #'     \theta q (S_0 + ... + S_N),}
 #'    where \eqn{q} is the threshold exceedance probability,
-#'    \eqn{N_0} is the number of sample K-gaps that are equal to zero and
-#'    (apart from an adjustment for the contributions of \eqn{S_0} and
-#'    \eqn{S_N}) \eqn{N_1} is the number of positive sample K-gaps.
+#'    \eqn{N_0} is the number of uncensored sample \eqn{K}-gaps that are equal
+#'    to zero and (apart from an adjustment for the contributions of \eqn{S_0}
+#'    and \eqn{S_N}) \eqn{N_1} is the number of positive sample \eqn{K}-gaps.
 #'    Specifically, \eqn{N_1} is equal to the number of
 #'    \eqn{S_1, \ldots, S_{N-1}}{S_1, ..., S_(N-1)}
 #'    that are positive plus \eqn{(I_0 + I_N) / 2}, where \eqn{I_0 = 1} if
@@ -345,6 +345,7 @@ kgaps_stats <- function(data, thresh, k = 1, inc_cens = FALSE) {
     T_u_cens <- c(exc_u[1] - 1, nx - exc_u[N_u])
     S_k_cens <- pmax(T_u_cens - k, 0)
     # N0, N1, sum of scaled K-gaps
+    # S_k_cens = 0 adds no information, because P(S >= 0) = 1
     N1_cens <- sum(S_k_cens > 0)
     sum_s_cens <- sum(q_u * S_k_cens)
     # Add contributions.
