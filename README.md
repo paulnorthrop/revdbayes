@@ -8,6 +8,10 @@ Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/revdbaye
 [![Coverage
 Status](https://codecov.io/github/paulnorthrop/revdbayes/coverage.svg?branch=master)](https://codecov.io/github/paulnorthrop/revdbayes?branch=master)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/revdbayes)](https://cran.r-project.org/package=revdbayes)
+[![Downloads
+(monthly)](https://cranlogs.r-pkg.org/badges/revdbayes?color=brightgreen)](https://cran.r-project.org/package=revdbayes)
+[![Downloads
+(total)](https://cranlogs.r-pkg.org/badges/grand-total/revdbayes?color=brightgreen)](https://cran.r-project.org/package=revdbayes)
 
 ### Ratio-of-uniforms Sampling for Bayesian Extreme Value Analysis
 
