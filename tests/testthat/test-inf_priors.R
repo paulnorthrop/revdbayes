@@ -1,4 +1,4 @@
-context("Informative priors: revdbayes vs. evdbayes")
+#context("Informative priors: revdbayes vs. evdbayes")
 
 # We check that the the revdbayes (R and C++) functions to evaluate
 # informative log-priors agree with each other and with the functions

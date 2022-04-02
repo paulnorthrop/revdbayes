@@ -1,4 +1,4 @@
-context("GP: upper")
+#context("GP: upper")
 
 # We check that if we specify a finite upper endpoint for the GP distribution
 # then the values posterior samples is consistent with this

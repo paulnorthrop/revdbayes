@@ -1,4 +1,4 @@
-context("K-gaps posterior: R vs Rcpp")
+#context("K-gaps posterior: R vs Rcpp")
 
 # We check that the values simulated using kgaps_post are (close enough to)
 # identical when they are called using use_rcpp = TRUE and use_rcpp = FALSE

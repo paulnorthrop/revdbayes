@@ -1,4 +1,4 @@
-context("GEV functions")
+#context("GEV functions")
 
 # We check the functions pgev, qgev and rgev.
 

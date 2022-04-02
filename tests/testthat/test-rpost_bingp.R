@@ -1,4 +1,4 @@
-context("binGP: rpost_rcpp vs rpost")
+#context("binGP: rpost_rcpp vs rpost")
 
 # We check that the values simulated using rpost() and rpost_rcpp() are
 # (close enough to) identical when they are called using the same data,

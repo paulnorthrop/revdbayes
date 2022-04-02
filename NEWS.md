@@ -10,6 +10,8 @@
 
 * The microbenchmark results have been reinstated in the "Faster simulation using revdbayes" vignette.
 
+* Activated 3rd edition of the `testthat` package
+
 # revdbayes 1.3.9
 
 ## Bug fixes and minor improvements

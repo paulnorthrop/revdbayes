@@ -1,4 +1,4 @@
-context("GP functions 2")
+#context("GP functions 2")
 
 ## Example shape parameters
 

@@ -1,4 +1,4 @@
-context("binGP functions")
+#context("binGP functions")
 
 # We check the functions pbingp and qbingp.
 

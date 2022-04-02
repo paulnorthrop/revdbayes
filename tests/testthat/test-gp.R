@@ -1,4 +1,4 @@
-context("GP functions")
+#context("GP functions")
 
 # We check the functions pgp, qgp and rgp.
 

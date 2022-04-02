@@ -1,4 +1,4 @@
-context("binGP rpost: weights vs no weights")
+#context("binGP rpost: weights vs no weights")
 
 # We check that the values simulated using rpost() are identical when weights
 # is not supplied and when weights is a vector of ones.
