@@ -285,7 +285,7 @@ grimshaw_gp_mle <- function(x) {
     #  Newton-Raphson Algorithm to find the zero of the function h()
     #  for a given initial starting point.
     j<-1
-    maxiter<-100  #{Maximum number of mod. Newton-Raphson iterations}
+    maxiter<-500  #{Maximum number of mod. Newton-Raphson iterations}
     while(j<=maxiter){
       #
       #  Determine whether it is better to use Bisection (if N-R is
@@ -362,7 +362,7 @@ grimshaw_gp_mle <- function(x) {
     #  Newton-Raphson Algorithm to find the zero of the function h()
     #  for a given initial starting point.
     j<-1
-    maxiter<-100  #{Maximum number of mod. Newton-Raphson iterations}
+    maxiter<-500  #{Maximum number of mod. Newton-Raphson iterations}
     while(j<=maxiter){
       #
       #  Determine whether it is better to use Bisection (if N-R is
@@ -446,7 +446,7 @@ grimshaw_gp_mle <- function(x) {
     #  Newton-Raphson Algorithm to find the zero of the function h()
     #  for a given initial starting point.
     j<-1
-    maxiter<-100  #{Maximum number of mod. Newton-Raphson iterations}
+    maxiter<-500  #{Maximum number of mod. Newton-Raphson iterations}
     while(j<=maxiter){
       #
       #  Determine whether it is better to use Bisection (if N-R is
@@ -516,7 +516,7 @@ grimshaw_gp_mle <- function(x) {
       dx<-thlo-thhi
 
       j<-1
-      maxiter<-100  #{Maximum number of bisection iterations}
+      maxiter<-500  #{Maximum number of bisection iterations}
       while(j<=maxiter){
         dx<-.5*dx
         thmid<-thzero+dx
@@ -550,7 +550,7 @@ grimshaw_gp_mle <- function(x) {
       dx<-thhi-thlo
 
       j<-1
-      maxiter<-100  #{Maximum number of bisection iterations}
+      maxiter<-500  #{Maximum number of bisection iterations}
       while(j<=maxiter){
         dx<-.5*dx
         thmid<-thzero+dx
@@ -599,7 +599,7 @@ grimshaw_gp_mle <- function(x) {
     #  Newton-Raphson Algorithm to find the zero of the function h()
     #  for a given initial starting point.
     j<-1
-    maxiter<-100  #{Maximum number of mod. Newton-Raphson iterations}
+    maxiter<-500  #{Maximum number of mod. Newton-Raphson iterations}
     while(j<=maxiter){
       #
       #  Determine whether it is better to use Bisection (if N-R is
@@ -669,7 +669,7 @@ grimshaw_gp_mle <- function(x) {
       dx<-thlo-thhi
 
       j<-1
-      maxiter<-100  #{Maximum number of bisection iterations}
+      maxiter<-500  #{Maximum number of bisection iterations}
       while(j<=maxiter){
         dx<-.5*dx
         thmid<-thzero+dx
@@ -703,7 +703,7 @@ grimshaw_gp_mle <- function(x) {
       dx<-thhi-thlo
 
       j<-1
-      maxiter<-100  #{Maximum number of bisection iterations}
+      maxiter<-500  #{Maximum number of bisection iterations}
       while(j<=maxiter){
         dx<-.5*dx
         thmid<-thzero+dx
