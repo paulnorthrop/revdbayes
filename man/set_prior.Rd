@@ -79,8 +79,8 @@ Of the in-built named priors available in revdbayes only
   Attalides (2016) consider the issue of posterior propriety in Bayesian
   extreme value analyses.  In most of improper priors below the prior for
   the scale parameter \eqn{\sigma} is taken to be \eqn{1/\sigma},
-  i.e. a flat prior for \eqn{\log \sigma}{log \sigma}.  Here we denote the scale
-  parameter of the GP distribution by \eqn{\sigma}, whereas we use
+  i.e. a flat prior for \eqn{\log \sigma}{log \sigma}.  Here we denote the
+  scale parameter of the GP distribution by \eqn{\sigma}, whereas we use
   \eqn{\sigma_u} in the revdbayes vignette.
 
   For all in-built priors the arguments \code{min_xi} and \code{max_xi} may
