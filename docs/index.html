@@ -29,6 +29,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -47,12 +49,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -92,7 +88,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/paulnorthrop/revdbayes/">
+  <a href="https://github.com/paulnorthrop/revdbayes/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -109,45 +105,44 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="revdbayes-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#revdbayes-" class="anchor"></a>revdbayes <img src="tools/revdbayes_logo.png" height="150" align="right">
+<div class="section level1">
+<div class="page-header"><h1 id="revdbayes-">revdbayes <img src="tools/revdbayes_logo.png" height="150" align="right"><a class="anchor" aria-label="anchor" href="#revdbayes-"></a>
 </h1></div>
 
-<div id="ratio-of-uniforms-sampling-for-bayesian-extreme-value-analysis" class="section level3">
-<h3 class="hasAnchor">
-<a href="#ratio-of-uniforms-sampling-for-bayesian-extreme-value-analysis" class="anchor"></a>Ratio-of-uniforms Sampling for Bayesian Extreme Value Analysis</h3>
+<div class="section level3">
+<h3 id="ratio-of-uniforms-sampling-for-bayesian-extreme-value-analysis">Ratio-of-uniforms Sampling for Bayesian Extreme Value Analysis<a class="anchor" aria-label="anchor" href="#ratio-of-uniforms-sampling-for-bayesian-extreme-value-analysis"></a>
+</h3>
 </div>
-<div id="what-does-revdbayes-do" class="section level3">
-<h3 class="hasAnchor">
-<a href="#what-does-revdbayes-do" class="anchor"></a>What does revdbayes do?</h3>
-<p>The <code>revdbayes</code> package uses the ratio-of-uniforms method to produce random samples from the posterior distributions that occur in some relatively simple Bayesian extreme value analyses. The functionality of revdbayes is similar to the <a href="https://cran.r-project.org/package=evdbayes"><code>evdbayes</code> package</a>, which uses Markov Chain Monte Carlo (MCMC) methods for posterior simulation. Advantages of the ratio-of-uniforms method over MCMC in this context are that the user is not required to set tuning parameters nor to monitor convergence and a random posterior sample is produced. Use of the <a href="https://cran.r-project.org/package=evdbayes">Rcpp package</a> enables <code>revdbayes</code> to be faster than <code>evdbayes</code>. Also provided are functions for making inferences about the extremal index, using the K-gaps model of <a href="https://doi.org/10.1214/09-AOAS292">Suveges and Davison (2010)</a>.</p>
+<div class="section level3">
+<h3 id="what-does-revdbayes-do">What does revdbayes do?<a class="anchor" aria-label="anchor" href="#what-does-revdbayes-do"></a>
+</h3>
+<p>The <code>revdbayes</code> package uses the ratio-of-uniforms method to produce random samples from the posterior distributions that occur in some relatively simple Bayesian extreme value analyses. The functionality of revdbayes is similar to the <a href="https://cran.r-project.org/package=evdbayes" class="external-link"><code>evdbayes</code> package</a>, which uses Markov Chain Monte Carlo (MCMC) methods for posterior simulation. Advantages of the ratio-of-uniforms method over MCMC in this context are that the user is not required to set tuning parameters nor to monitor convergence and a random posterior sample is produced. Use of the <a href="https://cran.r-project.org/package=evdbayes" class="external-link">Rcpp package</a> enables <code>revdbayes</code> to be faster than <code>evdbayes</code>. Also provided are functions for making inferences about the extremal index, using the K-gaps model of <a href="https://doi.org/10.1214/09-AOAS292" class="external-link">Suveges and Davison (2010)</a>.</p>
 </div>
-<div id="a-simple-example" class="section level3">
-<h3 class="hasAnchor">
-<a href="#a-simple-example" class="anchor"></a>A simple example</h3>
+<div class="section level3">
+<h3 id="a-simple-example">A simple example<a class="anchor" aria-label="anchor" href="#a-simple-example"></a>
+</h3>
 <p>The two main functions in <code>revdbayes</code> are <code>set_prior</code> and <code>rpost</code>. <code>set_prior</code> sets a prior for extreme value parameters. <code>rpost</code> samples from the posterior produced by updating this prior using the likelihood of observed data under an extreme value model. The following code sets a prior for Generalised Extreme Value (GEV) parameters based on a multivariate normal distribution and then simulates a random sample of size 1000 from the posterior distribution based on a dataset of annual maximum sea levels.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">portpirie</span><span class="op">)</span>
-<span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
-<span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">portpirie</span><span class="op">)</span>
+<span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
+<span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span>
 <span class="va">gevp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">gevp</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gevp</span><span class="op">)</span></code></pre></div>
 <p>From version 1.2.0 onwards the faster function <code>rpost_rcpp</code> can be used.<br>
 See the vignette “Faster simulation using revdbayes and Rcpp” for details. The functions <code>rpost</code> and <code>post_rcpp</code> have the same syntax. For example:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gevp_rcpp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="installation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h3>
+<div class="section level3">
+<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h3>
 <p>To get the current released version from CRAN:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"revdbayes"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"revdbayes"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="vignettes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#vignettes" class="anchor"></a>Vignettes</h3>
+<div class="section level3">
+<h3 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
+</h3>
 <p>See <code>vignette("revdbayes-vignette", package = "revdbayes")</code> for an overview of the package and <code>vignette("revdbayes-using-rcpp-vignette", package = "revdbayes")</code> for an illustration of the improvements in efficiency produced using the Rcpp package. See <code>vignette("revdbayes-predictive-vignette", package = "revdbayes")</code> for an outline of how to use revdbayes to perform posterior predictive extreme value inference. Inference for the extremal index using the K-gaps model is described in <code>vignette("revdbayes-kgaps-vignette", package = "revdbayes")</code></p>
 </div>
 </div>
@@ -155,49 +150,60 @@ See the vignette “Faster simulation using revdbayes and Rcpp” for details. T
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=revdbayes">https://​cloud.r-project.org/​package=revdbayes</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/paulnorthrop/revdbayes/">https://​github.com/​paulnorthrop/​revdbayes/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/paulnorthrop/revdbayes/issues">https://​github.com/​paulnorthrop/​revdbayes/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=revdbayes" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/paulnorthrop/revdbayes/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/paulnorthrop/revdbayes/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>GPL (&gt;= 2)</li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Paul J. Northrop <br><small class="roles"> Author, maintainer, copyright holder </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html#citation">Citing revdbayes</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/paulnorthrop/revdbayes"><img src="https://travis-ci.org/paulnorthrop/revdbayes.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://ci.appveyor.com/project/paulnorthrop/revdbayes"><img src="https://ci.appveyor.com/api/projects/status/github/paulnorthrop/revdbayes?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
-<li><a href="https://codecov.io/github/paulnorthrop/revdbayes?branch=master"><img src="https://codecov.io/github/paulnorthrop/revdbayes/coverage.svg?branch=master" alt="Coverage Status"></a></li>
-<li><a href="https://cran.r-project.org/package=revdbayes"><img src="https://www.r-pkg.org/badges/version/revdbayes" alt="CRAN_Status_Badge"></a></li>
+<li>Paul J. Northrop <br><small class="roles"> Author, maintainer, copyright holder </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://ci.appveyor.com/project/paulnorthrop/revdbayes" class="external-link"><img src="https://ci.appveyor.com/api/projects/status/github/paulnorthrop/revdbayes?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
+<li><a href="https://codecov.io/github/paulnorthrop/revdbayes?branch=master" class="external-link"><img src="https://codecov.io/github/paulnorthrop/revdbayes/coverage.svg?branch=master" alt="Coverage Status"></a></li>
+<li><a href="https://cran.r-project.org/package=revdbayes" class="external-link"><img src="https://www.r-pkg.org/badges/version/revdbayes" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=revdbayes" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/revdbayes?color=brightgreen" alt="Downloads (monthly)"></a></li>
+<li><a href="https://cran.r-project.org/package=revdbayes" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/revdbayes?color=brightgreen" alt="Downloads (total)"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Paul J. Northrop.</p>
+  <p></p>
+<p>Developed by Paul J. Northrop.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -205,6 +211,8 @@ See the vignette “Faster simulation using revdbayes and Rcpp” for details. T
 
   
 
+
+  
 
   </body>
 </html>

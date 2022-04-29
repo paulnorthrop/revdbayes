@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,12 +39,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -82,7 +78,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/paulnorthrop/revdbayes/">
+  <a href="https://github.com/paulnorthrop/revdbayes/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -97,170 +93,142 @@
 
       
 
-      </header><script src="revdbayes-b-using-rcpp-vignette_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Faster simulation using revdbayes</h1>
-                        <h4 class="author">Paul J. Northrop</h4>
+                        <h4 data-toc-skip class="author">Paul J. Northrop</h4>
             
-            <h4 class="date">2021-09-18</h4>
+            <h4 data-toc-skip class="date">2022-04-29</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/master/vignettes/revdbayes-b-using-rcpp-vignette.Rmd"><code>vignettes/revdbayes-b-using-rcpp-vignette.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/HEAD/vignettes/revdbayes-b-using-rcpp-vignette.Rmd" class="external-link"><code>vignettes/revdbayes-b-using-rcpp-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>revdbayes-b-using-rcpp-vignette.Rmd</code></div>
 
     </div>
 
     
     
-<p>This vignette introduces a new feature of <em>revdbayes</em>: reducing posterior simulation time by performing the most time-consuming tasks using C++ functions. This achieved using a new facility in the <em>rust</em> package <span class="citation">(Northrop 2017)</span>, which in turn uses the <strong>Rcpp</strong> package <span class="citation">Eddelbuettel (2013)</span>. The result is a new function <code>rpost_rcpp</code>, which has the same structure as the existing function <code>rpost</code>. From a user’s perspective the only difference between these two functions occurs if they wish to supply their own prior distribution: <code>rpost_rcpp</code> requires an external pointer to a C++ function (see <a href="#cpp_fun">Providing a user-defined prior</a>), whereas <code>rpost</code> requires an input R function (see the vignette <a href="revdbayes-a-vignette.html">Introducing revdbayes</a>.</p>
+<p>This vignette introduces a new feature of <em>revdbayes</em>: reducing posterior simulation time by performing the most time-consuming tasks using C++ functions. This achieved using a new facility in the <em>rust</em> package <span class="citation">(Northrop 2017)</span>, which in turn uses the <strong>Rcpp</strong> package <span class="citation">(Eddelbuettel and Francois 2011)</span>. The result is a new function <code>rpost_rcpp</code>, which has the same structure as the existing function <code>rpost</code>. From a user’s perspective the only difference between these two functions occurs if they wish to supply their own prior distribution: <code>rpost_rcpp</code> requires an external pointer to a C++ function (see <a href="#cpp_fun">Providing a user-defined prior</a>), whereas <code>rpost</code> requires an input R function (see the vignette <a href="revdbayes-a-vignette.html">Introducing revdbayes</a>.</p>
 <p>Before we deal with user-supplied priors we compare posterior simulation times using <code>rpost</code> and <code>rpost_rcpp</code> for examples based on in-built prior distributions. We use the default settings of <code>rpost</code> and <code>rpost_rcpp</code> throughout. We also compare the speed of these functions with the function <code>posterior</code> in the <strong>evdbayes</strong> package <span class="citation">(Stephenson and Ribatet 2014)</span>, using the <strong>microbenchmark</strong> package <span class="citation">(Mersmann 2015)</span>.</p>
-<div id="performance-comparisons" class="section level2">
-<h2 class="hasAnchor">
-<a href="#performance-comparisons" class="anchor"></a>Performance comparisons</h2>
+<div class="section level2">
+<h2 id="performance-comparisons">Performance comparisons<a class="anchor" aria-label="anchor" href="#performance-comparisons"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/revdbayes/">revdbayes</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/revdbayes/" class="external-link">revdbayes</a></span><span class="op">)</span>
 <span class="co"># Are microbenchmark and evdbayes available?</span>
-<span class="va">got_microbenchmark</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"microbenchmark"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">got_evdbayes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"evdbayes"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">got_microbenchmark</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"microbenchmark"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">got_evdbayes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"evdbayes"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="kw">if</span> <span class="op">(</span><span class="va">got_microbenchmark</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/" class="external-link">microbenchmark</a></span><span class="op">)</span>
 <span class="op">}</span>
 <span class="kw">if</span> <span class="op">(</span><span class="va">got_evdbayes</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">evdbayes</span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">evdbayes</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="co"># Set the number of posterior samples required.</span>
 <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">46</span><span class="op">)</span></code></pre></div>
-<div id="gp_example" class="section level3">
-<h3 class="hasAnchor">
-<a href="#gp_example" class="anchor"></a>Generalised Pareto (GP) model</h3>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">46</span><span class="op">)</span></code></pre></div>
+<div class="section level3">
+<h3 id="gp_example">Generalised Pareto (GP) model<a class="anchor" aria-label="anchor" href="#gp_example"></a>
+</h3>
 <p>We repeat the analysis of the Gulf of Mexico Wave Height Data from the <a href="revdbayes-a-vignette.html">Introducing revdbayes</a> vignette to check that using Rcpp does indeed reduce computation time.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">u</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">u</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span>
 <span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
 <span class="kw">if</span> <span class="op">(</span><span class="va">got_microbenchmark</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span>
+  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">microbenchmark</span><span class="op">(</span>
     rpost <span class="op">=</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"gp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>, data <span class="op">=</span> <span class="va">gom</span><span class="op">)</span>,
     rpost_rcpp <span class="op">=</span> <span class="fu"><a href="../reference/rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"gp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>, 
                             data <span class="op">=</span>   <span class="va">gom</span><span class="op">)</span>
   <span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="st">"relative"</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="op">}</span>  
-<span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;        expr min    lq  mean median  uq max neval</span>
-<span class="co">#&gt;       rpost 106 111.0 116.0  114.0 119 174   100</span>
-<span class="co">#&gt;  rpost_rcpp  18  18.8  20.1   19.3  20  47   100</span>
-<span class="co">#&gt; Unit: relative</span>
-<span class="co">#&gt;        expr min  lq mean median  uq max neval</span>
-<span class="co">#&gt;       rpost 5.9 5.9  5.8    5.9 5.9 3.7   100</span>
-<span class="co">#&gt;  rpost_rcpp 1.0 1.0  1.0    1.0 1.0 1.0   100</span></code></pre></div>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="st">"relative"</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="op">}</span>  </code></pre></div>
 <p>In this example <code>rpost_rcpp</code> is indeed much faster than <code>rpost</code>.</p>
 </div>
-<div id="generalised-extreme-value-gev-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#generalised-extreme-value-gev-model" class="anchor"></a>Generalised Extreme Value (GEV) model</h3>
+<div class="section level3">
+<h3 id="generalised-extreme-value-gev-model">Generalised Extreme Value (GEV) model<a class="anchor" aria-label="anchor" href="#generalised-extreme-value-gev-model"></a>
+</h3>
 <p>We repeat the analysis of the Port Pirie annual maximum sea level data from the <a href="revdbayes-a-vignette.html">Introducing revdbayes</a>. We add to the comparison the example calculations that feature in the <strong>evdbayes</strong> user guide, based on the <code>posterior</code> function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
-<span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
+<span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span>
 <span class="co"># Tuning parameters from the evdbayes user guide.</span>
-<span class="va">t0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3.87</span>, <span class="fl">0.2</span>, <span class="op">-</span><span class="fl">0.05</span><span class="op">)</span> 
-<span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.06</span>, <span class="fl">.25</span>, <span class="fl">.25</span><span class="op">)</span>
+<span class="va">t0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.87</span>, <span class="fl">0.2</span>, <span class="op">-</span><span class="fl">0.05</span><span class="op">)</span> 
+<span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.06</span>, <span class="fl">.25</span>, <span class="fl">.25</span><span class="op">)</span>
 <span class="kw">if</span> <span class="op">(</span><span class="va">got_microbenchmark</span><span class="op">)</span> <span class="op">{</span>
   <span class="kw">if</span> <span class="op">(</span><span class="va">got_evdbayes</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span>
+    <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">microbenchmark</span><span class="op">(</span>
       rpost <span class="op">=</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span><span class="op">)</span>,
       rpost_rcpp <span class="op">=</span> <span class="fu"><a href="../reference/rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, 
                             data <span class="op">=</span> <span class="va">portpirie</span><span class="op">)</span>,
-      evdbayes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/evdbayes/man/posterior.html">posterior</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="va">t0</span>, prior <span class="op">=</span> <span class="va">pn</span>, lh <span class="op">=</span> <span class="st">"gev"</span>, 
+      evdbayes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/evdbayes/man/posterior.html" class="external-link">posterior</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="va">t0</span>, prior <span class="op">=</span> <span class="va">pn</span>, lh <span class="op">=</span> <span class="st">"gev"</span>, 
                          data <span class="op">=</span> <span class="va">portpirie</span>, psd <span class="op">=</span> <span class="va">s</span>, burn <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
     <span class="op">)</span>
   <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-    <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span>
+    <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">microbenchmark</span><span class="op">(</span>
       rpost <span class="op">=</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span><span class="op">)</span>,
       rpost_rcpp <span class="op">=</span> <span class="fu"><a href="../reference/rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, 
                               data <span class="op">=</span> <span class="va">portpirie</span><span class="op">)</span>
     <span class="op">)</span>
   <span class="op">}</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="st">"relative"</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="op">}</span>  
-<span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;        expr   min    lq  mean median  uq   max neval</span>
-<span class="co">#&gt;       rpost 251.0 261.0 272.0  268.0 276 339.0   100</span>
-<span class="co">#&gt;  rpost_rcpp  62.3  65.8  68.6   67.7  71  86.7   100</span>
-<span class="co">#&gt;    evdbayes 193.0 200.0 205.0  203.0 208 265.0   100</span>
-<span class="co">#&gt; Unit: relative</span>
-<span class="co">#&gt;        expr min lq mean median  uq max neval</span>
-<span class="co">#&gt;       rpost 4.0  4    4      4 3.9 3.9   100</span>
-<span class="co">#&gt;  rpost_rcpp 1.0  1    1      1 1.0 1.0   100</span>
-<span class="co">#&gt;    evdbayes 3.1  3    3      3 2.9 3.1   100</span></code></pre></div>
+  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="st">"relative"</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="op">}</span>  </code></pre></div>
 <p>This comparison is generous to <code>posterior</code> because the burn-in has been set to zero and <code>posterior</code> produces a dependent sample rather than a random sample. The <em>effective sample size</em> of an MCMC sample from <code>posterior</code> varies between simulations and across parameters. The <code>effectiveSize</code> function in the <strong>coda</strong> package <span class="citation">(Plummer et al. 2006)</span> suggests that the effective sample size in this example is of the order of 100 to 200, whereas the <strong>revdbayes</strong> functions <code>rpost</code> and <code>rpost_rcpp</code> produce random samples of size 1000. <code>rpost</code> is a little slower than <code>posterior</code> while <code>rpost_rcpp</code> is much faster than <code>posterior</code>.</p>
 </div>
-<div id="point-process-pp-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#point-process-pp-model" class="anchor"></a>Point Process (PP) model</h3>
+<div class="section level3">
+<h3 id="point-process-pp-model">Point Process (PP) model<a class="anchor" aria-label="anchor" href="#point-process-pp-model"></a>
+</h3>
 <p>We compare the computational efficiencies of <code>rpost</code>, <code>rpost_rcpp</code> and the evdbayes function <code>posterior</code> when performing the analysis of daily rainfall totals from the <a href="revdbayes-a-vignette.html">Introducing revdbayes</a>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Informative prior set using revdbayes</span>
-<span class="va">pr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prob <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">38.9</span>, <span class="fl">7.1</span>, <span class="fl">47</span><span class="op">)</span>,
-                 scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">6.3</span>, <span class="fl">2.6</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="st">"quant"</span><span class="op">)</span>
+<span class="va">pr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prob <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">38.9</span>, <span class="fl">7.1</span>, <span class="fl">47</span><span class="op">)</span>,
+                 scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">6.3</span>, <span class="fl">2.6</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="st">"quant"</span><span class="op">)</span>
 <span class="co"># Tuning parameters from the evdbayes user guide.</span>
-<span class="va">t0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">43.2</span>, <span class="fl">7.64</span>, <span class="fl">0.32</span><span class="op">)</span> 
-<span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">.2</span>, <span class="fl">.07</span><span class="op">)</span>
+<span class="va">t0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">43.2</span>, <span class="fl">7.64</span>, <span class="fl">0.32</span><span class="op">)</span> 
+<span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">.2</span>, <span class="fl">.07</span><span class="op">)</span>
 <span class="kw">if</span> <span class="op">(</span><span class="va">got_microbenchmark</span><span class="op">)</span> <span class="op">{</span>
   <span class="kw">if</span> <span class="op">(</span><span class="va">got_evdbayes</span><span class="op">)</span> <span class="op">{</span>
     <span class="co"># Informative prior set using evdbayes</span>
-    <span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/evdbayes/man/prior.html">prior.quant</a></span><span class="op">(</span>prob <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">38.9</span>, <span class="fl">7.1</span>, <span class="fl">47</span><span class="op">)</span>, 
-                      scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">6.3</span>, <span class="fl">2.6</span><span class="op">)</span><span class="op">)</span>
-    <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span>
+    <span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/evdbayes/man/prior.html" class="external-link">prior.quant</a></span><span class="op">(</span>prob <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">38.9</span>, <span class="fl">7.1</span>, <span class="fl">47</span><span class="op">)</span>, 
+                      scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">6.3</span>, <span class="fl">2.6</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">microbenchmark</span><span class="op">(</span>
       rpost <span class="op">=</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"pp"</span>, prior <span class="op">=</span> <span class="va">pr2</span>, data <span class="op">=</span> <span class="va">rainfall</span>,
                 thresh <span class="op">=</span> <span class="fl">40</span>, noy <span class="op">=</span> <span class="fl">54</span><span class="op">)</span>,
       rpost_rcpp <span class="op">=</span> <span class="fu"><a href="../reference/rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"pp"</span>, prior <span class="op">=</span> <span class="va">pr2</span>, data <span class="op">=</span> <span class="va">rainfall</span>,
                           thresh <span class="op">=</span> <span class="fl">40</span>, noy <span class="op">=</span> <span class="fl">54</span><span class="op">)</span>,
-      evdbayes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/evdbayes/man/posterior.html">posterior</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="va">t0</span>, prior <span class="op">=</span> <span class="va">pr</span>, <span class="st">"pp"</span>, data <span class="op">=</span> <span class="va">rainfall</span>,
+      evdbayes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/evdbayes/man/posterior.html" class="external-link">posterior</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="va">t0</span>, prior <span class="op">=</span> <span class="va">pr</span>, <span class="st">"pp"</span>, data <span class="op">=</span> <span class="va">rainfall</span>,
                        thresh <span class="op">=</span> <span class="fl">40</span>, noy <span class="op">=</span> <span class="fl">54</span>, psd <span class="op">=</span> <span class="va">s</span>, burn <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
     <span class="op">)</span>
   <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-    <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span>
+    <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">microbenchmark</span><span class="op">(</span>
       rpost <span class="op">=</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"pp"</span>, prior <span class="op">=</span> <span class="va">pr2</span>, data <span class="op">=</span> <span class="va">rainfall</span>,
                 thresh <span class="op">=</span> <span class="fl">40</span>, noy <span class="op">=</span> <span class="fl">54</span><span class="op">)</span>,
       rpost_rcpp <span class="op">=</span> <span class="fu"><a href="../reference/rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"pp"</span>, prior <span class="op">=</span> <span class="va">pr2</span>, data <span class="op">=</span> <span class="va">rainfall</span>,
                           thresh <span class="op">=</span> <span class="fl">40</span>, noy <span class="op">=</span> <span class="fl">54</span><span class="op">)</span>
     <span class="op">)</span>
   <span class="op">}</span>  
-  <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="st">"relative"</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="op">}</span>  
-<span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;        expr   min    lq  mean median    uq   max neval</span>
-<span class="co">#&gt;       rpost 442.0 466.0 476.0  472.0 485.0 557.0   100</span>
-<span class="co">#&gt;  rpost_rcpp  38.1  39.2  41.2   40.4  43.2  48.4   100</span>
-<span class="co">#&gt;    evdbayes 253.0 258.0 262.0  261.0 265.0 327.0   100</span>
-<span class="co">#&gt; Unit: relative</span>
-<span class="co">#&gt;        expr  min   lq mean median   uq  max neval</span>
-<span class="co">#&gt;       rpost 12.0 12.0 12.0   12.0 11.0 12.0   100</span>
-<span class="co">#&gt;  rpost_rcpp  1.0  1.0  1.0    1.0  1.0  1.0   100</span>
-<span class="co">#&gt;    evdbayes  6.6  6.6  6.4    6.4  6.1  6.7   100</span></code></pre></div>
+  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="st">"relative"</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="op">}</span>  </code></pre></div>
 <p>In this example <code>rpost</code> is slower than <code>posterior</code> but <code>rpost_rcpp</code> is substantially faster than <code>posterior</code>.</p>
 </div>
 </div>
-<div id="cpp_fun" class="section level2">
-<h2 class="hasAnchor">
-<a href="#cpp_fun" class="anchor"></a>Providing a user-defined prior</h2>
-<p>If the user wishes to supply their own prior to <code>rpost_rcpp</code> then they must first write a C++ function that evaluates the log of the prior density. The general way that <strong>rust</strong> (and hence <strong>revdbayes</strong>) enables users to provide their own C++ log-prior functions uses external pointers and is based on the <a href="https://gallery.rcpp.org/">Rcpp Gallery</a> article <a href="https://gallery.rcpp.org/articles/passing-cpp-function-pointers/">Passing user-supplied C++ functions</a> by Dirk Eddelbuettel.</p>
+<div class="section level2">
+<h2 id="cpp_fun">Providing a user-defined prior<a class="anchor" aria-label="anchor" href="#cpp_fun"></a>
+</h2>
+<p>If the user wishes to supply their own prior to <code>rpost_rcpp</code> then they must first write a C++ function that evaluates the log of the prior density. The general way that <strong>rust</strong> (and hence <strong>revdbayes</strong>) enables users to provide their own C++ log-prior functions uses external pointers and is based on the <a href="https://gallery.rcpp.org/" class="external-link">Rcpp Gallery</a> article <a href="https://gallery.rcpp.org/articles/passing-cpp-function-pointers/" class="external-link">Passing user-supplied C++ functions</a> by Dirk Eddelbuettel.</p>
 <p>The implementation in <strong>rust</strong> requires this C++ function to have a particular structure: it must take a constant reference to an <code>Rcpp::NumericVector</code>, say <code>x</code>, a constant reference to an <code>Rcpp::List</code>, say <code>ppars</code>, and return a <code>double</code> precision scalar. Here <code>x</code> is the argument of the prior density, i.e. the parameter vector of the extreme value model, and <code>ppars</code> is a list containing the values of prior parameters whose values are not specified inside the function. Thus values of any parameters in the prior can be changed without editing the function. If there are no such parameters then the argument <code>ppars</code> must still be present in the C++ function, even though the list provided to the function will be empty.</p>
-<p>A simple way to provide C++ log-prior functions is to put them in a file, say <code>user_fns.cpp</code>, perhaps taking advantage of the R-like syntax made available by <a href="https://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf">Rcpp sugar</a>. Example content is provided below. This file is available on the <a href="https://github.com/paulnorthrop/revdbayes/blob/master/src/user_priors.cpp">revdbayes Github page</a>.The functions in this file are compiled and made available to R, either using the <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html">Rcpp::sourceCpp</a></code> function (e.g. <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html">Rcpp::sourceCpp("user_fns.cpp")</a></code>) or using RStudio’s Source button on the editor toolbar. The example content below also includes the function <code>create_prior_xptr</code>, which creates an external pointer to a C++ function. See . It is this external pointer that is passed to <code>set_prior</code> to set the prior. If the user has written a C++ function, say <code>new_name</code>, they need to add to <code>create_prior_xptr</code> two lines of code:</p>
+<p>A simple way to provide C++ log-prior functions is to put them in a file, say <code>user_fns.cpp</code>, perhaps taking advantage of the R-like syntax made available by <a href="https://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf" class="external-link">Rcpp sugar</a>. Example content is provided below. This file is available on the <a href="https://github.com/paulnorthrop/revdbayes/blob/master/src/user_priors.cpp" class="external-link">revdbayes Github page</a>.The functions in this file are compiled and made available to R, either using the <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">Rcpp::sourceCpp</a></code> function (e.g. <code>Rcpp::sourceCpp("user_fns.cpp")</code>) or using RStudio’s Source button on the editor toolbar. The example content below also includes the function <code>create_prior_xptr</code>, which creates an external pointer to a C++ function. See . It is this external pointer that is passed to <code>set_prior</code> to set the prior. If the user has written a C++ function, say <code>new_name</code>, they need to add to <code>create_prior_xptr</code> two lines of code:</p>
 <pre><code>else if (fstr == "new_name")  
   return(Rcpp::XPtr&lt;funcPtr&gt;(new funcPtr(&amp;new_name))) ;</code></pre>
 <p>in order that they can create an external pointer for <code>new_name</code> using <code>create_xptr</code>.</p>
-<p>The following excerpt from the example <code>user_fns.cpp</code> file contains a C++ function <code>user_gp_flat</code> to evaluate (the log of) a prior density <span class="math inline">\(\pi(\sigma, \xi) \propto \sigma^{-1}, \, \sigma &gt; 0\)</span>, with an extra parameter <code>min_xi</code> enabling a prior lower bound to be set for <span class="math inline">\(\xi\)</span>. The same prior can be set, using an in-built prior function, using <code><a href="../reference/set_prior.html">set_prior(prior = "flat", model = "gp", min_xi = -1)</a></code>, where we have set <code>min_xi = -1</code>. Note that . Hence in <code>user_gp_flat</code> <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\xi\)</span> are <code>x[0]</code> and <code>x[1]</code> not <code>x[1]</code> and <code>x[2]</code>.</p>
+<p>The following excerpt from the example <code>user_fns.cpp</code> file contains a C++ function <code>user_gp_flat</code> to evaluate (the log of) a prior density <span class="math inline">\(\pi(\sigma, \xi) \propto \sigma^{-1}, \, \sigma &gt; 0\)</span>, with an extra parameter <code>min_xi</code> enabling a prior lower bound to be set for <span class="math inline">\(\xi\)</span>. The same prior can be set, using an in-built prior function, using <code>set_prior(prior = "flat", model = "gp", min_xi = -1)</code>, where we have set <code>min_xi = -1</code>. Note that . Hence in <code>user_gp_flat</code> <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\xi\)</span> are <code>x[0]</code> and <code>x[1]</code> not <code>x[1]</code> and <code>x[2]</code>.</p>
 <pre><code>// [[Rcpp::depends(Rcpp)]]
 
 #include &lt;Rcpp.h&gt;
@@ -304,29 +272,26 @@ SEXP create_prior_xptr(std::string fstr) {
 <span class="va">gpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gp"</span>, prior <span class="op">=</span> <span class="va">p_user</span>, thresh <span class="op">=</span> <span class="va">u</span>,
                   data <span class="op">=</span> <span class="va">gom</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <script type="text/x-mathjax-config">
    MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
 </script><div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-RcppDEbook" class="csl-entry">
-Eddelbuettel, D. 2013. <em>Seamless r and c++ Integration with Rcpp</em>. New York: Springer. <a href="https://www.springer.com/gb/book/9781461468677">https://www.springer.com/gb/book/9781461468677</a>.
-</div>
 <div id="ref-Rcpp" class="csl-entry">
-Eddelbuettel, D., and R. Francois. 2011. <span>“Rcpp: Seamless r and c++ Integration.”</span> <em>Journal of Statistical Software</em> 40 (8): 1–18. <a href="https://doi.org/10.18637/jss.v040.i08">https://doi.org/10.18637/jss.v040.i08</a>.
+Eddelbuettel, D., and R. Francois. 2011. <span>“Rcpp: Seamless <span>R</span> and <span>C++</span> Integration.”</span> <em>Journal of Statistical Software</em> 40 (8): 1–18. doi:<a href="https://doi.org/10.18637/jss.v040.i08" class="external-link">10.18637/jss.v040.i08</a>.
 </div>
 <div id="ref-microbenchmark" class="csl-entry">
-Mersmann, O. 2015. <em>Microbenchmark: Accurate Timing Functions</em>. <a href="https://CRAN.R-project.org/package=microbenchmark">https://CRAN.R-project.org/package=microbenchmark</a>.
+Mersmann, O. 2015. <em>Microbenchmark: Accurate Timing Functions</em>. <a href="https://CRAN.R-project.org/package=microbenchmark" class="external-link">https://CRAN.R-project.org/package=microbenchmark</a>.
 </div>
 <div id="ref-rust" class="csl-entry">
-Northrop, P. J. 2017. <em><span class="nocase">r</span>ust: Ratio-of-Uniforms Simulation with Transformation</em>. <a href="https://CRAN.R-project.org/package=rust">https://CRAN.R-project.org/package=rust</a>.
+Northrop, P. J. 2017. <em><span class="nocase">r</span>ust: Ratio-of-Uniforms Simulation with Transformation</em>. <a href="https://CRAN.R-project.org/package=rust" class="external-link">https://CRAN.R-project.org/package=rust</a>.
 </div>
 <div id="ref-coda" class="csl-entry">
-Plummer, M., N. Best, K. Cowles, and K. Vines. 2006. <span>“CODA: Convergence Diagnosis and Output Analysis for <span>MCMC</span>.”</span> <em>R News</em> 6 (1): 7–11. <a href="https://www.r-project.org/doc/Rnews/Rnews_2006-1.pdf">https://www.r-project.org/doc/Rnews/Rnews_2006-1.pdf</a>.
+Plummer, M., N. Best, K. Cowles, and K. Vines. 2006. <span>“CODA: Convergence Diagnosis and Output Analysis for <span>MCMC</span>.”</span> <em>R News</em> 6 (1): 7–11. <a href="https://www.r-project.org/doc/Rnews/Rnews_2006-1.pdf" class="external-link">https://www.r-project.org/doc/Rnews/Rnews_2006-1.pdf</a>.
 </div>
 <div id="ref-evdbayes" class="csl-entry">
-Stephenson, A., and M. Ribatet. 2014. <em><span class="nocase">e</span>vdbayes: Bayesian Analysis in Extreme Value Theory</em>. <a href="https://CRAN.R-project.org/package=evdbayes">https://CRAN.R-project.org/package=evdbayes</a>.
+Stephenson, A., and M. Ribatet. 2014. <em><span class="nocase">e</span>vdbayes: Bayesian Analysis in Extreme Value Theory</em>. <a href="https://CRAN.R-project.org/package=evdbayes" class="external-link">https://CRAN.R-project.org/package=evdbayes</a>.
 </div>
 </div>
 </div>
@@ -343,11 +308,13 @@ Stephenson, A., and M. Ribatet. 2014. <em><span class="nocase">e</span>vdbayes: 
 
 
       <footer><div class="copyright">
-  <p>Developed by Paul J. Northrop.</p>
+  <p></p>
+<p>Developed by Paul J. Northrop.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -355,6 +322,8 @@ Stephenson, A., and M. Ribatet. 2014. <em><span class="nocase">e</span>vdbayes: 
 
   
 
+
+  
 
   </body>
 </html>

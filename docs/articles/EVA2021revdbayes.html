@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,12 +39,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -82,7 +78,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/paulnorthrop/revdbayes/">
+  <a href="https://github.com/paulnorthrop/revdbayes/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -97,29 +93,29 @@
 
       
 
-      </header><script src="EVA2021revdbayes_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>EVA 2021 R Workshop: revdbayes</h1>
-                        <h4 class="author">Paul Northrop, <a href="p.northrop@ucl.ac.uk">p.northrop@ucl.ac.uk</a>
+                        <h4 data-toc-skip class="author">Paul Northrop, <a href="p.northrop@ucl.ac.uk">p.northrop@ucl.ac.uk</a>
 </h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/master/vignettes/EVA2021revdbayes.Rmd"><code>vignettes/EVA2021revdbayes.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/HEAD/vignettes/EVA2021revdbayes.Rmd" class="external-link"><code>vignettes/EVA2021revdbayes.Rmd</code></a></small>
       <div class="hidden name"><code>EVA2021revdbayes.Rmd</code></div>
 
     </div>
 
     
     
-<div id="how-did-revdbayes-start" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-did-revdbayes-start" class="anchor"></a>How did revdbayes start?</h2>
+<div class="section level2">
+<h2 id="how-did-revdbayes-start">How did revdbayes start?<a class="anchor" aria-label="anchor" href="#how-did-revdbayes-start"></a>
+</h2>
 <ul>
 <li>I needed to sample <strong>quickly and automatically</strong> from many EV (generalised Pareto) posteriors<br>
 </li>
 <li>
-<a href="https://cran.r-project.org/package=threshr">threshr</a>: threshold selection based on
+<a href="https://cran.r-project.org/package=threshr" class="external-link">threshr</a>: threshold selection based on
 <ul>
 <li>out-of-sample EV predictions</li>
 <li>leave-one-out cross-validation</li>
@@ -129,12 +125,12 @@
 <li>wanted to avoid MCMC tuning and convergence diagnostics</li>
 </ul>
 </div>
-<div id="what-does-revdbayes-do" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-does-revdbayes-do" class="anchor"></a>What does revdbayes do?</h2>
+<div class="section level2">
+<h2 id="what-does-revdbayes-do">What does revdbayes do?<a class="anchor" aria-label="anchor" href="#what-does-revdbayes-do"></a>
+</h2>
 <ul>
 <li>Direct sampling from (simple) EV posterior distributions</li>
-<li>Has similar functionality to <a href="https://cran.r-project.org/package=evdbayes">evdbayes</a>
+<li>Has similar functionality to <a href="https://cran.r-project.org/package=evdbayes" class="external-link">evdbayes</a>
 </li>
 </ul>
 <table class="table">
@@ -167,9 +163,9 @@
 </tbody>
 </table>
 </div>
-<div id="ratio-of-uniforms-method" class="section level2 smaller">
-<h2 class="hasAnchor">
-<a href="#ratio-of-uniforms-method" class="anchor"></a>Ratio-of-uniforms method</h2>
+<div class="section level2 smaller">
+<h2 class="smaller" id="ratio-of-uniforms-method">Ratio-of-uniforms method<a class="anchor" aria-label="anchor" href="#ratio-of-uniforms-method"></a>
+</h2>
 <!--
 <span style="color: blue;">Have any of you used this method before?</span>
 -->
@@ -195,9 +191,9 @@
 See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 -->
 </div>
-<div id="increasing-efficiency" class="section level2">
-<h2 class="hasAnchor">
-<a href="#increasing-efficiency" class="anchor"></a>Increasing efficiency</h2>
+<div class="section level2">
+<h2 id="increasing-efficiency">Increasing efficiency<a class="anchor" aria-label="anchor" href="#increasing-efficiency"></a>
+</h2>
 <p><span class="math display">\[ p_a(d, r) = \frac{\int f(x) {\rm ~d}x}{(r d + 1) \, a(r) \displaystyle\prod_{i=1}^d \left[b_i^+(r) -b_i^-(r) \right]} \]</span></p>
 <ul>
 <li>
@@ -212,19 +208,19 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 <p>(EV posteriors can exhibit strong dependence and asymmetry)</p>
 <ul>
 <li>
-<a href="https://paulnorthrop.github.io/rust/">rust</a> R package</li>
+<a href="https://paulnorthrop.github.io/rust/" class="external-link">rust</a> R package</li>
 <li>
-<a href="https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html">Introduction to rust</a> vignette</li>
+<a href="https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html" class="external-link">Introduction to rust</a> vignette</li>
 </ul>
 </div>
-<div id="acceptance-region-for-n10-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#acceptance-region-for-n10-1" class="anchor"></a>Acceptance region for N(10, 1)</h2>
+<div class="section level2">
+<h2 id="acceptance-region-for-n10-1">Acceptance region for N(10, 1)<a class="anchor" aria-label="anchor" href="#acceptance-region-for-n10-1"></a>
+</h2>
 <p><img src="ROUnormal.PNG" width="600px" style="display: block; margin: auto;"></p>
 </div>
-<div id="r-exercises-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#r-exercises-1" class="anchor"></a><a href="https://paulnorthrop.github.io/revdbayes/articles/ex1revdbayes.html">R exercises 1</a>
+<div class="section level2">
+<h2 id="r-exercises-1">
+<a href="https://paulnorthrop.github.io/revdbayes/articles/ex1revdbayes.html" class="external-link">R exercises 1</a><a class="anchor" aria-label="anchor" href="#r-exercises-1"></a>
 </h2>
 <ul>
 <li>1D normal</li>
@@ -238,11 +234,11 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 <li>a warning?</li>
 <li>an error?</li>
 </ul>
-<p>Use <code><a href="https://rdrr.io/r/stats/Distributions.html">?Distributions</a></code> for possibilities</p>
+<p>Use <code><a href="https://rdrr.io/r/stats/Distributions.html" class="external-link">?Distributions</a></code> for possibilities</p>
 </div>
-<div id="summary-of-rou-and-rust" class="section level2">
-<h2 class="hasAnchor">
-<a href="#summary-of-rou-and-rust" class="anchor"></a>Summary of ROU and rust</h2>
+<div class="section level2">
+<h2 id="summary-of-rou-and-rust">Summary of ROU and rust<a class="anchor" aria-label="anchor" href="#summary-of-rou-and-rust"></a>
+</h2>
 <ul>
 <li>Can be useful for
 <ul>
@@ -263,11 +259,11 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 </ul>
 </li>
 </ul>
-<p>See <a href="https://paulnorthrop.github.io/rust/articles/rust-b-when-to-use-vignette.html">When can rust be used?</a></p>
+<p>See <a href="https://paulnorthrop.github.io/rust/articles/rust-b-when-to-use-vignette.html" class="external-link">When can rust be used?</a></p>
 </div>
-<div id="bayesian-ev-analyses" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bayesian-ev-analyses" class="anchor"></a>Bayesian EV analyses</h2>
+<div class="section level2">
+<h2 id="bayesian-ev-analyses">Bayesian EV analyses<a class="anchor" aria-label="anchor" href="#bayesian-ev-analyses"></a>
+</h2>
 <ul>
 <li>
 <strong>Prior</strong> <span class="math inline">\(\pi(\theta)\)</span> for model parameter vector <span class="math inline">\(\theta\)</span>
@@ -280,42 +276,42 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 </li>
 <li>Simulate a large sample from <span class="math inline">\(\pi(\theta \mid \mbox{data})\)</span>, often using MCMC</li>
 </ul>
-<div id="in-revdbayes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#in-revdbayes" class="anchor"></a>In revdbayes</h3>
+<div class="section level3">
+<h3 id="in-revdbayes">In revdbayes<a class="anchor" aria-label="anchor" href="#in-revdbayes"></a>
+</h3>
 <ul>
 <li>4 standard univariate models: GEV, OS, GP, PP</li>
 <li>Simplest, i.i.d. case</li>
 </ul>
 </div>
 </div>
-<div id="gp-model-for-threshold-excesses-1" class="section level2 smaller">
-<h2 class="hasAnchor">
-<a href="#gp-model-for-threshold-excesses-1" class="anchor"></a>GP model for threshold excesses 1</h2>
+<div class="section level2 smaller">
+<h2 class="smaller" id="gp-model-for-threshold-excesses-1">GP model for threshold excesses 1<a class="anchor" aria-label="anchor" href="#gp-model-for-threshold-excesses-1"></a>
+</h2>
 <p>Negative association + asymmetry <span class="math inline">\(\phantom{\xi + \sigma / x_{(m)}}\)</span></p>
 <p><img src="EVA2021revdbayes_files/figure-html/plots1-1.png" width="624" style="display: block; margin: auto;"></p>
 </div>
-<div id="gp-model-for-threshold-excesses-2" class="section level2 smaller">
-<h2 class="hasAnchor">
-<a href="#gp-model-for-threshold-excesses-2" class="anchor"></a>GP model for threshold excesses 2</h2>
+<div class="section level2 smaller">
+<h2 class="smaller" id="gp-model-for-threshold-excesses-2">GP model for threshold excesses 2<a class="anchor" aria-label="anchor" href="#gp-model-for-threshold-excesses-2"></a>
+</h2>
 <p>Rotation about the MAP estimate based on the Hessian at the MAP <span class="math inline">\(\phantom{\xi + \sigma / x_{(m)}}\)</span></p>
 <p><img src="EVA2021revdbayes_files/figure-html/plots2-1.png" width="624" style="display: block; margin: auto;"></p>
 </div>
-<div id="gp-model-for-threshold-excesses-3" class="section level2 smaller">
-<h2 class="hasAnchor">
-<a href="#gp-model-for-threshold-excesses-3" class="anchor"></a>GP model for threshold excesses 3</h2>
+<div class="section level2 smaller">
+<h2 class="smaller" id="gp-model-for-threshold-excesses-3">GP model for threshold excesses 3<a class="anchor" aria-label="anchor" href="#gp-model-for-threshold-excesses-3"></a>
+</h2>
 <p>Box-Cox transformations of <span class="math inline">\(\phi_1 = \sigma_u &gt; 0\)</span> and <span class="math inline">\(\phi_2 = \xi + \sigma / x_{(m)} &gt; 0\)</span></p>
 <p><img src="EVA2021revdbayes_files/figure-html/plots3-1.png" width="624" style="display: block; margin: auto;"></p>
 </div>
-<div id="gp-model-for-threshold-excesses-4" class="section level2 smaller">
-<h2 class="hasAnchor">
-<a href="#gp-model-for-threshold-excesses-4" class="anchor"></a>GP model for threshold excesses 4</h2>
+<div class="section level2 smaller">
+<h2 class="smaller" id="gp-model-for-threshold-excesses-4">GP model for threshold excesses 4<a class="anchor" aria-label="anchor" href="#gp-model-for-threshold-excesses-4"></a>
+</h2>
 <p>Box-Cox first then rotate <span class="math inline">\(\phantom{\xi + \sigma / x_{(m)}}\)</span></p>
 <p><img src="EVA2021revdbayes_files/figure-html/plots4-1.png" width="624" style="display: block; margin: auto;"></p>
 </div>
-<div id="other-models-in-revdbayes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#other-models-in-revdbayes" class="anchor"></a>Other models in revdbayes</h2>
+<div class="section level2">
+<h2 id="other-models-in-revdbayes">Other models in revdbayes<a class="anchor" aria-label="anchor" href="#other-models-in-revdbayes"></a>
+</h2>
 <ul>
 <li>GEV for block (annual?) maxima</li>
 <li>Order statistics (OS): largest <span class="math inline">\(k\)</span> observations per block</li>
@@ -329,9 +325,9 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 </li>
 </ul>
 </div>
-<div id="r-exercises-2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#r-exercises-2" class="anchor"></a><a href="https://paulnorthrop.github.io/revdbayes/articles/ex2revdbayes.html">R exercises 2</a>
+<div class="section level2">
+<h2 id="r-exercises-2">
+<a href="https://paulnorthrop.github.io/revdbayes/articles/ex2revdbayes.html" class="external-link">R exercises 2</a><a class="anchor" aria-label="anchor" href="#r-exercises-2"></a>
 </h2>
 <ul>
 <li>
@@ -354,9 +350,9 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 <li>playing with function arguments</li>
 </ul>
 </div>
-<div id="reflections" class="section level2">
-<h2 class="hasAnchor">
-<a href="#reflections" class="anchor"></a>Reflections</h2>
+<div class="section level2">
+<h2 id="reflections">Reflections<a class="anchor" aria-label="anchor" href="#reflections"></a>
+</h2>
 <p><strong>Limitations</strong></p>
 <ul>
 <li>Very simple EV models</li>
@@ -365,9 +361,9 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 <p><strong>Current uses</strong></p>
 <ul>
 <li>
-<a href="https://paulnorthrop.github.io/threshr/">threshr</a> Threshold Selection and Uncertainty for Extreme Value Analysis</li>
+<a href="https://paulnorthrop.github.io/threshr/" class="external-link">threshr</a> Threshold Selection and Uncertainty for Extreme Value Analysis</li>
 <li>
-<a href="https://cran.r-project.org/package=mev">mev</a>
+<a href="https://cran.r-project.org/package=mev" class="external-link">mev</a>
 <ul>
 <li>
 <code>lambdadep()</code>: a bivariate dependence function (many posterior samples required)</li>
@@ -376,37 +372,37 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 </ul>
 </li>
 <li>
-<a href="https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-d-kgaps-vignette.html">Estimation of the extremal index</a> using the <span class="math inline">\(K\)</span>-gaps model</li>
+<a href="https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-d-kgaps-vignette.html" class="external-link">Estimation of the extremal index</a> using the <span class="math inline">\(K\)</span>-gaps model</li>
 </ul>
 </div>
-<div id="resources" class="section level2 smaller">
-<h2 class="hasAnchor">
-<a href="#resources" class="anchor"></a>Resources</h2>
+<div class="section level2 smaller">
+<h2 class="smaller" id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a>
+</h2>
 <ul>
 <li>
-<a href="https://paulnorthrop.github.io/rust/">rust</a>
+<a href="https://paulnorthrop.github.io/rust/" class="external-link">rust</a>
 <ul>
-<li><a href="https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html">Introduction</a></li>
-<li><a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html">When can rust be used?</a></li>
+<li><a href="https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html" class="external-link">Introduction</a></li>
+<li><a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html" class="external-link">When can rust be used?</a></li>
 <li>
-<a href="https://doi.org/10.1007/BF01889987">Wakefield et al. (1991)</a> Efficiency of the ROU method</li>
+<a href="https://doi.org/10.1007/BF01889987" class="external-link">Wakefield et al. (1991)</a> Efficiency of the ROU method</li>
 </ul>
 </li>
 <li>
-<a href="https://paulnorthrop.github.io/revdbayes/">revdbayes</a>
+<a href="https://paulnorthrop.github.io/revdbayes/" class="external-link">revdbayes</a>
 <ul>
-<li><a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html">Introduction</a></li>
-<li><a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html">Posterior predictive inference</a></li>
+<li><a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html" class="external-link">Introduction</a></li>
+<li><a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html" class="external-link">Posterior predictive inference</a></li>
 <li>
-<a href="https://doi.org/10.1201/b19721">Stephenson (2016)</a> Bayesian EV analysis review</li>
+<a href="https://doi.org/10.1201/b19721" class="external-link">Stephenson (2016)</a> Bayesian EV analysis review</li>
 <li>
-<a href="https://doi.org/10.5705/ss.2014.034">Northrop and Attalides (2016)</a> Certain improper priors should not be used!</li>
+<a href="https://doi.org/10.5705/ss.2014.034" class="external-link">Northrop and Attalides (2016)</a> Certain improper priors should not be used!</li>
 </ul>
 </li>
 <li>
-<a href="https://paulnorthrop.github.io/threshr/">threshr</a>
+<a href="https://paulnorthrop.github.io/threshr/" class="external-link">threshr</a>
 <ul>
-<li><a href="https://paulnorthrop.github.io/threshr/articles/threshr-vignette.html">Introduction</a></li>
+<li><a href="https://paulnorthrop.github.io/threshr/articles/threshr-vignette.html" class="external-link">Introduction</a></li>
 </ul>
 </li>
 </ul>
@@ -424,11 +420,13 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 
 
       <footer><div class="copyright">
-  <p>Developed by Paul J. Northrop.</p>
+  <p></p>
+<p>Developed by Paul J. Northrop.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -436,6 +434,8 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 
   
 
+
+  
 
   </body>
 </html>
