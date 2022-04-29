@@ -89,8 +89,8 @@ user's value of \code{noy} is used in the likelihood.}
 
 \item{npy}{A numeric scalar. The mean number of observations per year
   of data, after excluding any missing values, i.e. the number of
-  non-missing observations divided by total number of years of non-missing
-  data.
+  non-missing observations divided by total number of years' worth of
+  non-missing data.
 
   The value of \code{npy} does not affect any calculation in
   \code{rpost}, it only affects subsequent extreme value inferences using

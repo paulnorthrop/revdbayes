@@ -75,8 +75,8 @@ in \code{x} for each value in \code{n_years}.}
 
 \item{npy}{A numeric scalar. The mean number of observations per year
   of data, after excluding any missing values, i.e. the number of
-  non-missing observations divided by total number of years of non-missing
-  data.
+  non-missing observations divided by total number of years' worth of
+  non-missing data.
 
 If \code{rpost} or \code{rpost_rcpp} was called with
 \code{model == "bingp"} then \code{npy} must either have been supplied
