@@ -1,6 +1,14 @@
 # revdbayes 1.3.9.9000
 
+## New features
+
+* The function `kgaps_post()` can now accept a `data` argument that
+    - is a matrix of independent subsets of data, such as monthly or seasonal time series from different years,
+    - contains missing values, that is, `NA`s. 
+
 ## Bug fixes and minor improvements
+
+* The default value of `inc_cens` in `kgaps_post()` is now `inc_cens = TRUE`.
 
 * In the generalised Pareto example in the introductory vignette, it is now noted that for the Gulf of Mexico data a threshold set at the 95% threshold results in only a small number (16) of threshold excesses. 
 

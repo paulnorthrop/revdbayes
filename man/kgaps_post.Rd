@@ -9,7 +9,7 @@ kgaps_post(
   thresh,
   k = 1,
   n = 1000,
-  inc_cens = FALSE,
+  inc_cens = TRUE,
   alpha = 1,
   beta = 1,
   param = c("logit", "theta"),
@@ -17,7 +17,15 @@ kgaps_post(
 )
 }
 \arguments{
-\item{data}{A numeric vector of raw data.  No missing values are allowed.}
+\item{data}{A numeric vector or numeric matrix of raw data.  If \code{data}
+  is a matrix then the log-likelihood is constructed as the sum of
+  (independent) contributions from different columns. A common situation is
+  where each column relates to a different year.
+
+  If \code{data} contains missing values then \code{\link{split_by_NAs}} is
+  used to divide the data further into sequences of non-missing values,
+  stored in different columns in a matrix.  Again, the log-likelihood
+  is constructed as a sum of contributions from different columns.}
 
 \item{thresh}{A numeric scalar.  Extreme value threshold applied to data.}
 
@@ -61,7 +69,7 @@ An object (list) of class \code{"evpost"}, which has the same
     \item{\code{model}:} The character scalar \code{"kgaps"}.
     \item{\code{thresh}:} The argument \code{thresh}.
     \item{\code{ss}:} The sufficient statistics for the K-gaps likelihood,
-      as calculated by \code{\link{kgaps_stats}}.
+      as calculated by \code{\link[exdex]{kgaps_stat}}.
   }
 }
 \description{
@@ -77,7 +85,7 @@ A beta(\eqn{\alpha}, \eqn{\beta}) prior distribution is used for
     \exp\{- \theta q (S_0 + \cdots + S_N)\}.}{%
     \theta ^ (2 N_1 + \alpha - 1) * (1 - \theta) ^ (N_0 + \beta - 1) *
     exp(- \theta q (S_0 + \dots + S_N)).}
-  See \code{\link{kgaps_stats}} for a description of the variables
+  See \code{\link[exdex]{kgaps_stat}} for a description of the variables
   involved in the contribution of the likelihood to this expression.
 
   The \code{\link[rust]{ru}} function in the \code{\link[rust]{rust}}
@@ -91,8 +99,15 @@ A beta(\eqn{\alpha}, \eqn{\beta}) prior distribution is used for
   and then transform back to the \eqn{\theta}-scale.
 }
 \examples{
+# Newlyn sea surges
+
 thresh <- quantile(newlyn, probs = 0.90)
 k_postsim <- kgaps_post(newlyn, thresh)
+plot(k_postsim)
+
+### Cheeseboro wind gusts
+
+k_postsim <- kgaps_post(cheeseboro, thresh = 45, k = 3)
 plot(k_postsim)
 }
 \references{
@@ -104,12 +119,6 @@ Attalides, N. (2015) Threshold-based extreme value modelling,
   PhD thesis, University College London.
 }
 \seealso{
-\code{\link{kgaps_mle}} for maximum likelihood estimation of the
-  extremal index \eqn{\theta} using the K-gaps model.
-
-\code{\link{kgaps_stats}} for the calculation of sufficient
-  statistics for the K-gaps model.
-
 \code{\link[rust]{ru}} for the form of the object returned by
   \code{kgaps_post}.
 }
