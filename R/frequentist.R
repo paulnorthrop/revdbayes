@@ -21,14 +21,35 @@ gp_mle <- function(gp_data) {
   #     nllh : A numeric scalar.  The negated log-likelihood at the MLE.
   #
   # Call Grimshaw (1993) function, note: k is -xi, a is sigma
-  pjn <- grimshaw_gp_mle(gp_data)
   temp <- list()
-  temp$mle <- c(pjn$a, -pjn$k)  # mle for (sigma,xi)
+  pjn <- try(grimshaw_gp_mle(gp_data), silent = TRUE)
+  if (inherits(pjn, "try-error")) {
+    # If grimshaw_gp_mle() errors then use a fallback MLE function
+    pjn <- fallback_gp_mle(init = c(mean(gp_data), 0), data = gp_data,
+                           m = length(gp_data), xm = max(gp_data),
+                           sum_gp = sum(gp_data))
+    temp$mle <- pjn$mle
+  } else {
+    # mle for (sigma,xi)
+    temp$mle <- c(pjn$a, -pjn$k)
+    # Check that the observed information is not singular
+    cov_mtx <- try(solve(gp_obs_info(gp_pars = temp$mle, y = gp_data)),
+                   silent = TRUE)
+    if (inherits(cov_mtx, "try-error")) {
+      # If it is singular then use the fallback MLE function
+      pjn <- fallback_gp_mle(init = c(mean(gp_data), 0), data = gp_data,
+                             m = length(gp_data), xm = max(gp_data),
+                             sum_gp = sum(gp_data))
+      temp$mle <- pjn$mle
+    }
+  }
   sc <- rep(temp$mle[1], length(gp_data))
   xi <- temp$mle[2]
   temp$nllh <- sum(log(sc)) + sum(log(1 + xi * gp_data / sc) * (1 / xi + 1))
   return(temp)
 }
+
+
 
 # =========================== gp_pwm ===========================
 

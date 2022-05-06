@@ -441,3 +441,16 @@ logNegNA <- function(x) {
   xx[x == 0] <- -Inf
   return(xx)
 }
+
+# ============================== fallback_gp_mle ==============================
+
+#' @keywords internal
+#' @rdname revdbayes-internal
+fallback_gp_mle <- function(init, ...){
+  x <- stats::optim(init, gp_loglik, ..., control = list(fnscale = -1),
+                    hessian = FALSE)
+  temp <- list()
+  temp$mle <- x$par
+  temp$nllh <- -x$value
+  return(temp)
+}

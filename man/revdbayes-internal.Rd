@@ -12,6 +12,7 @@
 \alias{check_sample_size}
 \alias{check_sample_size_message}
 \alias{logNegNA}
+\alias{fallback_gp_mle}
 \title{Internal revdbayes functions}
 \usage{
 process_data(model, data, thresh, noy, use_noy, ros, weights = NULL)
@@ -33,6 +34,8 @@ check_sample_size(prior_name, n_check)
 check_sample_size_message(prior_name, n_check)
 
 logNegNA(x)
+
+fallback_gp_mle(init, ...)
 }
 \description{
 Internal revdbayes functions

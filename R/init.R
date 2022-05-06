@@ -247,13 +247,16 @@ gp_init <- function(data, m = length(data[!is.na(data)]),
     ests_ok <- TRUE
     # Check whether or not we should use the SE
     if (init[2] > -0.25){
-      cov_mtx <- solve(gp_obs_info(init, data))
-      se <- sqrt(diag_pos(cov_mtx))
-      mat <- matrix(c(1, 0, 1 / xm, 1), 2, 2, byrow = TRUE)
-      var_phi <- mat %*% cov_mtx %*% t(mat)
-      if (all(diag(var_phi) > 0)){
-        se_phi <- sqrt(diag(var_phi))
-        ses_ok <- TRUE
+      cov_mtx <- try(solve(gp_obs_info(gp_pars = init, y = data)),
+                     silent = TRUE)
+      if (!inherits(cov_mtx, "try-error")) {
+        se <- sqrt(diag_pos(cov_mtx))
+        mat <- matrix(c(1, 0, 1 / xm, 1), 2, 2, byrow = TRUE)
+        var_phi <- mat %*% cov_mtx %*% t(mat)
+        if (all(diag(var_phi) > 0)){
+          se_phi <- sqrt(diag(var_phi))
+          ses_ok <- TRUE
+        }
       }
     }
   }
