@@ -1,4 +1,4 @@
-# revdbayes 1.3.9.9000
+# revdbayes 1.4.9
 
 ## New features
 
@@ -9,6 +9,8 @@
 ## Bug fixes and minor improvements
 
 * The default value of `inc_cens` in `kgaps_post()` is now `inc_cens = TRUE`.
+
+* In the (extremely rare) cases where `grimshaw_gp_mle()` errors or returns an estimate for which the observation information is singular, a fallback function is used, which maximises the log-likelihood using `stats::optim()`
 
 * In the generalised Pareto example in the introductory vignette, it is now noted that for the Gulf of Mexico data a threshold set at the 95% threshold results in only a small number (16) of threshold excesses. 
 
