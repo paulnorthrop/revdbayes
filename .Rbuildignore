@@ -20,3 +20,4 @@
 ^vignettes/EVA2021revdbayes\.Rmd$
 ^vignettes/ex1revdbayes\.Rmd$
 ^vignettes/ex2revdbayes\.Rmd$
+^checks$
