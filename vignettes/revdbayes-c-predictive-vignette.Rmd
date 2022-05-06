@@ -77,7 +77,7 @@ The `pp_check` method `pp_check.evpost` provides an interface to the
 posterior predictive checking graphics available in the *bayesplot* package
 [@bayesplot].  For details see the bayesplot vignette 
 [Graphical posterior predictive checks](https://CRAN.R-project.org/package=bayesplot).  *bayesplot* functions return a `ggplot` object 
-that can be customised using the *gglot2* package [@ggplot2].
+that can be customised using the *ggplot2* package [@ggplot2].
 
 ```{r}
 library(bayesplot)
