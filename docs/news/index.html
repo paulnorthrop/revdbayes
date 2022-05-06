@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9</span>
       </span>
     </div>
 
@@ -76,10 +76,19 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.3.9.9000" id="revdbayes-1399000">revdbayes 1.3.9.9000<a class="anchor" aria-label="anchor" href="#revdbayes-1399000"></a></h2>
+<h2 class="page-header" data-toc-text="1.4.9" id="revdbayes-149">revdbayes 1.4.9<a class="anchor" aria-label="anchor" href="#revdbayes-149"></a></h2>
 <div class="section level3">
-<h3 id="bug-fixes-and-minor-improvements-1-3-9-9000">Bug fixes and minor improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-improvements-1-3-9-9000"></a></h3>
-<ul><li><p>In the generalised Pareto example in the introductory vignette, it is now noted that for the Gulf of Mexico data a threshold set at the 95% threshold results in only a small number (16) of threshold excesses.</p></li>
+<h3 id="new-features-1-4-9">New features<a class="anchor" aria-label="anchor" href="#new-features-1-4-9"></a></h3>
+<ul><li>The function <code><a href="../reference/kgaps_post.html">kgaps_post()</a></code> can now accept a <code>data</code> argument that
+<ul><li>is a matrix of independent subsets of data, such as monthly or seasonal time series from different years,</li>
+<li>contains missing values, that is, <code>NA</code>s.</li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-and-minor-improvements-1-4-9">Bug fixes and minor improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-improvements-1-4-9"></a></h3>
+<ul><li><p>The default value of <code>inc_cens</code> in <code><a href="../reference/kgaps_post.html">kgaps_post()</a></code> is now <code>inc_cens = TRUE</code>.</p></li>
+<li><p>In the (extremely rare) cases where <code><a href="../reference/grimshaw_gp_mle.html">grimshaw_gp_mle()</a></code> errors or returns an estimate for which the observation information is singular, a fallback function is used, which maximises the log-likelihood using <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code></p></li>
+<li><p>In the generalised Pareto example in the introductory vignette, it is now noted that for the Gulf of Mexico data a threshold set at the 95% threshold results in only a small number (16) of threshold excesses.</p></li>
 <li><p>In the GP section of the introductory vignette a link is given to the binomial-GP analysis in the Posterior Predictive Extreme Value Inference vignette.</p></li>
 <li><p>In the introductory vignette: corrected references to plots as “on the left” when in fact they were below, and corrected “random example” to “random sample”.</p></li>
 <li><p>The microbenchmark results have been reinstated in the “Faster simulation using revdbayes” vignette.</p></li>

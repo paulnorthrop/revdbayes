@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9</span>
       </span>
     </div>
 
@@ -99,7 +99,7 @@
       <h1 data-toc-skip>Inference for the extremal index using the K-gaps model</h1>
                         <h4 data-toc-skip class="author">Paul J. Northrop</h4>
             
-            <h4 data-toc-skip class="date">2022-04-29</h4>
+            <h4 data-toc-skip class="date">2022-05-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/HEAD/vignettes/revdbayes-d-kgaps-vignette.Rmd" class="external-link"><code>vignettes/revdbayes-d-kgaps-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>revdbayes-d-kgaps-vignette.Rmd</code></div>
@@ -112,35 +112,20 @@
 <div class="section level2">
 <h2 id="k-gaps-model">K-gaps model<a class="anchor" aria-label="anchor" href="#k-gaps-model"></a>
 </h2>
-<p>The extremal index has several interpretations and leading to different models/methods by which inferences about <span class="math inline">\(\theta\)</span> can be made. Here we consider a model based on the behaviour of occurrences of exceedances of a high threshold. The <em>K-gaps model</em> of <span class="citation">Süveges and Davison (2010)</span> extends the model of <span class="citation">Ferro and Segers (2003)</span> by incorporating a <em>run length</em> parameter <span class="math inline">\(K\)</span>. Under this model threshold inter-exceedance times not larger than <span class="math inline">\(K\)</span> are part of the same cluster and other inter-exceedance times have an exponential distribution with rate parameter <span class="math inline">\(\theta\)</span>. Thus, <span class="math inline">\(\theta\)</span> has dual role as the probability that a process leaves one cluster of threshold exceedances and as the reciprocal of the mean time until the process enters the next cluster. For details see <span class="citation">Süveges and Davison (2010)</span>.</p>
-<p>The <strong>revdbayes</strong> packages provides functions for performing maximum likelihood and Bayesian inferences about <span class="math inline">\(\theta\)</span> under the K-gaps model. We illustrate the code using the <code>newlyn</code> dataset, which is analysed in <span class="citation">Fawcett and Walshaw (2012)</span>. For the sake of illustration we use the default setting, <span class="math inline">\(K = 1\)</span>, which may not be appropriate for these data. See <span class="citation">Süveges and Davison (2010)</span> for discussion of this issue and for methodology to inform the choice of <span class="math inline">\(K\)</span>.</p>
-</div>
-<div class="section level2">
-<h2 id="maximum-likelihood-estimation">Maximum likelihood estimation<a class="anchor" aria-label="anchor" href="#maximum-likelihood-estimation"></a>
-</h2>
-<p>The function <code>kgaps_mle</code> finds the maximum likelihood estimate and its estimated standard error and (optionally) a <code>conf</code>% level likelihood-based confidence interval for <span class="math inline">\(\theta\)</span>.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/revdbayes/" class="external-link">revdbayes</a></span><span class="op">)</span>
-<span class="co"># Set a threshold at the 90% quantile</span>
-<span class="va">thresh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">newlyn</span>, probs <span class="op">=</span> <span class="fl">0.90</span><span class="op">)</span>
-<span class="co"># MLE, SE and 95% likelihood-based confidence interval</span>
-<span class="va">mle</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kgaps_mle.html">kgaps_mle</a></span><span class="op">(</span><span class="va">newlyn</span>, <span class="va">thresh</span>, conf <span class="op">=</span> <span class="fl">95</span><span class="op">)</span>
-<span class="va">mle</span><span class="op">$</span><span class="va">theta_mle</span>
-<span class="co">#&gt; [1] 0.3779466</span>
-<span class="va">mle</span><span class="op">$</span><span class="va">theta_se</span>
-<span class="co">#&gt; [1] 0.02275285</span>
-<span class="va">mle</span><span class="op">$</span><span class="va">theta_ci</span>
-<span class="co">#&gt; [1] 0.3344465 0.4235232</span></code></pre></div>
+<p>The extremal index has several interpretations and leading to different models/methods by which inferences about <span class="math inline">\(\theta\)</span> can be made. Here we consider a model based on the behaviour of occurrences of exceedances of a high threshold. The <em>K-gaps model</em> of <span class="citation">Süveges and Davison (2010)</span> extends the model of <span class="citation">Ferro and Segers (2003)</span> by incorporating a <em>run length</em> parameter <span class="math inline">\(K\)</span>. Under this model threshold inter-exceedance times not larger than <span class="math inline">\(K\)</span> are part of the same cluster and other inter-exceedance times have an exponential distribution with rate parameter <span class="math inline">\(\theta\)</span>. Thus, <span class="math inline">\(\theta\)</span> has dual role as the probability that a process leaves one cluster of threshold exceedances and as the reciprocal of the mean time until the process enters the next cluster. For details see <span class="citation">Süveges and Davison (2010)</span>. The <strong>exdex</strong> package <span class="citation">(Northrop and Christodoulides 2022)</span> packages provides functions for performing maximum likelihood about <span class="math inline">\(\theta\)</span> under the K-gaps model.</p>
 </div>
 <div class="section level2">
 <h2 id="bayesian-inference">Bayesian Inference<a class="anchor" aria-label="anchor" href="#bayesian-inference"></a>
 </h2>
+<p>We use the <code>newlyn</code> dataset, which is analysed in <span class="citation">Fawcett and Walshaw (2012)</span>. For the sake of illustration we use the default setting, <span class="math inline">\(K = 1\)</span>, which may not be appropriate for these data. See <span class="citation">Süveges and Davison (2010)</span> for discussion of this issue and for methodology to inform the choice of <span class="math inline">\(K\)</span>.</p>
 <p>The function <code>kgaps_post</code> simulates a random sample from the posterior distribution of <span class="math inline">\(\theta\)</span> based on a Beta(<span class="math inline">\(\alpha, \beta\)</span>) prior. The use can choose the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. The default setting is <span class="math inline">\(\alpha = \beta = 1\)</span>, that is, a U(0,1) prior for <span class="math inline">\(\theta\)</span>. See <span class="citation">Attalides (2015)</span> for further information and for a methods for selecting the value of the threshold in this situation. The plot produced below is is histogram of the sample from the posterior with the posterior density superimposed.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">thresh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">newlyn</span>, probs <span class="op">=</span> <span class="fl">0.90</span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/revdbayes/" class="external-link">revdbayes</a></span><span class="op">)</span>
+<span class="co"># Set a threshold at the 90% quantile</span>
+<span class="va">thresh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">newlyn</span>, probs <span class="op">=</span> <span class="fl">0.90</span><span class="op">)</span>
 <span class="va">postsim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kgaps_post.html">kgaps_post</a></span><span class="op">(</span><span class="va">newlyn</span>, <span class="va">thresh</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">postsim</span>, xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="revdbayes-d-kgaps-vignette_files/figure-html/unnamed-chunk-3-1.png" width="480" style="display: block; margin: auto;"></p>
+<p><img src="revdbayes-d-kgaps-vignette_files/figure-html/unnamed-chunk-2-1.png" width="480" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -159,6 +144,9 @@ Fawcett, L., and D. Walshaw. 2012. <span>“Estimating Return Levels from Serial
 </div>
 <div id="ref-FS2003" class="csl-entry">
 Ferro, C. A. T., and J. Segers. 2003. <span>“Inference for Clusters of Extreme Values.”</span> <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 65 (2). Blackwell Publishing: 545–556. doi:<a href="https://doi.org/10.1111/1467-9868.00401" class="external-link">10.1111/1467-9868.00401</a>.
+</div>
+<div id="ref-exdex" class="csl-entry">
+Northrop, P. J., and C. Christodoulides. 2022. <em><span class="nocase">e</span>xdex: Estimation of the Extremal Index</em>. <a href="https://CRAN.R-project.org/package=exdex" class="external-link">https://CRAN.R-project.org/package=exdex</a>.
 </div>
 <div id="ref-SD2010" class="csl-entry">
 Süveges, M., and A. C. Davison. 2010. <span>“Model Misspecification in Peaks over Threshold Analysis.”</span> <em>The Annals of Applied Statistics</em> 4 (1): 203–221. doi:<a href="https://doi.org/10.1214/09-AOAS292" class="external-link">10.1214/09-AOAS292</a>.
