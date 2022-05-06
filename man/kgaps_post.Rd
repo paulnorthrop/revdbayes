@@ -107,7 +107,7 @@ plot(k_postsim)
 
 ### Cheeseboro wind gusts
 
-k_postsim <- kgaps_post(cheeseboro, thresh = 45, k = 3)
+k_postsim <- kgaps_post(exdex::cheeseboro, thresh = 45, k = 3)
 plot(k_postsim)
 }
 \references{
