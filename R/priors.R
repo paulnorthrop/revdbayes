@@ -307,7 +307,7 @@ set_prior <- function(prior = c("norm", "loglognorm", "mdi", "flat",
   # If prior is a pointer to an external C++ function then just return it in
   # the required format.  We don't need to worry about adding the argument
   # trendsd because we don't need the prior to work with the evdbayes package.
-  if (class(prior) == "externalptr") {
+  if (inherits(prior, "externalptr")) {
     temp <- list(prior = prior, ...)
     return(structure(temp, class = "evprior", model = model))
   }
@@ -912,7 +912,7 @@ set_bin_prior <- function(prior = c("jeffreys", "laplace", "haldane", "beta",
     temp <- list(prior = prior, ...)
     return(structure(temp, class = "binprior"))
   }
-  if (class(prior) == "externalptr") {
+  if (inherits(prior, "externalptr")) {
     stop("A user-supplied prior must be specified using an R function")
   }
   # Otherwise, call the appropriate function to set the prior with name prior.
