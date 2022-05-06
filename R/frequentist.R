@@ -857,8 +857,8 @@ gev_fish <- function(theta) {
   # Returns: a 3 by 3 matrix
   #
   sigma <- theta[2]
-  gam <- 0.5772157
-  zet <- 1.2020569
+  gam <- 0.5772156649015323
+  zet <- 1.2020569031595945
   i_mm <- 1 / sigma^2
   i_ss <- (pi ^ 2 / 6 - (1 - gam) ^ 2 ) / sigma^2
   i_xx <- pi ^ 2 / 6 - pi ^ 2 * gam / 2 + gam ^ 2 - gam ^ 3 - 2 * zet +
