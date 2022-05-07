@@ -49,8 +49,9 @@
 #'   parameters.
 #' @seealso \code{\link{rpost}} and \code{\link{rpost_rcpp}} to perform
 #'   ratio-of-uniforms sampling from an extreme value posterior distribution.
-#' @seealso \code{\link{kgaps_post}} to sample from the posterior distribution
-#'   for the extremal index.
+#' @seealso \code{\link{kgaps_post}} and \code{\link{dgaps_post}} to sample
+#'   from a posterior distribution for the extremal index based on
+#'   inter-exceedance times.
 #' @seealso The \code{\link[rust]{ru}} and \code{\link[rust]{ru_rcpp}}
 #'   functions in the \code{\link{rust}} package for details of the arguments
 #'   that can be passed to \code{ru} via \code{rpost} and for the form of the

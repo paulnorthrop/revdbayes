@@ -124,4 +124,7 @@ Suveges, M. and Davison, A. C. (2010) Model
 \seealso{
 \code{\link[rust]{ru}} for the form of the object returned by
   \code{kgaps_post}.
+
+\code{\link{dgaps_post}} for Bayesian inference about the
+  extremal index \eqn{\theta} using the \eqn{D}-gaps model.
 }

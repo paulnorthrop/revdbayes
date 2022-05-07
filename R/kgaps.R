@@ -81,6 +81,8 @@
 #'   Applied Statistics}, \strong{4}(1), 203-221. \doi{10.1214/09-AOAS292}
 #' @seealso \code{\link[rust]{ru}} for the form of the object returned by
 #'   \code{kgaps_post}.
+#' @seealso \code{\link{dgaps_post}} for Bayesian inference about the
+#'   extremal index \eqn{\theta} using the \eqn{D}-gaps model.
 #' @examples
 #' # Newlyn sea surges
 #'
