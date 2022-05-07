@@ -29,7 +29,8 @@ Encoding: UTF-8
 Depends:
     R (>= 3.3.0),
 RoxygenNote: 7.1.2
-Suggests: ggplot2 (>= 2.2.1),
+Suggests: evdbayes,
+    ggplot2 (>= 2.2.1),
     knitr,
     microbenchmark,
     rmarkdown,
