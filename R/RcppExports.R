@@ -417,6 +417,10 @@ kgaps_logpost <- function(x, pars) {
     .Call(`_revdbayes_kgaps_logpost`, x, pars)
 }
 
+dgaps_logpost <- function(x, pars) {
+    .Call(`_revdbayes_dgaps_logpost`, x, pars)
+}
+
 kgaps_logpost_xptr <- function(fstr) {
     .Call(`_revdbayes_kgaps_logpost_xptr`, fstr)
 }

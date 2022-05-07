@@ -2209,6 +2209,27 @@ namespace revdbayes {
         return Rcpp::as<double >(rcpp_result_gen);
     }
 
+    inline double dgaps_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars) {
+        typedef SEXP(*Ptr_dgaps_logpost)(SEXP,SEXP);
+        static Ptr_dgaps_logpost p_dgaps_logpost = NULL;
+        if (p_dgaps_logpost == NULL) {
+            validateSignature("double(*dgaps_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
+            p_dgaps_logpost = (Ptr_dgaps_logpost)R_GetCCallable("revdbayes", "_revdbayes_dgaps_logpost");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_dgaps_logpost(Shield<SEXP>(Rcpp::wrap(x)), Shield<SEXP>(Rcpp::wrap(pars)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
     inline SEXP kgaps_logpost_xptr(std::string fstr) {
         typedef SEXP(*Ptr_kgaps_logpost_xptr)(SEXP);
         static Ptr_kgaps_logpost_xptr p_kgaps_logpost_xptr = NULL;
