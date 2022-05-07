@@ -393,3 +393,30 @@ create_sim_vals <- function(object) {
   }
   return(x)
 }
+
+# ============================ print.evpost ============================
+
+#' Print method for objects of class "evpost"
+#'
+#' @param x An object of class "evpost", a result of a call to
+#'   \code{\link{rpost}}, \code{\link{rpost_rcpp}}, \code{\link{kgaps_post}}
+#'   or \code{\link{dgaps_post}}.
+#' @details \code{print.evpost} just prints the original function call, to
+#'   avoid printing a huge list.
+#' @return The argument \code{x} is returned, invisibly.
+#' @seealso \code{\link{plot.evpost}} for a diagnostic plot.
+#' @examples
+#' # Newlyn sea surges
+#'
+#' thresh <- quantile(newlyn, probs = 0.90)
+#' k_postsim <- kgaps_post(newlyn, thresh)
+#' k_postsim
+#' @export
+print.evpost <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
+  if (!inherits(x, "evpost")) {
+    stop("use only with \"evpost\" objects")
+  }
+  cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"),
+      "\n\n", sep = "")
+  return(invisible(x))
+}

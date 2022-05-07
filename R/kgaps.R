@@ -70,6 +70,7 @@
 #'   \code{\link[rust]{ru}}.
 #'   In addition this list contains
 #'   \itemize{
+#'     \item{\code{call}:} The call to \code{kgaps()}.
 #'     \item{\code{model}:} The character scalar \code{"kgaps"}.
 #'     \item{\code{thresh}:} The argument \code{thresh}.
 #'     \item{\code{ss}:} The sufficient statistics for the K-gaps likelihood,
@@ -166,6 +167,7 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = TRUE,
   temp$model <- "kgaps"
   temp$thresh <- thresh
   temp$ss <- ss
+  temp$call <- match.call(expand.dots = TRUE)
   class(temp) <- "evpost"
   return(temp)
 }

@@ -530,6 +530,7 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
       temp$bin_logf <- temp_bin$bin_logf
       temp$bin_logf_args <- temp_bin$bin_logf_args
     }
+    temp$call <- match.call(expand.dots = TRUE)
     class(temp) <- "evpost"
     temp$model <- save_model
     if (save_model == "gp") {
@@ -685,6 +686,7 @@ rpost_rcpp <- function(n, model = c("gev", "gp", "bingp", "pp", "os"), data,
     temp$bin_logf <- temp_bin$bin_logf
     temp$bin_logf_args <- temp_bin$bin_logf_args
   }
+  temp$call <- match.call(expand.dots = TRUE)
   class(temp) <- "evpost"
   temp$model <- save_model
   if (save_model == "gp") {

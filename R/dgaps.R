@@ -75,6 +75,7 @@
 #'   \code{\link[rust]{ru}}.
 #'   In addition this list contains
 #'   \itemize{
+#'     \item{\code{call}:} The call to \code{dgaps()}.
 #'     \item{\code{model}:} The character scalar \code{"dgaps"}.
 #'     \item{\code{thresh}:} The argument \code{thresh}.
 #'     \item{\code{ss}:} The sufficient statistics for the D-gaps likelihood,
@@ -171,6 +172,7 @@ dgaps_post <- function(data, thresh, D = 1, n = 1000, inc_cens = TRUE,
   temp$model <- "dgaps"
   temp$thresh <- thresh
   temp$ss <- ss
+  temp$call <- match.call(expand.dots = TRUE)
   class(temp) <- "evpost"
   return(temp)
 }
