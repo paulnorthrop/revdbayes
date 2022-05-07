@@ -1,10 +1,10 @@
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note
 
-evdbayes is in Suggests: but it was archived on 2022-04-23.  revdbayes does not import functions from evdbayes.  It uses evdbayes only in creating 2 of the package vignettes and in some tests.  requireNamespace() is used to make these tasks conditional on evdbayes being available. 
+evdbayes is in Suggests: but it was archived on 2022-04-23.  revdbayes does not import functions from evdbayes.  It uses evdbayes only in 2 of the package vignettes and in tests.  requireNamespace() is used to make these tasks conditional on evdbayes being available. 
 
-win-builder suggests that 10 DOI URLs may be invalid.  I have checked them and they are correct.
+win-builder suggests that 10 DOI URLs may be invalid.  I have checked them and they are correct. I think that the 3 possibly misspelled words in DESCRIPTION are false positives (2 are names).
 
 ## Test environments
 
