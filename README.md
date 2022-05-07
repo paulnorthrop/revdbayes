@@ -29,7 +29,9 @@ a random posterior sample is produced. Use of the [Rcpp
 package](https://cran.r-project.org/package=evdbayes) enables
 `revdbayes` to be faster than `evdbayes`. Also provided are functions
 for making inferences about the extremal index, using the K-gaps model
-of [Suveges and Davison (2010)](https://doi.org/10.1214/09-AOAS292).
+of [Suveges and Davison (2010)](https://doi.org/10.1214/09-AOAS292) and
+the D-gaps model of [Holesovsky and Fusek
+(2020)](https://doi.org/10.1007/s10687-020-00374-3).
 
 ### A simple example
 
@@ -70,13 +72,13 @@ install.packages("revdbayes")
 
 ### Vignettes
 
-See `vignette("revdbayes-vignette", package = "revdbayes")` for an
+See `vignette("revdbayes-a-vignette", package = "revdbayes")` for an
 overview of the package and
-`vignette("revdbayes-using-rcpp-vignette", package = "revdbayes")` for
+`vignette("revdbayes-b-using-rcpp-vignette", package = "revdbayes")` for
 an illustration of the improvements in efficiency produced using the
 Rcpp package. See
-`vignette("revdbayes-predictive-vignette", package = "revdbayes")` for
+`vignette("revdbayes-c-predictive-vignette", package = "revdbayes")` for
 an outline of how to use revdbayes to perform posterior predictive
-extreme value inference. Inference for the extremal index using the
-K-gaps model is described in
-`vignette("revdbayes-kgaps-vignette", package = "revdbayes")`
+extreme value inference. Inference for the extremal index using
+threshold inter-exceedance times is described in
+`vignette("revdbayes-d-kgaps-vignette", package = "revdbayes")`
