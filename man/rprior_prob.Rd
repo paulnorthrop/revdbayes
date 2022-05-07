@@ -91,13 +91,6 @@ Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
   \doi{10.1111/rssc.12159}
 }
 \seealso{
-\code{\link[evdbayes:prior]{prior.prob}} to set this prior using
-  the evdbayes package.
-
-\code{\link[evdbayes]{posterior}}: evdbayes function that can
-  sample from this prior distribution (using MCMC) if the argument
-  \code{lh = "none"} is given.
-
 \code{\link{rpost}} and \code{\link{rpost_rcpp}} for sampling
   from an extreme value posterior distribution.
 }

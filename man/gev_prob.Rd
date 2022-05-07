@@ -72,5 +72,5 @@ Stephenson, A. (2016) Bayesian inference for extreme value
   from an extreme value posterior distribution.
 
 Sets the same prior as the function
-  \code{\link[evdbayes:prior]{prior.prob}} in the evdbayes package.
+  \code{prior.prob} in the evdbayes package.
 }

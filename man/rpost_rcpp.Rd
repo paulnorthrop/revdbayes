@@ -337,7 +337,4 @@ Wadsworth, J. L., Tawn, J. A. and Jonathan, P. (2010)
   \code{\link[rust]{rust}} package is used inside \code{rpost} to set the
   Box-Cox transformation parameter lambda when the \code{trans = "BC"}
   argument is given.
-
-\code{\link[evdbayes]{posterior}} for sampling from an extreme
-  value posterior using the evdbayes package.
 }

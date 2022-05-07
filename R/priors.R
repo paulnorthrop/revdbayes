@@ -47,10 +47,8 @@
 #'   \code{prior = "norm"} (\code{\link{gev_norm}}) or
 #'   \code{prior = "loglognorm"} (\code{\link{gev_loglognorm}}) are proper.
 #'   If \code{model = "gev"} these priors are equivalent to priors available
-#'   in the evdbayes package, namely \code{\link[evdbayes:prior]{prior.prob}},
-#'   \code{\link[evdbayes:prior]{prior.quant}},
-#'   \code{\link[evdbayes:prior]{prior.norm}} and
-#'   \code{\link[evdbayes:prior]{prior.loglognorm}}.
+#'   in the evdbayes package, namely \code{prior.prob},
+#'   \code{prior.quant}, \code{prior.norm} and \code{prior.loglognorm}.
 #'
 #'   The other in-built priors are improper, that is, the integral of the
 #'   prior function over its support is not finite.  Such priors do not
@@ -209,13 +207,6 @@
 #'   \code{\link{gev_mdi}}, \code{\link{gev_flat}}, \code{\link{gev_flatflat}},
 #'   \code{\link{gev_beta}}, \code{\link{gev_prob}}, \code{\link{gev_quant}}
 #'   to see the arguments for priors for GEV parameters.
-#' @seealso \code{\link[evdbayes:prior]{prior.prob}},
-#'   \code{\link[evdbayes:prior]{prior.quant}},
-#'   \code{\link[evdbayes:prior]{prior.norm}}
-#'   and \code{\link[evdbayes:prior]{prior.loglognorm}} for setting a prior
-#'   distribution using the evdbayes package.
-#' @seealso \code{\link[evdbayes]{posterior}} for sampling from an extreme
-#'   value posterior using the evdbayes package.
 #' @references Castellanos, E. M. and Cabras, S. (2007) A default Bayesian
 #'   procedure for the generalized Pareto distribution.
 #'   \emph{Journal of Statistical Planning and Inference} \strong{137(2)},

@@ -198,8 +198,6 @@
 #'   \code{\link[rust]{find_lambda_rcpp}} in the \code{\link[rust]{rust}}
 #'   package is used inside \code{rpost} to set the Box-Cox transformation
 #'   parameter lambda when the \code{trans = "BC"} argument is given.
-#' @seealso \code{\link[evdbayes]{posterior}} for sampling from an extreme
-#'   value posterior using the evdbayes package.
 #' @references Coles, S. G. and Powell, E. A. (1996) Bayesian methods in
 #'   extreme value modelling: a review and new developments.
 #'   \emph{Int. Statist. Rev.}, \strong{64}, 119-136.

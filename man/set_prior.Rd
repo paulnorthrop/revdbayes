@@ -68,10 +68,8 @@ Of the in-built named priors available in revdbayes only
   \code{prior = "norm"} (\code{\link{gev_norm}}) or
   \code{prior = "loglognorm"} (\code{\link{gev_loglognorm}}) are proper.
   If \code{model = "gev"} these priors are equivalent to priors available
-  in the evdbayes package, namely \code{\link[evdbayes:prior]{prior.prob}},
-  \code{\link[evdbayes:prior]{prior.quant}},
-  \code{\link[evdbayes:prior]{prior.norm}} and
-  \code{\link[evdbayes:prior]{prior.loglognorm}}.
+  in the evdbayes package, namely \code{prior.prob},
+  \code{prior.quant}, \code{prior.norm} and \code{prior.loglognorm}.
 
   The other in-built priors are improper, that is, the integral of the
   prior function over its support is not finite.  Such priors do not
@@ -307,13 +305,4 @@ Stephenson, A. (2016) Bayesian inference for extreme value
   \code{\link{gev_mdi}}, \code{\link{gev_flat}}, \code{\link{gev_flatflat}},
   \code{\link{gev_beta}}, \code{\link{gev_prob}}, \code{\link{gev_quant}}
   to see the arguments for priors for GEV parameters.
-
-\code{\link[evdbayes:prior]{prior.prob}},
-  \code{\link[evdbayes:prior]{prior.quant}},
-  \code{\link[evdbayes:prior]{prior.norm}}
-  and \code{\link[evdbayes:prior]{prior.loglognorm}} for setting a prior
-  distribution using the evdbayes package.
-
-\code{\link[evdbayes]{posterior}} for sampling from an extreme
-  value posterior using the evdbayes package.
 }
