@@ -12,10 +12,11 @@
 #'   (independent) contributions from different columns. A common situation is
 #'   where each column relates to a different year.
 #'
-#'   If \code{data} contains missing values then \code{\link{split_by_NAs}} is
-#'   used to divide the data further into sequences of non-missing values,
-#'   stored in different columns in a matrix.  Again, the log-likelihood
-#'   is constructed as a sum of contributions from different columns.
+#'   If \code{data} contains missing values then
+#'   \code{\link[exdex]{split_by_NAs}} is used to divide the data further into
+#'   sequences of non-missing values, stored in different columns in a matrix.
+#'   Again, the log-likelihood is constructed as a sum of contributions from
+#'   different columns.
 #' @param thresh A numeric scalar.  Extreme value threshold applied to data.
 #' @param k A numeric scalar.  Run parameter \eqn{K}, as defined in Suveges and
 #'   Davison (2010).  Threshold inter-exceedances times that are not larger
@@ -24,8 +25,12 @@
 #'   corresponding to an inter-exceedance time of \eqn{T} is given by
 #'   \eqn{S = \max(T - K, 0)}{S = max(T - K, 0)}.
 #' @param inc_cens A logical scalar indicating whether or not to include
-#'   contributions from censored inter-exceedance times relating to the
-#'   first and last observation.  See Attalides (2015) for details.
+#'   contributions from right-censored inter-exceedance times, relating to the
+#'   first and last observations.  It is known that these times are greater
+#'   than or equal to the time observed.
+#'   If \code{data} has multiple columns then there will be right-censored
+#'   first and last inter-exceedance times for each column.  See also the
+#'   \strong{Details} section of \code{\link[exdex]{kgaps}}.
 #' @param alpha,beta Positive numeric scalars.  Parameters of a
 #'   beta(\eqn{\alpha}, \eqn{\beta}) prior for \eqn{\theta}.
 #' @param param A character scalar.  If \code{param = "logit"} (the default)
@@ -73,8 +78,6 @@
 #' @references Suveges, M. and Davison, A. C. (2010) Model
 #'   misspecification in peaks over threshold analysis, \emph{The Annals of
 #'   Applied Statistics}, \strong{4}(1), 203-221. \doi{10.1214/09-AOAS292}
-#' @references Attalides, N. (2015) Threshold-based extreme value modelling,
-#'   PhD thesis, University College London.
 #' @seealso \code{\link[rust]{ru}} for the form of the object returned by
 #'   \code{kgaps_post}.
 #' @examples
@@ -98,11 +101,8 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = TRUE,
   if (thresh >= max(data, na.rm = TRUE)) {
     stop("thresh must be less than max(data)")
   }
-  if (!is.numeric(k) || length(k) != 1) {
-    stop("k must be a numeric scalar")
-  }
-  if (k < 1) {
-    stop("k must be no smaller than 1.")
+  if (!is.numeric(k) || k <= 0 || length(k) != 1) {
+    stop("k must be a positive scalar")
   }
   if (alpha <= 0 | beta <= 0) {
     stop("alpha and beta must be positive.")
@@ -139,7 +139,7 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = TRUE,
   }
   # Sample on the logit scale phi = log(theta / (1 - theta)) ?
   if (ss$N0 == 0 || ss$N1 == 0) {
-    param = "logit"
+    param <- "logit"
   }
   if (param == "logit") {
     # Transformation, Jacobian and initial estimate

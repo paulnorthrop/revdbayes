@@ -22,10 +22,11 @@ kgaps_post(
   (independent) contributions from different columns. A common situation is
   where each column relates to a different year.
 
-  If \code{data} contains missing values then \code{\link{split_by_NAs}} is
-  used to divide the data further into sequences of non-missing values,
-  stored in different columns in a matrix.  Again, the log-likelihood
-  is constructed as a sum of contributions from different columns.}
+  If \code{data} contains missing values then
+  \code{\link[exdex]{split_by_NAs}} is used to divide the data further into
+  sequences of non-missing values, stored in different columns in a matrix.
+  Again, the log-likelihood is constructed as a sum of contributions from
+  different columns.}
 
 \item{thresh}{A numeric scalar.  Extreme value threshold applied to data.}
 
@@ -39,8 +40,12 @@ corresponding to an inter-exceedance time of \eqn{T} is given by
 \item{n}{A numeric scalar. The size of posterior sample required.}
 
 \item{inc_cens}{A logical scalar indicating whether or not to include
-contributions from censored inter-exceedance times relating to the
-first and last observation.  See Attalides (2015) for details.}
+contributions from right-censored inter-exceedance times, relating to the
+first and last observations.  It is known that these times are greater
+than or equal to the time observed.
+If \code{data} has multiple columns then there will be right-censored
+first and last inter-exceedance times for each column.  See also the
+\strong{Details} section of \code{\link[exdex]{kgaps}}.}
 
 \item{alpha, beta}{Positive numeric scalars.  Parameters of a
 beta(\eqn{\alpha}, \eqn{\beta}) prior for \eqn{\theta}.}
@@ -114,9 +119,6 @@ plot(k_postsim)
 Suveges, M. and Davison, A. C. (2010) Model
   misspecification in peaks over threshold analysis, \emph{The Annals of
   Applied Statistics}, \strong{4}(1), 203-221. \doi{10.1214/09-AOAS292}
-
-Attalides, N. (2015) Threshold-based extreme value modelling,
-  PhD thesis, University College London.
 }
 \seealso{
 \code{\link[rust]{ru}} for the form of the object returned by
