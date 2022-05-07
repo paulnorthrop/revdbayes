@@ -36,6 +36,7 @@
 #'   \doi{10.1214/09-AOAS292}
 #' @references Attalides, N. (2015) Threshold-based extreme value modelling,
 #'   PhD thesis, University College London.
+#'   \url{https://discovery.ucl.ac.uk/1471121/1/Nicolas_Attalides_Thesis.pdf}
 #' @seealso \code{\link{set_prior}} to set a prior density for extreme value
 #'   parameters.
 #' @seealso \code{\link{rpost}} and \code{\link{rpost_rcpp}} to perform
