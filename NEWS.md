@@ -6,6 +6,8 @@
     - is a matrix of independent subsets of data, such as monthly or seasonal time series from different years,
     - contains missing values, that is, `NA`s. 
 
+* A new function `dgaps_post()` produces random samples from a posterior distribution for the extremal index based on what we call the D-gaps model of Holesovsky, J. and Fusek, M. Estimation of the extremal index using censored distributions. Extremes 23, 197–213 (2020). doi: 10.1007/s10687-020-00374-3. `dgaps_post()` has the same functionality as `kgaps_post()`. 
+
 ## Bug fixes and minor improvements
 
 * The default value of `inc_cens` in `kgaps_post()` is now `inc_cens = TRUE`.
