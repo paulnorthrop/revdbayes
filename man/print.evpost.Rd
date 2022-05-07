@@ -4,12 +4,14 @@
 \alias{print.evpost}
 \title{Print method for objects of class "evpost"}
 \usage{
-\method{print}{evpost}(x, digits = max(3L, getOption("digits") - 3L), ...)
+\method{print}{evpost}(x, ...)
 }
 \arguments{
 \item{x}{An object of class "evpost", a result of a call to
 \code{\link{rpost}}, \code{\link{rpost_rcpp}}, \code{\link{kgaps_post}}
 or \code{\link{dgaps_post}}.}
+
+\item{...}{Further arguments.  None are used.}
 }
 \value{
 The argument \code{x} is returned, invisibly.

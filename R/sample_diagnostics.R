@@ -401,6 +401,7 @@ create_sim_vals <- function(object) {
 #' @param x An object of class "evpost", a result of a call to
 #'   \code{\link{rpost}}, \code{\link{rpost_rcpp}}, \code{\link{kgaps_post}}
 #'   or \code{\link{dgaps_post}}.
+#' @param ... Further arguments.  None are used.
 #' @details \code{print.evpost} just prints the original function call, to
 #'   avoid printing a huge list.
 #' @return The argument \code{x} is returned, invisibly.
@@ -412,7 +413,7 @@ create_sim_vals <- function(object) {
 #' k_postsim <- kgaps_post(newlyn, thresh)
 #' k_postsim
 #' @export
-print.evpost <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
+print.evpost <- function(x, ...) {
   if (!inherits(x, "evpost")) {
     stop("use only with \"evpost\" objects")
   }
