@@ -52,7 +52,7 @@ Bayesian extreme value analyses."><!-- mathjax --><script src="https://cdnjs.clo
       <a href="../articles/revdbayes-c-predictive-vignette.html">Posterior Predictive Extreme Value Inference using the revdbayes Package</a>
     </li>
     <li>
-      <a href="../articles/revdbayes-d-kgaps-vignette.html">Inference for the extremal index using the K-gaps model</a>
+      <a href="../articles/revdbayes-d-kgaps-vignette.html">Inference for the extremal index using threshold interexceedance times</a>
     </li>
   </ul></li>
 <li>
@@ -96,22 +96,30 @@ Bayesian extreme value analyses.</p>
   There are options to improve the probability of acceptance of the
   ratio-of-uniforms algorithm by working with transformation of the model
   parameters.</p>
-<p>The function <code><a href="kgaps_post.html">kgaps_post</a></code> simulates from the posterior
-  distribution of the extremal index \(\theta\) based on the
-  K-gaps model for threshold interexceedance times of Suveges and Davison
-  (2010).  See also Attalides (2015).</p>
+<p>The functions <code><a href="kgaps_post.html">kgaps_post</a></code> and <code><a href="dgaps_post.html">dgaps_post</a></code>
+  simulate from the posterior distribution of the extremal index
+  \(\theta\) based on the K-gaps model for threshold interexceedance
+  times of Suveges and Davison (2010) and the similar D-gaps model of
+  Holesovsky and Fusek (2020).  See also Attalides (2015).</p>
 <p>See <code><a href="../articles/revdbayes-a-vignette.html">vignette("revdbayes-a-vignette", package = "revdbayes")</a></code> for an
   overview of the package and
   <code><a href="../articles/revdbayes-b-using-rcpp-vignette.html">vignette("revdbayes-b-using-rcpp-vignette", package = "revdbayes")</a></code>
    for an illustration of the improvements in efficiency produced using
    the Rcpp package.
-   See `vignette("revdbayes-c-predictive-vignette", package = "revdbayes")`
+   See
+   <code><a href="../articles/revdbayes-c-predictive-vignette.html">vignette("revdbayes-c-predictive-vignette", package = "revdbayes")</a></code>
    for an outline of how to use revdbayes to perform posterior predictive
-   extreme value inference.</p>
+   extreme value inference and
+   <code><a href="../articles/revdbayes-d-kgaps-vignette.html">vignette("revdbayes-d-kgaps-vignette", package = "revdbayes")</a></code>
+   considers Bayesian inference for the extremal index \(\theta\)
+   using threshold inter-exceedance times.</p>
     </div>
     <div id="references">
     <h2>References</h2>
-    <p>Northrop, P. J. (2016). rust: Ratio-of-Uniforms Simulation with
+    <p>Holesovsky, J. and Fusek, M. Estimation of the extremal index
+  using censored distributions. Extremes 23, 197-213 (2020).
+  doi: <a href="https://doi.org/10.1007/s10687-020-00374-3" class="external-link">10.1007/s10687-020-00374-3</a></p>
+<p>Northrop, P. J. (2016). rust: Ratio-of-Uniforms Simulation with
   Transformation. R package version 1.2.2.
   <a href="https://cran.r-project.org/package=rust" class="external-link">https://cran.r-project.org/package=rust</a>.</p>
 <p>Suveges, M. and Davison, A. C. (2010) Model
@@ -128,8 +136,9 @@ Bayesian extreme value analyses.</p>
   parameters.</p>
 <p><code><a href="rpost.html">rpost</a></code> and <code><a href="rpost_rcpp.html">rpost_rcpp</a></code> to perform
   ratio-of-uniforms sampling from an extreme value posterior distribution.</p>
-<p><code><a href="kgaps_post.html">kgaps_post</a></code> to sample from the posterior distribution
-  for the extremal index.</p>
+<p><code><a href="kgaps_post.html">kgaps_post</a></code> and <code><a href="dgaps_post.html">dgaps_post</a></code> to sample
+  from a posterior distribution for the extremal index based on
+  inter-exceedance times.</p>
 <p>The <code><a href="https://paulnorthrop.github.io/rust/reference/ru.html" class="external-link">ru</a></code> and <code><a href="https://paulnorthrop.github.io/rust/reference/ru_rcpp.html" class="external-link">ru_rcpp</a></code>
   functions in the <code>rust</code> package for details of the arguments
   that can be passed to <code>ru</code> via <code>rpost</code> and for the form of the
