@@ -43,6 +43,9 @@
     <loc>/reference/create_prior_xptr.html</loc>
   </url>
   <url>
+    <loc>/reference/dgaps_post.html</loc>
+  </url>
+  <url>
     <loc>/reference/gev.html</loc>
   </url>
   <url>
@@ -134,6 +137,9 @@
   </url>
   <url>
     <loc>/reference/predict.evpost.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.evpost.html</loc>
   </url>
   <url>
     <loc>/reference/print.summary.evpost.html</loc>

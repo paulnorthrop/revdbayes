@@ -83,10 +83,12 @@
 <ul><li>is a matrix of independent subsets of data, such as monthly or seasonal time series from different years,</li>
 <li>contains missing values, that is, <code>NA</code>s.</li>
 </ul></li>
+<li>A new function <code><a href="../reference/dgaps_post.html">dgaps_post()</a></code> produces random samples from a posterior distribution for the extremal index based on what we call the D-gaps model of Holesovsky, J. and Fusek, M. Estimation of the extremal index using censored distributions. Extremes 23, 197–213 (2020). doi: 10.1007/s10687-020-00374-3. <code><a href="../reference/dgaps_post.html">dgaps_post()</a></code> has the same functionality as <code><a href="../reference/kgaps_post.html">kgaps_post()</a></code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-and-minor-improvements-1-4-9">Bug fixes and minor improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-improvements-1-4-9"></a></h3>
-<ul><li><p>The default value of <code>inc_cens</code> in <code><a href="../reference/kgaps_post.html">kgaps_post()</a></code> is now <code>inc_cens = TRUE</code>.</p></li>
+<ul><li><p>The print method <code>print.evpost</code> avoids printing a long list by printing only the original function call.</p></li>
+<li><p>The default value of <code>inc_cens</code> in <code><a href="../reference/kgaps_post.html">kgaps_post()</a></code> is now <code>inc_cens = TRUE</code>.</p></li>
 <li><p>In the (extremely rare) cases where <code><a href="../reference/grimshaw_gp_mle.html">grimshaw_gp_mle()</a></code> errors or returns an estimate for which the observation information is singular, a fallback function is used, which maximises the log-likelihood using <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code></p></li>
 <li><p>In the generalised Pareto example in the introductory vignette, it is now noted that for the Gulf of Mexico data a threshold set at the 95% threshold results in only a small number (16) of threshold excesses.</p></li>
 <li><p>In the GP section of the introductory vignette a link is given to the binomial-GP analysis in the Posterior Predictive Extreme Value Inference vignette.</p></li>
