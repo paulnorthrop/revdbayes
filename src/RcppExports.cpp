@@ -3650,6 +3650,41 @@ RcppExport SEXP _revdbayes_kgaps_logpost(SEXP xSEXP, SEXP parsSEXP) {
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// dgaps_logpost
+double dgaps_logpost(const Rcpp::NumericVector& x, const Rcpp::List& pars);
+static SEXP _revdbayes_dgaps_logpost_try(SEXP xSEXP, SEXP parsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type pars(parsSEXP);
+    rcpp_result_gen = Rcpp::wrap(dgaps_logpost(x, pars));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _revdbayes_dgaps_logpost(SEXP xSEXP, SEXP parsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_revdbayes_dgaps_logpost_try(xSEXP, parsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // kgaps_logpost_xptr
 SEXP kgaps_logpost_xptr(std::string fstr);
 static SEXP _revdbayes_kgaps_logpost_xptr_try(SEXP fstrSEXP) {
@@ -4001,6 +4036,7 @@ static int _revdbayes_RcppExport_validate(const char* sig) {
         signatures.insert("SEXP(*pp_logpost_phi_xptr)(std::string)");
         signatures.insert("SEXP(*os_logpost_phi_xptr)(std::string)");
         signatures.insert("double(*kgaps_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
+        signatures.insert("double(*dgaps_logpost)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("SEXP(*kgaps_logpost_xptr)(std::string)");
         signatures.insert("double(*kgaps_log_j)(const Rcpp::NumericVector&,const Rcpp::List&)");
         signatures.insert("SEXP(*log_j_xptr)(std::string)");
@@ -4118,6 +4154,7 @@ RcppExport SEXP _revdbayes_RcppExport_registerCCallable() {
     R_RegisterCCallable("revdbayes", "_revdbayes_pp_logpost_phi_xptr", (DL_FUNC)_revdbayes_pp_logpost_phi_xptr_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_os_logpost_phi_xptr", (DL_FUNC)_revdbayes_os_logpost_phi_xptr_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_kgaps_logpost", (DL_FUNC)_revdbayes_kgaps_logpost_try);
+    R_RegisterCCallable("revdbayes", "_revdbayes_dgaps_logpost", (DL_FUNC)_revdbayes_dgaps_logpost_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_kgaps_logpost_xptr", (DL_FUNC)_revdbayes_kgaps_logpost_xptr_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_kgaps_log_j", (DL_FUNC)_revdbayes_kgaps_log_j_try);
     R_RegisterCCallable("revdbayes", "_revdbayes_log_j_xptr", (DL_FUNC)_revdbayes_log_j_xptr_try);
