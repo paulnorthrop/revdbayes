@@ -29,6 +29,9 @@ intervals should be plotted?  \code{"long"} for equi-tailed intervals,
 \code{"short"} for the shortest possible intervals, \code{"both"} for
 both.}
 }
+\value{
+Nothing is returned.
+}
 \description{
 \code{plot} method for class "evpred".  Plots summarising the predictive
 distribution of the largest value to be observed in N years are produced.

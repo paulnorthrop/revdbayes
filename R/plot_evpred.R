@@ -26,6 +26,7 @@
 #'   intervals should be plotted?  \code{"long"} for equi-tailed intervals,
 #'   \code{"short"} for the shortest possible intervals, \code{"both"} for
 #'   both.
+#' @return Nothing is returned.
 #' @seealso \code{\link{predict.evpost}} for the S3 \code{predict} method
 #'  for objects of class \code{evpost}.
 #' @examples
@@ -129,6 +130,7 @@ plot.evpred <- function(x, ..., leg_pos = NULL, leg_text = NULL,
       my_segments(x2[, 1], y2, x2[, 2], y2, ...)
     }
     u <- graphics::par("usr")
+    on.exit(graphics::par(u))
     epx <- (u[2] - u[1]) / 50
     if (is.null(temp$cex)) {
       graphics::text(x[, 2] + epx, y_lab, labels = as.character(level),
@@ -187,4 +189,5 @@ plot.evpred <- function(x, ..., leg_pos = NULL, leg_text = NULL,
       my_legend(x = leg_pos, legend = leg_text, ...)
     }
   }
+  return(invisible())
 }
