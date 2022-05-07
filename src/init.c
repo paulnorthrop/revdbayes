@@ -3,7 +3,7 @@
 #include <stdlib.h> // for NULL
 #include <R_ext/Rdynload.h>
 
-/* FIXME: 
+/* FIXME:
    Check these declarations against the C/Fortran source code.
 */
 
@@ -68,6 +68,7 @@ extern SEXP _revdbayes_gp_user_logpost(SEXP, SEXP);
 extern SEXP _revdbayes_gp_user_logpost_phi(SEXP, SEXP);
 extern SEXP _revdbayes_kgaps_log_j(SEXP, SEXP);
 extern SEXP _revdbayes_kgaps_logpost(SEXP, SEXP);
+extern SEXP _revdbayes_dgaps_logpost(SEXP, SEXP);
 extern SEXP _revdbayes_kgaps_logpost_xptr(SEXP);
 extern SEXP _revdbayes_kgaps_phi_to_theta(SEXP, SEXP);
 extern SEXP _revdbayes_lgdgev_cpp(SEXP, SEXP, SEXP, SEXP);
@@ -182,6 +183,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_revdbayes_gp_user_logpost_phi",          (DL_FUNC) &_revdbayes_gp_user_logpost_phi,          2},
     {"_revdbayes_kgaps_log_j",                  (DL_FUNC) &_revdbayes_kgaps_log_j,                  2},
     {"_revdbayes_kgaps_logpost",                (DL_FUNC) &_revdbayes_kgaps_logpost,                2},
+    {"_revdbayes_dgaps_logpost",                (DL_FUNC) &_revdbayes_dgaps_logpost,                2},
     {"_revdbayes_kgaps_logpost_xptr",           (DL_FUNC) &_revdbayes_kgaps_logpost_xptr,           1},
     {"_revdbayes_kgaps_phi_to_theta",           (DL_FUNC) &_revdbayes_kgaps_phi_to_theta,           2},
     {"_revdbayes_lgdgev_cpp",                   (DL_FUNC) &_revdbayes_lgdgev_cpp,                   4},
