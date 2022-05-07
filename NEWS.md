@@ -10,6 +10,8 @@
 
 ## Bug fixes and minor improvements
 
+* The print method `print.evpost` avoids printing a long list by printing only the original function call.
+
 * The default value of `inc_cens` in `kgaps_post()` is now `inc_cens = TRUE`.
 
 * In the (extremely rare) cases where `grimshaw_gp_mle()` errors or returns an estimate for which the observation information is singular, a fallback function is used, which maximises the log-likelihood using `stats::optim()`
