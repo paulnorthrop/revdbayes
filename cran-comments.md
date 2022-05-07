@@ -2,13 +2,17 @@
 
 0 errors | 0 warnings | 0 notes
 
+evdbayes is in Suggests: but it was archived on 2022-04-23.  revdbayes does not import functions from evdbayes.  It uses evdbayes only in creating 2 of the package vignettes and in some tests.  requireNamespace() is used to make these tasks conditional on evdbayes being available. 
+
+win-builder suggests that 10 DOI URLs may be invalid.  I have checked them and they are correct.
+
 ## Test environments
 
 - Debian Linux, GCC (R-patched and R-devel) on R-hub
 - Fedora Linux, GCC (R-devel) on R-hub
 - Oracle Solaris 10, x86, 32 bit, R-release
 - macOS 10.13.6 High Sierra, R-release on R-hub
-- win-builder (R-devel, R-release and R-oldrelease)
+- win-builder (R-devel and R-release)
 
 ## Downstream dependencies
 
