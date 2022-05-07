@@ -14,19 +14,27 @@
 #'   ratio-of-uniforms algorithm by working with transformation of the model
 #'   parameters.
 #'
-#'   The function \code{\link{kgaps_post}} simulates from the posterior
-#'   distribution of the extremal index \eqn{\theta} based on the
-#'   K-gaps model for threshold interexceedance times of Suveges and Davison
-#'   (2010).  See also Attalides (2015).
+#'   The functions \code{\link{kgaps_post}} and \code{\link{dgaps_post}}
+#'   simulate from the posterior distribution of the extremal index
+#'   \eqn{\theta} based on the K-gaps model for threshold interexceedance
+#'   times of Suveges and Davison (2010) and the similar D-gaps model of
+#'   Holesovsky and Fusek (2020).  See also Attalides (2015).
 #'
 #'   See \code{vignette("revdbayes-a-vignette", package = "revdbayes")} for an
 #'   overview of the package and
 #'   \code{vignette("revdbayes-b-using-rcpp-vignette", package = "revdbayes")}
 #'    for an illustration of the improvements in efficiency produced using
 #'    the Rcpp package.
-#'    See `vignette("revdbayes-c-predictive-vignette", package = "revdbayes")`
+#'    See
+#'    \code{vignette("revdbayes-c-predictive-vignette", package = "revdbayes")}
 #'    for an outline of how to use revdbayes to perform posterior predictive
-#'    extreme value inference.
+#'    extreme value inference and
+#'    \code{vignette("revdbayes-d-kgaps-vignette", package = "revdbayes")}
+#'    considers Bayesian inference for the extremal index \eqn{\theta}
+#'    using threshold inter-exceedance times.
+#' @references Holesovsky, J. and Fusek, M. Estimation of the extremal index
+#'   using censored distributions. Extremes 23, 197-213 (2020).
+#'   \doi{10.1007/s10687-020-00374-3}
 #' @references Northrop, P. J. (2016). rust: Ratio-of-Uniforms Simulation with
 #'   Transformation. R package version 1.2.2.
 #'   \url{https://cran.r-project.org/package=rust}.
