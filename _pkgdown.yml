@@ -73,8 +73,6 @@ reference:
   - title: Miscellaneous
     desc: ~
     contents:
-      - "kgaps_mle"
-      - "kgaps_stats"
       - "quantile_to_gev"
       - "create_prior_xptr"
       - "grimshaw_gp_mle"
