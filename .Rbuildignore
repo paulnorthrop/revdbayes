@@ -21,3 +21,4 @@
 ^vignettes/ex1revdbayes\.Rmd$
 ^vignettes/ex2revdbayes\.Rmd$
 ^checks$
+^CRAN-SUBMISSION$
