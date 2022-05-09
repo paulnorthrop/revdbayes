@@ -75,7 +75,6 @@
 #' \url{https://CRAN.R-project.org/package=bayesplot}
 #' @examples
 #' ## GP posterior
-#' data(gom)
 #' u <- stats::quantile(gom, probs = 0.65)
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 #' gpg <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = gom)
@@ -92,7 +91,6 @@
 #' }
 #'
 #' ## bin-GP posterior
-#' data(gom)
 #' u <- quantile(gom, probs = 0.65)
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 #' bp <- set_bin_prior(prior = "jeffreys")
@@ -314,7 +312,6 @@ plot.evpost <- function(x, y, ..., n = ifelse(x$d == 1, 1001, 101),
 #' }
 #' @examples
 #' # GP posterior
-#' data(gom)
 #' u <- stats::quantile(gom, probs = 0.65)
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 #' gpg <- rpost_rcpp(n = 1000, model = "gp", prior = fp, thresh = u,
@@ -359,7 +356,6 @@ summary.evpost <- function(object, add_pu = FALSE, ...) {
 #' }
 #' @examples
 #' # GP posterior
-#' data(gom)
 #' u <- stats::quantile(gom, probs = 0.65)
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 #' gpg <- rpost_rcpp(n = 1000, model = "gp", prior = fp, thresh = u,

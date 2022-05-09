@@ -894,7 +894,6 @@ pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 #' @seealso \code{\link{set_bin_prior}} for setting a prior distribution
 #'   for the binomial probability \eqn{p}.
 #' @examples
-#' data(gom)
 #' u <- quantile(gom, probs = 0.65)
 #' ds_bin <- list()
 #' ds_bin$n_raw <- length(gom)

@@ -270,7 +270,6 @@
 #' plot(predict(gevp, type = "r"))
 #'
 #' ### Binomial-GP
-#' data(gom)
 #' u <- quantile(gom, probs = 0.65)
 #' fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 #' bp <- set_bin_prior(prior = "jeffreys")

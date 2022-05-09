@@ -129,7 +129,6 @@ heights from a location in the Gulf of Mexico, from the years 1900 to
 the 65\% sample quantile and use `set_prior` to set a prior.
 
 ```{r}
-data(gom)
 thresh <- quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 ```

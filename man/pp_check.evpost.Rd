@@ -140,7 +140,6 @@ pp_check(gevp, type = "intervals", subtype = "ribbon")
 pp_check(gevp, type = "user", fun = "dens_overlay")
 
 # GP model
-data(gom)
 u <- quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 gpg <- rpost(n = 1000, model = "gp", prior = fp, thresh = u,

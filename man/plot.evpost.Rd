@@ -105,7 +105,6 @@ For details of the \strong{bayesplot} functions available when
 }
 \examples{
 ## GP posterior
-data(gom)
 u <- stats::quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 gpg <- rpost(n = 1000, model = "gp", prior = fp, thresh = u, data = gom)
@@ -122,7 +121,6 @@ plot(gpg, use_bayesplot = TRUE, fun_name = "scatter")
 }
 
 ## bin-GP posterior
-data(gom)
 u <- quantile(gom, probs = 0.65)
 fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
 bp <- set_bin_prior(prior = "jeffreys")

@@ -73,7 +73,6 @@ If \code{prior$prior == "bin_beta"} then the posterior for \eqn{p}
   generalised ratio-of-uniforms method.
 }
 \examples{
-data(gom)
 u <- quantile(gom, probs = 0.65)
 ds_bin <- list()
 ds_bin$n_raw <- length(gom)
