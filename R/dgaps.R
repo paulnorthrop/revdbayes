@@ -174,6 +174,7 @@ dgaps_post <- function(data, thresh, D = 1, n = 1000, inc_cens = TRUE,
   temp$model <- "dgaps"
   temp$thresh <- thresh
   temp$ss <- ss
+  colnames(temp$sim_vals) <- "theta"
   temp$call <- match.call(expand.dots = TRUE)
   class(temp) <- "evpost"
   return(temp)

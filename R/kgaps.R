@@ -169,6 +169,7 @@ kgaps_post <- function(data, thresh, k = 1, n = 1000, inc_cens = TRUE,
   temp$model <- "kgaps"
   temp$thresh <- thresh
   temp$ss <- ss
+  colnames(temp$sim_vals) <- "theta"
   temp$call <- match.call(expand.dots = TRUE)
   class(temp) <- "evpost"
   return(temp)
