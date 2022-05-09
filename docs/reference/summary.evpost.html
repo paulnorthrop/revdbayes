@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
       </span>
     </div>
 
@@ -116,7 +116,6 @@ was used in the call to <code>rpost</code> or <code>rpost_rcpp</code>.</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># GP posterior</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">gom</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">u</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">gpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>,</span>
@@ -131,16 +130,16 @@ was used in the call to <code>rpost</code> or <code>rpost_rcpp</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.2034900  0.10510888  0.37350179    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5149331</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5157298</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     sigma[u]            xi          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.9859   Min.   :-0.11918  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.5584   1st Qu.: 0.06144  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.7200   Median : 0.12657  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.7327   Mean   : 0.13842  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.8940   3rd Qu.: 0.20961  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :2.5730   Max.   : 0.55985  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     sigma[u]           xi          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :1.026   Min.   :-0.12440  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.562   1st Qu.: 0.05888  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.722   Median : 0.12672  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.738   Mean   : 0.13623  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.888   3rd Qu.: 0.20753  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :2.891   Max.   : 0.58763  </span>
 </code></pre></div>
     </div>
   </div>

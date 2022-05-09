@@ -20,7 +20,7 @@ a Dirichlet prior on differences between these probabilities)."><!-- mathjax -->
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
       </span>
     </div>
 
@@ -175,7 +175,6 @@ then <code>lb_prob</code> is not used.</p></dd>
 <span class="r-in"><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2.5</span>, <span class="fl">2.25</span>, <span class="fl">0.25</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">rprior_prob</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, quant <span class="op">=</span> <span class="va">quant</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, exc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">rprior_prob</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, quant <span class="op">=</span> <span class="va">quant</span>, alpha <span class="op">=</span> <span class="va">alpha</span>, exc <span class="op">=</span> <span class="cn">TRUE</span>, lb <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in qgev(p = lb_prob, loc = temp[, 1], scale = temp[, 2], shape = temp[,     3]):</span> invalid scale: scale must be positive.</span>
 </code></pre></div>
     </div>
   </div>

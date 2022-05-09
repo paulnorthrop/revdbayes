@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
       </span>
     </div>
 
@@ -99,7 +99,7 @@
       <h1 data-toc-skip>Posterior Predictive Extreme Value Inference using the revdbayes Package</h1>
                         <h4 data-toc-skip class="author">Paul J. Northrop</h4>
             
-            <h4 data-toc-skip class="date">2022-05-07</h4>
+            <h4 data-toc-skip class="date">2022-05-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/HEAD/vignettes/revdbayes-c-predictive-vignette.Rmd" class="external-link"><code>vignettes/revdbayes-c-predictive-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>revdbayes-c-predictive-vignette.Rmd</code></div>
@@ -125,7 +125,6 @@
 <span class="va">gevp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>
 
 <span class="co">### GP model for Gulf-of-Mexico significant wave heights</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">gom</span><span class="op">)</span>
 <span class="va">u</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span>
 <span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
 <span class="va">gpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>, data <span class="op">=</span> <span class="va">gom</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></code></pre></div>
@@ -187,7 +186,6 @@
 <p>We repeat the posterior simulation for the Gulf-of-Mexico example, changing <code>model = gp</code> to <code>model = bingp</code> in the call to <code>rpost</code> to add inferences about the probability of threshold exceedance based on a binomial distribution.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### Binomial-GP model for Gulf-of-Mexico significant wave heights</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">gom</span><span class="op">)</span>
 <span class="va">u</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span>
 <span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
 <span class="va">bp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_bin_prior.html">set_bin_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"jeffreys"</span><span class="op">)</span>

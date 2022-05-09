@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
       </span>
     </div>
 
@@ -99,7 +99,7 @@
       <h1 data-toc-skip>Faster simulation using revdbayes</h1>
                         <h4 data-toc-skip class="author">Paul J. Northrop</h4>
             
-            <h4 data-toc-skip class="date">2022-05-07</h4>
+            <h4 data-toc-skip class="date">2022-05-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/HEAD/vignettes/revdbayes-b-using-rcpp-vignette.Rmd" class="external-link"><code>vignettes/revdbayes-b-using-rcpp-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>revdbayes-b-using-rcpp-vignette.Rmd</code></div>
@@ -146,11 +146,11 @@
 <span class="op">}</span>  
 <span class="co">#&gt; Unit: milliseconds</span>
 <span class="co">#&gt;        expr  min    lq  mean median    uq   max neval</span>
-<span class="co">#&gt;       rpost 99.6 107.0 110.0  110.0 112.0 126.0   100</span>
-<span class="co">#&gt;  rpost_rcpp 18.9  19.7  21.2   20.3  21.2  41.7   100</span>
+<span class="co">#&gt;       rpost 98.1 104.0 106.0  106.0 109.0 123.0   100</span>
+<span class="co">#&gt;  rpost_rcpp 18.7  19.2  20.3   19.5  20.2  41.2   100</span>
 <span class="co">#&gt; Unit: relative</span>
 <span class="co">#&gt;        expr min  lq mean median  uq max neval</span>
-<span class="co">#&gt;       rpost 5.3 5.4  5.2    5.4 5.3   3   100</span>
+<span class="co">#&gt;       rpost 5.2 5.4  5.2    5.5 5.4   3   100</span>
 <span class="co">#&gt;  rpost_rcpp 1.0 1.0  1.0    1.0 1.0   1   100</span></code></pre></div>
 <p>In this example <code>rpost_rcpp</code> is indeed much faster than <code>rpost</code>.</p>
 </div>
@@ -187,14 +187,14 @@
 <span class="op">}</span>  
 <span class="co">#&gt; Unit: milliseconds</span>
 <span class="co">#&gt;        expr   min    lq  mean median    uq   max neval</span>
-<span class="co">#&gt;       rpost 250.0 262.0 268.0  266.0 273.0 337.0   100</span>
-<span class="co">#&gt;  rpost_rcpp  65.8  69.8  71.9   70.9  74.1  80.3   100</span>
-<span class="co">#&gt;    evdbayes 197.0 203.0 207.0  206.0 208.0 280.0   100</span>
+<span class="co">#&gt;       rpost 250.0 262.0 270.0  267.0 272.0 344.0   100</span>
+<span class="co">#&gt;  rpost_rcpp  65.8  69.1  71.8   70.3  73.7  93.5   100</span>
+<span class="co">#&gt;    evdbayes 195.0 201.0 207.0  203.0 206.0 290.0   100</span>
 <span class="co">#&gt; Unit: relative</span>
 <span class="co">#&gt;        expr min  lq mean median  uq max neval</span>
-<span class="co">#&gt;       rpost 3.8 3.8  3.7    3.8 3.7 4.2   100</span>
+<span class="co">#&gt;       rpost 3.8 3.8  3.8    3.8 3.7 3.7   100</span>
 <span class="co">#&gt;  rpost_rcpp 1.0 1.0  1.0    1.0 1.0 1.0   100</span>
-<span class="co">#&gt;    evdbayes 3.0 2.9  2.9    2.9 2.8 3.5   100</span></code></pre></div>
+<span class="co">#&gt;    evdbayes 3.0 2.9  2.9    2.9 2.8 3.1   100</span></code></pre></div>
 <p>This comparison is generous to <code>posterior</code> because the burn-in has been set to zero and <code>posterior</code> produces a dependent sample rather than a random sample. The <em>effective sample size</em> of an MCMC sample from <code>posterior</code> varies between simulations and across parameters. The <code>effectiveSize</code> function in the <strong>coda</strong> package <span class="citation">(Plummer et al. 2006)</span> suggests that the effective sample size in this example is of the order of 100 to 200, whereas the <strong>revdbayes</strong> functions <code>rpost</code> and <code>rpost_rcpp</code> produce random samples of size 1000. <code>rpost</code> is a little slower than <code>posterior</code> while <code>rpost_rcpp</code> is much faster than <code>posterior</code>.</p>
 </div>
 <div class="section level3">
@@ -235,15 +235,15 @@
   <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="op">}</span>  
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;        expr   min    lq  mean median    uq    max neval</span>
-<span class="co">#&gt;       rpost 471.0 488.0 577.0  553.0 641.0 1880.0   100</span>
-<span class="co">#&gt;  rpost_rcpp  40.7  44.7  49.7   47.9  54.2   68.7   100</span>
-<span class="co">#&gt;    evdbayes 253.0 264.0 297.0  291.0 322.0  601.0   100</span>
+<span class="co">#&gt;        expr   min  lq  mean median    uq   max neval</span>
+<span class="co">#&gt;       rpost 446.0 473 487.0  483.0 494.0 651.0   100</span>
+<span class="co">#&gt;  rpost_rcpp  39.1  41  43.2   42.2  45.4  52.3   100</span>
+<span class="co">#&gt;    evdbayes 247.0 256 262.0  261.0 266.0 330.0   100</span>
 <span class="co">#&gt; Unit: relative</span>
 <span class="co">#&gt;        expr  min   lq mean median   uq  max neval</span>
-<span class="co">#&gt;       rpost 12.0 11.0   12   12.0 12.0 27.0   100</span>
-<span class="co">#&gt;  rpost_rcpp  1.0  1.0    1    1.0  1.0  1.0   100</span>
-<span class="co">#&gt;    evdbayes  6.2  5.9    6    6.1  5.9  8.8   100</span></code></pre></div>
+<span class="co">#&gt;       rpost 11.0 12.0 11.0   11.0 11.0 12.0   100</span>
+<span class="co">#&gt;  rpost_rcpp  1.0  1.0  1.0    1.0  1.0  1.0   100</span>
+<span class="co">#&gt;    evdbayes  6.3  6.2  6.1    6.2  5.9  6.3   100</span></code></pre></div>
 <p>In this example <code>rpost</code> is slower than <code>posterior</code> but <code>rpost_rcpp</code> is substantially faster than <code>posterior</code>.</p>
 </div>
 </div>

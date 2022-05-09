@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
       </span>
     </div>
 
@@ -99,7 +99,7 @@
       <h1 data-toc-skip>Introducing revdbayes: Ratio-of-Uniforms Sampling for Bayesian Extreme Value Analysis</h1>
                         <h4 data-toc-skip class="author">Paul J. Northrop</h4>
             
-            <h4 data-toc-skip class="date">2022-05-07</h4>
+            <h4 data-toc-skip class="date">2022-05-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/HEAD/vignettes/revdbayes-a-vignette.Rmd" class="external-link"><code>vignettes/revdbayes-a-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>revdbayes-a-vignette.Rmd</code></div>
@@ -140,8 +140,7 @@
 </h3>
 <p>The numeric vector <code>gom</code> contains 315 storm peak significant wave heights from a location in the Gulf of Mexico, from the years 1900 to 2005. These data are analysed in <span class="citation">Northrop, Attalides, and Jonathan (2017)</span>. We set the threshold at the 65% sample quantile and use <code>set_prior</code> to set a prior.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">gom</span><span class="op">)</span>
-<span class="va">thresh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">thresh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span>
 <span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p>We sample first on the <span class="math inline">\((\sigma_u, \xi)\)</span> scale, with mode relocation only.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -354,7 +353,7 @@
   thresh <span class="op">=</span> <span class="va">rthresh</span>, noy <span class="op">=</span> <span class="fl">54</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;    1.78    0.00    1.78</span>
+<span class="co">#&gt;    1.70    0.00    1.72</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rn1</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-19-2.png" width="672"></p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
@@ -377,7 +376,7 @@
   thresh <span class="op">=</span> <span class="va">rthresh</span>, noy <span class="op">=</span> <span class="fl">54</span>, use_noy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;    2.25    0.00    2.25</span>
+<span class="co">#&gt;    2.17    0.00    2.19</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rn3</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-20-2.png" width="672"></p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">

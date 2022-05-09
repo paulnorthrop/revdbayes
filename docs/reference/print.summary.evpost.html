@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
       </span>
     </div>
 
@@ -112,7 +112,6 @@
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># GP posterior</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">gom</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">u</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">gpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>,</span>
@@ -127,16 +126,16 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> b2plus   0.2034900  0.10510888  0.37350179    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated probability of acceptance:  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5288207</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5257624</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample summary </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     sigma[u]           xi          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :0.980   Min.   :-0.14561  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.562   1st Qu.: 0.06221  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.715   Median : 0.13178  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.731   Mean   : 0.14308  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.896   3rd Qu.: 0.21102  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :2.572   Max.   : 0.60949  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :1.039   Min.   :-0.11432  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1.580   1st Qu.: 0.05559  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1.738   Median : 0.12392  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1.751   Mean   : 0.13616  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:1.913   3rd Qu.: 0.20388  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :2.552   Max.   : 0.60027  </span>
 </code></pre></div>
     </div>
   </div>
