@@ -2,7 +2,7 @@
 % Please edit documentation in R/predictive.R
 \name{predict.evpost}
 \alias{predict.evpost}
-\title{Predictive inference for the largest value observed in N years.}
+\title{Predictive inference for the largest value observed in \eqn{N} years.}
 \usage{
 \method{predict}{evpost}(
   object,
@@ -76,7 +76,7 @@
 and \code{x} is not supplied then \code{x_num} gives the number of values
 in \code{x} for each value in \code{n_years}.}
 
-\item{n_years}{A numeric vector. Values of N.}
+\item{n_years}{A numeric vector. Values of \eqn{N}.}
 
 \item{npy}{A numeric scalar. The mean number of observations per year
   of data, after excluding any missing values, i.e. the number of
@@ -106,13 +106,13 @@ used and a warning given.}
 \item{level}{A numeric vector of values in (0, 100).
 Only relevant when \code{type = "i"}.
 Levels of predictive intervals for the largest value observed in
-N years, i.e. level\% predictive intervals are returned.}
+\eqn{N} years, i.e. level\% predictive intervals are returned.}
 
 \item{hpd}{A logical scalar.
   Only relevant when \code{type = "i"}.
 
   If \code{hpd = FALSE} then the interval is
-  equi-tailed, with its limits produced by
+  equi-tailed, with its limits produced by \cr
   \code{predict.evpost(}\code{object, type ="q", x = p)},
   where \code{p = c((1-level/100)/2,} \code{(1+level/100)/2)}.
 
@@ -177,7 +177,7 @@ An object of class "evpred", a list containing a subset of the
 \description{
 \code{predict} method for class "evpost".  Performs predictive inference
 about the largest value to be observed over a future time period of
-N years.  Predictive inferences accounts for uncertainty in model
+\eqn{N} years.  Predictive inferences accounts for uncertainty in model
 parameters and for uncertainty owing to the variability of future
 observations.
 }

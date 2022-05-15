@@ -1,10 +1,10 @@
 # =========================== predict.evpost ===========================
 
-#' Predictive inference for the largest value observed in N years.
+#' Predictive inference for the largest value observed in \eqn{N} years.
 #'
 #' \code{predict} method for class "evpost".  Performs predictive inference
 #' about the largest value to be observed over a future time period of
-#' N years.  Predictive inferences accounts for uncertainty in model
+#' \eqn{N} years.  Predictive inferences accounts for uncertainty in model
 #' parameters and for uncertainty owing to the variability of future
 #' observations.
 #'
@@ -60,7 +60,7 @@
 #' @param x_num A numeric scalar.  If \code{type = "p"} or \code{type = "d"}
 #'   and \code{x} is not supplied then \code{x_num} gives the number of values
 #'   in \code{x} for each value in \code{n_years}.
-#' @param n_years A numeric vector. Values of N.
+#' @param n_years A numeric vector. Values of \eqn{N}.
 #' @param npy A numeric scalar. The mean number of observations per year
 #'   of data, after excluding any missing values, i.e. the number of
 #'   non-missing observations divided by total number of years' worth of
@@ -88,12 +88,12 @@
 #' @param level A numeric vector of values in (0, 100).
 #'   Only relevant when \code{type = "i"}.
 #'   Levels of predictive intervals for the largest value observed in
-#'   N years, i.e. level\% predictive intervals are returned.
+#'   \eqn{N} years, i.e. level\% predictive intervals are returned.
 #' @param hpd A logical scalar.
 #'   Only relevant when \code{type = "i"}.
 #'
 #'   If \code{hpd = FALSE} then the interval is
-#'   equi-tailed, with its limits produced by
+#'   equi-tailed, with its limits produced by \cr
 #'   \code{predict.evpost(}\code{object, type ="q", x = p)},
 #'   where \code{p = c((1-level/100)/2,} \code{(1+level/100)/2)}.
 #'
