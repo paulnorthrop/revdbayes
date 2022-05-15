@@ -8,7 +8,7 @@
 #' parameters and for uncertainty owing to the variability of future
 #' observations.
 #'
-#' @param object An object of class "evpost", a result of a call to
+#' @param object An object of class \code{"evpost"}, a result of a call to
 #'   \code{\link{rpost}} or \code{\link{rpost_rcpp}} with \code{model = "gev"},
 #'   \code{model = "os"}, \code{model = "pp"} or \code{model == "bingp"}.
 #'   Calling these functions after a call to \code{rpost} or \code{rpost_rcpp}
@@ -16,6 +16,11 @@
 #'   the probability of threshold exceedance are required, in addition to the
 #'   distribution of threshold excesses. The model is stored in
 #'   \code{object$model}.
+#'
+#'   \code{object} may also be an object created within the function
+#'   \code{predict.blite} in the \code{lite} package. In this case
+#'   \code{object$sim_vals} has a column named \code{"theta"} containing
+#'   a posterior sample of values of the extremal index.
 #' @param type A character vector.  Indicates which type of inference is
 #'   required:
 #' \itemize{
