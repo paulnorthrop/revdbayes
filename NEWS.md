@@ -1,5 +1,9 @@
 # revdbayes 1.4.9.9000
 
+## New features
+
+* When calling `predict.evpost(object, ...)`, if `object$model = "bingp"` and `object$sim_vals` has a third column named `"theta"` containing a posterior sample for the extremal index, then predictive inferences incorporate this posterior sample.  This feature is introduced to facilitate the `predict.blite()` function in version 1.1.0 of the `lite` package. 
+
 # revdbayes 1.4.9
 
 ## New features

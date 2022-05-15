@@ -896,6 +896,21 @@ pred_dbingp <- function(ev_obj, x, n_years = 100, npy = NULL,
   # For each value in n_years calculate the distribution function of the
   # n_years maximum.
   mult <- npy * n_years
+  # If ev_obj$sim_vals contains a posterior sample for the extremal index
+  # theta then multiply mult by these values
+  if ("theta" %in% colnames(ev_obj$sim_vals)) {
+    theta <- ev_obj$sim_vals[, "theta"]
+    # Check that all the values of theta are non-negative
+    if (any(theta < 0)) {
+      stop("The posterior sample for the extremal index has negative values")
+    }
+    # Set to 1 any values of theta that are > 1
+    if (any(theta > 1)) {
+      theta <- pmin(theta, 1)
+      warning("Some values of the extremal index have been decreased to 1")
+    }
+    mult <- mult * theta
+  }
   for (i in 1:n_y) {
     d[, i] <- sapply(x[, i], temp, p_u = p_u, scale = scale, shape = shape,
                      thresh = thresh, mult = mult[i])
@@ -939,6 +954,21 @@ pred_pbingp <- function(ev_obj, q, n_years = 100, npy = NULL,
   # For each value in n_years calculate the distribution function of the
   # n_years maximum.
   mult <- npy * n_years
+  # If ev_obj$sim_vals contains a posterior sample for the extremal index
+  # theta then multiply mult by these values
+  if ("theta" %in% colnames(ev_obj$sim_vals)) {
+    theta <- ev_obj$sim_vals[, "theta"]
+    # Check that all the values of theta are non-negative
+    if (any(theta < 0)) {
+      stop("The posterior sample for the extremal index has negative values")
+    }
+    # Set to 1 any values of theta that are > 1
+    if (any(theta > 1)) {
+      theta <- pmin(theta, 1)
+      warning("Some values of the extremal index have been decreased to 1")
+    }
+    mult <- mult * theta
+  }
   for (i in 1:n_y) {
     p[, i] <- sapply(q[, i], temp, p_u = p_u, scale = scale, shape = shape,
                      thresh = thresh, mult = mult[i])
@@ -1002,6 +1032,21 @@ pred_qbingp <- function(ev_obj, p, n_years = 100, npy = NULL,
     }
   }
   mult <- npy * n_years
+  # If ev_obj$sim_vals contains a posterior sample for the extremal index
+  # theta then multiply mult by these values
+  if ("theta" %in% colnames(ev_obj$sim_vals)) {
+    theta <- ev_obj$sim_vals[, "theta"]
+    # Check that all the values of theta are non-negative
+    if (any(theta < 0)) {
+      stop("The posterior sample for the extremal index has negative values")
+    }
+    # Set to 1 any values of theta that are > 1
+    if (any(theta > 1)) {
+      theta <- pmin(theta, 1)
+      warning("Some values of the extremal index have been decreased to 1")
+    }
+    mult <- mult * theta
+  }
   lower <- ev_obj$thresh
   upper <- big_q
   u_minus_l <- upper - lower
@@ -1072,6 +1117,21 @@ pred_rbingp <- function(ev_obj = ev_obj, n_years = n_years, npy = npy) {
   r_mat <- matrix(NA, nrow = n_sim, ncol = n_y)
   #
   mult <- npy * n_years
+  # If ev_obj$sim_vals contains a posterior sample for the extremal index
+  # theta then multiply mult by these values
+  if ("theta" %in% colnames(ev_obj$sim_vals)) {
+    theta <- ev_obj$sim_vals[, "theta"]
+    # Check that all the values of theta are non-negative
+    if (any(theta < 0)) {
+      stop("The posterior sample for the extremal index has negative values")
+    }
+    # Set to 1 any values of theta that are > 1
+    if (any(theta > 1)) {
+      theta <- pmin(theta, 1)
+      warning("Some values of the extremal index have been decreased to 1")
+    }
+    mult <- mult * theta
+  }
   # We use the sample underlying simulated uniforms for each value in n_years.
   u <- stats::runif(n_sim)
   for (i in 1:n_y) {
