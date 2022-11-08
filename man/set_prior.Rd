@@ -5,8 +5,8 @@
 \title{Construction of prior distributions for extreme value model parameters}
 \usage{
 set_prior(
-  prior = c("norm", "loglognorm", "mdi", "flat", "flatflat", "jeffreys", "beta",
-    "prob", "quant"),
+  prior = c("norm", "loglognorm", "mdi", "flat", "flatflat", "jeffreys", "beta", "prob",
+    "quant"),
   model = c("gev", "gp", "pp", "os"),
   ...
 )
