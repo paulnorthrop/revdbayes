@@ -22,3 +22,4 @@
 ^vignettes/ex2revdbayes\.Rmd$
 ^checks$
 ^CRAN-SUBMISSION$
+^\.github$
