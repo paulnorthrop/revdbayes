@@ -1,5 +1,5 @@
-pandoc: 2.14.0.3
-pkgdown: 2.0.2
+pandoc: 2.19.2
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   EVA2021revdbayes: EVA2021revdbayes.html
@@ -9,5 +9,5 @@ articles:
   revdbayes-b-using-rcpp-vignette: revdbayes-b-using-rcpp-vignette.html
   revdbayes-c-predictive-vignette: revdbayes-c-predictive-vignette.html
   revdbayes-d-kgaps-vignette: revdbayes-d-kgaps-vignette.html
-last_built: 2022-05-09T09:15Z
+last_built: 2022-11-08T11:32Z
 

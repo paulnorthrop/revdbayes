@@ -29,7 +29,7 @@ The argument model is used for consistency with rpost.'><!-- mathjax --><script 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -38,7 +38,7 @@ The argument model is used for consistency with rpost.'><!-- mathjax --><script 
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -105,12 +105,12 @@ The argument <code>model</code> is used for consistency with <code>rpost</code>.
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">set_prior</span><span class="op">(</span>
-  prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"norm"</span>, <span class="st">"loglognorm"</span>, <span class="st">"mdi"</span>, <span class="st">"flat"</span>, <span class="st">"flatflat"</span>, <span class="st">"jeffreys"</span>, <span class="st">"beta"</span>,
-    <span class="st">"prob"</span>, <span class="st">"quant"</span><span class="op">)</span>,
-  model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gev"</span>, <span class="st">"gp"</span>, <span class="st">"pp"</span>, <span class="st">"os"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">set_prior</span><span class="op">(</span></span>
+<span>  prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"norm"</span>, <span class="st">"loglognorm"</span>, <span class="st">"mdi"</span>, <span class="st">"flat"</span>, <span class="st">"flatflat"</span>, <span class="st">"jeffreys"</span>, <span class="st">"beta"</span>, <span class="st">"prob"</span>,</span>
+<span>    <span class="st">"quant"</span><span class="op">)</span>,</span>
+<span>  model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gev"</span>, <span class="st">"gp"</span>, <span class="st">"pp"</span>, <span class="st">"os"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -122,6 +122,8 @@ The argument <code>model</code> is used for consistency with <code>rpost</code>.
 <li><p>A character string giving the name of the prior.
     See <strong>Details</strong> for a list of priors available for each model.</p></li>
 </ul></dd>
+
+
 <dt>model</dt>
 <dd><p>A character string.  If <code>prior</code> is a character string
 then <code>model</code> gives the extreme value model to be used.  Using
@@ -130,6 +132,8 @@ either <code>model = "gev"</code>, <code>model = "pp"</code> or
 If <code>prior</code> is a function then the value of <code>model</code> is stored
 so that in the subsequent call to <code>rpost</code>, consistency of the
 prior and extreme value model parameterisations can be checked.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Further arguments to be passed to the user-supplied or
 in-built prior function.  For details of the latter see <strong>Details</strong>
@@ -141,10 +145,13 @@ and/or the relevant underlying function: <code><a href="gp_norm.html">gp_norm</a
 <code><a href="gev_beta.html">gev_beta</a></code>, <code><a href="gev_prob.html">gev_prob</a></code>, <code><a href="gev_quant.html">gev_quant</a></code>.
 All these priors have the arguments <code>min_xi</code> (prior lower bound on
 \(\xi\)) and <code>max_xi</code> (prior upper bound on \(\xi\)).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list with class <code>"evprior"</code>.  The first component is the
+    
+
+<p>A list with class <code>"evprior"</code>.  The first component is the
   input prior, i.e. either the name of the prior or a user-supplied
   function.  The remaining components contain the numeric values of any
   hyperparameters in the prior.</p>
@@ -250,7 +257,7 @@ All these priors have the arguments <code>min_xi</code> (prior lower bound on
     <p>Castellanos, E. M. and Cabras, S. (2007) A default Bayesian
   procedure for the generalized Pareto distribution.
   <em>Journal of Statistical Planning and Inference</em> <strong>137(2)</strong>,
-  473-483. doi: <a href="https://doi.org/10.1016/j.jspi.2006.01.006" class="external-link">10.1016/j.jspi.2006.01.006</a>
+  473-483. <a href="https://doi.org/10.1016/j.jspi.2006.01.006" class="external-link">doi:10.1016/j.jspi.2006.01.006</a>
 .</p>
 <p>Coles, S. G. and Tawn, J. A. (1996) A Bayesian analysis of
   extreme rainfall data. <em>Appl. Statist.</em>, <strong>45</strong>, 463-478.</p>
@@ -261,38 +268,38 @@ All these priors have the arguments <code>min_xi</code> (prior lower bound on
 <p>Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
   for the Generalized Pareto Distribution.  <em>Technometrics</em>,
   <strong>35(2)</strong>, 185-191.
-  doi: <a href="https://doi.org/10.1080/00401706.1993.10485040" class="external-link">10.1080/00401706.1993.10485040</a>
+  <a href="https://doi.org/10.1080/00401706.1993.10485040" class="external-link">doi:10.1080/00401706.1993.10485040</a>
 .</p>
 <p>Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and
   Quantile Estimation for the Generalized Pareto Distribution.
   <em>Technometrics</em>, <strong>29(3)</strong>, 339-349.
-  doi: <a href="https://doi.org/10.2307/1269343" class="external-link">10.2307/1269343</a>
+  <a href="https://doi.org/10.2307/1269343" class="external-link">doi:10.2307/1269343</a>
 .</p>
 <p>Martins, E. S. and Stedinger, J. R. (2000) Generalized maximum
   likelihood generalized extreme value quantile estimators for hydrologic
   data, <em>Water Resources Research</em>, <strong>36(3)</strong>, 737-744.
-  doi: <a href="https://doi.org/10.1029/1999WR900330" class="external-link">10.1029/1999WR900330</a>
+  <a href="https://doi.org/10.1029/1999WR900330" class="external-link">doi:10.1029/1999WR900330</a>
 .</p>
 <p>Martins, E. S. and Stedinger, J. R. (2001) Generalized maximum
   likelihood Pareto-Poisson estimators for partial duration series,
   <em>Water Resources Research</em>, <strong>37(10)</strong>, 2551-2557.
-  doi: <a href="https://doi.org/10.1029/2001WR000367" class="external-link">10.1029/2001WR000367</a>
+  <a href="https://doi.org/10.1029/2001WR000367" class="external-link">doi:10.1029/2001WR000367</a>
 .</p>
 <p>Northrop, P.J. and Attalides, N. (2016) Posterior propriety in
   Bayesian extreme value analyses using reference priors
   <em>Statistica Sinica</em>, <strong>26</strong>(2), 721--743
-  doi: <a href="https://doi.org/10.5705/ss.2014.034" class="external-link">10.5705/ss.2014.034</a>
+  <a href="https://doi.org/10.5705/ss.2014.034" class="external-link">doi:10.5705/ss.2014.034</a>
 .</p>
 <p>Northrop, P. J., Attalides, N. and Jonathan, P. (2017)
   Cross-validatory extreme value threshold selection and uncertainty
   with application to ocean storm severity.
   <em>Journal of the Royal Statistical Society Series C: Applied
   Statistics</em>, <strong>66</strong>(1), 93-120.
-  doi: <a href="https://doi.org/10.1111/rssc.12159" class="external-link">10.1111/rssc.12159</a></p>
+  <a href="https://doi.org/10.1111/rssc.12159" class="external-link">doi:10.1111/rssc.12159</a></p>
 <p>Stephenson, A. (2016) Bayesian inference for extreme value
   modelling.  In <em>Extreme Value Modeling and Risk Analysis: Methods
   and Applications</em> (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-  London. doi: <a href="https://doi.org/10.1201/b19721" class="external-link">10.1201/b19721</a>
+  London. <a href="https://doi.org/10.1201/b19721" class="external-link">doi:10.1201/b19721</a>
 .</p>
     </div>
     <div id="see-also">
@@ -315,10 +322,10 @@ All these priors have the arguments <code>min_xi</code> (prior lower bound on
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Normal prior for GEV parameters (mu, log(sigma), xi).</span></span>
-<span class="r-in"><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu">set_prior</span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pn</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Normal prior for GEV parameters (mu, log(sigma), xi).</span></span></span>
+<span class="r-in"><span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu">set_prior</span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pn</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prior</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "gev_norm"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -341,10 +348,10 @@ All these priors have the arguments <code>min_xi</code> (prior lower bound on
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "evprior"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"model")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "gev"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Prior for GP parameters with flat prior for xi on (-1, infinity).</span></span>
-<span class="r-in"><span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu">set_prior</span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">fp</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Prior for GP parameters with flat prior for xi on (-1, infinity).</span></span></span>
+<span class="r-in"><span><span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu">set_prior</span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">fp</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prior</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "gp_flat"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -361,20 +368,20 @@ All these priors have the arguments <code>min_xi</code> (prior lower bound on
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "evprior"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"model")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "gp"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># A user-defined prior (see the vignette for details).</span></span>
-<span class="r-in"><span class="va">u_prior_fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">ab</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">0</span> <span class="op">|</span> <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">1</span> <span class="op">|</span> <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&gt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="va">ab</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">         <span class="op">(</span><span class="va">ab</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="va">up</span> <span class="op">&lt;-</span> <span class="fu">set_prior</span><span class="op">(</span>prior <span class="op">=</span> <span class="va">u_prior_fn</span>, ab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># A user-defined prior using a pointer to a C++ function</span></span>
-<span class="r-in"><span class="va">ptr_gp_flat</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_prior_xptr.html">create_prior_xptr</a></span><span class="op">(</span><span class="st">"gp_flat"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">u_prior_ptr</span> <span class="op">&lt;-</span> <span class="fu">set_prior</span><span class="op">(</span>prior <span class="op">=</span> <span class="va">ptr_gp_flat</span>, model <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># A user-defined prior (see the vignette for details).</span></span></span>
+<span class="r-in"><span><span class="va">u_prior_fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">ab</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fl">0</span> <span class="op">|</span> <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">1</span> <span class="op">|</span> <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&gt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="va">ab</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>         <span class="op">(</span><span class="va">ab</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">up</span> <span class="op">&lt;-</span> <span class="fu">set_prior</span><span class="op">(</span>prior <span class="op">=</span> <span class="va">u_prior_fn</span>, ab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># A user-defined prior using a pointer to a C++ function</span></span></span>
+<span class="r-in"><span><span class="va">ptr_gp_flat</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_prior_xptr.html">create_prior_xptr</a></span><span class="op">(</span><span class="st">"gp_flat"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">u_prior_ptr</span> <span class="op">&lt;-</span> <span class="fu">set_prior</span><span class="op">(</span>prior <span class="op">=</span> <span class="va">ptr_gp_flat</span>, model <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -389,7 +396,7 @@ All these priors have the arguments <code>min_xi</code> (prior lower bound on
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

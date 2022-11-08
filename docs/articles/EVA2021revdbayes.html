@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -43,7 +43,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -97,7 +97,8 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>EVA 2021 R Workshop: revdbayes</h1>
-                        <h4 data-toc-skip class="author">Paul Northrop, <a href="p.northrop@ucl.ac.uk">p.northrop@ucl.ac.uk</a>
+                        <h4 data-toc-skip class="author">Paul Northrop,
+<a href="p.northrop@ucl.ac.uk">p.northrop@ucl.ac.uk</a>
 </h4>
             
       
@@ -112,10 +113,12 @@
 <h2 id="how-did-revdbayes-start">How did revdbayes start?<a class="anchor" aria-label="anchor" href="#how-did-revdbayes-start"></a>
 </h2>
 <ul>
-<li>I needed to sample <strong>quickly and automatically</strong> from many EV (generalised Pareto) posteriors<br>
+<li>I needed to sample <strong>quickly and automatically</strong> from
+many EV (generalised Pareto) posteriors<br>
 </li>
 <li>
-<a href="https://cran.r-project.org/package=threshr" class="external-link">threshr</a>: threshold selection based on
+<a href="https://cran.r-project.org/package=threshr" class="external-link">threshr</a>:
+threshold selection based on
 <ul>
 <li>out-of-sample EV predictions</li>
 <li>leave-one-out cross-validation</li>
@@ -170,14 +173,22 @@
 <span style="color: blue;">Have any of you used this method before?</span>
 -->
 <p><span class="math inline">\(d\)</span>-dimensional continuous <span class="math inline">\(X = (X_1, \ldots, X_d)\)</span> with density <span class="math inline">\(\propto\)</span> <span class="math inline">\(f(x)\)</span></p>
-<p>If <span class="math inline">\((u, v_1, \ldots, v_d)\)</span> are uniformly distributed over</p>
-<p><span class="math display">\[ C(r) = \left\{ (u, v_1, \ldots, v_d): 0 &lt; u \leq \left[ f\left( \frac{v_1}{u^r}, \ldots, \frac{v_d}{u^r} \right) \right] ^ {1/(r d + 1)} \right\} \]</span></p>
-<p>for some <span class="math inline">\(r \geq 0\)</span>, then <span class="math inline">\((v_1 / u ^r, \ldots, v_d / u ^ r)\)</span> has density <span class="math inline">\(f(x) / \int f(x) {\rm ~d}x\)</span></p>
+<p>If <span class="math inline">\((u, v_1, \ldots, v_d)\)</span> are
+uniformly distributed over</p>
+<p><span class="math display">\[ C(r) = \left\{ (u, v_1, \ldots, v_d): 0
+&lt; u \leq \left[ f\left( \frac{v_1}{u^r}, \ldots, \frac{v_d}{u^r}
+\right) \right] ^ {1/(r d + 1)} \right\} \]</span></p>
+<p>for some <span class="math inline">\(r \geq 0\)</span>, then <span class="math inline">\((v_1 / u ^r, \ldots, v_d / u ^ r)\)</span> has
+density <span class="math inline">\(f(x) / \int f(x) {\rm
+~d}x\)</span></p>
 <p><strong>Acceptance-rejection algorithm</strong></p>
 <ul>
-<li>simulate uniformly over a <span class="math inline">\((d+1)\)</span>-dimensional bounding box <span class="math inline">\(\{ 0 &lt; u \leq a(r), \, b_i^-(r) \leq v_i \leq b_i^+(r), \, i = 1, \ldots, d \}\)</span>
+<li>simulate uniformly over a <span class="math inline">\((d+1)\)</span>-dimensional bounding box <span class="math inline">\(\{ 0 &lt; u \leq a(r), \, b_i^-(r) \leq v_i \leq
+b_i^+(r), \, i = 1, \ldots, d \}\)</span>
 </li>
-<li>if simulated <span class="math inline">\((u, v_1, \ldots, v_d) \in C(r)\)</span> then accept <span class="math inline">\(x = (v_1 / u ^r, \ldots, v_d / u ^ r)\)</span>
+<li>if simulated <span class="math inline">\((u, v_1, \ldots, v_d) \in
+C(r)\)</span> then accept <span class="math inline">\(x = (v_1 / u ^r,
+\ldots, v_d / u ^ r)\)</span>
 </li>
 </ul>
 <p><strong>Limitations</strong></p>
@@ -194,23 +205,32 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 <div class="section level2">
 <h2 id="increasing-efficiency">Increasing efficiency<a class="anchor" aria-label="anchor" href="#increasing-efficiency"></a>
 </h2>
-<p><span class="math display">\[ p_a(d, r) = \frac{\int f(x) {\rm ~d}x}{(r d + 1) \, a(r) \displaystyle\prod_{i=1}^d \left[b_i^+(r) -b_i^-(r) \right]} \]</span></p>
+<p><span class="math display">\[ p_a(d, r) = \frac{\int f(x) {\rm
+~d}x}{(r d + 1) \, a(r) \displaystyle\prod_{i=1}^d \left[b_i^+(r)
+-b_i^-(r) \right]} \]</span></p>
 <ul>
 <li>
-<strong>Relocate the mode to zero</strong> (hard-coded into rust)</li>
+<strong>Relocate the mode to zero</strong> (hard-coded into
+rust)</li>
 <li>
-<strong>Choice of <span class="math inline">\(r\)</span></strong> (<span class="math inline">\(r = 1/2\)</span> optimal for zero-mean normal)</li>
+<strong>Choice of <span class="math inline">\(r\)</span></strong>
+(<span class="math inline">\(r = 1/2\)</span> optimal for zero-mean
+normal)</li>
 <li>
-<strong>Rotation</strong> (<span class="math inline">\(d &gt; 1\)</span>): the weaker the association the better</li>
+<strong>Rotation</strong> (<span class="math inline">\(d &gt;
+1\)</span>): the weaker the association the better</li>
 <li>
-<strong>Transformation</strong>: symmetric better than asymmetric</li>
+<strong>Transformation</strong>: symmetric better than
+asymmetric</li>
 </ul>
 <p>(EV posteriors can exhibit strong dependence and asymmetry)</p>
 <ul>
 <li>
-<a href="https://paulnorthrop.github.io/rust/" class="external-link">rust</a> R package</li>
+<a href="https://paulnorthrop.github.io/rust/" class="external-link">rust</a> R
+package</li>
 <li>
-<a href="https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html" class="external-link">Introduction to rust</a> vignette</li>
+<a href="https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html" class="external-link">Introduction
+to rust</a> vignette</li>
 </ul>
 </div>
 <div class="section level2">
@@ -220,7 +240,8 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 </div>
 <div class="section level2">
 <h2 id="r-exercises-1">
-<a href="https://paulnorthrop.github.io/revdbayes/articles/ex1revdbayes.html" class="external-link">R exercises 1</a><a class="anchor" aria-label="anchor" href="#r-exercises-1"></a>
+<a href="https://paulnorthrop.github.io/revdbayes/articles/ex1revdbayes.html" class="external-link">R
+exercises 1</a><a class="anchor" aria-label="anchor" href="#r-exercises-1"></a>
 </h2>
 <ul>
 <li>1D normal</li>
@@ -254,27 +275,36 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 <li>Cannot be used in all cases
 <ul>
 <li>unbounded densities: perhaps OK after transformation</li>
-<li>heavy tails: choose <span class="math inline">\(r\)</span> appropriately and/or transform</li>
+<li>heavy tails: choose <span class="math inline">\(r\)</span>
+appropriately and/or transform</li>
 <li>multi-modal: OK in theory, but need to find global optima</li>
 </ul>
 </li>
 </ul>
-<p>See <a href="https://paulnorthrop.github.io/rust/articles/rust-b-when-to-use-vignette.html" class="external-link">When can rust be used?</a></p>
+<p>See <a href="https://paulnorthrop.github.io/rust/articles/rust-b-when-to-use-vignette.html" class="external-link">When
+can rust be used?</a></p>
 </div>
 <div class="section level2">
 <h2 id="bayesian-ev-analyses">Bayesian EV analyses<a class="anchor" aria-label="anchor" href="#bayesian-ev-analyses"></a>
 </h2>
 <ul>
 <li>
-<strong>Prior</strong> <span class="math inline">\(\pi(\theta)\)</span> for model parameter vector <span class="math inline">\(\theta\)</span>
+<strong>Prior</strong> <span class="math inline">\(\pi(\theta)\)</span> for model parameter vector
+<span class="math inline">\(\theta\)</span>
 </li>
 <li>
-<strong>Likelihood</strong> <span class="math inline">\(L(\theta \mid \mbox{data})\)</span>
+<strong>Likelihood</strong> <span class="math inline">\(L(\theta
+\mid \mbox{data})\)</span>
 </li>
 <li>
-<strong>Posterior</strong> <span class="math inline">\(\pi(\theta \mid \mbox{data})\)</span> via Bayes’ theorem <span class="math display">\[ \pi(\theta \mid \mbox{data}) = \frac{L(\theta \mid \mbox{data}) \pi(\theta)}{P(\mbox{data})} = \frac{L(\theta \mid \mbox{data}) \pi(\theta)}{\int L(\theta \mid \mbox{data}) \pi(\theta) \,\mbox{d}\theta} \]</span>
+<strong>Posterior</strong> <span class="math inline">\(\pi(\theta
+\mid \mbox{data})\)</span> via Bayes’ theorem <span class="math display">\[ \pi(\theta \mid \mbox{data}) = \frac{L(\theta
+\mid \mbox{data}) \pi(\theta)}{P(\mbox{data})} = \frac{L(\theta \mid
+\mbox{data}) \pi(\theta)}{\int L(\theta \mid \mbox{data}) \pi(\theta)
+\,\mbox{d}\theta} \]</span>
 </li>
-<li>Simulate a large sample from <span class="math inline">\(\pi(\theta \mid \mbox{data})\)</span>, often using MCMC</li>
+<li>Simulate a large sample from <span class="math inline">\(\pi(\theta
+\mid \mbox{data})\)</span>, often using MCMC</li>
 </ul>
 <div class="section level3">
 <h3 id="in-revdbayes">In revdbayes<a class="anchor" aria-label="anchor" href="#in-revdbayes"></a>
@@ -300,13 +330,16 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 <div class="section level2 smaller">
 <h2 class="smaller" id="gp-model-for-threshold-excesses-3">GP model for threshold excesses 3<a class="anchor" aria-label="anchor" href="#gp-model-for-threshold-excesses-3"></a>
 </h2>
-<p>Box-Cox transformations of <span class="math inline">\(\phi_1 = \sigma_u &gt; 0\)</span> and <span class="math inline">\(\phi_2 = \xi + \sigma / x_{(m)} &gt; 0\)</span></p>
+<p>Box-Cox transformations of <span class="math inline">\(\phi_1 =
+\sigma_u &gt; 0\)</span> and <span class="math inline">\(\phi_2 = \xi +
+\sigma / x_{(m)} &gt; 0\)</span></p>
 <p><img src="EVA2021revdbayes_files/figure-html/plots3-1.png" width="624" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2 smaller">
 <h2 class="smaller" id="gp-model-for-threshold-excesses-4">GP model for threshold excesses 4<a class="anchor" aria-label="anchor" href="#gp-model-for-threshold-excesses-4"></a>
 </h2>
-<p>Box-Cox first then rotate <span class="math inline">\(\phantom{\xi + \sigma / x_{(m)}}\)</span></p>
+<p>Box-Cox first then rotate <span class="math inline">\(\phantom{\xi +
+\sigma / x_{(m)}}\)</span></p>
 <p><img src="EVA2021revdbayes_files/figure-html/plots4-1.png" width="624" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
@@ -317,8 +350,10 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 <li>Order statistics (OS): largest <span class="math inline">\(k\)</span> observations per block</li>
 <li>Non-homogeneous point process (PP) for threshold exceedances
 <ul>
-<li>approximates binomial for threshold exceedance and GP for excesses</li>
-<li>GEV parameterisation: <span class="math inline">\((\mu, \sigma, \xi)\)</span>
+<li>approximates binomial for threshold exceedance and GP for
+excesses</li>
+<li>GEV parameterisation: <span class="math inline">\((\mu, \sigma,
+\xi)\)</span>
 </li>
 <li>choice of block length affects posterior sampling efficiency</li>
 </ul>
@@ -327,7 +362,8 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 </div>
 <div class="section level2">
 <h2 id="r-exercises-2">
-<a href="https://paulnorthrop.github.io/revdbayes/articles/ex2revdbayes.html" class="external-link">R exercises 2</a><a class="anchor" aria-label="anchor" href="#r-exercises-2"></a>
+<a href="https://paulnorthrop.github.io/revdbayes/articles/ex2revdbayes.html" class="external-link">R
+exercises 2</a><a class="anchor" aria-label="anchor" href="#r-exercises-2"></a>
 </h2>
 <ul>
 <li>
@@ -341,7 +377,8 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 <li>
 <strong>PP</strong>: sampling efficiently from the posterior</li>
 <li>
-<strong>GEV</strong>: compare <code>revdbayes</code> and <code>evdbayes</code>
+<strong>GEV</strong>: compare <code>revdbayes</code> and
+<code>evdbayes</code>
 </li>
 </ul>
 <p>Options to experiment</p>
@@ -361,18 +398,21 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 <p><strong>Current uses</strong></p>
 <ul>
 <li>
-<a href="https://paulnorthrop.github.io/threshr/" class="external-link">threshr</a> Threshold Selection and Uncertainty for Extreme Value Analysis</li>
+<a href="https://paulnorthrop.github.io/threshr/" class="external-link">threshr</a>
+Threshold Selection and Uncertainty for Extreme Value Analysis</li>
 <li>
 <a href="https://cran.r-project.org/package=mev" class="external-link">mev</a>
 <ul>
 <li>
-<code>lambdadep()</code>: a bivariate dependence function (many posterior samples required)</li>
+<code>lambdadep()</code>: a bivariate dependence function (many
+posterior samples required)</li>
 <li>
 <code>tstab.gpd()</code>: threshold stability plot</li>
 </ul>
 </li>
 <li>
-<a href="https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-d-kgaps-vignette.html" class="external-link">Estimation of the extremal index</a> using the <span class="math inline">\(K\)</span>-gaps model</li>
+<a href="https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-d-kgaps-vignette.html" class="external-link">Estimation
+of the extremal index</a> using the <span class="math inline">\(K\)</span>-gaps model</li>
 </ul>
 </div>
 <div class="section level2 smaller">
@@ -383,20 +423,25 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 <a href="https://paulnorthrop.github.io/rust/" class="external-link">rust</a>
 <ul>
 <li><a href="https://paulnorthrop.github.io/rust/articles/rust-a-vignette.html" class="external-link">Introduction</a></li>
-<li><a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html" class="external-link">When can rust be used?</a></li>
+<li><a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html" class="external-link">When
+can rust be used?</a></li>
 <li>
-<a href="https://doi.org/10.1007/BF01889987" class="external-link">Wakefield et al. (1991)</a> Efficiency of the ROU method</li>
+<a href="https://doi.org/10.1007/BF01889987" class="external-link">Wakefield et
+al. (1991)</a> Efficiency of the ROU method</li>
 </ul>
 </li>
 <li>
 <a href="https://paulnorthrop.github.io/revdbayes/" class="external-link">revdbayes</a>
 <ul>
 <li><a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html" class="external-link">Introduction</a></li>
-<li><a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html" class="external-link">Posterior predictive inference</a></li>
+<li><a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-a-vignette.html" class="external-link">Posterior
+predictive inference</a></li>
 <li>
-<a href="https://doi.org/10.1201/b19721" class="external-link">Stephenson (2016)</a> Bayesian EV analysis review</li>
+<a href="https://doi.org/10.1201/b19721" class="external-link">Stephenson (2016)</a>
+Bayesian EV analysis review</li>
 <li>
-<a href="https://doi.org/10.5705/ss.2014.034" class="external-link">Northrop and Attalides (2016)</a> Certain improper priors should not be used!</li>
+<a href="https://doi.org/10.5705/ss.2014.034" class="external-link">Northrop and Attalides
+(2016)</a> Certain improper priors should not be used!</li>
 </ul>
 </li>
 <li>
@@ -426,7 +471,7 @@ See [Wakefield et al. (1991)](https://doi.org/10.1007/BF01889987)
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

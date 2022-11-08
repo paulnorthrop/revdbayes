@@ -28,7 +28,7 @@ the line.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/m
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -37,7 +37,7 @@ the line.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/m
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -103,14 +103,14 @@ the line.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for evpred</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">...</span>,
-  leg_pos <span class="op">=</span> <span class="cn">NULL</span>,
-  leg_text <span class="op">=</span> <span class="cn">NULL</span>,
-  which_int <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"long"</span>, <span class="st">"short"</span>, <span class="st">"both"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for evpred</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  leg_pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  leg_text <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  which_int <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"long"</span>, <span class="st">"short"</span>, <span class="st">"both"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -118,23 +118,34 @@ the line.</p>
     <dl><dt>x</dt>
 <dd><p>An object of class "evpost", a result of a call to
 <code><a href="rpost.html">rpost</a></code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments passed on to <code><a href="https://rdrr.io/r/graphics/matplot.html" class="external-link">matplot</a></code>.</p></dd>
+
+
 <dt>leg_pos</dt>
 <dd><p>A character scalar. Keyword for the position of legend.
 See <code><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></code>.</p></dd>
+
+
 <dt>leg_text</dt>
 <dd><p>A character or expression vector.  Text for legend.
 See <code><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></code>.</p></dd>
+
+
 <dt>which_int</dt>
 <dd><p>A character scalar.  If <code>x$type = "i"</code> which
 intervals should be plotted?  <code>"long"</code> for equi-tailed intervals,
 <code>"short"</code> for the shortest possible intervals, <code>"both"</code> for
 both.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Nothing is returned.</p>
+    
+
+<p>Nothing is returned.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -144,38 +155,39 @@ both.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">portpirie</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">gevp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Predictive density function</span></span>
-<span class="r-in"><span class="va">d_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">d_gevp</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">portpirie</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gevp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Predictive density function</span></span></span>
+<span class="r-in"><span><span class="va">d_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">d_gevp</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.evpred-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Predictive distribution function</span></span>
-<span class="r-in"><span class="va">p_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"p"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">p_gevp</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Predictive distribution function</span></span></span>
+<span class="r-in"><span><span class="va">p_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"p"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">p_gevp</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.evpred-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Predictive quantiles</span></span>
-<span class="r-in"><span class="va">q_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"q"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">q_gevp</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Predictive quantiles</span></span></span>
+<span class="r-in"><span><span class="va">q_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"q"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">q_gevp</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.evpred-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Predictive intervals</span></span>
-<span class="r-in"><span class="va">i_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"i"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">i_gevp</span>, which_int <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Predictive intervals</span></span></span>
+<span class="r-in"><span><span class="va">i_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"i"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">i_gevp</span>, which_int <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>argument 1 does not name a graphical parameter</span>
 <span class="r-plt img"><img src="plot.evpred-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Sample from predictive distribution</span></span>
-<span class="r-in"><span class="va">r_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"r"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">r_gevp</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Sample from predictive distribution</span></span></span>
+<span class="r-in"><span><span class="va">r_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"r"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">r_gevp</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.evpred-5.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">r_gevp</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">r_gevp</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.evpred-6.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -190,7 +202,7 @@ both.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

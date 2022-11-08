@@ -19,7 +19,7 @@ distribution."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -28,7 +28,7 @@ distribution."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -85,49 +85,68 @@ distribution.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">dgev</span><span class="op">(</span><span class="va">x</span>, loc <span class="op">=</span> <span class="fl">0</span>, scale <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">0</span>, log <span class="op">=</span> <span class="cn">FALSE</span>, m <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-
-<span class="fu">pgev</span><span class="op">(</span><span class="va">q</span>, loc <span class="op">=</span> <span class="fl">0</span>, scale <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">0</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span>, m <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-
-<span class="fu">qgev</span><span class="op">(</span><span class="va">p</span>, loc <span class="op">=</span> <span class="fl">0</span>, scale <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">0</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span>, m <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-
-<span class="fu">rgev</span><span class="op">(</span><span class="va">n</span>, loc <span class="op">=</span> <span class="fl">0</span>, scale <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">0</span>, m <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dgev</span><span class="op">(</span><span class="va">x</span>, loc <span class="op">=</span> <span class="fl">0</span>, scale <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">0</span>, log <span class="op">=</span> <span class="cn">FALSE</span>, m <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">pgev</span><span class="op">(</span><span class="va">q</span>, loc <span class="op">=</span> <span class="fl">0</span>, scale <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">0</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span>, m <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgev</span><span class="op">(</span><span class="va">p</span>, loc <span class="op">=</span> <span class="fl">0</span>, scale <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">0</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span>, m <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">rgev</span><span class="op">(</span><span class="va">n</span>, loc <span class="op">=</span> <span class="fl">0</span>, scale <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">0</span>, m <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x, q</dt>
 <dd><p>Numeric vectors of quantiles.</p></dd>
+
+
 <dt>loc, scale, shape</dt>
 <dd><p>Numeric vectors.
 Location, scale and shape parameters.
 All elements of <code>scale</code> must be positive.</p></dd>
+
+
 <dt>log, log.p</dt>
 <dd><p>A logical scalar; if TRUE, probabilities p are given as
 log(p).</p></dd>
+
+
 <dt>m</dt>
 <dd><p>A numeric scalar.  The distribution is reparameterised by working
 with the GEV(<code>loc, scale, shape</code>) distribution function raised to the
 power <code>m</code>.  See <strong>Details</strong>.</p></dd>
+
+
 <dt>lower.tail</dt>
 <dd><p>A logical scalar.  If TRUE (default), probabilities
 are \(P[X \leq x]\), otherwise, \(P[X &gt; x]\).</p></dd>
+
+
 <dt>p</dt>
 <dd><p>A numeric vector of probabilities in [0,1].</p></dd>
+
+
 <dt>n</dt>
 <dd><p>Numeric scalar.  The number of observations to be simulated.
 If <code>length(n) &gt; 1</code> then <code>length(n)</code> is taken to be the number
 required.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>dgev</code> gives the density function, <code>pgev</code> gives the
+    
+
+<p><code>dgev</code> gives the density function, <code>pgev</code> gives the
   distribution function, <code>qgev</code> gives the quantile function,
-  and <code>rgev</code> generates random deviates.
-  The length of the result is determined by <code>n</code> for <code>rgev</code>,
+  and <code>rgev</code> generates random deviates.</p>
+
+
+<p>The length of the result is determined by <code>n</code> for <code>rgev</code>,
   and is the maximum of the lengths of the numerical arguments for the
-  other functions.
-  The numerical arguments other than <code>n</code> are recycled to the length
+  other functions.</p>
+
+
+<p>The numerical arguments other than <code>n</code> are recycled to the length
   of the result.</p>
     </div>
     <div id="details">
@@ -165,44 +184,44 @@ required.</p></dd>
     <p>Jenkinson, A. F. (1955) The frequency distribution of the
   annual maximum (or minimum) of meteorological elements.
   <em>Quart. J. R. Met. Soc.</em>, <strong>81</strong>, 158-171.
-  Chapter 3: doi: <a href="https://doi.org/10.1002/qj.49708134804" class="external-link">10.1002/qj.49708134804</a></p>
+  Chapter 3: <a href="https://doi.org/10.1002/qj.49708134804" class="external-link">doi:10.1002/qj.49708134804</a></p>
 <p>Coles, S. G. (2001) <em>An Introduction to Statistical
   Modeling of Extreme Values</em>, Springer-Verlag, London.
-  doi: <a href="https://doi.org/10.1007/978-1-4471-3675-0_3" class="external-link">10.1007/978-1-4471-3675-0_3</a></p>
+  <a href="https://doi.org/10.1007/978-1-4471-3675-0_3" class="external-link">doi:10.1007/978-1-4471-3675-0_3</a></p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">dgev</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">dgev</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.00000000 0.00000000 0.73575888 0.17210639 0.06706381 0.03428205</span>
-<span class="r-in"><span class="fu">dgev</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.2</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">dgev</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.2</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.3068528 -1.4279153 -5.7449245       -Inf       -Inf       -Inf</span>
-<span class="r-in"><span class="fu">dgev</span><span class="op">(</span><span class="fl">1</span>, shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.4</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">dgev</span><span class="op">(</span><span class="fl">1</span>, shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.4</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2951551 0.2001168</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">pgev</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">pgev</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0000000 0.0000000 0.3678794 0.7386812 0.8467772 0.8948490</span>
-<span class="r-in"><span class="fu">pgev</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.2</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pgev</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3678794 0.9251864 0.9996801 1.0000000 1.0000000 1.0000000</span>
-<span class="r-in"><span class="fu">pgev</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.4</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pgev</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.4</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3678794 0.1743086</span>
-<span class="r-in"><span class="fu">pgev</span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.4</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pgev</span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.4</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6.218855e-09 0.000000e+00</span>
-<span class="r-in"><span class="fu">pgev</span><span class="op">(</span><span class="fl">7</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.4</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pgev</span><span class="op">(</span><span class="fl">7</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.4</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.0000000 0.9541694</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">qgev</span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span>, <span class="fl">2</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">qgev</span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span>, <span class="fl">2</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.695706 1.802111 1.913749 2.045276 2.212953 2.444700 2.800811 3.449973</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [9] 5.157141</span>
-<span class="r-in"><span class="fu">qgev</span><span class="op">(</span><span class="fl">0.5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">qgev</span><span class="op">(</span><span class="fl">0.5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.167445 2.402245</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span></span>
-<span class="r-in"><span class="fu">pgev</span><span class="op">(</span><span class="fu">qgev</span><span class="op">(</span><span class="va">p</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">0.8</span><span class="op">)</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">0.8</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="fu">pgev</span><span class="op">(</span><span class="fu">qgev</span><span class="op">(</span><span class="va">p</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">0.8</span><span class="op">)</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">0.8</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">rgev</span><span class="op">(</span><span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7547665 6.0602868 1.4163303 1.7995539 0.7740570 0.7925306</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">rgev</span><span class="op">(</span><span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.0081976 5.0867084 1.3884322 0.9459824 0.6457322 1.8994342</span>
 </code></pre></div>
     </div>
   </div>
@@ -217,7 +236,7 @@ required.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

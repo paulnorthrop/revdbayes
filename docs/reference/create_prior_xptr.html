@@ -23,7 +23,7 @@ the log-prior density.  Please see the vignette
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -32,7 +32,7 @@ the log-prior density.  Please see the vignette
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -93,17 +93,20 @@ the log-prior density.  Please see the vignette
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">create_prior_xptr</span><span class="op">(</span><span class="va">fstr</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_prior_xptr</span><span class="op">(</span><span class="va">fstr</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>fstr</dt>
 <dd><p>A string indicating the C++ function required.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An external pointer.</p>
+    
+
+<p>An external pointer.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -128,17 +131,17 @@ and the vignette "Rusting Faster: Simulation using Rcpp" in the package
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">ptr_gp_flat</span> <span class="op">&lt;-</span> <span class="fu">create_prior_xptr</span><span class="op">(</span><span class="st">"gp_flat"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">prior_cfn</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="va">ptr_gp_flat</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ptr_gev_flat</span> <span class="op">&lt;-</span> <span class="fu">create_prior_xptr</span><span class="op">(</span><span class="st">"gev_flat"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">prior_cfn</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="va">ptr_gev_flat</span>, model <span class="op">=</span> <span class="st">"gev"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span>
-<span class="r-in">                       max_xi <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ptr_gev_norm</span> <span class="op">&lt;-</span> <span class="fu">create_prior_xptr</span><span class="op">(</span><span class="st">"gev_norm"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pn_u</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="va">ptr_gev_norm</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>,</span>
-<span class="r-in">                  icov <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ptr_gp_flat</span> <span class="op">&lt;-</span> <span class="fu">create_prior_xptr</span><span class="op">(</span><span class="st">"gp_flat"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">prior_cfn</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="va">ptr_gp_flat</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ptr_gev_flat</span> <span class="op">&lt;-</span> <span class="fu">create_prior_xptr</span><span class="op">(</span><span class="st">"gev_flat"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">prior_cfn</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="va">ptr_gev_flat</span>, model <span class="op">=</span> <span class="st">"gev"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span></span>
+<span class="r-in"><span>                       max_xi <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ptr_gev_norm</span> <span class="op">&lt;-</span> <span class="fu">create_prior_xptr</span><span class="op">(</span><span class="st">"gev_norm"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pn_u</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="va">ptr_gev_norm</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  icov <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -153,7 +156,7 @@ and the vignette "Rusting Faster: Simulation using Rcpp" in the package
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

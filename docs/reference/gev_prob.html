@@ -19,7 +19,7 @@ prior see set_prior."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -28,7 +28,7 @@ prior see set_prior."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -85,7 +85,7 @@ prior see <code><a href="set_prior.html">set_prior</a></code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">gev_prob</span><span class="op">(</span><span class="va">pars</span>, <span class="va">quant</span>, <span class="va">alpha</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span>, max_xi <span class="op">=</span> <span class="cn">Inf</span>, trendsd <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gev_prob</span><span class="op">(</span><span class="va">pars</span>, <span class="va">quant</span>, <span class="va">alpha</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span>, max_xi <span class="op">=</span> <span class="cn">Inf</span>, trendsd <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -93,27 +93,40 @@ prior see <code><a href="set_prior.html">set_prior</a></code>.</p>
     <dl><dt>pars</dt>
 <dd><p>A numeric vector of length 3.
 GEV parameters (\(\mu, \sigma, \xi\)).</p></dd>
+
+
 <dt>quant</dt>
 <dd><p>A numeric vector of length 3 containing quantiles
 (\(q_1, q_2, q_3\)) such that
 \(q_1 &lt; q_2 &lt; q_3\). If the values
 in <code>quant</code> are not ordered from smallest to largest then they
 will be ordered inside <code>set_prior</code> without warning.</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>A numeric vector of length 4.  Parameters specifying a
 prior distribution for probabilities related to the quantiles in
 <code>quant</code>.  See <strong>Details</strong> below.</p></dd>
+
+
 <dt>min_xi</dt>
 <dd><p>A numeric scalar.  Prior lower bound on \(\xi\).</p></dd>
+
+
 <dt>max_xi</dt>
 <dd><p>A numeric scalar.  Prior upper bound on \(\xi\).</p></dd>
+
+
 <dt>trendsd</dt>
 <dd><p>Has no function other than to achieve compatibility with
 function in the evdbayes package.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The log of the prior density.</p>
+    
+
+<p>The log of the prior density.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -139,11 +152,11 @@ function in the evdbayes package.</p></dd>
   with application to ocean storm severity.
   <em>Journal of the Royal Statistical Society Series C: Applied
   Statistics</em>, <strong>66</strong>(1), 93-120.
-  doi: <a href="https://doi.org/10.1111/rssc.12159" class="external-link">10.1111/rssc.12159</a></p>
+  <a href="https://doi.org/10.1111/rssc.12159" class="external-link">doi:10.1111/rssc.12159</a></p>
 <p>Stephenson, A. (2016) Bayesian inference for extreme value
   modelling.  In <em>Extreme Value Modeling and Risk Analysis: Methods
   and Applications</em> (eds D. K. Dey and J. Yan), 257-280, Chapman and Hall,
-  London. doi: <a href="https://doi.org/10.1201/b19721" class="external-link">10.1201/b19721</a>
+  London. <a href="https://doi.org/10.1201/b19721" class="external-link">doi:10.1201/b19721</a>
 .</p>
     </div>
     <div id="see-also">
@@ -167,7 +180,7 @@ function in the evdbayes package.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

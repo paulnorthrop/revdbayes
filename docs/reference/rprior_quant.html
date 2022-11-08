@@ -19,7 +19,7 @@ between quantiles."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -28,7 +28,7 @@ between quantiles."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aj
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -85,39 +85,52 @@ between quantiles.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rprior_quant</span><span class="op">(</span><span class="va">n</span>, <span class="va">prob</span>, <span class="va">shape</span>, <span class="va">scale</span>, lb <span class="op">=</span> <span class="cn">NULL</span>, lb_prob <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rprior_quant</span><span class="op">(</span><span class="va">n</span>, <span class="va">prob</span>, <span class="va">shape</span>, <span class="va">scale</span>, lb <span class="op">=</span> <span class="cn">NULL</span>, lb_prob <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>n</dt>
 <dd><p>A numeric scalar. The size of sample required.</p></dd>
+
+
 <dt>prob</dt>
 <dd><p>A numeric vector of length 3. Exceedance probabilities
 corresponding to the quantiles used to specify the prior distribution.
 The values should <em>decrease</em> with the index of the vector.
 If not, the values in <code>prob</code> will be sorted into decreasing order
 without warning.</p></dd>
+
+
 <dt>shape</dt>
 <dd><p>A numeric vector of length 3. Respective shape parameters of
 the gamma priors for the quantile differences.</p></dd>
+
+
 <dt>scale</dt>
 <dd><p>A numeric vector of length 3. Respective scale parameters of
 the gamma priors for the quantile differences.</p></dd>
+
+
 <dt>lb</dt>
 <dd><p>A numeric scalar.  If this is not <code>NULL</code> then the simulation
 is constrained so that <code>lb</code> is an approximate lower bound on the
 GEV variable.  Specifically, only simulated GEV parameter values for
 which the 100<code>lb_prob</code>% quantile is greater than <code>lb</code> are
 retained.</p></dd>
+
+
 <dt>lb_prob</dt>
 <dd><p>A numeric scalar.  The non-exceedance probability involved
 in the specification of <code>lb</code>.  Must be in (0,1).  If <code>lb=NULL</code>
 then <code>lb_prob</code> is not used.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An <code>n</code> by 3 numeric matrix.</p>
+    
+
+<p>An <code>n</code> by 3 numeric matrix.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -139,7 +152,7 @@ then <code>lb_prob</code> is not used.</p></dd>
 <p>Stephenson, A. 2016. Bayesian Inference for Extreme Value
   Modelling. In <em>Extreme Value Modeling and Risk Analysis: Methods and
   Applications</em>, edited by D. K. Dey and J. Yan, 257-80. London:
-  Chapman and Hall. doi: <a href="https://doi.org/10.1201/b19721" class="external-link">10.1201/b19721</a></p>
+  Chapman and Hall. <a href="https://doi.org/10.1201/b19721" class="external-link">doi:10.1201/b19721</a></p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -149,11 +162,11 @@ then <code>lb_prob</code> is not used.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="op">^</span> <span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">38.9</span>, <span class="fl">7.1</span>, <span class="fl">47</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">6.3</span>, <span class="fl">2.6</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">rprior_quant</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, prob <span class="op">=</span> <span class="va">pr</span>, shape <span class="op">=</span> <span class="va">sh</span>, scale <span class="op">=</span> <span class="va">sc</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">rprior_quant</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, prob <span class="op">=</span> <span class="va">pr</span>, shape <span class="op">=</span> <span class="va">sh</span>, scale <span class="op">=</span> <span class="va">sc</span>, lb <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="op">^</span> <span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">38.9</span>, <span class="fl">7.1</span>, <span class="fl">47</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">6.3</span>, <span class="fl">2.6</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">rprior_quant</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, prob <span class="op">=</span> <span class="va">pr</span>, shape <span class="op">=</span> <span class="va">sh</span>, scale <span class="op">=</span> <span class="va">sc</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">rprior_quant</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, prob <span class="op">=</span> <span class="va">pr</span>, shape <span class="op">=</span> <span class="va">sh</span>, scale <span class="op">=</span> <span class="va">sc</span>, lb <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -168,7 +181,7 @@ then <code>lb_prob</code> is not used.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

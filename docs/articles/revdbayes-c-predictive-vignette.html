@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -43,7 +43,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -96,10 +96,12 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Posterior Predictive Extreme Value Inference using the revdbayes Package</h1>
-                        <h4 data-toc-skip class="author">Paul J. Northrop</h4>
+      <h1 data-toc-skip>Posterior Predictive Extreme Value Inference
+using the revdbayes Package</h1>
+                        <h4 data-toc-skip class="author">Paul J.
+Northrop</h4>
             
-            <h4 data-toc-skip class="date">2022-05-09</h4>
+            <h4 data-toc-skip class="date">2022-11-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/HEAD/vignettes/revdbayes-c-predictive-vignette.Rmd" class="external-link"><code>vignettes/revdbayes-c-predictive-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>revdbayes-c-predictive-vignette.Rmd</code></div>
@@ -108,119 +110,246 @@
 
     
     
-<p>This vignette focuses on <em>posterior predictive inference</em> using extreme value models. Posterior predictive inference is the prediction of unobserved variables conditional on observed data, performed by integrating parameter-specific inferences over a posterior distribution for model parameters. In practice, the integration averaging is performed using an empirical average based on samples from the posterior distribution. The vignette <a href="revdbayes-a-vignette.html">Introducing revdbayes</a> covers the sampling from extreme value posterior distributions and the vignette <a href="revdbayes-b-using-rcpp-vignette.html">Faster simulation using revdbayes</a> considers how to do this more quickly.</p>
-<p>We consider two uses of posterior predictive inference. In the first we simulate from the posterior predictive distribution many replicates of the observed data. A comparison of these replicates to the observed data provides a way to assess the fit of the model: systematic differences in behaviour between the observed and replicated data suggest features of the data that are not represented well by the model. For greater detail see Chapter 6 of <span class="citation">Gelman et al. (2014)</span>. Secondly, we define as the variable of interest the largest value <span class="math inline">\(M_N\)</span> to be observed over a future time period of length <span class="math inline">\(N\)</span> years and estimate under the extreme value model the conditional distribution of <span class="math inline">\(M_N\)</span> given the observed data. This accounts for uncertainty in model parameters and for uncertainty owing to the variability of future observations.</p>
-<p>We illustrate the code used to perform these two tasks using the <code>portpirie</code> and <code>gom</code> datasets that feature in the vignette <a href="revdbayes-a-vignette.html">Introducing revdbayes</a>.</p>
+<p>This vignette focuses on <em>posterior predictive inference</em>
+using extreme value models. Posterior predictive inference is the
+prediction of unobserved variables conditional on observed data,
+performed by integrating parameter-specific inferences over a posterior
+distribution for model parameters. In practice, the integration
+averaging is performed using an empirical average based on samples from
+the posterior distribution. The vignette <a href="revdbayes-a-vignette.html">Introducing revdbayes</a> covers the
+sampling from extreme value posterior distributions and the vignette <a href="revdbayes-b-using-rcpp-vignette.html">Faster simulation using
+revdbayes</a> considers how to do this more quickly.</p>
+<p>We consider two uses of posterior predictive inference. In the first
+we simulate from the posterior predictive distribution many replicates
+of the observed data. A comparison of these replicates to the observed
+data provides a way to assess the fit of the model: systematic
+differences in behaviour between the observed and replicated data
+suggest features of the data that are not represented well by the model.
+For greater detail see Chapter 6 of <span class="citation">Gelman et al.
+(2014)</span>. Secondly, we define as the variable of interest the
+largest value <span class="math inline">\(M_N\)</span> to be observed
+over a future time period of length <span class="math inline">\(N\)</span> years and estimate under the extreme
+value model the conditional distribution of <span class="math inline">\(M_N\)</span> given the observed data. This
+accounts for uncertainty in model parameters and for uncertainty owing
+to the variability of future observations.</p>
+<p>We illustrate the code used to perform these two tasks using the
+<code>portpirie</code> and <code>gom</code> datasets that feature in the
+vignette <a href="revdbayes-a-vignette.html">Introducing
+revdbayes</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Set the number of posterior samples required.</span>
-<span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">47</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/revdbayes/" class="external-link">revdbayes</a></span><span class="op">)</span></code></pre></div>
-<p>We produce posterior samples for later use. The argument <code>nrep = 50</code> to <code>rpost</code> results in 50 simulated replicates of the data being returned in <code>object$data_rep</code>.</p>
+<code class="sourceCode R"><span><span class="co"># Set the number of posterior samples required.</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">47</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/revdbayes/" class="external-link">revdbayes</a></span><span class="op">)</span></span></code></pre></div>
+<p>We produce posterior samples for later use. The argument
+<code>nrep = 50</code> to <code>rpost</code> results in 50 simulated
+replicates of the data being returned in
+<code>object$data_rep</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">### GEV model for Port Pirie Annual Maximum Sea Levels </span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">portpirie</span><span class="op">)</span>
-<span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
-<span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span>
-<span class="va">gevp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>
-
-<span class="co">### GP model for Gulf-of-Mexico significant wave heights</span>
-<span class="va">u</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span>
-<span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
-<span class="va">gpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>, data <span class="op">=</span> <span class="va">gom</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">### GEV model for Port Pirie Annual Maximum Sea Levels </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">portpirie</span><span class="op">)</span></span>
+<span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></span>
+<span><span class="va">gevp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### GP model for Gulf-of-Mexico significant wave heights</span></span>
+<span><span class="va">u</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span></span>
+<span><span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">gpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>, data <span class="op">=</span> <span class="va">gom</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="posterior-predictive-model-checking">Posterior predictive model checking<a class="anchor" aria-label="anchor" href="#posterior-predictive-model-checking"></a>
 </h2>
-<p>The <code>pp_check</code> method <code>pp_check.evpost</code> provides an interface to the posterior predictive checking graphics available in the <em>bayesplot</em> package <span class="citation">(Gabry and Mahr 2017)</span>. For details see the bayesplot vignette <a href="https://CRAN.R-project.org/package=bayesplot" class="external-link">Graphical posterior predictive checks</a>. <em>bayesplot</em> functions return a <code>ggplot</code> object that can be customised using the <em>ggplot2</em> package <span class="citation">(Wickham 2009)</span>.</p>
+<p>The <code>pp_check</code> method <code>pp_check.evpost</code>
+provides an interface to the posterior predictive checking graphics
+available in the <em>bayesplot</em> package <span class="citation">(Gabry and Mahr 2017)</span>. For details see the
+bayesplot vignette <a href="https://CRAN.R-project.org/package=bayesplot" class="external-link">Graphical posterior
+predictive checks</a>. <em>bayesplot</em> functions return a
+<code>ggplot</code> object that can be customised using the
+<em>ggplot2</em> package <span class="citation">(Wickham
+2009)</span>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/bayesplot/" class="external-link">bayesplot</a></span><span class="op">)</span>
-<span class="co">#&gt; This is bayesplot version 1.8.1</span>
-<span class="co">#&gt; - Online documentation and vignettes at mc-stan.org/bayesplot</span>
-<span class="co">#&gt; - bayesplot theme set to bayesplot::theme_default()</span>
-<span class="co">#&gt;    * Does _not_ affect other ggplot2 plots</span>
-<span class="co">#&gt;    * See ?bayesplot_theme_set for details on theme setting</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></code></pre></div>
-<p>We show three examples of the graphical posterior predictive checks that are available from <em>bayesplot</em>.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/bayesplot/" class="external-link">bayesplot</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; This is bayesplot version 1.9.0</span></span>
+<span><span class="co">#&gt; - Online documentation and vignettes at mc-stan.org/bayesplot</span></span>
+<span><span class="co">#&gt; - bayesplot theme set to bayesplot::theme_default()</span></span>
+<span><span class="co">#&gt;    * Does _not_ affect other ggplot2 plots</span></span>
+<span><span class="co">#&gt;    * See ?bayesplot_theme_set for details on theme setting</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
+<p>We show three examples of the graphical posterior predictive checks
+that are available from <em>bayesplot</em>.</p>
 <div class="section level3">
 <h3 id="overlaid-density-and-distribution-functions">Overlaid density and distribution functions<a class="anchor" aria-label="anchor" href="#overlaid-density-and-distribution-functions"></a>
 </h3>
-<p>Calling <code>pp_check</code> with <code>type = "overlaid"</code> produces plots in which either the empirical distribution functions or kernel density estimates of the observed and replicated data are compared. If the model fits well then the observed data should look like a typical replication from the posterior predictive distribution, which seems to be the case here.</p>
+<p>Calling <code>pp_check</code> with <code>type = "overlaid"</code>
+produces plots in which either the empirical distribution functions or
+kernel density estimates of the observed and replicated data are
+compared. If the model fits well then the observed data should look like
+a typical replication from the posterior predictive distribution, which
+seems to be the case here.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># GEV</span>
-<span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"overlaid"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"GEV empirical distribution functions"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"overlaid"</span>, subtype <span class="op">=</span> <span class="st">"dens"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"GEV kernel density estimates"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># GEV</span></span>
+<span><span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"overlaid"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"GEV empirical distribution functions"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"overlaid"</span>, subtype <span class="op">=</span> <span class="st">"dens"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"GEV kernel density estimates"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-5-1.png" width="45%"><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-5-2.png" width="45%"></p>
 </div>
 <div class="section level3">
 <h3 id="multiple-plots">Multiple plots<a class="anchor" aria-label="anchor" href="#multiple-plots"></a>
 </h3>
-<p>Using <code>type = multiple</code> produces multiple plots, rather than overlaid plots, with <code>subtype</code> indicating the type of plots to be drawn. By default only 8 plots of replicated data are drawn, but this can be changed using the <code>nrep</code> argument. Again, the plot of the observed data is not obviously different from those of the replicated data.</p>
+<p>Using <code>type = multiple</code> produces multiple plots, rather
+than overlaid plots, with <code>subtype</code> indicating the type of
+plots to be drawn. By default only 8 plots of replicated data are drawn,
+but this can be changed using the <code>nrep</code> argument. Again, the
+plot of the observed data is not obviously different from those of the
+replicated data.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span>, type <span class="op">=</span> <span class="st">"multiple"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"GP kernel density estimates"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span>, type <span class="op">=</span> <span class="st">"multiple"</span>, subtype <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"GP boxplots"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span>, type <span class="op">=</span> <span class="st">"multiple"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"GP kernel density estimates"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span>, type <span class="op">=</span> <span class="st">"multiple"</span>, subtype <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"GP boxplots"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-6-1.png" width="45%"><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-6-2.png" width="45%"></p>
 </div>
 <div class="section level3">
 <h3 id="posterior-predictive-test-statistics">Posterior predictive test statistics<a class="anchor" aria-label="anchor" href="#posterior-predictive-test-statistics"></a>
 </h3>
-<p>The default setting for <code>pp_check</code> is to produce a plot that compares the values of test statistics for the observed and replicated data. The argument <code>stat</code> defines the test statistic (or a pair of test statistics) to use, using either the name of a standard function or a user-defined function. For a model that fits well the value of the statistic calculated from the observed data should not be unusual compared to the values calculated from the replicated data. In this example, the plots do not suggest clear lack-of-fit.</p>
+<p>The default setting for <code>pp_check</code> is to produce a plot
+that compares the values of test statistics for the observed and
+replicated data. The argument <code>stat</code> defines the test
+statistic (or a pair of test statistics) to use, using either the name
+of a standard function or a user-defined function. For a model that fits
+well the value of the statistic calculated from the observed data should
+not be unusual compared to the values calculated from the replicated
+data. In this example, the plots do not suggest clear lack-of-fit.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span><span class="op">)</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span>, stat <span class="op">=</span> <span class="st">"max"</span><span class="op">)</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span>, stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"max"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">iqr</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span>, stat <span class="op">=</span> <span class="st">"iqr"</span><span class="op">)</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
+<span><span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span>, stat <span class="op">=</span> <span class="st">"max"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
+<span><span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span>, stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"max"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">iqr</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span>, stat <span class="op">=</span> <span class="st">"iqr"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code></pre></div>
 <p><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-7-1.png" width="45%"><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-7-2.png" width="45%"><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-7-3.png" width="45%"><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-7-4.png" width="45%"></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="posterior-predictive-extreme-value-inference">Posterior predictive extreme value inference<a class="anchor" aria-label="anchor" href="#posterior-predictive-extreme-value-inference"></a>
 </h2>
-<p>Posterior predictive inferences for the largest value <span class="math inline">\(M_N\)</span> to be observed over a future time period of length <span class="math inline">\(N\)</span> years is performed by the <code>predict</code> method for the objects of class <code>evpost</code> returned from <code>rpost</code>. Objects returned from <code>predict.evpost</code> have class <code>evpred</code>. The <code>plot</code> method for these objects produces graphical summaries of the output from <code>predict</code>.</p>
-<p>To perform predictive inference about <span class="math inline">\(M_N\)</span> we need to provide, or assume, information about the timescale covered by the data. To do this we need to supply the mean number <code>npy</code> of non-missing observations per year, either in the call to <code>rpost</code> or the call to <code>predict</code>. For the GEV and OS models it is often the case that the input data are annual maxima, so <code>npy = 1</code> is the default value if <code>npy</code> is not supplied. For the PP model a similar assumption is made: see the documentation for <code>predict.evpost</code> for details. For the binomial-GP model (note that we need the binomial part in order to account for the rate at which the threshold is exceedance) <code>npy</code> must be provided by the user.</p>
-<p>Let <span class="math inline">\(F_{M_N}(z; \theta)\)</span> denote the distribution function of <span class="math inline">\(M_N\)</span> conditional on the parameters <span class="math inline">\(\theta\)</span> of an extreme value model and let <span class="math inline">\(\pi(\theta \mid x)\)</span> be the posterior distribution of <span class="math inline">\(\theta\)</span> given the observed data. Then, if we assume that given <span class="math inline">\(\theta\)</span> future observations are independent of the data <span class="math inline">\(x\)</span> then posterior predictive distribution function of <span class="math inline">\(M_N\)</span> given only the data <span class="math inline">\(x\)</span> is given by <span class="math display">\[ P(M_N \leqslant z \mid x) = \int F_{M_N}(z; \theta) \, \pi(\theta \mid x) {\rm ~d}\theta. \]</span> We estimate <span class="math inline">\(P(M_N \leqslant z)\)</span> using <span class="math display">\[ \hat{P}(M_N \leqslant z \mid x) = \frac1m \sum_{j=1}^m F_{M_N}(z; \theta_j), \]</span> where <span class="math inline">\(\theta_j, j=1, \ldots, m\)</span> is a sample from the posterior distribution <span class="math inline">\(\pi(\theta \mid x)\)</span>.</p>
-<p>The form of <span class="math inline">\(F_{M_N}(z; \theta)\)</span> depends on the extreme value model. The GEV, OS and PP models are each parameterised by the location, scale and shape parameters of a GEV distribution. Let <span class="math inline">\(G(z; \theta)\)</span> be the GEV distribution function for an annual maximum under a given such model, after appropriate adjustment for the value of <code>npy</code>. Then, <span class="math inline">\(F_{M_N}(z; \theta) = G(z; \theta)^{N}\)</span>. For the binomial-GP model, provided that <span class="math inline">\(z\)</span> is the greater than the threshold <span class="math inline">\(u\)</span>, <span class="math inline">\(F_{M_N}(z; \theta) = F(z; \theta)^{n_{py} N}\)</span>, where <span class="math inline">\(n_{py}\)</span> is the value of <code>npy</code> and <span class="math display">\[ F(z; \theta) = 1-p_u \left\{1+\xi\left(\frac{z-u}{\sigma_u}\right)\right\}^{-1/\xi}. \]</span> See <span class="citation">Northrop, Attalides, and Jonathan (2017)</span> for greater detail.</p>
-<p>We repeat the posterior simulation for the Gulf-of-Mexico example, changing <code>model = gp</code> to <code>model = bingp</code> in the call to <code>rpost</code> to add inferences about the probability of threshold exceedance based on a binomial distribution.</p>
+<p>Posterior predictive inferences for the largest value <span class="math inline">\(M_N\)</span> to be observed over a future time
+period of length <span class="math inline">\(N\)</span> years is
+performed by the <code>predict</code> method for the objects of class
+<code>evpost</code> returned from <code>rpost</code>. Objects returned
+from <code>predict.evpost</code> have class <code>evpred</code>. The
+<code>plot</code> method for these objects produces graphical summaries
+of the output from <code>predict</code>.</p>
+<p>To perform predictive inference about <span class="math inline">\(M_N\)</span> we need to provide, or assume,
+information about the timescale covered by the data. To do this we need
+to supply the mean number <code>npy</code> of non-missing observations
+per year, either in the call to <code>rpost</code> or the call to
+<code>predict</code>. For the GEV and OS models it is often the case
+that the input data are annual maxima, so <code>npy = 1</code> is the
+default value if <code>npy</code> is not supplied. For the PP model a
+similar assumption is made: see the documentation for
+<code>predict.evpost</code> for details. For the binomial-GP model (note
+that we need the binomial part in order to account for the rate at which
+the threshold is exceedance) <code>npy</code> must be provided by the
+user.</p>
+<p>Let <span class="math inline">\(F_{M_N}(z; \theta)\)</span> denote
+the distribution function of <span class="math inline">\(M_N\)</span>
+conditional on the parameters <span class="math inline">\(\theta\)</span> of an extreme value model and let
+<span class="math inline">\(\pi(\theta \mid x)\)</span> be the posterior
+distribution of <span class="math inline">\(\theta\)</span> given the
+observed data. Then, if we assume that given <span class="math inline">\(\theta\)</span> future observations are
+independent of the data <span class="math inline">\(x\)</span> then
+posterior predictive distribution function of <span class="math inline">\(M_N\)</span> given only the data <span class="math inline">\(x\)</span> is given by <span class="math display">\[ P(M_N \leqslant z \mid x) = \int F_{M_N}(z;
+\theta) \, \pi(\theta \mid x) {\rm ~d}\theta. \]</span> We estimate
+<span class="math inline">\(P(M_N \leqslant z)\)</span> using <span class="math display">\[ \hat{P}(M_N \leqslant z \mid x) = \frac1m
+\sum_{j=1}^m F_{M_N}(z; \theta_j), \]</span> where <span class="math inline">\(\theta_j, j=1, \ldots, m\)</span> is a sample from
+the posterior distribution <span class="math inline">\(\pi(\theta \mid
+x)\)</span>.</p>
+<p>The form of <span class="math inline">\(F_{M_N}(z; \theta)\)</span>
+depends on the extreme value model. The GEV, OS and PP models are each
+parameterised by the location, scale and shape parameters of a GEV
+distribution. Let <span class="math inline">\(G(z; \theta)\)</span> be
+the GEV distribution function for an annual maximum under a given such
+model, after appropriate adjustment for the value of <code>npy</code>.
+Then, <span class="math inline">\(F_{M_N}(z; \theta) = G(z;
+\theta)^{N}\)</span>. For the binomial-GP model, provided that <span class="math inline">\(z\)</span> is the greater than the threshold <span class="math inline">\(u\)</span>, <span class="math inline">\(F_{M_N}(z;
+\theta) = F(z; \theta)^{n_{py} N}\)</span>, where <span class="math inline">\(n_{py}\)</span> is the value of <code>npy</code>
+and <span class="math display">\[ F(z; \theta) = 1-p_u
+\left\{1+\xi\left(\frac{z-u}{\sigma_u}\right)\right\}^{-1/\xi}.
+\]</span> See <span class="citation">Northrop, Attalides, and Jonathan
+(2017)</span> for greater detail.</p>
+<p>We repeat the posterior simulation for the Gulf-of-Mexico example,
+changing <code>model = gp</code> to <code>model = bingp</code> in the
+call to <code>rpost</code> to add inferences about the probability of
+threshold exceedance based on a binomial distribution.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">### Binomial-GP model for Gulf-of-Mexico significant wave heights</span>
-<span class="va">u</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span>
-<span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
-<span class="va">bp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_bin_prior.html">set_bin_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"jeffreys"</span><span class="op">)</span>
-<span class="co"># We need to provide the mean number of observations per year (the data cover a period of 105 years)</span>
-<span class="va">npy_gom</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">gom</span><span class="op">)</span><span class="op">/</span><span class="fl">105</span>
-<span class="va">bgpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"bingp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>, data <span class="op">=</span> <span class="va">gom</span>,
-              bin_prior <span class="op">=</span> <span class="va">bp</span>, npy <span class="op">=</span> <span class="va">npy_gom</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">### Binomial-GP model for Gulf-of-Mexico significant wave heights</span></span>
+<span><span class="va">u</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span></span>
+<span><span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">bp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_bin_prior.html">set_bin_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"jeffreys"</span><span class="op">)</span></span>
+<span><span class="co"># We need to provide the mean number of observations per year (the data cover a period of 105 years)</span></span>
+<span><span class="va">npy_gom</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">gom</span><span class="op">)</span><span class="op">/</span><span class="fl">105</span></span>
+<span><span class="va">bgpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"bingp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>, data <span class="op">=</span> <span class="va">gom</span>,</span>
+<span>              bin_prior <span class="op">=</span> <span class="va">bp</span>, npy <span class="op">=</span> <span class="va">npy_gom</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="posterior-predictive-density-and-distribution-functions">Posterior predictive density and distribution functions<a class="anchor" aria-label="anchor" href="#posterior-predictive-density-and-distribution-functions"></a>
 </h3>
-<p>We plot, for the analyses of the <code>portpirie</code> (GEV) and <code>gom</code> (binomial-GP) datasets, the estimated posterior predictive density functions and distributions functions of <span class="math inline">\(M_N\)</span> for <span class="math inline">\(N = 100\)</span> and <span class="math inline">\(N = 1000\)</span>. The argument <code>n_years</code> gives the value(s) of <span class="math inline">\(N\)</span>.</p>
+<p>We plot, for the analyses of the <code>portpirie</code> (GEV) and
+<code>gom</code> (binomial-GP) datasets, the estimated posterior
+predictive density functions and distributions functions of <span class="math inline">\(M_N\)</span> for <span class="math inline">\(N =
+100\)</span> and <span class="math inline">\(N = 1000\)</span>. The
+argument <code>n_years</code> gives the value(s) of <span class="math inline">\(N\)</span>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># GEV (Portpirie)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"p"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># GEV (Portpirie)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"p"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span></code></pre></div>
 <p><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-9-1.png" width="45%"><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-9-2.png" width="45%"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># binGP (Gulf-of-Mexico)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, type <span class="op">=</span> <span class="st">"p"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># binGP (Gulf-of-Mexico)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, type <span class="op">=</span> <span class="st">"p"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span></code></pre></div>
 <p><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-10-1.png" width="45%"><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-10-2.png" width="45%"></p>
-<p>As one would expect there is greater uncertainty for <span class="math inline">\(N=1000\)</span> than for <span class="math inline">\(N=100\)</span>. In making inferences over a period of length 1000 years a large degree of uncertainty is to be expected. For the Gulf-of-Mexico data in particular, this results in appreciable probability on values of significant wave height thought by experts to be physically unrealistic.</p>
+<p>As one would expect there is greater uncertainty for <span class="math inline">\(N=1000\)</span> than for <span class="math inline">\(N=100\)</span>. In making inferences over a period
+of length 1000 years a large degree of uncertainty is to be expected.
+For the Gulf-of-Mexico data in particular, this results in appreciable
+probability on values of significant wave height thought by experts to
+be physically unrealistic.</p>
 </div>
 <div class="section level3">
 <h3 id="posterior-predictive-intervals">Posterior predictive intervals<a class="anchor" aria-label="anchor" href="#posterior-predictive-intervals"></a>
 </h3>
-<p>The default setting for <code>predict.evpost</code> is to estimate posterior predictive intervals for <span class="math inline">\(M_N\)</span>. In addition to <code>n_years</code> we can specify the probability level <code>level</code> of the interval(s), that is, the estimated probability that <span class="math inline">\(M_N\)</span> lies within the interval. Two types of interval can be calculated. One is an equi-tailed interval in which the estimated probability that <span class="math inline">\(M_N\)</span> lies below the lower limit of the interval is equal to the estimated probability that <span class="math inline">\(M_N\)</span> lies above the upper limit of the interval. Typically, there will exist intervals of the required probability level that is shorter than the equi-tailed interval. <code>predict.evpost</code> can search for the shortest such interval. If the estimated posterior predictive distribution is unimodal then this interval is the <em>highest predictive density</em> (HPD) interval, with the property that at all values inside the interval the estimated posterior predictive density is greater than at all values outside the interval. If <code>hpd = FALSE</code> then only equi-tailed intervals are returned. If <code>hpd = TRUE</code> then both types of interval are returned.</p>
-<p>The <code>plot.evpred</code> method plots the estimated posterior predictive intervals for each value in <code>n_years</code> and each level in <code>level</code>. The argument <code>which_int</code> controls which of the two types of interval are included. The dashed lines give the HPD intervals and the solid lines the equi-tailed intervals. Each line is labelled by the level of the interval.</p>
+<p>The default setting for <code>predict.evpost</code> is to estimate
+posterior predictive intervals for <span class="math inline">\(M_N\)</span>. In addition to <code>n_years</code>
+we can specify the probability level <code>level</code> of the
+interval(s), that is, the estimated probability that <span class="math inline">\(M_N\)</span> lies within the interval. Two types
+of interval can be calculated. One is an equi-tailed interval in which
+the estimated probability that <span class="math inline">\(M_N\)</span>
+lies below the lower limit of the interval is equal to the estimated
+probability that <span class="math inline">\(M_N\)</span> lies above the
+upper limit of the interval. Typically, there will exist intervals of
+the required probability level that is shorter than the equi-tailed
+interval. <code>predict.evpost</code> can search for the shortest such
+interval. If the estimated posterior predictive distribution is unimodal
+then this interval is the <em>highest predictive density</em> (HPD)
+interval, with the property that at all values inside the interval the
+estimated posterior predictive density is greater than at all values
+outside the interval. If <code>hpd = FALSE</code> then only equi-tailed
+intervals are returned. If <code>hpd = TRUE</code> then both types of
+interval are returned.</p>
+<p>The <code>plot.evpred</code> method plots the estimated posterior
+predictive intervals for each value in <code>n_years</code> and each
+level in <code>level</code>. The argument <code>which_int</code>
+controls which of the two types of interval are included. The dashed
+lines give the HPD intervals and the solid lines the equi-tailed
+intervals. Each line is labelled by the level of the interval.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">i_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span>, level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">95</span>, <span class="fl">99</span><span class="op">)</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">i_gevp</span>, which_int <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">i_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span>, level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">95</span>, <span class="fl">99</span><span class="op">)</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">i_gevp</span>, which_int <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in graphics::par(u): argument 1 does not name a graphical parameter</span></span></code></pre></div>
 <p><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">i_bgpp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span>, level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">95</span>, <span class="fl">99</span><span class="op">)</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">i_bgpp</span>, which_int <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">i_bgpp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span>, level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">95</span>, <span class="fl">99</span><span class="op">)</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">i_bgpp</span>, which_int <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in graphics::par(u): argument 1 does not name a graphical parameter</span></span></code></pre></div>
 <p><img src="revdbayes-c-predictive-vignette_files/figure-html/unnamed-chunk-11-2.png" width="672"></p>
 </div>
 </div>
@@ -231,16 +360,24 @@
    MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
 </script><div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-bayesplot" class="csl-entry">
-Gabry, Jonah, and Tristan Mahr. 2017. <em>Bayesplot: Plotting for Bayesian Models</em>. <a href="https://CRAN.R-project.org/package=bayesplot" class="external-link">https://CRAN.R-project.org/package=bayesplot</a>.
+Gabry, Jonah, and Tristan Mahr. 2017. <em>Bayesplot: Plotting for
+Bayesian Models</em>. <a href="https://CRAN.R-project.org/package=bayesplot" class="external-link">https://CRAN.R-project.org/package=bayesplot</a>.
 </div>
 <div id="ref-BDA2014" class="csl-entry">
-Gelman, A., J. B. Carlin, Dunson Stern H. S., and D. B. Rubin. 2014. <em>Bayesian Data Analysis</em>. Third edition. London: Chapman &amp; Hall / CRC Press.
+Gelman, A., J. B. Carlin, Dunson Stern H. S., and D. B. Rubin. 2014.
+<em>Bayesian Data Analysis</em>. Third edition. London: Chapman &amp;
+Hall / CRC Press.
 </div>
 <div id="ref-NAJ2016" class="csl-entry">
-Northrop, P. J., N. Attalides, and P. Jonathan. 2017. <span>“Cross-Validatory Extreme Value Threshold Selection and Uncertainty with Application to Ocean Storm Severity.”</span> <em>Journal of the Royal Statistical Society: Series C (Applied Statistics)</em> 66 (1): 93–120. doi:<a href="https://doi.org/10.1111/rssc.12159" class="external-link">10.1111/rssc.12159</a>.
+Northrop, P. J., N. Attalides, and P. Jonathan. 2017.
+<span>“Cross-Validatory Extreme Value Threshold Selection and
+Uncertainty with Application to Ocean Storm Severity.”</span>
+<em>Journal of the Royal Statistical Society: Series C (Applied
+Statistics)</em> 66 (1): 93–120. doi:<a href="https://doi.org/10.1111/rssc.12159" class="external-link">10.1111/rssc.12159</a>.
 </div>
 <div id="ref-ggplot2" class="csl-entry">
-Wickham, Hadley. 2009. <em><span class="nocase">ggplot2</span>: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org/" class="external-link">https://ggplot2.tidyverse.org/</a>.
+Wickham, Hadley. 2009. <em><span class="nocase">ggplot2</span>: Elegant
+Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org/" class="external-link">https://ggplot2.tidyverse.org/</a>.
 </div>
 </div>
 </div>
@@ -263,7 +400,7 @@ Wickham, Hadley. 2009. <em><span class="nocase">ggplot2</span>: Elegant Graphics
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

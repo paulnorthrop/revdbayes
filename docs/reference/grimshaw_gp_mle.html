@@ -20,7 +20,7 @@ Grimshaw (1993), with only minor modifications."><!-- mathjax --><script src="ht
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@ Grimshaw (1993), with only minor modifications."><!-- mathjax --><script src="ht
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -87,7 +87,7 @@ Grimshaw (1993), with only minor modifications.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">grimshaw_gp_mle</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">grimshaw_gp_mle</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -95,18 +95,25 @@ Grimshaw (1993), with only minor modifications.</p>
     <dl><dt>x</dt>
 <dd><p>A numeric vector containing only <strong>positive</strong> values, assumed
 to be a random sample from a generalized Pareto distribution.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A numeric vector of length 2.  The estimates of the <strong>negated</strong>  shape parameter \(k (= -\xi)\) and the scale parameter
-\(a (= \sigma)\).</p>
+    
+
+<p>A numeric vector of length 2.  The estimates of the <strong>negated</strong></p>
+
+
+<p>shape parameter \(k (= -\xi)\) and the scale parameter</p>
+<p></p>
+<p>\(a (= \sigma)\).</p>
     </div>
     <div id="references">
     <h2>References</h2>
     <p>Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
   and Computing (1991) 1, 129-133.
-  doi: <a href="https://doi.org/10.1080/00401706.1993.10485040" class="external-link">10.1080/00401706.1993.10485040</a>
+  <a href="https://doi.org/10.1080/00401706.1993.10485040" class="external-link">doi:10.1080/00401706.1993.10485040</a>
 .</p>
     </div>
     <div id="see-also">
@@ -117,8 +124,8 @@ to be a random sample from a generalized Pareto distribution.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">u</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">grimshaw_gp_mle</span><span class="op">(</span><span class="op">(</span><span class="va">gom</span> <span class="op">-</span> <span class="va">u</span><span class="op">)</span><span class="op">[</span><span class="va">gom</span> <span class="op">&gt;</span> <span class="va">u</span><span class="op">]</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">u</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">grimshaw_gp_mle</span><span class="op">(</span><span class="op">(</span><span class="va">gom</span> <span class="op">-</span> <span class="va">u</span><span class="op">)</span><span class="op">[</span><span class="va">gom</span> <span class="op">&gt;</span> <span class="va">u</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $k</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.101175</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -139,7 +146,7 @@ to be a random sample from a generalized Pareto distribution.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

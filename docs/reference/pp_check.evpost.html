@@ -20,7 +20,7 @@ details of these functions.'><!-- mathjax --><script src="https://cdnjs.cloudfla
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@ details of these functions.'><!-- mathjax --><script src="https://cdnjs.cloudfla
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -87,16 +87,16 @@ details of these functions.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for evpost</span>
-<span class="fu">pp_check</span><span class="op">(</span>
-  <span class="va">object</span>,
-  <span class="va">...</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stat"</span>, <span class="st">"overlaid"</span>, <span class="st">"multiple"</span>, <span class="st">"intervals"</span>, <span class="st">"user"</span><span class="op">)</span>,
-  subtype <span class="op">=</span> <span class="cn">NULL</span>,
-  stat <span class="op">=</span> <span class="st">"median"</span>,
-  nrep <span class="op">=</span> <span class="fl">8</span>,
-  fun <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for evpost</span></span>
+<span><span class="fu">pp_check</span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stat"</span>, <span class="st">"overlaid"</span>, <span class="st">"multiple"</span>, <span class="st">"intervals"</span>, <span class="st">"user"</span><span class="op">)</span>,</span>
+<span>  subtype <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"median"</span>,</span>
+<span>  nrep <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>  fun <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -106,8 +106,12 @@ details of these functions.</p>
 <code><a href="rpost.html">rpost</a></code> or <code><a href="rpost_rcpp.html">rpost_rcpp</a></code>.
 Currently <code>object$model = "gev"</code>,
 <code>"gp"</code>, <code>"bingp"</code> and <code>"pp"</code> are supported.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments passed on to bayesplot functions.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>A character vector.  The type of bayesplot plot required:</p><ul><li><p>"stat" for predictive test statistics
     (see <a href="https://mc-stan.org/bayesplot/reference/PPC-test-statistics.html" class="external-link">PPC-test-statistics</a>),</p></li>
@@ -125,6 +129,8 @@ Currently <code>object$model = "gev"</code>,
     <code>fun</code> to be supplied
     (see <a href="https://mc-stan.org/bayesplot/reference/pp_check.html" class="external-link">pp_check</a>).</p></li>
 </ul></dd>
+
+
 <dt>subtype</dt>
 <dd><p>A character scalar.  Specifies the form of the plot(s)
 produced.  Could be one of
@@ -134,24 +140,34 @@ If <code>subtype</code> is not supplied then the defaults are:
 <code>"dens"</code> if <code>type = multiple</code>,
 <code>"intervals"</code> if <code>type = intervals</code>.
 <code>subtype</code> is not relevant if <code>type = "stat"</code>.</p></dd>
+
+
 <dt>stat</dt>
 <dd><p>See <a href="https://mc-stan.org/bayesplot/reference/PPC-test-statistics.html" class="external-link">PPC-test-statistics</a>.</p></dd>
+
+
 <dt>nrep</dt>
 <dd><p>If <code>type = "multiple"</code> the maximum number of
 summary plots of the predictive simulated datasets to include.
 If <code>nrep</code> is greater than <code>nrow(object$data_rep)</code> then
 <code>nrep</code> is set equal to <code>nrow(object$data_rep)</code>.</p></dd>
+
+
 <dt>fun</dt>
 <dd><p>The plotting function to call.
 Only relevant if <code>type = "user"</code>.
 Can be any of the functions detailed at <a href="https://mc-stan.org/bayesplot/reference/PPC-overview.html" class="external-link">PPC-overview</a>.
 The "ppc_" prefix can optionally be dropped if fun is specified
 as a string.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A ggplot object that can be further customized using the
-<strong>ggplot2</strong> package.</p>
+    
+
+<p>A ggplot object that can be further customized using the</p>
+<p></p>
+<p><strong>ggplot2</strong> package.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -202,82 +218,82 @@ Chapman &amp; Hall/CRC Press, London, third edition. (Chapter 6)</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co"># GEV model</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">portpirie</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">gevp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="rpost.html">rpost</a></span><span class="op">(</span><span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span>,</span>
-<span class="r-in">               nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Posterior predictive test statistics</span></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># GEV model</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">portpirie</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gevp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="rpost.html">rpost</a></span><span class="op">(</span><span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span>,</span></span>
+<span class="r-in"><span>               nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Posterior predictive test statistics</span></span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="r-plt img"><img src="pp_check.evpost-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, stat <span class="op">=</span> <span class="st">"min"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, stat <span class="op">=</span> <span class="st">"min"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="r-plt img"><img src="pp_check.evpost-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"max"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"max"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="pp_check.evpost-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="va">iqr</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, stat <span class="op">=</span> <span class="st">"iqr"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">iqr</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, stat <span class="op">=</span> <span class="st">"iqr"</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get(as.character(FUN), mode = "function", envir = envir):</span> object 'iqr' of mode 'function' was not found</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Overlaid density and distributions functions</span></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"overlaid"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Overlaid density and distributions functions</span></span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"overlaid"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="pp_check.evpost-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"overlaid"</span>, subtype <span class="op">=</span> <span class="st">"dens"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"overlaid"</span>, subtype <span class="op">=</span> <span class="st">"dens"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="pp_check.evpost-5.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Multiple plots</span></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"multiple"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Multiple plots</span></span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"multiple"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="pp_check.evpost-6.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"multiple"</span>, subtype <span class="op">=</span> <span class="st">"hist"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"multiple"</span>, subtype <span class="op">=</span> <span class="st">"hist"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="r-plt img"><img src="pp_check.evpost-7.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"multiple"</span>, subtype <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"multiple"</span>, subtype <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="pp_check.evpost-8.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Intervals</span></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"intervals"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Intervals</span></span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"intervals"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="pp_check.evpost-9.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"intervals"</span>, subtype <span class="op">=</span> <span class="st">"ribbon"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"intervals"</span>, subtype <span class="op">=</span> <span class="st">"ribbon"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="pp_check.evpost-10.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># User-supplied bayesplot function</span></span>
-<span class="r-in"><span class="co"># Equivalent to p_check(gevp, type = "overlaid")</span></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"user"</span>, fun <span class="op">=</span> <span class="st">"dens_overlay"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># User-supplied bayesplot function</span></span></span>
+<span class="r-in"><span><span class="co"># Equivalent to p_check(gevp, type = "overlaid")</span></span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"user"</span>, fun <span class="op">=</span> <span class="st">"dens_overlay"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="pp_check.evpost-11.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># GP model</span></span>
-<span class="r-in"><span class="va">u</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">gpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>,</span>
-<span class="r-in">             data <span class="op">=</span> <span class="va">gom</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gpg</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># GP model</span></span></span>
+<span class="r-in"><span><span class="va">u</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gom</span>, probs <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>,</span></span>
+<span class="r-in"><span>             data <span class="op">=</span> <span class="va">gom</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gpg</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="r-plt img"><img src="pp_check.evpost-12.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">gpg</span>, type <span class="op">=</span> <span class="st">"overlaid"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">gpg</span>, type <span class="op">=</span> <span class="st">"overlaid"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="pp_check.evpost-13.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># bin-GP model</span></span>
-<span class="r-in"><span class="va">bp</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_bin_prior.html">set_bin_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"jeffreys"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">bgpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"bingp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>,</span>
-<span class="r-in">              data <span class="op">=</span> <span class="va">gom</span>, bin_prior <span class="op">=</span> <span class="va">bp</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">bgpg</span>, stat <span class="op">=</span> <span class="st">"max"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># bin-GP model</span></span></span>
+<span class="r-in"><span><span class="va">bp</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_bin_prior.html">set_bin_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"jeffreys"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">bgpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"bingp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>,</span></span>
+<span class="r-in"><span>              data <span class="op">=</span> <span class="va">gom</span>, bin_prior <span class="op">=</span> <span class="va">bp</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">bgpg</span>, stat <span class="op">=</span> <span class="st">"max"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="r-plt img"><img src="pp_check.evpost-14.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># PP model</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">rainfall</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">rthresh</span> <span class="op">&lt;-</span> <span class="fl">40</span></span>
-<span class="r-in"><span class="va">pf</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ppr</span> <span class="op">&lt;-</span> <span class="fu"><a href="rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"pp"</span>, prior <span class="op">=</span> <span class="va">pf</span>, data <span class="op">=</span> <span class="va">rainfall</span>,</span>
-<span class="r-in">             thresh <span class="op">=</span> <span class="va">rthresh</span>, noy <span class="op">=</span> <span class="fl">54</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">pp_check</span><span class="op">(</span><span class="va">ppr</span>, stat <span class="op">=</span> <span class="st">"max"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># PP model</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">rainfall</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rthresh</span> <span class="op">&lt;-</span> <span class="fl">40</span></span></span>
+<span class="r-in"><span><span class="va">pf</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"flat"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ppr</span> <span class="op">&lt;-</span> <span class="fu"><a href="rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"pp"</span>, prior <span class="op">=</span> <span class="va">pf</span>, data <span class="op">=</span> <span class="va">rainfall</span>,</span></span>
+<span class="r-in"><span>             thresh <span class="op">=</span> <span class="va">rthresh</span>, noy <span class="op">=</span> <span class="fl">54</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">pp_check</span><span class="op">(</span><span class="va">ppr</span>, stat <span class="op">=</span> <span class="st">"max"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="r-plt img"><img src="pp_check.evpost-15.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># }</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -292,7 +308,7 @@ Chapman &amp; Hall/CRC Press, London, third edition. (Chapter 6)</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

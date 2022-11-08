@@ -18,7 +18,7 @@ vector \(\alpha\) = (\(\alpha_1\), ..., \(\alpha_K\))."><!-- mathjax --><script 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -27,7 +27,7 @@ vector \(\alpha\) = (\(\alpha_1\), ..., \(\alpha_K\))."><!-- mathjax --><script 
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -83,19 +83,24 @@ vector \(\alpha\) = (\(\alpha_1\), ..., \(\alpha_K\)).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rDir</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rDir</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>n</dt>
 <dd><p>A numeric scalar. The size of sample required.</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>A numeric vector.  Dirichlet concentration parameter.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An <code>n</code> by <code>length(alpha)</code> numeric matrix.</p>
+    
+
+<p>An <code>n</code> by <code>length(alpha)</code> numeric matrix.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -113,7 +118,7 @@ vector \(\alpha\) = (\(\alpha_1\), ..., \(\alpha_K\)).</p>
     <p>Kotz, S., Balakrishnan, N. and Johnson, N. L. (2000)
   <em>Continuous Multivariate Distributions, vol. 1, Models and
   Applications, 2nd edn</em>, ch. 49. New York: Wiley.
-  doi: <a href="https://doi.org/10.1002/0471722065" class="external-link">10.1002/0471722065</a></p>
+  <a href="https://doi.org/10.1002/0471722065" class="external-link">doi:10.1002/0471722065</a></p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -123,18 +128,18 @@ vector \(\alpha\) = (\(\alpha_1\), ..., \(\alpha_K\)).</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">rDir</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span>, alpha <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]       [,2]      [,3]      [,4]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.018077281 0.33123156 0.1730763 0.4776149</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.159189394 0.18386164 0.2922436 0.3647054</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.002278068 0.38206495 0.1841349 0.4315220</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.106199112 0.04103120 0.4323430 0.4204267</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.375346417 0.07226472 0.3419845 0.2104044</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.112733786 0.57453414 0.1343445 0.1783875</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.260891981 0.08149044 0.2526252 0.4049924</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.136586597 0.33278382 0.2918623 0.2387673</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.009990965 0.23595020 0.3638403 0.3902185</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.052601600 0.36215683 0.1301260 0.4551156</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">rDir</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span>, alpha <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]      [,3]      [,4]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.02694918 0.41074106 0.3301213 0.2321885</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.11629814 0.14093833 0.4380787 0.3046848</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.05547469 0.14579032 0.5108456 0.2878893</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.03956541 0.13676808 0.2339401 0.5897265</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.11772343 0.01882325 0.3553011 0.5081522</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.05234570 0.36348095 0.4134318 0.1707416</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.17796999 0.22594478 0.2539473 0.3421380</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.03629088 0.21713777 0.3988201 0.3477512</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.09147964 0.02459760 0.6331329 0.2507898</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.20572902 0.30056751 0.2088527 0.2848507</span>
 </code></pre></div>
     </div>
   </div>
@@ -149,7 +154,7 @@ vector \(\alpha\) = (\(\alpha_1\), ..., \(\alpha_K\)).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -19,7 +19,7 @@ for threshold interexceedance times of Suveges and Davison (2010)."><!-- mathjax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -28,7 +28,7 @@ for threshold interexceedance times of Suveges and Davison (2010)."><!-- mathjax
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -85,17 +85,17 @@ for threshold interexceedance times of Suveges and Davison (2010).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">kgaps_post</span><span class="op">(</span>
-  <span class="va">data</span>,
-  <span class="va">thresh</span>,
-  k <span class="op">=</span> <span class="fl">1</span>,
-  n <span class="op">=</span> <span class="fl">1000</span>,
-  inc_cens <span class="op">=</span> <span class="cn">TRUE</span>,
-  alpha <span class="op">=</span> <span class="fl">1</span>,
-  beta <span class="op">=</span> <span class="fl">1</span>,
-  param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"logit"</span>, <span class="st">"theta"</span><span class="op">)</span>,
-  use_rcpp <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">kgaps_post</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">thresh</span>,</span>
+<span>  k <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  inc_cens <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  beta <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"logit"</span>, <span class="st">"theta"</span><span class="op">)</span>,</span>
+<span>  use_rcpp <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -110,8 +110,12 @@ for threshold interexceedance times of Suveges and Davison (2010).</p>
   sequences of non-missing values, stored in different columns in a matrix.
   Again, the log-likelihood is constructed as a sum of contributions from
   different columns.</p></dd>
+
+
 <dt>thresh</dt>
 <dd><p>A numeric scalar.  Extreme value threshold applied to data.</p></dd>
+
+
 <dt>k</dt>
 <dd><p>A numeric scalar.  Run parameter \(K\), as defined in Suveges and
 Davison (2010).  Threshold inter-exceedances times that are not larger
@@ -119,8 +123,12 @@ than <code>k</code> units are assigned to the same cluster, resulting in a
 \(K\)-gap equal to zero.  Specifically, the \(K\)-gap \(S\)
 corresponding to an inter-exceedance time of \(T\) is given by
 \(S = \max(T - K, 0)\).</p></dd>
+
+
 <dt>n</dt>
 <dd><p>A numeric scalar. The size of posterior sample required.</p></dd>
+
+
 <dt>inc_cens</dt>
 <dd><p>A logical scalar indicating whether or not to include
 contributions from right-censored inter-exceedance times, relating to the
@@ -129,9 +137,13 @@ than or equal to the time observed.
 If <code>data</code> has multiple columns then there will be right-censored
 first and last inter-exceedance times for each column.  See also the
 <strong>Details</strong> section of <code><a href="https://paulnorthrop.github.io/exdex/reference/kgaps.html" class="external-link">kgaps</a></code>.</p></dd>
+
+
 <dt>alpha, beta</dt>
 <dd><p>Positive numeric scalars.  Parameters of a
 beta(\(\alpha\), \(\beta\)) prior for \(\theta\).</p></dd>
+
+
 <dt>param</dt>
 <dd><p>A character scalar.  If <code>param = "logit"</code> (the default)
 then we simulate from the posterior distribution of
@@ -142,18 +154,26 @@ directly from the posterior distribution of \(\theta\), unless
 the sample K-gaps are all equal to zero or all positive, when we revert
 to <code>param = "logit"</code>.  This is to avoid sampling directly from a
 posterior with mode equal to 0 or 1.</p></dd>
+
+
 <dt>use_rcpp</dt>
 <dd><p>A logical scalar.  If <code>TRUE</code> (the default) the
 rust function <code><a href="https://paulnorthrop.github.io/rust/reference/ru_rcpp.html" class="external-link">ru_rcpp</a></code> is used for
 posterior simulation.  If <code>FALSE</code> the (slower) function
 <code><a href="https://paulnorthrop.github.io/rust/reference/ru.html" class="external-link">ru</a></code> is used.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object (list) of class <code>"evpost"</code>, which has the same
-  structure as an object of class <code>"ru"</code> returned from
-<code><a href="https://paulnorthrop.github.io/rust/reference/ru.html" class="external-link">ru</a></code>.
-  In addition this list contains</p><ul><li><p><code>call</code>: The call to <code>kgaps()</code>.</p></li>
+    
+
+<p>An object (list) of class <code>"evpost"</code>, which has the same
+  structure as an object of class <code>"ru"</code> returned from</p>
+<p></p>
+<p><code><a href="https://paulnorthrop.github.io/rust/reference/ru.html" class="external-link">ru</a></code>.
+  In addition this list contains</p>
+<p></p>
+<ul><li><p><code>call</code>: The call to <code>kgaps()</code>.</p></li>
 <li><p><code>model</code>: The character scalar <code>"kgaps"</code>.</p></li>
 <li><p><code>thresh</code>: The argument <code>thresh</code>.</p></li>
 <li><p><code>ss</code>: The sufficient statistics for the K-gaps likelihood,
@@ -182,7 +202,7 @@ posterior simulation.  If <code>FALSE</code> the (slower) function
     <h2>References</h2>
     <p>Suveges, M. and Davison, A. C. (2010) Model
   misspecification in peaks over threshold analysis, <em>The Annals of
-  Applied Statistics</em>, <strong>4</strong>(1), 203-221. doi: <a href="https://doi.org/10.1214/09-AOAS292" class="external-link">10.1214/09-AOAS292</a></p>
+  Applied Statistics</em>, <strong>4</strong>(1), 203-221. <a href="https://doi.org/10.1214/09-AOAS292" class="external-link">doi:10.1214/09-AOAS292</a></p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -194,17 +214,17 @@ posterior simulation.  If <code>FALSE</code> the (slower) function
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Newlyn sea surges</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">thresh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">newlyn</span>, probs <span class="op">=</span> <span class="fl">0.90</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">k_postsim</span> <span class="op">&lt;-</span> <span class="fu">kgaps_post</span><span class="op">(</span><span class="va">newlyn</span>, <span class="va">thresh</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">k_postsim</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Newlyn sea surges</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">thresh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">newlyn</span>, probs <span class="op">=</span> <span class="fl">0.90</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">k_postsim</span> <span class="op">&lt;-</span> <span class="fu">kgaps_post</span><span class="op">(</span><span class="va">newlyn</span>, <span class="va">thresh</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">k_postsim</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="kgaps_post-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">### Cheeseboro wind gusts</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">k_postsim</span> <span class="op">&lt;-</span> <span class="fu">kgaps_post</span><span class="op">(</span><span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span>, thresh <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">k_postsim</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### Cheeseboro wind gusts</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">k_postsim</span> <span class="op">&lt;-</span> <span class="fu">kgaps_post</span><span class="op">(</span><span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span>, thresh <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">k_postsim</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="kgaps_post-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -220,7 +240,7 @@ posterior simulation.  If <code>FALSE</code> the (slower) function
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

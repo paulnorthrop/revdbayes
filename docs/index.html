@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -55,7 +55,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -125,22 +125,22 @@
 </h3>
 <p>The two main functions in <code>revdbayes</code> are <code>set_prior</code> and <code>rpost</code>. <code>set_prior</code> sets a prior for extreme value parameters. <code>rpost</code> samples from the posterior produced by updating this prior using the likelihood of observed data under an extreme value model. The following code sets a prior for Generalised Extreme Value (GEV) parameters based on a multivariate normal distribution and then simulates a random sample of size 1000 from the posterior distribution based on a dataset of annual maximum sea levels.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">portpirie</span><span class="op">)</span>
-<span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
-<span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span>
-<span class="va">gevp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gevp</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">portpirie</span><span class="op">)</span></span>
+<span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">pn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></span>
+<span><span class="va">gevp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gevp</span><span class="op">)</span></span></code></pre></div>
 <p>From version 1.2.0 onwards the faster function <code>rpost_rcpp</code> can be used.<br>
 See the vignette “Faster simulation using revdbayes and Rcpp” for details. The functions <code>rpost</code> and <code>post_rcpp</code> have the same syntax. For example:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gevp_rcpp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">gevp_rcpp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
 <p>To get the current released version from CRAN:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"revdbayes"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"revdbayes"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
@@ -183,16 +183,7 @@ See the vignette “Faster simulation using revdbayes and Rcpp” for details. T
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://ci.appveyor.com/project/paulnorthrop/revdbayes" class="external-link"><img src="https://ci.appveyor.com/api/projects/status/github/paulnorthrop/revdbayes?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
-<li><a href="https://codecov.io/github/paulnorthrop/revdbayes?branch=master" class="external-link"><img src="https://codecov.io/github/paulnorthrop/revdbayes/coverage.svg?branch=master" alt="Coverage Status"></a></li>
-<li><a href="https://cran.r-project.org/package=revdbayes" class="external-link"><img src="https://www.r-pkg.org/badges/version/revdbayes" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://cran.r-project.org/package=revdbayes" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/revdbayes?color=brightgreen" alt="Downloads (monthly)"></a></li>
-<li><a href="https://cran.r-project.org/package=revdbayes" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/revdbayes?color=brightgreen" alt="Downloads (total)"></a></li>
-</ul>
-</div>
+
 
   </div>
 </div>
@@ -205,7 +196,7 @@ See the vignette “Faster simulation using revdbayes and Rcpp” for details. T
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
