@@ -1,8 +1,12 @@
-# revdbayes 1.4.9.9000
+# revdbayes 1.5.9
 
 ## New features
 
-* When calling `predict.evpost(object, ...)`, if `object$model = "bingp"` and `object$sim_vals` has a third column named `"theta"` containing a posterior sample for the extremal index, then predictive inferences incorporate this posterior sample.  This feature is introduced to facilitate the `predict.blite()` function in version 1.1.0 of the `lite` package. 
+* When calling `predict.evpost(object, ...)`, if `object$model = "bingp"` and `object$sim_vals` has a third column named `"theta"` containing a posterior sample for the extremal index, then predictive inferences incorporate this posterior sample.  This feature is introduced to facilitate the `predict.blite()` function in the upcoming version 1.1.0 of the `lite` package.
+
+## Bug fixes and minor improvements
+
+* WARNINGs in the CRAN package check results, like "init.c:120:52: warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes] extern SEXP _revdbayes_RcppExport_registerCCallable();" have been avoided.
 
 # revdbayes 1.4.9
 
