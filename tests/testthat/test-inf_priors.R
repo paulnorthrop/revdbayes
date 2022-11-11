@@ -8,7 +8,10 @@
 my_tol <- 1e-5
 
 # Is evdbayes available?
-got_evdbayes <- requireNamespace("evdbayes", quietly = TRUE)
+#got_evdbayes <- requireNamespace("evdbayes", quietly = TRUE)
+
+# Set got_evdbayes = FALSE because evdbayes is archived on CRAN
+got_evdbayes <- FALSE
 
 # prior_prob
 
