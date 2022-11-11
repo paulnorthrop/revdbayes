@@ -26,14 +26,10 @@ Before we deal with user-supplied priors we compare posterior simulation times u
 
 ```{r}
 library(revdbayes)
-# Are microbenchmark and evdbayes available?
+# Is the microbenchmark package available?
 got_microbenchmark <- requireNamespace("microbenchmark", quietly = TRUE)
-got_evdbayes <- requireNamespace("evdbayes", quietly = TRUE)
 if (got_microbenchmark) {
   library(microbenchmark)
-}
-if (got_evdbayes) {
-  library(evdbayes)
 }
 # Set the number of posterior samples required.
 n <- 1000
@@ -63,79 +59,49 @@ In this example `rpost_rcpp` is indeed much faster than `rpost`.
 
 ### Generalised Extreme Value (GEV) model
 
-We repeat the analysis of the Port Pirie annual maximum sea level data from the [Introducing revdbayes](revdbayes-a-vignette.html).  We add to the comparison the example calculations that feature in the **evdbayes** user guide, based on the `posterior` function.  
+We repeat the analysis of the Port Pirie annual maximum sea level data from the [Introducing revdbayes](revdbayes-a-vignette.html).  
 
 ```{r}
 mat <- diag(c(10000, 10000, 100))
 pn <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
-# Tuning parameters from the evdbayes user guide.
-t0 <- c(3.87, 0.2, -0.05) 
-s <- c(.06, .25, .25)
 if (got_microbenchmark) {
-  if (got_evdbayes) {
-    res <- microbenchmark(
-      rpost = rpost(n = n, model = "gev", prior = pn, data = portpirie),
-      rpost_rcpp = rpost_rcpp(n = n, model = "gev", prior = pn, 
-                            data = portpirie),
-      evdbayes = posterior(n = n, init = t0, prior = pn, lh = "gev", 
-                         data = portpirie, psd = s, burn = 0)
-    )
-  } else {
-    res <- microbenchmark(
-      rpost = rpost(n = n, model = "gev", prior = pn, data = portpirie),
-      rpost_rcpp = rpost_rcpp(n = n, model = "gev", prior = pn, 
-                              data = portpirie)
-    )
-  }
-  options(microbenchmark.unit = NULL)
-  print(res, signif = 3)
-  options(microbenchmark.unit = "relative")
-  print(res, signif = 2)
-}  
+  res <- microbenchmark(
+    rpost = rpost(n = n, model = "gev", prior = pn, data = portpirie),
+    rpost_rcpp = rpost_rcpp(n = n, model = "gev", prior = pn, 
+                            data = portpirie)
+  )
+}    
+options(microbenchmark.unit = NULL)
+print(res, signif = 3)
+options(microbenchmark.unit = "relative")
+print(res, signif = 2)
 ```
 
-This comparison is generous to `posterior` because the burn-in has been set to zero and `posterior` produces a dependent sample rather than a random sample.  The *effective sample size* of an MCMC sample from `posterior` varies between simulations and across parameters.  The `effectiveSize` function in the **coda** package [@coda] suggests that the effective sample size in this example is of the order of 100 to 200, whereas the **revdbayes** functions `rpost` and `rpost_rcpp` produce random samples of size 1000. `rpost` is a little slower than `posterior` while `rpost_rcpp` is much faster than `posterior`.
+Comparison to the example calculations that feature in the **evdbayes** user guide, based on the `posterior` function, are not shown because **evdbayes** is archived on CRAN.  This comparison shows that `rpost_rcpp` is approximately a factor 3 faster than `posterior`.  This comparison is generous to `posterior` because the burn-in was set to zero and `posterior` produces a dependent sample rather than a random sample.  The *effective sample size* of an MCMC sample from `posterior` varies between simulations and across parameters.  The `effectiveSize` function in the **coda** package [@coda] suggests that the effective sample size in this example is of the order of 100 to 200, whereas the **revdbayes** functions `rpost` and `rpost_rcpp` produce random samples of size 1000. `rpost` is a little slower than `posterior`.
 
 ### Point Process (PP) model
 
-We compare the computational efficiencies of `rpost`, `rpost_rcpp` and the evdbayes function `posterior` when performing the analysis of daily rainfall totals from the [Introducing revdbayes](revdbayes-a-vignette.html).  
+We compare the computational efficiencies of `rpost` and `rpost_rcpp` when performing the analysis of daily rainfall totals from the [Introducing revdbayes](revdbayes-a-vignette.html).  
 
 ```{r}
 # Informative prior set using revdbayes
 pr2 <- set_prior(prob = 10^-(1:3), shape = c(38.9, 7.1, 47),
                  scale = c(1.5, 6.3, 2.6), model = "gev", prior = "quant")
-# Tuning parameters from the evdbayes user guide.
-t0 <- c(43.2, 7.64, 0.32) 
-s <- c(2, .2, .07)
 if (got_microbenchmark) {
-  if (got_evdbayes) {
-    # Informative prior set using evdbayes
-    pr <- prior.quant(prob = 10^-(1:3), shape = c(38.9, 7.1, 47), 
-                      scale = c(1.5, 6.3, 2.6))
-    res <- microbenchmark(
-      rpost = rpost(n = n, model = "pp", prior = pr2, data = rainfall,
-                thresh = 40, noy = 54),
-      rpost_rcpp = rpost_rcpp(n = n, model = "pp", prior = pr2, data = rainfall,
-                          thresh = 40, noy = 54),
-      evdbayes = posterior(n = n, init = t0, prior = pr, "pp", data = rainfall,
-                       thresh = 40, noy = 54, psd = s, burn = 0)
-    )
-  } else {
-    res <- microbenchmark(
-      rpost = rpost(n = n, model = "pp", prior = pr2, data = rainfall,
-                thresh = 40, noy = 54),
-      rpost_rcpp = rpost_rcpp(n = n, model = "pp", prior = pr2, data = rainfall,
-                          thresh = 40, noy = 54)
-    )
-  }  
-  options(microbenchmark.unit = NULL)
-  print(res, signif = 3)
-  options(microbenchmark.unit = "relative")
-  print(res, signif = 2)
-}  
+  res <- microbenchmark(
+    rpost = rpost(n = n, model = "pp", prior = pr2, data = rainfall,
+                  thresh = 40, noy = 54),
+    rpost_rcpp = rpost_rcpp(n = n, model = "pp", prior = pr2, 
+                            data = rainfall, thresh = 40, noy = 54)
+  )
+}
+options(microbenchmark.unit = NULL)
+print(res, signif = 3)
+options(microbenchmark.unit = "relative")
+print(res, signif = 2)
 ```
 
-In this example `rpost` is slower than `posterior` but `rpost_rcpp` is substantially faster than `posterior`.
+Again, a comparison with the function `posterior` in **evdbayes** is not shown, but `rpost` is slower and `rpost_rcpp` substantially faster than `posterior`.
 
 ## Providing a user-defined prior {#cpp_fun}
 
