@@ -1,6 +1,6 @@
 Package: revdbayes
 Title: Ratio-of-Uniforms Sampling for Bayesian Extreme Value Analysis
-Version: 1.5.9
+Version: 1.5.0
 Date: 2022-11-08
 Authors@R: c(person(c("Paul", "J."), "Northrop", email = "p.northrop@ucl.ac.uk",
   role = c("aut", "cre", "cph")), person(c("Scott", "D."), "Grimshaw", 
@@ -31,8 +31,7 @@ Encoding: UTF-8
 Depends:
     R (>= 3.3.0),
 RoxygenNote: 7.2.1
-Suggests: evdbayes,
-    ggplot2 (>= 2.2.1),
+Suggests: ggplot2 (>= 2.2.1),
     knitr,
     microbenchmark,
     rmarkdown,
