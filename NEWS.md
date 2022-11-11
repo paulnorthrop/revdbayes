@@ -7,6 +7,7 @@
 ## Bug fixes and minor improvements
 
 * Dependence on the previously suggested package evdbayes has been removed because evdbayes has been archived on CRAN.
+
 * WARNINGs in the CRAN package check results, like "init.c:120:52: warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes] extern SEXP _revdbayes_RcppExport_registerCCallable();" have been avoided.
 
 # revdbayes 1.4.9
