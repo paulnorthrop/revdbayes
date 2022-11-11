@@ -5,7 +5,7 @@
 
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/revdbayes?branch=master&svg=true)](https://ci.appveyor.com/project/paulnorthrop/revdbayes)
-[![R-CMD-check](https://github.com/paulnorthrop/revdbayes/workflows/R-CMD-check/badge.svg)](https://github.com/paulnorthrop/revdbayes/actions)
+[![R-CMD-check](https://github.com/paulnorthrop/revdbayes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/paulnorthrop/revdbayes/actions/workflows/R-CMD-check.yaml)
 [![Coverage
 Status](https://codecov.io/github/paulnorthrop/revdbayes/coverage.svg?branch=master)](https://codecov.io/github/paulnorthrop/revdbayes?branch=master)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/revdbayes)](https://cran.r-project.org/package=revdbayes)
