@@ -1,3 +1,5 @@
+This is a patch to avoid the CRAN check WARNING on r-oldrel-windows-ix86+x86_64
+
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
@@ -9,7 +11,7 @@
 - Oracle Solaris 10, x86, 32 bit, R-release
 - macOS 10.13.6 High Sierra, R-release on R-hub
 - macOS (R-release), ubuntu (R-oldrel, R-release, R-devel), windows (R-release) using the rcmdcheck package
-- win-builder (R-devel and R-release)
+- win-builder (R-devel, R-release and R-oldrelease)
 
 ## Downstream dependencies
 
