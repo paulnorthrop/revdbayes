@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.1</span>
       </span>
     </div>
 
@@ -144,7 +144,8 @@ to revdbayes</a> vignette.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="va">pkg_list</span><span class="op">)</span></span>
 <span><span class="co"># Load all packages</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">pkg</span>, <span class="va">library</span>, character.only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## Warning: package 'ggplot2' was built under R version 4.2.2</span></span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Simulation sample size</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span></code></pre></div>
 </div>
@@ -154,7 +155,7 @@ to revdbayes</a> vignette.</p>
 <div class="section level3">
 <h3 id="gp-priors">GP priors<a class="anchor" aria-label="anchor" href="#gp-priors"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Information about the set_prior() function</span></span>
 <span><span class="co"># You can choose from a set of options, or create your own</span></span>
 <span><span class="op">?</span><span class="va">set_prior</span></span>
@@ -166,7 +167,7 @@ to revdbayes</a> vignette.</p>
 <div class="section level3">
 <h3 id="gp-posteriors">GP posteriors<a class="anchor" aria-label="anchor" href="#gp-posteriors"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Information about the rpost function</span></span>
 <span><span class="op">?</span><span class="va">rpost</span></span>
 <span><span class="co"># Information about the gom (significant wave heights) data</span></span>
@@ -186,24 +187,24 @@ to revdbayes</a> vignette.</p>
 <div class="section level3">
 <h3 id="comparing-approaches">Comparing approaches<a class="anchor" aria-label="anchor" href="#comparing-approaches"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Samples and posterior density contours</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gp1</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"mode relocation only, pa = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">gp1</span><span class="op">$</span><span class="va">pa</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/GPplots-1.png" width="700"></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gp2</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"rotation, pa = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">gp2</span><span class="op">$</span><span class="va">pa</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/GPplots-2.png" width="700"></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gp3</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Box-Cox, pa = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">gp3</span><span class="op">$</span><span class="va">pa</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/GPplots-3.png" width="700"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gp4</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Box-Cox and rotation, pa = "</span>,</span>
 <span>                                        <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">gp4</span><span class="op">$</span><span class="va">pa</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/GPplots-4.png" width="700"></p>
 <p><code><a href="../reference/rpost_rcpp.html">rpost_rcpp()</a></code> is faster than <code><a href="../reference/rpost.html">rpost()</a></code>. See
 the <a href="https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-b-using-rcpp-vignette.html" class="external-link">rusting
 faster</a> vignette.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gp2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"gp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>, data <span class="op">=</span> <span class="va">gom</span><span class="op">)</span></span></code></pre></div>
 <p>Suggestion: increase the threshold and see how the appearance of the
 posterior changes.</p>
@@ -214,7 +215,7 @@ posterior changes.</p>
 </h2>
 <p>There is further information in the <a href="https://paulnorthrop.github.io/revdbayes/articles/revdbayes-c-predictive-vignette.html" class="external-link">Posterior
 predictive EV inference</a> vignette.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># nrep = 50 asks for 50 fake replicates of the original data</span></span>
 <span><span class="co"># For each of 50 posterior samples of the parameters a dataset is simulated </span></span>
 <span><span class="va">gpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"gp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>, data <span class="op">=</span> <span class="va">gom</span>, </span>
@@ -224,7 +225,7 @@ predictive EV inference</a> vignette.</p>
 <span><span class="co"># Compare real and fake datasets</span></span>
 <span><span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span>, type <span class="op">=</span> <span class="st">"multiple"</span>, subtype <span class="op">=</span> <span class="st">"dens"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"GP kernel density estimates"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/GPcheck-1.png" width="700"></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compare real and fake summary statistics</span></span>
 <span><span class="fu"><a href="../reference/pp_check.evpost.html">pp_check</a></span><span class="op">(</span><span class="va">gpg</span>, stat <span class="op">=</span> <span class="st">"max"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code></pre>
@@ -251,7 +252,7 @@ plot</li>
 </h3>
 <p>Modelling threshold excesses is only part of the story. We also need
 to model the proportion of observations that exceed the threshold.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_bin_prior.html">set_bin_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"jeffreys"</span><span class="op">)</span></span>
 <span><span class="co"># We need to provide the mean number of observations per year </span></span>
 <span><span class="co"># The data cover a period of 105 years</span></span>
@@ -260,30 +261,30 @@ to model the proportion of observations that exceed the threshold.</p>
 <span>              bin_prior <span class="op">=</span> <span class="va">bp</span>, npy <span class="op">=</span> <span class="va">npy_gom</span>, nrep <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
 <p>We can make predictive inferences about the largest value <span class="math inline">\(M_N\)</span> to be observed over a time horizon of
 <span class="math inline">\(N\)</span> years.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Information about pp_check.evpost</span></span>
 <span><span class="op">?</span><span class="va">predict.evpost</span></span>
 <span><span class="co"># Predictive density of the largest value in `n_years' years</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fl">200</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/predBinGP-1.png" width="700"></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Predictive intervals (equi-tailed and shortest possible)</span></span>
 <span><span class="va">i_bgpp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, n_years <span class="op">=</span> <span class="fl">200</span>, level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">95</span>, <span class="fl">99</span><span class="op">)</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">i_bgpp</span>, which_int <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in graphics::par(u): argument 1 does not name a graphical parameter</span></span></code></pre>
 <p><img src="ex2revdbayes_files/figure-html/predBinGP-2.png" width="700"></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">i_bgpp</span><span class="op">$</span><span class="va">short</span> </span></code></pre></div>
 <pre><code><span><span class="co">##          lower    upper n_years level</span></span>
-<span><span class="co">## [1,] 10.328013 40.72704     200    95</span></span>
-<span><span class="co">## [2,]  9.422854 74.43915     200    99</span></span></code></pre>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<span><span class="co">## [1,] 10.298586 41.19673     200    95</span></span>
+<span><span class="co">## [2,]  9.433693 74.91695     200    99</span></span></code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The predictive 100, 200 and 500 year return levels </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, type <span class="op">=</span> <span class="st">"q"</span>, n_years <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.99</span>, <span class="fl">0.995</span>, <span class="fl">0.998</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">y</span></span></code></pre></div>
 <pre><code><span><span class="co">##          [,1]</span></span>
-<span><span class="co">## [1,] 15.35860</span></span>
-<span><span class="co">## [2,] 18.26952</span></span>
-<span><span class="co">## [3,] 23.22449</span></span></code></pre>
+<span><span class="co">## [1,] 15.38398</span></span>
+<span><span class="co">## [2,] 18.33259</span></span>
+<span><span class="co">## [3,] 23.35112</span></span></code></pre>
 <p>See <a href="https://doi.org/10.1111/rssc.12159" class="external-link">Northrop and
 Attalides (2017)</a> for an analysis of these data using an informative
 prior.</p>
@@ -301,34 +302,34 @@ al. (2010)</a>: parameterise to make <span class="math inline">\(\mu\)</span> o
 </li>
 <li>Empirical rotation to reduce association</li>
 </ol>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Information about the rainfall data</span></span>
 <span><span class="op">?</span><span class="fu">revdbayes</span><span class="fu">::</span><span class="va"><a href="../reference/rainfall.html">rainfall</a></span></span>
 <span><span class="co"># Set a threshold and use the prior from the evdbayes user guide</span></span>
 <span><span class="va">rthresh</span> <span class="op">&lt;-</span> <span class="fl">40</span></span>
 <span><span class="va">prrain</span> <span class="op">&lt;-</span> <span class="fu">evdbayes</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/evdbayes/man/prior.html" class="external-link">prior.quant</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">38.9</span>,<span class="fl">7.1</span>,<span class="fl">47</span><span class="op">)</span>, scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.5</span>,<span class="fl">6.3</span>,<span class="fl">2.6</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1. Number of blocks = number of years of data (54)</span></span>
 <span><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"pp"</span>, prior <span class="op">=</span> <span class="va">prrain</span>, data <span class="op">=</span> <span class="va">rainfall</span>,</span>
 <span>            thresh <span class="op">=</span> <span class="va">rthresh</span>, noy <span class="op">=</span> <span class="fl">54</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/PPsampling-1.png" width="700"></p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 2. Number of blocks = number of threshold excesses (use_noy = FALSE)</span></span>
 <span><span class="va">n_exc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">rainfall</span> <span class="op">&gt;</span> <span class="va">rthresh</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">r2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"pp"</span>, prior <span class="op">=</span> <span class="va">prrain</span>, data <span class="op">=</span> <span class="va">rainfall</span>, </span>
 <span>            thresh <span class="op">=</span> <span class="va">rthresh</span>, noy <span class="op">=</span> <span class="fl">54</span>, use_noy <span class="op">=</span> <span class="cn">FALSE</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">r2</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/PPsampling-2.png" width="700"></p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 3. # Rotation about maximum a posteriori estimate (MAP)</span></span>
 <span><span class="va">r3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"pp"</span>, prior <span class="op">=</span> <span class="va">prrain</span>, data <span class="op">=</span> <span class="va">rainfall</span>, </span>
 <span>            thresh <span class="op">=</span> <span class="va">rthresh</span>, noy <span class="op">=</span> <span class="fl">54</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">r3</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/PPsampling-3.png" width="700"></p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">r1</span><span class="op">$</span><span class="va">pa</span>, <span class="va">r2</span><span class="op">$</span><span class="va">pa</span>, <span class="va">r3</span><span class="op">$</span><span class="va">pa</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.1691675 0.1936746 0.3040345</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 0.1662206 0.1947458 0.3006434</span></span></code></pre>
 <ul>
 <li>Based on the plots, which approach do you expect to have the largest
 probability of acceptance?</li>
@@ -339,7 +340,7 @@ probability of acceptance?</li>
 <div class="section level2">
 <h2 id="gev-model-for-block-maxima">GEV model for block maxima<a class="anchor" aria-label="anchor" href="#gev-model-for-block-maxima"></a>
 </h2>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Information about the portpirie data</span></span>
 <span><span class="op">?</span><span class="fu">revdbayes</span><span class="fu">::</span><span class="va"><a href="../reference/portpirie.html">portpirie</a></span></span>
 <span><span class="co"># Use the prior from the evdbayes user guide</span></span>
@@ -348,7 +349,7 @@ probability of acceptance?</li>
 <div class="section level3">
 <h3 id="revdbayes">revdbayes<a class="anchor" aria-label="anchor" href="#revdbayes"></a>
 </h3>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">gevp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="va">pn</span>, data <span class="op">=</span> <span class="va">portpirie</span><span class="op">)</span></span>
 <span><span class="co"># Information about plot.evpost</span></span>
@@ -356,14 +357,14 @@ probability of acceptance?</li>
 <span><span class="co"># Can use the plots from the bayesplot package</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gevp</span>, use_bayesplot <span class="op">=</span> <span class="cn">TRUE</span>, fun_name <span class="op">=</span> <span class="st">"dens"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/revdbayes-1.png" width="700"></p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gevp</span>, use_bayesplot <span class="op">=</span> <span class="cn">TRUE</span>, pars <span class="op">=</span> <span class="st">"xi"</span>, prob <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/revdbayes-2.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="evdbayes">evdbayes<a class="anchor" aria-label="anchor" href="#evdbayes"></a>
 </h3>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># evdbayes has a function ar.choice to help set the proposal SDs</span></span>
 <span><span class="co"># It does this by searching for values that achieve approximately</span></span>
 <span><span class="co"># target values for the acceptance rates (default 0.4 for all parameters)</span></span>
@@ -375,22 +376,23 @@ probability of acceptance?</li>
 <span>                          tol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.02</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">psd</span></span></code></pre></div>
 <pre><code><span><span class="co">## Accept Rate values and proposal standard deviations at each iterations...</span></span>
 <span><span class="co">## Accept Rate   Prop. Std</span></span>
-<span><span class="co">## 0.88 0.97 0.97    0.01 0.01 0.01 </span></span>
-<span><span class="co">## 0.67 0.91 0.89    0.03 0.03 0.03 </span></span>
-<span><span class="co">## 0.48 0.74 0.75    0.057 0.072 0.071 </span></span>
-<span><span class="co">## 0.38 0.57 0.57    0.079 0.141 0.14 </span></span>
-<span><span class="co">## 0.46 0.43 0.44    0.054 0.221 0.218 </span></span>
-<span><span class="co">## 0.45 0.36 0.36    0.06 0.271 0.273 </span></span>
-<span><span class="co">## 0.44 0.46 0.45    0.067 0.199 0.199 </span></span>
-<span><span class="co">## 0.39 0.43 0.44    0.074 0.226 0.222 </span></span>
-<span><span class="co">## 0.36 0.39 0.37    0.074 0.25 0.246 </span></span>
-<span><span class="co">## 0.4 0.4 0.42      0.066 0.25 0.215</span></span></code></pre>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<span><span class="co">## 0.9 0.96 0.97     0.01 0.01 0.01 </span></span>
+<span><span class="co">## 0.65 0.88 0.87    0.03 0.03 0.03 </span></span>
+<span><span class="co">## 0.46 0.77 0.72    0.056 0.07 0.069 </span></span>
+<span><span class="co">## 0.38 0.57 0.58    0.075 0.141 0.133 </span></span>
+<span><span class="co">## 0.48 0.42 0.4     0.052 0.221 0.208 </span></span>
+<span><span class="co">## 0.45 0.44 0.46    0.059 0.221 0.208 </span></span>
+<span><span class="co">## 0.41 0.39 0.5     0.067 0.269 0.17 </span></span>
+<span><span class="co">## 0.42 0.35 0.49    0.067 0.269 0.168 </span></span>
+<span><span class="co">## 0.4 0.46 0.48     0.067 0.203 0.186 </span></span>
+<span><span class="co">## 0.39 0.42 0.44    0.067 0.229 0.215 </span></span>
+<span><span class="co">## 0.41 0.42 0.41    0.067 0.229 0.241</span></span></code></pre>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">post</span> <span class="op">&lt;-</span> <span class="fu">posterior</span><span class="op">(</span><span class="va">n</span>, init <span class="op">=</span> <span class="va">init</span>, prior <span class="op">=</span> <span class="va">pn</span>, lh <span class="op">=</span> <span class="st">"gev"</span>, </span>
 <span>                  data <span class="op">=</span> <span class="va">portpirie</span>, psd <span class="op">=</span> <span class="va">prop.sd.auto</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">post</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mu"</span>,<span class="st">"sigma"</span>,<span class="st">"xi"</span><span class="op">)</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span> </span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/evdbayes-1.png" width="700"><img src="ex2revdbayes_files/figure-html/evdbayes-2.png" width="700"><img src="ex2revdbayes_files/figure-html/evdbayes-3.png" width="700"></p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">post_for_coda</span> <span class="op">&lt;-</span> <span class="fu">coda</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/coda/man/mcmc.html" class="external-link">mcmc</a></span><span class="op">(</span><span class="va">post</span><span class="op">)</span></span>
 <span><span class="co"># Assuming no burn-in period</span></span>
 <span><span class="va">burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span>                 </span>
@@ -398,15 +400,15 @@ probability of acceptance?</li>
 <span><span class="co"># Trace plots and KDEs</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">post_for_coda</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/coda-1.png" width="700"></p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The sampled values are autocorrelated</span></span>
 <span><span class="fu">coda</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/coda/man/trellisplots.html" class="external-link">acfplot</a></span><span class="op">(</span><span class="va">post_for_coda</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex2revdbayes_files/figure-html/coda-2.png" width="700"></p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Effective sample sizes (10,000 for revdbayes)</span></span>
 <span><span class="fu">coda</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html" class="external-link">effectiveSize</a></span><span class="op">(</span><span class="va">post_for_coda</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##       mu    sigma       xi </span></span>
-<span><span class="co">## 1538.732 1476.492 1463.203</span></span></code></pre>
+<span><span class="co">## 1575.064 1524.571 1460.282</span></span></code></pre>
 <ul>
 <li>In practice one would run multiple chains and use the Gelman-Rubin
 convergence diagnostic, e.g. <code>gelman.diag</code> in the

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.1</span>
       </span>
     </div>
 
@@ -76,15 +76,22 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.5.0" id="revdbayes-150">revdbayes 1.5.0<a class="anchor" aria-label="anchor" href="#revdbayes-150"></a></h2>
+<h2 class="page-header" data-toc-text="1.5.1" id="revdbayes-151">revdbayes 1.5.1<a class="anchor" aria-label="anchor" href="#revdbayes-151"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-and-minor-improvements-1-5-1">Bug fixes and minor improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-improvements-1-5-1"></a></h3>
+<ul><li>Removed evdbayes:: completely from tests/testthat/test-inf_priors.R to avoid a WARNING in the r-oldrel-windows-ix86+x86_64 CRAN check in checking for unstated dependencies in ‘tests’ …</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.0" id="revdbayes-150">revdbayes 1.5.0<small>2022-11-12</small><a class="anchor" aria-label="anchor" href="#revdbayes-150"></a></h2>
 <div class="section level3">
 <h3 id="new-features-1-5-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-5-0"></a></h3>
 <ul><li>When calling <code>predict.evpost(object, ...)</code>, if <code>object$model = "bingp"</code> and <code>object$sim_vals</code> has a third column named <code>"theta"</code> containing a posterior sample for the extremal index, then predictive inferences incorporate this posterior sample. This feature is introduced to facilitate the <code>predict.blite()</code> function in the upcoming version 1.1.0 of the <code>lite</code> package.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-and-minor-improvements-1-5-0">Bug fixes and minor improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-improvements-1-5-0"></a></h3>
-<ul><li>Dependence on the previously suggested package evdbayes has been removed because evdbayes has been archived on CRAN.</li>
-<li>WARNINGs in the CRAN package check results, like “init.c:120:52: warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes] extern SEXP _revdbayes_RcppExport_registerCCallable();” have been avoided.</li>
+<ul><li><p>Dependence on the previously suggested package evdbayes has been removed because evdbayes has been archived on CRAN.</p></li>
+<li><p>WARNINGs in the CRAN package check results, like “init.c:120:52: warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes] extern SEXP _revdbayes_RcppExport_registerCCallable();” have been avoided.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
