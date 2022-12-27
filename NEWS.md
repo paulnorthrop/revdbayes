@@ -1,3 +1,9 @@
+# revdbayes 1.5.0.9000
+
+## Bug fixes and minor improvements
+
+* Removed evdbayes:: completely from tests/testthat/test-inf_priors.R to avoid a WARNING in the r-oldrel-windows-ix86+x86_64 CRAN check in checking for unstated dependencies in 'tests' ... 
+
 # revdbayes 1.5.0
 
 ## New features

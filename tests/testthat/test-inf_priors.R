@@ -1,30 +1,17 @@
 #context("Informative priors: revdbayes vs. evdbayes")
 
 # We check that the the revdbayes (R and C++) functions to evaluate
-# informative log-priors agree with each other and with the functions
-# prior.prob() and prior.quant() in the evdbayes package.
+# informative log-priors agree with each other.
 
-# Set a tolerance for the comparison of the simulated values
+# Set a tolerance for the comparison
 my_tol <- 1e-5
-
-# Is evdbayes available?
-#got_evdbayes <- requireNamespace("evdbayes", quietly = TRUE)
-
-# Set got_evdbayes = FALSE because evdbayes is archived on CRAN
-got_evdbayes <- FALSE
 
 # prior_prob
 
 prior_prob_test <- function(x, quant, alpha) {
   r_val <- as.numeric(gev_prob(pars = x, quant = quant, alpha = alpha))
   c_val <- cpp_gev_prob(x = x, ppars = list(quant = quant, alpha = alpha))
-  if (got_evdbayes) {
-    e_val <- evdbayes::dprior.prob(par = x, quant = quant, alpha = alpha,
-                                   trendsd = 0)
-  } else {
-    return(c(r_val, c_val))
-  }
-  return(c(e_val, r_val, c_val))
+  return(c(r_val, c_val))
 }
 
 # prior_quant
@@ -34,23 +21,12 @@ prior_quant_test <- function(x, prob, shape, scale) {
                                 scale = scale))
   c_val <- cpp_gev_quant(x = x, ppars = list(prob = prob, shape = shape,
                                              scale = scale))
-  if(got_evdbayes) {
-    e_val <- evdbayes::dprior.quant(par = x, prob = prob, shape = shape,
-                                    scale = scale, trendsd = 0)
-  } else {
-    return(c(r_val, c_val))
-  }
-  return(c(e_val, r_val, c_val))
+  return(c(r_val, c_val))
 }
 
 test_function <- function(x, test_string) {
   testthat::test_that(test_string, {
-    if (got_evdbayes) {
-      testthat::expect_equal(x[1], x[2], tolerance = my_tol)
-      testthat::expect_equal(x[2], x[3], tolerance = my_tol)
-    } else {
-      testthat::expect_equal(x[1], x[2], tolerance = my_tol)
-    }
+    testthat::expect_equal(x[1], x[2], tolerance = my_tol)
   })
 }
 
