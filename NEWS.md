@@ -1,3 +1,13 @@
+# revdbayes 1.5.2
+
+## Bug fixes and minor improvements
+
+* The unnecessary C++11 specification has been dropped to avoid a CRAN Package Check NOTE. 
+
+* README.md: Used app.codecov.io as base for codecov link.
+
+* Create the help file for the package correctly, with alias revdbayes-package.
+
 # revdbayes 1.5.1
 
 ## Bug fixes and minor improvements
