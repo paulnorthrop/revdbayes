@@ -493,5 +493,5 @@ create_prior_xptr <- function(fstr) {
 
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
-    .Call('_revdbayes_RcppExport_registerCCallable', PACKAGE = 'revdbayes')
+    .Call(`_revdbayes_RcppExport_registerCCallable`)
 })
