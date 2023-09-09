@@ -59,7 +59,6 @@
 #'   structure as an object (of class "ru") returned by \code{ru} and
 #'   \code{ru_rcpp}.
 #' @docType package
-#' @name revdbayes
 #' @importFrom graphics plot
 #' @importFrom stats predict
 #' @importFrom bayesplot ppc_stat
@@ -78,7 +77,7 @@
 #' @importFrom bayesplot mcmc_hist
 #' @useDynLib revdbayes, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
-NULL
+"_PACKAGE"
 
 #' Annual Maximum Sea Levels at Port Pirie, South Australia
 #'
