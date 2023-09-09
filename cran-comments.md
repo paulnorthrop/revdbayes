@@ -1,4 +1,4 @@
-This is a patch to avoid the CRAN check WARNING on r-oldrel-windows-ix86+x86_64
+The NOTE at https://cran.r-project.org/web/checks/check_results_revdbayes.html has been fixed.
 
 ## R CMD check results
 
@@ -13,4 +13,4 @@ This is a patch to avoid the CRAN check WARNING on r-oldrel-windows-ix86+x86_64
 
 ## Downstream dependencies
 
-The downstream dependencies of revdbayes (lax, lite, threshr, smovie, exdex, fitteR, mev, rust, distributions3) passed R CMD check.
+The downstream dependencies of revdbayes (lax, lite, threshr, smovie, exdex, fitteR, mev, rust, distributions3) passed R CMD check. The Suggested packages mev and fitteR have suggested packages that were not available for checking.
