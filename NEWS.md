@@ -4,6 +4,8 @@
 
 * The issue described at https://github.com/RcppCore/Rcpp/issues/1287 has been fixed to avoid WARNINGs from CRAN checks on some platforms. Thank you to Dirk Eddelbuettel for providing the fix so quickly!
 
+* Fixed issues with the incorrect use of \itemize in some Rd files.
+
 # revdbayes 1.5.2
 
 ## Bug fixes and minor improvements
