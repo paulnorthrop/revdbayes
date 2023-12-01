@@ -34,9 +34,9 @@ package.}
 \item{n}{A numeric scalar.  Only relevant if \code{x$d = 1} or
   \code{x$d = 2}. The meaning depends on the value of x$d.
 \itemize{
-  \item {For d = 1 : n + 1 is the number of abscissae in the trapezium
-     method used to normalize the density.}
-  \item {For d = 2 : an n by n regular grid is used to contour the density.}
+  \item For d = 1 : n + 1 is the number of abscissae in the trapezium
+     method used to normalize the density.
+  \item For d = 2 : an n by n regular grid is used to contour the density.
 }}
 
 \item{prob}{Numeric vector. Only relevant for d = 2.  The contour lines are

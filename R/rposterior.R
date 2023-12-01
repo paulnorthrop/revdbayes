@@ -843,8 +843,8 @@ pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 #' @param ds_bin A numeric list.  Sufficient statistics for inference
 #'   about a binomial probability \eqn{p}.  Contains
 #' \itemize{
-#'   \item {\code{n_raw} : number of raw observations}
-#'   \item {\code{m} : number of threshold exceedances.}
+#'   \item \code{n_raw} : number of raw observations.
+#'   \item \code{m} : number of threshold exceedances.
 #' }
 #' @param param A character scalar.  Only relevant if \code{prior$prior} is a
 #'   (user-supplied) R function.  \code{param} specifies the parameterization
@@ -1085,11 +1085,11 @@ r_pu_N <- function(n, n_success, n_failure, alpha = 0, beta = 0) {
 #' @param ds_bin A numeric list.  Sufficient statistics for inference
 #'   about the binomial probability \eqn{p}.  Contains
 #' \itemize{
-#'   \item {\code{sf} : a logical vector of success (\code{TRUE}) and failure
-#'     (\code{FALSE}) indicators.}
-#'   \item {\code{w} : a numeric vector of length \code{length(sf)} containing
+#'   \item \code{sf} : a logical vector of success (\code{TRUE}) and failure
+#'     (\code{FALSE}) indicators.
+#'   \item \code{w} : a numeric vector of length \code{length(sf)} containing
 #'     the values by which to multiply the observations when constructing the
-#'     log-likelihood.}
+#'     log-likelihood.
 #' }
 #' @details For \code{prior$prior == "bin_beta"} the posterior for \eqn{p}
 #'   is a beta distribution so \code{\link[stats:Beta]{rbeta}} is used to

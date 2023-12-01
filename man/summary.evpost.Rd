@@ -19,12 +19,12 @@ was used in the call to \code{rpost} or \code{rpost_rcpp}.}
 \value{
 Prints
 \itemize{
-  \item {information about the ratio-of-uniforms bounding box, i.e.
-    \code{object$box}}
-  \item {an estimate of the probability of acceptance, i.e.
-    \code{object$pa}}
-  \item {a summary of the simulated values, via
-    \code{summary(object$sim_vals)}}
+  \item information about the ratio-of-uniforms bounding box, i.e.
+    \code{object$box}
+  \item an estimate of the probability of acceptance, i.e.
+    \code{object$pa}
+  \item a summary of the simulated values, via
+    \code{summary(object$sim_vals)}
 }
 }
 \description{

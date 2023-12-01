@@ -16,11 +16,11 @@ the excesses of \code{u}.}
 \value{
 A list with components
   \itemize{
-    \item{\code{est}:} A numeric vector.  PWM estimates of GP parameters
+    \item \code{est}: A numeric vector.  PWM estimates of GP parameters
       \eqn{\sigma} (scale) and \eqn{\xi} (shape).
-    \item{\code{se}:} A numeric vector.  Estimated standard errors of
+    \item \code{se}: A numeric vector.  Estimated standard errors of
       \eqn{\sigma} and \eqn{\xi}.
-    \item{\code{cov}:} A numeric matrix.  Estimate covariance matrix of the
+    \item \code{cov}: A numeric matrix.  Estimate covariance matrix of the
       the PWM estimators of \eqn{\sigma} and \eqn{\xi}.
   }
 }

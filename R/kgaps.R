@@ -70,10 +70,10 @@
 #'   \code{\link[rust]{ru}}.
 #'   In addition this list contains
 #'   \itemize{
-#'     \item{\code{call}:} The call to \code{kgaps()}.
-#'     \item{\code{model}:} The character scalar \code{"kgaps"}.
-#'     \item{\code{thresh}:} The argument \code{thresh}.
-#'     \item{\code{ss}:} The sufficient statistics for the K-gaps likelihood,
+#'     \item \code{call}: The call to \code{kgaps()}.
+#'     \item \code{model}: The character scalar \code{"kgaps"}.
+#'     \item \code{thresh}: The argument \code{thresh}.
+#'     \item \code{ss}: The sufficient statistics for the K-gaps likelihood,
 #'       as calculated by \code{\link[exdex]{kgaps_stat}}.
 #'   }
 #' @references Suveges, M. and Davison, A. C. (2010) Model

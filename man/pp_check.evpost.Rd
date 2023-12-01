@@ -88,10 +88,10 @@ For details of these functions see \link[bayesplot]{PPC-overview}.
 
   The format of \code{object$data} depends on the model:
   \itemize{
-    \item{\code{model = "gev"}.} A vector of block maxima.
-    \item{\code{model = "gp"}.} Data that lie above the threshold,
+    \item \code{model = "gev"}. A vector of block maxima.
+    \item \code{model = "gp"}. Data that lie above the threshold,
       i.e. threshold exceedances.
-    \item{\code{model = "bingp"} or \code{"pp"}} The input data are
+    \item \code{model = "bingp"} or \code{model = "pp"}. The input data are
       returned but any value lying below the threshold is set to
       \code{object$thresh}.
   }

@@ -33,7 +33,7 @@
 #' @param x A numeric vector or a matrix with \code{n_years} columns.
 #'   The meaning of \code{x} depends on \code{type}.
 #'   \itemize{
-#'     \item{\code{type = "p"} or \code{type = "d"}:} \code{x} contains
+#'     \item \code{type = "p"} or \code{type = "d"}: \code{x} contains
 #'       quantiles at which to evaluate the distribution or density function.
 #'
 #'       If \code{object$model == "bingp"} then no element of \code{x} can be
@@ -43,7 +43,7 @@
 #'       set: vectors of length \code{x_num} from the 0.1\% quantile to the
 #'       99\% quantile, subject all values being greater than the threshold.
 #'
-#'     \item{\code{type = "q"}:} \code{x} contains probabilities in (0,1)
+#'     \item \code{type = "q"}: \code{x} contains probabilities in (0,1)
 #'       at which to evaluate the quantile function.  Any values outside
 #'       (0, 1) will be removed without warning.
 #'
@@ -55,7 +55,7 @@
 #'
 #'       If \code{x} is not supplied then a default value of
 #'       \code{c(0.025, 0.25, 0.5, 0.75, 0.975)} is used.
-#'     \item{\code{type = "i"} or \code{type = "r"}:} \code{x} is not relevant.
+#'     \item \code{type = "i"} or \code{type = "r"}: \code{x} is not relevant.
 #'   }
 #' @param x_num A numeric scalar.  If \code{type = "p"} or \code{type = "d"}
 #'   and \code{x} is not supplied then \code{x_num} gives the number of values
@@ -74,11 +74,11 @@
 #' based on the value of \code{model} in the call to \code{rpost} or
 #' \code{rpost_rcpp}:
 #' \itemize{
-#'   \item{\code{model = "gev"}:} \code{npy} = 1, i.e. the data were
+#'   \item \code{model = "gev"}: \code{npy} = 1, i.e. the data were
 #'     annual maxima so the block size is one year.
-#'   \item{\code{model = "os"}:} \code{npy} = 1, i.e. the data were
+#'   \item \code{model = "os"}: \code{npy} = 1, i.e. the data were
 #'     annual order statistics so the block size is one year.
-#'   \item{\code{model = "pp"}:}
+#'   \item \code{model = "pp"}:
 #'     \code{npy} = \code{length(x$data)} / \code{object$noy},
 #'     i.e. the value of \code{noy} used in the call to \code{\link{rpost}}
 #'     or \code{\link{rpost_rcpp}} is equated to a block size of one year.
@@ -132,21 +132,21 @@
 #'   with \code{m} = \eqn{b}.
 #'
 #'   \itemize{
-#'     \item{\code{type = "p"}.} We calculate using \code{\link{pgev}}
+#'     \item \code{type = "p"}. We calculate using \code{\link{pgev}}
 #'     the GEV distribution function at \code{q} for each of the posterior
 #'     samples of the location, scale and shape parameters.  Then we take
 #'     the mean of these values.
 #'
-#'     \item{\code{type = "d"}.} We calculate using \code{\link{dgev}}
+#'     \item \code{type = "d"}. We calculate using \code{\link{dgev}}
 #'     the GEV density function at \code{x} for each of the posterior samples
 #'     of the location, scale and shape parameters.  Then we take the
 #'     mean of these values.
 #'
-#'     \item{\code{type = "q"}.} We solve numerically
+#'     \item \code{type = "q"}. We solve numerically
 #'     \code{predict.evpost(object, type = "p", x = q)} = \code{p[i]}
 #'     numerically for \code{q} for each element \code{p[i]} of \code{p}.
 #'
-#'     \item{\code{type = "i"}.} If \code{hpd = FALSE} then the interval is
+#'     \item \code{type = "i"}. If \code{hpd = FALSE} then the interval is
 #'     equi-tailed, equal to \code{predict.evpost()} \code{object, type ="q", x = p)},
 #'     where \code{p = c((1-level/100)/2,} \code{(1+level/100)/2)}.
 #'     If \code{hpd = TRUE} then, in addition, we perform a
@@ -154,7 +154,7 @@
 #'     approximating the predictive quantile function using monotonic
 #'     cubic splines, to reduce computing time.
 #'
-#'     \item{\code{type = "r"}.} For each simulated value of the GEV parameters
+#'     \item \code{type = "r"}. For each simulated value of the GEV parameters
 #'     at the \code{n_years} level of aggregation we simulate one value from
 #'     this GEV distribution using \code{\link{rgev}}.  Thus, each sample
 #'     from the predictive distribution is of a size equal to the size of
@@ -180,19 +180,19 @@
 #'   the threshold.
 #'
 #' \itemize{
-#'   \item{\code{type = "p"}.} We calculate
+#'   \item \code{type = "p"}. We calculate
 #'     \eqn{F(z, \theta)^m} at \code{q} for each of the posterior samples
 #'     \eqn{\theta}.  Then we take the mean of these values.
-#'   \item{\code{type = "d"}.}  We calculate the density of of \eqn{M_n}, i.e.
+#'   \item \code{type = "d"}.  We calculate the density of of \eqn{M_n}, i.e.
 #'     the derivative of \eqn{F(z, \theta)^m} with respect to \eqn{z} at
 #'     \code{x} for each of the posterior samples \eqn{\theta}.  Then we take
 #'     the mean of these values.
-#'   \item{\code{type = "q"} and \code{type = "i"}} We perform calculations
+#'   \item \code{type = "q"} and \code{type = "i"}. We perform calculations
 #'     that are analogous to the GEV case above.  If \code{n_years} is very
 #'     small and/or level is very close to 100 then a predictive interval
 #'     may extend below the threshold.  In such cases \code{NA}s are returned
 #'     (see \strong{Value} below).
-#'   \item{\code{type = "r"}.}  For each simulated value of the bin-GP
+#'   \item \code{type = "r"}.  For each simulated value of the bin-GP
 #'     parameter we simulate from the distribution of \eqn{M_N} using the
 #'     inversion method applied to the distribution function of \eqn{M_N} given
 #'     above.  Occasionally a value below the threshold would need to be
@@ -212,13 +212,13 @@
 #'       Only present if \code{type} is \code{"p", "d"} or \code{"q"}.}
 #'     \item{y}{The content of \code{y} depends on \code{type}:
 #'     \itemize{
-#'       \item{\code{type = "p", "d", "q"}:}  A matrix with the same
+#'       \item \code{type = "p", "d", "q"}:  A matrix with the same
 #'       dimensions as \code{x}.  Contains distribution function values
 #'       (\code{type = "p"}), predictive density (\code{type = "d"})
 #'       or quantiles (\code{type = "q"}).
-#'       \item{\code{type = "r"}:} A numeric matrix with \code{length(n_years)}
+#'       \item \code{type = "r"}: A numeric matrix with \code{length(n_years)}
 #'       columns and number of rows equal to the size of the posterior sample.
-#'       \item{\code{type = "i"}:} \code{y} is not present.
+#'       \item \code{type = "i"}: \code{y} is not present.
 #'       }}
 #'       \item{long}{A \code{length(n_years)*length(level)} by 4 numeric
 #'         matrix containing the equi-tailed limits with columns:

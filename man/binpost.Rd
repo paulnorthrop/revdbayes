@@ -15,8 +15,8 @@ binpost(n, prior, ds_bin, param = c("logit", "p"))
 \item{ds_bin}{A numeric list.  Sufficient statistics for inference
   about a binomial probability \eqn{p}.  Contains
 \itemize{
-  \item {\code{n_raw} : number of raw observations}
-  \item {\code{m} : number of threshold exceedances.}
+  \item \code{n_raw} : number of raw observations.
+  \item \code{m} : number of threshold exceedances.
 }}
 
 \item{param}{A character scalar.  Only relevant if \code{prior$prior} is a

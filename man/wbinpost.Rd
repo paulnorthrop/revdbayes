@@ -16,11 +16,11 @@ wbinpost(n, prior, ds_bin)
 \item{ds_bin}{A numeric list.  Sufficient statistics for inference
   about the binomial probability \eqn{p}.  Contains
 \itemize{
-  \item {\code{sf} : a logical vector of success (\code{TRUE}) and failure
-    (\code{FALSE}) indicators.}
-  \item {\code{w} : a numeric vector of length \code{length(sf)} containing
+  \item \code{sf} : a logical vector of success (\code{TRUE}) and failure
+    (\code{FALSE}) indicators.
+  \item \code{w} : a numeric vector of length \code{length(sf)} containing
     the values by which to multiply the observations when constructing the
-    log-likelihood.}
+    log-likelihood.
 }}
 }
 \value{

@@ -14,11 +14,11 @@ set_prior(
 \arguments{
 \item{prior}{Either
 \itemize{
-  \item {An R function, or a pointer to a user-supplied compiled
+  \item An R function, or a pointer to a user-supplied compiled
   C++ function, that returns the value of the log of the prior density
-  (see \strong{Examples}), or}
-  \item {A character string giving the name of the prior.
-    See \strong{Details} for a list of priors available for each model.}
+  (see \strong{Examples}), or
+  \item A character string giving the name of the prior.
+    See \strong{Details} for a list of priors available for each model.
 }}
 
 \item{model}{A character string.  If \code{prior} is a character string
@@ -94,14 +94,12 @@ Of the in-built named priors available in revdbayes only
   The names of the in-built extreme value priors set using \code{prior}
   and details of hyperparameters are:
 \itemize{
-  \item{\code{"prob"}.  A prior for GEV parameters \eqn{(\mu, \sigma, \xi)}
+  \item \code{"prob"}.  A prior for GEV parameters \eqn{(\mu, \sigma, \xi)}
     based on Crowder (1992).  See \code{\link{gev_prob}} for details.
     See also Northrop et al. (2017) and Stephenson (2016).
-  }
-  \item{\code{"quant"}.  A prior for GEV parameters \eqn{(\mu, \sigma, \xi)}
+  \item \code{"quant"}.  A prior for GEV parameters \eqn{(\mu, \sigma, \xi)}
     based on Coles and Tawn (1996). See \code{\link{gev_quant}} for details.
-  }
-  \item {\code{"norm"}.
+  \item \code{"norm"}.
 
   For \code{model = "gp"}:
     (\eqn{\log \sigma, \xi}{log \sigma, \xi}), is bivariate normal
@@ -113,14 +111,14 @@ Of the in-built named priors available in revdbayes only
     normal with mean \code{mean} (a numeric vector of length 3) and
     covariance matrix \code{cov} (a symmetric positive definite 3 by 3
     matrix).
-  }
-  \item {\code{"loglognorm"}.  For \code{model = "gev"} only:
+
+  \item \code{"loglognorm"}.  For \code{model = "gev"} only:
     (\eqn{\log \mu, \log \sigma, \xi}{log \mu, log \sigma, \xi}), is
     trivariate normal with mean \code{mean} (a numeric vector of length 3)
     and covariance matrix \code{cov} (a symmetric positive definite 3 by 3
     matrix).
-  }
-  \item {\code{"mdi"}.
+
+  \item \code{"mdi"}.
 
   For \code{model = "gp"}: (an extended version
     of) the maximal data information (MDI) prior, that is,
@@ -151,8 +149,8 @@ Of the in-built named priors available in revdbayes only
     and GEV parameters a local maximum of the likelihood
     is sought on the region
     \eqn{\sigma > 0, \xi \geq -1}{\sigma > 0, \xi >= -1}.
-  }
-  \item{\code{"flat"}.
+
+  \item\code{"flat"}.
 
     For \code{model = "gp"}: a flat prior for
     \eqn{\xi} (and for \eqn{\log \sigma}{log \sigma}):
@@ -163,8 +161,8 @@ Of the in-built named priors available in revdbayes only
     \eqn{\xi} (and for \eqn{\mu} and \eqn{\log \sigma}{log \sigma}):
     \deqn{\pi(\mu, \sigma, \xi) = \sigma^{-1}, {\rm ~for~} \sigma > 0.}{%
           \pi(\mu, \sigma, \xi) = (1/ \sigma), for \sigma > 0.}
-  }
-  \item{\code{"flatflat"}.
+
+  \item \code{"flatflat"}.
 
     For \code{model = "gp"}: flat priors for
     \eqn{\sigma} and \eqn{\xi}:
@@ -177,8 +175,8 @@ Of the in-built named priors available in revdbayes only
           \pi(\mu, \sigma, \xi) = 1, for \sigma > 0.}
 
     Therefore, the posterior is proportional to the likelihood.
-  }
-  \item{\code{"jeffreys"}.  For \code{model = "gp"} only: the Jeffreys
+
+  \item \code{"jeffreys"}.  For \code{model = "gp"} only: the Jeffreys
     prior (Castellanos and Cabras, 2007):
     \deqn{\pi(\sigma, \xi) = \sigma^{-1}(1+\xi)^{-1}(1+2\xi)^{-1/2},
       {\rm ~for~} \sigma > 0, \xi > -1 / 2.}{%
@@ -187,8 +185,8 @@ Of the in-built named priors available in revdbayes only
 
     In the GEV case the Jeffreys prior doesn't yield a proper posterior
     for any sample size.  See Northrop and Attalides (2016) for details.
-  }
-  \item{\code{"beta"}.
+
+  \item \code{"beta"}.
     For \code{model = "gp"}: a beta-type(p, q)
     prior is used for xi on the interval (\code{min_xi}, \code{max_xi}):
     \deqn{\pi(\sigma, \xi) = \sigma^{-1} (\xi - {\min}_{\xi}) ^ {p-1}
@@ -208,7 +206,7 @@ Of the in-built named priors available in revdbayes only
     The default settings for this prior are \code{p = 6, q = 9} and
     \code{min_xi = -1/2, max_xi = 1/2}, which corresponds to the
     prior for \eqn{\xi} proposed in Martins and Stedinger (2000, 2001).
-  }
+
 }
 }
 \examples{

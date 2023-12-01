@@ -12,10 +12,10 @@ set_bin_prior(
 \arguments{
 \item{prior}{Either
 \itemize{
-  \item {An R function that returns the value of the log of the prior
-  density (see \strong{Examples}), or}
-  \item {A character string giving the name of the prior for \eqn{p}.
-    See \strong{Details} for a list of priors available.}
+  \item An R function that returns the value of the log of the prior
+  density (see \strong{Examples}), or
+  \item A character string giving the name of the prior for \eqn{p}.
+    See \strong{Details} for a list of priors available.
 }}
 
 \item{...}{Further arguments to be passed to the user-supplied or in-built
@@ -39,18 +39,18 @@ and arguments for hyperparameters.
 \strong{Binomial priors.} The names of the binomial priors set using
   \code{bin_prior} are:
 \itemize{
-  \item{\code{"jeffreys"}: the \emph{Jeffreys} beta(1/2, 1/2) prior.}
-  \item{\code{"laplace"}: the \emph{Bayes-Laplace} beta(1, 1) prior.}
-  \item{\code{"haldane"}: the \emph{Haldane} beta(0, 0) prior.}
-  \item{\code{"beta"}: a beta(\eqn{\alpha, \beta}) prior.  The argument
+  \item \code{"jeffreys"}: the \emph{Jeffreys} beta(1/2, 1/2) prior.
+  \item \code{"laplace"}: the \emph{Bayes-Laplace} beta(1, 1) prior.
+  \item \code{"haldane"}: the \emph{Haldane} beta(0, 0) prior.
+  \item \code{"beta"}: a beta(\eqn{\alpha, \beta}) prior.  The argument
     \code{ab} is a vector containing \code{c}(\eqn{\alpha, \beta}).
-    The default is \code{ab = c(1, 1)}.}
-  \item{\code{"mdi"}: the MDI prior
+    The default is \code{ab = c(1, 1)}.
+  \item \code{"mdi"}: the MDI prior
     \eqn{\pi(p) = 1.6186 p^p (1-p)^{1-p}}{\pi(p) = 1.6186 p^p (1-p)^(1-p)},
-        for \eqn{0 < p < 1.}}
-  \item{\code{"northrop"}: the improper prior
+        for \eqn{0 < p < 1.}
+  \item \code{"northrop"}: the improper prior
     \eqn{\pi(p)=\{-\ln(1-p)\}^{-1}(1-p)^{-1}}{\pi(p)=1 / [ -ln(1-p) (1-p) ]},
-        for \eqn{0 < p < 1.}}
+        for \eqn{0 < p < 1.}
 }
 Apart from the last two priors these are all beta distributions.
 }

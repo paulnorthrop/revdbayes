@@ -71,10 +71,10 @@ An object (list) of class \code{"evpost"}, which has the same
   \code{\link[rust]{ru}}.
   In addition this list contains
   \itemize{
-    \item{\code{call}:} The call to \code{dgaps()}.
-    \item{\code{model}:} The character scalar \code{"dgaps"}.
-    \item{\code{thresh}:} The argument \code{thresh}.
-    \item{\code{ss}:} The sufficient statistics for the D-gaps likelihood,
+    \item \code{call}: The call to \code{dgaps()}.
+    \item \code{model}: The character scalar \code{"dgaps"}.
+    \item \code{thresh}: The argument \code{thresh}.
+    \item \code{ss}: The sufficient statistics for the D-gaps likelihood,
       as calculated by \code{\link[exdex]{dgaps_stat}}.
   }
 }
