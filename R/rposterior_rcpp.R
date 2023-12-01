@@ -131,10 +131,10 @@
 #' @return An object (list) of class \code{"evpost"}, which has the same
 #'   structure as an object of class \code{"ru"} returned from
 #'   \code{\link[rust]{ru_rcpp}}.  In addition this list contains
-#'   \itemize{
-#'     \item{\code{model}:} The argument \code{model} to \code{rpost}
-#'       detailed above.
-#'     \item{\code{data}:} The content depends on \code{model}:
+#'
+#'     \item{\code{model}:}{The argument \code{model} to \code{rpost}
+#'       detailed above.}
+#'     \item{\code{data}:}{The content depends on \code{model}:
 #'       if \code{model = "gev"} then this is the argument \code{data} to
 #'       \code{rpost} detailed above, with missing values removed;
 #'       if \code{model = "gp"} then only the values that lie above the
@@ -142,12 +142,12 @@
 #'       \code{model = "pp"} then the input data are returned
 #'       but any value lying below the threshold is set to \code{thresh};
 #'       if \code{model = "os"} then the order statistics used are returned
-#'       as a single vector.
-#'     \item{\code{prior}:} The argument \code{prior} to \code{rpost}
-#'       detailed above.
-#'     \item{\code{logf_rho_args}:} A list of arguments to the (transformed)
-#'       target log-density.
-#'   }
+#'       as a single vector.}
+#'     \item{\code{prior}:}{The argument \code{prior} to \code{rpost}
+#'       detailed above.}
+#'     \item{\code{logf_rho_args}:}{A list of arguments to the (transformed)
+#'       target log-density.}
+#'
 #'   If \code{nrep} is not \code{NULL} then this list also contains
 #'   \code{data_rep}, a numerical matrix with \code{nrep} rows.  Each
 #'   row contains a replication of the original data \code{data}
