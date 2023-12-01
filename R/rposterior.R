@@ -880,14 +880,14 @@ pu_pp <- function (q, loc = 0, scale = 1, shape = 0, lower_tail = TRUE){
 #'   \code{\link[rust]{ru}} is used to sample from the posterior using the
 #'   generalised ratio-of-uniforms method.
 #' @return An object (list) of class \code{"binpost"} with components
-#'   \itemize{
-#'     \item{\code{bin_sim_vals}:} {An \code{n} by 1 numeric matrix of values
+#'
+#'     \item{\code{bin_sim_vals}:}{An \code{n} by 1 numeric matrix of values
 #'       simulated from the posterior for the binomial
 #'       probability \eqn{p}}
-#'     \item{\code{bin_logf}:} {A function returning the log-posterior for
+#'     \item{\code{bin_logf}:}{A function returning the log-posterior for
 #'       \eqn{p}.}
-#'     \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
-#'   }
+#'     \item{\code{bin_logf_args}:}{A list of arguments to \code{bin_logf}.}
+#'
 #'   If \code{prior$prior} is a (user-supplied) R function then this list
 #'   also contains \code{ru_object} the object of class \code{"ru"}
 #'   returned by \code{\link[rust]{ru}}.
