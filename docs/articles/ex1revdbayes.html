@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
       </span>
     </div>
 
@@ -146,8 +146,7 @@ to rust</a> vignette.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="va">pkg_list</span><span class="op">)</span></span>
 <span><span class="co"># Load both packages</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">pkg</span>, <span class="va">library</span>, character.only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: package 'mvtnorm' was built under R version 4.2.3</span></span></code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Information about the ru() function</span></span>
 <span><span class="op">?</span><span class="va">ru</span></span>
 <span></span>
@@ -157,45 +156,45 @@ to rust</a> vignette.</p>
 <div class="section level2">
 <h2 id="d-normal">1D normal<a class="anchor" aria-label="anchor" href="#d-normal"></a>
 </h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># By default r = 1/2</span></span>
 <span><span class="co"># init is an initial estimate of the mode of logf</span></span>
 <span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="va">x1</span><span class="op">$</span><span class="va">pa</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.7824726</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## [1] 0.7604563</span></span></code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex1revdbayes_files/figure-html/normal-1.png" width="700"></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># r = 1 will be slightly less efficient</span></span>
 <span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="fl">0.1</span>, r <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">x2</span><span class="op">$</span><span class="va">pa</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.7390983</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 0.7272727</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="d-log-normal">1D log-normal<a class="anchor" aria-label="anchor" href="#d-log-normal"></a>
 </h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># lower = 0 tells ru() that the log-normal is bounded below at 0</span></span>
 <span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, lower <span class="op">=</span> <span class="fl">0</span>, init <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">x1</span><span class="op">$</span><span class="va">pa</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.5810575</span></span></code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## [1] 0.5698006</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex1revdbayes_files/figure-html/log-normal-1.png" width="700"></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We know that ln(X) is normal.  </span></span>
 <span><span class="co"># First transform using a Box-Cox transformation with lambda=0 then simulate</span></span>
 <span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dlnorm</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, init <span class="op">=</span> <span class="fl">0.1</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,</span>
 <span>         lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span></span>
 <span><span class="va">x2</span><span class="op">$</span><span class="va">pa</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.7843137</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## [1] 0.7949126</span></span></code></pre>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot the (normal) distribution from which we have simulated using ROU </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x2</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex1revdbayes_files/figure-html/log-normal-2.png" width="700"></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># A check that the inverse (exponential) transformation has been applied</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex1revdbayes_files/figure-html/log-normal-3.png" width="700"></p>
@@ -203,7 +202,7 @@ to rust</a> vignette.</p>
 <div class="section level2">
 <h2 id="d-normal-1">2D normal<a class="anchor" aria-label="anchor" href="#d-normal-1"></a>
 </h2>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># two-dimensional normal with positive association ----------------</span></span>
 <span><span class="va">rho</span> <span class="op">&lt;-</span> <span class="fl">0.9</span></span>
 <span><span class="va">covmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">rho</span>, <span class="va">rho</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
@@ -212,44 +211,44 @@ to rust</a> vignette.</p>
 <span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="fu">mvtnorm</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html" class="external-link">dmvnorm</a></span>, sigma <span class="op">=</span> <span class="va">covmat</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="va">n</span>, </span>
 <span>         init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, rotate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x1</span><span class="op">$</span><span class="va">pa</span>, <span class="va">x2</span><span class="op">$</span><span class="va">pa</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.2320186 0.5724098</span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## [1] 0.2354049 0.5268704</span></span></code></pre>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x1</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex1revdbayes_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x2</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex1revdbayes_files/figure-html/unnamed-chunk-1-2.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="d-gamma">1D gamma<a class="anchor" aria-label="anchor" href="#d-gamma"></a>
 </h2>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Exponential case, with strong skewness</span></span>
 <span><span class="co"># A cube root transformation results in approximate symmetry</span></span>
 <span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,</span>
 <span>       lambda <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>, init <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span></span>
 <span><span class="va">x1</span><span class="op">$</span><span class="va">pa</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.8143322</span></span></code></pre>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## [1] 0.7936508</span></span></code></pre>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># If alpha &lt; 1 then the gamma density is extremely skewed and unbounded at 0</span></span>
 <span><span class="co"># A transformation can avoid this, but it needs to be stronger than a cube root</span></span>
 <span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
 <span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu">ru</span><span class="op">(</span>logf <span class="op">=</span> <span class="va">dgamma</span>, shape <span class="op">=</span> <span class="va">alpha</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, d <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="va">n</span>, trans <span class="op">=</span> <span class="st">"BC"</span>,</span>
 <span>         lambda <span class="op">=</span> <span class="fl">0.068</span>, init <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">x2</span><span class="op">$</span><span class="va">pa</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.7326007</span></span></code></pre>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## [1] 0.7434944</span></span></code></pre>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex1revdbayes_files/figure-html/gamma-1.png" width="700"></p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x2</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ex1revdbayes_files/figure-html/gamma-2.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="can-you-break-rust">Can you break rust?<a class="anchor" aria-label="anchor" href="#can-you-break-rust"></a>
 </h2>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Pick a standard distribution</span></span>
 <span><span class="op">?</span><span class="va">Distributions</span></span>
 <span><span class="co"># Change dnorm to a d???? of your choice below</span></span>

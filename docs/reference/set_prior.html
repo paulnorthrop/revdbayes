@@ -29,7 +29,7 @@ The argument model is used for consistency with rpost.'><!-- mathjax --><script 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
       </span>
     </div>
 
@@ -190,10 +190,12 @@ All these priors have the arguments <code>min_xi</code> (prior lower bound on
     See also Northrop et al. (2017) and Stephenson (2016).</p></li>
 <li><p><code>"quant"</code>.  A prior for GEV parameters \((\mu, \sigma, \xi)\)
     based on Coles and Tawn (1996). See <code><a href="gev_quant.html">gev_quant</a></code> for details.</p></li>
-<li><p><code>"norm"</code>.  For <code>model = "gp"</code>:
+<li><p><code>"norm"</code>.</p>
+<p>For <code>model = "gp"</code>:
     (\(\log \sigma, \xi\)), is bivariate normal
     with mean <code>mean</code> (a numeric vector of length 2) and covariance
-    matrix <code>cov</code> (a symmetric positive definite 2 by 2 matrix).  For <code>model = "gev"</code>:
+    matrix <code>cov</code> (a symmetric positive definite 2 by 2 matrix).</p>
+<p>For <code>model = "gev"</code>:
     (\(\mu, \log \sigma, \xi\)), is trivariate
     normal with mean <code>mean</code> (a numeric vector of length 3) and
     covariance matrix <code>cov</code> (a symmetric positive definite 3 by 3
@@ -203,18 +205,21 @@ All these priors have the arguments <code>min_xi</code> (prior lower bound on
     trivariate normal with mean <code>mean</code> (a numeric vector of length 3)
     and covariance matrix <code>cov</code> (a symmetric positive definite 3 by 3
     matrix).</p></li>
-<li><p><code>"mdi"</code>.  For <code>model = "gp"</code>: (an extended version
+<li><p><code>"mdi"</code>.</p>
+<p>For <code>model = "gp"</code>: (an extended version
     of) the maximal data information (MDI) prior, that is,
     $$\pi(\sigma, \xi) = \sigma^{-1} \exp[-a(\xi + 1)], {\rm ~for~}
     \sigma &gt; 0, \xi \geq -1, a \geq 0.$$
     The value of \(a\) is set using the argument <code>a</code>.  The default
-    value is \(a = 1\), which gives the MDI prior.    For <code>model = "gev"</code>: (an extended version
+    value is \(a = 1\), which gives the MDI prior.</p>
+<p>For <code>model = "gev"</code>: (an extended version
     of) the maximal data information (MDI) prior, that is,
     $$\pi(\mu, \sigma, \xi) = \sigma^{-1} \exp[-a(\xi + 1)],
     {\rm ~for~} \sigma &gt; 0, \xi \geq -1, a \geq 0.$$
     The value of \(a\) is set using the argument <code>a</code>.  The default
     value is \(a = \gamma\), where \(\gamma = 0.57721\) is Euler's
-    constant, which gives the MDI prior.    For each of these cases \(\xi\) must be is bounded below
+    constant, which gives the MDI prior.</p>
+<p>For each of these cases \(\xi\) must be is bounded below
     <em>a priori</em> for the posterior to be proper
     (Northrop and Attalides, 2016).  An argument for the
     bound \(\xi \geq -1\) is that for \(\xi &lt; -1\) the
@@ -224,30 +229,38 @@ All these priors have the arguments <code>min_xi</code> (prior lower bound on
     and GEV parameters a local maximum of the likelihood
     is sought on the region
     \(\sigma &gt; 0, \xi \geq -1\).</p></li>
-<li><p><code>"flat"</code>.    For <code>model = "gp"</code>: a flat prior for
+<li><p><code>"flat"</code>.</p>
+<p>For <code>model = "gp"</code>: a flat prior for
     \(\xi\) (and for \(\log \sigma\)):
-    $$\pi(\sigma, \xi) = \sigma^{-1}, {\rm ~for~} \sigma &gt; 0.$$    For <code>model = "gev"</code>: a flat prior for
+    $$\pi(\sigma, \xi) = \sigma^{-1}, {\rm ~for~} \sigma &gt; 0.$$</p>
+<p>For <code>model = "gev"</code>: a flat prior for
     \(\xi\) (and for \(\mu\) and \(\log \sigma\)):
     $$\pi(\mu, \sigma, \xi) = \sigma^{-1}, {\rm ~for~} \sigma &gt; 0.$$</p></li>
-<li><p><code>"flatflat"</code>.    For <code>model = "gp"</code>: flat priors for
+<li><p><code>"flatflat"</code>.</p>
+<p>For <code>model = "gp"</code>: flat priors for
     \(\sigma\) and \(\xi\):
-    $$\pi(\sigma, \xi) = 1, {\rm ~for~} \sigma &gt; 0.$$    For <code>model = "gev"</code>: flat priors for \(\mu\), \(\sigma\)
+    $$\pi(\sigma, \xi) = 1, {\rm ~for~} \sigma &gt; 0.$$</p>
+<p>For <code>model = "gev"</code>: flat priors for \(\mu\), \(\sigma\)
     and \(\xi\):
-    $$\pi(\mu, \sigma, \xi) = 1, {\rm ~for~} \sigma &gt; 0.$$    Therefore, the posterior is proportional to the likelihood.</p></li>
+    $$\pi(\mu, \sigma, \xi) = 1, {\rm ~for~} \sigma &gt; 0.$$</p>
+<p>Therefore, the posterior is proportional to the likelihood.</p></li>
 <li><p><code>"jeffreys"</code>.  For <code>model = "gp"</code> only: the Jeffreys
     prior (Castellanos and Cabras, 2007):
     $$\pi(\sigma, \xi) = \sigma^{-1}(1+\xi)^{-1}(1+2\xi)^{-1/2},
-      {\rm ~for~} \sigma &gt; 0, \xi &gt; -1 / 2.$$    In the GEV case the Jeffreys prior doesn't yield a proper posterior
+      {\rm ~for~} \sigma &gt; 0, \xi &gt; -1 / 2.$$</p>
+<p>In the GEV case the Jeffreys prior doesn't yield a proper posterior
     for any sample size.  See Northrop and Attalides (2016) for details.</p></li>
 <li><p><code>"beta"</code>.
     For <code>model = "gp"</code>: a beta-type(p, q)
     prior is used for xi on the interval (<code>min_xi</code>, <code>max_xi</code>):
     $$\pi(\sigma, \xi) = \sigma^{-1} (\xi - {\min}_{\xi}) ^ {p-1}
           ({\max}_{\xi} - \xi) ^ {q-1}, {\rm ~for~}
-          {\min}_{\xi} &lt; \xi &lt; {\max}_{\xi}.$$    For <code>model = "gev"</code>: similarly ...
+          {\min}_{\xi} &lt; \xi &lt; {\max}_{\xi}.$$</p>
+<p>For <code>model = "gev"</code>: similarly ...
     $$\pi(\mu, \sigma, \xi) = \sigma^{-1} (\xi - {\min}_{\xi}) ^ {p-1}
           ({\max}_{\xi} - \xi) ^ {q-1}, {\rm ~for~}
-          {\min}_{\xi} &lt; \xi &lt; {\max}_{\xi}.$$    The argument <code>pq</code> is a vector containing <code>c(p,q)</code>.
+          {\min}_{\xi} &lt; \xi &lt; {\max}_{\xi}.$$</p>
+<p>The argument <code>pq</code> is a vector containing <code>c(p,q)</code>.
     The default settings for this prior are <code>p = 6, q = 9</code> and
     <code>min_xi = -1/2, max_xi = 1/2</code>, which corresponds to the
     prior for \(\xi\) proposed in Martins and Stedinger (2000, 2001).</p></li>

@@ -19,7 +19,7 @@ observation when constructing the log-likelihood."><!-- mathjax --><script src="
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
       </span>
     </div>
 
@@ -115,14 +115,19 @@ observation when constructing the log-likelihood.</p>
     
 
 <p>An object (list) of class <code>"binpost"</code> with components</p>
-<p></p>
-<ul><li><p><code>bin_sim_vals</code>: An <code>n</code> by 1 numeric matrix of values
+<dl><dt><code>bin_sim_vals</code>:</dt>
+<dd><p>An <code>n</code> by 1 numeric matrix of values
       simulated from the posterior for the binomial
-      probability \(p\)</p></li>
-<li><p><code>bin_logf</code>: A function returning the log-posterior for
-      \(p\).</p></li>
-<li><p><code>bin_logf_args</code>: A list of arguments to <code>bin_logf</code>.</p></li>
-</ul></div>
+      probability \(p\)</p></dd>
+
+    <dt><code>bin_logf</code>:</dt>
+<dd><p>A function returning the log-posterior for
+      \(p\).</p></dd>
+
+    <dt><code>bin_logf_args</code>:</dt>
+<dd><p>A list of arguments to <code>bin_logf</code>.</p></dd>
+
+</dl></div>
     <div id="details">
     <h2>Details</h2>
     <p>For <code>prior$prior == "bin_beta"</code> the posterior for \(p\)

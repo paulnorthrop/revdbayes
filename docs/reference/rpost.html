@@ -19,7 +19,7 @@ model."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/math
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
       </span>
     </div>
 
@@ -118,11 +118,11 @@ model.</p>
 
 <dt>data</dt>
 <dd><p>Sample data, of a format appropriate to the value of
-<code>model</code>..</p><ul><li><p>"gp" A numeric vector of threshold excesses or raw data.</p></li>
-<li><p>"bingp" A numeric vector of raw data.</p></li>
-<li><p>"gev" A numeric vector of block maxima.</p></li>
-<li><p>"pp" A numeric vector of raw data.</p></li>
-<li><p>"os" A numeric matrix or data frame. Each row should contain
+<code>model</code>.</p><ul><li><p><code>"gp"</code>. A numeric vector of threshold excesses or raw data.</p></li>
+<li><p><code>"bingp"</code>. A numeric vector of raw data.</p></li>
+<li><p><code>"gev"</code>. A numeric vector of block maxima.</p></li>
+<li><p><code>"pp"</code>. A numeric vector of raw data.</p></li>
+<li><p><code>"os"</code>. A numeric matrix or data frame. Each row should contain
     the largest order statistics for a block of data.  These need not
     be ordered: they are sorted inside <code>rpost</code>. If a block
     contains fewer than <code>dim(as.matrix(data))[2]</code> order statistics
@@ -256,10 +256,12 @@ In the latter case <code>bin_prior$prior</code> must be <code>"bin_beta"</code>.
 <p></p>
 <p><code><a href="https://paulnorthrop.github.io/rust/reference/ru.html" class="external-link">ru</a></code>.
   In addition this list contains</p>
-<p></p>
-<ul><li><p><code>model</code>: The argument <code>model</code> to <code>rpost</code>
-      detailed above.</p></li>
-<li><p><code>data</code>: The content depends on <code>model</code>:
+<dl><dt><code>model</code>:</dt>
+<dd><p>The argument <code>model</code> to <code>rpost</code>
+      detailed above.</p></dd>
+
+    <dt><code>data</code>:</dt>
+<dd><p>The content depends on <code>model</code>:
       if <code>model = "gev"</code> then this is the argument <code>data</code> to
       <code>rpost</code> detailed above, with missing values removed;
       if <code>model = "gp"</code> then only the values that lie above the
@@ -267,10 +269,14 @@ In the latter case <code>bin_prior$prior</code> must be <code>"bin_beta"</code>.
       <code>model = "pp"</code> then the input data are returned
       but any value lying below the threshold is set to <code>thresh</code>;
       if <code>model = "os"</code> then the order statistics used are returned
-      as a single vector.</p></li>
-<li><p><code>prior</code>: The argument <code>prior</code> to <code>rpost</code>
-      detailed above.</p></li>
-</ul><p>If <code>nrep</code> is not <code>NULL</code> then this list also contains</p>
+      as a single vector.</p></dd>
+
+    <dt><code>prior</code>:</dt>
+<dd><p>The argument <code>prior</code> to <code>rpost</code>
+      detailed above.</p></dd>
+
+
+</dl><p>If <code>nrep</code> is not <code>NULL</code> then this list also contains</p>
 <p></p>
 <p><code>data_rep</code>, a numerical matrix with <code>nrep</code> rows.  Each
   row contains a replication of the original data <code>data</code></p>
@@ -299,14 +305,18 @@ In the latter case <code>bin_prior$prior</code> must be <code>"bin_beta"</code>.
 
 
 <p>If <code>model == "bingp"</code> then this list also contains</p>
-<p></p>
-<ul><li><p><code>bin_sim_vals</code>: An <code>n</code> by 1 numeric matrix of values
-      simulated from the posterior for the binomial
-      probability \(p\)</p></li>
-<li><p><code>bin_logf</code>: A function returning the log-posterior for
-      \(p\).</p></li>
-<li><p><code>bin_logf_args</code>: A list of arguments to <code>bin_logf</code>.</p></li>
-</ul></div>
+<dl><dt><code>bin_sim_vals</code>:</dt>
+<dd><p>An <code>n</code> by 1 numeric matrix of values
+      simulated from the posterior for the binomial probability \(p\)</p></dd>
+
+    <dt><code>bin_logf</code>:</dt>
+<dd><p>A function returning the log-posterior for
+      \(p\).</p></dd>
+
+    <dt><code>bin_logf_args</code>:</dt>
+<dd><p>A list of arguments to <code>bin_logf</code>.</p></dd>
+
+</dl></div>
     <div id="details">
     <h2>Details</h2>
     <p><em>Generalised Pareto (GP)</em>: <code>model = "gp"</code>.  A model for threshold

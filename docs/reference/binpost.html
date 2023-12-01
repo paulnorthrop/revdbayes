@@ -18,7 +18,7 @@ of a binomial distribution."><!-- mathjax --><script src="https://cdnjs.cloudfla
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
       </span>
     </div>
 
@@ -99,7 +99,7 @@ of a binomial distribution.</p>
 
 <dt>ds_bin</dt>
 <dd><p>A numeric list.  Sufficient statistics for inference
-  about a binomial probability \(p\).  Contains</p><ul><li><p><code>n_raw</code> : number of raw observations</p></li>
+  about a binomial probability \(p\).  Contains</p><ul><li><p><code>n_raw</code> : number of raw observations.</p></li>
 <li><p><code>m</code> : number of threshold exceedances.</p></li>
 </ul></dd>
 
@@ -124,14 +124,20 @@ of a binomial distribution.</p>
     
 
 <p>An object (list) of class <code>"binpost"</code> with components</p>
-<p></p>
-<ul><li><p><code>bin_sim_vals</code>: An <code>n</code> by 1 numeric matrix of values
+<dl><dt><code>bin_sim_vals</code>:</dt>
+<dd><p>An <code>n</code> by 1 numeric matrix of values
       simulated from the posterior for the binomial
-      probability \(p\)</p></li>
-<li><p><code>bin_logf</code>: A function returning the log-posterior for
-      \(p\).</p></li>
-<li><p><code>bin_logf_args</code>: A list of arguments to <code>bin_logf</code>.</p></li>
-</ul><p>If <code>prior$prior</code> is a (user-supplied) R function then this list
+      probability \(p\)</p></dd>
+
+    <dt><code>bin_logf</code>:</dt>
+<dd><p>A function returning the log-posterior for
+      \(p\).</p></dd>
+
+    <dt><code>bin_logf_args</code>:</dt>
+<dd><p>A list of arguments to <code>bin_logf</code>.</p></dd>
+
+
+</dl><p>If <code>prior$prior</code> is a (user-supplied) R function then this list
   also contains <code>ru_object</code> the object of class <code>"ru"</code></p>
 
 
