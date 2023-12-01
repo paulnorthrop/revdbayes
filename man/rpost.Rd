@@ -175,8 +175,7 @@ An object (list) of class \code{"evpost"}, which has the same
   If \code{model == "bingp"} then this list also contains
 
     \item{\code{bin_sim_vals}:}{An \code{n} by 1 numeric matrix of values
-      simulated from the posterior for the binomial
-      probability \eqn{p}}
+      simulated from the posterior for the binomial probability \eqn{p}}
     \item{\code{bin_logf}:}{A function returning the log-posterior for
       \eqn{p}.}
     \item{\code{bin_logf_args}:}{A list of arguments to \code{bin_logf}.}
