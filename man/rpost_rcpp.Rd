@@ -30,11 +30,11 @@ rpost_rcpp(
 \item{data}{Sample data, of a format appropriate to the value of
 \code{model}.
 \itemize{
-  \item {"gp"} {A numeric vector of threshold excesses or raw data.}
-  \item {"bingp"} {A numeric vector of raw data.}
-  \item {"gev"} {A numeric vector of block maxima.}
-  \item {"pp"} {A numeric vector of raw data.}
-  \item {"os"} {A numeric matrix or data frame. Each row should contain
+  \item {"gp"}{A numeric vector of threshold excesses or raw data.}
+  \item {"bingp"}{A numeric vector of raw data.}
+  \item {"gev"}{A numeric vector of block maxima.}
+  \item {"pp"}{A numeric vector of raw data.}
+  \item {"os"}{A numeric matrix or data frame. Each row should contain
     the largest order statistics for a block of data.  These need not
     be ordered: they are sorted inside \code{rpost}. If a block
     contains fewer than \code{dim(as.matrix(data))[2]} order statistics
@@ -161,14 +161,12 @@ An object (list) of class \code{"evpost"}, which has the same
     contains the argument \code{thresh} to \code{rpost} detailed above.
 
   If \code{model == "bingp"} then this list also contains
-  \itemize{
-    \item{\code{bin_sim_vals}:} {An \code{n} by 1 numeric matrix of values
-      simulated from the posterior for the binomial
-      probability \eqn{p}}
-    \item{\code{bin_logf}:} {A function returning the log-posterior for
+
+    \item{\code{bin_sim_vals}:}{An \code{n} by 1 numeric matrix of values
+      simulated from the posterior for the binomial probability \eqn{p}}
+    \item{\code{bin_logf}:}{A function returning the log-posterior for
       \eqn{p}.}
-    \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
-  }
+    \item{\code{bin_logf_args}:}{A list of arguments to \code{bin_logf}.}
 }
 \description{
 Uses the \code{\link[rust]{ru_rcpp}} function in the
