@@ -30,13 +30,13 @@ rpost(
 \item{model}{A character string.  Specifies the extreme value model.}
 
 \item{data}{Sample data, of a format appropriate to the value of
-\code{model}..
+\code{model}.
 \itemize{
-  \item {"gp"} {A numeric vector of threshold excesses or raw data.}
-  \item {"bingp"} {A numeric vector of raw data.}
-  \item {"gev"} {A numeric vector of block maxima.}
-  \item {"pp"} {A numeric vector of raw data.}
-  \item {"os"} {A numeric matrix or data frame. Each row should contain
+  \item {"gp"}{A numeric vector of threshold excesses or raw data.}
+  \item {"bingp"}{A numeric vector of raw data.}
+  \item {"gev"}{A numeric vector of block maxima.}
+  \item {"pp"}{A numeric vector of raw data.}
+  \item {"os"}{A numeric matrix or data frame. Each row should contain
     the largest order statistics for a block of data.  These need not
     be ordered: they are sorted inside \code{rpost}. If a block
     contains fewer than \code{dim(as.matrix(data))[2]} order statistics
@@ -138,10 +138,10 @@ An object (list) of class \code{"evpost"}, which has the same
   structure as an object of class \code{"ru"} returned from
   \code{\link[rust]{ru}}.
   In addition this list contains
-  \itemize{
-    \item{\code{model}:} The argument \code{model} to \code{rpost}
-      detailed above.
-    \item{\code{data}:} The content depends on \code{model}:
+
+    \item{\code{model}:}{The argument \code{model} to \code{rpost}
+      detailed above.}
+    \item{\code{data}:}{The content depends on \code{model}:
       if \code{model = "gev"} then this is the argument \code{data} to
       \code{rpost} detailed above, with missing values removed;
       if \code{model = "gp"} then only the values that lie above the
@@ -149,10 +149,10 @@ An object (list) of class \code{"evpost"}, which has the same
       \code{model = "pp"} then the input data are returned
       but any value lying below the threshold is set to \code{thresh};
       if \code{model = "os"} then the order statistics used are returned
-      as a single vector.
-    \item{\code{prior}:} The argument \code{prior} to \code{rpost}
-      detailed above.
-  }
+      as a single vector.}
+    \item{\code{prior}:}{The argument \code{prior} to \code{rpost}
+      detailed above.}
+
   If \code{nrep} is not \code{NULL} then this list also contains
   \code{data_rep}, a numerical matrix with \code{nrep} rows.  Each
   row contains a replication of the original data \code{data}
@@ -173,14 +173,13 @@ An object (list) of class \code{"evpost"}, which has the same
     contains the argument \code{thresh} to \code{rpost} detailed above.
 
   If \code{model == "bingp"} then this list also contains
-  \itemize{
-    \item{\code{bin_sim_vals}:} {An \code{n} by 1 numeric matrix of values
+
+    \item{\code{bin_sim_vals}:}{An \code{n} by 1 numeric matrix of values
       simulated from the posterior for the binomial
       probability \eqn{p}}
-    \item{\code{bin_logf}:} {A function returning the log-posterior for
+    \item{\code{bin_logf}:}{A function returning the log-posterior for
       \eqn{p}.}
-    \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
-  }
+    \item{\code{bin_logf_args}:}{A list of arguments to \code{bin_logf}.}
 }
 \description{
 Uses the \code{\link[rust]{ru}} function in the \code{\link[rust]{rust}}
