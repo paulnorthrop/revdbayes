@@ -32,11 +32,11 @@ rpost(
 \item{data}{Sample data, of a format appropriate to the value of
 \code{model}.
 \itemize{
-  \item {"gp"}{A numeric vector of threshold excesses or raw data.}
-  \item {"bingp"}{A numeric vector of raw data.}
-  \item {"gev"}{A numeric vector of block maxima.}
-  \item {"pp"}{A numeric vector of raw data.}
-  \item {"os"}{A numeric matrix or data frame. Each row should contain
+  \item \code{"gp"}. A numeric vector of threshold excesses or raw data.
+  \item \code{"bingp"}. A numeric vector of raw data.
+  \item \code{"gev"}. A numeric vector of block maxima.
+  \item \code{"pp"}. A numeric vector of raw data.
+  \item \code{"os"}. A numeric matrix or data frame. Each row should contain
     the largest order statistics for a block of data.  These need not
     be ordered: they are sorted inside \code{rpost}. If a block
     contains fewer than \code{dim(as.matrix(data))[2]} order statistics
@@ -44,7 +44,7 @@ rpost(
     \code{ros} is supplied then only the largest \code{ros} values in
     each row are used.  If a vector is supplied then this is converted
     to a matrix with one column.  This is equivalent to using
-    \code{model = "gev"}.}
+    \code{model = "gev"}.
 }}
 
 \item{prior}{A list specifying the prior for the parameters of the extreme
