@@ -25,14 +25,13 @@ wbinpost(n, prior, ds_bin)
 }
 \value{
 An object (list) of class \code{"binpost"} with components
-  \itemize{
-    \item{\code{bin_sim_vals}:} {An \code{n} by 1 numeric matrix of values
+
+    \item{\code{bin_sim_vals}:}{An \code{n} by 1 numeric matrix of values
       simulated from the posterior for the binomial
       probability \eqn{p}}
-    \item{\code{bin_logf}:} {A function returning the log-posterior for
+    \item{\code{bin_logf}:}{A function returning the log-posterior for
       \eqn{p}.}
-    \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
-  }
+    \item{\code{bin_logf_args}:}{A list of arguments to \code{bin_logf}.}
 }
 \description{
 Samples from the posterior distribution of the probability \eqn{p}

@@ -1095,14 +1095,14 @@ r_pu_N <- function(n, n_success, n_failure, alpha = 0, beta = 0) {
 #'   is a beta distribution so \code{\link[stats:Beta]{rbeta}} is used to
 #'   sample from the posterior.
 #' @return An object (list) of class \code{"binpost"} with components
-#'   \itemize{
-#'     \item{\code{bin_sim_vals}:} {An \code{n} by 1 numeric matrix of values
+#'
+#'     \item{\code{bin_sim_vals}:}{An \code{n} by 1 numeric matrix of values
 #'       simulated from the posterior for the binomial
 #'       probability \eqn{p}}
-#'     \item{\code{bin_logf}:} {A function returning the log-posterior for
+#'     \item{\code{bin_logf}:}{A function returning the log-posterior for
 #'       \eqn{p}.}
-#'     \item{\code{bin_logf_args}:} {A list of arguments to \code{bin_logf}.}
-#'   }
+#'     \item{\code{bin_logf_args}:}{A list of arguments to \code{bin_logf}.}
+#'
 #' @seealso \code{\link{set_bin_prior}} for setting a prior distribution
 #'   for the binomial probability \eqn{p}.
 #' @examples
