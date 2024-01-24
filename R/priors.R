@@ -431,9 +431,9 @@ gp_norm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
 #'
 #' For information about this and other priors see \code{\link{set_prior}}.
 #'
-#' @param pars A numeric vector of length 3.
+#' @param pars A numeric vector of length 2.
 #'   GP parameters (\eqn{\sigma, \xi}).
-#' @param a A numeric scalar.  The default value, Euler's constant, gives the
+#' @param a A numeric scalar.  The default value of 1 gives the
 #'   MDI prior.
 #' @param min_xi  A numeric scalar.  Prior lower bound on \eqn{\xi}.
 #'   Must not be \code{-Inf} because this results in an improper posterior.
@@ -742,7 +742,7 @@ gev_loglognorm <- function(pars, mean, icov, min_xi = -Inf, max_xi = Inf,
 #'   function in the evdbayes package.
 #' @return The log of the prior density.
 #' @export
-gev_mdi <- function(pars, a=0.5772156649015323, min_xi=-1, max_xi=Inf,
+gev_mdi <- function(pars, a = 0.5772156649015323, min_xi = -1, max_xi = Inf,
                     trendsd = 0) {
   if (pars[2] <= 0 | pars[3] < min_xi | pars[3] > max_xi) {
     return(-Inf)

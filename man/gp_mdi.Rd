@@ -8,10 +8,10 @@
 gp_mdi(pars, a = 1, min_xi = -1, max_xi = Inf, trendsd = 0)
 }
 \arguments{
-\item{pars}{A numeric vector of length 3.
+\item{pars}{A numeric vector of length 2.
 GP parameters (\eqn{\sigma, \xi}).}
 
-\item{a}{A numeric scalar.  The default value, Euler's constant, gives the
+\item{a}{A numeric scalar.  The default value of 1 gives the
 MDI prior.}
 
 \item{min_xi}{A numeric scalar.  Prior lower bound on \eqn{\xi}.
