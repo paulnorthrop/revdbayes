@@ -21,7 +21,7 @@ observations.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3.9000</span>
       </span>
     </div>
 
@@ -393,37 +393,37 @@ arguments are used.</p></dd>
 <span class="r-in"><span><span class="co"># Interval estimation</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span><span class="op">)</span><span class="op">$</span><span class="va">long</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         lower    upper n_years level</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 4.449594 5.993786     100    95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 4.448773 5.969923     100    95</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">short</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         lower    upper n_years level</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 4.366233 5.671543     100    95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 4.367625 5.652975     100    95</span>
 <span class="r-in"><span><span class="co"># Density function</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">7</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"d"</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">$</span><span class="va">y</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 2.746685e-13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 7.706746e-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 4.388037e-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 6.891881e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1.729910e-14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 7.820535e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 4.206692e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 6.358165e-03</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="predict.evpost-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># Distribution function</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"p"</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">$</span><span class="va">y</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1.515830e-15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 7.441047e-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 9.752746e-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 9.941298e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1.004588e-16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 7.437885e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 9.763105e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 9.940995e-01</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"p"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="predict.evpost-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># Quantiles</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"q"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">y</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          [,1]     [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 4.449594 4.689824</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 4.636722 4.918989</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 4.783093 5.138710</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 5.007752 5.528677</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 5.993786 7.413930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 4.448773 4.680078</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 4.633844 4.915395</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 4.782720 5.147881</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 5.008050 5.526167</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 5.969923 7.327620</span>
 <span class="r-in"><span><span class="co"># Random generation</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"r"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="predict.evpost-3.png" alt="" width="700" height="433"></span>
@@ -438,8 +438,8 @@ arguments are used.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Setting npy in call to predict.evpost()</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, npy <span class="op">=</span> <span class="va">npy_gom</span><span class="op">)</span><span class="op">$</span><span class="va">long</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         lower    upper n_years level</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 10.37413 41.54889     100    95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        lower    upper n_years level</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 10.4358 41.83222     100    95</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Setting npy in call to rpost() or rpost_rcpp()</span></span></span>
 <span class="r-in"><span><span class="va">bgpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="rpost_rcpp.html">rpost_rcpp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, model <span class="op">=</span> <span class="st">"bingp"</span>, prior <span class="op">=</span> <span class="va">fp</span>, thresh <span class="op">=</span> <span class="va">u</span>,</span></span>
@@ -448,10 +448,10 @@ arguments are used.</p></dd>
 <span class="r-in"><span><span class="co"># Interval estimation</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span><span class="op">)</span><span class="op">$</span><span class="va">long</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         lower   upper n_years level</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 10.43199 42.5304     100    95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 10.39731 41.3388     100    95</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">short</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         lower    upper n_years level</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 9.015996 34.11841     100    95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        lower    upper n_years level</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 9.02042 33.25011     100    95</span>
 <span class="r-in"><span><span class="co"># Density function</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="predict.evpost-4.png" alt="" width="700" height="433"></span>
@@ -461,11 +461,11 @@ arguments are used.</p></dd>
 <span class="r-in"><span><span class="co"># Quantiles</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, type <span class="op">=</span> <span class="st">"q"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">y</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          [,1]     [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 10.43199 15.03383</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 13.36624 19.92257</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 15.96859 25.09860</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 20.23332 34.34370</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 42.53040 90.86274</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 10.39731 14.91932</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 13.25110 19.62011</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 15.75514 24.41841</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 19.84202 33.17579</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 41.33880 88.48956</span>
 <span class="r-in"><span><span class="co"># Random generation</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bgpg</span>, type <span class="op">=</span> <span class="st">"r"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="predict.evpost-6.png" alt="" width="700" height="433"></span>
