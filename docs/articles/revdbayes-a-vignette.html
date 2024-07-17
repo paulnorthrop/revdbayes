@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Introducing revdbayes: Ratio-of-Uniforms Sampling for Bayesian Extreme Value Analysis • revdbayes</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
       </span>
     </div>
 
@@ -101,7 +101,7 @@ Sampling for Bayesian Extreme Value Analysis</h1>
                         <h4 data-toc-skip class="author">Paul J.
 Northrop</h4>
             
-            <h4 data-toc-skip class="date">2024-03-17</h4>
+            <h4 data-toc-skip class="date">2024-07-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/HEAD/vignettes/revdbayes-a-vignette.Rmd" class="external-link"><code>vignettes/revdbayes-a-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>revdbayes-a-vignette.Rmd</code></div>
@@ -517,17 +517,19 @@ reduces the dependence.</p>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rn0</span><span class="op">$</span><span class="va">pa</span></span>
-<span><span class="co">#&gt; [1] 0.1693652</span></span>
-<span><span class="co"># Rotation about maximum a posteriori estimate (MAP)</span></span>
+<span><span class="co">#&gt; [1] 0.1693652</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Rotation about maximum a posteriori estimate (MAP)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
 <span><span class="va">rn1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"pp"</span>, prior <span class="op">=</span> <span class="va">prrain</span>, data <span class="op">=</span> <span class="va">rainfall</span>, </span>
 <span>  thresh <span class="op">=</span> <span class="va">rthresh</span>, noy <span class="op">=</span> <span class="fl">54</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;    3.04    0.08    3.42</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rn1</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt;    3.39    0.06    3.53</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rn1</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-17-2.png" width="672"></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rn1</span><span class="op">$</span><span class="va">pa</span></span>
 <span><span class="co">#&gt; [1] 0.3003995</span></span></code></pre></div>
 <p>Using the <span class="citation">Wadsworth, Tawn, and Jonathan
@@ -539,26 +541,28 @@ parameterisation and <code>rotate = TRUE</code> also reduces posterior
 dependence between all parameters but the earlier plot suggests that
 using <code>rotate = TRUE</code> alone is sufficient in this
 example.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Number of blocks = number of threshold excesses</span></span>
 <span><span class="va">n_exc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">rainfall</span> <span class="op">&gt;</span> <span class="va">rthresh</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">rn2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"pp"</span>, prior <span class="op">=</span> <span class="va">prrain</span>, data <span class="op">=</span> <span class="va">rainfall</span>, </span>
 <span>  thresh <span class="op">=</span> <span class="va">rthresh</span>, noy <span class="op">=</span> <span class="fl">54</span>, use_noy <span class="op">=</span> <span class="cn">FALSE</span>, rotate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">rn2</span><span class="op">$</span><span class="va">pa</span></span>
-<span><span class="co">#&gt; [1] 0.193039</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rn2</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.193039</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rn2</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Number of blocks = number of threshold excesses, rotation about MAP</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
 <span><span class="va">rn3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"pp"</span>, prior <span class="op">=</span> <span class="va">prrain</span>, data <span class="op">=</span> <span class="va">rainfall</span>,</span>
 <span>  thresh <span class="op">=</span> <span class="va">rthresh</span>, noy <span class="op">=</span> <span class="fl">54</span>, use_noy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;    3.59    0.07    3.88</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rn3</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt;    3.62    0.14    3.83</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rn3</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-18-2.png" width="672"></p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rn3</span><span class="op">$</span><span class="va">pa</span></span>
 <span><span class="co">#&gt; [1] 0.3011232</span></span></code></pre></div>
 <p>In this example, rotation of the posterior about its mode using
@@ -576,13 +580,13 @@ example, that is, <code>rn1</code> takes a little longer to produce than
 <code>rn3</code> and this is also the case for other choices of
 prior.</p>
 <p>We produce plots of the estimated marginal posterior densities.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">oldpar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html" class="external-link">density</a></span><span class="op">(</span><span class="va">rn1</span><span class="op">$</span><span class="va">sim_vals</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, adj <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">""</span>, xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">mu</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html" class="external-link">density</a></span><span class="op">(</span><span class="va">rn1</span><span class="op">$</span><span class="va">sim_vals</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, adj <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">""</span>, xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">sigma</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html" class="external-link">density</a></span><span class="op">(</span><span class="va">rn1</span><span class="op">$</span><span class="va">sim_vals</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span>, adj <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">""</span>, xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">xi</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">oldpar</span><span class="op">)</span></span></code></pre></div>
 <p>We do not illustrate the use of marginal Box-Cox transformation in
 the PP case. If <code>trans = "BC"</code> then we use <span class="math inline">\(\phi_1 = \mu\)</span>, <span class="math inline">\(\phi_2 = [\sigma + \xi (u - \mu) ] / (x_{(m)} -
@@ -614,14 +618,14 @@ should be considered.</p>
 <div class="section level3">
 <h3 id="venice-sea-level-data">Venice Sea Level Data<a class="anchor" aria-label="anchor" href="#venice-sea-level-data"></a>
 </h3>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">venice</span><span class="op">)</span></span>
 <span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">10000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">pv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"norm"</span>, model <span class="op">=</span> <span class="st">"gev"</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, cov <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></span>
 <span><span class="va">osv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rpost.html">rpost</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, model <span class="op">=</span> <span class="st">"os"</span>, prior <span class="op">=</span> <span class="va">pv</span>, data <span class="op">=</span> <span class="va">venice</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">osv</span><span class="op">)</span></span></code></pre></div>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-20-1.png" width="672"></p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">osv</span>, ru_scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="revdbayes-a-vignette_files/figure-html/unnamed-chunk-21-1.png" width="672"></p>
 <p>We do not illustrate the use of marginal Box-Cox transformation in
@@ -690,7 +694,7 @@ Method.”</span> <em>Statistics and Computing</em> 1 (2): 129–133. doi:<a hre
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>
