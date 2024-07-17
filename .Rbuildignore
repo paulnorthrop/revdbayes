@@ -25,3 +25,4 @@
 ^\.github$
 ^vignettes/ex1revdbayes\.nb\.html$
 ^vignettes/ex2revdbayes\.nb\.html$
+^LICENSE\.md$
