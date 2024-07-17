@@ -13,4 +13,4 @@ A patch to fix the problems at https://cran.r-project.org/web/checks/check_resul
 
 ## Downstream dependencies
 
-Apart from warnings and notes unrelated to revdbayes, the downstream dependencies of revdbayes (lax, lite, threshr, smovie, exdex, fitteR, mev, rust, distributions3) passed R CMD check. (I will fix these problems for exdex, lax, rust, threshr, smovie shortly.)
+Apart from warnings and notes unrelated to revdbayes, the downstream dependencies of revdbayes (lax, lite, threshr, smovie, exdex, fitteR, mev, rust, distributions3) passed R CMD check.
