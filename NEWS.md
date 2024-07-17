@@ -1,8 +1,9 @@
-# revdbayes 1.5.3.9000
+# revdbayes 1.5.4
 
 ## Bug fixes and minor improvements
 
 * The descriptions of the arguments `pars` and `a` have been corrected: `pars` has length 2, not 3, and the default value of `a` is 1, not Euler's constant. Thank you to Léo Belzile for spotting this.
+* Fixed 3 \link{} targets with missing package anchors in Rd files
 
 # revdbayes 1.5.3
 
