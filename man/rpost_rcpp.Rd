@@ -204,7 +204,7 @@ of an extreme value model.
   in \code{data} are used unless \code{ros} is supplied.
 
 \emph{Parameter transformation}.  The scalar logical arguments (to the
-  function \code{\link{ru}}) \code{trans} and \code{rotate} determine,
+  function \code{\link[rust]{ru}}) \code{trans} and \code{rotate} determine,
   respectively, whether or not Box-Cox transformation is used to reduce
   asymmetry in the posterior distribution and rotation of parameter
   axes is used to reduce posterior parameter dependence.  The default

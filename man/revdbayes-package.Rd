@@ -70,10 +70,10 @@ Attalides, N. (2015) Threshold-based extreme value modelling,
   inter-exceedance times.
 
 The \code{\link[rust]{ru}} and \code{\link[rust]{ru_rcpp}}
-  functions in the \code{\link{rust}} package for details of the arguments
+  functions in the \code{\link[rust]{rust}} package for details of the arguments
   that can be passed to \code{ru} via \code{rpost} and for the form of the
-  object (of class "evpost") returned from \code{rpost}, which has the same
-  structure as an object (of class "ru") returned by \code{ru} and
+  object (of class \code{"evpost"}) returned from \code{rpost}, which has the same
+  structure as an object (of class \code{"ru"}) returned by \code{ru} and
   \code{ru_rcpp}.
 }
 \author{
