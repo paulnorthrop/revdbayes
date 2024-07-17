@@ -112,9 +112,9 @@ rgev(6, 1, 0.5, 0.8)
 Jenkinson, A. F. (1955) The frequency distribution of the
   annual maximum (or minimum) of meteorological elements.
   \emph{Quart. J. R. Met. Soc.}, \strong{81}, 158-171.
-  Chapter 3: \doi{10.1002/qj.49708134804}
+  \doi{10.1002/qj.49708134804}
 
 Coles, S. G. (2001) \emph{An Introduction to Statistical
   Modeling of Extreme Values}, Springer-Verlag, London.
-  \doi{10.1007/978-1-4471-3675-0_3}
+  Chapter 3: \doi{10.1007/978-1-4471-3675-0_3}
 }
