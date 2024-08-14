@@ -1,6 +1,6 @@
 #context("predict.evpost function")
 
-# We check predict.evpost for parameteizations binGP and GEV, for different
+# We check predict.evpost for parameterizations binGP and GEV, for different
 # choices of the argument type.
 
 # Set a tolerance for the comparison of the simulated values
