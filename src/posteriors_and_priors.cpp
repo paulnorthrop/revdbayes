@@ -27,7 +27,7 @@ double cpp_gp_loglik(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
   Rcpp::NumericVector zz = 1 + x[1] * sdat ;
   int m = ss["m"] ;
   if (std::abs(x[1]) > 1e-6) {
-    loglik = -m * log(x[0]) - (1 + 1 / x[1]) * sum(log(zz)) ;
+    loglik = -m * log(x[0]) - (1.0 + 1.0 / x[1]) * sum(log(zz)) ;
   } else {
     double sum_gp = ss["sum_gp"] ;
     double t1, t2, sdatj ;
@@ -59,7 +59,7 @@ double cpp_gev_loglik(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
   int m = ss["m"] ;
   double val = -m * log(x[1]) ;
   if (std::abs(x[2]) > 1e-6) {
-    val = val - (1 + 1 / x[2]) * sum(log(zz)) - sum(pow(zz, (-1 / x[2]))) ;
+    val = val - (1.0 + 1.0 / x[2]) * sum(log(zz)) - sum(pow(zz, (-1 / x[2]))) ;
   } else {
     double sum_gev = ss["sum_gev"] ;
     double t1, t2, sdatj, temp ;
@@ -99,7 +99,7 @@ double cpp_os_loglik(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
   int nos = ss["nos"] ;
   double val = -nos * log(x[1]) ;
   if (std::abs(x[2]) > 1e-6) {
-    val = val - (1 + 1 / x[2]) * sum(log(zz)) - sum(pow(zz_min, (-1 / x[2]))) ;
+    val = val - (1.0 + 1.0 / x[2]) * sum(log(zz)) - sum(pow(zz_min, (-1 / x[2]))) ;
   } else {
     double sum_os = ss["sum_os"] ;
     double t1, t2, sdatj, smindatj, temp ;
@@ -148,7 +148,7 @@ double cpp_pp_loglik(const Rcpp::NumericVector& x, const Rcpp::List& ss) {
   double noy = ss["noy"] ;
   double val = -n_exc * log(x[1]) ;
   if (std::abs(x[2]) > 1e-6) {
-    val = val - (1 + 1 / x[2]) * sum(log(zz)) - noy * pow(zz_u, -1 / x[2]) ;
+    val = val - (1.0 + 1.0 / x[2]) * sum(log(zz)) - noy * pow(zz_u, -1 / x[2]) ;
   } else {
     double sum_pp = ss["sum_pp"] ;
     double t1, t2, sdatj ;
