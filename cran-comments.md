@@ -1,4 +1,4 @@
-A patch to fix the NOTEs at https://cran.r-project.org/web/checks/check_results_revdbayes.html.
+A patch to fix the issues at https://cran.r-project.org/web/checks/check_results_revdbayes.html. Originally, there were ERRORs on r-release-macos-x86_64 and r-oldrel-macos-x86_64, stemming from the unit tests, but these seem to be false positives because they disappeared.
 
 ## R CMD check results
 
@@ -6,9 +6,8 @@ A patch to fix the NOTEs at https://cran.r-project.org/web/checks/check_results_
 
 ## Test environments
 
-- Debian Linux, clang (R-devel) on R-hub
-- Fedora Linux, clang (R-devel) on R-hub
 - macOS (R-release), ubuntu (R-oldrel, R-release, R-devel), windows (R-release) using the rcmdcheck package
+- macOS builder (R-release)
 - win-builder (R-devel, R-release and R-oldrelease)
 
 ## Downstream dependencies

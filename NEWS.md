@@ -1,3 +1,9 @@
+# revdbayes 1.5.5
+
+## Bug fixes and minor improvements
+
+* A patch to fix the issues at https://cran.r-project.org/web/checks/check_results_revdbayes.html. Originally, there were ERRORs on r-release-macos-x86_64 and r-oldrel-macos-x86_64, stemming from the unit tests, but these seem to be false positives because they disappeared.
+
 # revdbayes 1.5.4
 
 ## Bug fixes and minor improvements
