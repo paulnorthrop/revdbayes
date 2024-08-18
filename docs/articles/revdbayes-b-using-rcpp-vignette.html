@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revdbayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.5</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@
                         <h4 data-toc-skip class="author">Paul J.
 Northrop</h4>
             
-            <h4 data-toc-skip class="date">2024-07-17</h4>
+            <h4 data-toc-skip class="date">2024-08-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/revdbayes/blob/HEAD/vignettes/revdbayes-b-using-rcpp-vignette.Rmd" class="external-link"><code>vignettes/revdbayes-b-using-rcpp-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>revdbayes-b-using-rcpp-vignette.Rmd</code></div>
@@ -163,13 +163,13 @@ time.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="op">}</span>  </span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;        expr  min   lq mean median   uq   max neval</span></span>
-<span><span class="co">#&gt;       rpost 83.3 89.0 93.3   92.2 96.6 123.0   100</span></span>
-<span><span class="co">#&gt;  rpost_rcpp 16.6 17.5 19.8   18.3 20.7  46.2   100</span></span>
+<span><span class="co">#&gt;        expr  min   lq  mean median    uq   max neval</span></span>
+<span><span class="co">#&gt;       rpost 83.8 89.4 105.0   95.1 103.0 409.0   100</span></span>
+<span><span class="co">#&gt;  rpost_rcpp 16.4 17.4  21.5   18.6  21.7  97.4   100</span></span>
 <span><span class="co">#&gt; Unit: relative</span></span>
 <span><span class="co">#&gt;        expr min  lq mean median  uq max neval</span></span>
-<span><span class="co">#&gt;       rpost   5 5.1  4.7    5.1 4.7 2.7   100</span></span>
-<span><span class="co">#&gt;  rpost_rcpp   1 1.0  1.0    1.0 1.0 1.0   100</span></span></code></pre></div>
+<span><span class="co">#&gt;       rpost 5.1 5.1  4.9    5.1 4.7 4.2   100</span></span>
+<span><span class="co">#&gt;  rpost_rcpp 1.0 1.0  1.0    1.0 1.0 1.0   100</span></span></code></pre></div>
 <p>In this example <code>rpost_rcpp</code> is indeed much faster than
 <code>rpost</code>.</p>
 </div>
@@ -192,15 +192,14 @@ revdbayes</a>.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;        expr min    lq  mean median    uq   max neval</span></span>
-<span><span class="co">#&gt;       rpost 221 234.0 241.0  239.0 245.0 306.0   100</span></span>
-<span><span class="co">#&gt;  rpost_rcpp  59  62.5  65.7   65.4  68.5  77.6   100</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="st">"relative"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        expr   min    lq mean median    uq max neval</span></span>
+<span><span class="co">#&gt;       rpost 216.0 230.0  248  236.0 252.0 439   100</span></span>
+<span><span class="co">#&gt;  rpost_rcpp  58.3  63.6   71   67.1  72.3 174   100</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="st">"relative"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Unit: relative</span></span>
 <span><span class="co">#&gt;        expr min  lq mean median  uq max neval</span></span>
-<span><span class="co">#&gt;       rpost 3.7 3.7  3.7    3.7 3.6 3.9   100</span></span>
+<span><span class="co">#&gt;       rpost 3.7 3.6  3.5    3.5 3.5 2.5   100</span></span>
 <span><span class="co">#&gt;  rpost_rcpp 1.0 1.0  1.0    1.0 1.0 1.0   100</span></span></code></pre></div>
 <p>Comparison to the example calculations that feature in the
 <strong>evdbayes</strong> user guide, based on the
@@ -226,7 +225,7 @@ and <code>rpost_rcpp</code> produce random samples of size 1000.
 <code>rpost_rcpp</code> when performing the analysis of daily rainfall
 totals from the <a href="revdbayes-a-vignette.html">Introducing
 revdbayes</a>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Informative prior set using revdbayes</span></span>
 <span><span class="va">pr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prob <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">38.9</span>, <span class="fl">7.1</span>, <span class="fl">47</span><span class="op">)</span>,</span>
 <span>                 scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">6.3</span>, <span class="fl">2.6</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"gev"</span>, prior <span class="op">=</span> <span class="st">"quant"</span><span class="op">)</span></span>
@@ -242,15 +241,14 @@ revdbayes</a>.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
 <span><span class="co">#&gt;        expr min    lq  mean median    uq   max neval</span></span>
-<span><span class="co">#&gt;       rpost 401 424.0 442.0  432.0 444.0 652.0   100</span></span>
-<span><span class="co">#&gt;  rpost_rcpp  37  39.7  43.4   42.1  44.7  65.7   100</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="st">"relative"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;       rpost 357 376.0 418.0  387.0 450.0 625.0   100</span></span>
+<span><span class="co">#&gt;  rpost_rcpp  36  38.8  41.6   40.7  43.5  52.5   100</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>microbenchmark.unit <span class="op">=</span> <span class="st">"relative"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span>, signif <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Unit: relative</span></span>
-<span><span class="co">#&gt;        expr min lq mean median  uq max neval</span></span>
-<span><span class="co">#&gt;       rpost  11 11   10     10 9.9 9.9   100</span></span>
-<span><span class="co">#&gt;  rpost_rcpp   1  1    1      1 1.0 1.0   100</span></span></code></pre></div>
+<span><span class="co">#&gt;        expr min  lq mean median uq max neval</span></span>
+<span><span class="co">#&gt;       rpost 9.9 9.7   10    9.5 10  12   100</span></span>
+<span><span class="co">#&gt;  rpost_rcpp 1.0 1.0    1    1.0  1   1   100</span></span></code></pre></div>
 <p>Again, a comparison with the function <code>posterior</code> in
 <strong>evdbayes</strong> is not shown, but <code>rpost</code> is slower
 and <code>rpost_rcpp</code> substantially faster than
@@ -353,7 +351,7 @@ is that now we create the pointer <code>ptr_gp_flat</code> and pass it
 to <code>set_prior</code> using <code>prior = ptr_gp_flat</code> rather
 than using the arguments <code>prior = "flat", model = "gp"</code> to
 specify the equivalent in-built prior.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># GP model, user-defined prior</span></span>
 <span><span class="va">ptr_gp_flat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_prior_xptr.html">create_prior_xptr</a></span><span class="op">(</span><span class="st">"gp_flat"</span><span class="op">)</span></span>
 <span><span class="va">p_user</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_prior.html">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="va">ptr_gp_flat</span>, model <span class="op">=</span> <span class="st">"gp"</span>, min_xi <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
@@ -365,7 +363,7 @@ specify the equivalent in-built prior.</p>
 </h2>
 <script type="text/x-mathjax-config">
    MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
-</script><div id="refs" class="references csl-bib-body hanging-indent">
+</script><div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-Rcpp" class="csl-entry">
 Eddelbuettel, D., and R. Francois. 2011. <span>“Rcpp: Seamless
 <span>R</span> and <span>C++</span> Integration.”</span> <em>Journal of
