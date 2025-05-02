@@ -976,7 +976,7 @@ gev_lrs <- function(x){
   n <- length(x)                          # sample size
   x <- sort(x)                            # put data in ascending order
   q0 <- 1 / (n + 1)
-  q2 <- n / (n+1)                         # for sample minimum and maximum
+  q2 <- n / (n + 1)                       # for sample minimum and maximum
   a <- sqrt(log(q2) / log(q0))
   q1 <- q0 ^ a                            # `middle' quantile
   n0 <- 1
