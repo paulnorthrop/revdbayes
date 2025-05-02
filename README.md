@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# revdbayes <img src="tools/revdbayes_logo.png" height = "150" align="right" />
+# revdbayes <img src="tools/revdbayes_logo.png" alt = "gamlssx logo" height = "150" align="right" />
 
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/revdbayes?branch=master&svg=true)](https://ci.appveyor.com/project/paulnorthrop/revdbayes)
