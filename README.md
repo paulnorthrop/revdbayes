@@ -1,10 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# revdbayes <img src="tools/revdbayes_logo.png" alt = "gamlssx logo" height = "150" align="right" />
+# revdbayes <a href="https://paulnorthrop.github.io/revdbayes/"><img src="tools/revdbayes_logo.png" align="right" style="float:right; height:150px;" alt="revdbayes logo"/></a>
 
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/revdbayes?branch=master&svg=true)](https://ci.appveyor.com/project/paulnorthrop/revdbayes)
 [![R-CMD-check](https://github.com/paulnorthrop/revdbayes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/paulnorthrop/revdbayes/actions/workflows/R-CMD-check.yaml)
 [![Coverage
 Status](https://codecov.io/github/paulnorthrop/revdbayes/coverage.svg?branch=master)](https://app.codecov.io/github/paulnorthrop/revdbayes?branch=master)
