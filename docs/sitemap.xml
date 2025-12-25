@@ -1,195 +1,66 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/articles/EVA2021revdbayes.html</loc>
-  </url>
-  <url>
-    <loc>/articles/ex1revdbayes.html</loc>
-  </url>
-  <url>
-    <loc>/articles/ex2revdbayes.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/revdbayes-a-vignette.html</loc>
-  </url>
-  <url>
-    <loc>/articles/revdbayes-b-using-rcpp-vignette.html</loc>
-  </url>
-  <url>
-    <loc>/articles/revdbayes-c-predictive-vignette.html</loc>
-  </url>
-  <url>
-    <loc>/articles/revdbayes-d-kgaps-vignette.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/binpost.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create_prior_xptr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dgaps_post.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gev.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gev_beta.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gev_flat.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gev_flatflat.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gev_loglognorm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gev_mdi.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gev_norm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gev_prob.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gev_quant.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gom.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp_beta.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp_flat.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp_flatflat.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp_jeffreys.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp_lrs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp_mdi.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp_norm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp_pwm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/grimshaw_gp_mle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/kgaps_mle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/kgaps_post.html</loc>
-  </url>
-  <url>
-    <loc>/reference/kgaps_stats.html</loc>
-  </url>
-  <url>
-    <loc>/reference/newlyn.html</loc>
-  </url>
-  <url>
-    <loc>/reference/oxford.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.evpost.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.evpred.html</loc>
-  </url>
-  <url>
-    <loc>/reference/portpirie.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pp_check.evpost.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predict.evpost.html</loc>
-  </url>
-  <url>
-    <loc>/reference/print.evpost.html</loc>
-  </url>
-  <url>
-    <loc>/reference/print.summary.evpost.html</loc>
-  </url>
-  <url>
-    <loc>/reference/quantile_to_gev.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rainfall.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rDir.html</loc>
-  </url>
-  <url>
-    <loc>/reference/revdbayes-internal.html</loc>
-  </url>
-  <url>
-    <loc>/reference/revdbayes-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/revdbayes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rpost.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rpost_rcpp.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rprior_prob.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rprior_quant.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_bin_prior.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_prior.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summary.evpost.html</loc>
-  </url>
-  <url>
-    <loc>/reference/venice.html</loc>
-  </url>
-  <url>
-    <loc>/reference/wbinpost.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/articles/EVA2021revdbayes.html</loc></url>
+<url><loc>/articles/ex1revdbayes.html</loc></url>
+<url><loc>/articles/ex2revdbayes.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/revdbayes-a-vignette.html</loc></url>
+<url><loc>/articles/revdbayes-b-using-rcpp-vignette.html</loc></url>
+<url><loc>/articles/revdbayes-c-predictive-vignette.html</loc></url>
+<url><loc>/articles/revdbayes-d-kgaps-vignette.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/binpost.html</loc></url>
+<url><loc>/reference/create_prior_xptr.html</loc></url>
+<url><loc>/reference/dgaps_post.html</loc></url>
+<url><loc>/reference/gev.html</loc></url>
+<url><loc>/reference/gev_beta.html</loc></url>
+<url><loc>/reference/gev_flat.html</loc></url>
+<url><loc>/reference/gev_flatflat.html</loc></url>
+<url><loc>/reference/gev_loglognorm.html</loc></url>
+<url><loc>/reference/gev_mdi.html</loc></url>
+<url><loc>/reference/gev_norm.html</loc></url>
+<url><loc>/reference/gev_prob.html</loc></url>
+<url><loc>/reference/gev_quant.html</loc></url>
+<url><loc>/reference/gom.html</loc></url>
+<url><loc>/reference/gp.html</loc></url>
+<url><loc>/reference/gp_beta.html</loc></url>
+<url><loc>/reference/gp_flat.html</loc></url>
+<url><loc>/reference/gp_flatflat.html</loc></url>
+<url><loc>/reference/gp_jeffreys.html</loc></url>
+<url><loc>/reference/gp_lrs.html</loc></url>
+<url><loc>/reference/gp_mdi.html</loc></url>
+<url><loc>/reference/gp_norm.html</loc></url>
+<url><loc>/reference/gp_pwm.html</loc></url>
+<url><loc>/reference/grimshaw_gp_mle.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/kgaps_mle.html</loc></url>
+<url><loc>/reference/kgaps_post.html</loc></url>
+<url><loc>/reference/kgaps_stats.html</loc></url>
+<url><loc>/reference/newlyn.html</loc></url>
+<url><loc>/reference/oxford.html</loc></url>
+<url><loc>/reference/plot.evpost.html</loc></url>
+<url><loc>/reference/plot.evpred.html</loc></url>
+<url><loc>/reference/portpirie.html</loc></url>
+<url><loc>/reference/pp_check.evpost.html</loc></url>
+<url><loc>/reference/predict.evpost.html</loc></url>
+<url><loc>/reference/print.evpost.html</loc></url>
+<url><loc>/reference/print.summary.evpost.html</loc></url>
+<url><loc>/reference/quantile_to_gev.html</loc></url>
+<url><loc>/reference/rainfall.html</loc></url>
+<url><loc>/reference/rDir.html</loc></url>
+<url><loc>/reference/revdbayes-internal.html</loc></url>
+<url><loc>/reference/revdbayes-package.html</loc></url>
+<url><loc>/reference/rpost.html</loc></url>
+<url><loc>/reference/rpost_rcpp.html</loc></url>
+<url><loc>/reference/rprior_prob.html</loc></url>
+<url><loc>/reference/rprior_quant.html</loc></url>
+<url><loc>/reference/set_bin_prior.html</loc></url>
+<url><loc>/reference/set_prior.html</loc></url>
+<url><loc>/reference/summary.evpost.html</loc></url>
+<url><loc>/reference/venice.html</loc></url>
+<url><loc>/reference/wbinpost.html</loc></url>
 </urlset>
+

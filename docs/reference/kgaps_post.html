@@ -5,7 +5,7 @@ for threshold interexceedance times of Suveges and Davison (2010)."><!-- mathjax
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -30,7 +30,7 @@ for threshold interexceedance times of Suveges and Davison (2010)."><!-- mathjax
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
@@ -61,14 +61,14 @@ for threshold interexceedance times of Suveges and Davison (2010)."><!-- mathjax
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/paulnorthrop/revdbayes/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
@@ -100,7 +100,9 @@ for threshold interexceedance times of Suveges and Davison (2010).</p>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>data</dt>
+
+
+<dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
 <dd><p>A numeric vector or numeric matrix of raw data.  If <code>data</code>
   is a matrix then the log-likelihood is constructed as the sum of
   (independent) contributions from different columns. A common situation is
@@ -112,11 +114,11 @@ for threshold interexceedance times of Suveges and Davison (2010).</p>
   different columns.</p></dd>
 
 
-<dt>thresh</dt>
+<dt id="arg-thresh">thresh<a class="anchor" aria-label="anchor" href="#arg-thresh"></a></dt>
 <dd><p>A numeric scalar.  Extreme value threshold applied to data.</p></dd>
 
 
-<dt>k</dt>
+<dt id="arg-k">k<a class="anchor" aria-label="anchor" href="#arg-k"></a></dt>
 <dd><p>A numeric scalar.  Run parameter \(K\), as defined in Suveges and
 Davison (2010).  Threshold inter-exceedances times that are not larger
 than <code>k</code> units are assigned to the same cluster, resulting in a
@@ -125,11 +127,11 @@ corresponding to an inter-exceedance time of \(T\) is given by
 \(S = \max(T - K, 0)\).</p></dd>
 
 
-<dt>n</dt>
+<dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
 <dd><p>A numeric scalar. The size of posterior sample required.</p></dd>
 
 
-<dt>inc_cens</dt>
+<dt id="arg-inc-cens">inc_cens<a class="anchor" aria-label="anchor" href="#arg-inc-cens"></a></dt>
 <dd><p>A logical scalar indicating whether or not to include
 contributions from right-censored inter-exceedance times, relating to the
 first and last observations.  It is known that these times are greater
@@ -139,12 +141,12 @@ first and last inter-exceedance times for each column.  See also the
 <strong>Details</strong> section of <code><a href="https://paulnorthrop.github.io/exdex/reference/kgaps.html" class="external-link">kgaps</a></code>.</p></dd>
 
 
-<dt>alpha, beta</dt>
+<dt id="arg-alpha-beta">alpha, beta<a class="anchor" aria-label="anchor" href="#arg-alpha-beta"></a></dt>
 <dd><p>Positive numeric scalars.  Parameters of a
 beta(\(\alpha\), \(\beta\)) prior for \(\theta\).</p></dd>
 
 
-<dt>param</dt>
+<dt id="arg-param">param<a class="anchor" aria-label="anchor" href="#arg-param"></a></dt>
 <dd><p>A character scalar.  If <code>param = "logit"</code> (the default)
 then we simulate from the posterior distribution of
 \(\phi = \log(\theta / (1-\theta))\)
@@ -156,7 +158,7 @@ to <code>param = "logit"</code>.  This is to avoid sampling directly from a
 posterior with mode equal to 0 or 1.</p></dd>
 
 
-<dt>use_rcpp</dt>
+<dt id="arg-use-rcpp">use_rcpp<a class="anchor" aria-label="anchor" href="#arg-use-rcpp"></a></dt>
 <dd><p>A logical scalar.  If <code>TRUE</code> (the default) the
 rust function <code><a href="https://paulnorthrop.github.io/rust/reference/ru_rcpp.html" class="external-link">ru_rcpp</a></code> is used for
 posterior simulation.  If <code>FALSE</code> the (slower) function
@@ -165,15 +167,10 @@ posterior simulation.  If <code>FALSE</code> the (slower) function
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>An object (list) of class <code>"evpost"</code>, which has the same
-  structure as an object of class <code>"ru"</code> returned from</p>
-<p></p>
-<p><code><a href="https://paulnorthrop.github.io/rust/reference/ru.html" class="external-link">ru</a></code>.
-  In addition this list contains</p>
-<p></p>
-<ul><li><p><code>call</code>: The call to <code>kgaps()</code>.</p></li>
+    <p>An object (list) of class <code>"evpost"</code>, which has the same
+  structure as an object of class <code>"ru"</code> returned from
+  <code><a href="https://paulnorthrop.github.io/rust/reference/ru.html" class="external-link">ru</a></code>.
+  In addition this list contains</p><ul><li><p><code>call</code>: The call to <code>kgaps()</code>.</p></li>
 <li><p><code>model</code>: The character scalar <code>"kgaps"</code>.</p></li>
 <li><p><code>thresh</code>: The argument <code>thresh</code>.</p></li>
 <li><p><code>ss</code>: The sufficient statistics for the K-gaps likelihood,
@@ -240,15 +237,15 @@ posterior simulation.  If <code>FALSE</code> the (slower) function
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

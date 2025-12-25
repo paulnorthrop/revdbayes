@@ -14,7 +14,7 @@ the line.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/m
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -39,7 +39,7 @@ the line.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/m
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
@@ -70,14 +70,14 @@ the line.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/m
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/paulnorthrop/revdbayes/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
@@ -103,7 +103,7 @@ the line.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for evpred</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'evpred'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">...</span>,</span>
@@ -115,26 +115,28 @@ the line.</p>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>x</dt>
+
+
+<dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>An object of class "evpost", a result of a call to
 <code><a href="rpost.html">rpost</a></code>.</p></dd>
 
 
-<dt>...</dt>
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional arguments passed on to <code><a href="https://rdrr.io/r/graphics/matplot.html" class="external-link">matplot</a></code>.</p></dd>
 
 
-<dt>leg_pos</dt>
+<dt id="arg-leg-pos">leg_pos<a class="anchor" aria-label="anchor" href="#arg-leg-pos"></a></dt>
 <dd><p>A character scalar. Keyword for the position of legend.
 See <code><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></code>.</p></dd>
 
 
-<dt>leg_text</dt>
+<dt id="arg-leg-text">leg_text<a class="anchor" aria-label="anchor" href="#arg-leg-text"></a></dt>
 <dd><p>A character or expression vector.  Text for legend.
 See <code><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></code>.</p></dd>
 
 
-<dt>which_int</dt>
+<dt id="arg-which-int">which_int<a class="anchor" aria-label="anchor" href="#arg-which-int"></a></dt>
 <dd><p>A character scalar.  If <code>x$type = "i"</code> which
 intervals should be plotted?  <code>"long"</code> for equi-tailed intervals,
 <code>"short"</code> for the shortest possible intervals, <code>"both"</code> for
@@ -143,9 +145,7 @@ both.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>Nothing is returned.</p>
+    <p>Nothing is returned.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -178,8 +178,8 @@ both.</p></dd>
 <span class="r-in"><span><span class="co"># Predictive intervals</span></span></span>
 <span class="r-in"><span><span class="va">i_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"i"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">i_gevp</span>, which_int <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>argument 1 does not name a graphical parameter</span>
 <span class="r-plt img"><img src="plot.evpred-4.png" alt="" width="700" height="433"></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>argument 1 does not name a graphical parameter</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Sample from predictive distribution</span></span></span>
 <span class="r-in"><span><span class="va">r_gevp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">gevp</span>, type <span class="op">=</span> <span class="st">"r"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -202,15 +202,15 @@ both.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 
