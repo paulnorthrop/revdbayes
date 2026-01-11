@@ -1,3 +1,9 @@
+# revdbayes 1.5.6
+
+## Bug fixes and minor improvements
+
+* Implements the patch described in [Rcpp Issue #1406](https://github.com/RcppCore/Rcpp/issues/1406) to avoid masking of `Rf_error()`.
+
 # revdbayes 1.5.5
 
 ## Bug fixes and minor improvements
