@@ -81,7 +81,7 @@ $$ p_a(d, r) = \frac{\int f(x) {\rm ~d}x}{(r d + 1) \, a(r) \displaystyle\prod_{
 
 ## Acceptance region for N(10, 1) 
 
-```{r Cpics, echo = FALSE, fig.align='center', out.width="600px"}
+```{r Cpics, echo = FALSE, fig.align='center', out.width="600px", fig.alt = "Plots showing the generalised ratio-of-uniforms acceptance region for the N(10, 1) case, for r = 1, r = 1/2 and r = 1/4. The value of r matters, with r = 1/2 being optimal in terms of acceptance probability, but comparing the plots in the second row, where mode relocation has been used, shows that mode relocation produces much larger improvements."}
 knitr::include_graphics("ROUnormal.PNG")
 ```
 

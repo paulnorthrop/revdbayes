@@ -70,11 +70,11 @@ if (got_microbenchmark) {
     rpost_rcpp = rpost_rcpp(n = n, model = "gev", prior = pn, 
                             data = portpirie)
   )
+  options(microbenchmark.unit = NULL)
+  print(res, signif = 3)
+  options(microbenchmark.unit = "relative")
+  print(res, signif = 2)
 }    
-options(microbenchmark.unit = NULL)
-print(res, signif = 3)
-options(microbenchmark.unit = "relative")
-print(res, signif = 2)
 ```
 
 Comparison to the example calculations that feature in the **evdbayes** user guide, based on the `posterior` function, are not shown because **evdbayes** is archived on CRAN.  This comparison shows that `rpost_rcpp` is approximately a factor 3 faster than `posterior`.  This comparison is generous to `posterior` because the burn-in was set to zero and `posterior` produces a dependent sample rather than a random sample.  The *effective sample size* of an MCMC sample from `posterior` varies between simulations and across parameters.  The `effectiveSize` function in the **coda** package [@coda] suggests that the effective sample size in this example is of the order of 100 to 200, whereas the **revdbayes** functions `rpost` and `rpost_rcpp` produce random samples of size 1000. `rpost` is a little slower than `posterior`.
@@ -94,11 +94,11 @@ if (got_microbenchmark) {
     rpost_rcpp = rpost_rcpp(n = n, model = "pp", prior = pr2, 
                             data = rainfall, thresh = 40, noy = 54)
   )
+  options(microbenchmark.unit = NULL)
+  print(res, signif = 3)
+  options(microbenchmark.unit = "relative")
+  print(res, signif = 2)
 }
-options(microbenchmark.unit = NULL)
-print(res, signif = 3)
-options(microbenchmark.unit = "relative")
-print(res, signif = 2)
 ```
 
 Again, a comparison with the function `posterior` in **evdbayes** is not shown, but `rpost` is slower and `rpost_rcpp` substantially faster than `posterior`.
