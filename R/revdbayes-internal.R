@@ -442,6 +442,61 @@ logNegNA <- function(x) {
   return(xx)
 }
 
+# =========================== gp_mle ===========================
+
+#' @keywords internal
+#' @rdname revdbayes-internal
+gp_mle <- function(gp_data) {
+  # Maximum likelihood estimation for the generalized Pareto distribution
+  #
+  # Performs maximum likelihood estimation for the generalized Pareto
+  # distribution.  Uses the function \code{gpdmle} associated with
+  # Grimshaw (1993), which returns MLEs of sigma and k = - \xi.
+  #
+  # Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
+  #   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
+  #   and Computing (1991) 1, 129-133. https://doi.org/10.1007/BF01889987.
+  #
+  # Args:
+  #   gp_data : A numeric vector containing positive values, assumed to be a
+  #             random sample from a generalized Pareto distribution.
+  #
+  # Returns:
+  #   A list with components
+  #     mle  : A numeric vector.  MLEs of GP parameters sigma and xi.
+  #     nllh : A numeric scalar.  The negated log-likelihood at the MLE.
+  #
+  # Remove missing values
+  gp_data <- as.numeric(stats::na.omit(gp_data))
+  # Call Grimshaw (1993) function, note: k is -xi, a is sigma
+  temp <- list()
+  pjn <- try(grimshaw_gp_mle(gp_data), silent = TRUE)
+  if (inherits(pjn, "try-error")) {
+    # If grimshaw_gp_mle() errors then use a fallback MLE function
+    pjn <- fallback_gp_mle(init = c(mean(gp_data), 0), data = gp_data,
+                           m = length(gp_data), xm = max(gp_data),
+                           sum_gp = sum(gp_data))
+    temp$mle <- pjn$mle
+  } else {
+    # mle for (sigma,xi)
+    temp$mle <- c(pjn$a, -pjn$k)
+    # Check that the observed information is not singular
+    cov_mtx <- try(solve(gp_obs_info(gp_pars = temp$mle, y = gp_data)),
+                   silent = TRUE)
+    if (inherits(cov_mtx, "try-error")) {
+      # If it is singular then use the fallback MLE function
+      pjn <- fallback_gp_mle(init = c(mean(gp_data), 0), data = gp_data,
+                             m = length(gp_data), xm = max(gp_data),
+                             sum_gp = sum(gp_data))
+      temp$mle <- pjn$mle
+    }
+  }
+  sc <- rep(temp$mle[1], length(gp_data))
+  xi <- temp$mle[2]
+  temp$nllh <- sum(log(sc)) + sum(log(1 + xi * gp_data / sc) * (1 / xi + 1))
+  return(temp)
+}
+
 # ============================== fallback_gp_mle ==============================
 
 #' @keywords internal
@@ -454,3 +509,4 @@ fallback_gp_mle <- function(init, ...){
   temp$nllh <- -x$value
   return(temp)
 }
+
