@@ -1,3 +1,9 @@
+# revdbayes 1.5.7
+
+## Bug fixes and minor improvements
+
+* In `grimshaw_gp_mle()` and in the internal function `gp_mle()`, any missing (`NA`) values are removed before attempting to find the MLE. 
+
 # revdbayes 1.5.6
 
 ## Bug fixes and minor improvements
