@@ -96,7 +96,7 @@ NULL
 #' @rdname gev
 #' @export
 dgev <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE, m = 1) {
-  if (any(scale <= 0)) {
+  if (any(scale <= 0, na.rm = TRUE)) {
     stop("invalid scale: scale must be positive.")
   }
   if (length(x) == 0) {
@@ -285,7 +285,7 @@ NULL
 #' @rdname gp
 #' @export
 dgp <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE) {
-  if (any(scale < 0)) {
+  if (any(scale < 0, na.rm = TRUE)) {
     stop("invalid scale: scale must be positive.")
   }
   if (length(x) == 0) {
