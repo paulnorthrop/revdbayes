@@ -154,3 +154,27 @@ test_that("log_pdf.GP works correctly", {
   expect_length(log_GP_pdf(g3, seq_len(10)), 10)
 })
 
+test_that("qgp throws warning and returns NaN if p < 0 or p > 1", {
+  # p < 0
+  expect_warning(q <- qgp(-0.0001, shape = xi1), regexp = "NaNs produced")
+  expect_identical(q, NaN)
+  # p > 1
+  expect_warning(q <- qgp(1.0001, shape = xi1), regexp = "NaNs produced")
+  expect_identical(q, NaN)
+  # exp(p) > 1
+  expect_warning(q <- qgp(0.0001, shape = xi1, log.p = TRUE), regexp = "NaNs produced")
+  expect_identical(q, NaN)
+
+  p <- seq(-0.2, 1.2, by = 0.1)
+  lidx <- p < 0 | p > 1
+  expect_warning(q <- qgp(p, shape = xi1), regexp = "NaNs produced")
+  expect_true(all(is.nan(q[lidx])))
+  expect_true(all(!is.nan(q[!lidx])))
+
+  p <- seq(-2, 1, by = 0.1)
+  lidx <- p > 0
+  expect_warning(q <- qgp(p, shape = xi1, log.p = TRUE), regexp = "NaNs produced")
+  expect_true(all(is.nan(q[lidx])))
+  expect_true(all(!is.nan(q[!lidx])))
+})
+

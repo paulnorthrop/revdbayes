@@ -169,14 +169,18 @@ pgev <- function(q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
 #' @export
 qgev <- function (p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
                   log.p = FALSE, m = 1) {
-  if (any(scale <= 0)) {
+  if (any(scale <= 0, na.rm = TRUE)) {
     stop("invalid scale: scale must be positive.")
   }
   if (length(p) == 0) {
     return(numeric(0))
   }
   if (!log.p & any(p < 0 | p > 1, na.rm = TRUE)) {
-    stop("invalid p: p must be in [0,1].")
+    p[p < 0 | p > 1] <- NaN
+    warning("NaNs produced")
+  } else if (log.p & any(p > 0)) {
+    p[p > 0] <- NaN
+    warning("NaNs produced")
   }
   max_len <- max(length(p), length(loc), length(scale), length(shape),
                  length(m))
@@ -355,14 +359,18 @@ pgp <- function (q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
 #' @export
 qgp <- function (p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
                  log.p = FALSE) {
-  if (any(scale < 0)) {
+  if (any(scale < 0, na.rm = TRUE)) {
     stop("invalid scale: scale must be positive.")
   }
   if (length(p) == 0) {
     return(numeric(0))
   }
   if (!log.p & any(p < 0 | p > 1, na.rm = TRUE)) {
-    stop("invalid p: p must be in [0,1].")
+    p[p < 0 | p > 1] <- NaN
+    warning("NaNs produced")
+  } else if (log.p & any(p > 0)) {
+    p[p > 0] <- NaN
+    warning("NaNs produced")
   }
   max_len <- max(length(p), length(loc), length(scale), length(shape))
   p <- rep_len(p, max_len)
