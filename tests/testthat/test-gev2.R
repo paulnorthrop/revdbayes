@@ -155,3 +155,31 @@ test_that("pgev and qgev are consistent", {
   expect_equal(pgev(qgev(pvec, shape = xi2), shape = xi2), pvec)
   expect_equal(pgev(qgev(pvec, shape = xi3), shape = xi3), pvec)
 })
+
+test_that("qgev throws warning and returns NaN if p < 0 or p > 1", {
+  # p < 0
+  expect_warning(q <- qgev(-0.0001, shape = xi1), regexp = "NaNs produced")
+  expect_identical(q, NaN)
+  # p > 1
+  expect_warning(q <- qgev(1.0001, shape = xi1), regexp = "NaNs produced")
+  expect_identical(q, NaN)
+  # exp(p) > 1
+  expect_warning(q <- qgev(0.0001, shape = xi1, log.p = TRUE), regexp = "NaNs produced")
+  expect_identical(q, NaN)
+
+  p <- seq(-0.2, 1.2, by = 0.1)
+  lidx <- p < 0 | p > 1
+  expect_warning(q <- qgev(p, shape = xi1), regexp = "NaNs produced")
+  expect_true(all(is.nan(q[lidx])))
+  expect_true(all(!is.nan(q[!lidx])))
+
+  p <- seq(-2, 1, by = 0.1)
+  lidx <- p > 0
+  expect_warning(q <- qgev(p, shape = xi1, log.p = TRUE), regexp = "NaNs produced")
+  expect_true(all(is.nan(q[lidx])))
+  expect_true(all(!is.nan(q[!lidx])))
+})
+
+
+
+
