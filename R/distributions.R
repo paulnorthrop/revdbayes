@@ -131,7 +131,7 @@ dgev <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE, m = 1) {
 #' @export
 pgev <- function(q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
                  log.p = FALSE, m = 1) {
-  if (any(scale <= 0)) {
+  if (any(scale <= 0, na.rm = TRUE)) {
     stop("invalid scale: scale must be positive.")
   }
   if (length(q) == 0) {
@@ -169,7 +169,7 @@ pgev <- function(q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
 #' @export
 qgev <- function (p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
                   log.p = FALSE, m = 1) {
-  if (any(scale <= 0)) {
+  if (any(scale <= 0, na.rm = TRUE)) {
     stop("invalid scale: scale must be positive.")
   }
   if (length(p) == 0) {
@@ -285,7 +285,7 @@ NULL
 #' @rdname gp
 #' @export
 dgp <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE) {
-  if (any(scale < 0)) {
+  if (any(scale <= 0, na.rm = TRUE)) {
     stop("invalid scale: scale must be positive.")
   }
   if (length(x) == 0) {
@@ -318,7 +318,7 @@ dgp <- function (x, loc = 0, scale = 1, shape = 0, log = FALSE) {
 #' @export
 pgp <- function (q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
                  log.p = FALSE){
-  if (any(scale < 0)) {
+  if (any(scale <= 0, na.rm = TRUE)) {
     stop("invalid scale: scale must be positive.")
   }
   if (length(q) == 0) {
@@ -355,7 +355,7 @@ pgp <- function (q, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
 #' @export
 qgp <- function (p, loc = 0, scale = 1, shape = 0, lower.tail = TRUE,
                  log.p = FALSE) {
-  if (any(scale < 0)) {
+  if (any(scale <= 0, na.rm = TRUE)) {
     stop("invalid scale: scale must be positive.")
   }
   if (length(p) == 0) {
@@ -410,7 +410,7 @@ dbingp <- function(x, p_u = 0.5 , loc = 0, scale = 1, shape = 0, log = FALSE) {
   if (any(x < loc)) {
     stop("Invalid x: no element of  can be less than loc.")
   }
-  if (any(scale < 0)) {
+  if (any(scale <= 0, na.rm = TRUE)) {
     stop("invalid scale: scale must be positive.")
   }
   if (any(p_u <= 0) || any(p_u >= 1)) {
@@ -445,7 +445,7 @@ pbingp <- function(q, p_u = 0.5 , loc = 0, scale = 1, shape = 0,
   if (any(q < loc)) {
     stop("Invalid q: no element of q can be less than loc.")
   }
-  if (min(scale) < 0) {
+  if (any(scale <= 0, na.rm = TRUE)) {
     stop("invalid scale: scale must be positive.")
   }
   if (any(p_u <= 0) || any(p_u >= 1)) {
@@ -488,7 +488,7 @@ qbingp <- function(p, p_u = 0.5, loc = 0, scale = 1, shape = 0,
       stop("Invalid p: no element of p can be greater than than p_u.")
     }
   }
-  if (min(scale) < 0) {
+  if (any(scale <= 0, na.rm = TRUE)) {
     stop("invalid scale: scale must be positive.")
   }
   if (any(p_u <= 0) || any(p_u > 1)) {
