@@ -12,6 +12,7 @@
 \alias{check_sample_size}
 \alias{check_sample_size_message}
 \alias{logNegNA}
+\alias{gp_mle}
 \alias{fallback_gp_mle}
 \title{Internal revdbayes functions}
 \usage{
@@ -34,6 +35,8 @@ check_sample_size(prior_name, n_check)
 check_sample_size_message(prior_name, n_check)
 
 logNegNA(x)
+
+gp_mle(gp_data)
 
 fallback_gp_mle(init, ...)
 }
