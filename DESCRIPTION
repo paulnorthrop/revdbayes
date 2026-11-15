@@ -30,7 +30,6 @@ LazyData: TRUE
 Encoding: UTF-8
 Depends:
     R (>= 3.3.0),
-RoxygenNote: 7.3.3
 Suggests: ggplot2 (>= 2.2.1),
     knitr,
     microbenchmark,
@@ -42,3 +41,4 @@ URL: https://paulnorthrop.github.io/revdbayes/,
 BugReports: https://github.com/paulnorthrop/revdbayes/issues
 LinkingTo: Rcpp (>= 0.12.10), RcppArmadillo
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.1

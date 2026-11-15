@@ -79,6 +79,11 @@ The \code{\link[rust]{ru}} and \code{\link[rust]{ru_rcpp}}
 \author{
 \strong{Maintainer}: Paul J. Northrop \email{p.northrop@ucl.ac.uk} [copyright holder]
 
+Authors:
+\itemize{
+  \item Paul J. Northrop \email{p.northrop@ucl.ac.uk} [copyright holder]
+}
+
 Other contributors:
 \itemize{
   \item Scott D. Grimshaw [contributor]

@@ -47,20 +47,22 @@ export(set_bin_prior)
 export(set_prior)
 export(wbinpost)
 importFrom(Rcpp,sourceCpp)
-importFrom(bayesplot,mcmc_areas)
-importFrom(bayesplot,mcmc_dens)
-importFrom(bayesplot,mcmc_hist)
-importFrom(bayesplot,mcmc_intervals)
-importFrom(bayesplot,pp_check)
-importFrom(bayesplot,ppc_boxplot)
-importFrom(bayesplot,ppc_dens)
-importFrom(bayesplot,ppc_dens_overlay)
-importFrom(bayesplot,ppc_ecdf_overlay)
-importFrom(bayesplot,ppc_hist)
-importFrom(bayesplot,ppc_intervals)
-importFrom(bayesplot,ppc_ribbon)
-importFrom(bayesplot,ppc_stat)
-importFrom(bayesplot,ppc_stat_2d)
+importFrom(bayesplot,
+  mcmc_areas,
+  mcmc_dens,
+  mcmc_hist,
+  mcmc_intervals,
+  pp_check,
+  ppc_boxplot,
+  ppc_dens,
+  ppc_dens_overlay,
+  ppc_ecdf_overlay,
+  ppc_hist,
+  ppc_intervals,
+  ppc_ribbon,
+  ppc_stat,
+  ppc_stat_2d
+)
 importFrom(graphics,plot)
 importFrom(stats,predict)
 useDynLib(revdbayes, .registration = TRUE)
