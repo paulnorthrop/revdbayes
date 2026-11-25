@@ -1,0 +1,84 @@
+# revdbayes [![revdbayes logo](tools/revdbayes_logo.png)](https://paulnorthrop.github.io/revdbayes/)
+
+[![R-CMD-check](https://github.com/paulnorthrop/revdbayes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/paulnorthrop/revdbayes/actions/workflows/R-CMD-check.yaml)
+[![Coverage
+Status](https://codecov.io/github/paulnorthrop/revdbayes/coverage.svg?branch=master)](https://app.codecov.io/github/paulnorthrop/revdbayes?branch=master)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/revdbayes)](https://cran.r-project.org/package=revdbayes)
+[![Downloads
+(monthly)](https://cranlogs.r-pkg.org/badges/revdbayes?color=brightgreen)](https://cran.r-project.org/package=revdbayes)
+[![Downloads
+(total)](https://cranlogs.r-pkg.org/badges/grand-total/revdbayes?color=brightgreen)](https://cran.r-project.org/package=revdbayes)
+
+### Ratio-of-uniforms Sampling for Bayesian Extreme Value Analysis
+
+### What does revdbayes do?
+
+The `revdbayes` package uses the ratio-of-uniforms method to produce
+random samples from the posterior distributions that occur in some
+relatively simple Bayesian extreme value analyses. The functionality of
+revdbayes is similar to the [`evdbayes`
+package](https://cran.r-project.org/package=evdbayes), which uses Markov
+Chain Monte Carlo (MCMC) methods for posterior simulation. Advantages of
+the ratio-of-uniforms method over MCMC in this context are that the user
+is not required to set tuning parameters nor to monitor convergence and
+a random posterior sample is produced. Use of the [Rcpp
+package](https://cran.r-project.org/package=evdbayes) enables
+`revdbayes` to be faster than `evdbayes`. Also provided are functions
+for making inferences about the extremal index, using the K-gaps model
+of [Suveges and Davison (2010)](https://doi.org/10.1214/09-AOAS292) and
+the D-gaps model of [Holesovsky and Fusek
+(2020)](https://doi.org/10.1007/s10687-020-00374-3).
+
+### A simple example
+
+The two main functions in `revdbayes` are `set_prior` and `rpost`.
+`set_prior` sets a prior for extreme value parameters. `rpost` samples
+from the posterior produced by updating this prior using the likelihood
+of observed data under an extreme value model. The following code sets a
+prior for Generalised Extreme Value (GEV) parameters based on a
+multivariate normal distribution and then simulates a random sample of
+size 1000 from the posterior distribution based on a dataset of annual
+maximum sea levels.
+
+``` r
+
+data(portpirie)
+mat <- diag(c(10000, 10000, 100))
+pn <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
+gevp  <- rpost(n = 1000, model = "gev", prior = pn, data = portpirie)
+plot(gevp)
+```
+
+From version 1.2.0 onwards the faster function `rpost_rcpp` can be
+used.\
+See the vignette “Faster simulation using revdbayes and Rcpp” for
+details. The functions `rpost` and `post_rcpp` have the same syntax. For
+example:
+
+``` r
+
+gevp_rcpp  <- rpost_rcpp(n = 1000, model = "gev", prior = pn, data = portpirie)
+```
+
+### Installation
+
+To get the current released version from CRAN:
+
+``` r
+
+install.packages("revdbayes")
+```
+
+### Vignettes
+
+See
+[`vignette("revdbayes-a-vignette", package = "revdbayes")`](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-a-vignette.md)
+for an overview of the package and
+[`vignette("revdbayes-b-using-rcpp-vignette", package = "revdbayes")`](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-b-using-rcpp-vignette.md)
+for an illustration of the improvements in efficiency produced using the
+Rcpp package. See
+[`vignette("revdbayes-c-predictive-vignette", package = "revdbayes")`](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-c-predictive-vignette.md)
+for an outline of how to use revdbayes to perform posterior predictive
+extreme value inference. Inference for the extremal index using
+threshold inter-exceedance times is described in
+[`vignette("revdbayes-d-kgaps-vignette", package = "revdbayes")`](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-d-kgaps-vignette.md)

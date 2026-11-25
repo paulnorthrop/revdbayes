@@ -13,8 +13,8 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="EVA 2021 R Workshop: revdbayes">
 </head>
@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">revdbayes</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -207,7 +207,7 @@ to rust</a> vignette</li>
 <div class="section level2">
 <h2 id="acceptance-region-for-n10-1">Acceptance region for N(10, 1)<a class="anchor" aria-label="anchor" href="#acceptance-region-for-n10-1"></a>
 </h2>
-<p><img src="ROUnormal.PNG" alt="Plots showing the generalised ratio-of-uniforms acceptance region for the N(10, 1) case, for r = 1, r = 1/2 and r = 1/4. The value of r matters, with r = 1/2 being optimal in terms of acceptance probability, but comparing the plots in the second row, where mode relocation has been used, shows that mode relocation produces much larger improvements." width="600px" style="display: block; margin: auto;"></p>
+<p><img src="ROUnormal.PNG" class="r-plt" alt="Plots showing the generalised ratio-of-uniforms acceptance region for the N(10, 1) case, for r = 1, r = 1/2 and r = 1/4. The value of r matters, with r = 1/2 being optimal in terms of acceptance probability, but comparing the plots in the second row, where mode relocation has been used, shows that mode relocation produces much larger improvements." width="600px" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="r-exercises-1">
@@ -290,13 +290,13 @@ can rust be used?</a></p>
 <h2 class="smaller" id="gp-model-for-threshold-excesses-1">GP model for threshold excesses 1<a class="anchor" aria-label="anchor" href="#gp-model-for-threshold-excesses-1"></a>
 </h2>
 <p>Negative association + asymmetry <span class="math inline">\(\phantom{\xi + \sigma / x_{(m)}}\)</span></p>
-<p><img src="EVA2021revdbayes_files/figure-html/plots1-1.png" width="624" style="display: block; margin: auto;"></p>
+<p><img src="EVA2021revdbayes_files/figure-html/plots1-1.png" class="r-plt" alt="" width="624" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2 smaller">
 <h2 class="smaller" id="gp-model-for-threshold-excesses-2">GP model for threshold excesses 2<a class="anchor" aria-label="anchor" href="#gp-model-for-threshold-excesses-2"></a>
 </h2>
 <p>Rotation about the MAP estimate based on the Hessian at the MAP <span class="math inline">\(\phantom{\xi + \sigma / x_{(m)}}\)</span></p>
-<p><img src="EVA2021revdbayes_files/figure-html/plots2-1.png" width="624" style="display: block; margin: auto;"></p>
+<p><img src="EVA2021revdbayes_files/figure-html/plots2-1.png" class="r-plt" alt="" width="624" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2 smaller">
 <h2 class="smaller" id="gp-model-for-threshold-excesses-3">GP model for threshold excesses 3<a class="anchor" aria-label="anchor" href="#gp-model-for-threshold-excesses-3"></a>
@@ -304,14 +304,14 @@ can rust be used?</a></p>
 <p>Box-Cox transformations of <span class="math inline">\(\phi_1 =
 \sigma_u &gt; 0\)</span> and <span class="math inline">\(\phi_2 = \xi +
 \sigma / x_{(m)} &gt; 0\)</span></p>
-<p><img src="EVA2021revdbayes_files/figure-html/plots3-1.png" width="624" style="display: block; margin: auto;"></p>
+<p><img src="EVA2021revdbayes_files/figure-html/plots3-1.png" class="r-plt" alt="" width="624" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2 smaller">
 <h2 class="smaller" id="gp-model-for-threshold-excesses-4">GP model for threshold excesses 4<a class="anchor" aria-label="anchor" href="#gp-model-for-threshold-excesses-4"></a>
 </h2>
 <p>Box-Cox first then rotate <span class="math inline">\(\phantom{\xi +
 \sigma / x_{(m)}}\)</span></p>
-<p><img src="EVA2021revdbayes_files/figure-html/plots4-1.png" width="624" style="display: block; margin: auto;"></p>
+<p><img src="EVA2021revdbayes_files/figure-html/plots4-1.png" class="r-plt" alt="" width="624" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="other-models-in-revdbayes">Other models in revdbayes<a class="anchor" aria-label="anchor" href="#other-models-in-revdbayes"></a>
@@ -434,7 +434,7 @@ Bayesian EV analysis review</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

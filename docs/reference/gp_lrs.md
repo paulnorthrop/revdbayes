@@ -1,0 +1,45 @@
+# Linear Combinations of Ratios of Spacings estimation of generalised Pareto parameters
+
+Uses the Linear Combinations of Ratios of Spacings (LRS) methodology of
+(Reiss and Thomas, 2007, page 134) to estimate the parameters of the
+generalised Pareto (GP) distribution, based on a sample of positive
+values.
+
+## Usage
+
+``` r
+gp_lrs(x)
+```
+
+## Arguments
+
+- x:
+
+  A numeric vector containing only **positive** values, assumed to be a
+  random sample from a generalized Pareto distribution.
+
+## Value
+
+A numeric vector of length 2. The estimates of the scale parameter
+\\\sigma\\ and the shape parameter \\\xi\\.
+
+## References
+
+Reiss, R.-D., Thomas, M. (2007) Statistical Analysis of Extreme Values
+with Applications to Insurance, Finance, Hydrology and Other
+Fields.Birkhauser.
+[doi:10.1007/978-3-7643-7399-3](https://doi.org/10.1007/978-3-7643-7399-3)
+.
+
+## See also
+
+[`gp`](https://github.com/paulnorthrop/revdbayes/reference/gp.md) for
+details of the parameterisation of the GP distribution.
+
+## Examples
+
+``` r
+u <- quantile(gom, probs = 0.65)
+gp_lrs((gom - u)[gom > u])
+#> [1] 1.8626800 0.1338447
+```

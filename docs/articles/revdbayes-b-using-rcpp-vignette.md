@@ -1,0 +1,256 @@
+# Faster simulation using revdbayes
+
+This vignette introduces a new feature of *revdbayes*: reducing
+posterior simulation time by performing the most time-consuming tasks
+using C++ functions. This achieved using a new facility in the *rust*
+package (Northrop 2017), which in turn uses the **Rcpp** package
+(Eddelbuettel and Francois 2011). The result is a new function
+`rpost_rcpp`, which has the same structure as the existing function
+`rpost`. From a user’s perspective the only difference between these two
+functions occurs if they wish to supply their own prior distribution:
+`rpost_rcpp` requires an external pointer to a C++ function (see
+[Providing a user-defined prior](#cpp_fun)), whereas `rpost` requires an
+input R function (see the vignette [Introducing
+revdbayes](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-a-vignette.md).
+
+Before we deal with user-supplied priors we compare posterior simulation
+times using `rpost` and `rpost_rcpp` for examples based on in-built
+prior distributions. We use the default settings of `rpost` and
+`rpost_rcpp` throughout. We also compare the speed of these functions
+with the function `posterior` in the **evdbayes** package (Stephenson
+and Ribatet 2014), using the **microbenchmark** package (Mersmann 2015).
+
+## Performance comparisons
+
+``` r
+
+library(revdbayes)
+# Is the microbenchmark package available?
+got_microbenchmark <- requireNamespace("microbenchmark", quietly = TRUE)
+if (got_microbenchmark) {
+  library(microbenchmark)
+}
+# Set the number of posterior samples required.
+n <- 1000
+set.seed(46)
+```
+
+### Generalised Pareto (GP) model
+
+We repeat the analysis of the Gulf of Mexico Wave Height Data from the
+[Introducing
+revdbayes](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-a-vignette.md)
+vignette to check that using Rcpp does indeed reduce computation time.
+
+``` r
+
+u <- quantile(gom, probs = 0.65)
+fp <- set_prior(prior = "flat", model = "gp", min_xi = -1)
+if (got_microbenchmark) {
+  res <- microbenchmark(
+    rpost = rpost(n = n, model = "gp", prior = fp, thresh = u, data = gom),
+    rpost_rcpp = rpost_rcpp(n = n, model = "gp", prior = fp, thresh = u, 
+                            data =   gom)
+  )
+  print(res, signif = 3)
+  options(microbenchmark.unit = "relative")
+  print(res, signif = 2)
+}  
+```
+
+In this example `rpost_rcpp` is indeed much faster than `rpost`.
+
+### Generalised Extreme Value (GEV) model
+
+We repeat the analysis of the Port Pirie annual maximum sea level data
+from the [Introducing
+revdbayes](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-a-vignette.md).
+
+``` r
+
+mat <- diag(c(10000, 10000, 100))
+pn <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
+if (got_microbenchmark) {
+  res <- microbenchmark(
+    rpost = rpost(n = n, model = "gev", prior = pn, data = portpirie),
+    rpost_rcpp = rpost_rcpp(n = n, model = "gev", prior = pn, 
+                            data = portpirie)
+  )
+  options(microbenchmark.unit = NULL)
+  print(res, signif = 3)
+  options(microbenchmark.unit = "relative")
+  print(res, signif = 2)
+}    
+```
+
+Comparison to the example calculations that feature in the **evdbayes**
+user guide, based on the `posterior` function, are not shown because
+**evdbayes** is archived on CRAN. This comparison shows that
+`rpost_rcpp` is approximately a factor 3 faster than `posterior`. This
+comparison is generous to `posterior` because the burn-in was set to
+zero and `posterior` produces a dependent sample rather than a random
+sample. The *effective sample size* of an MCMC sample from `posterior`
+varies between simulations and across parameters. The `effectiveSize`
+function in the **coda** package (Plummer et al. 2006) suggests that the
+effective sample size in this example is of the order of 100 to 200,
+whereas the **revdbayes** functions `rpost` and `rpost_rcpp` produce
+random samples of size 1000. `rpost` is a little slower than
+`posterior`.
+
+### Point Process (PP) model
+
+We compare the computational efficiencies of `rpost` and `rpost_rcpp`
+when performing the analysis of daily rainfall totals from the
+[Introducing
+revdbayes](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-a-vignette.md).
+
+``` r
+
+# Informative prior set using revdbayes
+pr2 <- set_prior(prob = 10^-(1:3), shape = c(38.9, 7.1, 47),
+                 scale = c(1.5, 6.3, 2.6), model = "gev", prior = "quant")
+if (got_microbenchmark) {
+  res <- microbenchmark(
+    rpost = rpost(n = n, model = "pp", prior = pr2, data = rainfall,
+                  thresh = 40, noy = 54),
+    rpost_rcpp = rpost_rcpp(n = n, model = "pp", prior = pr2, 
+                            data = rainfall, thresh = 40, noy = 54)
+  )
+  options(microbenchmark.unit = NULL)
+  print(res, signif = 3)
+  options(microbenchmark.unit = "relative")
+  print(res, signif = 2)
+}
+```
+
+Again, a comparison with the function `posterior` in **evdbayes** is not
+shown, but `rpost` is slower and `rpost_rcpp` substantially faster than
+`posterior`.
+
+## Providing a user-defined prior
+
+If the user wishes to supply their own prior to `rpost_rcpp` then they
+must first write a C++ function that evaluates the log of the prior
+density. The general way that **rust** (and hence **revdbayes**) enables
+users to provide their own C++ log-prior functions uses external
+pointers and is based on the [Rcpp Gallery](https://gallery.rcpp.org/)
+article [Passing user-supplied C++
+functions](https://gallery.rcpp.org/articles/passing-cpp-function-pointers/)
+by Dirk Eddelbuettel.
+
+The implementation in **rust** requires this C++ function to have a
+particular structure: it must take a constant reference to an
+`Rcpp::NumericVector`, say `x`, a constant reference to an `Rcpp::List`,
+say `ppars`, and return a `double` precision scalar. Here `x` is the
+argument of the prior density, i.e. the parameter vector of the extreme
+value model, and `ppars` is a list containing the values of prior
+parameters whose values are not specified inside the function. Thus
+values of any parameters in the prior can be changed without editing the
+function. If there are no such parameters then the argument `ppars` must
+still be present in the C++ function, even though the list provided to
+the function will be empty.
+
+A simple way to provide C++ log-prior functions is to put them in a
+file, say `user_fns.cpp`, perhaps taking advantage of the R-like syntax
+made available by [Rcpp
+sugar](https://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf). Example
+content is provided below. This file is available on the [revdbayes
+Github
+page](https://github.com/paulnorthrop/revdbayes/blob/master/src/user_priors.cpp).The
+functions in this file are compiled and made available to R, either
+using the
+[`Rcpp::sourceCpp`](https://rdrr.io/pkg/Rcpp/man/sourceCpp.html)
+function (e.g. `Rcpp::sourceCpp("user_fns.cpp")`) or using RStudio’s
+Source button on the editor toolbar. The example content below also
+includes the function `create_prior_xptr`, which creates an external
+pointer to a C++ function. See . It is this external pointer that is
+passed to `set_prior` to set the prior. If the user has written a C++
+function, say `new_name`, they need to add to `create_prior_xptr` two
+lines of code:
+
+    else if (fstr == "new_name")  
+      return(Rcpp::XPtr<funcPtr>(new funcPtr(&new_name))) ;
+
+in order that they can create an external pointer for `new_name` using
+`create_xptr`.
+
+The following excerpt from the example `user_fns.cpp` file contains a
+C++ function `user_gp_flat` to evaluate (the log of) a prior density
+\\\pi(\sigma, \xi) \propto \sigma^{-1}, \\ \sigma \> 0\\, with an extra
+parameter `min_xi` enabling a prior lower bound to be set for \\\xi\\.
+The same prior can be set, using an in-built prior function, using
+`set_prior(prior = "flat", model = "gp", min_xi = -1)`, where we have
+set `min_xi = -1`. Note that . Hence in `user_gp_flat` \\\sigma\\ and
+\\\xi\\ are `x[0]` and `x[1]` not `x[1]` and `x[2]`.
+
+    // [[Rcpp::depends(Rcpp)]]
+
+    #include <Rcpp.h>
+
+    using namespace Rcpp;
+
+    // [[Rcpp::interfaces(r, cpp)]]
+
+    // Generalized Pareto log-priors
+
+    // [[Rcpp::export]]
+    double user_gp_flat(const Rcpp::NumericVector& x, const Rcpp::List& ppars) {
+      double min_xi = ppars["min_xi"] ;
+      if (x[0] <= 0 || x[1] < min_xi)
+        return R_NegInf ;
+      return -log(x[0]) ;
+    }
+
+    // [[Rcpp::export]]
+    SEXP create_prior_xptr(std::string fstr) {
+      typedef double (*priorPtr)(const Rcpp::NumericVector& x,
+                      const Rcpp::List& ppars) ;
+      if (fstr == "gp_flat") 
+        return(Rcpp::XPtr<priorPtr>(new priorPtr(&user_gp_flat))) ;
+      else
+        return(Rcpp::XPtr<priorPtr>(R_NilValue)) ;
+    }
+
+    // We could create an external pointer when this file is sourced using
+    // this embedded R code below and/or (re)create them using the relevant
+    // pointer-creation functions in an R session or R package.
+
+    /*** R
+      ptr_gp_flat <- create_prior_xptr("gp_flat")
+    */
+
+Once the external pointer to the user-supplied prior C++ function has
+been created it is passed to `set_prior`, along with any required
+parameter values. The following example repeats the example in
+[Generalised Pareto (GP) model](#gp_example). The difference is that now
+we create the pointer `ptr_gp_flat` and pass it to `set_prior` using
+`prior = ptr_gp_flat` rather than using the arguments
+`prior = "flat", model = "gp"` to specify the equivalent in-built prior.
+
+``` r
+
+# GP model, user-defined prior
+ptr_gp_flat <- create_prior_xptr("gp_flat")
+p_user <- set_prior(prior = ptr_gp_flat, model = "gp", min_xi = -1)
+gpg <- rpost_rcpp(n = 1000, model = "gp", prior = p_user, thresh = u,
+                  data = gom)
+```
+
+## References
+
+Eddelbuettel, D., and R. Francois. 2011. “Rcpp: Seamless R and C++
+Integration.” *Journal of Statistical Software* 40 (8): 1–18.
+doi:[10.18637/jss.v040.i08](https://doi.org/10.18637/jss.v040.i08).
+
+Mersmann, O. 2015. *Microbenchmark: Accurate Timing Functions*.
+<https://CRAN.R-project.org/package=microbenchmark>.
+
+Northrop, P. J. 2017. *rust: Ratio-of-Uniforms Simulation with
+Transformation*. <https://CRAN.R-project.org/package=rust>.
+
+Plummer, M., N. Best, K. Cowles, and K. Vines. 2006. “CODA: Convergence
+Diagnosis and Output Analysis for MCMC.” *R News* 6 (1): 7–11.
+<https://www.r-project.org/doc/Rnews/Rnews_2006-1.pdf>.
+
+Stephenson, A., and M. Ribatet. 2014. *evdbayes: Bayesian Analysis in
+Extreme Value Theory*. <https://CRAN.R-project.org/package=evdbayes>.

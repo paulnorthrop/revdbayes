@@ -1,0 +1,239 @@
+# revdbayes [![revdbayes logo](tools/revdbayes_logo.png)](https://paulnorthrop.github.io/revdbayes/)
+
+[![R-CMD-check](https://github.com/paulnorthrop/revdbayes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/paulnorthrop/revdbayes/actions/workflows/R-CMD-check.yaml)
+[![Coverage
+Status](https://codecov.io/github/paulnorthrop/revdbayes/coverage.svg?branch=master)](https://app.codecov.io/github/paulnorthrop/revdbayes?branch=master)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/revdbayes)](https://cran.r-project.org/package=revdbayes)
+[![Downloads
+(monthly)](https://cranlogs.r-pkg.org/badges/revdbayes?color=brightgreen)](https://cran.r-project.org/package=revdbayes)
+[![Downloads
+(total)](https://cranlogs.r-pkg.org/badges/grand-total/revdbayes?color=brightgreen)](https://cran.r-project.org/package=revdbayes)
+
+### Ratio-of-uniforms Sampling for Bayesian Extreme Value Analysis
+
+### What does revdbayes do?
+
+The `revdbayes` package uses the ratio-of-uniforms method to produce
+random samples from the posterior distributions that occur in some
+relatively simple Bayesian extreme value analyses. The functionality of
+revdbayes is similar to the [`evdbayes`
+package](https://cran.r-project.org/package=evdbayes), which uses Markov
+Chain Monte Carlo (MCMC) methods for posterior simulation. Advantages of
+the ratio-of-uniforms method over MCMC in this context are that the user
+is not required to set tuning parameters nor to monitor convergence and
+a random posterior sample is produced. Use of the [Rcpp
+package](https://cran.r-project.org/package=evdbayes) enables
+`revdbayes` to be faster than `evdbayes`. Also provided are functions
+for making inferences about the extremal index, using the K-gaps model
+of [Suveges and Davison (2010)](https://doi.org/10.1214/09-AOAS292) and
+the D-gaps model of [Holesovsky and Fusek
+(2020)](https://doi.org/10.1007/s10687-020-00374-3).
+
+### A simple example
+
+The two main functions in `revdbayes` are `set_prior` and `rpost`.
+`set_prior` sets a prior for extreme value parameters. `rpost` samples
+from the posterior produced by updating this prior using the likelihood
+of observed data under an extreme value model. The following code sets a
+prior for Generalised Extreme Value (GEV) parameters based on a
+multivariate normal distribution and then simulates a random sample of
+size 1000 from the posterior distribution based on a dataset of annual
+maximum sea levels.
+
+``` r
+
+data(portpirie)
+mat <- diag(c(10000, 10000, 100))
+pn <- set_prior(prior = "norm", model = "gev", mean = c(0,0,0), cov = mat)
+gevp  <- rpost(n = 1000, model = "gev", prior = pn, data = portpirie)
+plot(gevp)
+```
+
+From version 1.2.0 onwards the faster function `rpost_rcpp` can be
+used.\
+See the vignette “Faster simulation using revdbayes and Rcpp” for
+details. The functions `rpost` and `post_rcpp` have the same syntax. For
+example:
+
+``` r
+
+gevp_rcpp  <- rpost_rcpp(n = 1000, model = "gev", prior = pn, data = portpirie)
+```
+
+### Installation
+
+To get the current released version from CRAN:
+
+``` r
+
+install.packages("revdbayes")
+```
+
+### Vignettes
+
+See
+[`vignette("revdbayes-a-vignette", package = "revdbayes")`](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-a-vignette.md)
+for an overview of the package and
+[`vignette("revdbayes-b-using-rcpp-vignette", package = "revdbayes")`](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-b-using-rcpp-vignette.md)
+for an illustration of the improvements in efficiency produced using the
+Rcpp package. See
+[`vignette("revdbayes-c-predictive-vignette", package = "revdbayes")`](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-c-predictive-vignette.md)
+for an outline of how to use revdbayes to perform posterior predictive
+extreme value inference. Inference for the extremal index using
+threshold inter-exceedance times is described in
+[`vignette("revdbayes-d-kgaps-vignette", package = "revdbayes")`](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-d-kgaps-vignette.md)
+
+# Package index
+
+## Package
+
+- [`revdbayes`](https://github.com/paulnorthrop/revdbayes/reference/revdbayes-package.md)
+  [`revdbayes-package`](https://github.com/paulnorthrop/revdbayes/reference/revdbayes-package.md)
+  : revdbayes: Ratio-of-Uniforms Sampling for Bayesian Extreme Value
+  Analysis
+
+## Priors
+
+- [`set_prior()`](https://github.com/paulnorthrop/revdbayes/reference/set_prior.md)
+  : Construction of prior distributions for extreme value model
+  parameters
+- [`set_bin_prior()`](https://github.com/paulnorthrop/revdbayes/reference/set_bin_prior.md)
+  : Construction of a prior distribution for a binomial probability
+  \\p\\
+- [`gev_beta()`](https://github.com/paulnorthrop/revdbayes/reference/gev_beta.md)
+  : Beta-type prior for GEV shape parameter \\\xi\\
+- [`gev_flat()`](https://github.com/paulnorthrop/revdbayes/reference/gev_flat.md)
+  : Flat prior for GEV parameters (\\\mu, log \sigma, \xi\\)
+- [`gev_flatflat()`](https://github.com/paulnorthrop/revdbayes/reference/gev_flatflat.md)
+  : Flat prior for GEV parameters (\\\mu, \sigma, \xi\\)
+- [`gev_loglognorm()`](https://github.com/paulnorthrop/revdbayes/reference/gev_loglognorm.md)
+  : Trivariate normal prior for GEV parameters (\\log \mu, log \sigma,
+  \xi\\)
+- [`gev_mdi()`](https://github.com/paulnorthrop/revdbayes/reference/gev_mdi.md)
+  : Maximal data information (MDI) prior for GEV parameters (\\\mu,
+  \sigma, \xi\\)
+- [`gev_norm()`](https://github.com/paulnorthrop/revdbayes/reference/gev_norm.md)
+  : Trivariate normal prior for GEV parameters (\\\mu, log \sigma,
+  \xi\\)
+- [`gev_prob()`](https://github.com/paulnorthrop/revdbayes/reference/gev_prob.md)
+  : Informative GEV prior on a probability scale
+- [`gev_quant()`](https://github.com/paulnorthrop/revdbayes/reference/gev_quant.md)
+  : Informative GEV prior on a quantile scale
+- [`gp_beta()`](https://github.com/paulnorthrop/revdbayes/reference/gp_beta.md)
+  : Beta-type prior for GP shape parameter \\\xi\\
+- [`gp_flat()`](https://github.com/paulnorthrop/revdbayes/reference/gp_flat.md)
+  : Flat prior for GP parameters (\\log \sigma, \xi\\)
+- [`gp_flatflat()`](https://github.com/paulnorthrop/revdbayes/reference/gp_flatflat.md)
+  : Flat prior for GP parameters (\\\sigma, \xi\\)
+- [`gp_jeffreys()`](https://github.com/paulnorthrop/revdbayes/reference/gp_jeffreys.md)
+  : Jeffreys prior for GP parameters (\\\sigma, \xi\\)
+- [`gp_mdi()`](https://github.com/paulnorthrop/revdbayes/reference/gp_mdi.md)
+  : Maximal data information (MDI) prior for GP parameters (\\\sigma,
+  \xi\\)
+- [`gp_norm()`](https://github.com/paulnorthrop/revdbayes/reference/gp_norm.md)
+  : Bivariate normal prior for GP parameters (\\log \sigma, \xi\\)
+- [`rprior_prob()`](https://github.com/paulnorthrop/revdbayes/reference/rprior_prob.md)
+  : Prior simulation of GEV parameters - prior on probability scale
+- [`rprior_quant()`](https://github.com/paulnorthrop/revdbayes/reference/rprior_quant.md)
+  : Prior simulation of GEV parameters - prior on quantile scale
+- [`rDir()`](https://github.com/paulnorthrop/revdbayes/reference/rDir.md)
+  : Simulation from a Dirichlet distribution
+
+## Posterior sampling
+
+- [`rpost()`](https://github.com/paulnorthrop/revdbayes/reference/rpost.md)
+  : Random sampling from extreme value posterior distributions
+- [`rpost_rcpp()`](https://github.com/paulnorthrop/revdbayes/reference/rpost_rcpp.md)
+  : Random sampling from extreme value posterior distributions
+- [`kgaps_post()`](https://github.com/paulnorthrop/revdbayes/reference/kgaps_post.md)
+  : Random sampling from K-gaps posterior distribution
+- [`dgaps_post()`](https://github.com/paulnorthrop/revdbayes/reference/dgaps_post.md)
+  : Random sampling from D-gaps posterior distribution
+- [`binpost()`](https://github.com/paulnorthrop/revdbayes/reference/binpost.md)
+  : Random sampling from a binomial posterior distribution
+- [`wbinpost()`](https://github.com/paulnorthrop/revdbayes/reference/wbinpost.md)
+  : Random sampling from a binomial posterior distribution, using
+  weights
+
+## Predictive inference and checking
+
+- [`predict(`*`<evpost>`*`)`](https://github.com/paulnorthrop/revdbayes/reference/predict.evpost.md)
+  : Predictive inference for the largest value observed in \\N\\ years.
+- [`pp_check(`*`<evpost>`*`)`](https://github.com/paulnorthrop/revdbayes/reference/pp_check.evpost.md)
+  : Posterior predictive checks for an evpost object
+
+## Distributions
+
+- [`dgev()`](https://github.com/paulnorthrop/revdbayes/reference/gev.md)
+  [`pgev()`](https://github.com/paulnorthrop/revdbayes/reference/gev.md)
+  [`qgev()`](https://github.com/paulnorthrop/revdbayes/reference/gev.md)
+  [`rgev()`](https://github.com/paulnorthrop/revdbayes/reference/gev.md)
+  : The Generalised Extreme Value Distribution
+- [`dgp()`](https://github.com/paulnorthrop/revdbayes/reference/gp.md)
+  [`pgp()`](https://github.com/paulnorthrop/revdbayes/reference/gp.md)
+  [`qgp()`](https://github.com/paulnorthrop/revdbayes/reference/gp.md)
+  [`rgp()`](https://github.com/paulnorthrop/revdbayes/reference/gp.md) :
+  The Generalised Pareto Distribution
+
+## Example data
+
+- [`gom`](https://github.com/paulnorthrop/revdbayes/reference/gom.md) :
+  Storm peak significant wave heights from the Gulf of Mexico
+- [`newlyn`](https://github.com/paulnorthrop/revdbayes/reference/newlyn.md)
+  : Newlyn sea surges
+- [`oxford`](https://github.com/paulnorthrop/revdbayes/reference/oxford.md)
+  : Annual Maximum Temperatures at Oxford
+- [`portpirie`](https://github.com/paulnorthrop/revdbayes/reference/portpirie.md)
+  : Annual Maximum Sea Levels at Port Pirie, South Australia
+- [`rainfall`](https://github.com/paulnorthrop/revdbayes/reference/rainfall.md)
+  : Daily Aggregate Rainfall
+- [`venice`](https://github.com/paulnorthrop/revdbayes/reference/venice.md)
+  : Largest Sea Levels in Venice
+
+## Generics
+
+- [`plot(`*`<evpost>`*`)`](https://github.com/paulnorthrop/revdbayes/reference/plot.evpost.md)
+  : Plot diagnostics for an evpost object
+- [`plot(`*`<evpred>`*`)`](https://github.com/paulnorthrop/revdbayes/reference/plot.evpred.md)
+  : Plot diagnostics for an evpred object
+- [`print(`*`<evpost>`*`)`](https://github.com/paulnorthrop/revdbayes/reference/print.evpost.md)
+  : Print method for objects of class "evpost"
+- [`summary(`*`<evpost>`*`)`](https://github.com/paulnorthrop/revdbayes/reference/summary.evpost.md)
+  : Summarizing an evpost object
+- [`print(`*`<summary.evpost>`*`)`](https://github.com/paulnorthrop/revdbayes/reference/print.summary.evpost.md)
+  : Print method for objects of class "summary.evpost"
+
+## Miscellaneous
+
+- [`quantile_to_gev()`](https://github.com/paulnorthrop/revdbayes/reference/quantile_to_gev.md)
+  : Converts quantiles to GEV parameters
+- [`create_prior_xptr()`](https://github.com/paulnorthrop/revdbayes/reference/create_prior_xptr.md)
+  : Create an external pointer to a C++ prior
+- [`grimshaw_gp_mle()`](https://github.com/paulnorthrop/revdbayes/reference/grimshaw_gp_mle.md)
+  : Maximum likelihood estimation of generalised Pareto parameters
+- [`gp_pwm()`](https://github.com/paulnorthrop/revdbayes/reference/gp_pwm.md)
+  : Probability-weighted moments estimation of generalised Pareto
+  parameters
+- [`gp_lrs()`](https://github.com/paulnorthrop/revdbayes/reference/gp_lrs.md)
+  : Linear Combinations of Ratios of Spacings estimation of generalised
+  Pareto parameters
+
+# Articles
+
+### All vignettes
+
+- [EVA 2021 R Workshop:
+  revdbayes](https://github.com/paulnorthrop/revdbayes/articles/EVA2021revdbayes.md):
+- [EVA 2021 revdbayes exercises
+  1](https://github.com/paulnorthrop/revdbayes/articles/ex1revdbayes.md):
+- [EVA 2021 revdbayes exercises
+  2](https://github.com/paulnorthrop/revdbayes/articles/ex2revdbayes.md):
+- [Introducing revdbayes: Ratio-of-Uniforms Sampling for Bayesian
+  Extreme Value
+  Analysis](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-a-vignette.md):
+- [Faster simulation using
+  revdbayes](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-b-using-rcpp-vignette.md):
+- [Posterior Predictive Extreme Value Inference using the revdbayes
+  Package](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-c-predictive-vignette.md):
+- [Inference for the extremal index using threshold interexceedance
+  times](https://github.com/paulnorthrop/revdbayes/articles/revdbayes-d-kgaps-vignette.md):
