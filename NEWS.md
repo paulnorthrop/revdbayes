@@ -1,3 +1,10 @@
+# revdbayes 1.5.8
+
+## Bug fixes and minor improvements
+
+* In `dgev()`, `pgev()`, `qgev()`, `dgp()`, `pgp()` and `ggp()` have been updated to allow `NA` components in the scale parameter vector, returning `NA` for such components. Many thanks to Reto Stauffer.
+* In the documentation of `set_prior()` it is noted that `prior = "flat"` corresponds to the conditional right Haar priors of Jewson at al. (2025).
+
 # revdbayes 1.5.7
 
 ## Bug fixes and minor improvements
