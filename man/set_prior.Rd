@@ -162,6 +162,7 @@ Of the in-built named priors available in revdbayes only
     \deqn{\pi(\mu, \sigma, \xi) = \sigma^{-1}, {\rm ~for~} \sigma > 0.}{%
           \pi(\mu, \sigma, \xi) = (1/ \sigma), for \sigma > 0.}
 
+    These are the conditional right Haar priors of Jewson et al. (2025).
   \item \code{"flatflat"}.
 
     For \code{model = "gp"}: flat priors for
@@ -256,6 +257,11 @@ Hosking, J. R. M. and Wallis, J. R. (1987) Parameter and
   Quantile Estimation for the Generalized Pareto Distribution.
   \emph{Technometrics}, \strong{29(3)}, 339-349.
   \doi{10.2307/1269343}.
+
+Jewson, S., Sweeting, T., and Jewson, L. (2025) Reducing
+  reliability bias in assessments of extreme weather risk using calibrating
+  priors, \emph{Adv. Stat. Clim. Meteorol. Oceanogr.}, \strong{11}, 1-22,
+  \doi{10.5194/ascmo-11-1-2025}.
 
 Martins, E. S. and Stedinger, J. R. (2000) Generalized maximum
   likelihood generalized extreme value quantile estimators for hydrologic
